@@ -1,8 +1,139 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.margin-left {margin-left:5px}
+.margin-left-2x {margin-left:10px}
+.margin-left-3x {margin-left:20px}
+.margin-left-4x {margin-left:30px}
+.margin-left-5x {margin-left:45px}
+.margin-left-6x {margin-left:90px}
+.margin-left-7x {margin-left:120px}
+.margin-left-8x {margin-left:150px}
+
+.marginNavPesquisa {margin-left:250px}
+
+.marginTop {margin-top:5px}
+.marginTop-2x {margin-top:15px}
+.marginTop-3x {margin-top:25px}
+.marginTop-4x {margin-top:35px}
+.marginTop-5x {margin-top:70px}
+.marginTop-6x {margin-top:120px}
+
+.backgroundNav {
+  background-color: #E0E0E0;
+}
+
+.colorTitle {
+  color:black;
+  font-size:13px;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.buttonBorder {
+  border-radius:5px;
+}
+
+.buttonGo {
+  padding: 5px 65px;
+}
+.divController {
+  border-radius:5px; 
+  background-color:#C0C0C0; 
+  height:-webkit-fill-available;
+}
+.inputLink {
+  background-color:#E0E0E0;
+  width: 500px;
+  text-align: center;
+  margin-left: 270px;
+  margin-top:20px;
+  border-radius: 5px;
+  border: 0px;
+  height: 23px; 
+  font-size: 12px; 
+  font-weight: bold;
+}
+
+.divBody {
+  margin-top:12px; 
+  background-color:white; 
+  border-left: 6px solid #C0C0C0; 
+  border-right: 6px solid  #C0C0C0; 
+  height: -webkit-fill-available;
+}
+
+.labelLanguage {
+  margin-left:980px;
+  font-weight: bold; 
+  font-weight: normal;
+}
+
+.optionLanguage {
+  background-color: #FFE5CC;
+}
+
+.selectLanguage {
+  border:0px; 
+  border-left:1px solid; 
+  font-weight: normal; 
+  font-size: 14px;
+}
+
+.titlesOnCenter {
+  text-align:center;
+}
+
+.titleBiAMa {
+  margin-top:80px; 
+  font-size: 75px; 
+  font-weight: normal;
+  color:#008B8B
+}
+
+.minTitleBiAMa {
+  margin-top:-25px; 
+  margin-right:8px;  
+  font-weight: normal;
+  color: #5F9EA0;font-size:15px
+}
+
+.subTitleBiAMa {
+  font-weight: normal;
+  color: #5F9EA0;
+  font:bold
+}
+.textBodyBiAMa {
+  width:600px;
+  margin-left: 370px;
+  text-align: justify;
+}
+
+.buttonSelected {
+  width:20%;
+  background-color: #E4A73F;
+  color: white; 
+  text-decoration:none
+}
+.buttonNotSelected {
+  width:20%; 
+  color:#E4A73F; 
+  background-color:#F9F1E4;
+  text-decoration:none
+}
+
+.buttonAlignment {
+  padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
 }
