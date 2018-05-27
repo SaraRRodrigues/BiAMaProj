@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<body ng-app="myApp" style="font-family: sans-serif;" ng-controller="OndeEstamosController">
+	 
+	<div> 
+		<div style="text-align:center;"> 
+			<h1 style="font-weight: normal;color: #5F9EA0;font:bold">Onde estamos</h1>
+		</div>
+			
+		<div id="map" style="margin-left:315px; width:50%;height:140px;">
+
+			<script>
+			function myMap() {
+				var mapCanvas = document.getElementById("map");
+				var mapOptions = {
+				center: new google.maps.LatLng(51.5, -0.2), zoom: 10
+				};
+				var map = new google.maps.Map(mapCanvas, mapOptions);
+			}
+			</script>
+
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+		</div>
+		<div style="text-align:center; margin-top:30px">
+			
+			<button type="button"></button>
+			<label>Escola biama</label>
+
+			<select style="font-weight: normal; font-size: 14px; margin-left:80px">
+				<option default>Pesquise um local ou endereço</option>
+				<option value="0" style="background-color: #FFE5CC;">ISEL</option>
+				<option value="1" style="background-color: #FFE5CC;">IST</option>
+			</select>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

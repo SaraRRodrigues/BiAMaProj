@@ -5,32 +5,34 @@ var app = angular.module("myApp", ['ngRoute'])
 	
 	$routeProvider
 	 .when('/BiAMa/ondeEstamos', {
-	  templateUrl: '/views/ondeEstamosPage',
+	  templateUrl: 'views/ondeEstamos',
 	  controller: 'OndeEstamosController',
 	})
 	$routeProvider.when('/BiAMa/biamaPage', {
-		templateUrl: 'index',
-		controller: 'MaincaController'
+		templateUrl: 'views/biamaPage',
+		controller: 'MainController'
 	  });
 	$routeProvider.when('/BiAMa/biblioteca', {
-	  templateUrl: 'bibliotecaPage',
+	  templateUrl: 'views/bibliotecaPage',
 	  controller: 'BibliotecaController'
 	});
 	$routeProvider.when('/BiAMa/aSuaBiAMa', {
-		templateUrl: 'suaBiamaPage',
+		templateUrl: 'views/suaBiamaPage',
 		controller: 'SuaBiamaController'
 	  });
+
 	$routeProvider.when('/BiAMa/forum', {
-	templateUrl: 'forumPage',
+	templateUrl: 'views/forumPage',
 	controller: 'ForumController'
 	});
-	
+
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
 
 .controller('MainController',['$scope', "UserService", "$http", function($scope, UserService, $http) {
 	
+	$scope.biamaPage = true;
 	$scope.UsersList = [
 		{
 			'desc': "cenas1",
@@ -47,20 +49,20 @@ var app = angular.module("myApp", ['ngRoute'])
 		
 	}	
 
-	$scope.getUsersAction = function(){
-        UserService.getUsers(function(users){
-			$scope.UsersList = users;
-			
-            console.log(users);
-		});
-    } 
+	
+	UserService.getUsers(function(users){
+		$scope.UsersList = users;
+		
+		console.log(users);
+	});
+    
 }])
 
 app.factory("UserService", function($http){
     return{
         getUsers: function(){
             
-           return $http.get('/perfilPage')
+           return $http.get('/biamaPage')
                         .then(function(response) {
                 
                     //console.log(response);

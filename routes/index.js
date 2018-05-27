@@ -6,11 +6,20 @@ var userService = require('../services/userService');
 
 /* GET home page. */
 router.get('/', (req, resp, next) => {
-	
-	  resp.render('index');
+	  resp.render('views/index');
 });
 
-router.get('/perfilPage', (req, resp, next) => {
+router.get('/views/:name', (req, resp, next) => {
+	console.log(req.params.name);
+	resp.render(`views/${req.params.name}`);
+});
+
+/*para poder fazer o refresh*/ 
+router.get('/BiAMa/:name', (req, resp, next) => {
+	resp.render(`views/${req.params.name}`);
+});
+
+router.get('/biamaPage', (req, resp, next) => {
 	userService.getUsers((error, users) => {
 
 		if(error){

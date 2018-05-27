@@ -2,26 +2,55 @@
 <!DOCTYPE html>
 <html>
 
- <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script type="text/javascript" src="controllers/main-controller.js"></script>
+	<head>
+		<title>{{title}}</title>
+		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+		<!-- start nav expand -->
+		<link rel="stylesheet" href="../stylesheets/font-awesome.css">
+		<link rel="stylesheet" href="../stylesheets/style.css">
+
+		<script type="text/javascript" src="../javascripts/jquery.2.1.3.min.js"></script>
+		<script type="text/javascript" src="../javascripts/singlenav.js"></script>
+		<script type="text/javascript" src="../javascripts/scripts.js"></script>
+		<!-- end nav expand -->
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script type="application/json" src="jsonLabels/en.json"></script>
+		<script type="application/json" src="jsonLabels/en.json"></script>
+
+		<script type="text/javascript" src="controllers/main-controller.js"></script>
+		<script type="text/javascript" src="controllers/ondeEstamos-controller.js"></script>
+		<script type="text/javascript" src="controllers/forum-controller.js"></script>
+		<script type="text/javascript" src="controllers/biblioteca-controller.js"></script>
+		<script type="text/javascript" src="controllers/suaBiama-controller.js"></script>
+		
 		<base href="/"/>
+
 	</head>
 
 	<body ng-app="myApp">
-		
 		<div class="divController" ng-controller="MainController"> 
 			<div > 
 				<button style="margin-left: 20px;" type="button"></button>
 				<button type="button"></button>
 				<button type="button"></button>
-				
+				<nav class="navigation">
+					<a href="#" class="menu-icon">
+						<i class="fa fa-bars"></i>
+					</a>
+					<ul class="main-navigation">
+						<li><a href="#what">What is BiAMA?</a></li>
+						<li><a href="#reqs">Join?</a></li>
+						<li><a href="#source">DiY</a></li>
+						<li><a href="#materials">Materials</a></li>
+						<li><a href="#projects">Projects</a></li>
+						<li><a href="#libs">Where?</a></li>
+					</ul>
+				</nav>
+      
 				<button style="margin-left:10px" type="button"></button>
 				<button type="button"></button>
 				
@@ -41,15 +70,13 @@
 					<div class="titlesOnCenter"> 
 						<h1 class="titleBiAMa">BiAMa</h1>
 						<h4 class="minTitleBiAMa">biblioteca aberta de materiais</h4>
-						
-						<h1 class="subTitleBiAMa">O que é a BiAMa?</h1>
 					</div>
-					<div class="textBodyBiAMa">
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-						</p>
-					</div>
+					
+					<ng-view></ng-view>
+					<input ng-if="biamaPage" type="input">Biama search</input>
 				</div>
 			</div>
+			
 			<div class="w3-bar w3-center">
 				<a href="/BiAMa/biamaPage" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 				<a href="/BiAMa/ondeEstamos" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
@@ -57,7 +84,6 @@
 				<a href="/BiAMa/aSuaBiAMa" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
 				<a href="/BiAMa/forum" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
 			</div>
-			<ng-view></ng-view>
 		</div>
 	</body>
 </html>
