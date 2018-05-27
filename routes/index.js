@@ -10,7 +10,7 @@ router.get('/', (req, resp, next) => {
 });
 
 router.get('/views/:name', (req, resp, next) => {
-	console.log(req.params.name);
+	
 	resp.render(`views/${req.params.name}`);
 });
 

@@ -7,15 +7,9 @@
 		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-		<!-- start nav expand -->
-		<link rel="stylesheet" href="../stylesheets/font-awesome.css">
-		<link rel="stylesheet" href="../stylesheets/style.css">
-
-		<script type="text/javascript" src="../javascripts/jquery.2.1.3.min.js"></script>
-		<script type="text/javascript" src="../javascripts/singlenav.js"></script>
-		<script type="text/javascript" src="../javascripts/scripts.js"></script>
-		<!-- end nav expand -->
-
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -26,64 +20,105 @@
 		<script type="text/javascript" src="controllers/forum-controller.js"></script>
 		<script type="text/javascript" src="controllers/biblioteca-controller.js"></script>
 		<script type="text/javascript" src="controllers/suaBiama-controller.js"></script>
-		
+
 		<base href="/"/>
 
 	</head>
 
 	<body ng-app="myApp">
 		<div class="divController" ng-controller="MainController"> 
-			<div > 
-				<button style="margin-left: 20px;" type="button"></button>
-				<button type="button"></button>
-				<button type="button"></button>
-				<nav class="navigation">
-					<a href="#" class="menu-icon">
-						<i class="fa fa-bars"></i>
-					</a>
-					<ul class="main-navigation">
-						<li><a href="#what">What is BiAMA?</a></li>
-						<li><a href="#reqs">Join?</a></li>
-						<li><a href="#source">DiY</a></li>
-						<li><a href="#materials">Materials</a></li>
-						<li><a href="#projects">Projects</a></li>
-						<li><a href="#libs">Where?</a></li>
-					</ul>
-				</nav>
-      
-				<button style="margin-left:10px" type="button"></button>
-				<button type="button"></button>
-				
-				<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
-				
-			</div>
-			<div class="divBody">
-				<button style="margin-left:30px; margin-top:40px"></button>
-				<button> </button>
-				
-				<label class="labelLanguage">Idioma</label>
-				<select class="selectLanguage">
-					<option class="optionLanguage" value="0">Português</option>
-					<option class="optionLanguage" value="1">Inglês</option>
-				</select>
-				<div> 
-					<div class="titlesOnCenter"> 
-						<h1 class="titleBiAMa">BiAMa</h1>
-						<h4 class="minTitleBiAMa">biblioteca aberta de materiais</h4>
+			<header class="masthead text-white text-center">
+				<nav>
+					<div style="padding-right:400px">
+						<button type="button"></button>
+						<button type="button"></button>
+						<button type="button"></button>
+
+						<button type="button"></button>
+						<button type="button"></button>
+						<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
 					</div>
-					
-					<ng-view></ng-view>
-					<input ng-if="biamaPage" type="input">Biama search</input>
-				</div>
-			</div>
+				</nav>	
+			</header>
 			
-			<div class="w3-bar w3-center">
+			<article>
+				<div class="divBody">
+					<!-- user & search & languages-->
+					<nav class="positionOfNavDetails">
+						<div class="row">
+							<div class="float-left padding-top-2x padding-left-3x">
+								<i ng-if="!userDetails" ng-click="clickUserDetails()" class="sizeUserAndSearch fas fa-user"></i>
+								<i ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" class="sizeUserAndSearch fas fa-search padding-left-2x"></i>
+								<i ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" class="sizeMinSearch fas fa-search padding-left-2x"></i>
+								<input class="inputMinSearch" ng-if="showSearch"type="text"></input>
+							</div>
+						</div>
+						<!-- languages -->
+						<div class="padding-left-4x">
+							<label class="labelLanguage">Idioma</label>
+							<select class="selectLanguage">
+								<option class="optionLanguage" value="0">Português</option>
+								<option class="optionLanguage" value="1">Inglês</option>
+							</select>
+						</div>
+						<!-- details user -->
+						<div class="row">
+							<nav class="padding-left-3x">
+								<div class="navDetailsUser" ng-if="userDetails"><br>
+									<i class="sizeUserAndSearch fas fa-user"></i><br><br>
+									<a href="/BiAMa/favorites">Favoritos</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/myQuestions">As minhas perguntas</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/worldShare">Partilhar com o Mundo</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/notifications">Notificações</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/perfilPage">Perfil</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/compare">Comparar</a><br>
+									<div class="lineWhite margin-bottom margin-top"></div>
+									<a href="/BiAMa/login">Iniciar sessão</a><br>
+									<button ng-click="clickUserDetails()"></button>	
+								</div>
+							</nav>
+						</div>
+					</nav>
+					
+					<!--image biama -->
+					<div class="row text-center">
+						<img class="margin-top-4x" src="../images/hero_bg_image.jpg" height="15%" width="20%">
+					</div>
+					<!-- titles of page & search -->
+					<div class="row text-center">
+						<div class="col-xl-9 mx-auto">
+							<h1 class="mb-5 titleBiAMa">BiAMa</h1><p>
+							<h4 class="mb-5 minTitleBiAMa">biblioteca aberta de materiais</h4>
+						</div>
+						<ng-view></ng-view>
+						<div class="col-sm-4 col-sm-offset-4">
+							<div id="imaginary_container"> 
+								<div class="input-group stylish-input-group">
+									<input type="text" class="form-control"  placeholder="" >
+									<span class="input-group-addon">
+										<a href="/BiAMa/searchResult">
+											<span class="glyphicon glyphicon-search"></span>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		
+			<footer class="w3-bar w3-center">
 				<a href="/BiAMa/biamaPage" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 				<a href="/BiAMa/ondeEstamos" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
 				<a href="/BiAMa/biblioteca" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
 				<a href="/BiAMa/aSuaBiAMa" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
 				<a href="/BiAMa/forum" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-			</div>
+			</footer>
 		</div>
 	</body>
 </html>

@@ -26,12 +26,42 @@ var app = angular.module("myApp", ['ngRoute'])
 	controller: 'ForumController'
 	});
 
+	$routeProvider.when('/BiAMa/perfilPage', {
+		templateUrl: 'views/perfilPage',
+		controller: 'PerfilController'
+		});
+
+	$routeProvider.when('/BiAMa/searchResult', {
+		templateUrl: 'views/resultSearch',
+		controller: 'SearchController'
+		});
+	
+		
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
 
 .controller('MainController',['$scope', "UserService", "$http", function($scope, UserService, $http) {
 	
+	$scope.showSearch = false;
+	$scope.userDetails = false;
+
+	$scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+
+	$scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+		}
+	}
+
 	$scope.biamaPage = true;
 	$scope.UsersList = [
 		{

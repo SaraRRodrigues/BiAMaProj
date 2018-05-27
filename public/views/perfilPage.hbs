@@ -1,80 +1,34 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-    <head>
-        <title>{{title}}</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script type="text/javascript" src="controllers/perfil-controller.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	    <script type="application/json" src="jsonLabels/en.json"></script>
-    </head>
     <body>
-   
-   <div ng-controller="PerfilController" ng-repeat="user in UsersList">
-       <h1>{{user.name}}</h1>
-
-   </div>
-        <nav class="navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand margin-left-7x" href="#">BIAMA</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class=""><a href="#">Novidades</a></li>
-                    <li><a href="#">Materiais</a></li>
-                    <li><a href="#">Materioteca</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Mais</a></li>
-                    <li class="marginNavPesquisa"><a href="#"><input type="text" placeholder="Pesquisa..."></a></li>
-                    <li><a >Perfil</a></li>
-                    <button ng-click="getUsersAction()">Perfil</button>
-                </ul>
-            </div>
-        </nav>
         <div ng-controller="PerfilController">
-            
-            <div class="nav-scroller bg-white box-shadow">
-                <nav class="backgroundNav">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                            <li class="margin-left-7x"><a class="colorTitle" href="#perfilDetail">Perfil</a></li>
-                            <li><a class="colorTitle" href="#registarDetail">Registar</a></li>
-                            <li><a class="colorTitle" href="#">Recuperar Password</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <div id="perfilDetail">
+            <div style="text-align:center;"> 
+			    <h1 style="font-weight: normal;color: #5F9EA0;font:bold">O meu perfil</h1>
+		    </div>
 
-                <h2 class="margin-left-8x marginTop-4x">INICIAR SESSÃO</h2>
-                <div class="alignCenter marginTop-6x">
-                    <input class="buttonBorder" type="text" placeholder="Email"></input><br>
-                    <input class="buttonBorder marginTop" type="text" placeholder="Password"></input>
-                </div>
-                <div class="alignCenter marginTop">
-                    <input type="checkbox">Lembrar</input><br>
-                    <button class="marginTop-2x buttonGo buttonBorder" type="button">Entrar</button>
-                </div>
-            </div>
-             <div id="registarDetail">
+            <div>
+                
+                <br>
+                <div class="perfilDetails">
+                
+                    <i class="fas fa-user"></i>
+                  
+                    <h4 class="minTitleBiAMa">Nome de Utilizador</h4><br>
 
-                <div class="alignCenter marginTop-6x">
-                    <input class="buttonBorder" type="text" placeholder="Email"></input><br>
-                    <input class="buttonBorder marginTop" type="text" placeholder="Password"></input>
-                </div>
-            </div>
-             <h1>cenas</h1>
-            
-                <!--{{#each UsersList}}
-                    <h1>name: {{this.name}}</h1>
-                    <h1>id: {{this.id}}</h1>
-                {{/each}}
-            -->
+                    <input class="inputsMyPerfil" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/><br>
+                    <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
 
-            <h1>{{UsersList}}</h1>
-            <div ng-repeat="user in UsersList">
-                <h1>{{user.name}}</h1>
+                    <input class="inputsMyPerfil" type="text" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/><br>
+                    <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+
+                    <input class="inputsMyPerfil" type="text" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;"/><br>
+                    <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+
+                    <input class="inputsMyPerfil" type="text" placeholder="Password" style="border:none; background: transparent; outline: 0;"/><br>
+                    <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+
+                    <button class="inputsMyPerfil buttonBorder margin-top margin-bottom" ng-click="clickUserDetails()">Alterar dados</button>	
+                </div>
             </div>
         </div>
     </body>
