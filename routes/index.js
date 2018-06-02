@@ -19,7 +19,7 @@ router.get('/BiAMa/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
 
-router.get('/biamaPage', (req, resp, next) => {
+router.get('/perfilPage', (req, resp, next) => {
 	userService.getUsers((error, users) => {
 
 		if(error){

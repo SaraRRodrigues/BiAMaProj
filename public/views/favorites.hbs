@@ -1,0 +1,31 @@
+<html>
+    <body  ng-app="myApp" ng-controller="FavoritesController">
+        <div style="text-align:center;">
+            <div class="padding-left-4x">
+                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Favoritos</h1> 
+               
+                <select id="selectedFav" ng-click="getValues()">
+                    <option class="optionLanguage" value="0">Materiais</option>
+                    <option class="optionLanguage" value="1">Perguntas</option>
+                </select>
+            </div>
+            <div ng-if="showQuestions">
+                <a href="" class="margin-left-5x margin-top" style="text-decoration:none;">Pergunta 1</a><br>
+                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 2</a><br>
+                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 3</a><br>
+                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+            </div>
+            <div ng-if="showMaterials" ng-repeat="image in imageMaterials track by $index">
+                <div style="padding: 5px;" class="column">
+                    <img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/>
+                    <img ng-if="$index%2!==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/><br>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+

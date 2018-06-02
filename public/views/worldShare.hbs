@@ -1,0 +1,16 @@
+<html>
+    <body  ng-app="myApp" ng-controller="WorldShareController">
+        <div style="text-align:center;">
+            <div class="padding-left-4x">
+                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Partilhar com o Mundo</h1> 
+            </div>
+            <div ng-repeat="image in imageMaterials track by $index">
+                <div style="padding: 5px;" class="column">
+                    <img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/>
+                    <img ng-if="$index%2!==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/><br>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

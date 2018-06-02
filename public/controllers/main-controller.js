@@ -1,5 +1,9 @@
 //var angular = require('angular');
 var app = angular.module("myApp", ['ngRoute'])
+.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[{');
+    $interpolateProvider.endSymbol('}]');
+})
 
 .config(function($routeProvider, $locationProvider) {
 	
@@ -29,14 +33,39 @@ var app = angular.module("myApp", ['ngRoute'])
 	$routeProvider.when('/BiAMa/perfilPage', {
 		templateUrl: 'views/perfilPage',
 		controller: 'PerfilController'
-		});
+	});
 
 	$routeProvider.when('/BiAMa/searchResult', {
 		templateUrl: 'views/resultSearch',
 		controller: 'SearchController'
-		});
-	
+	});
+
+	$routeProvider.when('/BiAMa/favorites', {
+		templateUrl: 'views/favorites',
+		controller: 'FavoritesController'
+	});
+
+	$routeProvider.when('/BiAMa/myQuestions', {
+		templateUrl: 'views/myQuestions',
+		controller: 'MyQuestionsController'
+	});
 		
+	$routeProvider.when('/BiAMa/worldShare', {
+		templateUrl: 'views/worldShare',
+		controller: 'WorldShareController'
+	});
+	$routeProvider.when('/BiAMa/notifications', {
+		templateUrl: 'views/notifications',
+		controller: 'NotificationsController'
+	});
+	$routeProvider.when('/BiAMa/compare', {
+		templateUrl: 'views/compare',
+		controller: 'CompareController'
+	});
+	$routeProvider.when('/BiAMa/login', {
+		templateUrl: 'views/login',
+		controller: 'LoginController'
+	});
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })

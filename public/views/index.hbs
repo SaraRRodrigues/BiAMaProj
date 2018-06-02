@@ -15,14 +15,23 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script type="application/json" src="jsonLabels/en.json"></script>
 
+		<!--footer controllers-->
 		<script type="text/javascript" src="controllers/main-controller.js"></script>
 		<script type="text/javascript" src="controllers/ondeEstamos-controller.js"></script>
 		<script type="text/javascript" src="controllers/forum-controller.js"></script>
 		<script type="text/javascript" src="controllers/biblioteca-controller.js"></script>
 		<script type="text/javascript" src="controllers/suaBiama-controller.js"></script>
 
-		<base href="/"/>
+		<!--details user controllers-->
+		<script type="text/javascript" src="controllers/perfil-controller.js"></script>
+		<script type="text/javascript" src="controllers/favorites-controller.js"></script>
+		<script type="text/javascript" src="controllers/notifications-controller.js"></script>
+		<script type="text/javascript" src="controllers/questions-controller.js"></script>
+		<script type="text/javascript" src="controllers/worldShares-controller.js"></script>
+		<script type="text/javascript" src="controllers/compare-controller.js"></script>
+		<script type="text/javascript" src="controllers/login-controller.js"></script>
 
+		<base href="/"/>
 	</head>
 
 	<body ng-app="myApp">
@@ -112,7 +121,7 @@
 				</div>
 			</article>
 		
-			<footer class="w3-bar w3-center">
+			<footer style="overflow: initial;" class="w3-bar w3-center">
 				<a href="/BiAMa/biamaPage" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 				<a href="/BiAMa/ondeEstamos" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
 				<a href="/BiAMa/biblioteca" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
