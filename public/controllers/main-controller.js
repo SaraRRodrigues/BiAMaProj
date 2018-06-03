@@ -74,6 +74,9 @@ var app = angular.module("myApp", ['ngRoute'])
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
+	$scope.search = true;
+	$scope.showLanguages = false;
+	$scope.languageSelected = 'Português'
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
@@ -91,6 +94,23 @@ var app = angular.module("myApp", ['ngRoute'])
 		}
 	}
 
+	$scope.disableSearch = function() {
+		$scope.userDetails = false;
+		$scope.search = false;
+	}
+	$scope.getLanguages = function() {
+		if($scope.showLanguages){
+			$scope.showLanguages = false;
+		}else {
+			$scope.showLanguages = true;
+		}
+	}
+
+	$scope.selectLanguage = function(language){
+		$scope.languageSelected = language;
+	}
+
+	$scope.languages = ['Português', 'Inglês']
 	$scope.biamaPage = true;
 	$scope.UsersList = [
 		{

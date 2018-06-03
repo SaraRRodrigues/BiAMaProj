@@ -17,6 +17,8 @@ a {
 .margin-left-8x {margin-left:150px}
 
 .margin-right-50px {margin-right: 50px}
+.margin-right{margin-right: 5px;}
+.margin-right-2x{margin-right: 10px;}
 
 .marginNavPesquisa {margin-left:250px}
 
@@ -38,6 +40,7 @@ a {
 .padding-left-2x{padding-left: 20px}
 .padding-left-3x{padding-left: 40px}
 .padding-left-4x{padding-left: 60px}
+.padding-left-5x{padding-left: 140px}
 
 .padding-right-2x {padding-right: 20px}
 .padding-right-3x {padding-right: 30px}
@@ -94,8 +97,8 @@ a {
 
 .labelLanguage {
   margin-left:980px;
-  font-weight: bold; 
-  font-weight: normal;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .optionLanguage {
@@ -106,7 +109,7 @@ a {
   border:0px; 
   border-left:1px solid; 
   font-weight: normal; 
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .titlesOnCenter {
@@ -193,4 +196,48 @@ a {
 
 .buttonBorder{
   border-radius:5px;
+}
+
+.circleHeader{
+  border-radius: 50%;
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border: 1px ;
+}
+.redCircle{
+  color: #FF6666;
+}
+.greenCircle{
+  color: #00994C;
+}
+
+.orangeCircle{
+  color: #FFB266;
+}
+
+.spaceCircles{
+  margin-left:4px
+}
+
+.arrows{
+  color:#DCDCDC	;
+}
+
+.languageSize{
+  font-size:15px;
+}
+
+.languagesDiv{
+  float: right;
+  margin-bottom: 0px;
+}
+
+.imageLeft{
+  float:left;
+  margin-left: 50px;
+}
+.imageRight{
+  float:right;
+  margin-right: 50px;
 }

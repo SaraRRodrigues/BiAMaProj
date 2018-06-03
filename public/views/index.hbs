@@ -38,13 +38,13 @@
 		<div class="divController" ng-controller="MainController"> 
 			<header class="masthead text-white text-center">
 				<nav>
-					<div style="padding-right:400px">
-						<button type="button"></button>
-						<button type="button"></button>
-						<button type="button"></button>
+					<div style="padding-right:500px">
+						<i class="fas fa-circle redCircle"></i>
+						<i class="fas fa-circle orangeCircle"></i>
+						<i class="fas fa-circle greenCircle margin-right-2x"></i>
 
-						<button type="button"></button>
-						<button type="button"></button>
+						<i class="fa fa-chevron-left arrows margin-right"></i>						
+						<i class="fa fa-chevron-right arrows"></i>
 						<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
 					</div>
 				</nav>	
@@ -63,31 +63,36 @@
 							</div>
 						</div>
 						<!-- languages -->
-						<div class="padding-left-4x">
+						<div class="padding-left-5x">
 							<label class="labelLanguage">Idioma</label>
-							<select class="selectLanguage">
-								<option class="optionLanguage" value="0">Português</option>
-								<option class="optionLanguage" value="1">Inglês</option>
-							</select>
+							<label class="selectLanguage"></label>
+							<label class="languageSize">[{languageSelected}]</label>
+							<i ng-click="getLanguages()" class="fas fa-caret-down"></i>	
+							<div ng-if="showLanguages">
+								<div ng-repeat="language in languages">
+									<label ng-click="selectLanguage(language)" class="languagesDiv">[{language}]</label>
+									<br>
+								</div>
+							</div>
 						</div>
 						<!-- details user -->
 						<div class="row">
 							<nav class="padding-left-3x">
 								<div class="navDetailsUser" ng-if="userDetails"><br>
 									<i class="sizeUserAndSearch fas fa-user"></i><br><br>
-									<a href="/BiAMa/favorites">Favoritos</a><br>
+									<a href="/BiAMa/favorites" ng-click="disableSearch()">Favoritos</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/myQuestions">As minhas perguntas</a><br>
+									<a href="/BiAMa/myQuestions" ng-click="disableSearch()">As minhas perguntas</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/worldShare">Partilhar com o Mundo</a><br>
+									<a href="/BiAMa/worldShare" ng-click="disableSearch()">Partilhar com o Mundo</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/notifications">Notificações</a><br>
+									<a href="/BiAMa/notifications" ng-click="disableSearch()">Notificações</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/perfilPage">Perfil</a><br>
+									<a href="/BiAMa/perfilPage" ng-click="disableSearch()">Perfil</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/compare">Comparar</a><br>
+									<a href="/BiAMa/compare" ng-click="disableSearch()">Comparar</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/login">Iniciar sessão</a><br>
+									<a href="/BiAMa/login" ng-click="disableSearch()">Iniciar sessão</a><br>
 									<button ng-click="clickUserDetails()"></button>	
 								</div>
 							</nav>
@@ -95,17 +100,13 @@
 					</nav>
 					
 					<!--image biama -->
-					<div class="row text-center">
-						<img class="margin-top-4x" src="../images/hero_bg_image.jpg" height="15%" width="20%">
+					<div ng-if="search" class="row text-center">
+						<img class="margin-top-6x" src="../images/topoBiamaHome.png"/>
 					</div>
 					<!-- titles of page & search -->
 					<div class="row text-center">
-						<div class="col-xl-9 mx-auto">
-							<h1 class="mb-5 titleBiAMa">BiAMa</h1><p>
-							<h4 class="mb-5 minTitleBiAMa">biblioteca aberta de materiais</h4>
-						</div>
 						<ng-view></ng-view>
-						<div class="col-sm-4 col-sm-offset-4">
+						<div ng-if="search" class="col-sm-4 col-sm-offset-4">
 							<div id="imaginary_container"> 
 								<div class="input-group stylish-input-group">
 									<input type="text" class="form-control"  placeholder="" >
@@ -122,11 +123,11 @@
 			</article>
 		
 			<footer style="overflow: initial;" class="w3-bar w3-center">
-				<a href="/BiAMa/biamaPage" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
-				<a href="/BiAMa/ondeEstamos" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-				<a href="/BiAMa/biblioteca" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-				<a href="/BiAMa/aSuaBiAMa" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-				<a href="/BiAMa/forum" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
+				<a href="/BiAMa/biamaPage" ng-click="disableSearch()" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
+				<a href="/BiAMa/ondeEstamos" ng-click="disableSearch()" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
+				<a href="/BiAMa/biblioteca" ng-click="disableSearch()" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
+				<a href="/BiAMa/aSuaBiAMa" ng-click="disableSearch()" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
+				<a href="/BiAMa/forum" ng-click="disableSearch()" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
 			</footer>
 		</div>
 	</body>
