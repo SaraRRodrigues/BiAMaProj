@@ -38,13 +38,13 @@
 		<div class="divController" ng-controller="MainController"> 
 			<header class="masthead text-white text-center">
 				<nav>
-					<div style="padding-right:500px">
-						<i class="fas fa-circle redCircle"></i>
-						<i class="fas fa-circle orangeCircle"></i>
-						<i class="fas fa-circle greenCircle margin-right-2x"></i>
+					<div style="padding-right:360px">
+						<i class="fas fa-circle redCircle margin-right margin-left"></i>
+						<i class="fas fa-circle orangeCircle margin-right"></i>
+						<i class="fas fa-circle greenCircle margin-right-3x"></i>
 
-						<i class="fa fa-chevron-left arrows margin-right"></i>						
-						<i class="fa fa-chevron-right arrows"></i>
+						<i class="fa fa-chevron-left arrows margin-right-2x"></i>						
+						<i class="fa fa-chevron-right arrows margin-right-5x"></i>
 						<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
 					</div>
 				</nav>	
@@ -54,17 +54,17 @@
 				<div class="divBody">
 					<!-- user & search & languages-->
 					<nav class="positionOfNavDetails">
-						<div class="row">
-							<div class="float-left padding-top-2x padding-left-3x">
-								<i ng-if="!userDetails" ng-click="clickUserDetails()" class="sizeUserAndSearch fas fa-user"></i>
-								<i ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" class="sizeUserAndSearch fas fa-search padding-left-2x"></i>
-								<i ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" class="sizeMinSearch fas fa-search padding-left-2x"></i>
-								<input class="inputMinSearch" ng-if="showSearch"type="text"></input>
-							</div>
-						</div>
 						<!-- languages -->
-						<div class="padding-left-5x">
+						<div class="float-left padding-left-3x">
+							<img class="" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
+							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
+						</div> 
+
+						<div class="padding-left-6x" style="margin-top: -25px;">
 							<label class="labelLanguage">Idioma</label>
+							<div class="separatorLanguage"></div>
 							<label class="selectLanguage"></label>
 							<label class="languageSize">[{languageSelected}]</label>
 							<i ng-click="getLanguages()" class="fas fa-caret-down"></i>	
@@ -74,12 +74,12 @@
 									<br>
 								</div>
 							</div>
-						</div>
+						</div>	
 						<!-- details user -->
 						<div class="row">
 							<nav class="padding-left-3x">
 								<div class="navDetailsUser" ng-if="userDetails"><br>
-									<i class="sizeUserAndSearch fas fa-user"></i><br><br>
+									<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 									<a href="/BiAMa/favorites" ng-click="disableSearch()">Favoritos</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
 									<a href="/BiAMa/myQuestions" ng-click="disableSearch()">As minhas perguntas</a><br>
@@ -93,7 +93,7 @@
 									<a href="/BiAMa/compare" ng-click="disableSearch()">Comparar</a><br>
 									<div class="lineWhite margin-bottom margin-top"></div>
 									<a href="/BiAMa/login" ng-click="disableSearch()">Iniciar sessão</a><br>
-									<button ng-click="clickUserDetails()"></button>	
+									<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 								</div>
 							</nav>
 						</div>
@@ -122,7 +122,7 @@
 				</div>
 			</article>
 		
-			<footer style="overflow: initial;" class="w3-bar w3-center">
+			<footer class="w3-bar w3-center">
 				<a href="/BiAMa/biamaPage" ng-click="disableSearch()" style="width:20%;color: white; text-decoration:none" class=" buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 				<a href="/BiAMa/ondeEstamos" ng-click="disableSearch()" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
 				<a href="/BiAMa/biblioteca" ng-click="disableSearch()" style="width:20%; color:#E4A73F;  text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>

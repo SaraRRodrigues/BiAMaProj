@@ -91,6 +91,7 @@ var app = angular.module("myApp", ['ngRoute'])
 			$scope.userDetails = false;
 		}else {
 			$scope.userDetails = true;
+			$scope.showSearch = false;
 		}
 	}
 

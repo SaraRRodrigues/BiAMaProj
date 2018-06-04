@@ -1,41 +1,38 @@
 <html>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-<body ng-app="myApp" style="font-family: sans-serif;" ng-controller="OndeEstamosController">
-	 
-	<div> 
+	<body ng-app="myApp" ng-controller="OndeEstamosController">
+		 <!--image biama -->
+        <div class="row text-center">
+            <img class="margin-top-3x" src="../images/topoBiama.png"/>
+        </div>
+        <div class="imageRight">
+            <img src="../images/rightBiama.png"/>
+        </div>
+	
 		<div style="text-align:center;"> 
+			<div class="imageLeft">
+                <img class="margin-top-3x" src="../images/leftBiama.png"/>
+            </div>
 			<h1 style="font-weight: normal;color: #5F9EA0;font:bold">Onde estamos</h1>
 		</div>
 			
-		<div id="map" style="margin-left:315px; width:50%;height:140px;">
-
-			<script>
-			function myMap() {
-				var mapCanvas = document.getElementById("map");
-				var mapOptions = {
-				center: new google.maps.LatLng(51.5, -0.2), zoom: 10
-				};
-				var map = new google.maps.Map(mapCanvas, mapOptions);
-			}
-			</script>
-
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
-		</div>
-		<div style="text-align:center; margin-top:30px">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49777.73275493282!2d-9.182217183163333!3d38.76122003047571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4af60672811cb198!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa!5e0!3m2!1spt-PT!2spt!4v1528151729506" width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+		<div style="text-align:center;">
 			
-			<button type="button"></button>
-			<label>Escola biama</label>
+			<div>
+				<i class="fas fa-map-marker-alt"></i>
+				<label class="margin-right-4x">Escola Superior de Educação de Lisboa</label>
 
-			<select style="font-weight: normal; font-size: 14px; margin-left:80px">
-				<option default>Pesquise um local ou endereço</option>
-				<option value="0" style="background-color: #FFE5CC;">ISEL</option>
-				<option value="1" style="background-color: #FFE5CC;">IST</option>
-			</select>
+				<label>Pesquise um local ou endereço</label>
+				<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
+				<div ng-if="showSchools">
+					<div ng-repeat="school in schools">
+						<label class="languagesDiv margin-right-4x" ng-click="selectSchool(language)">[{school}]</label>
+						<br>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
 
 

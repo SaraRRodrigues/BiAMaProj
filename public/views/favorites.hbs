@@ -1,5 +1,5 @@
 <html>
-    <body  ng-app="myApp" ng-controller="FavoritesController">
+    <body ng-app="myApp" ng-controller="FavoritesController">
         <!--image biama -->
         <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -12,12 +12,21 @@
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
            <div class="padding-left-4x">
-                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Favoritos</h1> 
                
-                <select id="selectedFav" ng-click="getValues()">
+                <!--<select id="selectedFav" ng-click="getValues()">
                     <option class="optionLanguage" value="0">Materiais</option>
                     <option class="optionLanguage" value="1">Perguntas</option>
-                </select>
+                </select>-->
+                <div>
+                    <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Favoritos<img src="../images/buttonDown.JPG" ng-click="getFavorites()"></h1> 
+                    
+                </div>
+				<div ng-if="showFavorites">
+					<div ng-repeat="favorite in favorites">
+						<label ng-click="selectFavorite(favorite)">[{favorite}]</label>
+						<br>
+					</div>
+				</div>
             </div>
             <div ng-if="showQuestions">
                 <a href="" class="margin-left-5x margin-top" style="text-decoration:none;">Pergunta 1</a><br>
@@ -27,11 +36,13 @@
                 <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 3</a><br>
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
             </div>
-            <div ng-if="showMaterials" ng-repeat="image in imageMaterials track by $index">
-                <div style="padding: 5px;" class="column">
+            <!--<div ng-if="showMaterials" ng-repeat="image in imageMaterials track by $index">-->
+            <div ng-if="showMaterials">
+                <!--<div style="padding: 5px;" class="column">
                     <img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/>
                     <img ng-if="$index%2!==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/><br>
-                </div>
+                </div>-->
+                <img src="../images/favorites.JPG"/>
             </div>
         </div>
     </body>

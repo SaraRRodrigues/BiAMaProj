@@ -1,9 +1,16 @@
 body {
   font-family: sans-serif;
+  bottom: 0;
 }
 
 a {
   color: #00B7FF;
+}
+
+footer{
+  overflow: initial;  
+  position: absolute; 
+  bottom: 0;
 }
 
 .margin-left-50px {margin-left: 50px}
@@ -19,6 +26,9 @@ a {
 .margin-right-50px {margin-right: 50px}
 .margin-right{margin-right: 5px;}
 .margin-right-2x{margin-right: 10px;}
+.margin-right-3x{margin-right: 20px;}
+.margin-right-4x{margin-right: 60px;}
+.margin-right-5x{margin-right: 210px;}
 
 .marginNavPesquisa {margin-left:250px}
 
@@ -40,7 +50,9 @@ a {
 .padding-left-2x{padding-left: 20px}
 .padding-left-3x{padding-left: 40px}
 .padding-left-4x{padding-left: 60px}
+.padding-left-4-5x{padding-left: 80px}
 .padding-left-5x{padding-left: 140px}
+.padding-left-6x{padding-left: 210px}
 
 .padding-right-2x {padding-right: 20px}
 .padding-right-3x {padding-right: 30px}
@@ -72,16 +84,16 @@ a {
   background-color:#C0C0C0; 
 }
 .inputLink {
-  background-color:#E0E0E0;
-  width: 450px;
+  background-color:#D3D3D3;
+  width: 550px;
   text-align: center;
-  margin-left: 270px;
   margin-top:20px;
   border-radius: 5px;
   border: 0px;
   height: 23px; 
   font-size: 12px; 
   font-weight: bold;
+  color:black
 }
 
 .divBody {
@@ -89,14 +101,13 @@ a {
   background-color:white; 
   border-left: 6px solid #C0C0C0; 
   border-right: 6px solid  #C0C0C0; 
-  padding-bottom: 31%;
 }
 .positionOfNavDetails{
   position: absolute;
 }
 
 .labelLanguage {
-  margin-left:980px;
+  margin-left:850px;
   font-weight: bold;
   font-size: 18px;
 }
@@ -140,15 +151,19 @@ a {
 
 .buttonSelected {
   width:20%;
-  background-color: #E4A73F;
+  background-color: #e68a009c;
   color: white; 
-  text-decoration:none
+  text-decoration:none;
+  font-size:28px;
+  font-weight: ligther;
 }
 .buttonNotSelected {
   width:20%; 
   color:#E4A73F; 
-  background-color:#F9F1E4;
-  text-decoration:none
+  background-color:#F5F5F5;
+  text-decoration:none;
+  font-size:28px;
+  font-weight: ligther;
 }
 
 .buttonAlignment {
@@ -188,7 +203,7 @@ a {
   font-size:12px;
   background-color: #C0C0C0;
   width: 300px;
-  margin-left: 540px;
+  margin-left: 497px;
 }
 .inputsCenter{
   text-align:center
@@ -236,8 +251,16 @@ a {
 .imageLeft{
   float:left;
   margin-left: 50px;
+  margin-top:-60px;
 }
 .imageRight{
   float:right;
   margin-right: 50px;
+  margin-top:-100px;
+}
+
+.separatorLanguage{
+	border: 1px solid black;
+	display: inline;
+	font-size: 14px;
 }
