@@ -1,4 +1,3 @@
-
 app.factory("UserService", function($http){
     return{
         getUsers: function(){
@@ -11,7 +10,6 @@ app.factory("UserService", function($http){
             });
             
             /*var x = function(data){
-
                 console.log(data)
                 return data;
             }*/
@@ -33,6 +31,3 @@ app.controller("PerfilController", ['$scope', "UserService", "$http", function($
         console.log(users);
     });
 }])
-
-
-

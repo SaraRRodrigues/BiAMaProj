@@ -1,5 +1,5 @@
 //var angular = require('angular');
-var app = angular.module("myApp", ['ngRoute'])
+var app = angular.module("myApp", ['ngRoute', 'firebase'])
 .config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('[{');
     $interpolateProvider.endSymbol('}]');
@@ -14,7 +14,7 @@ var app = angular.module("myApp", ['ngRoute'])
 	})
 	$routeProvider.when('/BiAMa/biamaPage', {
 		templateUrl: 'views/biamaPage',
-		controller: 'MainController'
+		controller: 'BiamaController'
 	  });
 	$routeProvider.when('/BiAMa/biblioteca', {
 	  templateUrl: 'views/bibliotecaPage',
@@ -62,21 +62,29 @@ var app = angular.module("myApp", ['ngRoute'])
 		templateUrl: 'views/compare',
 		controller: 'CompareController'
 	});
-	$routeProvider.when('/BiAMa/login', {
+	/*$routeProvider.when('/BiAMa/login', {
 		templateUrl: 'views/login',
 		controller: 'LoginController'
-	});
+	});*/
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http", function($scope, UserService, $http) {
+.controller('MainController',['$scope', "UserService", "$http", '$firebaseAuth',
+function($scope, UserService, $http, $firebaseAuth) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
 	$scope.search = true;
 	$scope.showLanguages = false;
 	$scope.languageSelected = 'Português'
+	$scope.initSession = false;
+	$scope.confirmSession = false;
+	$scope.showInitSession = false;
+	$scope.usernameModel = '';
+	$scope.passwordModel = '';
+	$scope.logoutLabel = false;
+	$scope.terminateLogin = false;
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
@@ -107,6 +115,81 @@ var app = angular.module("myApp", ['ngRoute'])
 		}
 	}
 
+	$scope.initSession = function () {
+		$scope.initSession = true;
+	}
+
+	$scope.showInitSessionDiv = function () {
+		if($scope.showInitSession){
+			$scope.showInitSession = false;
+		}else {
+			$scope.showInitSession = true;
+		}
+	}
+	var config = {
+		apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
+		authDomain: "fir-biama.firebaseapp.com",
+		databaseURL: "https://fir-biama.firebaseio.com",
+		projectId: "fir-biama",
+		storageBucket: "fir-biama.appspot.com",
+		messagingSenderId: "861577986516"
+	};
+
+	firebase.initializeApp(config);
+
+	$scope.loginWithGoogle = function() {
+		
+		const provider = new firebase.auth.GoogleAuthProvider();
+
+    	firebase.auth().signInWithPopup(provider)
+            .then(result => {
+
+				const user = result.user;
+				console.log(user);
+				//window.setTimeout("location.href = 'http://localhost:8080'")
+            })
+			.catch(console.log)
+		
+		$scope.confirmSession = true;
+		$scope.validateUserLogin();
+	}
+
+	$scope.validateUserLogin = function() {
+
+	}
+
+	$scope.loginWithFacebook = function() {
+		
+		const provider = new firebase.auth.FacebookAuthProvider();
+
+    	firebase.auth().signInWithPopup(provider)
+            .then(result => {
+				
+				const user = result.user;
+				$scope.confirmSession = true;
+				//window.setTimeout("location.href = 'http://localhost:8080'")
+            })
+			.catch(console.log)
+	}
+
+	$scope.logout = function(){
+		$scope.confirmSession = false;
+		firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});
+	}
+
+	$scope.confirmSessionAction = function (username, password) {
+
+		//var users = $http.get('/perfilPage');
+		//console.log(users)
+	}
+
 	$scope.selectLanguage = function(language){
 		$scope.languageSelected = language;
 	}
@@ -126,16 +209,18 @@ var app = angular.module("myApp", ['ngRoute'])
 	$scope.s = function() {
 		
 		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
-		
 	}	
 
-	
-	UserService.getUsers(function(users){
+	$scope.searchMaterials = function(){
+		
+	}
+
+/*	UserService.getUsers(function(users){
 		$scope.UsersList = users;
 		
 		console.log(users);
 	});
-    
+*/
 }])
 
 app.factory("UserService", function($http){
@@ -150,7 +235,6 @@ app.factory("UserService", function($http){
             });
             
             /*var x = function(data){
-
                 console.log(data)
                 return data;
             }*/
@@ -165,4 +249,3 @@ app.factory("UserService", function($http){
         }
     }
 });
-

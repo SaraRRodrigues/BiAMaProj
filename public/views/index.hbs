@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<title>{{title}}</title>
 		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
@@ -10,13 +9,20 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
+		
+		
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script type="application/json" src="jsonLabels/en.json"></script>
 
 		<!--footer controllers-->
 		<script type="text/javascript" src="controllers/main-controller.js"></script>
+		<script type="text/javascript" src="controllers/biama-controller.js"></script>
 		<script type="text/javascript" src="controllers/ondeEstamos-controller.js"></script>
 		<script type="text/javascript" src="controllers/forum-controller.js"></script>
 		<script type="text/javascript" src="controllers/biblioteca-controller.js"></script>
@@ -30,6 +36,7 @@
 		<script type="text/javascript" src="controllers/worldShares-controller.js"></script>
 		<script type="text/javascript" src="controllers/compare-controller.js"></script>
 		<script type="text/javascript" src="controllers/login-controller.js"></script>
+		<script type="text/javascript" src="controllers/resultsMaterials-controller.js"></script>
 
 		<base href="/"/>
 	</head>
@@ -79,21 +86,60 @@
 						<div class="row">
 							<nav class="padding-left-3x">
 								<div class="navDetailsUser" ng-if="userDetails"><br>
-									<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-									<a href="/BiAMa/favorites" ng-click="disableSearch()">Favoritos</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/myQuestions" ng-click="disableSearch()">As minhas perguntas</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/worldShare" ng-click="disableSearch()">Partilhar com o Mundo</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/notifications" ng-click="disableSearch()">Notificações</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/perfilPage" ng-click="disableSearch()">Perfil</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/compare" ng-click="disableSearch()">Comparar</a><br>
-									<div class="lineWhite margin-bottom margin-top"></div>
-									<a href="/BiAMa/login" ng-click="disableSearch()">Iniciar sessão</a><br>
-									<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+									<div ng-if="!confirmSession">
+										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+										<a>Favoritos</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>As minhas perguntas</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Partilhar com o Mundo</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Notificações</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Perfil</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Comparar</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+										
+										<div class="divInitSession" ng-if="showInitSession">
+											<div class="alignCenter">
+												<h5 class="initSessionColor">Iniciar Sessão</h5>
+												<div class="lineWhiteInitSession"></div><br>
+												
+												<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+												<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+												
+												<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+
+												<!-- login with firebase providers -->
+												<div>
+													<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+													<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+												</div>
+												<br>
+												<button class="registSession" type="button">Registar</button>
+											</div>
+										</div>
+									</div>
+									<div ng-if="confirmSession">
+										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+										<a href="/BiAMa/favorites" ng-click="disableSearch()">Favoritos</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/myQuestions" ng-click="disableSearch()">As minhas perguntas</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/worldShare" ng-click="disableSearch()">Partilhar com o Mundo</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/notifications" ng-click="disableSearch()">Notificações</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/perfilPage" ng-click="disableSearch()">Perfil</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/compare" ng-click="disableSearch()">Comparar</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a ng-click="logout()">Terminar Sessão</a><br>
+										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+									</div>
 								</div>
 							</nav>
 						</div>
@@ -111,7 +157,7 @@
 								<div class="input-group stylish-input-group">
 									<input type="text" class="form-control"  placeholder="" >
 									<span class="input-group-addon">
-										<a href="/BiAMa/searchResult">
+										<a href="/BiAMa/searchResult" ng-click="disableSearch()">
 											<span class="glyphicon glyphicon-search"></span>
 										</a>
 									</span>

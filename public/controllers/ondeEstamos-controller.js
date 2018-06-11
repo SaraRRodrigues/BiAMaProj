@@ -1,4 +1,4 @@
-app.controller("OndeEstamosController", ['$scope', "$http", function($scope, $http){
+app.controller("OndeEstamosController", ['$scope', "$http" , "UserService", function($scope, $http,UserService){
     $scope.biamaPage = false;
     $scope.ondeEstamosPage = true;
     $scope.showSchools = false;

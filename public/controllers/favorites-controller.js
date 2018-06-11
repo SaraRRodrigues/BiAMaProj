@@ -1,6 +1,5 @@
 app.controller('FavoritesController',['$scope', "$http", function($scope, $http) {
     
-
     $scope.showQuestions = false;
     $scope.showMaterials = true;
     $scope.showFavorites = false;
