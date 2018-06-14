@@ -18,7 +18,6 @@ function getUsers(cb){
 			if(err) {
 				return console.error('error running query', err);
 			}
-			
 			cb(null, {UsersList:result.rows} )
 		});
 	});

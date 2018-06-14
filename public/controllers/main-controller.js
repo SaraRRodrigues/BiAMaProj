@@ -1,5 +1,5 @@
 //var angular = require('angular');
-var app = angular.module("myApp", ['ngRoute', 'firebase'])
+var app = angular.module("myApp", ['ngRoute'])
 .config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('[{');
     $interpolateProvider.endSymbol('}]');
@@ -70,8 +70,8 @@ var app = angular.module("myApp", ['ngRoute', 'firebase'])
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http", '$firebaseAuth',
-function($scope, UserService, $http, $firebaseAuth) {
+.controller('MainController',['$scope', "UserService", "$http",
+function($scope, UserService, $http) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -186,8 +186,6 @@ function($scope, UserService, $http, $firebaseAuth) {
 
 	$scope.confirmSessionAction = function (username, password) {
 
-		//var users = $http.get('/perfilPage');
-		//console.log(users)
 	}
 
 	$scope.selectLanguage = function(language){
@@ -206,30 +204,30 @@ function($scope, UserService, $http, $firebaseAuth) {
 		}
 	];
 
-	$scope.s = function() {
+	/*$scope.s = function() {
 		
 		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
-	}	
+	}	*/
 
 	$scope.searchMaterials = function(){
 		
 	}
 
-/*	UserService.getUsers(function(users){
+	UserService.getUsers(function(users){
 		$scope.UsersList = users;
 		
 		console.log(users);
 	});
-*/
+
 }])
 
 app.factory("UserService", function($http){
     return{
         getUsers: function(){
             
-           return $http.get('/biamaPage')
+           return $http.get('/views/index')
                         .then(function(response) {
-                
+					//debugger
                     //console.log(response);
                     return response.data;
             });
