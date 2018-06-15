@@ -106,20 +106,23 @@
 										<div class="divInitSession" ng-if="showInitSession">
 											<div class="alignCenter">
 												<h5 class="initSessionColor">Iniciar Sessão</h5>
+												
 												<div class="lineWhiteInitSession"></div><br>
-												
-												<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-												<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-												
-												<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-
-												<!-- login with firebase providers -->
-												<div>
-													<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-													<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+												<div ng-if="users === 'loadUser'">
+													<div class="loading-icon"></div>
 												</div>
-												<br>
-												<button class="registSession" type="button">Registar</button>
+												<div ng-if="users !== 'loadUser'">
+													<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+													<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+													<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+													<!-- login with firebase providers -->
+													<div>
+														<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+														<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+													</div>
+													<br>
+													<button class="registSession" type="button" ng-click="regist()">Registar</button>
+												</div>												
 											</div>
 										</div>
 									</div>

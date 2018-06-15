@@ -186,24 +186,33 @@ function($scope, UserService, $http) {
 
 	$scope.confirmSessionAction = function (username, password) {
 
+		$scope.users = 'loadUser';
+		var getAllUsers = UserService.getUsers(function(users){});
+		
+		getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+			
+			for(var index=0; index<$scope.users.length; ++index){
+				$scope.userName = $scope.users[index].username;
+				$scope.userPassword = $scope.users[index].password;
+				if($scope.userName !== null && $scope.userName === username){
+					if($scope.userPassword !== null && $scope.userPassword === password){
+					
+						$scope.confirmSession = true;
+						break;
+					}
+				}
+			}
+		});
 	}
-
+	
 	$scope.selectLanguage = function(language){
 		$scope.languageSelected = language;
 	}
 
 	$scope.languages = ['Português', 'Inglês']
 	$scope.biamaPage = true;
-	$scope.UsersList = [
-		{
-			'desc': "cenas1",
-
-		},
-		{
-			'desc':"cenas2"
-		}
-	];
-
+	
 	/*$scope.s = function() {
 		
 		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
@@ -212,38 +221,31 @@ function($scope, UserService, $http) {
 	$scope.searchMaterials = function(){
 		
 	}
-
-	UserService.getUsers(function(users){
-		$scope.UsersList = users;
-		
-		console.log(users);
-	});
-
 }])
 
-app.factory("UserService", function($http){
-    return{
+app.factory("UserService", function($q, $http, $timeout){
+    /*return{
         getUsers: function(){
-            
-           return $http.get('/views/index')
-                        .then(function(response) {
-					//debugger
-                    //console.log(response);
-                    return response.data;
-            });
-            
-            /*var x = function(data){
-                console.log(data)
-                return data;
-            }*/
-                /*.then(function(response) {
-                
-                    
-                    
-                    console.log(response);
-                    return 'x';
-                });*/
-
+          
+			return $http.get('/users')
+			.then(function(response) {
+			 
+				console.log(response.data);
+			  	return response.data;
+			});
         }
-    }
+	}*/
+	var getUsers = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/users'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getUsers: getUsers
+	  };
 });

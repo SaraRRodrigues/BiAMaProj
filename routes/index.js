@@ -13,13 +13,10 @@ router.get('/', (req, resp, next) => {
 	resp.render('views/index');
 });
 
-router.get('/biama', (req, resp, next) => {
+router.get('/users', (req, resp, next) => {
 	userService.getUsers((error, users) => {
-		console.log(users)
 		resp.json({users})
 	});
-	
-	console.log('Users');
 	//resp.render(`views/${req.params.name}`);
 });
 

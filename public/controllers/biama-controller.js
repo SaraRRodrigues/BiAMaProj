@@ -1,17 +1,18 @@
 app.controller("BiamaController", ['$scope', "UserService", "$http", function($scope,  UserService, $http){
-
-    UserService.getUsers(function(users){
-		$scope.UsersList = users;
-		
-		console.log(users);
-	});
+    
+    /*UserService.getUsers(function(users){
+		$scope.usersDB = users;
+        console.log('biama: ', users);
+       
+    });
+    */
 }])
 
-app.factory("UserService", function($http){
+/*app.factory("UserService", function($http){
     return{
         getUsers: function(){
             
-           return $http.get('/biama')
+           return $http.get('/users')
                         .then(function(response) {
 					//debugger
                     console.log(response);
@@ -20,4 +21,4 @@ app.factory("UserService", function($http){
         }
     }
 });
-
+*/
