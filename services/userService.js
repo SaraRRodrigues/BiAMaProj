@@ -7,7 +7,7 @@ var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 const { Client } = require('pg');
 
 const client = new Client({
-	connectionString: process.env.DATABASE_URL,
+	connectionString: process.env.DATABASE_URI_HEROKU,
 	ssl: true,
 });
   
@@ -40,6 +40,7 @@ module.exports = {
 function getUsers(cb){
 	client.query('SELECT * FROM "User"', (err, res) => {
 		if (err) throw err;
+		console.log(res.rows);
 		for (let row of res.rows) {
 	  		console.log(JSON.stringify(row));
 		}
