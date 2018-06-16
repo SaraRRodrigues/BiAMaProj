@@ -1,5 +1,6 @@
 //var angular = require('angular');
 var app = angular.module("myApp", ['ngRoute'])
+.run(['$route', angular.noop])
 .config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('[{');
     $interpolateProvider.endSymbol('}]');
@@ -15,7 +16,7 @@ var app = angular.module("myApp", ['ngRoute'])
 	$routeProvider.when('/BiAMa/biamaPage', {
 		templateUrl: 'views/biamaPage',
 		controller: 'BiamaController'
-	  });
+	})
 	$routeProvider.when('/BiAMa/biblioteca', {
 	  templateUrl: 'views/bibliotecaPage',
 	  controller: 'BibliotecaController'
@@ -61,7 +62,10 @@ var app = angular.module("myApp", ['ngRoute'])
 	$routeProvider.when('/BiAMa/compare', {
 		templateUrl: 'views/compare',
 		controller: 'CompareController'
-	});
+	})
+	.otherwise({
+        redirectTo: 'views/biamaPage'
+      });
 	/*$routeProvider.when('/BiAMa/login', {
 		templateUrl: 'views/login',
 		controller: 'LoginController'
@@ -191,7 +195,6 @@ function($scope, UserService, $http) {
 		
 		getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
-			
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;
 				$scope.userPassword = $scope.users[index].password;
@@ -224,17 +227,7 @@ function($scope, UserService, $http) {
 }])
 
 app.factory("UserService", function($q, $http, $timeout){
-    /*return{
-        getUsers: function(){
-          
-			return $http.get('/users')
-			.then(function(response) {
-			 
-				console.log(response.data);
-			  	return response.data;
-			});
-        }
-	}*/
+    
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
