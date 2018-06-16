@@ -63,9 +63,7 @@ var app = angular.module("myApp", ['ngRoute'])
 		templateUrl: 'views/compare',
 		controller: 'CompareController'
 	})
-	.otherwise({
-        redirectTo: 'views/biamaPage'
-      });
+	
 	/*$routeProvider.when('/BiAMa/login', {
 		templateUrl: 'views/login',
 		controller: 'LoginController'

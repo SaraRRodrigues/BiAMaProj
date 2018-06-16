@@ -1,14 +1,22 @@
 var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
-var pg = require('pg');
+//var pg = require('pg');
 //var pgClient = new pg.Client(connectDB);
 //var UsersList = require('../model/UsersList');
 
 //pgClient.connect();
+const { Client } = require('pg');
+
+const client = new Client({
+	connectionString: process.env.DATABASE_URL,
+	ssl: true,
+});
+  
+client.connect();
 
 module.exports = {
 	'getUsers': getUsers	
 }
-function getUsers(cb){
+/*function getUsers(cb){
 	console.log('database: ' + process.env.DATABASE_URL)
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
@@ -28,4 +36,14 @@ function getUsers(cb){
 		console.log('strinngsss: ' , obj);
 		cb(null, data);
 	}
-}
+}*/
+function getUsers(cb){
+	client.query('SELECT * FROM "User"', (err, res) => {
+		if (err) throw err;
+		for (let row of res.rows) {
+	  		console.log(JSON.stringify(row));
+		}
+		cb(null, res.rows)
+		client.end();
+  	});
+};
