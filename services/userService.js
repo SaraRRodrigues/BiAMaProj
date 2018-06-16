@@ -11,7 +11,6 @@ const client = new Client({
 	ssl: true,
 });
   
-client.connect();
 
 module.exports = {
 	'getUsers': getUsers	
@@ -38,6 +37,7 @@ module.exports = {
 	}
 }*/
 function getUsers(cb){
+	client.connect();
 	client.query('SELECT * FROM "User"', (err, res) => {
 		if (err) throw err;
 		console.log(res.rows);
