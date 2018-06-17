@@ -1,5 +1,5 @@
 var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
-//var pg = require('pg');
+var pg = require('pg');
 //var pgClient = new pg.Client(connectDB);
 //var UsersList = require('../model/UsersList');
 
