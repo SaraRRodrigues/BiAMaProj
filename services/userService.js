@@ -15,7 +15,7 @@ const client = new Client({
 module.exports = {
 	'getUsers': getUsers	
 }
-/*function getUsers(cb){
+function getUsers(cb){
 	console.log('database: ' + process.env.DATABASE_URL)
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
@@ -35,8 +35,8 @@ module.exports = {
 		console.log('strinngsss: ' , obj);
 		cb(null, data);
 	}
-}*/
-function getUsers(cb){
+}
+/*function getUsers(cb){
 	client.connect();
 	client.query('SELECT * FROM "User"', (err, res) => {
 		if (err) throw err;
@@ -47,4 +47,4 @@ function getUsers(cb){
 		cb(null, res.rows)
 		client.end();
   	});
-};
+};*/
