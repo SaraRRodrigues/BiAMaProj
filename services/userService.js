@@ -4,12 +4,12 @@ var pg = require('pg');
 //var UsersList = require('../model/UsersList');
 
 //pgClient.connect();
-const { Client } = require('pg');
+//const { Client } = require('pg');
 
-const client = new Client({
+/*const client = new Client({
 	connectionString: process.env.DATABASE_URL,
 	ssl: true,
-});
+});*/
   
 
 module.exports = {
