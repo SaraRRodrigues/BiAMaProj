@@ -2,14 +2,14 @@ var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 var pg = require('pg');
 
 module.exports = {
-	'getUsers': getUsers	
+	'getMyQuestions': getMyQuestions	
 }
-function getUsers(cb){
+function getMyQuestions(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "User"', function(err, result) {
+		client.query('SELECT * FROM "Question"', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}

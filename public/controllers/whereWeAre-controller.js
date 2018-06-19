@@ -1,6 +1,5 @@
-app.controller("OndeEstamosController", ['$scope', "$http" , "UserService", function($scope, $http,UserService){
+app.controller("WhereWeAreController", ['$scope', "$http" , "UserService", function($scope, $http,UserService){
     $scope.biamaPage = false;
-    $scope.ondeEstamosPage = true;
     $scope.showSchools = false;
     $scope.schools = ['Instituto Superior Técnico', 'Faculdade de Ciências e Tecnologias']
 

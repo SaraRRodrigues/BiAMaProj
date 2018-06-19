@@ -10,7 +10,6 @@ app.controller('FavoritesController',['$scope', "$http", function($scope, $http)
         var value = document.getElementById('selectedFav');
         $scope.itemSelecionado = value.options[value.selectedIndex].text
 
-        console.log('selecionado:' + $scope.itemSelecionado);
         if($scope.itemSelecionado === 'Perguntas') {
        
             $scope.showQuestions = true;

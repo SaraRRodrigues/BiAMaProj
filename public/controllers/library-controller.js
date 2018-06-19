@@ -1,5 +1,5 @@
 
-app.controller("BibliotecaController", ['$scope', "$http", function($scope, $http){
+app.controller("LibraryController", ['$scope', "$http", function($scope, $http){
 
   $scope.imagesLibrary = [];
     $scope.imagesLibrary.push({

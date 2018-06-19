@@ -9,17 +9,17 @@ var app = angular.module("myApp", ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
 	
 	$routeProvider
-	 .when('/BiAMa/ondeEstamos', {
-	  templateUrl: 'views/ondeEstamos',
-	  controller: 'OndeEstamosController',
+	 .when('/BiAMa/whereWeAre', {
+	  templateUrl: 'views/whereWeAre',
+	  controller: 'WhereWeAreController',
 	})
 	$routeProvider.when('/BiAMa/biamaPage', {
 		templateUrl: 'views/biamaPage',
 		controller: 'BiamaController'
 	})
-	$routeProvider.when('/BiAMa/biblioteca', {
-	  templateUrl: 'views/bibliotecaPage',
-	  controller: 'BibliotecaController'
+	$routeProvider.when('/BiAMa/library', {
+	  templateUrl: 'views/library',
+	  controller: 'LibraryController'
 	});
 	$routeProvider.when('/BiAMa/aSuaBiAMa', {
 		templateUrl: 'views/suaBiamaPage',
@@ -147,7 +147,6 @@ function($scope, UserService, $http) {
             .then(result => {
 
 				const user = result.user;
-				console.log(user);
 				//window.setTimeout("location.href = 'http://localhost:8080'")
             })
 			.catch(console.log)

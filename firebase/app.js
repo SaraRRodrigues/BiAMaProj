@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", event => {
     const app = firebase.app();
-    console.log(app);
 })
 
 function googleLogin() {
@@ -11,8 +10,6 @@ function googleLogin() {
 
                 const user = result.user;
                 window.setTimeout("location.href = 'http://localhost:8080'")
-                //document.write('Hello ' + user.displayName)
-                console.log(user);
             })
             .catch(console.log)
 }
