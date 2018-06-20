@@ -20,8 +20,8 @@
 		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
 		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
 		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
-		<script type="text/javascript" src="../controllers/biblioteca-controller.js"></script>
-		<script type="text/javascript" src="../controllers/suaBiama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/library-controller.js"></script>
+		<script type="text/javascript" src="../controllers/yourBiama-controller.js"></script>
 
 		<!--details user controllers-->
 		<script type="text/javascript" src="../controllers/perfil-controller.js"></script>
@@ -35,7 +35,7 @@
 		 
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp">
+	<body ng-app="myApp" ng-controller="BiamaController">
 		 <!--image biama -->
         <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -44,14 +44,17 @@
             <img src="../images/rightBiama.png"/>
         </div>
 		
-		<div style="text-align:center;"> 
+		<div class="titlesOnCenter"> 
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-			<h1 style="font-weight: normal;color: #5F9EA0;font:bold">O que é a BiAMa?</h1>
+			<h1 class="subtitles">O que é a BiAMa?</h1>
 		</div>
-		<div style="width:40%;max-width: 800px;margin: 0 auto; text-align: justify;">
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		<div ng-if="loading">
+			<div class="loading-icon-footer-info"></div>
+		</div>
+		<div ng-if="!loading" class="sectionDetails" >
+			<p>[{descriptionBiama}]
 			</p>
 		</div>
 	</body>

@@ -329,3 +329,32 @@ footer{
   position: fixed;
   top: 0; 
 }
+
+.loading-icon-footer-info{
+  position: relative;
+  width: 20px;
+  height: 20px; 
+  margin: 50px auto;
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+.loading-icon-footer-info:before {
+  content: "\f110";
+  font-family: FontAwesome;
+  font-size: 50px;
+  position: fixed;
+  top: 0; 
+}
+
+.subtitles {
+  font-weight: normal;
+  color: #5F9EA0;
+  font:bold
+}
+
+.sectionDetails{
+  width: 40%;
+  max-width: 800px;
+  margin: 0 auto; 
+  text-align: justify;
+}

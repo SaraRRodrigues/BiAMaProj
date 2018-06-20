@@ -7,15 +7,18 @@
 		<div class="imageRight">
 			<img src="../images/rightBiama.png"/>
 		</div>
-		<div style="text-align:center;"> 
+		<div class="titlesOnCenter"> 
 			<div class="imageLeft">
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
-			<h1 style="font-weight: normal;color: #5F9EA0;font:bold">Biblioteca</h1>
+			<h1 class="subtitles">Biblioteca</h1>
 		</div>
-		<div style="text-align:center;">
-			<div ng-repeat="image in imagesLibrary">
-				<img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto"/><br>
+		<div ng-if="loading">
+			<div class="loading-icon-footer-info"></div>
+		</div>
+		<div ng-if="!loading" class="titlesOnCenter">
+			<div ng-repeat="image in materialDetails">
+				<img ng-src="../images/Categories/[{image.name}]" width="10%" height="10%" alt="foto"/><br>
 			</div>
 		</div>
 	</body>

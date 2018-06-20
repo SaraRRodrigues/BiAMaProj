@@ -1,18 +1,28 @@
+app.controller("LibraryController", ['$scope', "$http","MaterialInfoService", function($scope, $http, MaterialInfoService){
 
-app.controller("LibraryController", ['$scope', "$http", function($scope, $http){
+    $scope.loading = true;
 
-  $scope.imagesLibrary = [];
-    $scope.imagesLibrary.push({
-        imgPath: '../images/plastic.jpg'
-    })
-    $scope.imagesLibrary.push({
-        imgPath: '../images/metal.jpg'
-    })
-    $scope.imagesLibrary.push({
-        imgPath: '../images/ceramica.jpg'
-    })
-    $scope.imagesLibrary.push({
-        imgPath: '../images/madeira.jpg'
-    })
-    
+    var getMaterialInfo = MaterialInfoService.getMaterial(function(infoMaterial){});
+    getMaterialInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.materialDetails;
+        $scope.materialDetails=data;
+    });
 }])
+
+app.factory("MaterialInfoService", function($q, $http, $timeout){
+    
+	var getMaterial = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/materials'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getMaterial: getMaterial
+	  };
+});

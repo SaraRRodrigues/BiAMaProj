@@ -1,19 +1,29 @@
-app.controller("BiamaController", ['$scope', "UserService", "$http", function($scope,  UserService, $http){
+app.controller("BiamaController", ['$scope', "BiAMaInfoService", "$http", function($scope,  BiAMaInfoService, $http){
     
-   
+    $scope.loading = true;
+
+    var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+    getBiamaInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.biamaDetails;
+        $scope.descriptionBiama=data[0].description;
+    });
 }])
 
-/*app.factory("UserService", function($http){
-    return{
-        getUsers: function(){
-            
-           return $http.get('/users')
-                        .then(function(response) {
-					//debugger
-                    console.log(response);
-                    return response.data;
-            });
-        }
-    }
+app.factory("BiAMaInfoService", function($q, $http, $timeout){
+    
+	var getBiAMaInfo = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/biamaInfo'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getBiAMaInfo: getBiAMaInfo
+	  };
 });
-*/
+

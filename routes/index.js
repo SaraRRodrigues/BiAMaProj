@@ -6,6 +6,7 @@ var path = require('path');
 var userService = require('../services/userService');
 var biamaInfoService = require('../services/biamaInformationService');
 var myBiamaInfoService = require('../services/myBiamaInformationService');
+var materialInfoService = require('../services/materialInfoService');
 var userAnswerService = require('../services/userAnswerService');
 var curiosityService = require('../services/curiosityService');
 var worldShareService = require('../services/worldShareService');
@@ -38,6 +39,14 @@ router.get('/myBiamaInfo', (req, resp, next) => {
 	});
 });
 
+
+/* GET material details: library */
+router.get('/materials', (req, resp, next) => {
+	materialInfoService.getMaterials((error, materialDetails) => {
+		resp.json({materialDetails})
+	});
+});
+
 /* GET user answer: forum */
 router.get('/userAnswers', (req, resp, next) => {
 	userAnswerService.getUserAnswer((error, answersDetails) => {
@@ -59,6 +68,7 @@ router.get('/worldShares', (req, resp, next) => {
 	});
 });
 
+/* FOOTER SERVICES */
 /* GET favorites: favorites */
 router.get('/favorites', (req, resp, next) => {
 	favoriteService.getMyFavorites((error, favoriteDetails) => {
