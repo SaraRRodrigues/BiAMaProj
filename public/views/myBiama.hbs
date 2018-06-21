@@ -48,26 +48,22 @@
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
 			<h1 class="subtitles">A sua BiAMa</h1>
-			<div ng-if="confirmSession">
-				<div ng-if="loading">
-					<div class="loading-icon-footer-info"></div>
-				</div>
-				<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
-				<div ng-if="!loading" class="sectionDetails">
-					<p>[{descriptionMyBiama}]</p>
-				</div>
-				<div ng-if="!loading" class="sectionDetails">
-					<div>
-						<i class="far fa-file-pdf"></i>
-						<label class="margin-right-3x">Formulário para Aderir</label>
-
-						<i class="far fa-file-pdf"></i>
-						<label>Construir a sua BiAMa</label>
-					</div>
-				</div>
+			
+			<div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
 			</div>
-			<div ng-if="!confirmSession">
-				<h1>Faça login para ter acesso à informação da sua BiAMa!</h1>
+			<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
+			<div ng-if="!loading" class="sectionDetails">
+				<p>[{descriptionMyBiama}]</p>
+			</div>
+			<div ng-if="!loading" class="sectionDetails">
+				<div>
+					<i class="far fa-file-pdf"></i>
+					<label class="margin-right-3x">Formulário para Aderir</label>
+
+					<i class="far fa-file-pdf"></i>
+					<label>Construir a sua BiAMa</label>
+				</div>
 			</div>
 		</div>
 	</body>
