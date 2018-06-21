@@ -39,26 +39,57 @@
 		<base href="/"/>
 	</head>
 	<body ng-app="myApp" ng-controller="QuestionsUsersForumController">
-		 <!--image biama -->
+		
+		<!--image biama -->
         <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
         </div>
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-		
-		<div class="titlesOnCenter"> 
+		<div class="titlesOnCenter">
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
-            </div>
-			<h1 class="subtitles">O que é a BiAMa?</h1>
+            </div> 
+			<h1 ng-if="!getQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 		</div>
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!loading" class="sectionDetails" >
-			<p>[{descriptionBiama}]
-			</p>
+		<div ng-if="!loading && !getQuestionDetails" class="titlesOnCenter" ng-repeat="question in questions track by $index">
+			<a class="questionX" ng-click="getQuestion(question.idQuestion, $index+1)">Pergunta [{$index+1}]</a><br>
+			<div class="separateQuestions"></div>
+		</div>
+		<div ng-if="getQuestionDetails">
+			<div class="titlesOnCenter"> 
+				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
+			</div>
+
+			<div class="titlesOnCenter">
+				
+				<div class="margin-left-10x">
+					<!-- Questions -->
+					<div class="borderQuestion">
+						<img src="../images/user.png">
+						<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+						<i class="fas fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="fas fa-thumbs-up"></i>
+						<i class="far fa-thumbs-up"></i>
+						<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+					</div>
+					<!-- Answers -->
+					<div class="borderAnswer">
+						<i class="fas fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="fas fa-thumbs-up"></i>
+						<i class="far fa-thumbs-up"></i>
+						<label class="margin-left-7x">Resposta [{indexQuestion}]</label>
+						<img src="../images/user.png">
+						<h5 class="descriptionAnswer" style="">[{descriptionQuestion}]</h5>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

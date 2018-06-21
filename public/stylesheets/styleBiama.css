@@ -17,18 +17,22 @@ footer{
 .margin-left {margin-left:5px}
 .margin-left-2x {margin-left:10px}
 .margin-left-3x {margin-left:20px}
-.margin-left-4x {margin-left:30px}
-.margin-left-5x {margin-left:45px}
+.margin-left-4x {margin-left:60px}
+.margin-left-5x {margin-left:80px}
 .margin-left-6x {margin-left:90px}
-.margin-left-7x {margin-left:120px}
-.margin-left-8x {margin-left:150px}
+.margin-left-7x {margin-left:110px}
+.margin-left-8x {margin-left:140px}
+.margin-left-9x {margin-left:150px}
+.margin-left-10x {margin-left:400px}
 
 .margin-right-50px {margin-right: 50px}
 .margin-right{margin-right: 5px;}
 .margin-right-2x{margin-right: 10px;}
 .margin-right-3x{margin-right: 20px;}
 .margin-right-4x{margin-right: 60px;}
-.margin-right-5x{margin-right: 210px;}
+.margin-right-5x{margin-right: 80px;}
+.margin-right-6x{margin-right: 120px;}
+.margin-right-7x{margin-right: 210px;}
 
 .marginNavPesquisa {margin-left:250px}
 
@@ -384,4 +388,44 @@ footer{
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #eaab00;
+}
+
+.questionX {
+  text-decoration:none;
+  cursor: pointer
+}
+.separateQuestions{
+  margin-bottom:10px;
+  color:#E0E0E0; 
+  margin-left:520px; 
+  width:200px; 
+  border:1px solid
+}
+
+.borderQuestion{
+  border:1px solid #eaab00;
+  width:400px;
+  margin-left: -49px;
+  margin-top: 52px;
+}
+
+.borderAnswer{
+  border:1px solid #70c0c1;
+  width:400px;
+  margin-left: 115px;
+  margin-top: 35px;
+}
+
+.descriptionQuestion{
+  margin-left: 100px; 
+  margin-top: -15px; 
+  width:250px; 
+  text-align: left;
+}
+
+.descriptionAnswer{
+  margin-left: 105px; 
+  margin-top: 5px; 
+  width:250px; 
+  text-align: right; 
 }
