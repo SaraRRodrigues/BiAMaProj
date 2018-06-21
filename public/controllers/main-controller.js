@@ -21,9 +21,9 @@ var app = angular.module("myApp", ['ngRoute'])
 	  templateUrl: 'views/library',
 	  controller: 'LibraryController'
 	});
-	$routeProvider.when('/BiAMa/yourBiama', {
-		templateUrl: 'views/yourBiama',
-		controller: 'YourBiamaController'
+	$routeProvider.when('/BiAMa/myBiama', {
+		templateUrl: 'views/myBiama',
+		controller: 'MyBiamaController'
 	  });
 
 	$routeProvider.when('/BiAMa/forum', {

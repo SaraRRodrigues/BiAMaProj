@@ -1,4 +1,43 @@
 <html>
+	<head>
+		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
+		<!--footer controllers-->
+		<script type="text/javascript" src="../controllers/main-controller.js"></script>
+		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
+		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
+		<script type="text/javascript" src="../controllers/library-controller.js"></script>
+		<script type="text/javascript" src="../controllers/myBiama-controller.js"></script>
+
+		<!--details user controllers-->
+		<script type="text/javascript" src="../controllers/perfil-controller.js"></script>
+		<script type="text/javascript" src="../controllers/favorites-controller.js"></script>
+		<script type="text/javascript" src="../controllers/notifications-controller.js"></script>
+		<script type="text/javascript" src="../controllers/questions-controller.js"></script>
+		<script type="text/javascript" src="../controllers/worldShares-controller.js"></script>
+		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
+		<script type="text/javascript" src="../controllers/login-controller.js"></script>
+		<script type="text/javascript" src="../controllers/resultsMaterials-controller.js"></script>
+		 
+		<base href="/"/>
+	</head>
 	<body ng-app="myApp"  ng-controller="ForumController">
 		<!--image biama -->
 		<div class="row text-center">
@@ -7,16 +46,22 @@
 		<div class="imageRight">
 			<img src="../images/rightBiama.png"/>
 		</div> 
-		<div style="text-align:center;"> 
+		<div class="titlesOnCenter"> 
 			<div class="imageLeft">
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
-			<h1 style="font-weight: normal;color: #5F9EA0;font:bold">Fórum</h1>
+			<h1 class="subtitles">Fórum</h1>
 		</div>
-		<div style="text-align: center;">
-			<img src="../images/perguntasUtilizador.JPG"/>
-			<img src="../images/curiosidades.JPG"/>
-			<img class="margin-right-3x" src="../images/partilhasMundo.JPG"/>
+		<div class="titlesOnCenter">
+			<a href="/BiAMa/questionsUsersForum">
+				<img  src="../images/questionsUsers.JPG"/>
+			</a>
+			<a href="/BiAMa/curiositiesForum">
+				<img src="../images/curiosities.JPG"/>
+			</a>
+			<a href="/BiAMa/worldSharesForum">
+				<img class="margin-right-3x" src="../images/worldShares.JPG"/>
+			</a>
 		</div>
 	</body>
 </html>

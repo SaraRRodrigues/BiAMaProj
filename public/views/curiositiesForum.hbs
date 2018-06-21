@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
 		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
 		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
-		<script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
 		<script type="text/javascript" src="../controllers/library-controller.js"></script>
@@ -38,26 +38,29 @@
 		 
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp"  ng-controller="LibraryController">
-		<!--image biama -->
-		<div class="row text-center">
-			<img class="margin-top-3x" src="../images/topoBiama.png"/>
-		</div>
-		<div class="imageRight">
-			<img src="../images/rightBiama.png"/>
-		</div>
+	<body ng-app="myApp" ng-controller="CuriosityForumController">
+		 <!--image biama -->
+        <div class="row text-center">
+            <img class="margin-top-3x" src="../images/topoBiama.png"/>
+        </div>
+        <div class="imageRight">
+            <img src="../images/rightBiama.png"/>
+        </div>
+		
 		<div class="titlesOnCenter"> 
 			<div class="imageLeft">
-				<img class="margin-top-3x" src="../images/leftBiama.png"/>
-			</div>
-			<h1 class="subtitles">Biblioteca</h1>
+                <img class="margin-top-3x" src="../images/leftBiama.png"/>
+            </div>
+			<h1 class="subtitles">Curiosidades</h1>
 		</div>
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!loading" class="titlesOnCenter">
-			<div ng-repeat="image in materialDetails">
-				<img ng-src="../images/Categories/[{image.name}]" width="10%" height="10%" alt="foto"/><br>
+		<div ng-if="!loading" class="sectionDetails sectionScroll">
+			<div ng-repeat="curiosity in descriptionCuriosity">
+				<img ng-src="../images/curiosities/[{curiosity.image}]" width="23%" height="30%" />
+				<h4>[{curiosity.title}]</h4>
+				<h6>[{curiosity.description}]</h6>
 			</div>
 		</div>
 	</body>

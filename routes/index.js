@@ -39,7 +39,6 @@ router.get('/myBiamaInfo', (req, resp, next) => {
 	});
 });
 
-
 /* GET material details: library */
 router.get('/materials', (req, resp, next) => {
 	materialInfoService.getMaterials((error, materialDetails) => {
