@@ -109,6 +109,16 @@ function($scope, UserService, $http) {
 		$scope.userDetails = false;
 		$scope.search = false;
 	}
+
+	$scope.nameclick='biamaPage';
+	$scope.changeColorClick = function(name) {
+		$scope.userDetails = false;
+		$scope.search = false;
+
+		$scope.nameclick=name;
+		console.log($scope.nameclick)
+	}
+
 	$scope.getLanguages = function() {
 		if($scope.showLanguages){
 			$scope.showLanguages = false;
