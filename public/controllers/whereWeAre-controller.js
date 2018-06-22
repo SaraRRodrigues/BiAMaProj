@@ -1,4 +1,4 @@
-app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService", function($scope, $http,BiAMaInfoService){
+app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", function($scope, $http,BiAMaInfoService, $sce){
     
     $scope.loading = true;
     $scope.schools=[];
@@ -9,9 +9,9 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService", 
         $scope.loading = false;
         var data=result.data.biamaDetails;
         $scope.biamaDetails=data;
-        $scope.locationsURL= $scope.pathURL + $scope.biamaDetails[1].location;
+        /**default - url of ESELx */
+        $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
         $scope.descriptionLocation=$scope.biamaDetails[1].locationDescription;
-        console.log($scope.descriptionLocation)
     });
 
     $scope.getSchools = function () {
@@ -23,14 +23,21 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService", 
     }
 
     $scope.selectSchool = function (locationSchool) {
-        console.log($scope.biamaDetails)
         for(var index=0; index <$scope.biamaDetails.length; ++index) {
             if($scope.biamaDetails[index].locationDescription === locationSchool){
-                $scope.locationsURL= $scope.pathURL + $scope.biamaDetails[index].location
+                $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[index].location)
                 $scope.descriptionLocation = $scope.biamaDetails[index].locationDescription;
                 break;
             }
         }
+    }
+
+    $scope.expandIframe = function(){
+        if($scope.zoomInIFrame){
+			$scope.zoomInIFrame = false;
+		}else {
+			$scope.zoomInIFrame = true;
+		}
     }
 }])
 

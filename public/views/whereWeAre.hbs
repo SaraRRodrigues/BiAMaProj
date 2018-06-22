@@ -19,9 +19,11 @@
 			<div class="loading-icon-footer-info"></div>
 		</div>	
 		<div ng-if="!loading" class="titlesOnCenter">
-			<iframe ng-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+
 			<div>
-				<i class="fas fa-map-marker-alt"></i>
+				<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
 				<label class="margin-right-4x">[{descriptionLocation}]</label>
 
 				<label>Pesquise um local ou endereço</label>
