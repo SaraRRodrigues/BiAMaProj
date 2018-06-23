@@ -8,6 +8,8 @@ var biamaInfoService = require('../services/biamaInformationService');
 var myBiamaInfoService = require('../services/myBiamaInformationService');
 var materialInfoService = require('../services/materialInfoService');
 var userQuestionService = require('../services/userQuestionService');
+var likeQuestionService = require('../services/likesQuestionService');
+var likeAnswerService = require('../services/likesAnswerService');
 var curiosityService = require('../services/curiosityService');
 var worldShareService = require('../services/worldShareService');
 
@@ -49,6 +51,20 @@ router.get('/materials', (req, resp, next) => {
 /* GET user answer: forum */
 router.get('/userQuestions', (req, resp, next) => {
 	userQuestionService.getUserQuestion((error, questionDetails) => {
+		resp.json({questionDetails})
+	});
+});
+
+/* GET like answer: forum */
+router.get('/userLikeQuestions', (req, resp, next) => {
+	likeQuestionService.getLikeQuestion((error, questionDetails) => {
+		resp.json({questionDetails})
+	});
+});
+
+/* GET like question: forum */
+router.get('/userLikeAnswers', (req, resp, next) => {
+	likeAnswerService.getLikeAnswer((error, questionDetails) => {
 		resp.json({questionDetails})
 	});
 });
