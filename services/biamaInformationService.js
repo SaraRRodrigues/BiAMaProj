@@ -1,4 +1,4 @@
-var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
+//var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 var pg = require('pg');
 
 module.exports = {
