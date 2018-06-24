@@ -7,6 +7,7 @@ var userService = require('../services/userService');
 var biamaInfoService = require('../services/biamaInformationService');
 var myBiamaInfoService = require('../services/myBiamaInformationService');
 var materialInfoService = require('../services/materialInfoService');
+var categoryInfoService = require('../services/categoryInfoService');
 var userQuestionService = require('../services/userQuestionService');
 var likeQuestionService = require('../services/likesQuestionService');
 var likeAnswerService = require('../services/likesAnswerService');
@@ -42,9 +43,16 @@ router.get('/myBiamaInfo', (req, resp, next) => {
 });
 
 /* GET material details: library */
-router.get('/materials', (req, resp, next) => {
-	materialInfoService.getMaterials((error, materialDetails) => {
-		resp.json({materialDetails})
+router.get('/materialsCategories', (req, resp, next) => {
+	materialInfoService.getMaterials((error, materialsCategories) => {
+		resp.json({materialsCategories})
+	});
+});
+
+/* GET categories details: library */
+router.get('/categories', (req, resp, next) => {
+	categoryInfoService.getCategories((error, categoryDetails) => {
+		resp.json({categoryDetails})
 	});
 });
 

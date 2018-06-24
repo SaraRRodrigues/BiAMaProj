@@ -55,10 +55,19 @@
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!loading" class="titlesOnCenter">
-			<div ng-repeat="image in materialDetails">
-				<img ng-src="../images/Categories/[{image.name}]" width="10%" height="10%" alt="foto"/><br>
+		<div ng-if="!loading && !showCategory && !showMaterialDetails" class="titlesOnCenter sectionScroll">
+			<div ng-repeat="category in materialsCategories">
+				<h1>[{image.category}]</h1>
+				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="47%" height="170px" alt="foto"/>
 			</div>
+		</div>
+		<div ng-if="showCategory && !showMaterialDetails" class="titlesOnCenter sectionScroll">
+			<img ng-repeat="image in materialOfCategory track by $index" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/categories/[{category}]/[{materialOfCategory[$index].name}]" ng-click="openDetailsMaterial(materialOfCategory[$index])" width="47%" height="170px" alt="foto"/>
+		</div>
+		<div ng-if="showMaterialDetails" class="titlesOnCenter sectionScroll">
+			<img class="margin-bottom-2x margin-left-2x" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="170px" alt="foto"/><br>
+			<p>[{materialInfo.description}]
+			</p>
 		</div>
 	</body>
 </html>

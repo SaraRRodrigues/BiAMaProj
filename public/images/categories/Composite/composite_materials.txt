@@ -1,0 +1,162 @@
+00_c
+This paper is coated with chemicals that react to turn black when heated. An example is the combination of a fluoran leuco dye and octadecylphosphonic acids. The surface of the paper is glossier than standard paper, and if you draw your fingernail across it, it turns black. This paper is designed to be used in thermal printers, which usually work by pushing heated pins against the paper surface. It is used in applications where colour and resolution are not important, such as for till receipts. The advantage for the vendor is that the tills don’t need to be replenished with ink like a normal printer, and hand held devices such as chip and pin units can be streamlined as no ink cartridge is required.
+Selections
+Categories
+Composite
+Curiosities
+Transformative
+Relationships
+White | Paper | Thermochromic
+
+01_c
+This brown modelling wax smells a bit like plasticine and is similarly easily softened by the heat from your hands. It’s malleability and low melting point mean that it is particularly useful for lost wax casting, where the artist produces a wax model which is subsequently surrounded by a mould material, usually made of silicone, latex or polyurethane. The wax is then melted in a kiln and the original model destroyed so that molten metal can be poured into its original place to produce the final cast. This wax looks black on initial inspection, but if you pull a little ball off and squash it between your fingers you’ll see that is has the texture and colour of the inside of a raisin.
+Selections
+Categories
+Composite | Polymers
+Curiosities
+Relationships
+Sacrificial | Impressionable | Short-lived
+
+02_c
+In the future we may be surrounded by concrete structures, which are able to self-heal cracks in their structure, with special bacteria doing the job for us. Tiny cracks in concrete do not necessarily affect structural integrity in the short term, but they do allow water and other chemicals to seep into the structure, which may cause big problems over time. Self-healing concrete has dormant bacteria and a food source (starch) embedded in the concrete. When a crack appears in the concrete, water seeps in and reactivates the bacteria. After they awaken, the bacteria eat their packed lunch and then conveniently excrete calcite, which heals the crack. The bacteria can survive dormant in the material for 50 years.
+Selections
+Wonder Stuff
+Categories
+Ceramic | Composite
+Curiosities
+Repair
+Relationships
+Concrete | Disk | Bacteria | Grey | Self-healing | Poo
+
+03_c
+These glasses contain lenses which can be self-adjusted by the wearer to their prescription, and were developed as a low-cost and accessible eye care solution for people in developing nations. The lens consists of two membranes, in between which silicon oil can be pumped with the syringes on the side of the frames. As fluid is pumped in or out, the focal length of the lens is changed, meaning the lens can be tuned to the specific requirements of the eye. The syringes can then be removed. The inventor of these glasses was nominated for a 2011 European Invention Award.
+Selections
+Wonder Stuff
+Categories
+Composite | Polymers
+Curiosities
+Optical
+Relationships
+Glasses | Vision | Spectacles | Eyecare | Adjustable | Prescription | Lens | Eye | Eyes | Focal | Invention | Optometry | Blindness
+
+
+04_c
+This is a rare sample of silica aerogel which is essentially a glass foam whose nano-structure contains up to 99.8% air, making it the world's lightest solid. It was made by Steve M. Jones, NASA Jet Propulsion Laboratory as part of the Stardust research project, which involved sending a spacecraft containing a large piece of aerogel on a close approach to the comet Wild 2 in order to collect space-dust. What made aerogel ideal for the mission was that, this ultra fine foam can gradually decelerate and capture dust particles in pristine condition. The process of then sifting through the aerogel, micron by micron, to identify and collect the space-dust was the world’s largest collaborative microscopy activity. The material appears to be much more invisible than glass despite being less transparent for there is no hint of reflection on its surfaces, giving it the appearance of not being fully solid. Its azure colour is not due to any pigmentation, but is caused by the same phenomenon that gives colour to our Earth's atmosphere, namely Raleigh scattering of light. In other words, it is blue for the same reasons that the sky is blue.
+Selections
+Superlative Materials | Wonder Stuff
+Categories
+Composite
+Curiosities
+Relationships
+Silica | NASA | Ultra light | Wondrous | High performance | Foam | Thermal conductivity | Blue | Light weight | Stardust
+
+05_c
+We demonstrated a new micro-fabricated adhesive based on the same physics mechanism that underlies the amazing climbing ability of geckos. The work is rated by experts as the first proof of concept of dry adhesives based on van der Waals interaction. The secret of how geckos are able to perform extraordinary climbing antics; researchers confirmed that tiny intermolecular forces - so called van der Waals forces - were produced by literally billions of tiny hair-like structures, or spatulae, on each gecko toe. These forces, which arise when unbalanced electrical charges around molecules attract one another, allow the animal to scurry up walls and even hang upside down on polished glass. They have fabricated arrays of plastic pillars that are little more than two thousandths of a millimetre tall; the spacing of the pillars is on a similar scale. They are attached to a flexible base that moves to bring the minute synthetic hairs into contact will all the small undulations that exist even on the smoothest of surfaces. Researchers have developed a super-sticky adhesive modeled on the gecko foot that grips even the slipperiest surfaces. Scholars have long marvelled at the superlative climbing abilities of gecko lizards. But only recently have scientists figured out how the creatures manage their gravity-defying feats. Nanotechnologist Andre K. Geim of the University of Manchester and his colleagues set out to create a novel type of adhesive mimicking the gecko's gripping mechanism. Their prototype - which consists of an array of microfabricated polyimide hairs attached to a flexible base - exhibits an adhesive force per hair that is comparable to that of a gecko foot-hair. And the flexible base ensures that as many hairs as possible come into contact with the substrate. Because the adhesive is dry, it can be attached and detached repeatedly.
+Selections
+Wonder Stuff
+Categories
+Composite
+Curiosities
+Relationships
+Adhesive | Sticky | Tape | Gecko | van der Waals
+
+06_c
+This composite material is a sandwich of polyester resin, glass fibres and an aramid paper honeycomb. These three materials can be fairly weak in isolation, but combined in this particular structure they are exceptionally strong for their weight. So strong in fact that these kind of reinforced honeycomb sandwich panels have been used in the floor and wing panels of Boeing 747s. The geometry of the honeycomb, which occurs naturally in bones and beehives, gives it very good stiffness and resistance to compression. Because each of the tessellating hexagons is hollow, the honeycomb uses less material for the same function and has heat and sound insulating properties. Because the glass fibre and paper are immersed in a transparent resin, you can see the intermeshing materials, which create an interesting optical effect.
+Selections
+Categories
+Composite | Glass | Polymers | Vegetable
+Curiosities
+Relationships
+Light | Strong | Paper | Polymer | Insulating | Acoustic | Resin | Composite | Sandwich | Honeycomb | Optical | Semi-transparent | Stiff | Glass fibre | Tessellation | Aerospace | Compression-resistant
+
+07_c
+Greek mythology attributes the first man-made honeycomb to the inventor Daedalus, who is said to have made one from gold using the lost wax method more than 3000 years ago. The geometry of the honeycomb, which occurs naturally in bones and beehives, gives it very good stiffness for its weight, and as a result it is often found in aircraft applications. This particular honeycomb is (probably) made from a high-temperature resistant aramid paper. Aramids are a group of very strong and heat-resistant synthetic polymers, including Kevlar, which are used in aerospace and military applications for ballistic body-armour, in bicycle tires, and as an asbestos substitute.
+Selections
+Categories
+Composite | Polymers
+Curiosities
+Relationships
+Fragile | Paper | Polymer | Honeycomb | Stiff | Tessellation | Aerospace | Aramid | Lightweight
+
+08_c
+Tarmac is the generic name given to road surfacing materials, which is comprised of tar-like materials mixed with mineral aggregates like Portland cement, sand, gravel or concrete. However, the word 'tar' is used to describe a number of distinct substances that aren't actually tar. Tar is refined natural resin or 'pitch', usually from the wood and roots of pine trees, but these are rarely found in our pavements. In fact, most of the 'tar' in tarmac is bitumen, which can be found in nature as a semi-solid form of petrol; but it is more commonly a bi-product of crude oil production by distillation. Popular lore holds that tarmac was invented by the Scotsman John McAdam, but in fact a county surveyor called Edgar Hooley was the man whose serendipitous encounter with an industrial spillage made road surfaces stick. McAdam had invented crushed stone surfaces, which were fine for horse-drawn coaches, but when cars became popular these surfaces were inadequate. The story goes that Hooley was surveying in Derby and saw a smooth section of road near an ironworks. When he investigated he was told a barrel of tar had fallen on the road, and waste slag from the furnaces had been poured on it to clear up the mess...and so tarmac was born.
+Selections
+Categories
+Composite
+Curiosities
+Relationships
+Tough | Composite | Tar | Road-surfacing | Bitumen | Sand | Stone | Aggregates | Black | Rough | Smell
+
+09_c
+This yellow propelling pencil has been made out of a polymer that is commonly called live edge Perspex and contains yellow fluorescent dyes. The intensity of light given off by the polymer is greater at the edges, for the light is gathered along the length of the material and emitted at the ends where the surface area is reduced and the fluorescent effect focused. Whilst the mechanics of the pencil propels graphite to the tip, the material it is made from propels light in the same direction.
+Selections
+Categories
+Composite | Polymers
+Curiosities
+Fluorescence
+Relationships
+Light | Fluorescent | Tool | Yellow | Pencil | Propel
+
+010_c
+This large sphere just about fits in the palm of an adult woman’s hand, looks like a lead cannonball in colour and texture, but pick it up and you will find it is disconcertingly light. That is because it is made from expanded polystyrene foam, coated in a layer of graphite. This type of rigid foam is widely used for packaging where bulk but not weight is required. It is also a good thermal insulator and shock absorber. Polystyrene can also be carved easily, formed in moulds and recycled. Why this ball of polystyrene is coated in graphite, we are not quite sure! Graphite is conductive so perhaps it was designed for some form of scientific instrumentation looking at conductivity. We prefer to imagine this item as a fake shot put, possibly starring in the pivotal scene of a historical drama about the Highland Games. If you have any ideas about what this could be used for, please let us know.
+Selections
+Categories
+Composite | Mineral | Polymers
+Curiosities
+Relationships
+Sphere | Grey | Foam | Black | Ball | Conductive | Light-weight | Sheen | Graphite | Polystyrene
+
+011_c
+This material is made from compacted fish scales which are heated under pressure, creating a solid composite. Everyone who picks up this material, once told it is made of fish scales, always smells it. It doesn’t smell of fish. It doesn’t really smell at all - the manufacturing process completely sterilises the scales, so there is no residual odour or essence of the fish remaining.
+Selections
+Categories
+Composite | Animal
+Curiosities
+Recycled
+Relationships
+Recycling | Fish | Animal | Recycled
+
+012_c
+This artificial grass was designed specifically for use by dogs: hence its name K9Grass. It is desgiend to be laid in indoor recreation areas for good to play and poo on. Made with a knitted, ‘flow-through’ backing means liquid waste is able to pass through it easily. In addition, it is washable. However, more interesting is the presence of an antimicrobial agent in the blades of this grass called AlphaSan®, which uses the antimicrobial properties of silver to keep odour at bay. As far back as 1200BC, when the Pheonicians used silver for storing water, this material has been used for its antimicrobial effects. During WW1, prior to the development of antibiotics, it was even used to prevent infection in the dress of wounds. In the case of K9Grass, the presence of silver ions (they must be in ion form in order to have antimicrobial effect) interferes with the reproduction of odour-causing bacteria. AlphaSan® can also be found in things like hospital apparel and kitchen countertops, while it is most suitable for application in plastics, fibres, foams and coating.
+Selections
+Categories
+Composite | Polymers
+Curiosities
+Relationships
+Green | Poo | Silver | Turf | Grass | Dog | Anti-microbial
+
+013_c
+This unfortunate scorpion is entombed in a bubble of transparent plastic with a pearlised blue base, and is being used for weighing down paperwork, or as a slightly alarming ornament. It is stuck to a disc of synthetic felt to protect your desk. The plastic is a two-part synthetic liquid casting resin – usually acrylic or polyurethane. In its liquid state it’s a monomer, which is mixed with its chemical curing agent or catalyst, and poured into a mould containing the scorpion. As the resin hardens, it ‘polymerises’ into a polymer. The chemical exothermic reaction causes the plastic to heat up as it cures, making most casting resins unsuitable for waxy or other low melting objects. Just before the clear resin is hard, the maker would pour in another thin layer containing blue pigment and some sort of pearly powder, to give the paperweight that sea-bed effect. The mould used for the bubble shape was probably made from silicone rubber, which allows the object to emerge clear and shiny, with no need for polishing. Resin is not a pleasant substance to work with, as it gives off irritating chemical fumes which are very smelly. Earlier types of resin tended to go yellow, brittle or cloudy with age and exposure to the UV rays in daylight, ruining many a museum display, but more modern formulations will stay clear and hard indefinitely.
+Selections
+Categories
+Composite | Polymers | Animal
+Curiosities
+Relationships
+Polymer | Resin | Cast | Transparent | Plastic | Exothermic | Scorpion
+
+014_c
+Wood has a tendency of splitting when nailled at the edges due to the arrangement of its grains/fibers. Plywood, made of thin sheets of wood glued together with each sheets' grain at 90° to the adjacent sheet, would less likely split when nailed at the edge. The cross-graining increases the strength of the whole sheet, and also reduces overall shrinkage or expansion. Plywood can be used both inddors and outdoors. Outdoor use plywood would uses a water resistant glue to prevent delamination (the layering). When working with plywood, several factors should be taken into consideration including location, thickness of plywood and flexibility. 
+Selections
+Categories
+Composite | Vegetable
+Curiosities
+Relationships
+Wood | Machineable | Manufacturing | Furniture
+
+015_c
+LFLECT is a reflective lace similar to high-visibility fabric.  The lace is made of wool fibres and reflective fibres. Light reflects off LFLECT, making it a potential alternative to the popular neon yellow high-vis clothing. It can be added to any item of clothing.
+Selections
+Categories
+Composite | Polymers
+Curiosities
+Relationships
+Reflective
+
+016_c
+This shiny, smooth 8 inch block is commonly used for flooring or furniture. It is made of 85% recycled glass aggregates held together by solvent-free resin. 
+Selections
+Categories
+Composite
+Curiosities
+Relationships
+White | Glass | Resin

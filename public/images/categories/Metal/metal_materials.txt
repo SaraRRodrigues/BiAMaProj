@@ -1,0 +1,293 @@
+00_me
+Given our everyday interactions with metals like steel, which is used in everything from cars, planes and boats, through to skyscrapers, bridges and other engineering projects of a gargantuan scale, it’s easy to understand why metals are perceived to be heavy materials. But magnesium is lighter than many woods and almost half as dense as aluminium. Its lightweight nature makes it a highly attractive option in weight-critical applications, such as in bikes and cars, where there is a strong demand to reduce weight in an effort to reduce fuel costs, without sacrificing material strength. Amorphous Magnesium is a particularly intriguing material in this respect. Magnesium is also well known to fireworks lovers: when exposed to a flame, magnesium ignites and emits an intensely white light. In the case of fireworks, it is used in powder form together with a range of other substances, which burn to produce the range of different colours we see during light shows.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Light | Metal
+
+01_me
+These small orange-brown coloured chips are made out of recycled copper. Some everyday items copper can be sourced from include computer chips, electric wiring, gas pipes, roofs from old buildings and automobile radiators. Copper is regarded as a strategic material for developed countries because of its importance in the electrical transmission cables, motors, electrical transformers and electronics. Being relatively scarce in the Earth’s crust, it commands a high price and recycled metal contributes to more than 50% of the copper used in the world today. Some analysts believe there is chance that looking ahead 50 years we will run out of copper, although this is disputed[1]. Copper’s high price is likely to rise though, unless other materials can be found to replace it in the electrical and electronics industries.
+Selections
+Categories
+Metal
+Curiosities
+Recycled
+Relationships
+Recycling | Wires | Telecommunications | Chips | Landfill
+
+02_me
+This large drill bit has rusted significantly, to the extent that some of the material is flaking from the surface. The main body of the piece is iron, and the orange-brown rust is iron oxide, which has formed over many years. The tip of the drill has not aged in the same way, and this is because it is made of a different material altogether. This material is tungsten carbide, and it is used on the tips of drill bits as it is much harder and wear-resistant than the iron used in the main body of the bit.
+Selections
+Categories
+Metal
+Curiosities
+Damage
+Relationships
+Tool | Iron | Rusty
+
+03_me
+This sphere is made of copper. Copper can be found in the environment in its native state although it is more often smelted, and was used by some of the oldest civilisations on earth. It is a relatively soft metal, which exhibits very high thermal conductivity and ductility. The combination of workability and good heat transfer made copper a very popular material for the production of cookware. In particular it is claimed that copper pans are better for beating egg whites as their reaction with the copper stabilises the foam.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal | Copper | Sphere | Smelting | Cooking | Soft
+
+04_me
+This sphere is made from steel. The surface is specked with rust where the iron has combined with oxygen in the atmosphere. The majority of the surface is highly reflective and silver-coloured. Steel is predominantly made of iron, and contains a small amount of carbon, somewhere between 0.2 and 2% by weight. Other alloying elements may be added, including manganese, chromium, vanadium, and tungsten. As a pure substance, iron is quite weak. The alloying elements harden iron as they become embedded in the crystal lattice and prevent dislocations in the lattice from propagating. Varying the type and amount of alloying elements allows fine control over the material properties of steel, such as hardness and ductility. This means steel is a very versatile alloy, and exists in over 3500 different forms, which depend on the alloy, how it is made and how it is treated. Steel balls are vital for many types of engineering machinery acting as bearings and in rollers.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Sphere | Steel
+
+05_me
+Produced in collaboration between architects Dissing+Weitling and Lindberg, a Danish eyewear manufacturer, these super-elastic ‘Air Titanium Rim’ glasses are made without the use of screws, rivets or soldering. The titanium wire that makes up the frame is incredibly thin, lightweight and strong, and is bent and twisted into the hinges, the bridge and the ear clips so that the optician fitting these glasses can tailor them to each client. Titanium is an attractive material for glasses being light and strong – it is also capable of being alloyed to display super-elasticity. The nose pads and silicone ear clips are made from medical silicone, which is a hypoallergenic material just like titanium. These materials are therefore well-suited to being used in this sort of prosthetic devices that come in close contact with the human body in order to improve its performance.
+Selections
+Categories
+Glass | Metal | Polymers
+Curiosities
+Optical
+Relationships
+Metal | Rubber | Super-elastic | Silicone | Medical | Hypo-allergenic | Wire | Deformed | Accessory | Titanium
+
+06_me
+Metallic threads have been around for thousands of years, used in the clothes of kings and other people of status, in Persian carpets and in Indian saris. These metallic threads would largely have been gold and silver, hammered into extremely thin sheets, cut into ribbons and worked into fabrics. Historically, metallic threads would have been constructed by wrapping a metal strip around a fibre core (usually cotton or silk), often revealing the colour of the fibre core with decorative effects. Most contemporary metallic fibres are manufactured by one of two basic processes: lamination or metallization. Lamination produces a plastic-coated metal, whereby a layer of aluminium is sealed between two layers of acetate or polyester film, and these fibres are then cut into tiny strips for yarns. The metallization process produces a metal-coated plastic by heating the metal until it vaporises and is deposited at high pressure on a polyester film, which is likewise cut into tiny fibres. It is likely that this sample is metallised, since this second process is said to produce fibres that are thinner, more flexible, and more comfortable - like this silky, sleek sample. Alternatively, less common processes for the production of metal fibres include shaving them from wire (as in the case of steel wool), ‘bundle drawing’ them from larger diameter wire, casting them from molten metal, or growing them around a seed (often carbon). Metallic fibres are often used for decorative purposes, for example in lamé and brocade, but because of their mechanical properties they also have a number of technical applications. Aluminium is generally renowned for being extremely lightweight, whilst also very strong. It also has antistatic properties, does not tarnish and reflects radiant heat and electromagnetic radiation, so is perfect for use in protective clothing for demanding environments like fire proximity suits.
+Selections
+Categories
+Metal | Polymers
+Curiosities
+Relationships
+Light | Metal | Grey | Aluminium | Textile | Reflective | Woven | Metallised | Metallic | Fibre | Mesh | Fine | Lamination | Protective | Conductive | Antistatic
+
+07_me
+Somewhere between a staple and a nail, these strange strips of fasteners that look like unbent, raw staples are in fact headless pin nails for a nail gun. The nail gun itself acts like any other, driving the metal fastener into the object using compressed air, flammable gases, electromagnetism or a small explosive charge. However, these thin and delicate pins are used by furniture makers and other craftspeople to attach fabrics, beading, decorative trim and other relatively fragile materials because they are less obvious and leave much smaller holes than larger nails, giving a much better-looking finished product. They are also less likely to split small pieces of wood, for example, with the force of their insertion.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal | Fastener | Craft | Nail | Staple | Pin
+
+08_me
+This mottled cylinder of aluminium is heavier than you’d expect - aluminium is generally renowned for being a spectacularly light-weight metal. This unexpected characteristic is a bit of a mystery, but probably has to do with the process by which it has been produced. Powder metallurgy is the process of blending fine powdered metals, compacting them into a desired shape, and then heating the compressed powder in a controlled atmosphere until its particles adhere to each other (sintering). This additive manufacturing technique has been particularly useful as it allows for the making of parts with very little scrap, and usually requires less energy than conventional processing techniques, as the sintering furnace is heated to below the melting point of aluminium. Sintered aluminium powder alloys can have properties quite different from those of aluminium fabricated by conventional casting techniques. The powder sintering process can be controlled in ways that enhance properties like strength, resistance to corrosion and high temperatures, and electrical and thermal conductivity. The porosity and density of the material can also be controlled, depending on the sintering practices and the composition of aluminium and alloying metal powders used.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal | Powder | Aluminium | Speckled | Smooth | Sintering | Metallurgy
+
+09_me
+Tefenol-D is an alloy named after the three different metals from which it is composed, Terbium (Te), Iron (Fe), Dysprosium (Dy), and from the laboratories where it was first generated (Naval Ordnance Laboratory - NOL). This shiny grey alloy is widely known and used for its magnetostrictive properties; when exposed to a magnetic field, magnetostrictive materials can change their shape or dimensions through the process of magnetisation. For this reason Terfenol-D is often used in actuators or transducers, where the change in the magnetic field can generate some kind of motion or an electric/mechanic response. For example, Terfenol-D has been introduced as a new technology for fuel injectors in diesel engines where the expansion or contraction of this alloy regulates the flow of fuel through the injector.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+
+010_me
+Although aluminium is the third most abundant element in the earth’s crust, its existence wasn’t established until 1808, and even after that it took many years of research to ‘unlock’ the metal from one of its ores, bauxite. As a result, aluminium is a relatively young metal in comparison to gold, copper and even steel. It was made for the first time in 1825 in Copenhagen by H. C. Oersted but since its commercial production was reliant on the development of electrolysis was only produced in significant quantities from the 1880s onwards. Because of its extraordinarily light weight and strength, aluminium has become a very popular metal and is used in volumes second only to steel in all areas of modern life from car bodies to drinks cans. It also transmits conducted heat and reflects radiant heat, making it a favourite material for cooking utensils, kitchen foil and building insulation. Although efforts have been made to make production processes more efficient over the years, aluminium requires a huge amount of energy to extract it from its ore by electrolysis, and only melts at 2000 degrees. However, its environmental credentials are helped by the fact that it is, in theory, 100% recyclable and that recycled aluminium uses about 5% of the energy needed for virgin aluminium. The energy required for its initial production can also be offset over time by the energy saved in use -for example, through fuel savings gained by using lightweight aluminium in a car body instead of heavier steel.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Light | White | Strong | Metal | Reflective | Silver | Conductive | Recyclable | Electrolysis | Energy-intensive
+
+011_me
+It is often necessary to join two metals together - like when constructing some of the huge buildings that dominate the skylines of modern cities, or the vast ocean going liners that spend months at sea at a time, transporting goods all over the planet. The economics of the car industry is highly dependent on welding robots, and the rail and pipeline industries are equally dependent on this technique. Its also a popular technique in the arts for sculpture. Welding is the technique of choice for joining together metals, which require a high-strength bond between two parent parts, and that must last indefinitely. Welding is not a trivial process however; it requires that both parts be melted together to create a permanent joint between them, and which must not be significantly weaker than the materials it is joining. Looking at this particular section, the weld joint can be seen where the interface of each steel section were brought into contact and then melted together by means of a welding torch, heating the steel to above 1400°C.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal Joining | Welding
+
+012_me
+Tungsten filaments have long been used in light bulbs since the early 1900s, as applying an electrical voltage across the filament causes the instantaneous emission of a powerful white light. Their intricate shape may seem unnecessary for such a basic application as generating light; however, one can increase the surface area of tungsten in a light bulb by including a number of coils into the filament, thus resulting in a brighter light source which is still able to fit in the limited space. By implementing this double helix configuration, however, it’s possible to squeeze 60cm of tungsten wire into just a 1cm long coil. This aids in creating the high intensity bright light that we all know and rely on so heavily. Tungsten filament bulbs are currently being phased out due to concerns over their energy efficiency.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Light | Metal | Nature | Coil
+
+013_me
+This shiny, yellow-coloured soft metal – Gold – is one of the least reactive solid elements known. Chemically unaffected by air, moisture and most corrosive reagents, and retains its golden colour almost indefinitely in almost any environmental conditions . For these properties it has long been the precious metal of choice for coinage and jewellery. This metal is also very good at conducting electricity: gold wires, like this sample here, are primarily used for making interconnections between integrated circuits and a printed circuit board in the making of semiconductor devices. Though aluminium and copper are also used, gold is normally preferred because it does not oxidise during the welding process and therefore doesn’t require an inert atmosphere during the wire-bonding process.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Inert | Conductivity | Malleability | Ductility | Jewellery
+
+014_me
+Ferrite magnets were once strongest magnets in existence until rare earth magnets were discovered, and in many instances their more powerful cousins have replaced them. However, this ferrite magnet is much less brittle and is considerably cheaper and easier to get hold of than rare earth magnets, and it is made from a mixture of a ceramic material and iron (III) oxide. Some iron ore (magnetite) is magnetic from the moment it is extracted from the ground, but this iron (III) oxide largely comes from the ore hematite, which is not strongly magnetic and has to have its magnetic field enhanced during the production process. T o do this, the magnet’s constituent materials are heated to a critical temperature and allowed to cool in the presence of a magnetic field. Magnetic iron oxides have a long history of use by humans with naturally occurring magnetised ‘lodestones’ (magnetite) used in navigation as primitive compasses since the 12th Century. Compasses work by the principle that the earth itself has a magnetic field, and the magnetised free-moving needle or pointer aligns itself with that field, with one end pointing towards the south magnetic pole, and the other to the north magnetic pole.
+Selections
+Categories
+Metal
+Curiosities
+Magnetic
+Relationships
+
+015_me
+Most of the metals around us perform their various important tasks silently and in what is perhaps an understated manner. Even when put under stress, the vast majority make no sound and we are often unaware of the huge forces that they withstand, particularly in the instances of towering skyscrapers or vast container ships. Indium, however, behaves quite differently and in not such a desecrate manner; bending this rod of indium will emit a strange gritty, cracking, creaking sound, as a result of the microscopic crystals (that all metals are composed of) grating against one another. This behaviour is most commonly associated with tin, a metal that makes a similar sound when deformed, resulting in the phenomenon often being termed “tin cry”. Both indium and tin, therefore, are rare examples of a metal expressing its discomfort as we shape it to our needs.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal | Tin cry | Crying
+
+016_me
+This 18th century teapot looks quite cartoonish in its form, with its little scroll feet, its plain, bulging and dull grey body, an oversized, faceted and elaborately decorated spout and a large mock-wood handle. Apart from some small pieces of bone inlay on the handle and some pearlescent shell on the lid, this teapot is largely made from dull and dark oxidised pewter; an alloy of tin with lead, antimony, bismuth and copper. We originally thought that it was made from britannia metal, a variant of the tin alloy that is similar in colour and composition to other pewters but contains a relatively high ratio of antimony (up to 6%), which makes it harder, stronger and easier to work. However, britannia metal is thought to have been invented by James Vickers in Sheffield, 1769. This teapot has a date stamp on its bottom that suggests it was manufactured in Sheffield, 1760. Because of its age, it is unlikely that this is Britannia-ware and more likely to be an older, mildly leaded piece of pewterware. This makes this particular teapot quite an interesting specimen, as shortly after its manufacture, pewterers generally stopped making teapots with leaded alloys, favouring britannia metal instead. Lead is toxic if inhaled or digested at high exposure levels, as it accumulates in the soft tissue and bones, damaging the nervous system and interfering with the production of red blood cells. However, lead was not banned from pewter for health reasons until the 1970s. It is more likely that pewterers gradually moved away from leaded alloys and towards antimony based pewters because they allowed for a new processing technique. Vickers found that the addition of antimony made britannia metal hard enough to form into sheet metal. Rather than being cast into expensive moulds and carved to add intricate details, as this teapot probably was, the metal could be cut, formed by hand or spun into shape, and then soldered together in a much faster and cheaper process. Even before the development of britannia metal, ‘fine metal’ pewter alloys used for tableware tended to have a relatively low lead content and high tin content so as to resemble silver. You may be familiar with this poor-man’s silver from the low-melt casting (and now all lead-free) pewters sometimes used in jewellery making. If so, you will know that when first cast it often comes out bright and shiny, not grey and dull like this piece. This teapot would probably have been sold highly-polished to mimic silver, but has tarnished over time to become its current grey-blue hue.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Copper | Grey | Casting | Alloy | Tin | Teapot | Vessel | Lead | Pewter | Britannia Metal | Toxicity | Dull | Oxidation | Tarnish
+
+017_me
+This metallic wire shaped in a form of a spring is made of a special alloy of nickel and titanium (commonly termed a shape memory alloy) that is able to contract 4% or more when heated and then return to its original shape when cooling. This material’s ability to contract upon heating makes it useful in mechanical devices where heat, which is usually precisely delivered through an electric current, is used to generate some kind of motion. Shape memory actuators (SMA) are found in a wide variety of applications, from medical devices (portable insulin pumps) to computers and vending machines.
+Selections
+Categories
+Metal
+Curiosities
+Transformative | Memory
+Relationships
+Titanium | Alloy | Heat | Transformation | Contraction | Spring | Shape Memory | Nitinol | Nickel
+
+018_me
+This black heavy metallic bar is made of lead. When freshly broken, the surfaces appear shiny bright and silvery, but they soon turn to dark grey when exposed to air. This is due to oxidation. This metal is very soft (it can be scratched with a fingernail) and malleable and so easy to form into pipes and vessels, and for roofing – applications for which it is historically known. It’s relatively easy to extract from ores and as been widely exploited as a result. Because of its low melting point, lead has long been used in the art, particularly in the casting of sculptures. The grey patina which forms through oxidation on the outer layer of lead prevents sculptures from corrosion, making it a good choice of material particularly for works in outdoor spaces. The chemical symbol Pb derives from the Latin word, ‘plumbum’, a generic term meaning soft metals (words like ‘plumber’ and ‘plumbing’ also originate from this word). Due to its toxicity to the human nervous system, lead’s use today is much less widespread, but its uses remain broad. For example, lead is used: in the making of battery electrodes found in motor vehicles; in the keel of sailboats where high density and resistance to corrosion prevent tipping in strong winds; and it is the metal of choice for shielding radioactive exposure due to its high density.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Corrosion | Malleability | Toxicity | Resistance | Plumbing
+
+019_me
+Jet engine turbine blades need to be extremely durable to withstand the punishment they receive during operation of the engine. Along with the massive mechanical loadings they experience, they need to withstand extremely high temperatures. Needless to say, failure of such a part in an aircraft could be catastrophic. This turbine blade has two distinguishing material features. Firstly, it is made of a superalloy, which has superior mechanical strength and creep resistance at high temperatures, good corrosion and oxidation resistance compared to normal metals and alloys. Secondly, it is formed out of a single metal crystal, a structure which gives the blade outstanding strength at high temperatures. Most bulk metals are not one big crystal: they are composed of many tiny crystallites called grains. The boundaries between these grains generally increase the strength of a metal, however at high temperatures they provide a way for the metal to deform over time (called creep). Creating a turbine blade as a single crystal means it does not have any grain boundaries, and it is therefore intrinsically stronger at high temperatures than polycrystalline metals. It is this property that has allowed turbine jet engines to be operated reliably at very high temperatures which increases the efficiency and safety of the engine. Modern turbine jet engines are more efficient engines on the planet.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+
+020_me
+The bell is a fantastic acoustic object. Normally made from a specific type of hard bronze, referred to as bell metal, this bell has been made from lead in order to demonstrate how the material from which something is made has a marked effect on the performance or the object. In comparison with bronze, lead is extremely soft at room temperature. This means that when it is struck, it can easily deform and absorbed the energy of the strike, resulting ain a dull knocking sound rather than a lively ring. Being made from lead also means that this bell is very heavy. The combination of the material’s mass and softness mean that this bell could not be made in the same shape as the other bells in the collection as is would have collapsed at the shoulders. A reinforcing ring also had to be inserted around the opening of the bell to help in maintain a circular shape. This is a great example of how material not only effects function but form too. If dipped into liquid nitrogen and cooled to –196oC, the lead becomes stiffer and as a result the sound of bell produces changes, increase its ring in both pitch and duration.
+Selections
+Sound
+Categories
+Metal
+Curiosities
+Relationships
+Sound | Element | Lead | Bell | Play | Acoustics
+
+021_me
+This bell is made from bronze, an ally of copper and tin, and was used by Air Raid Protection (ARP) wardens during World War II to signal the event of an air raid. Each area of England had a number of designated wardens who would walk the street ringing such bells to indicate residence were to seek cover in bomb shelters. The bells were cast and produced in quantity with the initials A.P.R on the side of each. When rung, this bell produces a clear resonate sound at a pitch of 1034 Hz, which is very close to a 6th octave C. It does not take much force to produce an extremely loud and strong sound from this bell. The specific type of bronze used to make this object is called Bell Metal and can be found in churches across the U.K. and beyond. Prized for its tonal stability and power, bronze is a great material for making bells.
+Selections
+Sound
+Categories
+Metal
+Curiosities
+Relationships
+Sound | Bell | Play | Acoustics | Bronze | WWII
+
+022_me
+These little staple-like items are steel fibre reinforcements. They are added to concrete in order to increase strength, making it possible to create complex shapes and structures out of concrete that would previously have collapsed. Prior to being mixed into the concrete, they are glued together in bundles; this way they are mixed together easily and uniformly throughout the concrete. There are a variety of sizes available, and can be used to create varying degrees of strength in concrete and enable new architectural possibilities. Such reinforcements can be seen in tunnelling projects and in structures including the CCTV building in China and the Oceanographic in Valencia, Spain.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Steel | Concrete | Fibres | Architecture | Reinforcement | Structures
+
+023_me
+These little staple-like items are steel fibre reinforcements. They are added to concrete in order to increase strength, making it possible to create complex shapes and structures out of concrete that would previously have collapsed. Prior to being mixed into the concrete, they are glued together in bundles; this way they are mixed together easily and uniformly throughout the concrete. There are a variety of sizes available, and can be used to create varying degrees of strength in concrete and enable new architectural possibilities. Such reinforcements can be seen in tunnelling projects and in structures including the CCTV building in China and the Oceanographic in Valencia, Spain.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Steel | Concrete | Fibres | Architecture | Reinforcement | Structures
+
+024_me
+Cymbals are typically made from a copper alloy as it had desireable sound properties. The cymbals in the collection are made from brass, an alloy of copper (38%) and zinc. Brass cymbals are considered 'the most basic cymbals you can hit' as it is limited in sound compared to other copper alloys as described by Paul Francis at Zildjian. The use of brass is common in beginner instruments as it is lower in cost compared to other alloys. 
+
+The cymbals found in the collection is tarnished and has lost its lustre. Tarnish is a mild form of corrosion caused by the exposure of copper to the environment like oil and salt from your fingers or chemicals in water.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Acoustic | Corrosion | Brass | Sound | Tarnish
+
+025_me
+Pewter is a malleable metal alloy- 85-99% tin with copper, antimony, bismuth and lead- the latter less common these days. Like may other metals and alloys, pewter formed into a mould before being made in to pewter products. 
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Metal | Alloy | Pewter
+
+026_me
+Spoons as an object hold a status as being extremely recognizable and readily associated with eating and tasting. A set of 7 spoons were manufactured to investigate the taste of inedible materials as part of Materials Library Founder, Zoe Laughlin’s PhD thesis. The spoon is a stainless steel teaspoon that has been electroplated with a layer of chrome  10 microns thick. Chrome is commonly found in many foods and in multivitamin food supplements. It is thought to be essential in the action of insulin and it is believed that a consumption of 10mg a day should cause no adverse effects. Chrome is also an element added into steel to form stainless steel.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Stainless Steel | Spoon | Metallic | Shiny
+
+027_me
+Spoons as an object hold a status as being extremely recognizable and readily associated with eating and tasting. A set of 7 spoons were manufactured to investigate the taste of inedible materials as part of Materials Library Founder, Zoe Laughlin’s PhD thesis. The spoon is a stainless steel teaspoon that has been electroplated with a layer of gold 10 microns thick. Gold is not naturally present in foodstuffs but can be added to food with no ill effects to the consumer.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Stainless Steel | Spoon | Gold-plating | Gold | Metallic | Taste
+
+028_me
+Spoons as an object hold a status as being extremely recognizable and readily associated with eating and tasting. A set of 7 spoons were manufactured to investigate the taste of inedible materials as part of Materials Library Founder, Zoe Laughlin’s PhD thesis. The spoon is a stainless steel teaspoon that has been electroplated with a layer of copper 10 microns thick. Elemental copper occurs naturally in many foods like nuts and shellfish and has traditionally used in many cooking utensils. However, an excessive intake of copper- greater than 1mg- could cause stomach pain, sickness and diarrhoea. Additionally, prolonged high doses of copper might damage the liver and kidneys. 
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Copper | Stainless Steel | Spoon | Metallic
+
+029_me
+Spoons as an object hold a status as being extremely recognizable and readily associated with eating and tasting. A set of 7 spoons were manufactured to investigate the taste of inedible materials as part of Materials Library Founder, Zoe Laughlin’s PhD thesis. The spoon is a stainless steel teaspoon that has been electroplated with a layer of tin 10 microns thick. Tin is not considered to be necessary for the body, but it is found in many foodstuff as a result of being stored in cans. Tin is also found in fresh food as a result of the composition of soil in which the food is grown. 
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Stainless Steel | Spoon | Metallic
+
+030_me
+Copper has a distinct reddish colour and is naturally found in its pure form. This cup is made of copper with a tin rim and handle finishings. Due to its high thermal conductivity, copper cups were popular in serving chilled drinks in.  The copper much has losts its lustre/shine as the copper has oxidised. It is possible that this mug was made in the older days as copper mugs these days are lined in nickel as copper is a heavy metal which will leech into the drinks. Whilst trace amounts of copper is necessary to ensure good health, an excessive intake of copper could cause stomach pain, sickness and diarrhoea. Additionally, prolonged high doses of copper might damage the liver and kidneys.
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Copper | Cup | Tin
+
+031_me
+Aluminium is commonly found combined with other elements. Once mined, the aluminium ore is processed to extract the impurities. The pure aluminium, in a molten state, will be casted into ingots ready for the next stage of processing to produce a useful final product. 
+Selections
+Categories
+Metal
+Curiosities
+Relationships
+Aluminium

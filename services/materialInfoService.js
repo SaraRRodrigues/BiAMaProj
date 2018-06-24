@@ -9,7 +9,7 @@ function getMaterials(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Material"', function(err, result) {
+		client.query('SELECT * FROM "Material" INNER JOIN "Library_Material" ON "Library_Material".material_id="Material".id ORDER BY "Material".id ASC', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
