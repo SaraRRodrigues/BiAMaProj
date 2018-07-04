@@ -1,10 +1,14 @@
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce){
 
 		$scope.loading = true;
 		$scope.showCategory = false;
 		$scope.category = '';
 		$scope.materialInfo = null;
 		$scope.showMaterialDetails = false;
+		$scope.favoriteMaterial = false;
+		$scope.locationMaterial = false;
+		$scope.zoomInMaterial = false;
+		$scope.pathURL='https://www.google.com/maps/';
 
 		/* get information of material and of library - when i do get library */
     var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
@@ -57,6 +61,36 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 					break;
 				}
 			}
+		}
+
+		$scope.clickFavorite = function() {
+			if($scope.favoriteMaterial){
+				$scope.favoriteMaterial = false;
+			}else {
+				$scope.favoriteMaterial = true;
+			}
+		}
+		$scope.clickZoomIn = function(material) {
+			if($scope.zoomInMaterial){
+				$scope.zoomInMaterial = false;
+			}else {
+				$scope.zoomInMaterial = true;
+				//ir buscar a imagem do material que se quer fazer zoom 
+			}
+		}
+		$scope.clickLocation = function(material) {
+			if($scope.locationMaterial){
+				$scope.locationMaterial = false;
+			}else {
+				$scope.locationMaterial = true;
+				//$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
+
+				window.setTimeout("location.href = 'http://localhost:8080/BiAMa/whereWeAre'")
+			}
+		
+		}
+		$scope.closeMaterial = function(){
+			$scope.zoomInMaterial = false;
 		}
 }])
 
