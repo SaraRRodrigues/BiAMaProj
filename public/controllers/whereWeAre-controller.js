@@ -1,4 +1,4 @@
-app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", function($scope, $http,BiAMaInfoService, $sce){
+app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", "$route", function($scope, $http,BiAMaInfoService, $sce, $route){
     
     $scope.loading = true;
     $scope.schools=[];
@@ -38,6 +38,9 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
 		}else {
 			$scope.zoomInIFrame = true;
 		}
+    }
+    $scope.reloadPage = function() {
+        $route.reload();
     }
 }])
 
