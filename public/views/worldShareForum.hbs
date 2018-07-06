@@ -20,9 +20,6 @@
 		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
 		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
 		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
-        <script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
-        <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
-        <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
 		<script type="text/javascript" src="../controllers/library-controller.js"></script>
 		<script type="text/javascript" src="../controllers/myBiama-controller.js"></script>
 
@@ -51,7 +48,7 @@
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-			<h1 class="subtitles">O que é a BiAMa?</h1>
+			<h1 ng-if="showWorldShares" class="subtitles">Partilhas do mundo</h1>
 		</div>
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
@@ -59,6 +56,17 @@
 		<div ng-if="!loading" class="sectionDetails" >
 			<p>[{descriptionBiama}]
 			</p>
+		</div>
+		<div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
+			<img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShate(image)" width="35%" height="150px" alt="foto"/>
+		</div>
+		<div ng-if="showWorldSharesDetails" class="titlesOnCenter">
+			<h1 class="subtitles">Partilha [{worldSharesInfo.share}]</h1>
+			<p>[{worldSharesInfo.description}]</p>
+			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]" width="47%" height="210px" alt="foto"/><br>
+		</div>
+		<div ng-if="showWorldSharesDetails" class="titlesOnCenter">
+
 		</div>
 	</body>
 </html>

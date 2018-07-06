@@ -13,6 +13,7 @@ var likeQuestionService = require('../services/likesQuestionService');
 var likeAnswerService = require('../services/likesAnswerService');
 var curiosityService = require('../services/curiosityService');
 var worldShareService = require('../services/worldShareService');
+var worldShareForumService = require('../services/worldShareServiceForum');
 
 var favoriteService = require('../services/favoriteService');
 var questionService = require('../services/questionService');
@@ -131,6 +132,13 @@ router.get('/compareMaterials', (req, resp, next) => {
 router.get('/users', (req, resp, next) => {
 	userService.getUsers((error, users) => {
 		resp.json({users})
+	});
+});
+
+/* GET world shares forum: forum */
+router.get('/worldSharesForum', (req, resp, next) => {
+	worldShareForumService.getWorldSharesForum((error, worldShareForumDetails) => {
+		resp.json({worldShareForumDetails})
 	});
 });
 
