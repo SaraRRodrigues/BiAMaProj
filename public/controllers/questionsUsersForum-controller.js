@@ -5,6 +5,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
     $scope.getQuestionDetails=false;
     $scope.favoriteQuestion=false;
     $scope.favoriteAnswer=false;
+    $scope.showDivAnswer=false;
 
     var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
     getUserQuestionInfo.then(function(result) {
@@ -60,6 +61,12 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
           $scope.likeAnswer=$scope.dataAnswer[index].likes;
         }
       }
+    }
+    $scope.clickOnAnswer = function() {
+      $scope.showDivAnswer=true;
+    }
+    $scope.putAnswer = function() {
+      //Inserir na base de dados
     }
 }])
 
