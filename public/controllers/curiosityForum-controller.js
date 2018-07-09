@@ -4,6 +4,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     $scope.loading=true;
     $scope.descriptionCuriosity=[];
     $scope.showCuriosity=true;
+    $scope.showBigImage=false;
 
     var getCuriosities = CuriositiesService.getCuriosities(function(infoCuriosities){});
     getCuriosities.then(function(result) {
@@ -27,6 +28,17 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
             break;
 				}
 			}
+    }
+
+    $scope.openBigImage = function(image) {
+      $scope.showBigImage=true;
+      $scope.showCuriosityDetails=false;
+      $scope.bigImage=image;
+    }
+
+    $scope.closeCuriosityImage = function() {
+      $scope.showBigImage=false;
+      $scope.showCuriosityDetails=true;
     }
 }])
 
