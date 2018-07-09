@@ -41,6 +41,17 @@ app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService"
 				}
 			}
     }
+
+    $scope.openBigImage = function(image) {
+      $scope.showBigImage=true;
+      $scope.showWorldSharesDetails=false;
+      $scope.bigImage=image;
+    }
+
+    $scope.closeWorldShareImage = function() {
+      $scope.showBigImage=false;
+      $scope.showWorldSharesDetails=true;
+    }
 }])
 
 app.factory("MyBiamaService", function($q, $http, $timeout){
