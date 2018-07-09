@@ -285,7 +285,12 @@ footer{
 .lineWhiteInitSession{
   border:1px solid white;
 }
-
+.imageOnCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 .alignCenter{
   text-align: center
 }

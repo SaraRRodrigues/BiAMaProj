@@ -3,6 +3,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 
     $scope.loading=true;
     $scope.descriptionCuriosity=[];
+    $scope.showCuriosity=true;
 
     var getCuriosities = CuriositiesService.getCuriosities(function(infoCuriosities){});
     getCuriosities.then(function(result) {
@@ -12,6 +13,21 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
               $scope.descriptionCuriosity.push(data[index]);
             }
     });
+
+    $scope.openDetailsCuriosity = function(image) {
+      for(var index=0; index<$scope.descriptionCuriosity.length; ++index) {
+				if($scope.descriptionCuriosity[index].image === image){
+            $scope.curiosityInfo={
+              'image':$scope.descriptionCuriosity[index].image,
+              'description': $scope.descriptionCuriosity[index].descriptionCuriosity,
+              "curiosity": index+1
+            }
+            $scope.showCuriosityDetails=true;
+            $scope.showCuriosity=false;
+            break;
+				}
+			}
+    }
 }])
 
 app.factory("CuriositiesService", function($q, $http, $timeout){
