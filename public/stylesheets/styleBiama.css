@@ -20,7 +20,7 @@ footer{
 .margin-left-4x {margin-left:60px}
 .margin-left-5x {margin-left:80px}
 .margin-left-6x {margin-left:90px}
-.margin-left-7x {margin-left:110px}
+.margin-left-7x {margin-left:140px}
 .margin-left-8x {margin-left:140px}
 .margin-left-9x {margin-left:150px}
 .margin-left-10x {margin-left:400px}
@@ -31,7 +31,7 @@ footer{
 .margin-right-3x{margin-right: 20px;}
 .margin-right-4x{margin-right: 60px;}
 .margin-right-5x{margin-right: 80px;}
-.margin-right-6x{margin-right: 120px;}
+.margin-right-6x{margin-right: 147px;}
 .margin-right-7x{margin-right: 210px;}
 
 .marginNavPesquisa {margin-left:250px}
@@ -324,13 +324,13 @@ footer{
 }
 
 .buttonAnswer{
-  float:right;
+  margin-left: 550px;
   border-radius:5px;
   background-color: #5F9EA0;
   color:white;
   text-transform: uppercase;
   width:130px;
-  margin-top:50px;
+  margin-top:25px;
 }
 
 .answerDiv {
@@ -430,29 +430,54 @@ footer{
 }
 
 .borderQuestion{
-  border:1px solid #eaab00;
-  width:400px;
-  margin-left: -49px;
-  margin-top: 52px;
+  border:5px solid #eaab00;
+  width:340px;
+  background-color: #eaab00;
+  margin-top: 20px;
+  height: 93px;
+}
+.favoriteButton {
+  float: right;
+}
+.likeButton {
+  margin-right: 3px;
+  float: right;
+}
+.imageButton {
+  float:left;
+  height: 14%;
+  border: 4px solid #eaab00;
+}
+
+.favoriteButtonLeft {
+  float: left;
+}
+.likeButtonLeft {
+  margin-left: 3px;
+  float: left;
+}
+.imageButtonLeft {
+  float:right;
+  border: 0px solid #70c0c1;
 }
 
 .borderAnswer{
-  border:1px solid #70c0c1;
-  width:400px;
-  margin-left: 115px;
-  margin-top: 35px;
+  border:5px solid #70c0c1;
+  width:340px;
+  margin-left: 220px;
+  margin-top: 20px;
+  height: 93px;
+  background-color: #70c0c1;
 }
 
 .descriptionQuestion{
-  margin-left: 100px; 
-  margin-top: -15px; 
-  width:250px; 
+  margin-left: 53px;
   text-align: left;
 }
 
 .descriptionAnswer{
-  margin-left: 105px; 
-  margin-top: 5px; 
+  margin-left: 6px; 
+  margin-top: 13px; 
   width:250px; 
   text-align: right; 
 }

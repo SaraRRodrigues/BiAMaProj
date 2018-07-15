@@ -15,6 +15,9 @@ var curiosityService = require('../services/curiosityService');
 var worldShareService = require('../services/worldShareService');
 var worldShareForumService = require('../services/worldShareServiceForum');
 
+/* insert services */
+var insertAnswerService = require('../services/insertAnswerService');
+
 var favoriteService = require('../services/favoriteService');
 var questionService = require('../services/questionService');
 var notificationService = require('../services/notificationService');
@@ -57,11 +60,19 @@ router.get('/categories', (req, resp, next) => {
 	});
 });
 
-/* GET user answer: forum */
+/* GET user question: forum */
 router.get('/userQuestions', (req, resp, next) => {
 	userQuestionService.getUserQuestion((error, questionDetails) => {
 		resp.json({questionDetails})
 	});
+	
+});
+/* GET details of user questions and answer: forum */
+router.get('/userAnswerAndQuestion', (req, resp, next) => {
+	userQuestionService.getQuestionAnswer((error, questionDetails) => {
+		resp.json({questionDetails})
+	});
+	
 });
 
 /* GET like answer: forum */
@@ -139,6 +150,14 @@ router.get('/users', (req, resp, next) => {
 router.get('/worldSharesForum', (req, resp, next) => {
 	worldShareForumService.getWorldSharesForum((error, worldShareForumDetails) => {
 		resp.json({worldShareForumDetails})
+	});
+});
+
+/* INSERT question : forum */
+router.post('/insertAnswer', (req, resp, next) => {
+	var answer = req.body;
+	insertAnswerService.putAnswer(answer ,(error, insertServiceDetails) => {
+		resp.json({insertServiceDetails})
 	});
 });
 
