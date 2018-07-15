@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestionService", "LikeQuestionService", "LikeAnswerService", function($scope, $http, UserQuestionService, LikeQuestionService, LikeAnswerService){
+app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestionService", "LikeQuestionService", "LikeAnswerService", "$route", function($scope, $http, UserQuestionService, LikeQuestionService, LikeAnswerService, $route){
 
     $scope.firtTimeOnPage=true;
     $scope.loading=true;
@@ -8,6 +8,10 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
     $scope.favoriteAnswer=false;
     $scope.showDivAnswer=false;
     $scope.textAnswer=null;
+    $scope.clickAddFavorite=false;
+    $scope.clickRemoveFavorite=false;
+    $scope.clickRemoveLike=false;
+    $scope.clickAddLike=false;
     $scope.likes=0;
     $scope.descriptionAnswer=[];
     $scope.indexQuestionAnswer=1;
@@ -24,31 +28,25 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.details=data;
+        $scope.calculateAnswerId($scope.details);
     });
-
-    var getLikeQuestion = LikeQuestionService.getLikesQuestion(function(infoUserQuestion){});
-    getLikeQuestion.then(function(result) {
-        $scope.loading = false;
-        $scope.dataQuestion=result.data.questionDetails;
-    });
-
-    var getLikeAnswer = LikeAnswerService.getLikesAnswer(function(infoUserAnswer){});
-    getLikeAnswer.then(function(result) {
-        $scope.loading = false;
-        $scope.dataAnswer=result.data.questionDetails;
-    });
+    $scope.calculateAnswerId = function(details) {
+      $scope.biggestId=0;
+      for(var index=0; index<details.length; ++index){
+        if(details[index].id_answer>$scope.biggestId){
+          $scope.biggestId=details[index].id_answer;
+        }
+      }
+    }
 
     $scope.getQuestion = function(questionId, indexQuestion) {
       $scope.showQuestionDetails = true;
       $scope.indexQuestion=indexQuestion+1;
       for(var index=0; index< $scope.questions.length; ++index) {
         if($scope.questions[index].id_question === questionId) {
-
+          $scope.idQuestion=$scope.questions[index].id_question;
           $scope.likeQuestion=$scope.questions[indexQuestion].likesQuestion;
           $scope.getAnswersOfQuestion(index);
-        }
-        if(index== $scope.details.length-1) {
-          $scope.idQuestion=$scope.questions[index].id_question;
         }
       }
       /* reset indexQuestionAnswer: number of answer of questions */
@@ -78,11 +76,69 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
         text: textAnswer,
         likes: $scope.likes,
         idQuestion: $scope.idQuestion,
-        idAnswer: $scope.idAnswer
+        idAnswer: $scope.biggestId
       };
       
       $http.post('/insertAnswer', data);
       $scope.showDivAnswer=false;
+    }
+    
+    $scope.addToFavoritesQuestion = function(){
+      if($scope.showInitSession){
+        /*var data = {
+          idFavorite: 0,
+          idUser: 0,
+          idMaterial: null,
+          idQuestion: $scope.idQuestion
+        };
+        $http.post('/insertFavoriteQuestion', data);
+        */
+      } else {
+        $scope.clickAddFavorite=true;
+      }
+    }
+
+    $scope.removeFromFavoritesQuestion = function() {
+      if($scope.showInitSession){
+        /*var data = {
+          idFavorite: 0,
+          idUser: 0,
+          idMaterial: null,
+          idQuestion: $scope.idQuestion
+        };
+        $http.post('/insertFavoriteQuestion', data);
+        */
+      } else {
+        $scope.clickRemoveFavorite=true;
+      }
+    }
+    $scope.addLikeQuestion = function() {
+      if($scope.showInitSession){
+        /*var data = {
+          idFavorite: 0,
+          idUser: 0,
+          idMaterial: null,
+          idQuestion: $scope.idQuestion
+        };
+        $http.post('/insertFavoriteQuestion', data);
+        */
+      } else {
+        $scope.clickAddLike=true;
+      }
+    }
+    $scope.removeLikeQuestion = function() {
+      if($scope.showInitSession){
+        /*var data = {
+          idFavorite: 0,
+          idUser: 0,
+          idMaterial: null,
+          idQuestion: $scope.idQuestion
+        };
+        $http.post('/insertFavoriteQuestion', data);
+        */
+      } else {
+        $scope.clickRemoveLike=true;
+      }
     }
 }])
 
