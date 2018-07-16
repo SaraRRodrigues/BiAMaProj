@@ -10,6 +10,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.zoomInMaterial = false;
 		$scope.pathURL='https://www.google.com/maps/';
 		$scope.clickAddFavoriteMaterial=false;
+		$scope.categories=[];
 
 		/* get information of material and of library - when i do get library */
     var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
@@ -17,6 +18,14 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
         $scope.loading = false;
         var data=result.data.materialsCategories;
 				$scope.materialsCategories=data;
+
+				for(var index=0; index<$scope.materialsCategories.length; ++index){
+					if(index<7){
+						$scope.categories.push($scope.materialsCategories[index])
+					} else {
+						break;
+					}
+				}
 		});
 
 		/* get category of material */
@@ -83,10 +92,15 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			}
 		}
 		$scope.clickLocation = function(material) {
+			$scope.schools= [];
 			for(var index=0; index<$scope.materialsCategories.length; ++index) {
 				if($scope.materialsCategories[index].material_id === material.idMaterial){
 						$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location);
 						$scope.descriptionLocation=$scope.materialsCategories[index].locationDescription;
+						var returnLocation = {
+							descriptionSchool: '$scope.descriptionLocation'
+						}
+						$scope.schools.push(returnLocation);
 						$scope.loading=false;
 						break;
 				}
@@ -94,9 +108,18 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			if($scope.locationMaterial){
 				$scope.locationMaterial = false;
 			}else {
-			
 					$scope.locationMaterial = true;
-			
+			}
+		}
+
+		$scope.selectSchool = function (locationSchool) {
+			debugger
+			for(var index=0; index <$scope.materialsCategories.length; ++index) {
+					if($scope.materialsCategories[index].locationDescription === locationSchool){
+							$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location)
+							$scope.descriptionLocation = $scope.materialsCategories[index].locationDescription;
+							break;
+					}
 			}
 		}
 

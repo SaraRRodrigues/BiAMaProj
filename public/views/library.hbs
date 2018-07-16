@@ -56,7 +56,7 @@
 			<div class="loading-icon-footer-info"></div>
 		</div>
 		<div ng-if="!loading && !showCategory && !showMaterialDetails" class="titlesOnCenter sectionScroll">
-			<div ng-repeat="category in materialsCategories">
+			<div ng-repeat="category in categories">
 				<h1>[{image.category}]</h1>
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="47%" height="170px" alt="foto"/>
 			</div>
@@ -106,8 +106,8 @@
 					<label>Pesquise um local ou endereço</label>
 					<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
 					<div ng-if="showSchools">
-						<div ng-repeat="biama in materialsCategories">
-							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
+						<div ng-repeat="biama in schools">
+							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.descriptionSchool)">[{biama.locationDescription}]</label>
 							<br>
 						</div>
 					</div>
