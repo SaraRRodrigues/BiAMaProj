@@ -1,4 +1,4 @@
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route){
 
 		$scope.loading = true;
 		$scope.showCategory = false;
@@ -9,6 +9,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.locationMaterial = false;
 		$scope.zoomInMaterial = false;
 		$scope.pathURL='https://www.google.com/maps/';
+		$scope.clickAddFavoriteMaterial=false;
 
 		/* get information of material and of library - when i do get library */
     var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
@@ -16,7 +17,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
         $scope.loading = false;
         var data=result.data.materialsCategories;
 				$scope.materialsCategories=data;
-				console.log($scope.materialsCategories);
 		});
 
 		/* get category of material */
@@ -25,7 +25,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
         $scope.loading = false;
         var data=result.data.categoryDetails;
 				$scope.categoryDetails=data;
-				console.log($scope.categoryDetails);
 		});
 
 		/* get material of library */
@@ -34,7 +33,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
         $scope.loading = false;
 				var data=result.data.biamaDetails;
 				$scope.materialOfLibraryDetails=data;
-				console.log($scope.materialOfLibraryDetails);
 		});
 		
 		$scope.openCategory = function(category) {
@@ -53,9 +51,10 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			for(var index=0; index<$scope.categoryDetails.length; ++index) {
 				if($scope.categoryDetails[index].id === material.id){
 					$scope.materialInfo={
+						'idMaterial': $scope.categoryDetails[index].id,
 						'image': $scope.categoryDetails[index].name,
 						'category': $scope.categoryDetails[index].category,
-						'description': $scope.categoryDetails[index].description
+						'description': $scope.categoryDetails[index].description,
 					}
 					$scope.showMaterialDetails=true;
 					break;
@@ -64,6 +63,11 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 
 		$scope.clickFavorite = function() {
+			if($scope.showInitSession){
+
+			} else {
+				$scope.clickAddFavoriteMaterial=true;
+			}
 			if($scope.favoriteMaterial){
 				$scope.favoriteMaterial = false;
 			}else {
@@ -79,18 +83,45 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			}
 		}
 		$scope.clickLocation = function(material) {
+			for(var index=0; index<$scope.materialsCategories.length; ++index) {
+				if($scope.materialsCategories[index].material_id === material.idMaterial){
+						$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location);
+						$scope.descriptionLocation=$scope.materialsCategories[index].locationDescription;
+						$scope.loading=false;
+						break;
+				}
+			}
 			if($scope.locationMaterial){
 				$scope.locationMaterial = false;
 			}else {
-				$scope.locationMaterial = true;
-				//$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-
-				window.setTimeout("location.href = 'http://localhost:8080/BiAMa/whereWeAre'")
+			
+					$scope.locationMaterial = true;
+			
 			}
-		
 		}
+
 		$scope.closeMaterial = function(){
 			$scope.zoomInMaterial = false;
+		}
+
+		$scope.expandIframe = function(){
+			if($scope.zoomInIFrame){
+				$scope.zoomInIFrame = false;
+			}else {
+				$scope.zoomInIFrame = true;
+			}
+		}
+
+		$scope.reloadPage = function() {
+			$route.reload();
+		}
+
+		$scope.getSchools = function () {
+			if($scope.showSchools){
+				$scope.showSchools = false;
+			}else {
+				$scope.showSchools = true;
+			}
 		}
 }])
 
