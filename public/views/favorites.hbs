@@ -7,43 +7,67 @@
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-        <div style="text-align:center;">
+        <div class="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-           <div class="padding-left-4x">
-               
-                <!--<select id="selectedFav" ng-click="getValues()">
-                    <option class="optionLanguage" value="0">Materiais</option>
-                    <option class="optionLanguage" value="1">Perguntas</option>
-                </select>-->
-                <div>
-                    <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Favoritos<img src="../images/buttonDown.JPG" ng-click="getFavorites()"></h1>  
-                </div>
-				<div ng-if="showFavorites">
-					<div ng-repeat="favorite in favorites">
-						<label ng-click="selectFavorite(favorite)">[{favorite}]</label>
-						<br>
+        </div>   
+        <div ng-if="loading">
+			<div class="loading-icon-footer-info"></div>
+		</div>
+        <div ng-if="!loading && showFavorites">
+			<div ng-repeat="fav in favorites">
+				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
+            </div>
+		</div>
+        <div ng-if="!showFavorites && !locationMaterial">
+			<div class="titlesOnCenter sectionScroll">
+				<img class="margin-bottom-2x margin-left-2x" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="27%" height="130px" alt="foto"/><br>
+				<div class="titlesOnCenter">
+					<!-- Favorite -->
+					<i ng-click="clickFavorite(detailsFavorite)" ng-if="detailsFavorite.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
+					<i ng-click="clickFavorite(detailsFavorite)" ng-if="!detailsFavorite.isFavorite" class="far fa-star cursorPointer iconMedium"></i>
+					<!-- Location -->
+					<i ng-click="clickLocation(detailsFavorite)" class="fas fa-map-marker-alt cursorPointer iconMedium"></i>
+					<!-- Zoom in -->
+					<i ng-click="clickZoomIn(detailsFavorite)" class="fas fa-search-plus cursorPointer iconMedium"></i>
+				</div>
+				<p>[{detailsFavorite.description}]
+				</p>
+				<div ng-if="clickAddFavoriteMaterial">
+					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
+				</div>
+				<div ng-if="favoriteAlreadyExists">
+					<h4>Favorito adicionado</h4>
+				</div>
+			</div>
+		</div>
+        <div ng-if="locationMaterial">
+			<div class="titlesOnCenter"> 
+				<i ng-click="reloadPage()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
+				<h1 class="subtitles">Onde estamos</h1>
+			</div>
+			<div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
+			</div>	
+			<div ng-if="!loading" class="titlesOnCenter">
+				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<div>
+					<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
+					<label class="margin-right-4x">[{descriptionLocation}]</label>
+
+					<label>Pesquise um local ou endereço</label>
+					<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
+					<div ng-if="showSchools">
+						<div ng-repeat="biama in schools">
+							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.descriptionSchool)">[{biama.descriptionSchool}]</label>
+							<br>
+						</div>
 					</div>
 				</div>
-            </div>
-            <div ng-if="showQuestions">
-                <a href="" class="margin-left-5x margin-top" style="text-decoration:none;">Pergunta 1</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 2</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 3</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-            </div>
-            <!--<div ng-if="showMaterials" ng-repeat="image in imageMaterials track by $index">-->
-            <div ng-if="showMaterials">
-                <!--<div style="padding: 5px;" class="column">
-                    <img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/>
-                    <img ng-if="$index%2!==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/><br>
-                </div>-->
-                <img src="../images/favorites.JPG"/>
-            </div>
-        </div>
+			</div>
+		</div>
     </body>
 </html>
 
