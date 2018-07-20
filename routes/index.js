@@ -18,6 +18,7 @@ var worldShareForumService = require('../services/worldShareServiceForum');
 /* insert services */
 var insertAnswerService = require('../services/insertAnswerService');
 var insertFavoriteService = require('../services/insertFavoriteService');
+var deleteFavoriteService = require('../services/deleteFavoriteService');
 
 var favoriteService = require('../services/favoriteService');
 var questionService = require('../services/questionService');
@@ -167,6 +168,14 @@ router.post('/insertFavoriteQuestion', (req, resp, next) => {
 	var favorite = req.body;
 	insertFavoriteService.insertFavoriteQuestion(favorite ,(error, insertServiceDetails) => {
 		resp.json({insertServiceDetails})
+	});
+});
+
+/* DELETE favorite question : forum */
+router.post('/deleteFavoriteQuestion', (req, resp, next) => {
+	var favorite = req.body;
+	deleteFavoriteService.deleteFavoriteQuestion(favorite,(error, deleteServiceDetails) => {
+		resp.json({deleteServiceDetails})
 	});
 });
 

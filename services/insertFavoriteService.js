@@ -7,14 +7,14 @@ module.exports = {
 function insertFavoriteQuestion(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         console.log('value: ', data);
-		var question_id = data.idQuestion;
-		var material_id = data.idMaterial;
-		var user_id = data.idUser;
-        var id = data.idFavorite+1;
+		var idFavorite = data.idFavorite;
+		var idUser = data.idUser;
+		var idMaterial = data.idMaterial;
+		var idQuestion = data.idQuestion
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query(`INSERT INTO "Favorite" VALUES ($1, $2, $3, $4)`, [id, user_id,material_id,question_id], function(err, result) {
+		client.query(`INSERT INTO "Favorite" VALUES ($1, $2, $3, $4)`, [idFavorite, idUser,idMaterial,idQuestion], function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}

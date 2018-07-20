@@ -207,7 +207,8 @@ function($scope, UserService, $http) {
 				$scope.userPassword = $scope.users[index].password;
 				if($scope.userName !== null && $scope.userName === username){
 					if($scope.userPassword !== null && $scope.userPassword === password){
-					
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
 						$scope.confirmSession = true;
 						break;
 					}
