@@ -1,5 +1,5 @@
 
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, $){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();

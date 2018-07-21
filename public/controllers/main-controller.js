@@ -113,11 +113,6 @@ function($scope, UserService, $http) {
 
 	$scope.nameclick='biamaPage';
 	$scope.changeColorClick = function(name) {
-		debugger
-		if(name === 'library') {
-			$scope.showCategory=false;
-			$scope.showMaterialDetails=false;
-		}
 		$scope.userDetails = false;
 		$scope.search = false;
 

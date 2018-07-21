@@ -1,5 +1,10 @@
 
-app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", function($scope, $http, MyBiamaService){
+app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuery", function($scope, $http, MyBiamaService){
+
+		/* hide footer of index page because of click in buttons footer reload page */
+		jQuery("#footerMain").hide();
+		/* my current page */
+		$scope.namePage='myBiama';
 
 		$scope.loading=true;
 		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});

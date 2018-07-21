@@ -1,6 +1,10 @@
 
-app.controller("ForumController", ['$scope', "$http", function($scope, $http){
-
+app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope, $http){
+	
+	/* hide footer of index page because of click in buttons footer reload page */
+	jQuery("#footerMain").hide();
+	/* my current page */
+	$scope.namePage='forum';
   
 }])
 .config(function($routeProvider, $locationProvider) {

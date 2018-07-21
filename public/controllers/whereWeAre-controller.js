@@ -1,9 +1,18 @@
-app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", "$route", function($scope, $http,BiAMaInfoService, $sce, $route){
-    
+app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", "$route", "jQuery", function($scope, $http,BiAMaInfoService, $sce, $route){
+   
+    /* hide footer of index page because of click in buttons footer reload page */
+    jQuery("#footerMain").hide();
+    /* my current page */
+    $scope.namePage='whereWeAre';
+
     $scope.loading = true;
     $scope.schools=[];
     $scope.pathURL='https://www.google.com/maps/';
 
+    $scope.goTo = function(name) {
+		
+    }
+    
     var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
     getBiamaInfo.then(function(result) {
         $scope.loading = false;

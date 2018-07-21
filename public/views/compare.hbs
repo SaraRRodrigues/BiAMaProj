@@ -24,6 +24,22 @@
                 </div>
             </div>-->
         </div>
+        <footer class="w3-bar w3-center">
+			<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
+			<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
+
+			<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
+			<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
+
+			<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
+			<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
+
+			<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
+			<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
+
+			<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
+			<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
+		</footer>
     </body>
 </html>
 

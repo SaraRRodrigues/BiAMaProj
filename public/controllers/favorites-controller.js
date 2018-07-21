@@ -1,5 +1,10 @@
 app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,$sce) {
     
+    /* hide footer of index page because of click in buttons footer reload page */
+	jQuery("#footerMain").hide();
+	/* my current page */
+    $scope.namePage='favorites';
+    
     $scope.loading = true;
     $scope.showSchools = false;
     $scope.showQuestions = false;
