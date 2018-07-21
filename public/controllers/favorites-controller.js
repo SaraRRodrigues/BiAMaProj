@@ -134,6 +134,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 		}
     }
     
+    $scope.closeMaterial = function(){
+		$scope.zoomInMaterial = false;
+    }
+    
     $scope.expandIframe = function(){
 		if($scope.zoomInIFrame){
 			$scope.zoomInIFrame = false;
@@ -157,6 +161,57 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 $scope.descriptionLocation = $scope.materialsCategories[index].locationDescription;
                 break;
             }
+		}
+    }
+    
+    $scope.clickFavorite = function(favoriteMaterial) {
+		$scope.idFavoriteMaterial=0;
+		
+		for(var index=0; index<$scope.favoriteDetails.length; ++index) {
+			
+			if($scope.favoriteDetails[index].material_id===favoriteMaterial.idMaterial){
+				$scope.favAlreadyExists=true;
+			} else {
+				$scope.favAlreadyExists=false;
+			}
+			if(index===$scope.favoriteDetails.length-1){
+				$scope.idFavoriteMaterial=$scope.favoriteDetails[index].id_favorite+1;
+			}
+		}
+		if($scope.detailsFavorite.isFavorite) {
+            $scope.detailsFavorite.isFavorite=false;
+            /* update table of favorites to remove this favorite material */
+            var data = {
+                idFavorite: $scope.idFavoriteMaterial,
+                idUser: -1,
+                idMaterial: -1,
+                idQuestion: -1
+            };
+            $scope.clickAddFavoriteMaterial=false;
+            $http.post('/deleteFavoriteQuestion', data);
+		} else {
+			$scope.detailsFavorite.isFavorite=true;
+			
+            if(!$scope.favAlreadyExists){
+                var data = {
+                    idFavorite: $scope.idFavoriteMaterial,
+                    idUser: $scope.idUserLoggerIn,
+                    idMaterial: favoriteMaterial.idMaterial,
+                    idQuestion: -1
+                };
+                $scope.favoriteAlreadyExists=false;
+                $http.post('/insertFavoriteQuestion', data);
+            } else {
+                $scope.favoriteAlreadyExists=true;
+                setTimeout(function () {
+                    $scope.$apply(function(){
+                        $scope.showMaterialDetails=false;
+                    $scope.showCategory=false;
+                    });
+                }, 2000);
+            }
+            
+            $scope.clickAddFavoriteMaterial=false;
 		}
 	}
 }])
