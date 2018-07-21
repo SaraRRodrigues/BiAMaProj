@@ -1,10 +1,14 @@
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService){
+
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, $){
+
+	/* hide footer of index page because of click in buttons footer reload page */
+	jQuery("#footerMain").hide();
+	/* my current page */
+	$scope.namePage='library';
 
 	$scope.loading = true;
-	$scope.showCategory = false;
 	$scope.category = '';
 	$scope.materialInfo = null;
-	$scope.showMaterialDetails = false;
 	$scope.favoriteMaterial = false;
 	$scope.locationMaterial = false;
 	$scope.zoomInMaterial = false;
@@ -12,6 +16,10 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.clickAddFavoriteMaterial=false;
 	$scope.categories=[];
 
+	$scope.goTo = function() {
+		$scope.showCategory=false;
+		$scope.showMaterialDetails=false;
+	}
 		/* get information of material and of library - when i do get library */
     var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
     getMaterialInfo.then(function(result) {
@@ -76,6 +84,14 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 							'isFavorite': true
 						}
 						break;
+					} else {
+						$scope.materialInfo={
+							'idMaterial': $scope.categoryDetails[index].id,
+							'image': $scope.categoryDetails[index].name,
+							'category': $scope.categoryDetails[index].category,
+							'description': $scope.categoryDetails[index].description,
+							'isFavorite': false
+						}
 					}
 				}
 				$scope.showMaterialDetails=true;
@@ -157,10 +173,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			if($scope.materialsCategories[index].material_id === material.idMaterial){
 					$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location);
 					$scope.descriptionLocation=$scope.materialsCategories[index].locationDescription;
-					var returnLocation = {
-						descriptionSchool: '$scope.descriptionLocation'
-					}
-					$scope.schools.push(returnLocation);
 					$scope.loading=false;
 					break;
 			}
@@ -199,16 +211,43 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	}
 
 	$scope.getSchools = function () {
+		$scope.getSchoolsOfMaterial();
 		if($scope.showSchools){
 			$scope.showSchools = false;
 		}else {
 			$scope.showSchools = true;
 		}
 	}
+
+	$scope.getSchoolsOfMaterial = function() {
+		/* get schools of material */
+		$scope.loadingSchool=true;
+        var materialId = $scope.materialInfo.idMaterial;
+        var getSchoolOfMaterial = LibraryMaterialInfoService.getSchoolOfMaterial(materialId, function(infoSchool){});
+        getSchoolOfMaterial.then(function(result) {
+			
+            $scope.loadingSchool = false;
+            var data=result.data.materialSchools;
+            $scope.schools=data;
+        });
+    }
 }])
 
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
-    
+	
+	var getSchoolOfMaterial = function(data) {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+          deferred.resolve($http.get('/materialSchool', 
+          {params: {
+            'data': data
+          }}));
+		}, 2000);
+	
+		return deferred.promise;
+	};
+	  
 	var getMaterial = function() {
 		var deferred = $q.defer();
 	
@@ -220,6 +259,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	  };
 	
 	  return {
+		getSchoolOfMaterial: getSchoolOfMaterial,
 		getMaterial: getMaterial
 	  };
 });

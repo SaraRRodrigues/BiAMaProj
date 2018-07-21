@@ -1,5 +1,6 @@
 //var angular = require('angular');
 var app = angular.module("myApp", ['ngRoute'])
+app.constant('jQuery', window.jQuery)
 .run(['$route', angular.noop])
 .config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('[{');
@@ -112,11 +113,15 @@ function($scope, UserService, $http) {
 
 	$scope.nameclick='biamaPage';
 	$scope.changeColorClick = function(name) {
+		debugger
+		if(name === 'library') {
+			$scope.showCategory=false;
+			$scope.showMaterialDetails=false;
+		}
 		$scope.userDetails = false;
 		$scope.search = false;
 
 		$scope.nameclick=name;
-		console.log($scope.nameclick)
 	}
 
 	$scope.getLanguages = function() {

@@ -110,10 +110,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			if($scope.materialsCategories[index].material_id === material.idMaterial){
 					$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location);
 					$scope.descriptionLocation=$scope.materialsCategories[index].locationDescription;
-					var returnLocation = {
-						descriptionSchool: '$scope.descriptionLocation'
-					}
-					$scope.schools.push(returnLocation);
 					$scope.loading=false;
 					break;
 			}
@@ -147,14 +143,28 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
 
     $scope.getSchools = function () {
+        $scope.getSchoolsOfMaterial();
+        
 		if($scope.showSchools){
 			$scope.showSchools = false;
 		}else {
 			$scope.showSchools = true;
 		}
     }
+
+    $scope.getSchoolsOfMaterial = function() {
+        /* get schools of material */
+        $scope.loadingSchool=true;
+        var materialId = $scope.detailsFavorite.idMaterial;
+        var getSchoolOfMaterial = LibraryMaterialInfoService.getSchoolOfMaterial(materialId, function(infoSchool){});
+        getSchoolOfMaterial.then(function(result) {
+            $scope.loadingSchool = false;
+            var data=result.data.materialSchools;
+            $scope.schools=data;
+        });
+    }
+
     $scope.selectSchool = function (locationSchool) {
-        debugger
 		for(var index=0; index <$scope.materialsCategories.length; ++index) {
             if($scope.materialsCategories[index].locationDescription === locationSchool){
                 $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location)
@@ -215,3 +225,33 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 		}
 	}
 }])
+
+app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
+    
+	var getSchoolOfMaterial = function(data) {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+          deferred.resolve($http.get('/materialSchool', 
+          {params: {
+            'data': data
+          }}));
+		}, 2000);
+	
+		return deferred.promise;
+      };
+      
+    var getMaterial = function() {
+    var deferred = $q.defer();
+
+    $timeout(function() {
+        deferred.resolve($http.get('/materialsCategories'));
+    }, 2000);
+
+    return deferred.promise;
+    };
+	  return {
+        getSchoolOfMaterial: getSchoolOfMaterial,
+        getMaterial: getMaterial
+	  };
+});

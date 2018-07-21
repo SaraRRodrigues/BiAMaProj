@@ -495,3 +495,7 @@ footer{
   width: 23px;
   font-size: 21px;
 }
+.loadSchool {
+  float: right;
+  margin-right: 90px;
+}

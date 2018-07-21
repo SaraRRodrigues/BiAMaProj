@@ -55,6 +55,16 @@ router.get('/materialsCategories', (req, resp, next) => {
 	});
 });
 
+/* GET material details: library */
+router.get('/materialSchool', (req, resp, next) => {
+	var materialId = req.query.data;
+	console.log('no index: ', materialId);
+	materialInfoService.getSchoolOfMaterial(materialId,(error, materialSchools) => {
+		resp.json({materialSchools})
+	});
+});
+
+
 /* GET categories details: library */
 router.get('/categories', (req, resp, next) => {
 	categoryInfoService.getCategories((error, categoryDetails) => {
