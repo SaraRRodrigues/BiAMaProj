@@ -2,7 +2,8 @@ var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 var pg = require('pg');
 
 module.exports = {
-	'getUsers': getUsers	
+	'getUsers': getUsers,
+	'updateUserSettings': updateUserSettings
 }
 function getUsers(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -10,6 +11,27 @@ function getUsers(cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT * FROM "User"', function(err, result) {
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}
+
+function updateUserSettings(data, cb){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		var idUser=data.idUser;
+		var name=data.name;
+		var email=data.email;
+		var birthdate=data.birthdate;
+		var username=data.username;
+		var password=data.password;
+		
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query('UPDATE "User" SET id=$1, name=$2, email=$3, birthdate=$4, username=$5,password=$6 WHERE id=$1',[idUser, name, email, birthdate, username, password], function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}

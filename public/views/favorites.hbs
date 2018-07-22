@@ -19,6 +19,9 @@
 			<div ng-repeat="fav in favorites">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
             </div>
+			<div ng-if="favorites.length===0">
+				<h4>Não tem favoritos associados</h4>
+			</div>
 		</div>
         <div ng-if="!showFavorites && !locationMaterial && !zoomInMaterial">
 			<div class="titlesOnCenter sectionScroll">

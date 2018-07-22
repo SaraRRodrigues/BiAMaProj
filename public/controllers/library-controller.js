@@ -60,6 +60,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	});
 
 	$scope.openCategory = function(category) {
+		debugger
 		$scope.showCategory = true;
 		$scope.category = category;
 
@@ -72,6 +73,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	}
 
 	$scope.openDetailsMaterial = function(material) {
+		debugger
 		for(var index=0; index<$scope.categoryDetails.length; ++index) {
 			if($scope.categoryDetails[index].id === material.id){
 				for(var indexFav=0; indexFav<$scope.favoriteDetails.length; ++indexFav) {
@@ -92,6 +94,15 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 							'description': $scope.categoryDetails[index].description,
 							'isFavorite': false
 						}
+					}
+				}
+				if($scope.favoriteDetails.length === 0) {
+					$scope.materialInfo={
+						'idMaterial': $scope.categoryDetails[index].id,
+						'image': $scope.categoryDetails[index].name,
+						'category': $scope.categoryDetails[index].category,
+						'description': $scope.categoryDetails[index].description,
+						'isFavorite': false
 					}
 				}
 				$scope.showMaterialDetails=true;

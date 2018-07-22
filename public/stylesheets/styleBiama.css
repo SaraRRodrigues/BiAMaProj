@@ -152,7 +152,7 @@ a {
 
 .buttonSelected {
   width:20%;
-  background-color: #e68a009c;
+  background-color: #E4A73F;
   color: white; 
   text-decoration:none;
   font-size:28px;
@@ -204,7 +204,7 @@ a {
   font-size:12px;
   background-color: #C0C0C0;
   width: 300px;
-  margin-left: 497px;
+  margin-left: 550px;
 }
 .inputsCenter{
   text-align:center

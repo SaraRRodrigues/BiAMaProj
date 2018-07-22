@@ -21,7 +21,6 @@ function getMaterials(cb){
 function getSchoolOfMaterial(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		var materialId = data;
-		console.log('id no serviço: ' , materialId);
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}

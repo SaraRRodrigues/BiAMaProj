@@ -9,35 +9,37 @@
             <div class="imageRight">
                 <img src="../images/rightBiama.png"/>
             </div>
-            <div style="text-align:center;"> 
+            <div class="titlesOnCenter"> 
                 <div class="imageLeft">
                     <img class="margin-top-3x" src="../images/leftBiama.png"/>
                 </div>
-			    <h1 style="font-weight: normal;color: #5F9EA0;font:bold">O meu perfil</h1>
+			    <h1 class="subtitles">O meu perfil</h1>
 		    </div>
-
             <div>
-                
                 <br>
                 <div class="perfilDetails">
-                
+                    <!-- user photo -->
                     <i class="fas fa-user"></i>
-                  
+
                     <h4 class="minTitleBiAMa">Nome de Utilizador</h4><br>
-
-                    <input class="inputsCenter" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input class="inputsCenter" ng-model="username" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
 
-                    <input class="inputsCenter" type="text" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
 
-                    <input class="inputsCenter" type="text" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input class="inputsCenter" ng-model="dateOfBirth" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
 
-                    <input class="inputsCenter" type="text" placeholder="Password" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input class="inputsCenter" ng-model="password" type="password" placeholder="Password" style="border:none; background: transparent; outline: 0;"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
 
-                    <button class="inputsCenter buttonBorder margin-top margin-bottom" ng-click="clickUserDetails()">Alterar dados</button>	
+                    <span>
+                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails(username, email, dateOfBirth, password)">Alterar dados</button>	
+                        <h5 ng-if="fieldsEmpty">Campos vazios.</h5>
+                        <h5 ng-if="fieldsEmpty">Por favor, preencha os seus dados.</h5>
+                    </span>
+                    <h5 ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
                 </div>
             </div>
         </div>

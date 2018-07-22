@@ -180,12 +180,15 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
     
     $scope.clickFavorite = function(favoriteMaterial) {
+        debugger;
+        console.log(favoriteMaterial);
 		$scope.idFavoriteMaterial=0;
 		
 		for(var index=0; index<$scope.favoriteDetails.length; ++index) {
 			
 			if($scope.favoriteDetails[index].material_id===favoriteMaterial.idMaterial){
-				$scope.favAlreadyExists=true;
+                $scope.favAlreadyExists=true;
+                $scope.favoriteId=$scope.favoriteDetails[index].id_favorite;
 			} else {
 				$scope.favAlreadyExists=false;
 			}
@@ -197,7 +200,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.detailsFavorite.isFavorite=false;
             /* update table of favorites to remove this favorite material */
             var data = {
-                idFavorite: $scope.idFavoriteMaterial,
+                idFavorite: $scope.favoriteId,
                 idUser: -1,
                 idMaterial: -1,
                 idQuestion: -1
@@ -234,17 +237,17 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
     
 	var getSchoolOfMaterial = function(data) {
-		var deferred = $q.defer();
-	
-		$timeout(function() {
-          deferred.resolve($http.get('/materialSchool', 
-          {params: {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+            deferred.resolve($http.get('/materialSchool', 
+            {params: {
             'data': data
-          }}));
-		}, 2000);
-	
-		return deferred.promise;
-      };
+            }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
       
     var getMaterial = function() {
     var deferred = $q.defer();
@@ -255,8 +258,9 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 
     return deferred.promise;
     };
-	  return {
+
+    return {
         getSchoolOfMaterial: getSchoolOfMaterial,
         getMaterial: getMaterial
-	  };
+    };
 });

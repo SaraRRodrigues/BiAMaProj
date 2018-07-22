@@ -58,7 +58,6 @@ router.get('/materialsCategories', (req, resp, next) => {
 /* GET material details: library */
 router.get('/materialSchool', (req, resp, next) => {
 	var materialId = req.query.data;
-	console.log('no index: ', materialId);
 	materialInfoService.getSchoolOfMaterial(materialId,(error, materialSchools) => {
 		resp.json({materialSchools})
 	});
@@ -155,6 +154,14 @@ router.get('/compareMaterials', (req, resp, next) => {
 router.get('/users', (req, resp, next) => {
 	userService.getUsers((error, users) => {
 		resp.json({users})
+	});
+});
+
+/* UPDATE user details: used in login */
+router.post('/updateUserDetails', (req, resp, next) => {
+	var data = req.body;
+	userService.updateUserSettings(data, (error, userDetails) => {
+		resp.json({userDetails})
 	});
 });
 
