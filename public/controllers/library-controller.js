@@ -19,6 +19,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.goTo = function() {
 		$scope.showCategory=false;
 		$scope.showMaterialDetails=false;
+		$scope.locationMaterial=false;
+		$scope.zoomInMaterial=false;
 	}
 		/* get information of material and of library - when i do get library */
     var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
@@ -60,7 +62,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	});
 
 	$scope.openCategory = function(category) {
-		debugger
 		$scope.showCategory = true;
 		$scope.category = category;
 
@@ -73,7 +74,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	}
 
 	$scope.openDetailsMaterial = function(material) {
-		debugger
 		for(var index=0; index<$scope.categoryDetails.length; ++index) {
 			if($scope.categoryDetails[index].id === material.id){
 				for(var indexFav=0; indexFav<$scope.favoriteDetails.length; ++indexFav) {
