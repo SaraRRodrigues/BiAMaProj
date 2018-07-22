@@ -19,27 +19,38 @@
                 <br>
                 <div class="perfilDetails">
                     <!-- user photo -->
-                    <i class="fas fa-user"></i>
+                    <div>
+                        <img src="../images/users/[{imageUser}]" class="w3-circle" style="width:20%">
+                        <label class="minTitleBiAMa">[{name}]</label>
+                    </div>
 
-                    <h4 class="minTitleBiAMa">Nome de Utilizador</h4><br>
-                    <input class="inputsCenter" ng-model="username" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" readonly style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/>
+                    <br>
+
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" readonly style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/>
+                    <br>
 
-                    <input class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="birthdate" type="text" readonly  placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="birthdate" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
+                    <br>
 
-                    <input class="inputsCenter" ng-model="dateOfBirth" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/><br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-
-                    <input class="inputsCenter" ng-model="password" type="password" placeholder="Password" style="border:none; background: transparent; outline: 0;"/><br>
+                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" readonly style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" style="border:none; background: transparent; outline: 0;"/>
+                    <br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-
                     <span>
-                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails(username, email, dateOfBirth, password)">Alterar dados</button>	
+                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails()">Alterar dados</button>
+                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdate, password, imageUser)">Salvar</button>		
                         <h5 ng-if="fieldsEmpty">Campos vazios.</h5>
                         <h5 ng-if="fieldsEmpty">Por favor, preencha os seus dados.</h5>
                     </span>
                     <h5 ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
+                    <h5 ng-if="invalidDate">Data de nascimento inválida.</h5>
                 </div>
             </div>
         </div>

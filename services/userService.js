@@ -25,13 +25,14 @@ function updateUserSettings(data, cb){
 		var name=data.name;
 		var email=data.email;
 		var birthdate=data.birthdate;
+		var image=data.image;
 		var username=data.username;
 		var password=data.password;
 		
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('UPDATE "User" SET id=$1, name=$2, email=$3, birthdate=$4, username=$5,password=$6 WHERE id=$1',[idUser, name, email, birthdate, username, password], function(err, result) {
+		client.query('UPDATE "User" SET id=$1, name=$2, email=$3, birthdate=$4, image=$5, username=$6,password=$7 WHERE id=$1',[idUser, name, email, birthdate, image, username, password], function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
