@@ -106,8 +106,12 @@ function($scope, UserService, $http) {
 		}
 	}
 
-	$scope.disableSearch = function() {
-		$scope.userDetails = false;
+	$scope.disableSearch = function(buttonClick) {
+		if(buttonClick === 'notification') {
+			$scope.userDetails = true;
+		} else {
+			$scope.userDetails = false;
+		}
 		$scope.search = false;
 	}
 

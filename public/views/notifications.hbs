@@ -4,15 +4,23 @@
         <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
         </div>
+        <i class="fas fa-caret-left littleButtonNotifications"></i>
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-        <div style="text-align:center;">
+        <div style="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
             <div class="padding-left-4x">
-                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">A minha partilha 1</h1> 
+                <h1 style="subtitles margin-top-title">A minha partilha 1</h1> 
+            </div>
+            
+            <div class="divNotifications sectionScrollNotification">
+                <div ng-repeat="notification in notifications">
+                   <div>[{notification.text}]</div>
+                   <div class="lineWhite margin-bottom margin-top"></div>									
+                </div>
             </div>
         </div>
         <footer class="w3-bar w3-center footer">
