@@ -26,26 +26,26 @@
                     </div>
                     <br><br><br><br>
 
-                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" readonly style="border:none; background: transparent; outline: 0;"/>
-                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
                     <br>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" readonly style="border:none; background: transparent; outline: 0;"/>
-                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="email" type="email" placeholder="E-mail" style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
                     <br>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                     <!-- edit mode -->
-                    <input ng-show="upgradeDate" class="inputsCenter" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
+                    <input ng-show="upgradeDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
                     <!-- -->
-                    <input ng-show="editDate" class="inputsCenter" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
+                    <input ng-show="editDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
                     <!-- Info of service -->
                     <h6 ng-show="!editDate">[{birthdateValue}]</h6>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" readonly style="border:none; background: transparent; outline: 0;"/>
-                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" style="border:none; background: transparent; outline: 0;"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
                     <br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                     
