@@ -497,3 +497,33 @@ a {
   float: right;
   margin-right: 90px;
 }
+
+.imageRotation {
+  transform: rotate(90deg);
+}
+
+.imagePerfil {
+  float: left;
+  margin-top: 28px;
+  margin-left: 19px;
+  width: 18%;
+}
+
+.labelPerfilName{
+  float: left;
+  margin-top: 15px;
+  margin-left: 53px;
+  text-align: center;
+}
+legend {
+  display: block;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: none;
+}
+
+.buttonEditPerfilPhoto {
+  float: left;
+  margin-top: 3px;
+  margin-left: 28px;
+}

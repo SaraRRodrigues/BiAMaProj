@@ -17,12 +17,14 @@
 		    </div>
             <div>
                 <br>
-                <div class="perfilDetails">
+                <div ng-if="!openImageUploadLabel" class="perfilDetails">
                     <!-- user photo -->
                     <div>
-                        <img src="../images/users/[{imageUser}]" class="w3-circle" style="width:20%">
-                        <label class="minTitleBiAMa">[{name}]</label>
+                        <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil" readonly >
+                        <img ng-show="upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil cursorPointer" ng-click="openImageUpload()">
+                        <label class="minTitleBiAMa labelPerfilName">[{name}]</label>
                     </div>
+                    <br><br><br><br>
 
                     <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" readonly style="border:none; background: transparent; outline: 0;"/>
                     <input ng-show="upgradeInformations" class="inputsCenter" ng-model="username" type="text" placeholder="Username" style="border:none; background: transparent; outline: 0;"/>
@@ -34,23 +36,31 @@
                     <br>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="birthdate" type="text" readonly  placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;"/>
-                    <input ng-show="upgradeInformations" class="inputsCenter" ng-model="birthdate" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
-                    <br>
+                    <!-- edit mode -->
+                    <input ng-show="upgradeDate" class="inputsCenter" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
+                    <!-- -->
+                    <input ng-show="editDate" class="inputsCenter" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA" style="border:none; background: transparent; outline: 0;margin-left:50px"/>
+                    <!-- Info of service -->
+                    <h6 ng-show="!editDate">[{birthdateValue}]</h6>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                     <input ng-show="!upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" readonly style="border:none; background: transparent; outline: 0;"/>
                     <input ng-show="upgradeInformations" class="inputsCenter" ng-model="password" type="password" placeholder="Password" style="border:none; background: transparent; outline: 0;"/>
                     <br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <span>
-                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails()">Alterar dados</button>
-                        <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdate, password, imageUser)">Salvar</button>		
-                        <h5 ng-if="fieldsEmpty">Campos vazios.</h5>
-                        <h5 ng-if="fieldsEmpty">Por favor, preencha os seus dados.</h5>
-                    </span>
+                    
+                    
+                    
+                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails()">Alterar dados</button>
+                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
+                    <h5 ng-if="fieldsEmpty">Campos inválidos.</h5>
                     <h5 ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
                     <h5 ng-if="invalidDate">Data de nascimento inválida.</h5>
+                    
+                </div>
+                 <div class="perfilDetails" ng-if="openImageUploadLabel">
+                    <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+                    <button ng-click="saveUploadFile()">Guardar</button>
                 </div>
             </div>
         </div>

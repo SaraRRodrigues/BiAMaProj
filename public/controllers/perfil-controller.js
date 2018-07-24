@@ -6,14 +6,17 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
     /* my current page */
     $scope.namePage='perfil';
    
+    $scope.editDate=false;
     $scope.name='';
     $scope.username='';
     $scope.imageUser='';
     $scope.email='';
-    $scope.birthdate='';
-    $scope.new_birthdate='';
+    $scope.birthdateValue='';
     $scope.password='';
     $scope.upgradeInformations=false;
+    $scope.openImageUploadLabel=false;
+    $scope.uploadPhoto='';
+    $scope.new_birthdate='';
 
     $scope.initUserDetails= function() {
         for(var index=0; index<$scope.users.length; ++index) {
@@ -22,23 +25,25 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
                 $scope.username=$scope.users[index].username;
                 $scope.imageUser=$scope.users[index].image;
                 $scope.email=$scope.users[index].email;
-                $scope.birthdate=new Date($scope.users[index].birthdate).toLocaleDateString();
+                $scope.birthdateValue=$scope.users[index].birthdate;
                 $scope.password=$scope.users[index].password;
             }
         }
     }
     
     $scope.clickUserDetails = function() {
-        $scope.upgradeInformations=true; 
+        $scope.birthdateValue='';
+        $scope.editDate=true;
+        $scope.upgradeInformations=true;
         $scope.invalidDate=false;
         $scope.invalidEmail=false;
         $scope.fieldsEmpty=false;
     }
 
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
-        $scope.upgradeInformations=false; 
+        
 
-        if(username === '' || email === '' || birthdate === '' || password === '') {
+        if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
             $scope.fieldsEmpty=false;
@@ -47,27 +52,38 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
             $scope.invalidEmail=true;
             $scope.fieldsEmpty=false;
         } 
-        
-        if($scope.birthdate === undefined || $scope.birthdate==='') {
+
+        if(image === '') {
+            $scope.invalidPhoto=true;
+        }
+        debugger
+        if(birthdate === undefined || birthdate === '') {
             $scope.invalidDate=true;
         } else {
-            $scope.birthdate=birthdate.toLocaleDateString();
+            if(!$scope.editDate && birthdate.includes("/") ){
+                $scope.birthdateValue=birthdate;             
+            } else if($scope.editDate){
+                $scope.birthdateValue=birthdate.toLocaleDateString();
+            }
             $scope.invalidDate=false;
+
         }
+
         //fazer update na base de dados
-        if(!$scope.invalidEmail && !$scope.fieldsEmpty && !$scope.invalidDate) {
+        if(!$scope.invalidEmail && !$scope.fieldsEmpty && !$scope.invalidDate && !$scope.invalidPhoto) {
             for(var index=0; index<$scope.users.length; ++index) {
                 if($scope.users[index].id === $scope.idUserLoggerIn){
                     $scope.updateUserDetails($scope.users[index].id, $scope.users[index].name
-                        , email, $scope.birthdate, image 
+                        , email, $scope.birthdateValue, image 
                         , username, password);
                     break;
                 }
             }
         }
+        $scope.upgradeInformations=false;
     }
 
-    $scope.updateUserDetails = function(id, name, email, birthdate, image, username, password) {  
+    $scope.updateUserDetails = function(id, name, email, birthdate, image, username, password) { 
         $scope.loadingSchool=true;
         var data = {
             'idUser': id,
@@ -88,8 +104,20 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
     }
 
     $scope.validBirthDate = function(birthdate) {
-        var pattern =/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/;
-        return pattern.test(birthdate);
+       /* var pattern =/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/;
+        return pattern.test(birthdate);*/
+    }
+
+    $scope.saveUploadFile = function () {
+        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
+        var res = splitDeviceRe.exec(($("#uploadPicture").val()));
+        $scope.imageUser=res[2];
+        
+        $scope.openImageUploadLabel=false;
+    }
+
+    $scope.openImageUpload = function() {
+        $scope.openImageUploadLabel=true;
     }
 
     $scope.initUserDetails();
