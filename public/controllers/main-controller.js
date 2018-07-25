@@ -73,8 +73,8 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService",
-function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService) {
+.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService","MyBiamaService", "WorldSharesForumService",
+function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService, MyBiamaService, WorldSharesForumService) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -290,6 +290,31 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	});
 	
 	/* page of my questions */
+
+	/* page of world shares */
+	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+    getMyBiamaInfo.then(function(result) {
+        $scope.loading = false;
+		var data=result.data.biamaDetails;
+		
+        $scope.descriptionMyBiama=data[0].description;
+        debugger
+	});
+	
+	var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
+    getWorldSharesForum.then(function(result) {
+      $scope.loading = false;
+      var data=result.data.worldShareForumDetails;
+
+      $scope.worldShareItems=[];
+      $scope.worldShareData=[];
+      $scope.shareNumber=[];
+      for(var index=0; index<data.length; ++index) {
+          $scope.worldShareItems.push(data[index].image);
+          $scope.worldShareData.push(data[index]);
+      }
+	});
+	
 }])
 
 app.factory("UserService", function($q, $http, $timeout){

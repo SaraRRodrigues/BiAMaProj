@@ -9,7 +9,7 @@ function getWorldSharesForum(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Share" INNER JOIN "Forum" ON "Share".forum_type="Forum".type_forum INNER JOIN "Library" ON "Library".id="Forum".library_id', function(err, result) {
+		client.query('SELECT * FROM "Share" INNER JOIN "Forum" ON "Share".forum_type="Forum".type_forum INNER JOIN "Library" ON "Library".id_library="Forum".library_id', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}

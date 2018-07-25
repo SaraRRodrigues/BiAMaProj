@@ -7,9 +7,9 @@ app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService"
 
     var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
     getMyBiamaInfo.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.biamaDetails;
-            $scope.descriptionMyBiama=data[0].description;
+        $scope.loading = false;
+        var data=result.data.biamaDetails;
+        $scope.descriptionMyBiama=data[0].description;
     });
 
     var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
@@ -27,7 +27,7 @@ app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService"
       }
     });
 
-    $scope.openDetailsWorldShate = function(image) {
+    $scope.openDetailsWorldShare = function(image) {
       for(var index=0; index<$scope.worldShareData.length; ++index) {
 				if($scope.worldShareData[index].image === image){
             $scope.worldSharesInfo={
