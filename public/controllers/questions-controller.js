@@ -5,10 +5,17 @@ app.controller("MyQuestionsController", ['$scope', "$http", "jQuery", function($
     /* my current page */
     $scope.namePage='myQuestions';	
 
+    $scope.favoriteQuestion=false;
+    $scope.favoriteAnswer=false;
     $scope.showDivAnswer=false;
     $scope.showMyQuestions=false;
     $scope.questions=[];
     $scope.descriptionAnswer=[];
+
+    $scope.clickAddFavorite=false;
+    $scope.clickRemoveFavorite=false;
+    $scope.clickAddLike=false;
+    $scope.clickRemoveLike=false;
    
     $scope.getQuestion = function(questionId, indexQuestion) {
         $scope.showMyQuestions = true;
@@ -24,7 +31,6 @@ app.controller("MyQuestionsController", ['$scope', "$http", "jQuery", function($
         $scope.indexQuestionAnswer=1;
     }
     $scope.getAnswersOfQuestion = function(index) {
-        debugger
         $scope.descriptionQuestion=$scope.myQuestions[index].text_question;
         for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
           if($scope.details[indexAnswer].id_question == $scope.myQuestions[index].id_question){
@@ -39,6 +45,74 @@ app.controller("MyQuestionsController", ['$scope', "$http", "jQuery", function($
           }
         }
     }
+
+    $scope.addToFavoritesQuestion = function(){
+        if($scope.showInitSession){
+            if($scope.favoriteDetails.length===0) {
+                $scope.favoriteId=1;
+            } else {
+                $scope.favoriteId=($scope.favoriteDetails[$scope.favoriteDetails.length-1].id_favorite)+1;
+            }
+            var data = {
+                idFavorite: $scope.favoriteId,
+                idUser: $scope.idUserLoggerIn,
+                idMaterial: null,
+                idQuestion: $scope.idQuestion
+            };
+            $http.post('/insertFavoriteQuestion', data);
+            
+            $scope.clickAddFavorite=true;
+        } 
+      }
+  
+      $scope.removeFromFavoritesQuestion = function() {
+        if($scope.showInitSession){
+            var data = {
+                idFavorite: $scope.favoriteId,
+                idUser: $scope.idUserLoggerIn,
+                idMaterial: null,
+                idQuestion: $scope.idQuestion
+            };
+            $http.post('/deleteFavoriteQuestion', data);
+          
+            $scope.clickAddFavorite=false;
+        } 
+      }
+      $scope.addLikeQuestion = function() {
+        if($scope.showInitSession){
+          /*var data = {
+            idFavorite: 0,
+            idUser: 0,
+            idMaterial: null,
+            idQuestion: $scope.idQuestion
+          };
+          $http.post('/insertFavoriteQuestion', data);
+          */
+            if($scope.clickAddLike) {
+                $scope.clickAddLike=false;
+            } else {
+                $scope.clickAddLike=true;
+            }
+        }
+      }
+      $scope.removeLikeQuestion = function() {
+        if($scope.showInitSession){
+          /*var data = {
+            idFavorite: 0,
+            idUser: 0,
+            idMaterial: null,
+            idQuestion: $scope.idQuestion
+          };
+          $http.post('/insertFavoriteQuestion', data);
+          */
+
+            if($scope.clickRemoveLike) {
+                $scope.clickRemoveLike=false;
+            } else {
+                $scope.clickRemoveLike=true;
+            }
+        }
+      }
 }])
 
 app.factory("UserQuestionService", function($q, $http, $timeout){

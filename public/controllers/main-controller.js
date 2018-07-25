@@ -73,8 +73,8 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService",
-function($scope, UserService, $http, NotificationService, UserQuestionService) {
+.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService",
+function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -239,6 +239,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService) {
 		
 	}
 
+	
 	var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
     getNotifications.then(function(result) {
         $scope.loading = false;
@@ -280,6 +281,14 @@ function($scope, UserService, $http, NotificationService, UserQuestionService) {
 			}
 		}
 	}
+
+	/* get favorites material */
+	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+	getMyFavorites.then(function(result) {
+		var data=result.data.favoriteDetails;
+		$scope.favoriteDetails=data;
+	});
+	
 	/* page of my questions */
 }])
 

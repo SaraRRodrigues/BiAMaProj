@@ -9,7 +9,7 @@ function getMyFavorites(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Favorite"', function(err, result) {
+		client.query('SELECT * FROM "Favorite" ORDER BY "Favorite".id_favorite ASC', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
