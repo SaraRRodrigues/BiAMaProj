@@ -129,6 +129,13 @@ router.get('/myQuestions', (req, resp, next) => {
 	});
 });
 
+/* GET my questions logged in: My questions */
+router.get('/myQuest', (req, resp, next) => {
+	userService.getMyQuestionsLogged((error, questions) => {
+		resp.json({questions})
+	});
+});
+
 /* GET my notifications: Notifications */
 router.get('/myNotifications', (req, resp, next) => {
 	notificationService.getMyNotifications((error, notificationDetails) => {

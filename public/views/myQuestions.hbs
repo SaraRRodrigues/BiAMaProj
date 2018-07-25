@@ -7,21 +7,81 @@
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-        <div style="text-align:center;">
+        <div class="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
             <div class="padding-left-4x">
-                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">As minhas perguntas</h1> 
+                <h1 ng-if="!showMyQuestions" class="subtitles">As minhas perguntas</h1> 
                
             </div>
-           <div style="text-align: center;">
-                <a href="" class="margin-left-5x margin-top" style="text-decoration:none;">Pergunta 1</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 2</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <a href="" class="margin-left-5x" style="text-decoration:none;">Pergunta 3</a><br>
-                <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+            <div ng-if="!loading && !showMyQuestions" class="titlesOnCenter" ng-repeat="question in myQuestionDetails track by $index">
+                <a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
+                <div class="separateQuestions"></div>
+            </div>
+            <div ng-if="showMyQuestions">
+                <div class="titlesOnCenter"> 
+                    <h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
+                </div>
+                <div class="titlesOnCenter">
+                    <div ng-if="!showDivAnswer" class="margin-left-10x">
+                        <!-- Question -->
+                        <img class="imageButton" src="../images/user.png">
+                        <div class="borderQuestion">
+                            <label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+                            <div ng-if="!favoriteQuestion" ng-click="addToFavoritesQuestion()">
+                                <i class="far fa-star favoriteButton cursorPointer"></i>
+                            </div>
+                            <div ng-if="favoriteQuestion" ng-click="removeFromFavoritesQuestion()">
+                                <i class="fas fa-star favoriteButton cursorPointer"></i>
+                            </div>
+                            <div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
+                                <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+                            </div>
+                            <div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
+                                <i class="far fa-thumbs-up likeButton cursorPointer" ></i>
+                            </div>
+                            <h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+                        </div>
+                        <!-- Answers -->
+                        <div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
+                            <img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
+                            <div ng-if="$index%2!==0" class="borderQuestion">
+                                <label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                <div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+                                    <i class="fas fa-star favoriteButton cursorPointer"></i>
+                                </div>
+                                <div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+                                    <i class="far fa-star favoriteButton cursorPointer"></i>
+                                </div>
+                                <div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
+                                    <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+                                </div>
+                                <div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
+                                    <i class="far fa-thumbs-up likeButton cursorPointer"></i>
+                                </div>
+                                <h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
+                            </div>
+                            <div ng-if="$index%2===0"  class="borderAnswer">
+                                <div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+                                    <i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
+                                </div>
+                                <div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+                                    <i class="far fa-star favoriteButtonLeft cursorPointer"></i>
+                                </div>
+                                <div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
+                                    <i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
+                                </div>
+                                <div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
+                                    <i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
+                                </div>
+                                <label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                <img class="imageButtonLeft" src="../images/user.png">
+                                <h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer class="w3-bar w3-center footer">

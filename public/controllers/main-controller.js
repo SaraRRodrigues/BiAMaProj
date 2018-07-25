@@ -73,8 +73,8 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http","NotificationService",
-function($scope, UserService, $http, NotificationService) {
+.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService",
+function($scope, UserService, $http, NotificationService, UserQuestionService) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -112,6 +112,7 @@ function($scope, UserService, $http, NotificationService) {
 			$scope.notificationNumber=true;
 		} else {
 			$scope.userDetails = false;
+			$scope.notificationNumber = false;
 		}
 		$scope.search = false;
 	}
@@ -246,6 +247,40 @@ function($scope, UserService, $http, NotificationService) {
 		$scope.numberOfNotifications=$scope.notifications.length;
 	});
 	
+	/* page of my questions */
+	var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
+    getUserQuestionInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.questionDetails;
+		$scope.myQuestions=data;
+	});
+
+
+	var getMyQuestions = UserService.getMyQuestionsLogged(function(infoMyQuestions){});
+    getMyQuestions.then(function(result) {
+	
+        $scope.loading = false;
+		var data=result.data.questions;
+		$scope.myQuestionDetails=data;
+	});
+
+	var getAnswerQuestionInfo = UserQuestionService.getQuestionAnswer(function(infoUserAnswer){});
+    getAnswerQuestionInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.questionDetails;
+        $scope.details=data;
+        $scope.calculateAnswerId($scope.details);
+	});
+	
+	$scope.calculateAnswerId = function(details) {
+		$scope.biggestId=0;
+		for(var index=0; index<details.length; ++index){
+			if(details[index].id_answer>$scope.biggestId){
+			$scope.biggestId=details[index].id_answer;
+			}
+		}
+	}
+	/* page of my questions */
 }])
 
 app.factory("UserService", function($q, $http, $timeout){
@@ -258,10 +293,19 @@ app.factory("UserService", function($q, $http, $timeout){
 		}, 2000);
 	
 		return deferred.promise;
-	  };
-	
+	};
+
+	var getMyQuestionsLogged = function() {
+		var deferred = $q.defer();
+		$timeout(function() {
+			deferred.resolve($http.get('/myQuest'));
+		}, 2000);
+
+		return deferred.promise;
+	};
 	  return {
-		getUsers: getUsers
+		getUsers: getUsers,
+		getMyQuestionsLogged: getMyQuestionsLogged
 	  };
 });
 

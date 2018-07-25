@@ -148,7 +148,7 @@
 										<div class="lineWhite margin-bottom margin-top"></div>
 										<a href="/BiAMa/worldShare" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a ng-class="!notificationNumber ? 'margin-right:50px': margin-right: 47px;'" class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
+										<a ng-if="!notificationNumber" class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
 										<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
 										<div ng-if="notificationNumber" class="circleNotification"></div>
 										<br>

@@ -18,7 +18,7 @@
             
             <div class="divNotifications sectionScrollNotification">
                 <div ng-repeat="notification in notifications">
-                    <div>
+                    <div ng-if="notification.insert">
                        <h6>[{notification.text_notification}]</h6>
                        <h6 class="dateNotification">[{notification.date_notification}]</h6>
                     </div>
