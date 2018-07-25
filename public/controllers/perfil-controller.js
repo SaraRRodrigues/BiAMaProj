@@ -41,8 +41,6 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
     }
 
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
-        
-
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
@@ -56,7 +54,7 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
         if(image === '') {
             $scope.invalidPhoto=true;
         }
-        debugger
+
         if(birthdate === undefined || birthdate === '') {
             $scope.invalidDate=true;
         } else {
@@ -66,7 +64,6 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
                 $scope.birthdateValue=birthdate.toLocaleDateString();
             }
             $scope.invalidDate=false;
-
         }
 
         //fazer update na base de dados

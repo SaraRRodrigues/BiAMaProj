@@ -297,6 +297,29 @@ a {
   padding-left:30px;
   padding-right:30px;
   padding-top:10px;
+  text-align: justify;
+}
+.circleNotification {
+  width: 21px;
+  margin-left: 137px;
+  margin-top: -24px;
+  height: 21px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #fff;
+  line-height: 500px;
+  text-align: center;
+  background: #000;
+  margin-bottom: -21px;
+}
+.notificationPosition {
+  margin-left: 39px;
+  margin-right: 47px;
+}
+
+.labelNumberNotification {
+  color: white;
+  margin-left: -19px;
 }
 
 .sectionScrollNotification {
@@ -583,4 +606,8 @@ legend {
   border:none; 
   background: transparent; 
   outline: 0;
+}
+
+.dateNotification {
+  font-size: 10px;
 }

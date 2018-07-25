@@ -18,7 +18,10 @@
             
             <div class="divNotifications sectionScrollNotification">
                 <div ng-repeat="notification in notifications">
-                   <div>[{notification.text}]</div>
+                    <div>
+                       <h6>[{notification.text_notification}]</h6>
+                       <h6 class="dateNotification">[{notification.date_notification}]</h6>
+                    </div>
                    <div class="lineWhite margin-bottom margin-top"></div>									
                 </div>
             </div>

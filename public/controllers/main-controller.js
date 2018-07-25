@@ -73,8 +73,8 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http",
-function($scope, UserService, $http) {
+.controller('MainController',['$scope', "UserService", "$http","NotificationService",
+function($scope, UserService, $http, NotificationService) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -109,6 +109,7 @@ function($scope, UserService, $http) {
 	$scope.disableSearch = function(buttonClick) {
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
+			$scope.notificationNumber=true;
 		} else {
 			$scope.userDetails = false;
 		}
@@ -236,6 +237,15 @@ function($scope, UserService, $http) {
 	$scope.searchMaterials = function(){
 		
 	}
+
+	var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
+    getNotifications.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.notificationDetails;
+		$scope.notifications=data;
+		$scope.numberOfNotifications=$scope.notifications.length;
+	});
+	
 }])
 
 app.factory("UserService", function($q, $http, $timeout){
@@ -253,4 +263,21 @@ app.factory("UserService", function($q, $http, $timeout){
 	  return {
 		getUsers: getUsers
 	  };
+});
+
+app.factory("NotificationService", function($q, $http, $timeout){
+    var getMyNotifications = function() {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications'));
+        }, 2000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMyNotifications: getMyNotifications
+    };
 });
