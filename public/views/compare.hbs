@@ -1,4 +1,20 @@
 <html>
+    <style>
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+        }
+        /* IE 6 doesn't support max-height
+        * we use height instead, but this forces the menu to always be this tall
+        */
+        * html .ui-autocomplete {
+            height: 100px;
+        }
+    </style>
     <body  ng-app="myApp" ng-controller="CompareController">
          <!--image biama -->
         <div class="row text-center">
@@ -7,22 +23,26 @@
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-        <div style="text-align:center;">
+        <div class="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
             <div class="padding-left-4x">
-                <h1 style="font-weight: normal;color: #5F9EA0;font:bold">Comparar Materiais</h1> 
+                <h1 class="subtitles">Comparar Materiais</h1> 
             </div>
-            <div>
-                <img src="../images/compararMateriais.JPG"/>
-            </div>
-            <!--<div ng-repeat="image in imageMaterials track by $index">
-                <div style="padding: 5px;" class="column">
-                    <img ng-if="$index%2==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/>
-                    <img ng-if="$index%2!==0" src="[{image.imgPath}]" alt="foto" width="10%" height="10%"/><br>
+            <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
+                <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
+                    <figure>
+                        <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="35%" height="150px" alt="foto"/>
+                        <figcaption>[{material.text}]</figcaption>
+                    </figure>
                 </div>
-            </div>-->
+            </div>
+            <br>
+            <div class="ui-widget">
+                <input id="tags" style="width: 195px;">
+                <button ng-click="selectedMaterial()">OK</button>
+            </div>
         </div>
         <footer class="w3-bar w3-center footer">
 			<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>

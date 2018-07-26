@@ -611,3 +611,68 @@ legend {
 .dateNotification {
   font-size: 10px;
 }
+
+ui.autocomplete{
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #eaab00;
+}
+
+scrollListMaterial {
+  width: 195px;
+}
+
+.sectionScrollTotalCompare{
+  padding:15px;
+  height:310px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sectionScrollTotalCompare::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollTotalCompare::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollTotalCompare::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #70c0c1;
+}
+
+.sectionScrollCompare{
+  padding:15px;
+  height:208px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sectionScrollCompare::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollCompare::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollCompare::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eaab00;
+}

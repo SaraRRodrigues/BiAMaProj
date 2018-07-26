@@ -73,8 +73,8 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
 
-.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService","MyBiamaService", "WorldSharesForumService",
-function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService, MyBiamaService, WorldSharesForumService) {
+.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService","MyBiamaService", "WorldSharesForumService","MaterialOfLibraryService", "CompareMaterialService",
+function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService, MyBiamaService, WorldSharesForumService, MaterialOfLibraryService, CompareMaterialService) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -298,7 +298,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 		var data=result.data.biamaDetails;
 		
         $scope.descriptionMyBiama=data[0].description;
-        debugger
+        
 	});
 	
 	var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
@@ -313,6 +313,14 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
           $scope.worldShareItems.push(data[index].image);
           $scope.worldShareData.push(data[index]);
       }
+	});
+
+	/* get material of library */
+	var getMaterialToCompare = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+	getMaterialToCompare.then(function(result) {
+        $scope.loading = false;
+		var data=result.data.comparationDetails;
+		$scope.materialComparation=data;
 	});
 	
 }])
@@ -357,5 +365,23 @@ app.factory("NotificationService", function($q, $http, $timeout){
 
     return {
         getMyNotifications: getMyNotifications
+    };
+});
+
+
+app.factory("CompareMaterialService", function($q, $http, $timeout){
+    var getMaterialComparation = function() {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/compareMaterials'));
+        }, 2000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMaterialComparation: getMaterialComparation
     };
 });

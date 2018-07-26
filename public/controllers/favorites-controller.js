@@ -180,7 +180,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
     
     $scope.clickFavorite = function(favoriteMaterial) {
-        debugger;
         console.log(favoriteMaterial);
 		$scope.idFavoriteMaterial=0;
 		
