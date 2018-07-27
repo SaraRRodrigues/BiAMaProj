@@ -88,6 +88,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	$scope.passwordModel = '';
 	$scope.logoutLabel = false;
 	$scope.terminateLogin = false;
+	$scope.materials=[];
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
@@ -238,90 +239,120 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	$scope.searchMaterials = function(){
 		
 	}
-
-	
-	var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
-    getNotifications.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.notificationDetails;
-		$scope.notifications=data;
-		$scope.numberOfNotifications=$scope.notifications.length;
-	});
-	
-	/* page of my questions */
-	var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
-    getUserQuestionInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.questionDetails;
-		$scope.myQuestions=data;
-	});
-
-
-	var getMyQuestions = UserService.getMyQuestionsLogged(function(infoMyQuestions){});
-    getMyQuestions.then(function(result) {
-	
-        $scope.loading = false;
-		var data=result.data.questions;
-		$scope.myQuestionDetails=data;
-	});
-
-	var getAnswerQuestionInfo = UserQuestionService.getQuestionAnswer(function(infoUserAnswer){});
-    getAnswerQuestionInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.questionDetails;
-        $scope.details=data;
-        $scope.calculateAnswerId($scope.details);
-	});
-	
-	$scope.calculateAnswerId = function(details) {
-		$scope.biggestId=0;
-		for(var index=0; index<details.length; ++index){
-			if(details[index].id_answer>$scope.biggestId){
-			$scope.biggestId=details[index].id_answer;
-			}
-		}
-	}
-
-	/* get favorites material */
-	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-	getMyFavorites.then(function(result) {
-		var data=result.data.favoriteDetails;
-		$scope.favoriteDetails=data;
-	});
-	
-	/* page of my questions */
-
-	/* page of world shares */
-	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-    getMyBiamaInfo.then(function(result) {
-        $scope.loading = false;
-		var data=result.data.biamaDetails;
-		
-        $scope.descriptionMyBiama=data[0].description;
-        
-	});
-	
-	var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
-    getWorldSharesForum.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.worldShareForumDetails;
-
-      $scope.worldShareItems=[];
-      $scope.worldShareData=[];
-      $scope.shareNumber=[];
-      for(var index=0; index<data.length; ++index) {
-          $scope.worldShareItems.push(data[index].image);
-          $scope.worldShareData.push(data[index]);
-      }
-	});
-
 	/* get material of library */
-	var getMaterialToCompare = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
-	getMaterialToCompare.then(function(result) {
-        $scope.loading = false;
+	var getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+	getMaterials.then(function(result) {
+		$scope.loading = false;
 		var data=result.data.comparationDetails;
 		$scope.materialComparation=data;
-	});
+		console.log('materials: ' , $scope.materialComparation);
+	}); 
+
+	if($scope.userLoggedIn) {
+		
+		var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
+		getNotifications.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+		});
+		/* page of my questions */
+		var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
+		getUserQuestionInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.questionDetails;
+			$scope.myQuestions=data;
+		});
+
+		var getMyQuestions = UserService.getMyQuestionsLogged(function(infoMyQuestions){});
+		getMyQuestions.then(function(result) {
+		
+			$scope.loading = false;
+			var data=result.data.questions;
+			$scope.myQuestionDetails=data;
+		});
+
+		var getAnswerQuestionInfo = UserQuestionService.getQuestionAnswer(function(infoUserAnswer){});
+		getAnswerQuestionInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.questionDetails;
+			$scope.details=data;
+			$scope.calculateAnswerId($scope.details);
+		});
+		$scope.calculateAnswerId = function(details) {
+			$scope.biggestId=0;
+			for(var index=0; index<details.length; ++index){
+				if(details[index].id_answer>$scope.biggestId){
+				$scope.biggestId=details[index].id_answer;
+				}
+			}
+		}
+	
+		/* get favorites material */
+		var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+		getMyFavorites.then(function(result) {
+			var data=result.data.favoriteDetails;
+			$scope.favoriteDetails=data;
+		});
+		
+		/* page of my questions */
+	
+		/* page of world shares */
+		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+		getMyBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.biamaDetails;
+			$scope.descriptionMyBiama=data[0].description;
+		});
+		
+		var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
+		getWorldSharesForum.then(function(result) {
+		  $scope.loading = false;
+		  var data=result.data.worldShareForumDetails;
+	
+		  $scope.worldShareItems=[];
+		  $scope.worldShareData=[];
+		  $scope.shareNumber=[];
+		  for(var index=0; index<data.length; ++index) {
+			  $scope.worldShareItems.push(data[index].image);
+			  $scope.worldShareData.push(data[index]);
+		  }
+		});
+	}
+	
+	jQuery( function() {
+        var availableTags = [
+			'Materiais',
+			'Categoria de materiais',
+			'Projeto de materiais'
+		];
+    jQuery( "#tags_search" ).autocomplete({
+        source: availableTags
+    });
+	} );
+	
+	$scope.selectedMaterial = function() {
+        $scope.showMaterial=true;
+		var valueSearchMaterial=jQuery( "#tags_search" ).val();
+		$scope.materials=[];
+		
+		if(valueSearchMaterial === 'Materiais') {
+			$scope.materials=$scope.materialComparation;
+		} else if(valueSearchMaterial === 'Categoria de materiais') {
+			var firstCategory = $scope.materialComparation[0].category;
+			for(var index=1; index<$scope.materialComparation.length; ++index) {
+				if(firstCategory !== $scope.materialComparation[index].category){
+					$scope.materials.push($scope.materialComparation[index].name);
+				} else {
+					break;
+				}
+			}
+			$scope.showCategoryMaterial=true;
+		}
+       
+        $scope.showMaterials=true;
+    }
 	
 }])
 

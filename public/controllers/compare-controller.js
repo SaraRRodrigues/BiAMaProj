@@ -45,9 +45,5 @@ app.controller("CompareController", ['$scope', "$http", "jQuery", function($scop
             }
         }
         $scope.showMaterialsCompare=true;
-        
-        //fazer o get dos materiais e depois no html meter o text, e quando clico, vou à lista encontrar o nome igual
-        //ao que foi selecionado e depois ir buscar a imagem do material
-        
     }
 }])

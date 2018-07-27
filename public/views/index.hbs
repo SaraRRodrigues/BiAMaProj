@@ -168,26 +168,39 @@
 					</nav>
 					
 					<!--image biama -->
-					<div ng-if="search" class="row text-center">
+					<div ng-if="search && !showMaterials" class="row text-center">
 						<img class="margin-top-6x" src="../images/topoBiamaHome.png"/>
 					</div>
+
+					<!-- image biama with search -->
+					<div ng-if="showMaterials" class="row text-center">
+						<img class="margin-top-3x" src="../images/topoBiama.png"/>
+					</div>
+
 					<!-- titles of page & search -->
 					<div class="row text-center">
 						<ng-view></ng-view>
-						<div ng-if="search" class="col-sm-4 col-sm-offset-4">
-							<div id="imaginary_container"> 
-								<div class="input-group stylish-input-group">
-									<input type="text" class="form-control"  placeholder="" >
-									<span class="input-group-addon">
-										<a href="/BiAMa/searchResult" ng-click="disableSearch('search')">
-											<span class="glyphicon glyphicon-search"></span>
-										</a>
-									</span>
+						<div class="col-sm-4 col-sm-offset-4">
+							<div class="ui-widget input-group stylish-input-group">
+								<input id="tags_search" style="width: 385px;">
+								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
+									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterial()" style="margin-right: 17px;"></span>
+								</span>
+							</div>
+						</div>
+						<div ng-if="showMaterials">
+							<div class="padding sectionScrollSearch">
+								<div class="col-md-4" ng-repeat="material in materials track by $index">
+									<div class="thumbnail" ng-if="!showCategoryMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer"  ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
+									</div>
+									<div class="thumbnail" ng-if="showCategoryMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer"  ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</article>
 			<footer class="w3-bar w3-center" id="footerMain">

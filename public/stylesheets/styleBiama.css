@@ -43,6 +43,8 @@ a {
 .margin-bottom-2x {margin-bottom:15px}
 .margin-bottom-3x {margin-bottom:25px}
  
+.padding {padding: 20px}
+
 .padding-top-2x{padding-top:20px;}
 .padding-top-3x{padding-top:50px;}
 .padding-top-6x{padding-top:100px;}
@@ -109,6 +111,14 @@ a {
   border-left: 6px solid #C0C0C0; 
   border-right: 6px solid  #C0C0C0; 
 }
+
+.divBodyMaterials {
+  margin-top:12px; 
+  background-color:white; 
+  border-left: 6px solid red; 
+  border-right: 6px solid  #C0C0C0; 
+}
+
 .positionOfNavDetails{
   position: absolute;
 }
@@ -671,6 +681,33 @@ scrollListMaterial {
 }
 
 .sectionScrollCompare::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eaab00;
+}
+
+.sectionScrollSearch {
+  height: 293px;
+  padding:15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 75px;
+}
+.sectionScrollSearch::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollSearch::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollSearch::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);

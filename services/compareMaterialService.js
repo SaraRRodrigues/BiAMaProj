@@ -9,7 +9,7 @@ function getMaterialComparation(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Material"', function(err, result) {
+		client.query('SELECT * FROM "Material" ORDER BY "Material".id ASC', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
