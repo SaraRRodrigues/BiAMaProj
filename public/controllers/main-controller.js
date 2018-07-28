@@ -89,6 +89,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	$scope.logoutLabel = false;
 	$scope.terminateLogin = false;
 	$scope.materials=[];
+	$scope.showDetailsOfMaterial=false;
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
@@ -322,24 +323,31 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	}
 	
 	jQuery( function() {
-        var availableTags = [
+        $scope.itemSearch = [
 			'Materiais',
 			'Categoria de materiais',
 			'Projeto de materiais'
 		];
     jQuery( "#tags_search" ).autocomplete({
-        source: availableTags
+        source: $scope.itemSearch
     });
 	} );
 	
+	
 	$scope.selectedMaterial = function() {
-        $scope.showMaterial=true;
+		$scope.openMaterialDetail=false;
+
 		var valueSearchMaterial=jQuery( "#tags_search" ).val();
+		$scope.searchValue=valueSearchMaterial;
+
 		$scope.materials=[];
 		
 		if(valueSearchMaterial === 'Materiais') {
 			$scope.materials=$scope.materialComparation;
-		} else if(valueSearchMaterial === 'Categoria de materiais') {
+			$scope.showCategoryMaterial=false;
+			$scope.showProjectMaterial=false;
+		} 
+		if(valueSearchMaterial === 'Categoria de materiais') {
 			var firstCategory = $scope.materialComparation[0].category;
 			for(var index=1; index<$scope.materialComparation.length; ++index) {
 				if(firstCategory !== $scope.materialComparation[index].category){
@@ -349,11 +357,47 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 				}
 			}
 			$scope.showCategoryMaterial=true;
+			$scope.showProjectMaterial=false;
+		} 
+		if(valueSearchMaterial === 'Projeto de materiais') {
+			for(var index=0; index<$scope.materialComparation.length; ++index) {
+				if($scope.materialComparation[index].code > parseInt('46')){
+					$scope.materials.push($scope.materialComparation[index].name);
+				} 
+			}	
+			$scope.showProjectMaterial=true;
+			$scope.showCategoryMaterial=false;
 		}
-       
+		$scope.showDetailsOfMaterial=false;
         $scope.showMaterials=true;
-    }
+	}
 	
+	$scope.openMaterial = function(material) {
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+	}
+
+	$scope.closeMaterial = function() {
+		if($scope.searchValue === 'Materiais'){
+			$scope.showCategoryMaterial=false;
+			$scope.showProjectMaterial=false;
+			$scope.showMaterials=true;
+		}
+
+		if($scope.searchValue === 'Projeto de materiais') {
+			$scope.showProjectMaterial=true;
+			$scope.showCategoryMaterial=false;
+			$scope.showMaterials=true;
+		} 
+		
+		if($scope.searchValue ==='Categoria de materiais'){
+			$scope.showCategoryMaterial=true;
+			$scope.showProjectMaterial=false;
+			$scope.showMaterials=true;
+		}
+		$scope.showDetailsOfMaterial=false;
+	}
 }])
 
 app.factory("UserService", function($q, $http, $timeout){

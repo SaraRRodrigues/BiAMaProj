@@ -85,7 +85,7 @@
 							<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
 						</div> 
 
-						<div class="padding-left-6x" style="margin-top: -25px;">
+						<!--<div class="padding-left-6x" style="margin-top: -25px;">
 							<label class="labelLanguage">Idioma</label>
 							<div class="separatorLanguage"></div>
 							<label class="selectLanguage"></label>
@@ -97,7 +97,7 @@
 									<br>
 								</div>
 							</div>
-						</div>	
+						</div>	-->
 						<!-- details user -->
 						<div class="row">
 							<nav class="padding-left-3x">
@@ -168,7 +168,7 @@
 					</nav>
 					
 					<!--image biama -->
-					<div ng-if="search && !showMaterials" class="row text-center">
+					<div ng-if="search && !showMaterials && !openMaterialDetail" class="row text-center">
 						<img class="margin-top-6x" src="../images/topoBiamaHome.png"/>
 					</div>
 
@@ -180,7 +180,7 @@
 					<!-- titles of page & search -->
 					<div class="row text-center">
 						<ng-view></ng-view>
-						<div class="col-sm-4 col-sm-offset-4">
+						<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
 							<div class="ui-widget input-group stylish-input-group">
 								<input id="tags_search" style="width: 385px;">
 								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
@@ -191,15 +191,42 @@
 						<div ng-if="showMaterials">
 							<div class="padding sectionScrollSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
-									<div class="thumbnail" ng-if="!showCategoryMaterial">
-										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer"  ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
+									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
 									</div>
-									<div class="thumbnail" ng-if="showCategoryMaterial">
-										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer"  ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+									<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+									</div>
+									<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
 									</div>
 								</div>
 							</div>
 						</div>
+
+						<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
+							<div class="row container">
+								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
+								<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+									<h4 class="margin-right-5x margin-top-6x">Category</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+									<h4 class="margin-right-5x">Code</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+									<h4 class="margin-right-5x">Description</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</article>
