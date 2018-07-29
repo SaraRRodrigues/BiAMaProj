@@ -4,7 +4,8 @@ var pg = require('pg');
 module.exports = {
 	'getUsers': getUsers,
 	'updateUserSettings': updateUserSettings,
-	'getMyQuestionsLogged': getMyQuestionsLogged
+	'getMyQuestionsLogged': getMyQuestionsLogged,
+	'insertUserSettings': insertUserSettings
 }
 function getUsers(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -41,6 +42,29 @@ function updateUserSettings(data, cb){
 		});
 	});
 }
+
+function insertUserSettings(data, cb){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		var idUser=data.idUser;
+		var name=data.name;
+		var email=data.email;
+		var birthdate=data.birthdate;
+		var image=data.image;
+		var username=data.username;
+		var password=data.password;
+		
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query('INSERT INTO "User" VALUES ($1,$2,$3,$4,$5,$6,$7)',[idUser, name, email, birthdate, image, username, password], function(err, result) {
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}
+
 
 function getMyQuestionsLogged(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {

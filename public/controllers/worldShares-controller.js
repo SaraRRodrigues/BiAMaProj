@@ -1,4 +1,4 @@
-app.controller("WorldShareController", ['$scope', "$http", "jQuery", "MyBiamaService", function($scope, $http, MyBiamaService){
+app.controller("WorldShareController", ['$scope', "$http", "jQuery", function($scope, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -7,7 +7,7 @@ app.controller("WorldShareController", ['$scope', "$http", "jQuery", "MyBiamaSer
 
     $scope.showWorldShares=true;
     $scope.addWorldShare=false;
-    
+
     $scope.openDetailsWorldShare = function(image) {
         for(var index=0; index<$scope.worldShareData.length; ++index) {
             if($scope.worldShareData[index].image === image){

@@ -221,7 +221,7 @@ a {
 
 .perfilDetails{
   font-size:12px;
-  background-color: #C0C0C0;
+  background-color: #F9F1E4;
   width: 300px;
   margin-left: 550px;
 }
@@ -722,4 +722,11 @@ scrollListMaterial {
 
 .detailsMaterialSearch {
   text-align: justify;
+}
+
+.labelRegistDetails {
+  float: left;
+  margin-top: 35px;
+  margin-left: 4px;
+  text-align: center;
 }

@@ -172,6 +172,14 @@ router.post('/updateUserDetails', (req, resp, next) => {
 	});
 });
 
+/* INSERT user details: used in login */
+router.post('/insertUserDetails', (req, resp, next) => {
+	var data = req.body;
+	userService.insertUserSettings(data, (error, userDetails) => {
+		resp.json({userDetails})
+	});
+});
+
 /* GET world shares forum: forum */
 router.get('/worldSharesForum', (req, resp, next) => {
 	worldShareForumService.getWorldSharesForum((error, worldShareForumDetails) => {

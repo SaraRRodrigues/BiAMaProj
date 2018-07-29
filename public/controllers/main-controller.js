@@ -123,7 +123,6 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	$scope.changeColorClick = function(name) {
 		$scope.userDetails = false;
 		$scope.search = false;
-
 		$scope.nameclick=name;
 	}
 
@@ -146,17 +145,21 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 			$scope.showInitSession = true;
 		}
 	}
-	var config = {
-		apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
-		authDomain: "fir-biama.firebaseapp.com",
-		databaseURL: "https://fir-biama.firebaseio.com",
-		projectId: "fir-biama",
-		storageBucket: "fir-biama.appspot.com",
-		messagingSenderId: "861577986516"
-	};
 
-	firebase.initializeApp(config);
+	$scope.initDataFirebase = function() {
+		var config = {
+			apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
+			authDomain: "fir-biama.firebaseapp.com",
+			databaseURL: "https://fir-biama.firebaseio.com",
+			projectId: "fir-biama",
+			storageBucket: "fir-biama.appspot.com",
+			messagingSenderId: "861577986516"
+		};
+	
+		firebase.initializeApp(config);
+	}
 
+	$scope.initDataFirebase();
 	$scope.loginWithGoogle = function() {
 		
 		const provider = new firebase.auth.GoogleAuthProvider();
@@ -203,54 +206,29 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 		});
 	}
 
-	$scope.confirmSessionAction = function (username, password) {
-
-		$scope.users = 'loadUser';
+	$scope.getUsers = function() {
 		var getAllUsers = UserService.getUsers(function(users){});
-		
 		getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
-			for(var index=0; index<$scope.users.length; ++index){
-				$scope.userName = $scope.users[index].username;
-				$scope.userPassword = $scope.users[index].password;
-				if($scope.userName !== null && $scope.userName === username){
-					if($scope.userPassword !== null && $scope.userPassword === password){
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
-						break;
-					}
-				}
-			}
 		});
 	}
-	
-	$scope.selectLanguage = function(language){
-		$scope.languageSelected = language;
-	}
+	$scope.getUsers();
 
-	$scope.languages = ['Português', 'Inglês']
-	$scope.biamaPage = true;
-	
-	/*$scope.s = function() {
-		
-		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
-	}	*/
+	$scope.getAllRequests = function() {
+		/* page of world shares */
+		var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
+		getWorldSharesForum.then(function(result) {
+		  $scope.loading = false;
+		  var data=result.data.worldShareForumDetails;
 
-	$scope.searchMaterials = function(){
-		
-	}
-	/* get material of library */
-	var getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
-	getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialComparation=data;
-		console.log('materials: ' , $scope.materialComparation);
-	}); 
-
-	if($scope.userLoggedIn) {
-		
+		  $scope.worldShareItems=[];
+		  $scope.worldShareData=[];
+		  $scope.shareNumber=[];
+		  for(var index=0; index<data.length; ++index) {
+			  $scope.worldShareItems.push(data[index].image);
+			  $scope.worldShareData.push(data[index]);
+		  }
+		});
 		var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
 		getNotifications.then(function(result) {
 			$scope.loading = false;
@@ -299,27 +277,142 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 		
 		/* page of my questions */
 	
-		/* page of world shares */
+	
+
 		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
 		getMyBiamaInfo.then(function(result) {
 			$scope.loading = false;
 			var data=result.data.biamaDetails;
 			$scope.descriptionMyBiama=data[0].description;
 		});
+
+			
 		
-		var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
-		getWorldSharesForum.then(function(result) {
-		  $scope.loading = false;
-		  var data=result.data.worldShareForumDetails;
-	
-		  $scope.worldShareItems=[];
-		  $scope.worldShareData=[];
-		  $scope.shareNumber=[];
-		  for(var index=0; index<data.length; ++index) {
-			  $scope.worldShareItems.push(data[index].image);
-			  $scope.worldShareData.push(data[index]);
-		  }
+		
+	}
+	$scope.confirmSessionAction = function (username, password) {
+
+		$scope.users = 'loadUser';
+		var getAllUsers = UserService.getUsers(function(users){});
+		
+		getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+			for(var index=0; index<$scope.users.length; ++index){
+				$scope.userName = $scope.users[index].username;
+				$scope.userPassword = $scope.users[index].password;
+				if($scope.userName !== null && $scope.userName === username){
+					if($scope.userPassword !== null && $scope.userPassword === password){
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
+						$scope.confirmSession = true;
+						break;
+					}
+				}
+			}
+
+			if($scope.confirmSession) {
+				$scope.getAllRequests();
+			}
 		});
+	}
+	
+	$scope.selectLanguage = function(language){
+		$scope.languageSelected = language;
+	}
+
+	$scope.languages = ['Português', 'Inglês']
+	$scope.biamaPage = true;
+	
+	/*$scope.s = function() {
+		
+		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
+	}	*/
+
+	$scope.searchMaterials = function(){
+		
+	}
+	/* get material of library */
+	var getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+	getMaterials.then(function(result) {
+		$scope.loading = false;
+		var data=result.data.comparationDetails;
+		$scope.materialComparation=data;
+	}); 
+
+	$scope.regist = function() {
+		$scope.userDetails = false;
+		$scope.registUser=true;
+		$scope.search=false;
+	}
+
+	$scope.validDateOfBirth = function(dateOfBirth) {
+		var resultBirth = dateOfBirth.split("/");
+
+		var currentDate = new Date();
+		currentDate=currentDate.toLocaleDateString();
+		var resultCurrentDate = currentDate.split("/");
+
+		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+		if(calculateYear < 18) {
+			return false;
+		}
+		return true;
+	},
+
+	$scope.validDataNotEquals = function(username, password) {
+		for(var index=0; index<$scope.users.length; ++index) {
+			if(username === $scope.users[index].username) {
+				return false;
+			}
+		}
+		return true;
+	},
+
+	$scope.insertUser = function(name, username, email, birthdate, password) {
+		debugger
+		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
+			$scope.emptyData=true;
+		} else {
+			var idUser = $scope.users[$scope.users.length-1].id;
+			var data = {
+				'idUser': parseInt(idUser)+1,
+				'name': name,
+				'email': email,
+				'birthdate': birthdate.toLocaleDateString(), 
+				'username': username,
+				'password': password,
+				'image': $scope.image
+			}
+			if($scope.image == undefined) {
+				data.image='noImage';
+			}
+
+			var validData = $scope.validDataNotEquals(data.username, data.password);
+			
+
+			if(validData) {
+				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+				if(validBirthdate){
+					$http.post('/insertUserDetails', data);
+				} else {
+					$scope.underAge=true;
+				}
+			} else {
+				$scope.usernameRepeated=true;
+			}
+		}
+	}
+
+	$scope.openImageUpload = function() {
+        $scope.openImageUploadLabel=true;
+	}
+	
+	$scope.saveUploadFile = function () {
+        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
+        var res = splitDeviceRe.exec(($("#uploadPicture").val()));
+        $scope.image=res[2];
+        
+        $scope.openImageUploadLabel=false;
 	}
 	
 	jQuery( function() {
@@ -332,7 +425,6 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
         source: $scope.itemSearch
     });
 	} );
-	
 	
 	$scope.selectedMaterial = function() {
 		$scope.openMaterialDetail=false;

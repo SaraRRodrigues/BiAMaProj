@@ -173,7 +173,7 @@
 					</div>
 
 					<!-- image biama with search -->
-					<div ng-if="showMaterials" class="row text-center">
+					<div ng-if="showMaterials || registUser" class="row text-center">
 						<img class="margin-top-3x" src="../images/topoBiama.png"/>
 					</div>
 
@@ -226,7 +226,46 @@
 								</div>
 							</div>
 						</div>
-						
+						<div ng-if="registUser">
+							<div class="titlesOnCenter"> 
+								<h1 class="subtitles">Registar</h1>
+							</div>
+							<!-- user photo -->
+							<div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
+								<div class="form-group">
+									<img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
+									<input class="minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
+								</div>
+								
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
+								<br>
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
+								<br>
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<!-- edit mode -->
+								<input class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
+
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
+								<br>
+								<button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
+							</div>
+							<div ng-if="emptyData">
+								<h3>Preencha todos os campos por favor.</h3>
+							</div>
+							<div ng-if="usernameRepeated">
+								<h3>Nome já existente.</h3>
+							</div>
+							<div ng-if="underAge">
+								<h3>Para efetuar o registo tem de ser maior de idade.</h3>
+							</div>
+						</div>
+						<div class="perfilDetails center-block" ng-if="openImageUploadLabel">
+							<input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+							<button ng-click="saveUploadFile()">Guardar</button>
+						</div>
 					</div>
 				</div>
 			</article>
