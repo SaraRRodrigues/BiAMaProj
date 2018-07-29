@@ -369,7 +369,6 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	},
 
 	$scope.insertUser = function(name, username, email, birthdate, password) {
-		debugger
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
 			$scope.emptyData=true;
 		} else {
@@ -389,7 +388,6 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 
 			var validData = $scope.validDataNotEquals(data.username, data.password);
 			
-
 			if(validData) {
 				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
 				if(validBirthdate){

@@ -56,7 +56,8 @@
                     <h5 ng-if="fieldsEmpty">Campos inválidos.</h5>
                     <h5 ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
                     <h5 ng-if="invalidDate">Data de nascimento inválida.</h5>
-                    
+                    <h5 ng-if="usernameRepeatedPerfil">Nome já existente.</h5>
+                    <h5 ng-if="underAgePerfil">Para efetuar o registo tem de ser maior de idade.</h5>
                 </div>
                  <div class="perfilDetails" ng-if="openImageUploadLabel">
                     <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">

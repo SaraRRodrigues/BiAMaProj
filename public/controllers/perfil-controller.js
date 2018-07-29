@@ -80,6 +80,29 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
         $scope.upgradeInformations=false;
     }
 
+    $scope.validDataNotEquals = function(username, password) {
+		for(var index=0; index<$scope.users.length; ++index) {
+			if(username === $scope.users[index].username) {
+				return false;
+			}
+		}
+		return true;
+    },
+    
+    $scope.validDateOfBirth = function(dateOfBirth) {
+		var resultBirth = dateOfBirth.split("/");
+
+		var currentDate = new Date();
+		currentDate=currentDate.toLocaleDateString();
+		var resultCurrentDate = currentDate.split("/");
+
+		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+		if(calculateYear < 18) {
+			return false;
+		}
+		return true;
+	},
+
     $scope.updateUserDetails = function(id, name, email, birthdate, image, username, password) { 
         $scope.loadingSchool=true;
         var data = {
@@ -91,8 +114,19 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
             'password': password,
             'image': image
         }
-        
-        $http.post('/updateUserDetails', data);
+        var validData = $scope.validDataNotEquals(data.username, data.password);
+			
+        if(validData) {
+            var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+            if(validBirthdate){
+                $http.post('/updateUserDetails', data);
+            } else {
+                $scope.underAgePerfil=true;
+            }
+        } else {
+            $scope.usernameRepeatedPerfil=true;
+        }
+
     }
 
     $scope.validEmail = function(email) {
