@@ -1,5 +1,5 @@
 
-app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService", "WorldSharesForumService", function($scope, $http, MyBiamaService, WorldSharesForumService){
+app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "$http", function($scope,WorldSharesForumService,MyBiamaService, $http){
 
     $scope.loading=true;
     $scope.showWorldShares=true;
@@ -20,7 +20,7 @@ app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService"
       $scope.worldShareItems=[];
       $scope.worldShareData=[];
       $scope.shareNumber=[];
-      console.log(data)
+      
       for(var index=0; index<data.length; ++index) {
           $scope.worldShareItems.push(data[index].image);
           $scope.worldShareData.push(data[index]);
@@ -53,23 +53,6 @@ app.controller("WorldShareForumController", ['$scope', "$http", "MyBiamaService"
       $scope.showWorldSharesDetails=true;
     }
 }])
-
-app.factory("MyBiamaService", function($q, $http, $timeout){
-
-var getMyBiamaInfo = function() {
-    var deferred = $q.defer();
-
-    $timeout(function() {
-      deferred.resolve($http.get('/myBiamaInfo'));
-    }, 2000);
-
-    return deferred.promise;
-  };
-
-  return {
-    getMyBiamaInfo: getMyBiamaInfo
-  };
-});
 
 app.factory("WorldSharesForumService", function($q, $http, $timeout){
 

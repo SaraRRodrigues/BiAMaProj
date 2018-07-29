@@ -72,9 +72,8 @@ app.constant('jQuery', window.jQuery)
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
-
-.controller('MainController',['$scope', "UserService", "$http","NotificationService","UserQuestionService", "FavoritesService","MyBiamaService", "WorldSharesForumService","MaterialOfLibraryService", "CompareMaterialService",
-function($scope, UserService, $http, NotificationService, UserQuestionService, FavoritesService, MyBiamaService, WorldSharesForumService, MaterialOfLibraryService, CompareMaterialService) {
+ 
+.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "$http", function($scope, UserService, MyBiamaService, CompareMaterialService, $http) {
 	
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -90,7 +89,42 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	$scope.terminateLogin = false;
 	$scope.materials=[];
 	$scope.showDetailsOfMaterial=false;
+	$scope.loading=true;
+	$scope.languages = ['Português', 'Inglês']
+	$scope.biamaPage = true;
+	$scope.compareMaterials = [];
+	$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
+	$scope.getAllUsers = UserService.getUsers(function(users){});
+	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
 
+	$scope.getLibraryUser.then(function(result) {
+		$scope.loading = false;
+		var data=result.data.userLibrary;
+		$scope.userLibrary=data;
+	});
+
+	$scope.getAllUsers.then(function(usersDB) {
+		$scope.loading=false;
+		$scope.users = usersDB.data.users;
+	});
+
+	$scope.getMaterials.then(function(result) {
+		$scope.loading = false;
+		var data=result.data.comparationDetails;
+		$scope.materialComparation=data;
+
+		for(var index=0; index<$scope.materialComparation.length; ++index) {
+			$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+		}
+
+		jQuery( function() {
+			var availableTags = $scope.compareMaterials;
+		jQuery( "#tags" ).autocomplete({
+			source: availableTags
+		});
+		} );
+	}); 
+  
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
 			$scope.showSearch = false;
@@ -109,6 +143,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	}
 
 	$scope.disableSearch = function(buttonClick) {
+		
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
@@ -177,7 +212,6 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 	}
 
 	$scope.validateUserLogin = function() {
-
 	}
 
 	$scope.loginWithFacebook = function() {
@@ -205,91 +239,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 
 		});
 	}
-
-	$scope.getUsers = function() {
-		var getAllUsers = UserService.getUsers(function(users){});
-		getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
-		});
-	}
-	$scope.getUsers();
-
-	$scope.getAllRequests = function() {
-		/* page of world shares */
-		var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
-		getWorldSharesForum.then(function(result) {
-		  $scope.loading = false;
-		  var data=result.data.worldShareForumDetails;
-
-		  $scope.worldShareItems=[];
-		  $scope.worldShareData=[];
-		  $scope.shareNumber=[];
-		  for(var index=0; index<data.length; ++index) {
-			  $scope.worldShareItems.push(data[index].image);
-			  $scope.worldShareData.push(data[index]);
-		  }
-		});
-		var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
-		getNotifications.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-		});
-		/* page of my questions */
-		var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
-		getUserQuestionInfo.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.questionDetails;
-			$scope.myQuestions=data;
-		});
-
-		var getMyQuestions = UserService.getMyQuestionsLogged(function(infoMyQuestions){});
-		getMyQuestions.then(function(result) {
-		
-			$scope.loading = false;
-			var data=result.data.questions;
-			$scope.myQuestionDetails=data;
-		});
-
-		var getAnswerQuestionInfo = UserQuestionService.getQuestionAnswer(function(infoUserAnswer){});
-		getAnswerQuestionInfo.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.questionDetails;
-			$scope.details=data;
-			$scope.calculateAnswerId($scope.details);
-		});
-		$scope.calculateAnswerId = function(details) {
-			$scope.biggestId=0;
-			for(var index=0; index<details.length; ++index){
-				if(details[index].id_answer>$scope.biggestId){
-				$scope.biggestId=details[index].id_answer;
-				}
-			}
-		}
 	
-		/* get favorites material */
-		var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-		getMyFavorites.then(function(result) {
-			var data=result.data.favoriteDetails;
-			$scope.favoriteDetails=data;
-		});
-		
-		/* page of my questions */
-	
-	
-
-		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-		getMyBiamaInfo.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.biamaDetails;
-			$scope.descriptionMyBiama=data[0].description;
-		});
-
-			
-		
-		
-	}
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -309,35 +259,12 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 					}
 				}
 			}
-
-			if($scope.confirmSession) {
-				$scope.getAllRequests();
-			}
 		});
 	}
 	
 	$scope.selectLanguage = function(language){
 		$scope.languageSelected = language;
 	}
-
-	$scope.languages = ['Português', 'Inglês']
-	$scope.biamaPage = true;
-	
-	/*$scope.s = function() {
-		
-		window.setTimeout("location.href = 'http://localhost:8080/perfil.hbs'")
-	}	*/
-
-	$scope.searchMaterials = function(){
-		
-	}
-	/* get material of library */
-	var getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
-	getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialComparation=data;
-	}); 
 
 	$scope.regist = function() {
 		$scope.userDetails = false;
@@ -373,6 +300,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 			$scope.emptyData=true;
 		} else {
 			var idUser = $scope.users[$scope.users.length-1].id;
+			$scope.insertedIdUser=idUser;
 			var data = {
 				'idUser': parseInt(idUser)+1,
 				'name': name,
@@ -392,6 +320,13 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
 				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
 				if(validBirthdate){
 					$http.post('/insertUserDetails', data);
+					
+					var dataLibraryUser = {
+						'idUser': parseInt($scope.insertedIdUser)+1,
+						'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
+					}
+
+					$http.post('/insertLibraryUser', dataLibraryUser);
 				} else {
 					$scope.underAge=true;
 				}
@@ -424,7 +359,7 @@ function($scope, UserService, $http, NotificationService, UserQuestionService, F
     });
 	} );
 	
-	$scope.selectedMaterial = function() {
+	$scope.selectedMaterialSearch = function() {
 		$scope.openMaterialDetail=false;
 
 		var valueSearchMaterial=jQuery( "#tags_search" ).val();
@@ -510,29 +445,49 @@ app.factory("UserService", function($q, $http, $timeout){
 
 		return deferred.promise;
 	};
-	  return {
+
+	var insertLibraryUserDetails = function() {
+		var deferred = $q.defer();
+		$timeout(function() {
+			deferred.resolve($http.post('/insertLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	var getLibraryUserDetails = function() {
+		var deferred = $q.defer();
+		$timeout(function() {
+			deferred.resolve($http.get('/getLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	return {
 		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged
+		getMyQuestionsLogged: getMyQuestionsLogged,
+		insertLibraryUserDetails: insertLibraryUserDetails,
+		getLibraryUserDetails: getLibraryUserDetails
+	};
+});
+
+app.factory("MyBiamaService", function($q, $http, $timeout){
+    
+	var getMyBiamaInfo = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/myBiamaInfo'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getMyBiamaInfo: getMyBiamaInfo
 	  };
 });
-
-app.factory("NotificationService", function($q, $http, $timeout){
-    var getMyNotifications = function() {
-        var deferred = $q.defer();
-
-        $timeout(function() {
-        deferred.resolve($http.get('/myNotifications'));
-        }, 2000);
-
-        return deferred.promise;
-    };
-
-
-    return {
-        getMyNotifications: getMyNotifications
-    };
-});
-
 
 app.factory("CompareMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {

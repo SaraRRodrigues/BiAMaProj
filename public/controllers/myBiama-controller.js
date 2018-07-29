@@ -14,20 +14,3 @@ app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuer
 				$scope.descriptionMyBiama=data[0].description;
 		});
 }])
-
-app.factory("MyBiamaService", function($q, $http, $timeout){
-    
-	var getMyBiamaInfo = function() {
-		var deferred = $q.defer();
-	
-		$timeout(function() {
-		  deferred.resolve($http.get('/myBiamaInfo'));
-		}, 2000);
-	
-		return deferred.promise;
-	  };
-	
-	  return {
-		getMyBiamaInfo: getMyBiamaInfo
-	  };
-});

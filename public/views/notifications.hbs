@@ -17,6 +17,9 @@
             </div>
             
             <div class="divNotifications sectionScrollNotification">
+                <div ng-if="loading">
+                    <div class="loading-icon-footer-info"></div>
+                </div>
                 <div ng-repeat="notification in notifications">
                     <div ng-if="notification.insert">
                        <h6>[{notification.text_notification}]</h6>

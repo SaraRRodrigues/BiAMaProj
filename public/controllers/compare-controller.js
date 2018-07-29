@@ -1,31 +1,21 @@
-app.controller("CompareController", ['$scope', "$http", "jQuery", function($scope, $http){
+app.controller("CompareController", ['$scope',"CompareMaterialService","jQuery", "$http", function($scope, CompareMaterialService, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
     /* my current page */
     $scope.namePage='compare';
+
     $scope.showMaterialsCompare=false;
     $scope.searchToCompare=true;
-    $scope.countries=[];
     $scope.materialToCompare=[];
-
-    for(var index=0; index<$scope.materialComparation.length; ++index) {
-        $scope.countries.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
-    }
+    $scope.loading = true;
 
     $scope.searchMaterial = function() {
         $scope.searchToCompare=true;
     }
 
-    jQuery( function() {
-        var availableTags = $scope.countries;
-    jQuery( "#tags" ).autocomplete({
-        source: availableTags
-    });
-    } );
-
     $scope.selectedMaterial = function() {
-        debugger
+
         $scope.showMaterial=true;
         var valueSearchMaterial=jQuery( "#tags" ).val();
         var result=valueSearchMaterial.split('-');
@@ -46,4 +36,21 @@ app.controller("CompareController", ['$scope', "$http", "jQuery", function($scop
         }
         $scope.showMaterialsCompare=true;
     }
+
+    $scope.getMaterials.then(function(result) {
+		$scope.loading = false;
+		var data=result.data.comparationDetails;
+		$scope.materialComparation=data;
+
+		for(var index=0; index<$scope.materialComparation.length; ++index) {
+			$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+		}
+
+		jQuery( function() {
+			var availableTags = $scope.compareMaterials;
+		jQuery( "#tags" ).autocomplete({
+			source: availableTags
+		});
+		} );
+	}); 
 }])

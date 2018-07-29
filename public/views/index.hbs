@@ -150,7 +150,7 @@
 										<div class="lineWhite margin-bottom margin-top"></div>
 										<a href="/BiAMa/worldShare" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a ng-if="!notificationNumber" class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
+										<a class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
 										<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
 										<div ng-if="notificationNumber" class="circleNotification"></div>
 										<br>
@@ -184,7 +184,7 @@
 							<div class="ui-widget input-group stylish-input-group">
 								<input id="tags_search" style="width: 385px;">
 								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
-									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterial()" style="margin-right: 17px;"></span>
+									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
 								</span>
 							</div>
 						</div>

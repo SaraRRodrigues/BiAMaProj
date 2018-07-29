@@ -1,12 +1,27 @@
-app.controller("WorldShareController", ['$scope', "$http", "jQuery", function($scope, $http){
+app.controller("WorldShareController", ['$scope',"WorldSharesService", "$http", "jQuery", function($scope,WorldSharesService, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
     /* my current page */
     $scope.namePage='worldShares';	
 
+    $scope.loading = true;
     $scope.showWorldShares=true;
     $scope.addWorldShare=false;
+    $scope.getWorldSharesForum = WorldSharesService.getWorldSharesForum(function(infoWorldSharesForum){});
+    
+    $scope.getWorldSharesForum.then(function(result) {
+      $scope.loading = false;
+      var data=result.data.worldShareForumDetails;
+
+      $scope.worldShareItems=[];
+      $scope.worldShareData=[];
+      $scope.shareNumber=[];
+      for(var index=0; index<data.length; ++index) {
+          $scope.worldShareItems.push(data[index].image);
+          $scope.worldShareData.push(data[index]);
+      }
+    });
 
     $scope.openDetailsWorldShare = function(image) {
         for(var index=0; index<$scope.worldShareData.length; ++index) {
@@ -38,3 +53,20 @@ app.controller("WorldShareController", ['$scope', "$http", "jQuery", function($s
         $scope.addWorldShare=true;
     }
 }])
+
+app.factory("WorldSharesService", function($q, $http, $timeout){
+
+    var getWorldSharesForum = function() {
+        var deferred = $q.defer();
+    
+        $timeout(function() {
+          deferred.resolve($http.get('/worldSharesForum'));
+        }, 2000);
+    
+        return deferred.promise;
+      };
+    
+      return {
+        getWorldSharesForum: getWorldSharesForum
+      };
+});

@@ -5,14 +5,16 @@ module.exports = {
 	'getUsers': getUsers,
 	'updateUserSettings': updateUserSettings,
 	'getMyQuestionsLogged': getMyQuestionsLogged,
-	'insertUserSettings': insertUserSettings
+	'insertUserSettings': insertUserSettings,
+	'insertLibraryUserDetails': insertLibraryUserDetails,
+	'getLibraryUserDetails': getLibraryUserDetails
 }
 function getUsers(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "User"', function(err, result) {
+		client.query('SELECT * FROM "User" ORDER BY "User".id ASC', function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
@@ -73,6 +75,37 @@ function getMyQuestionsLogged(cb){
 		}
 		
 		client.query('SELECT * FROM "User" INNER JOIN "Library_User" ON "User".id="Library_User".user_id INNER JOIN "Forum" ON "Library_User".library_id="Forum".library_id INNER JOIN "Question" ON "Forum".type_forum="Question".forum_type', function(err, result) {
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}
+
+function getLibraryUserDetails(data, cb){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query(`SELECT * FROM "Library_User"`, function(err, result) {
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}
+
+function insertLibraryUserDetails(data, cb){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        console.log('value: ', data);
+		var idLibraryDetail = data.idLibrary;
+		var idUserDetail = data.idUser;
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query(`INSERT INTO "Library_User" VALUES ($1, $2)`, [idLibraryDetail, idUserDetail], function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}

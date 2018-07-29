@@ -19,6 +19,31 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.categories= [];
     $scope.favorites = [];
 
+    /* get favorites material */
+	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+	getMyFavorites.then(function(result) {
+        $scope.loading = false;
+		var data=result.data.favoriteDetails;
+		$scope.favoriteDetails=data;
+    });
+    
+    /* get information of material and of library - when i do get library */
+    var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+    getMaterialInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.materialsCategories;
+        $scope.materialsCategories=data;
+        for(var index=0; index<$scope.materialsCategories.length; ++index){
+            if(index<MINIMUM_CATEGORIES){
+                $scope.categories.push($scope.materialsCategories[index])
+            } else {
+                break;
+            }
+        }
+        $scope.getFavInMaterials();
+        
+    });
+    
     $scope.getValues = function(){
         var value = document.getElementById('selectedFav');
         $scope.itemSelecionado = value.options[value.selectedIndex].text
@@ -48,30 +73,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.showMaterials = false;
         }
     }
-    
-    /* get favorites material */
-	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-	getMyFavorites.then(function(result) {
-		var data=result.data.favoriteDetails;
-		$scope.favoriteDetails=data;
-    });
-    
-    /* get information of material and of library - when i do get library */
-    var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-    getMaterialInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.materialsCategories;
-        $scope.materialsCategories=data;
-        for(var index=0; index<$scope.materialsCategories.length; ++index){
-            if(index<MINIMUM_CATEGORIES){
-                $scope.categories.push($scope.materialsCategories[index])
-            } else {
-                break;
-            }
-        }
-        $scope.getFavInMaterials();
-        
-    });
 
     $scope.getFavInMaterials = function() {
         for(var index=0; index<$scope.materialsCategories.length; ++index){
@@ -109,6 +110,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
         $scope.showFavorites=false;
     }
+
     $scope.clickLocation = function(material) {
         $scope.schools= [];
 		for(var index=0; index<$scope.materialsCategories.length; ++index) {

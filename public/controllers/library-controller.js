@@ -320,7 +320,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	
 		return deferred.promise;
 	  };
-	
+
 	  return {
 			getMyFavorites: getMyFavorites
 	  };

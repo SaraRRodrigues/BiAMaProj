@@ -180,6 +180,23 @@ router.post('/insertUserDetails', (req, resp, next) => {
 	});
 });
 
+/* INSERT user library details: used on regist of user */
+router.post('/insertLibraryUser', (req, resp, next) => {
+	var data = req.body;
+	userService.insertLibraryUserDetails(data, (error, userLibrary) => {
+		resp.json({userLibrary})
+	});
+});
+
+/* GET user library details: used on regist of user */
+router.get('/getLibraryUser', (req, resp, next) => {
+	var data = req.body;
+	userService.getLibraryUserDetails(data, (error, userLibrary) => {
+		resp.json({userLibrary})
+	});
+});
+
+
 /* GET world shares forum: forum */
 router.get('/worldSharesForum', (req, resp, next) => {
 	worldShareForumService.getWorldSharesForum((error, worldShareForumDetails) => {

@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestionService", "LikeQuestionService", "LikeAnswerService", "$route", function($scope, $http, UserQuestionService, LikeQuestionService, LikeAnswerService, $route){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "$http", "LikeQuestionService", "LikeAnswerService", "$route", function($scope, UserForumQuestionService, $http, LikeQuestionService, LikeAnswerService, $route){
 
     $scope.firtTimeOnPage=true;
     $scope.loading=true;
@@ -16,20 +16,21 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
     $scope.descriptionAnswer=[];
     $scope.indexQuestionAnswer=1;
     
-    var getUserQuestionInfo = UserQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
+    var getUserQuestionInfo = UserForumQuestionService.getUserQuestionInfo(function(infoUserAnswer){});
     getUserQuestionInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.questions=data;
     });
 
-    var getAnswerQuestionInfo = UserQuestionService.getQuestionAnswer(function(infoUserAnswer){});
+    var getAnswerQuestionInfo = UserForumQuestionService.getQuestionAnswer(function(infoUserAnswer){});
     getAnswerQuestionInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.details=data;
         $scope.calculateAnswerId($scope.details);
     });
+    
     $scope.calculateAnswerId = function(details) {
       $scope.biggestId=0;
       for(var index=0; index<details.length; ++index){
@@ -142,7 +143,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "$http", "UserQuestio
     }
 }])
 
-app.factory("UserQuestionService", function($q, $http, $timeout){
+app.factory("UserForumQuestionService", function($q, $http, $timeout){
   var getUserQuestionInfo = function() {
     var deferred = $q.defer();
 

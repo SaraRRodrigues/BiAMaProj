@@ -14,6 +14,9 @@
             <div class="padding-left-4x">
                 <h1 ng-if="showWorldShares" class="subtitles">Partilhar com o Mundo</h1> 
             </div>
+            <div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
+			</div>
             <div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
                 <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
                 <i ng-if="$index===worldShareItems.length-1" class="fas fa-plus-circle" ng-click="openAddWorldShare()"></i>
