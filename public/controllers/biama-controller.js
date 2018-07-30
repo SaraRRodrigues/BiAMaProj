@@ -2,6 +2,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService", "$http", "jQuer
 		
 		/* hide footer of index page because of click in buttons footer reload page */
 		jQuery("#footerMain").hide();
+		//jQuery("#footerMainMobile").hide();
 		/* my current page */
 		$scope.namePage='biamaPage';
 		

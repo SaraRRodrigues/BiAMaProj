@@ -5,6 +5,13 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
     /* my current page */
     $scope.namePage='whereWeAre';
 
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+    }
+    
     $scope.loading = true;
     $scope.schools=[];
     $scope.pathURL='https://www.google.com/maps/';

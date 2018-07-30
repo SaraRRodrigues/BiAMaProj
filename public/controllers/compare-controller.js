@@ -4,6 +4,13 @@ app.controller("CompareController", ['$scope',"CompareMaterialService","jQuery",
     jQuery("#footerMain").hide();
     /* my current page */
     $scope.namePage='compare';
+    
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
 
     $scope.showMaterialsCompare=false;
     $scope.searchToCompare=true;

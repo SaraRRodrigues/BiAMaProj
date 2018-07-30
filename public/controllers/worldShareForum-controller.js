@@ -1,6 +1,13 @@
 
 app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "$http", function($scope,WorldSharesForumService,MyBiamaService, $http){
 
+    var window_width = $( window ).width();
+    if(window_width <= 1024) {
+      $scope.isMobileView=true;
+    } else {
+      $scope.isMobileView=false;
+    }
+    
     $scope.loading=true;
     $scope.showWorldShares=true;
     $scope.showWorldSharesDetails=false;

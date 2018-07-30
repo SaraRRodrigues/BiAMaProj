@@ -5,6 +5,13 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "$http", 
     /* my current page */
     $scope.namePage='worldShares';	
 
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+    } 
+    
     $scope.loading = true;
     $scope.showWorldShares=true;
     $scope.addWorldShare=false;

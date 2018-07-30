@@ -1,6 +1,14 @@
 
 app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "$http", "LikeQuestionService", "LikeAnswerService", "$route", function($scope, UserForumQuestionService, $http, LikeQuestionService, LikeAnswerService, $route){
 
+
+    var window_width = $( window ).width();
+    if(window_width <= 1024) {
+      $scope.isMobileView=true;
+    } else {
+      $scope.isMobileView=false;
+    }
+    
     $scope.firtTimeOnPage=true;
     $scope.loading=true;
     $scope.getQuestionDetails=false;

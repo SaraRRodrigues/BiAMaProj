@@ -5,6 +5,13 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     /* my current page */
     $scope.namePage='myQuestions';	
 
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
+
     $scope.loading = true;
     $scope.favoriteQuestion=false;
     $scope.favoriteAnswer=false;

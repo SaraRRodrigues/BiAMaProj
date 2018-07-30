@@ -5,6 +5,13 @@ app.controller("NotificationsController", ['$scope', "NotificationService", "$ht
     /* my current page */
     $scope.namePage='notifications';
 
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
+
     $scope.loading = true;
     $scope.getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
 

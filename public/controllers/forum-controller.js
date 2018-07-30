@@ -5,7 +5,13 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	jQuery("#footerMain").hide();
 	/* my current page */
 	$scope.namePage='forum';
-  
+	
+  var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
 }])
 .config(function($routeProvider, $locationProvider) {
 

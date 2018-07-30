@@ -6,6 +6,13 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     $scope.showCuriosity=true;
     $scope.showBigImage=false;
 
+    var window_width = $( window ).width();
+    if(window_width <= 1024) {
+      $scope.isMobileView=true;
+    } else {
+      $scope.isMobileView=false;
+    }
+
     var getCuriosities = CuriositiesService.getCuriosities(function(infoCuriosities){});
     getCuriosities.then(function(result) {
             $scope.loading = false;

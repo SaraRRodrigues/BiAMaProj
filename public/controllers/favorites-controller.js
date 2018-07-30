@@ -5,6 +5,13 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	/* my current page */
     $scope.namePage='favorites';
     
+    var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+    }
+    
     $scope.loading = true;
     $scope.showSchools = false;
     $scope.showQuestions = false;

@@ -65,6 +65,11 @@ app.constant('jQuery', window.jQuery)
 		controller: 'CompareController'
 	})
 	
+	/* mobile view */
+	$routeProvider.when('/BiAMa/libraryMobile', {
+		templateUrl: 'views/libraryMobile',
+		controller: 'LibraryController'
+	})
 	/*$routeProvider.when('/BiAMa/login', {
 		templateUrl: 'views/login',
 		controller: 'LoginController'
@@ -75,6 +80,13 @@ app.constant('jQuery', window.jQuery)
  
 .controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "$http", function($scope, UserService, MyBiamaService, CompareMaterialService, $http) {
 	
+	var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
+
 	$scope.showSearch = false;
 	$scope.userDetails = false;
 	$scope.search = true;

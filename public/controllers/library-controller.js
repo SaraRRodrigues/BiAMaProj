@@ -6,6 +6,17 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	/* my current page */
 	$scope.namePage='library';
 
+	$scope.showSearch = false;
+	$scope.userDetails = false;
+
+	var window_width = $( window ).width();
+	if(window_width <= 1024) {
+		$scope.isMobileView=true;
+	} else {
+		$scope.isMobileView=false;
+	}
+	console.log('width library ', $scope.isMobileView);
+
 	$scope.loading = true;
 	$scope.category = '';
 	$scope.materialInfo = null;
@@ -15,6 +26,14 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.pathURL='https://www.google.com/maps/';
 	$scope.clickAddFavoriteMaterial=false;
 	$scope.categories=[];
+
+	$scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
 
 	$scope.goTo = function() {
 		$scope.showCategory=false;
