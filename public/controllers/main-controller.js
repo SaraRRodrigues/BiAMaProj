@@ -2,12 +2,12 @@
 var app = angular.module("myApp", ['ngRoute'])
 app.constant('jQuery', window.jQuery)
 .run(['$route', angular.noop])
-.config(function($interpolateProvider) {
+.config(function($interpolateProvider,$httpProvider) {
+	$httpProvider.useApplyAsync(true);
     $interpolateProvider.startSymbol('[{');
-    $interpolateProvider.endSymbol('}]');
+	$interpolateProvider.endSymbol('}]');
 })
-
-.config(function($routeProvider, $locationProvider) {
+.config(function($routeProvider, $locationProvider, $httpProvider) {
 	
 	$routeProvider
 	 .when('/BiAMa/whereWeAre', {
@@ -78,10 +78,10 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
  
-.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "$http", function($scope, UserService, MyBiamaService, CompareMaterialService, $http) {
+.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "$http", "jQuery", function($scope, UserService, MyBiamaService, CompareMaterialService, $http) {
 	
 	var window_width = $( window ).width();
-	if(window_width <= 1024) {
+	if(window_width < 1024) {
 		$scope.isMobileView=true;
 	} else {
 		$scope.isMobileView=false;
@@ -109,6 +109,13 @@ app.constant('jQuery', window.jQuery)
 	$scope.getAllUsers = UserService.getUsers(function(users){});
 	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
 
+	jQuery( function() {
+		var availableTags = $scope.compareMaterials;
+	jQuery( "#tags" ).autocomplete({
+		source: availableTags
+	});
+	} );
+
 	$scope.getLibraryUser.then(function(result) {
 		$scope.loading = false;
 		var data=result.data.userLibrary;
@@ -129,12 +136,6 @@ app.constant('jQuery', window.jQuery)
 			$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
 		}
 
-		jQuery( function() {
-			var availableTags = $scope.compareMaterials;
-		jQuery( "#tags" ).autocomplete({
-			source: availableTags
-		});
-		} );
 	}); 
   
 	$scope.clickTopSearch = function() {
@@ -442,15 +443,34 @@ app.factory("UserService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
-		$timeout(function() {
-		  deferred.resolve($http.get('/users'));
-		}, 2000);
+ 		$timeout(function() {
+		  deferred.resolve($http.get('/users',  {cache:true}));
+		}, 2000); 
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/users', true);
+		xhr.send();*/
+
 		return deferred.promise;
 	};
 
 	var getMyQuestionsLogged = function() {
 		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/myQuest', true);
+		xhr.send();*/
+
 		$timeout(function() {
 			deferred.resolve($http.get('/myQuest'));
 		}, 2000);
@@ -460,6 +480,18 @@ app.factory("UserService", function($q, $http, $timeout){
 
 	var insertLibraryUserDetails = function() {
 		var deferred = $q.defer();
+
+		
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/insertLibraryUser', true);
+		xhr.send();*/
+
 		$timeout(function() {
 			deferred.resolve($http.post('/insertLibraryUser'));
 		}, 2000);
@@ -469,6 +501,17 @@ app.factory("UserService", function($q, $http, $timeout){
 
 	var getLibraryUserDetails = function() {
 		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/getLibraryUser', true);
+		xhr.send();*/
+
 		$timeout(function() {
 			deferred.resolve($http.get('/getLibraryUser'));
 		}, 2000);
@@ -489,9 +532,19 @@ app.factory("MyBiamaService", function($q, $http, $timeout){
 	var getMyBiamaInfo = function() {
 		var deferred = $q.defer();
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/myBiamaInfo', true);
+		xhr.send();*/
+
 		$timeout(function() {
 		  deferred.resolve($http.get('/myBiamaInfo'));
-		}, 2000);
+		}, 3000);
 	
 		return deferred.promise;
 	  };
@@ -505,9 +558,23 @@ app.factory("CompareMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
 
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			if (this.readyState == 4 && this.status == 200) {
+				var response = resp.response;
+				debugger
+				deferred.resolve(response);
+			}
+			
+		}
+
+		xhr.open('GET','/compareMaterials', true);
+		xhr.send();*/
+
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
-        }, 2000);
+        }, 4000);
 
         return deferred.promise;
     };

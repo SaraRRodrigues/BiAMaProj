@@ -12,10 +12,18 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
 		$scope.isMobileView=false;
     }
     
+    
     $scope.loading = true;
     $scope.schools=[];
     $scope.pathURL='https://www.google.com/maps/';
 
+    $scope.nameclick='whereWeAre';
+	$scope.changeColorClick = function(name) {
+		$scope.userDetails = false;
+		$scope.search = false;
+		$scope.nameclick=name;
+    }
+    
     $scope.goTo = function(name) {
 		
     }

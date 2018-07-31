@@ -12,6 +12,14 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	} else {
 		$scope.isMobileView=false;
 	}
+
+	$scope.nameclick='biamaPage';
+	$scope.changeColorClick = function(name) {
+		$scope.userDetails = false;
+		$scope.search = false;
+		$scope.nameclick=name;
+	}
+	
 }])
 .config(function($routeProvider, $locationProvider) {
 

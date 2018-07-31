@@ -184,6 +184,14 @@ a {
   font-weight: ligther;
 }
 
+.buttonAlignment {
+  padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
+}
 .sizeUserAndSearch {
   font-size: 35px;
 }

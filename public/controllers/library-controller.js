@@ -1,6 +1,8 @@
 
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", "$cacheFactory" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, $cacheFactory){
 
+	var httpCache = $cacheFactory.get('http');
+	
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 	/* my current page */
@@ -26,6 +28,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.pathURL='https://www.google.com/maps/';
 	$scope.clickAddFavoriteMaterial=false;
 	$scope.categories=[];
+	$scope.getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+	$scope.getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
+	$scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
@@ -41,9 +46,21 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.locationMaterial=false;
 		$scope.zoomInMaterial=false;
 	}
-		/* get information of material and of library - when i do get library */
-    var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-    getMaterialInfo.then(function(result) {
+
+	$scope.nameclick='libraryMobile';
+	$scope.changeColorClick = function(name) {
+		$scope.locationMaterial=false;
+		$scope.zoomInMaterial=false;
+		$scope.showCategory=false;
+		$scope.showMaterialDetails=false;
+		$scope.loading=false;
+		$scope.userDetails = false;
+		$scope.search = false;
+		$scope.nameclick=name;
+	}
+
+	/* get information of material and of library - when i do get library */
+    $scope.getMaterialInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.materialsCategories;
 		$scope.materialsCategories=data;
@@ -56,28 +73,17 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	});
 
-		/* get category of material */
-	var getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
-	getCategoryInfo.then(function(result) {
+	/* get category of material */
+	$scope.getCategoryInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.categoryDetails;
 				$scope.categoryDetails=data;
 	});
 
-	/* get material of library */
-	var getMaterialOfLibrary = MaterialOfLibraryService.getMaterialDetails(function(infoMaterial){});
-	getMaterialOfLibrary.then(function(result) {
-        $scope.loading = false;
-				var data=result.data.biamaDetails;
-				$scope.materialOfLibraryDetails=data;
-	});
 	/* get favorites material */
-	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-	getMyFavorites.then(function(result) {
+	$scope.getMyFavorites.then(function(result) {
 		var data=result.data.favoriteDetails;
 		$scope.favoriteDetails=data;
-		
-		console.log($scope.favoriteDetails)
 	});
 
 	$scope.openCategory = function(category) {
@@ -198,6 +204,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 	$scope.clickLocation = function(material) {
+
 		$scope.schools= [];
 		for(var index=0; index<$scope.materialsCategories.length; ++index) {
 			if($scope.materialsCategories[index].material_id === material.idMaterial){
@@ -216,11 +223,11 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 
 	$scope.selectSchool = function (locationSchool) {
 		for(var index=0; index <$scope.materialsCategories.length; ++index) {
-				if($scope.materialsCategories[index].locationDescription === locationSchool){
-						$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location)
-						$scope.descriptionLocation = $scope.materialsCategories[index].locationDescription;
-						break;
-				}
+			if($scope.materialsCategories[index].locationDescription === locationSchool){
+					$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location)
+					$scope.descriptionLocation = $scope.materialsCategories[index].locationDescription;
+					break;
+			}
 		}
 	}
 
@@ -273,7 +280,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
           {params: {
             'data': data
           }}));
-		}, 2000);
+		}, 1000);
 	
 		return deferred.promise;
 	};
@@ -281,6 +288,16 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	var getMaterial = function() {
 		var deferred = $q.defer();
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/materialsCategories', true);
+		xhr.send();*/
+
 		$timeout(function() {
 		  deferred.resolve($http.get('/materialsCategories'));
 		}, 2000);
@@ -299,6 +316,16 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 	var getCategory = function() {
 		var deferred = $q.defer();
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/categories', true);
+		xhr.send();*/
+
 		$timeout(function() {
 		  deferred.resolve($http.get('/categories'));
 		}, 2000);
@@ -316,9 +343,19 @@ app.factory("MaterialOfLibraryService", function($q, $http, $timeout){
 	var getMaterialDetails = function() {
 		var deferred = $q.defer();
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/biamaInfo', true);
+		xhr.send();*/
+
 		$timeout(function() {
 		  deferred.resolve($http.get('/biamaInfo'));
-		}, 2000);
+		}, 3000);
 	
 		return deferred.promise;
 	  };
@@ -333,6 +370,16 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	var getMyFavorites = function() {
 		var deferred = $q.defer();
 	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/favorites', true);
+		xhr.send();*/
+
 		$timeout(function() {
 		  deferred.resolve($http.get('/favorites'));
 		}, 2000);
