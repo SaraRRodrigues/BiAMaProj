@@ -12,6 +12,7 @@ function deleteFavoriteQuestion(data, cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query(`DELETE FROM "Favorite" WHERE "Favorite".id_favorite=$1`, [idMaterial], function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

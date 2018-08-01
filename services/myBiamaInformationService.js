@@ -10,6 +10,7 @@ function getMyInformationOfBiama(cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT description FROM "Library" INNER JOIN "Library_User" ON "Library".id_library="Library_User".library_id', function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

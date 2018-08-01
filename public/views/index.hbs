@@ -59,397 +59,370 @@
 		<base href="/"/>
 	</head>
 
-	<body ng-app="myApp">
-		<div ng-controller="MainController"> 
-			<div ng-if="isMobileView">
-				
-				<!-- header -->
-				<div class="container-fluid">
-					<div class="header">
-						<div class="col-sm-4">
-							<div ng-if="!showSearch" class="margin-top-2x col-sm-1">
-								<img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-								<img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-							</div>
-							<img style="margin-top:-10px" ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+	<body ng-app="myApp" ng-controller="MainController">
+		<div ng-if="isMobileView">
+			
+			<!-- header -->
+			<div class="container-fluid">
+				<div class="header">
+					<div class="col-sm-4">
+						<div ng-if="!showSearch" class="margin-top-2x col-sm-1">
+							<img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 						</div>
-						
-						<div ng-if="showSearch" class="margin-top col-sm-2">
-							<img style="margin-top: -77px;" class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-							<img style="margin-top: -77px;" class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-						</div>
-						<div class="col-sm-1">
-							<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="float: right;margin-right: 57px;margin-top: -62px;"></input>
-						</div>
-					</div>
-				</div> 
-				<!-- image biama with search -->
-				<div class="row text-center">
-					<img class="margin-top-3x" src="../images/topoBiama.png"/>
-				</div>
-				<!-- spinner loading page -->
-				<div ng-if="loading">
-					<div class="loading-icon-footer-info"></div>
-				</div>
-				<!-- show categories and materials -->
-				<div class="container">
-					<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
-						<div class="ui-widget input-group stylish-input-group" style="top: 50%;left: 50%;margin-left: -105px;">
-							<input id="tags_search" style="margin-top: 25px; margin-left: 24px;">
-							<span style="padding: 4px;padding-left: 22px;">
-								<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
-							</span>
-						</div>
-					</div>
-					<div ng-if="showMaterials">
-						<div class="padding sectionScrollSearch">
-							<div class="col-md-4" ng-repeat="material in materials track by $index">
-								<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
-									<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
-								</div>
-								<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-									<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
-								</div>
-								<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-									<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
-								</div>
-							</div>
-						</div>
+						<img style="margin-top:-10px" ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
 					</div>
 					
-					<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
-						<div class="row container">
-							<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
-							<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
-								<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
+					<div ng-if="showSearch" class="margin-top col-sm-2">
+						<img style="margin-top: -77px;" class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+						<img style="margin-top: -77px;" class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+					</div>
+					<div class="col-sm-1">
+						<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="float: right;margin-right: 57px;margin-top: -62px;"></input>
+					</div>
+				</div>
+			</div> 
+			<!-- image biama with search -->
+			<div class="row text-center">
+				<img class="margin-top-3x" src="../images/topoBiama.png"/>
+			</div>
+			<!-- spinner loading page -->
+			<div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
+			</div>
+			<!-- show categories and materials -->
+			<div class="container">
+				<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
+					<div class="ui-widget input-group stylish-input-group" style="top: 50%;left: 50%;margin-left: -105px;">
+						<input id="tags_search" style="margin-top: 25px; margin-left: 24px;">
+						<span style="padding: 4px;padding-left: 22px;">
+							<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
+						</span>
+					</div>
+				</div>
+				<div ng-if="showMaterials">
+					<div class="padding sectionScrollSearch">
+						<div class="col-md-4" ng-repeat="material in materials track by $index">
+							<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
+								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
 							</div>
-							<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
-								<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+							<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
+								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
 							</div>
-							<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
-								<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-							</div>
-							<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-								<h4 class="margin-right-5x margin-top-6x">Category</h4>
-								<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
-								<h4 class="margin-right-5x">Code</h4>
-								<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
-								<h4 class="margin-right-5x">Description</h4>
-								<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+							<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
+								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				<!-- zoom in material -->
-				<div ng-if="zoomInMaterial">
-					<div>
-						<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
-						<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
-					</div>
-				</div>
-				<!-- show location of material -->
-				<div ng-if="locationMaterial">
-					<div ng-if="loading">
-						<div class="loading-icon-footer-info"></div>
-					</div>	
-					<div ng-if="!loading" class="titlesOnCenter">
-						<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-						<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-						
-						<div class="dropup ">
-							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-								<div ng-if="!loadingSchool" ng-repeat="biama in schools">
-									<li>
-									<a class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
-									</li>
-								</div>
-							</ul>
-								<ul class="dropdown-menu">
-								<div class="loadSchool" ng-if="loadingSchool">
-									<li class="loading-icon-footer-info"></li>
-								</div>
-							</ul>
+				<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
+					<div class="row container">
+						<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
+						<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+							<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
 						</div>
-					</div>
-				</div>
-				<!-- footer -->
-				<div class="container" style="    margin-top: 150px;">
-					<div>
-						<a href="/BiAMa/libraryMobile">
-							<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none;margin-left: -2px;" class="buttonNotSelected" src="../images/mobile/library.png"/>
-							<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none;margin-left: -2px;" class="buttonSelected " src="../images/mobile/library.png"/>
-						</a>
-						<a href="/BiAMa/whereWeAre">
-							<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/location.png"/>
-							<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/location.png"/>
-						</a>
-						<a href="/BiAMa/library">
-							<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/photo.png"/>
-							<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/photo.png"/>
-						</a>
-						<a href="/BiAMa/library">
-							<img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/biamaPage.png"/>
-							<img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none;" class="buttonSelected " src="../images/mobile/biamaPage.png"/>
-						</a>
-						<a href="/BiAMa/forum">
-							<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/questions.png"/>
-							<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/questions.png"/>
-						</a>
+						<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+						</div>
+						<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+						</div>
+						<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+							<h4 class="margin-right-5x margin-top-6x">Category</h4>
+							<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+							<h4 class="margin-right-5x">Code</h4>
+							<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+							<h4 class="margin-right-5x">Description</h4>
+							<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="divController" ng-if="!isMobileView">
-				<header class="masthead text-white text-center">
-					<nav>
-						<div style="padding-right:360px">
-							<i class="fas fa-circle redCircle margin-right margin-left"></i>
-							<i class="fas fa-circle orangeCircle margin-right"></i>
-							<i class="fas fa-circle greenCircle margin-right-3x"></i>
+			
+			<!-- zoom in material -->
+			<div ng-if="zoomInMaterial">
+				<div>
+					<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
+					<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
+				</div>
+			</div>
+			<!-- show location of material -->
+			<div ng-if="locationMaterial">
+				<div ng-if="loading">
+					<div class="loading-icon-footer-info"></div>
+				</div>	
+				<div ng-if="!loading" class="titlesOnCenter">
+					<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+					
+					<div class="dropup ">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<div ng-if="!loadingSchool" ng-repeat="biama in schools">
+								<li>
+								<a class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
+								</li>
+							</div>
+						</ul>
+							<ul class="dropdown-menu">
+							<div class="loadSchool" ng-if="loadingSchool">
+								<li class="loading-icon-footer-info"></li>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="!isMobileView" class="divController" >
+			<header class="masthead text-white text-center">
+				<nav>
+					<div style="padding-right:360px">
+						<i class="fas fa-circle redCircle margin-right margin-left"></i>
+						<i class="fas fa-circle orangeCircle margin-right"></i>
+						<i class="fas fa-circle greenCircle margin-right-3x"></i>
 
-							<i class="fa fa-chevron-left arrows margin-right-2x"></i>						
-							<i class="fa fa-chevron-right arrows margin-right-5x"></i>
-							<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
-						</div>
-					</nav>	
-				</header>
-				<article>
-					<div class="divBody">
-						<!-- user & search & languages-->
-						<nav class="positionOfNavDetails">
-							<!-- languages -->
-							<div class="float-left padding-left-3x">
-								<img class="" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
-								<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-								<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-								<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
-							</div> 
+						<i class="fa fa-chevron-left arrows margin-right-2x"></i>						
+						<i class="fa fa-chevron-right arrows margin-right-5x"></i>
+						<input class="inputLink" type="input" placeholder="https://www.biama.pt"></input>
+					</div>
+				</nav>	
+			</header>
+			<article>
+				<div class="divBody">
+					<!-- user & search & languages-->
+					<nav class="positionOfNavDetails">
+						<!-- languages -->
+						<div class="float-left padding-left-3x">
+							<img class="" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
+							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
+						</div> 
 
-							<!--<div class="padding-left-6x" style="margin-top: -25px;">
-								<label class="labelLanguage">Idioma</label>
-								<div class="separatorLanguage"></div>
-								<label class="selectLanguage"></label>
-								<label class="languageSize">[{languageSelected}]</label>
-								<i ng-click="getLanguages()" class="fas fa-caret-down"></i>	
-								<div ng-if="showLanguages">
-									<div ng-repeat="language in languages">
-										<label ng-click="selectLanguage(language)" class="languagesDiv">[{language}]</label>
-										<br>
-									</div>
+						<!--<div class="padding-left-6x" style="margin-top: -25px;">
+							<label class="labelLanguage">Idioma</label>
+							<div class="separatorLanguage"></div>
+							<label class="selectLanguage"></label>
+							<label class="languageSize">[{languageSelected}]</label>
+							<i ng-click="getLanguages()" class="fas fa-caret-down"></i>	
+							<div ng-if="showLanguages">
+								<div ng-repeat="language in languages">
+									<label ng-click="selectLanguage(language)" class="languagesDiv">[{language}]</label>
+									<br>
 								</div>
-							</div>	-->
-							<!-- details user -->
-							<div class="row">
-								<nav class="padding-left-3x">
-									<div class="navDetailsUser" ng-if="userDetails"><br>
-										<div ng-if="!confirmSession">
-											<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-											<a>Favoritos</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a>As minhas perguntas</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a>Partilhar com o Mundo</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a>Notificações</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a>Perfil</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a>Comparar</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
-											<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-											
-											<div class="divInitSession" ng-if="showInitSession">
-												<div class="alignCenter">
-													<h5 class="initSessionColor">Iniciar Sessão</h5>
-													
-													<div class="lineWhiteInitSession"></div><br>
-													<div ng-if="users === 'loadUser'">
-														<div class="loading-icon"></div>
-													</div>
-													<div ng-if="users !== 'loadUser'">
-														<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-														<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-														<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-														<!-- login with firebase providers -->
-														<div>
-															<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-															<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
-														</div>
-														<br>
-														<button class="registSession" type="button" ng-click="regist()">Registar</button>
-													</div>												
+							</div>
+						</div>	-->
+						<!-- details user -->
+						<div class="row">
+							<nav class="padding-left-3x">
+								<div class="navDetailsUser" ng-if="userDetails"><br>
+									<div ng-if="!confirmSession">
+										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+										<a>Favoritos</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>As minhas perguntas</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Partilhar com o Mundo</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Notificações</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Perfil</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a>Comparar</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+										
+										<div class="divInitSession" ng-if="showInitSession">
+											<div class="alignCenter">
+												<h5 class="initSessionColor">Iniciar Sessão</h5>
+												
+												<div class="lineWhiteInitSession"></div><br>
+												<div ng-if="users === 'loadUser'">
+													<div class="loading-icon"></div>
 												</div>
+												<div ng-if="users !== 'loadUser'">
+													<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+													<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+													<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+													<!-- login with firebase providers -->
+													<div>
+														<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+														<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+													</div>
+													<br>
+													<button class="registSession" type="button" ng-click="regist()">Registar</button>
+												</div>												
 											</div>
 										</div>
-										<div ng-if="confirmSession">
-											<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-											<a href="/BiAMa/favorites" ng-click="disableSearch('favorites')">Favoritos</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a href="/BiAMa/myQuestions" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a href="/BiAMa/worldShare" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
-											<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
-											<div ng-if="notificationNumber" class="circleNotification"></div>
-											<br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a href="/BiAMa/perfilPage" ng-click="disableSearch('perfil')">Perfil</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a href="/BiAMa/compare" ng-click="disableSearch('compare')">Comparar</a><br>
-											<div class="lineWhite margin-bottom margin-top"></div>
-											<a ng-click="logout()">Terminar Sessão</a><br>
-											<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-										</div>
 									</div>
-								</nav>
+									<div ng-if="confirmSession">
+										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+										<a href="/BiAMa/favorites" ng-click="disableSearch('favorites')">Favoritos</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/myQuestions" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/worldShare" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
+										<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
+										<div ng-if="notificationNumber" class="circleNotification"></div>
+										<br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/perfilPage" ng-click="disableSearch('perfil')">Perfil</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a href="/BiAMa/compare" ng-click="disableSearch('compare')">Comparar</a><br>
+										<div class="lineWhite margin-bottom margin-top"></div>
+										<a ng-click="logout()">Terminar Sessão</a><br>
+										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+									</div>
+								</div>
+							</nav>
+						</div>
+					</nav>
+					
+					<!--image biama -->
+					<div ng-if="search && !showMaterials && !openMaterialDetail" class="row text-center">
+						<img class="margin-top-6x" src="../images/topoBiamaHome.png"/>
+					</div>
+
+					<!-- image biama with search -->
+					<div ng-if="showMaterials || registUser" class="row text-center">
+						<img class="margin-top-3x" src="../images/topoBiama.png"/>
+					</div>
+
+					<!-- titles of page & search -->
+					<div class="row text-center">
+						<ng-view></ng-view>
+						<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
+							<div class="ui-widget input-group stylish-input-group">
+								<input id="tags_search" style="width: 385px;">
+								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
+									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
+								</span>
 							</div>
-						</nav>
-						
-						<!--image biama -->
-						<div ng-if="search && !showMaterials && !openMaterialDetail" class="row text-center">
-							<img class="margin-top-6x" src="../images/topoBiamaHome.png"/>
+						</div>
+						<div ng-if="showMaterials">
+							<div class="padding sectionScrollSearch">
+								<div class="col-md-4" ng-repeat="material in materials track by $index">
+									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
+									</div>
+									<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+									</div>
+									<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
+										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
+									</div>
+								</div>
+							</div>
 						</div>
 
-						<!-- image biama with search -->
-						<div ng-if="showMaterials || registUser" class="row text-center">
-							<img class="margin-top-3x" src="../images/topoBiama.png"/>
+						<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
+							<div class="row container">
+								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
+								<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+									<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+								</div>
+								<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+									<h4 class="margin-right-5x margin-top-6x">Category</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+									<h4 class="margin-right-5x">Code</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+									<h4 class="margin-right-5x">Description</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+								</div>
+							</div>
 						</div>
+						<div ng-if="registUser">
+							<div class="titlesOnCenter"> 
+								<h1 class="subtitles">Registar</h1>
+							</div>
+							<!-- user photo -->
+							<div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
+								<div class="form-group">
+									<img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
+									<input class="minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
+								</div>
+								
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
+								<br>
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
+								<br>
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<!-- edit mode -->
+								<input class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
 
-						<!-- titles of page & search -->
-						<div class="row text-center">
-							<ng-view></ng-view>
-							<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
-								<div class="ui-widget input-group stylish-input-group">
-									<input id="tags_search" style="width: 385px;">
-									<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
-										<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
-									</span>
-								</div>
+								<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
+								<input class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
+								<br>
+								<button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
 							</div>
-							<div ng-if="showMaterials">
-								<div class="padding sectionScrollSearch">
-									<div class="col-md-4" ng-repeat="material in materials track by $index">
-										<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
-											<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
-										</div>
-										<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-											<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
-										</div>
-										<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-											<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
-										</div>
-									</div>
-								</div>
+							<div ng-if="emptyData">
+								<h3>Preencha todos os campos por favor.</h3>
 							</div>
-
-							<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
-								<div class="row container">
-									<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
-									<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
-										<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
-									</div>
-									<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
-										<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-									</div>
-									<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
-										<img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-									</div>
-									<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-										<h4 class="margin-right-5x margin-top-6x">Category</h4>
-										<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
-										<h4 class="margin-right-5x">Code</h4>
-										<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
-										<h4 class="margin-right-5x">Description</h4>
-										<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
-									</div>
-								</div>
+							<div ng-if="usernameRepeated">
+								<h3>Nome já existente.</h3>
 							</div>
-							<div ng-if="registUser">
-								<div class="titlesOnCenter"> 
-									<h1 class="subtitles">Registar</h1>
-								</div>
-								<!-- user photo -->
-								<div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
-									<div class="form-group">
-										<img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
-										<input class="minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
-									</div>
-									
-									<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-									<input class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
-									<br>
-									<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-									<input class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
-									<br>
-									<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-									<!-- edit mode -->
-									<input class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
-
-									<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-									<input class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
-									<br>
-									<button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
-								</div>
-								<div ng-if="emptyData">
-									<h3>Preencha todos os campos por favor.</h3>
-								</div>
-								<div ng-if="usernameRepeated">
-									<h3>Nome já existente.</h3>
-								</div>
-								<div ng-if="underAge">
-									<h3>Para efetuar o registo tem de ser maior de idade.</h3>
-								</div>
+							<div ng-if="underAge">
+								<h3>Para efetuar o registo tem de ser maior de idade.</h3>
 							</div>
-							<div class="perfilDetails center-block" ng-if="openImageUploadLabel">
-								<input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
-								<button ng-click="saveUploadFile()">Guardar</button>
-							</div>
+						</div>
+						<div class="perfilDetails center-block" ng-if="openImageUploadLabel">
+							<input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+							<button ng-click="saveUploadFile()">Guardar</button>
 						</div>
 					</div>
-				</article>
-				<footer ng-if="!isMobileView" class="w3-bar w3-center" id="footerMain">
-					<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-					<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
+				</div>
+			</article>
+			<footer class="w3-bar w3-center" id="footerMain">
+				<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
+				<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 
-					<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-					<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
+				<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
+				<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
 
-					<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-					<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
+				<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
+				<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
 
-					<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-					<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
+				<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
+				<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
 
-					<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-					<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
-				</footer>
-				<footer ng-if="isMobileView">
-					<a href="/BiAMa/libraryMobile">
-						<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
-						<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
-					</a>
-					<a href="/BiAMa/whereWeAre">
-						<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
-						<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
-					</a>
-					<a href="/BiAMa/library">
-						<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
-						<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
-					</a>
-					<a href="/BiAMa/biamaPage">
-						<img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-						<img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-					</a>
-					<a href="/BiAMa/forum">
-						<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
-						<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
-					</a>
-				</footer>
-			</div>
+				<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
+				<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
+			</footer>
+		</div>
+		<div ng-if="isMobileView" style="margin-left: -22px;">
+			<a href="/BiAMa/libraryMobile">
+				<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
+				<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
+			</a>
+			<a href="/BiAMa/whereWeAreMobile">
+				<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
+				<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
+			</a>
+			<a href="/BiAMa/library">
+				<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
+				<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
+			</a>
+			<a href="/BiAMa/biamaPage">
+				<img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
+				<img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
+			</a>
+			<a href="/BiAMa/forum">
+				<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
+				<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
+			</a>
 		</div>
 	</body>
 </html>

@@ -15,6 +15,7 @@ function insertFavoriteQuestion(data, cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query(`INSERT INTO "Favorite" VALUES ($1, $2, $3, $4)`, [idFavorite, idUser,idMaterial,idQuestion], function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

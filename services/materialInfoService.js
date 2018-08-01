@@ -15,6 +15,7 @@ function getMaterials(cb){
 				return console.error('error running query', err);
 			}
 			cb(null, result.rows)
+			client.end();
 		});
 	});
 }
@@ -25,6 +26,7 @@ function getSchoolOfMaterial(data, cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT * FROM "Library" INNER JOIN "Library_Material" ON "Library".id_library="Library_Material".library_id and "Library_Material".material_id=$1', [materialId], function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

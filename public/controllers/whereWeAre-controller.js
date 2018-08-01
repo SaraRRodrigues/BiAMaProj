@@ -1,4 +1,4 @@
-app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","$sce", "$route", "jQuery", function($scope, $http,BiAMaInfoService, $sce, $route){
+app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "$http" ,"$sce", "$route", "jQuery", function($scope, BiAMaInfoService, LibraryMaterialInfoService, $http, $sce, $route){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -12,7 +12,6 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
 		$scope.isMobileView=false;
     }
     
-    
     $scope.loading = true;
     $scope.schools=[];
     $scope.pathURL='https://www.google.com/maps/';
@@ -24,6 +23,14 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
 		$scope.nameclick=name;
     }
     
+    $scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+    }
+  
     $scope.goTo = function(name) {
 		
     }
@@ -35,7 +42,7 @@ app.controller("WhereWeAreController", ['$scope', "$http" , "BiAMaInfoService","
         $scope.biamaDetails=data;
         /**default - url of ESELx */
         $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-        $scope.descriptionLocation=$scope.biamaDetails[1].locationDescription;
+        $scope.schools=$scope.biamaDetails;
     });
 
     $scope.getSchools = function () {

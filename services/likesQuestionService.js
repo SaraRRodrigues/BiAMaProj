@@ -10,6 +10,7 @@ function getLikeQuestion(cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT * FROM "Question" ORDER BY "Question".id_question ASC', function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

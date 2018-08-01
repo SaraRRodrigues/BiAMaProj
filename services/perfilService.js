@@ -10,6 +10,7 @@ function getMyPerfil(cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT * FROM "User"', function(err, result) {
+			done();
 			if(err) {
 				return console.error('error running query', err);
 			}

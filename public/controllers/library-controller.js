@@ -1,8 +1,6 @@
 
 app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", "$cacheFactory" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, $cacheFactory){
 
-	var httpCache = $cacheFactory.get('http');
-	
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 	/* my current page */
@@ -204,8 +202,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 	$scope.clickLocation = function(material) {
-
-		$scope.schools= [];
 		for(var index=0; index<$scope.materialsCategories.length; ++index) {
 			if($scope.materialsCategories[index].material_id === material.idMaterial){
 					$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.materialsCategories[index].location);

@@ -47,13 +47,15 @@
 		 
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp" ng-controller="LibraryController">
-        
-        <!-- header -->
+	<body ng-app="myApp" ng-controller="WhereWeAreController">
+         <!-- header -->
         <div class="container-fluid">
             <div class="header margin-top-3x">
                 <div class="margin-left-4x  col-sm-4">
                     <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+                </div>
+                <div ng-if="!showSearch" class="col-sm-6">
+                    <h2 class="subtitles">Onde estamos ?</h2>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
@@ -68,112 +70,27 @@
                 </div>
             </div>
         </div> 
-        <!-- image biama with search -->
-        <div class="row text-center">
-            <img class="margin-top-3x" src="../images/topoBiama.png"/>
-        </div>
         <!-- spinner loading page -->
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-        <!-- show categories and materials -->
-        <div class="container">
-            <div ng-if="showMaterials">
-                <div class="padding sectionScrollSearch">
-                    <div class="col-md-4" ng-repeat="material in materials track by $index">
-                        <div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
-                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
-                        </div>
-                        <div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
-                        </div>
-                        <div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
-                <div class="ui-widget input-group stylish-input-group">
-                    <input id="tags_search" style="width: 385px;">
-                    <span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
-                        <span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
-                    </span>
-                </div>
-            </div>
-            <div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
-                <div class="row container">
-                    <i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
-                    <div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
-                        <img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
-                    </div>
-                    <div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
-                        <img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-                    </div>
-                    <div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
-                        <img class="margin-bottom-3x margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-                    </div>
-                    <div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-                        <h4 class="margin-right-5x margin-top-6x">Category</h4>
-                        <h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
-                        <h4 class="margin-right-5x">Code</h4>
-                        <h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
-                        <h4 class="margin-right-5x">Description</h4>
-                        <h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- show material details -->
-        <div ng-if="!loading" class="margin-left-2x col-sm-11">
-			<div ng-if="showMaterialDetails && !locationMaterial && !zoomInMaterial" class="titlesOnCenter sectionScroll">
-				<img class="margin-bottom-2x" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="15%" height="130px" alt="foto"/><br>
-				<div class="titlesOnCenter">
-					<!-- Favorite -->
-					<i ng-click="clickFavorite(materialInfo)" ng-if="materialInfo.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
-					<i ng-click="clickFavorite(materialInfo)" ng-if="!materialInfo.isFavorite" class="far fa-star cursorPointer iconMedium"></i>
-					<!-- Location -->
-					<i ng-click="clickLocation(materialInfo)" class="fas fa-map-marker-alt cursorPointer iconMedium"></i>
-					<!-- Zoom in -->
-					<i ng-click="clickZoomIn(materialInfo)" class="fas fa-search-plus cursorPointer iconMedium"></i>
-				</div>
-				<p>[{materialInfo.description}]
-				</p>
-				<div ng-if="clickAddFavoriteMaterial">
-					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
-				</div>
-				<div ng-if="favoriteAlreadyExists">
-					<h4>Favorito adicionado</h4>
-				</div>
-			</div>
-		</div>
-        <!-- zoom in material -->
-        <div ng-if="zoomInMaterial">
-			<div>
-				<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
-				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
-			</div>
-		</div>
         <!-- show location of material -->
-		<div ng-if="locationMaterial">
-			<div ng-if="loading">
-				<div class="loading-icon-footer-info"></div>
-			</div>	
+		<div>
 			<div ng-if="!loading" class="titlesOnCenter">
 				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 				
-                <div class="dropup ">
+                <div class="dropup">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <div ng-if="!loadingSchool" ng-repeat="biama in schools">
+                        <div ng-if="showSchools" ng-repeat="biama in schools">
                             <li>
                             <a class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
                             </li>
                         </div>
                     </ul>
-                        <ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
                         <div class="loadSchool" ng-if="loadingSchool">
                             <li class="loading-icon-footer-info"></li>
                         </div>
@@ -182,13 +99,14 @@
 			</div>
 		</div>
         <!-- footer -->
+
         <div class="container">
             <div>
                 <a href="/BiAMa/libraryMobile">
                     <img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected" src="../images/mobile/library.png"/>
                     <img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/library.png"/>
                 </a>
-                <a href="/BiAMa/whereWeAreMobile">
+                <a href="/BiAMa/whereWeAre">
                     <img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/location.png"/>
                     <img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/location.png"/>
                 </a>

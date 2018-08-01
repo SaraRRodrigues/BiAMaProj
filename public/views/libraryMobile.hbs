@@ -148,7 +148,7 @@
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <div ng-if="!loadingSchool" ng-repeat="biama in schools">
+                        <div ng-if="showSchools" ng-repeat="biama in schools">
                             <li>
                             <a class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
                             </li>
@@ -170,7 +170,7 @@
                     <img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected" src="../images/mobile/library.png"/>
                     <img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/library.png"/>
                 </a>
-                <a href="/BiAMa/whereWeAre">
+                <a href="/BiAMa/whereWeAreMobile">
                     <img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/location.png"/>
                     <img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/location.png"/>
                 </a>
