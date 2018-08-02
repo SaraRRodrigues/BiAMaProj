@@ -76,6 +76,15 @@ app.constant('jQuery', window.jQuery)
 		controller: 'WhereWeAreController'
 	})
 	
+	$routeProvider.when('/BiAMa/biamaPageMobile', {
+		templateUrl: 'views/biamaPageMobile',
+		controller: 'BiamaController'
+	})
+	
+	$routeProvider.when('/BiAMa/forumPageMobile', {
+		templateUrl: 'views/forumPageMobile',
+		controller: 'ForumController'
+	})
 	/*$routeProvider.when('/BiAMa/login', {
 		templateUrl: 'views/login',
 		controller: 'LoginController'

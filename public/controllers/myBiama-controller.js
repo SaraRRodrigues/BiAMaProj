@@ -13,6 +13,13 @@ app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuer
 		$scope.isMobileView=false;
 	}
 
+	$scope.nameclick='myBiama';
+	$scope.changeColorClick = function(name) {
+		$scope.userDetails = false;
+		$scope.search = false;
+		$scope.nameclick=name;
+    }
+
 	$scope.loading=true;
 	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
 	getMyBiamaInfo.then(function(result) {

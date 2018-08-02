@@ -1,6 +1,8 @@
 
 app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "jQuery", "$cacheFactory" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, $cacheFactory){
 
+
+	
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 	/* my current page */
@@ -45,8 +47,11 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.zoomInMaterial=false;
 	}
 
-	$scope.nameclick='libraryMobile';
+	$scope.nameclick='library';
 	$scope.changeColorClick = function(name) {
+		debugger
+		//$route.navigated = false;
+		//$route.navigate([$route.url]);
 		$scope.locationMaterial=false;
 		$scope.zoomInMaterial=false;
 		$scope.showCategory=false;

@@ -5,6 +5,9 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	jQuery("#footerMain").hide();
 	/* my current page */
 	$scope.namePage='forum';
+
+	$scope.showSearch = false;
+	$scope.userDetails = false;
 	
   var window_width = $( window ).width();
 	if(window_width <= 1024) {
@@ -13,13 +16,22 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 		$scope.isMobileView=false;
 	}
 
-	$scope.nameclick='biamaPage';
+	$scope.nameclick='forum';
 	$scope.changeColorClick = function(name) {
 		$scope.userDetails = false;
 		$scope.search = false;
 		$scope.nameclick=name;
 	}
-	
+
+	$scope.clickTopSearch = function() {
+		debugger
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+
 }])
 .config(function($routeProvider, $locationProvider) {
 
