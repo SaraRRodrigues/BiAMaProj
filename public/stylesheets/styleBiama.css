@@ -16,7 +16,7 @@ a {
 .margin-left-4x {margin-left:60px}
 .margin-left-5x {margin-left:80px}
 .margin-left-6x {margin-left:90px}
-.margin-left-7x {margin-left:140px}
+.margin-left-7x {margin-left:127px}
 .margin-left-8x {margin-left:140px}
 .margin-left-9x {margin-left:150px}
 .margin-left-10x {margin-left:400px}
@@ -519,6 +519,15 @@ a {
   margin-top: 20px;
   height: 93px;
 }
+
+.borderQuestionMobile{
+  border:5px solid #eaab00;
+  width:310px;
+  background-color: #eaab00;
+  margin-top: 20px;
+  height: 93px;
+}
+
 .favoriteButton {
   float: right;
 }
@@ -548,6 +557,14 @@ a {
   border:5px solid #70c0c1;
   width:340px;
   margin-left: 220px;
+  margin-top: 20px;
+  height: 93px;
+  background-color: #70c0c1;
+}
+
+.borderAnswerMobile{
+  border:5px solid #70c0c1;
+  width:310px;
   margin-top: 20px;
   height: 93px;
   background-color: #70c0c1;
