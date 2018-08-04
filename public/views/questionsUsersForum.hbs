@@ -43,21 +43,21 @@
         <div ng-if="isMobileView" class="container-fluid">
             <div class="header">
                 <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -269px;">
+                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 class="subtitles" style="font-size: 16px;">Pergunta dos utilizadores</h2>
+                    <h2 class="subtitles" style="font-size: 14px;">Pergunta dos utilizadores</h2>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
                 </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -55px;">
+                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -86px;">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
                 </div>
                 <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="    width: 201px;margin-top: 2px;margin-left: 74px;"></input>
+                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="    width: 149px;margin-left: 74px;"></input>
                 </div>
             </div>
         </div> 
@@ -86,15 +86,32 @@
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 			</div>
 			<div class="titlesOnCenter">
-				<div ng-if="!showDivAnswer" ng-style="(isMobileView) ? 'margin-left: 27px;' : 'margin-left:400px'">
+				<div ng-if="!showDivAnswer" ng-style="(isMobileView) ? 'margin-left: 20px;' : 'margin-left:400px'">
 					<!-- Question -->
-					<img class="imageButton" src="../images/user.png">
-					<div class="borderQuestion">
+					<img ng-if="!isMobileView" class="imageButton" src="../images/user.png">
+					<img ng-if="isMobileView" class="imageButton" src="../images/user.png" style="margin-left: 21px;">
+					<div ng-if="!isMobileView" class="borderQuestion">
 						<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-						<div ng-if="!favoriteQuestion" ng-click="addToFavoritesQuestion()">
+						<div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
 							<i class="far fa-star favoriteButton cursorPointer"></i>
 						</div>
-						<div ng-if="favoriteQuestion" ng-click="removeFromFavoritesQuestion()">
+						<div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()">
+							<i class="fas fa-star favoriteButton cursorPointer"></i>
+						</div>
+						<div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
+							<i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+						</div>
+						<div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
+							<i class="far fa-thumbs-up likeButton cursorPointer" ></i>
+						</div>
+						<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+					</div>
+					<div ng-if="isMobileView" class="borderQuestionMobile margin-left-3x">
+						<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+						<div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
+							<i class="far fa-star favoriteButton cursorPointer"></i>
+						</div>
+						<div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()">
 							<i class="fas fa-star favoriteButton cursorPointer"></i>
 						</div>
 						<div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
@@ -107,8 +124,9 @@
 					</div>
 					<!-- Answers -->
 					<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
-						<img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
-						<div ng-if="$index%2!==0" class="borderQuestion">
+						<img ng-if="$index%2!==0 && !isMobileView" class="imageButton" src="../images/user.png">
+						<img ng-if="$index%2!==0 && isMobileView" class="imageButton" src="../images/user.png" style="margin-left: 21px;">
+						<div ng-if="$index%2!==0 && !isMobileView" class="borderQuestion">
 							<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButton cursorPointer"></i>
@@ -124,7 +142,23 @@
 							</div>
 							<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 						</div>
-						<div ng-if="$index%2===0"  class="borderAnswer">
+						<div ng-if="$index%2!==0 && isMobileView" class="borderQuestionMobile margin-left-3x">
+							<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+								<i class="fas fa-star favoriteButton cursorPointer"></i>
+							</div>
+							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+								<i class="far fa-star favoriteButton cursorPointer"></i>
+							</div>
+							<div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
+								<i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+							</div>
+							<div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
+								<i class="far fa-thumbs-up likeButton cursorPointer"></i>
+							</div>
+							<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
+						</div>
+						<div ng-if="$index%2===0 && !isMobileView"  class="borderAnswer">
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
 							</div>
@@ -141,12 +175,38 @@
 							<img class="imageButtonLeft" src="../images/user.png">
 							<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
 						</div>
+						<div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
+							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+								<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
+							</div>
+							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+								<i class="far fa-star favoriteButtonLeft cursorPointer"></i>
+							</div>
+							<div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
+								<i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
+							</div>
+							<div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
+								<i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
+							</div>
+							<label class="margin-left-6x1">Resposta [{answerQuestion.numberOfQuestion}]</label>
+							<img class="imageButtonLeft" src="../images/user.png">
+							<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+						</div>
 					</div>
 				</div>
-				<button ng-if="!showDivAnswer" class="buttonAnswer" ng-click="clickOnAnswer()">Responder</button>
-				<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
-					<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
-					<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
+				<div ng-if="!isMobileView"> 
+					<button ng-if="!showDivAnswer" class="buttonAnswer" ng-click="clickOnAnswer()">Responder</button>
+					<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
+						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
+						<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
+					</div>
+				</div>
+				<div ng-if="isMobileView">
+					<button ng-if="!showDivAnswer" class="buttonAnswerMobile" ng-click="clickOnAnswer()">Responder</button>
+					<div ng-if="showDivAnswer" class="titlesOnCenter" style="padding-top: 39px; background-color: lightgray;">
+						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
+						<button class="buttonAnswerMobile" ng-click="putAnswer(textAnswer)">Responder</button>
+					</div>
 				</div>
 				<div class="margin-top-3x" ng-if="clickAddFavorite || clickRemoveFavorite">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
