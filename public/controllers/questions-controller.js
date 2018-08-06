@@ -86,6 +86,20 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
           }
         }
     }
+    $scope.clickOnAnswer = function() {
+        $scope.showDivAnswer=true;
+    }
+    $scope.putAnswer = function(textAnswer) {
+        var data = {
+            text: textAnswer,
+            likes: $scope.likes,
+            idQuestion: $scope.idQuestion,
+            idAnswer: $scope.biggestId
+        };
+        
+        $http.post('/insertAnswer', data);
+        $scope.showDivAnswer=false;
+    }
 
     $scope.addToFavoritesQuestion = function(){
         $scope.showMyQuestions=false;

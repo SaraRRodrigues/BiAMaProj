@@ -1,5 +1,5 @@
 <html>
-    <body ng-app="myApp" ng-controller="MyQuestionsController">
+    <body ng-app="myApp" ng-controller="QuestionsController">
          <!-- header -->
         <div ng-if="isMobileView" class="container-fluid">
             <div class="header">
@@ -139,6 +139,13 @@
                         </div>
                     </div>
                 </div>
+                <div> 
+					<button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
+					<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
+						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
+						<button class="buttonConfirm" ng-click="putAnswer(textAnswer)">Responder</button>
+					</div>
+				</div>
             </div>
         </div>
         <footer ng-if="!isMobileView" class="w3-bar w3-center footer">

@@ -30,10 +30,10 @@
             <img src="../images/rightBiama.png"/>
         </div>
         <div class="titlesOnCenter">
-            <div  ng-if="!isMobileView" class="imageLeft">
+            <div ng-if="!isMobileView" class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-            <div  ng-if="!isMobileView" class="padding-left-4x">
+            <div ng-if="!isMobileView" class="padding-left-4x">
                 <h1 ng-if="showWorldShares" class="subtitles">Partilhar com o Mundo</h1> 
             </div>
             <div ng-if="loading">
@@ -44,11 +44,12 @@
                 <br>
                 <i ng-if="!loading" class="fas fa-plus-circle cursorPointer" style="font-size: 77px;" ng-click="openAddWorldShare()"></i>
             </div>
-            <div ng-if="addWorldShare && !loading" class="container center-block" style="background-color:#E4A73F; width:600px; height:400px; border-radius:2px;">
+            <div ng-if="addWorldShare && !loading" class="container center-block" ng-style="(!isMobileView)? 'background-color:#E4A73F; width:600px; height:400px; border-radius:2px;':'background-color:#E4A73F; width:349px; height:400px; border-radius:2px;'">
                 <div style="background-color:white;padding:10px;margin-top: 10px;height: 378px;margin-left: 6px;margin-right: 6px;">
                     <h1>Nome do Projeto</h1>
                     <div class="divider"></div>
-                    <textarea placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 422px;height: 101px;"></textarea>
+                    <textarea ng-if="isMobileView" placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 248px;height: 101px;"></textarea>
+                    <textarea ng-if="!isMobileView" placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 422px;height: 101px;"></textarea>
                     <div style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
                         <div ng-if="!openWorldShareUploadLabel">
                             <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">

@@ -58,7 +58,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           $scope.getAnswersOfQuestion(index);
         }
       }
-      debugger
+      
       $scope.showDivAnswer
       /* reset indexQuestionAnswer: number of answer of questions */
       $scope.indexQuestionAnswer=1;
