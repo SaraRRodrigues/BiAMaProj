@@ -13,10 +13,10 @@ SET standard_conforming_strings = on;
 -- Roles
 --
 
-CREATE ROLE "BiAMa";
-ALTER ROLE "BiAMa" WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5c775bf11bd54ab2d00814fb29c370064' VALID UNTIL 'infinity';
-CREATE ROLE postgres;
-ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'md524bb002702969490e41e26e1a454036c';
+--CREATE ROLE "postgresql-sinuous-71786";
+--ALTER ROLE "postgresql-sinuous-71786" WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5c775bf11bd54ab2d00814fb29c370064' VALID UNTIL 'infinity';
+--CREATE ROLE postgres;
+--ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'md524bb002702969490e41e26e1a454036c';
 
 
 
@@ -27,14 +27,14 @@ ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION
 -- Database creation
 --
 
-CREATE DATABASE "BiAMaDB" WITH TEMPLATE = template0 OWNER = "BiAMa";
-REVOKE ALL ON DATABASE template1 FROM PUBLIC;
-REVOKE ALL ON DATABASE template1 FROM postgres;
-GRANT ALL ON DATABASE template1 TO postgres;
-GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+--CREATE DATABASE "postgresql-sinuous-71786DB" WITH TEMPLATE = template0 OWNER = "postgresql-sinuous-71786";
+--REVOKE ALL ON DATABASE template1 FROM PUBLIC;
+--REVOKE ALL ON DATABASE template1 FROM postgres;
+--GRANT ALL ON DATABASE template1 TO postgres;
+--GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 
 
-\connect "BiAMaDB"
+--\connect "postgresql-sinuous-71786DB"
 
 SET default_transaction_read_only = off;
 
@@ -79,7 +79,7 @@ SET default_with_oids = false;
 
 --
 -- TOC entry 190 (class 1259 OID 24811)
--- Name: Answer; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Answer; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Answer" (
@@ -90,11 +90,11 @@ CREATE TABLE public."Answer" (
 );
 
 
-ALTER TABLE public."Answer" OWNER TO "BiAMa";
+ALTER TABLE public."Answer" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 187 (class 1259 OID 24761)
--- Name: Curiosity; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Curiosity; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Curiosity" (
@@ -105,11 +105,11 @@ CREATE TABLE public."Curiosity" (
 );
 
 
-ALTER TABLE public."Curiosity" OWNER TO "BiAMa";
+ALTER TABLE public."Curiosity" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 191 (class 1259 OID 24824)
--- Name: Favorite; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Favorite; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Favorite" (
@@ -120,11 +120,11 @@ CREATE TABLE public."Favorite" (
 );
 
 
-ALTER TABLE public."Favorite" OWNER TO "BiAMa";
+ALTER TABLE public."Favorite" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 182 (class 1259 OID 16458)
--- Name: Forum; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Forum; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Forum" (
@@ -133,11 +133,11 @@ CREATE TABLE public."Forum" (
 );
 
 
-ALTER TABLE public."Forum" OWNER TO "BiAMa";
+ALTER TABLE public."Forum" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 183 (class 1259 OID 24605)
--- Name: Library; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Library; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Library" (
@@ -148,11 +148,11 @@ CREATE TABLE public."Library" (
 );
 
 
-ALTER TABLE public."Library" OWNER TO "BiAMa";
+ALTER TABLE public."Library" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 186 (class 1259 OID 24640)
--- Name: Library_Material; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Library_Material; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Library_Material" (
@@ -161,11 +161,11 @@ CREATE TABLE public."Library_Material" (
 );
 
 
-ALTER TABLE public."Library_Material" OWNER TO "BiAMa";
+ALTER TABLE public."Library_Material" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 185 (class 1259 OID 24623)
--- Name: Library_User; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Library_User; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Library_User" (
@@ -174,11 +174,11 @@ CREATE TABLE public."Library_User" (
 );
 
 
-ALTER TABLE public."Library_User" OWNER TO "BiAMa";
+ALTER TABLE public."Library_User" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 181 (class 1259 OID 16413)
--- Name: Material; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Material; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Material" (
@@ -192,11 +192,11 @@ CREATE TABLE public."Material" (
 );
 
 
-ALTER TABLE public."Material" OWNER TO "BiAMa";
+ALTER TABLE public."Material" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 195 (class 1259 OID 24912)
--- Name: sequence_notification; Type: SEQUENCE; Schema: public; Owner: BiAMa
+-- Name: sequence_notification; Type: SEQUENCE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE SEQUENCE public.sequence_notification
@@ -207,11 +207,11 @@ CREATE SEQUENCE public.sequence_notification
     CACHE 1;
 
 
-ALTER TABLE public.sequence_notification OWNER TO "BiAMa";
+ALTER TABLE public.sequence_notification OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 193 (class 1259 OID 24900)
--- Name: Notification; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Notification; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Notification" (
@@ -222,7 +222,7 @@ CREATE TABLE public."Notification" (
 );
 
 
-ALTER TABLE public."Notification" OWNER TO "BiAMa";
+ALTER TABLE public."Notification" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 192 (class 1259 OID 24871)
@@ -256,7 +256,7 @@ ALTER TABLE public."Question" OWNER TO postgres;
 
 --
 -- TOC entry 188 (class 1259 OID 24783)
--- Name: Share; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: Share; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."Share" (
@@ -267,11 +267,11 @@ CREATE TABLE public."Share" (
 );
 
 
-ALTER TABLE public."Share" OWNER TO "BiAMa";
+ALTER TABLE public."Share" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 194 (class 1259 OID 24909)
--- Name: sequence_user; Type: SEQUENCE; Schema: public; Owner: BiAMa
+-- Name: sequence_user; Type: SEQUENCE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE SEQUENCE public.sequence_user
@@ -282,11 +282,11 @@ CREATE SEQUENCE public.sequence_user
     CACHE 1;
 
 
-ALTER TABLE public.sequence_user OWNER TO "BiAMa";
+ALTER TABLE public.sequence_user OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 184 (class 1259 OID 24613)
--- Name: User; Type: TABLE; Schema: public; Owner: BiAMa
+-- Name: User; Type: TABLE; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 CREATE TABLE public."User" (
@@ -300,12 +300,12 @@ CREATE TABLE public."User" (
 );
 
 
-ALTER TABLE public."User" OWNER TO "BiAMa";
+ALTER TABLE public."User" OWNER TO "postgresql-sinuous-71786";
 
 --
 -- TOC entry 2204 (class 0 OID 24811)
 -- Dependencies: 190
--- Data for Name: Answer; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Answer; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Answer" (id_answer, id_question, text_answer, "likesAnswer") FROM stdin;
@@ -322,7 +322,7 @@ COPY public."Answer" (id_answer, id_question, text_answer, "likesAnswer") FROM s
 --
 -- TOC entry 2201 (class 0 OID 24761)
 -- Dependencies: 187
--- Data for Name: Curiosity; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Curiosity; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Curiosity" (forum_type, title, image, "descriptionCuriosity") FROM stdin;
@@ -334,7 +334,7 @@ forum2	Projeto-animal	proj1_animal.png	Este infeliz escorpião é sepultado em u
 --
 -- TOC entry 2205 (class 0 OID 24824)
 -- Dependencies: 191
--- Data for Name: Favorite; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Favorite; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Favorite" (id_favorite, user_id, material_id, question_id) FROM stdin;
@@ -358,7 +358,7 @@ COPY public."Favorite" (id_favorite, user_id, material_id, question_id) FROM std
 --
 -- TOC entry 2196 (class 0 OID 16458)
 -- Dependencies: 182
--- Data for Name: Forum; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Forum; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Forum" (type_forum, library_id) FROM stdin;
@@ -373,12 +373,12 @@ forum5	5
 --
 -- TOC entry 2197 (class 0 OID 24605)
 -- Dependencies: 183
--- Data for Name: Library; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Library; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Library" (id_library, location, description, "locationDescription") FROM stdin;
-2	embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654	Com os avanços da tecnologia, surge a necessidade de criar bibliotecas digitais de acesso aberto. Este tipo de bibliotecas são muito úteis no que diz respeito à deslocação, pois não é necessário o utilizador se deslocar para pesquisar algum material, projeto de material, entre outros. O nome BiAMa, tem como significado "Biblioteca Aberta de Materiais".	Instituto Superior Técnico de Lisboa
-1	embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919	Com os avanços da tecnologia, surge a necessidade de criar bibliotecas digitais de acesso aberto. Este tipo de bibliotecas são muito úteis no que diz respeito à deslocação, pois não é necessário o utilizador se deslocar para pesquisar algum material, projeto de material, entre outros. O nome BiAMa, tem como significado "Biblioteca Aberta de Materiais".	Escola Superior de Educação de Lisboa
+2	embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654	Com os avanços da tecnologia, surge a necessidade de criar bibliotecas digitais de acesso aberto. Este tipo de bibliotecas são muito úteis no que diz respeito à deslocação, pois não é necessário o utilizador se deslocar para pesquisar algum material, projeto de material, entre outros. O nome postgresql-sinuous-71786, tem como significado "Biblioteca Aberta de Materiais".	Instituto Superior Técnico de Lisboa
+1	embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919	Com os avanços da tecnologia, surge a necessidade de criar bibliotecas digitais de acesso aberto. Este tipo de bibliotecas são muito úteis no que diz respeito à deslocação, pois não é necessário o utilizador se deslocar para pesquisar algum material, projeto de material, entre outros. O nome postgresql-sinuous-71786, tem como significado "Biblioteca Aberta de Materiais".	Escola Superior de Educação de Lisboa
 3	\N	\N	\N
 4	\N	\N	\N
 5	\N	\N	\N
@@ -388,7 +388,7 @@ COPY public."Library" (id_library, location, description, "locationDescription")
 --
 -- TOC entry 2200 (class 0 OID 24640)
 -- Dependencies: 186
--- Data for Name: Library_Material; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Library_Material; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Library_Material" (library_id, material_id) FROM stdin;
@@ -446,7 +446,7 @@ COPY public."Library_Material" (library_id, material_id) FROM stdin;
 --
 -- TOC entry 2199 (class 0 OID 24623)
 -- Dependencies: 185
--- Data for Name: Library_User; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Library_User; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Library_User" (library_id, user_id) FROM stdin;
@@ -457,7 +457,7 @@ COPY public."Library_User" (library_id, user_id) FROM stdin;
 --
 -- TOC entry 2195 (class 0 OID 16413)
 -- Dependencies: 181
--- Data for Name: Material; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Material; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Material" (id, type, color, code, name, category, description) FROM stdin;
@@ -516,7 +516,7 @@ COPY public."Material" (id, type, color, code, name, category, description) FROM
 --
 -- TOC entry 2207 (class 0 OID 24900)
 -- Dependencies: 193
--- Data for Name: Notification; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Notification; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Notification" (id_notification, text_notification, date_notification, insert) FROM stdin;
@@ -543,7 +543,7 @@ COPY public."Question" (id_question, text_question, "likesQuestion", forum_type)
 --
 -- TOC entry 2202 (class 0 OID 24783)
 -- Dependencies: 188
--- Data for Name: Share; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: Share; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."Share" (forum_type, title, image, "descriptionShare") FROM stdin;
@@ -559,7 +559,7 @@ forum2	ws5	ws_05.png	Cenas5
 --
 -- TOC entry 2198 (class 0 OID 24613)
 -- Dependencies: 184
--- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: BiAMa
+-- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 COPY public."User" (id, name, email, birthdate, image, username, password) FROM stdin;
@@ -570,7 +570,7 @@ COPY public."User" (id, name, email, birthdate, image, username, password) FROM 
 --
 -- TOC entry 2219 (class 0 OID 0)
 -- Dependencies: 195
--- Name: sequence_notification; Type: SEQUENCE SET; Schema: public; Owner: BiAMa
+-- Name: sequence_notification; Type: SEQUENCE SET; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 SELECT pg_catalog.setval('public.sequence_notification', 3, true);
@@ -588,7 +588,7 @@ SELECT pg_catalog.setval('public.sequence_start_0', 7, true);
 --
 -- TOC entry 2221 (class 0 OID 0)
 -- Dependencies: 194
--- Name: sequence_user; Type: SEQUENCE SET; Schema: public; Owner: BiAMa
+-- Name: sequence_user; Type: SEQUENCE SET; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 SELECT pg_catalog.setval('public.sequence_user', 1, false);
@@ -596,7 +596,7 @@ SELECT pg_catalog.setval('public.sequence_user', 1, false);
 
 --
 -- TOC entry 2065 (class 2606 OID 24818)
--- Name: Answer_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Answer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Answer"
@@ -605,7 +605,7 @@ ALTER TABLE ONLY public."Answer"
 
 --
 -- TOC entry 2059 (class 2606 OID 24850)
--- Name: Curiosity_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Curiosity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Curiosity"
@@ -614,7 +614,7 @@ ALTER TABLE ONLY public."Curiosity"
 
 --
 -- TOC entry 2067 (class 2606 OID 24828)
--- Name: Favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Favorite"
@@ -623,7 +623,7 @@ ALTER TABLE ONLY public."Favorite"
 
 --
 -- TOC entry 2047 (class 2606 OID 24770)
--- Name: Forum_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Forum_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Forum"
@@ -632,7 +632,7 @@ ALTER TABLE ONLY public."Forum"
 
 --
 -- TOC entry 2057 (class 2606 OID 24644)
--- Name: Library_Material_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_Material_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_Material"
@@ -641,7 +641,7 @@ ALTER TABLE ONLY public."Library_Material"
 
 --
 -- TOC entry 2055 (class 2606 OID 24627)
--- Name: Library_User_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_User_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_User"
@@ -650,7 +650,7 @@ ALTER TABLE ONLY public."Library_User"
 
 --
 -- TOC entry 2043 (class 2606 OID 24639)
--- Name: Material_code_key; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Material_code_key; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Material"
@@ -659,7 +659,7 @@ ALTER TABLE ONLY public."Material"
 
 --
 -- TOC entry 2069 (class 2606 OID 24904)
--- Name: Notification_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Notification_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Notification"
@@ -677,7 +677,7 @@ ALTER TABLE ONLY public."Question"
 
 --
 -- TOC entry 2061 (class 2606 OID 24848)
--- Name: Share_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Share_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Share"
@@ -686,7 +686,7 @@ ALTER TABLE ONLY public."Share"
 
 --
 -- TOC entry 2051 (class 2606 OID 24880)
--- Name: User_pkey1; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: User_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."User"
@@ -695,7 +695,7 @@ ALTER TABLE ONLY public."User"
 
 --
 -- TOC entry 2053 (class 2606 OID 24622)
--- Name: User_username_key; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: User_username_key; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."User"
@@ -704,7 +704,7 @@ ALTER TABLE ONLY public."User"
 
 --
 -- TOC entry 2049 (class 2606 OID 24612)
--- Name: id; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: id; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library"
@@ -713,7 +713,7 @@ ALTER TABLE ONLY public."Library"
 
 --
 -- TOC entry 2045 (class 2606 OID 16420)
--- Name: material_pkey; Type: CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: material_pkey; Type: CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Material"
@@ -722,7 +722,7 @@ ALTER TABLE ONLY public."Material"
 
 --
 -- TOC entry 2078 (class 2606 OID 24853)
--- Name: Answer_idQuestion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Answer_idQuestion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Answer"
@@ -731,7 +731,7 @@ ALTER TABLE ONLY public."Answer"
 
 --
 -- TOC entry 2075 (class 2606 OID 24778)
--- Name: Curiosity_forum_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Curiosity_forum_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Curiosity"
@@ -740,7 +740,7 @@ ALTER TABLE ONLY public."Curiosity"
 
 --
 -- TOC entry 2079 (class 2606 OID 24834)
--- Name: Favorite_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Favorite_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Favorite"
@@ -749,7 +749,7 @@ ALTER TABLE ONLY public."Favorite"
 
 --
 -- TOC entry 2080 (class 2606 OID 24886)
--- Name: Favorite_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Favorite_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Favorite"
@@ -758,7 +758,7 @@ ALTER TABLE ONLY public."Favorite"
 
 --
 -- TOC entry 2070 (class 2606 OID 24771)
--- Name: Forum_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Forum_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Forum"
@@ -767,7 +767,7 @@ ALTER TABLE ONLY public."Forum"
 
 --
 -- TOC entry 2073 (class 2606 OID 24645)
--- Name: Library_Material_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_Material_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_Material"
@@ -776,7 +776,7 @@ ALTER TABLE ONLY public."Library_Material"
 
 --
 -- TOC entry 2074 (class 2606 OID 24650)
--- Name: Library_Material_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_Material_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_Material"
@@ -785,7 +785,7 @@ ALTER TABLE ONLY public."Library_Material"
 
 --
 -- TOC entry 2071 (class 2606 OID 24628)
--- Name: Library_User_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_User_library_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_User"
@@ -794,7 +794,7 @@ ALTER TABLE ONLY public."Library_User"
 
 --
 -- TOC entry 2072 (class 2606 OID 24881)
--- Name: Library_User_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Library_User_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Library_User"
@@ -812,7 +812,7 @@ ALTER TABLE ONLY public."Question"
 
 --
 -- TOC entry 2076 (class 2606 OID 24791)
--- Name: Share_forum_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: BiAMa
+-- Name: Share_forum_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgresql-sinuous-71786
 --
 
 ALTER TABLE ONLY public."Share"
@@ -837,7 +837,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
-\connect postgres
+--\connect postgres
 
 SET default_transaction_read_only = off;
 
@@ -920,7 +920,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
-\connect template1
+--\connect template1
 
 SET default_transaction_read_only = off;
 

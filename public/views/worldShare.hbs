@@ -41,10 +41,29 @@
 			</div>
             <div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
                 <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
-                <i ng-if="$index===worldShareItems.length-1" class="fas fa-plus-circle" ng-click="openAddWorldShare()"></i>
+                <br>
+                <i class="fas fa-plus-circle cursorPointer" style="font-size: 77px;" ng-click="openAddWorldShare()"></i>
             </div>
-            <div ng-if="addWorldShare">
-                
+            <div ng-if="addWorldShare && !loading" class="container center-block" style="background-color:#E4A73F; width:600px; height:400px; border-radius:2px;">
+                <div style="background-color:white;padding:10px;margin-top: 10px;height: 378px;margin-left: 6px;margin-right: 6px;">
+                    <h1>Nome do Projeto</h1>
+                    <div class="divider"></div>
+                    <textarea placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 422px;height: 101px;"></textarea>
+                    <div style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
+                        <div ng-if="!openWorldShareUploadLabel">
+                            <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
+                        </div>
+                        <i class="fas fa-plus-circle cursorPointer" style="font-size: 30px;border-style: dotted;width: 117px;height: 68px;padding: 13px;" ng-click="openWorldShareUpload()"></i>
+                        <br>
+                        <div class="perfilDetails" ng-if="openWorldShareUploadLabel">
+                            <input type="file" id="uploadPictureWorldShare" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+                            <button ng-click="saveUploadFile()">Guardar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="buttonConfirm" ng-click="saveConfigInsertWorldShare(imageWorldShare, descriptionWorldShare)">Confimar</button>
+                    <button ng-click="cancelInsertWorldShare()">Cancelar</button>
+                </div>
             </div>
             <div ng-if="showWorldSharesDetails && !addWorldShare" class="sectionDetails">
                 <h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>

@@ -1,4 +1,4 @@
-app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,$sce) {
+app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,$sce) {
     
     /* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -14,7 +14,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     
     $scope.loading = true;
     $scope.showSchools = false;
-    $scope.showQuestions = false;
+    $scope.showMyQuestions=false;
     $scope.showMaterials = true;
     $scope.showFavorites = false;
     var MINIMUM_CATEGORIES=7;
@@ -22,7 +22,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.zoomInMaterial = false;
     $scope.pathURL='https://www.google.com/maps/';
 
-    $scope.favorites = ['Materiais', 'Perguntas']
     $scope.categories= [];
     $scope.favorites = [];
 
@@ -31,7 +30,20 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	getMyFavorites.then(function(result) {
         $scope.loading = false;
 		var data=result.data.favoriteDetails;
-		$scope.favoriteDetails=data;
+        $scope.favoritesInfo=data;
+        $scope.favoriteDetails=[];
+        $scope.favoriteMaterials=[];
+        $scope.favoriteQuestions=[];
+
+        for(var index=0; index<$scope.favoritesInfo.length; ++index) {
+            if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
+                if($scope.favoritesInfo[index].question_id == -1) {
+                    $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
+                } else {
+                    $scope.favoriteQuestions.push($scope.favoritesInfo[index])
+                }
+            }
+        }
     });
     
     /* get information of material and of library - when i do get library */
@@ -51,17 +63,18 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         
     });
     
-    $scope.getValues = function(){
+    /*$scope.getValues = function(){
+
         var value = document.getElementById('selectedFav');
         $scope.itemSelecionado = value.options[value.selectedIndex].text
         if($scope.itemSelecionado === 'Perguntas') {
-            $scope.showQuestions = true;
+            $scope.showMyQuestions = true;
             $scope.showMaterials = false;
         } else {
-            $scope.showQuestions = false;
+            $scope.showMyQuestions = false;
             $scope.showMaterials = true;
         }
-    }
+    }*/
 
     $scope.getFavorites = function() {
         if($scope.showFavorites){
@@ -73,18 +86,29 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     $scope.selectFavorite = function(favorite){
 		if(favorite == 'Materiais'){
-            $scope.showQuestions = false;
+            $scope.showMyQuestions = false;
             $scope.showMaterials = true;
+            $scope.showQuestionDetails = false;
         }else {
-            $scope.showQuestions = true;
+            $scope.showMyQuestions = true;
             $scope.showMaterials = false;
+           // $scope.showQuestionDetails = true;
         }
+    }
+
+    $scope.openFavoritesButton = function(){
+        if($scope.showFavoritesButton){
+			$scope.showFavoritesButton = false;
+		}else {
+			$scope.showFavoritesButton = true;
+		}
+        $scope.favoritesButton = ['Materiais', 'Perguntas']
     }
 
     $scope.getFavInMaterials = function() {
         for(var index=0; index<$scope.materialsCategories.length; ++index){
-            for(var indexFav=0; indexFav<$scope.favoriteDetails.length; ++indexFav) {
-                if($scope.materialsCategories[index].material_id === $scope.favoriteDetails[indexFav].material_id) {
+            for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
+                if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
                     var infoFav = {
                         "materialId": $scope.materialsCategories[index].material_id,
                         "description": $scope.materialsCategories[index].description,
@@ -189,7 +213,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
     
     $scope.clickFavorite = function(favoriteMaterial) {
-        console.log(favoriteMaterial);
 		$scope.idFavoriteMaterial=0;
 		
 		for(var index=0; index<$scope.favoriteDetails.length; ++index) {
@@ -239,7 +262,56 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             
             $scope.clickAddFavoriteMaterial=false;
 		}
-	}
+    }
+    
+    var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
+    getUserQuestionInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.questionDetails;
+        $scope.questions=data;
+        console.log('a ', $scope.questions)
+    });
+
+    var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
+    getAnswerQuestionInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.questionDetails;
+        $scope.details=data;
+        console.log('b: ', $scope.details)
+    });
+
+    $scope.getQuestion = function(questionId, indexQuestion) {
+        $scope.showQuestionDetails = true;
+        $scope.showMyQuestions=false;
+        $scope.indexQuestion=indexQuestion+1;
+        for(var index=0; index< $scope.questions.length; ++index) {
+          if(parseInt($scope.questions[index].id_question) === questionId) {
+            $scope.idQuestion=$scope.questions[index].id_question;
+            $scope.getAnswersOfQuestion(index);
+          }
+        }
+
+        /* reset indexQuestionAnswer: number of answer of questions */
+        $scope.indexQuestionAnswer=1;
+    }
+
+    $scope.getAnswersOfQuestion = function(index) {
+        $scope.descriptionAnswer=[];
+        $scope.descriptionQuestion=$scope.questions[index].text_question;
+        for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
+            if($scope.details[indexAnswer].id_question == $scope.questions[index].id_question){
+                var resultAnswer = {
+                    numberOfQuestion: $scope.indexQuestionAnswer,
+                    text: $scope.details[indexAnswer].text_answer,
+                    likes: $scope.details[indexAnswer].likesAnswer,
+                    favorite: false
+                }
+                $scope.indexQuestionAnswer+=1;
+                $scope.descriptionAnswer.push(resultAnswer);
+            }
+        }
+        console.log('desc ', $scope.descriptionAnswer);
+    }
 }])
 
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
@@ -272,3 +344,30 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
         getMaterial: getMaterial
     };
 });
+
+app.factory("QuestionFavoriteService", function($q, $http, $timeout){
+    var getUserQuestionInfo = function() {
+      var deferred = $q.defer();
+  
+      $timeout(function() {
+        deferred.resolve($http.get('/userQuestions'));
+      }, 2000);
+  
+      return deferred.promise;
+    };
+    var getQuestionAnswer = function() {
+      var deferred = $q.defer();
+  
+      $timeout(function() {
+        deferred.resolve($http.get('/userAnswerAndQuestion'));
+      }, 2000);
+  
+      return deferred.promise;
+    };
+  
+    return {
+      getUserQuestionInfo: getUserQuestionInfo,
+      getQuestionAnswer: getQuestionAnswer
+    };
+  });
+  

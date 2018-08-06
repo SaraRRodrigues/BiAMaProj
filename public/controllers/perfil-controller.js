@@ -77,9 +77,9 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
         if(!$scope.invalidEmail && !$scope.fieldsEmpty && !$scope.invalidDate && !$scope.invalidPhoto) {
             for(var index=0; index<$scope.users.length; ++index) {
                 if($scope.users[index].id === $scope.idUserLoggerIn){
-                    $scope.updateUserDetails($scope.users[index].id, $scope.users[index].name
-                        , email, $scope.birthdateValue, image 
-                        , username, password);
+                    $scope.updateUserDetails($scope.users[index].id, $scope.users[index].name, 
+                        email, $scope.birthdateValue, image, 
+                        username, password);
                     break;
                 }
             }

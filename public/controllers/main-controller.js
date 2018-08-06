@@ -515,6 +515,7 @@ app.factory("UserService", function($q, $http, $timeout){
 	}
 
 	var getLibraryUserDetails = function() {
+		
 		var deferred = $q.defer();
 
 		/*var xhr = new XMLHttpRequest();

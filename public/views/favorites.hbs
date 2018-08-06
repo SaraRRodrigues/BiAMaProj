@@ -34,16 +34,61 @@
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
         </div>   
+		<div ng-if="!isMobileView" class="padding-left-4x">
+			<h1 class="subtitles">Favoritos</h1> 
+			<i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
+		</div>
+		<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
+			<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
+		</div>
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!isMobileView" class="padding-left-4x">
-			<h1 class="subtitles">Favoritos</h1> 
-		</div>
         <div ng-if="!loading && showFavorites">
-			<div ng-repeat="fav in favorites">
+			<div ng-if="showMaterials" ng-repeat="fav in favorites">
 				<img ng-if="!isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
 				<img ng-if="isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="35%" height="130px" alt="foto"/>
+			</div>
+			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
+                <a class="questionX" ng-click="getQuestion(question.question_id, $index)">Pergunta [{$index+1}]</a><br>
+                <div class="separateQuestions"></div>
+            </div>
+           	<div ng-if="showQuestionDetails">
+				<div class="titlesOnCenter"> 
+					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
+				</div>
+				<div class="titlesOnCenter" style="margin-left: 274px;">
+					<div ng-if="!showDivAnswer" ng-class="(!isMobileView) ? 'margin-left-10x' : 'margin-left-3x'">
+						<!-- Question -->
+						<img class="imageButton" src="../images/user.png">
+						<div ng-if="!isMobileView" class="borderQuestion">
+							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+						</div>
+						<div ng-if="isMobileView" class="borderQuestionMobile">
+							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+						</div>
+						<!-- Answers -->
+						<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
+							<img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
+							<div ng-if="$index%2!==0" class="borderQuestion">
+								<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+								<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
+							</div>
+							<div ng-if="$index%2===0 && !isMobileView"  class="borderAnswerNoMargin">
+								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+								<img class="imageButtonLeft" src="../images/user.png">
+								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+							</div>
+							<div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
+								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+								<img class="imageButtonLeft" src="../images/user.png">
+								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div ng-if="favorites.length===0">
 				<h4>Não tem favoritos associados</h4>
@@ -92,7 +137,7 @@
 						<div class="loadSchool" ng-if="loadingSchool">
 							<div class="loading-icon-footer-info"></div>
 						</div>
-						<div  ng-if="!loadingSchool" ng-repeat="biama in schools">
+						<div ng-if="!loadingSchool" ng-repeat="biama in schools">
 							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
 							<br>
 						</div>

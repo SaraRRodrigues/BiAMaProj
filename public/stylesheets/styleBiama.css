@@ -418,6 +418,15 @@ a {
   margin-top:25px;
 }
 
+.buttonConfirm{
+  border-radius:5px;
+  background-color: #5F9EA0;
+  color:white;
+  text-transform: uppercase;
+  width:130px;
+  margin-top:25px;
+}
+
 .buttonAnswerMobile{
   margin-left: 180px;
   border-radius:5px;
@@ -569,6 +578,14 @@ a {
   border:5px solid #70c0c1;
   width:340px;
   margin-left: 220px;
+  margin-top: 20px;
+  height: 93px;
+  background-color: #70c0c1;
+}
+
+.borderAnswerNoMargin{
+  border:5px solid #70c0c1;
+  width:340px;
   margin-top: 20px;
   height: 93px;
   background-color: #70c0c1;

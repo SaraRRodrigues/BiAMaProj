@@ -14,6 +14,7 @@ var likeAnswerService = require('../services/likesAnswerService');
 var curiosityService = require('../services/curiosityService');
 var worldShareService = require('../services/worldShareService');
 var worldShareForumService = require('../services/worldShareServiceForum');
+var forumService = require('../services/forumService');
 
 /* insert services */
 var insertAnswerService = require('../services/insertAnswerService');
@@ -108,13 +109,22 @@ router.get('/curiosities', (req, resp, next) => {
 });
 
 /* GET world shares: forum */
-router.get('/worldShares', (req, resp, next) => {
-	worldShareService.getWorldShares((error, worldShareDetails) => {
+router.get('/worldMyShares', (req, resp, next) => {
+	var data = req.query.data;
+	worldShareService.getAllMyWorldShares((error, worldShareDetails) => {
 		resp.json({worldShareDetails})
 	});
 });
 
 /* FOOTER SERVICES */
+
+/* GET Forum */
+router.get('/forum', (req, resp, next) => {
+	forumService.getForum((error, forumDetails) => {
+		resp.json({forumDetails})
+	});
+});
+
 /* GET favorites: favorites */
 router.get('/favorites', (req, resp, next) => {
 	favoriteService.getMyFavorites((error, favoriteDetails) => {
@@ -203,6 +213,15 @@ router.get('/worldSharesForum', (req, resp, next) => {
 		resp.json({worldShareForumDetails})
 	});
 });
+
+/* INSERT world shares */
+router.post('/insertWorldShares', (req, resp, next) => {
+	var newWorldShare = req.query.data;
+	worldShareService.insertWorldShares(newWorldShare, (error, worldShareDetails) => {
+		resp.json({worldShareDetails})
+	});
+});
+
 
 /* INSERT question : forum */
 router.post('/insertAnswer', (req, resp, next) => {

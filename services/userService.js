@@ -72,7 +72,6 @@ function insertUserSettings(data, cb){
 	});
 }
 
-
 function getMyQuestionsLogged(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
@@ -121,3 +120,4 @@ function insertLibraryUserDetails(data, cb){
 		});
 	});
 }
+
