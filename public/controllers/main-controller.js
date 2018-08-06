@@ -93,7 +93,7 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
  
-.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "$http", "jQuery", function($scope, UserService, MyBiamaService, CompareMaterialService, $http) {
+.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "NotificationService", "$http", "jQuery", function($scope, UserService, MyBiamaService, CompareMaterialService,NotificationService, $http) {
 	
 	var window_width = $( window ).width();
 	if(window_width < 1024) {
@@ -451,7 +451,34 @@ app.constant('jQuery', window.jQuery)
 		}
 		$scope.showDetailsOfMaterial=false;
 	}
+
+	$scope.getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
+
+    $scope.getNotifications.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.notificationDetails;
+        $scope.notifications=data;
+		$scope.numberOfNotifications=$scope.notifications.length;
+		$scope.loading = true;
+    });
 }])
+
+app.factory("NotificationService", function($q, $http, $timeout){
+    var getMyNotifications = function() {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications'));
+        }, 2000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMyNotifications: getMyNotifications
+    };
+});
 
 app.factory("UserService", function($q, $http, $timeout){
     
