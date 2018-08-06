@@ -1,4 +1,4 @@
-app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,$sce) {
+app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService","$route", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,$route, $sce) {
     
     /* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -21,9 +21,12 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.showFavorites=true;
     $scope.zoomInMaterial = false;
     $scope.pathURL='https://www.google.com/maps/';
+    $scope.likes=0;
+    $scope.indexQuestionAnswer=1;
 
     $scope.categories= [];
     $scope.favorites = [];
+    $scope.descriptionAnswer=[];
 
     /* get favorites material */
 	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
@@ -76,6 +79,9 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         }
     }*/
 
+    $scope.reload = function() {
+        $route.reload();
+    }
     $scope.getFavorites = function() {
         if($scope.showFavorites){
 			$scope.showFavorites = false;
@@ -280,8 +286,18 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.details=data;
-        console.log('b: ', $scope.details)
+        //console.log('b: ', $scope.details)
+        $scope.calculateAnswerId($scope.details);
     });
+
+    $scope.calculateAnswerId = function(details) {
+        $scope.biggestId=0;
+        for(var index=0; index<details.length; ++index){
+            if(details[index].id_answer>$scope.biggestId){
+            $scope.biggestId=details[index].id_answer;
+            }
+        }
+    }
 
     $scope.getQuestion = function(questionId, indexQuestion) {
         debugger
@@ -299,7 +315,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
 
     $scope.getAnswersOfQuestion = function(index) {
-        $scope.descriptionAnswer=[];
+        
         $scope.descriptionQuestion=$scope.questions[index].text_question;
         for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
             if($scope.details[indexAnswer].id_question == $scope.questions[index].id_question){
@@ -313,8 +329,24 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 $scope.descriptionAnswer.push(resultAnswer);
             }
         }
-        console.log('desc ', $scope.descriptionAnswer);
+        console.log('description ',  $scope.descriptionAnswer);
     }
+
+    $scope.clickOnAnswer = function() {
+        $scope.showDivAnswer=true;
+    }
+
+    $scope.putAnswer = function(textAnswer) {
+        var data = {
+          text: textAnswer,
+          likes: $scope.likes,
+          idQuestion: $scope.idQuestion,
+          idAnswer: $scope.biggestId
+        };
+        
+        $http.post('/insertAnswer', data);
+        $scope.showDivAnswer=false;
+      }
 }])
 
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){

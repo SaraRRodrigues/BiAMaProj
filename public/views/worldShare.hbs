@@ -42,7 +42,7 @@
             <div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
                 <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
                 <br>
-                <i class="fas fa-plus-circle cursorPointer" style="font-size: 77px;" ng-click="openAddWorldShare()"></i>
+                <i ng-if="!loading" class="fas fa-plus-circle cursorPointer" style="font-size: 77px;" ng-click="openAddWorldShare()"></i>
             </div>
             <div ng-if="addWorldShare && !loading" class="container center-block" style="background-color:#E4A73F; width:600px; height:400px; border-radius:2px;">
                 <div style="background-color:white;padding:10px;margin-top: 10px;height: 378px;margin-left: 6px;margin-right: 6px;">
