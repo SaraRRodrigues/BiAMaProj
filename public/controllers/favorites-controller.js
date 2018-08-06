@@ -85,6 +85,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
 
     $scope.selectFavorite = function(favorite){
+        $scope.showFavoritesButton=false;
 		if(favorite == 'Materiais'){
             $scope.showMyQuestions = false;
             $scope.showMaterials = true;
@@ -100,7 +101,9 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         if($scope.showFavoritesButton){
 			$scope.showFavoritesButton = false;
 		}else {
-			$scope.showFavoritesButton = true;
+            $scope.showFavoritesButton = true;
+            $scope.showMyQuestions = false;
+            $scope.showMaterials = false;
 		}
         $scope.favoritesButton = ['Materiais', 'Perguntas']
     }
@@ -281,6 +284,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     });
 
     $scope.getQuestion = function(questionId, indexQuestion) {
+        debugger
         $scope.showQuestionDetails = true;
         $scope.showMyQuestions=false;
         $scope.indexQuestion=indexQuestion+1;
@@ -290,7 +294,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.getAnswersOfQuestion(index);
           }
         }
-
         /* reset indexQuestionAnswer: number of answer of questions */
         $scope.indexQuestionAnswer=1;
     }

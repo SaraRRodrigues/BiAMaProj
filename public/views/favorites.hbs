@@ -52,14 +52,14 @@
 				<img ng-if="isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="35%" height="130px" alt="foto"/>
 			</div>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
-                <a class="questionX" ng-click="getQuestion(question.question_id, $index)">Pergunta [{$index+1}]</a><br>
+                <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestions"></div>
             </div>
            	<div ng-if="showQuestionDetails">
 				<div class="titlesOnCenter"> 
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
-				<div class="titlesOnCenter" style="margin-left: 274px;">
+				<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
 					<div ng-if="!showDivAnswer" ng-class="(!isMobileView) ? 'margin-left-10x' : 'margin-left-3x'">
 						<!-- Question -->
 						<img class="imageButton" src="../images/user.png">
