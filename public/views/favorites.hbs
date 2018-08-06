@@ -35,8 +35,10 @@
             </div>
         </div>   
 		<div ng-if="!isMobileView" class="padding-left-4x">
-			<h1 class="subtitles">Favoritos</h1> 
-			<i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
+			<h1 class="subtitles">Favoritos
+				<i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
+			</h1> 
+			
 		</div>
 		<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 			<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
