@@ -300,7 +300,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     }
 
     $scope.getQuestion = function(questionId, indexQuestion) {
-        debugger
         $scope.showQuestionDetails = true;
         $scope.showMyQuestions=false;
         $scope.indexQuestion=indexQuestion+1;

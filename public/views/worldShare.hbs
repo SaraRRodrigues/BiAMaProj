@@ -101,9 +101,19 @@
                 <div style="background-color:white;padding:10px;margin-top: 10px;height: 378px;margin-left: 6px;margin-right: 6px;">
                     <h1>Nome do Projeto</h1>
                     <div class="divider"></div>
-                    <textarea ng-if="isMobileView" placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 248px;height: 101px;"></textarea>
-                    <textarea ng-if="!isMobileView" placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 422px;height: 101px;"></textarea>
-                    <div style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
+                    <textarea placeholder="Descrição..." ng-model="descriptionWorldShare" style="width: 256px;height: 101px;"></textarea><br>
+                    <div ng-if="!isMobileView" style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
+                        <i ng-if="!savePhoto" class="fas fa-plus-circle cursorPointer" style="font-size: 30px;border-style: dotted;width: 117px;height: 68px;padding: 13px;" ng-click="openWorldShareUpload()"></i>
+                        <div ng-if="savePhoto">
+                            <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
+                        </div>
+                        <br>
+                        <div ng-if="openWorldShareUploadLabel">
+                            <input type="file" id="uploadPictureWorldShare" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+                            <button ng-click="saveUploadFile()">Guardar</button>
+                        </div>
+                    </div>
+                    <div ng-if="isMobileView" style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
                         <div ng-if="!openWorldShareUploadLabel">
                             <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
                         </div>

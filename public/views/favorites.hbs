@@ -103,7 +103,7 @@
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<button ng-if="!loading && showQuestionDetails" ng-click="reload()"></button>
+		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites">
 			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
 				<img ng-if="!isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>

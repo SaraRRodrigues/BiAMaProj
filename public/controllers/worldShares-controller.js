@@ -11,6 +11,8 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         }
     ];
     $scope.descriptionWorldShare='';
+    $scope.savePhoto=false;
+    $scope.openWorldShareUploadLabel=false;
 
     var window_width = $( window ).width();
 	if(window_width <= 1024) {
@@ -80,10 +82,10 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     }
     
     $scope.saveUploadFile = function () {
+        $scope.savePhoto=true;
         var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
         var res = splitDeviceRe.exec(($("#uploadPictureWorldShare").val()));
         $scope.imageWorldShare=res[2];
-        console.log('image: ', $scope.imageWorldShare)
         $scope.numberOfNewShares[0].insert=false;
         $scope.openWorldShareUploadLabel=false;
     }
@@ -93,14 +95,17 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         $scope.imageWorldShare='';
     }
 
-    $scope.saveConfigInsertWorldShare = function (image, description) {
-        var data = {
-            'forumType': $scope.forumType, 
-            'title': $scope.title,
-            'image': image,
-            'description': description
+    $scope.saveConfigInsertWorldShare = function (image, description) {  
+        debugger
+        if(image !== undefined) {
+            var data = {
+                'forumType': $scope.forumType, 
+                'title': $scope.title,
+                'image': image,
+                'description': description
+            }
+            $http.post('/insertWorldShares', data);
         }
-        $http.post('/insertWorldShares', data);
     }
 }])
 

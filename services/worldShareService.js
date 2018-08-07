@@ -25,11 +25,12 @@ function insertWorldShares(data, cb){
 	var title = data.title;
 	var image = data.image;
 	var description = data.description;
+
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('INSERT INTO "Shares" VALUES($1, $2, $3, $4)', [forumType,title,image,description], function(err, result) {
+		client.query('INSERT INTO "Share" VALUES($1, $2, $3, $4)', [forumType,title,image,description], function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);

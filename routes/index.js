@@ -216,7 +216,7 @@ router.get('/worldSharesForum', (req, resp, next) => {
 
 /* INSERT world shares */
 router.post('/insertWorldShares', (req, resp, next) => {
-	var newWorldShare = req.query.data;
+	var newWorldShare = req.body;
 	worldShareService.insertWorldShares(newWorldShare, (error, worldShareDetails) => {
 		resp.json({worldShareDetails})
 	});
