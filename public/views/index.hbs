@@ -386,7 +386,7 @@
 					</div>
 
 					<!-- image biama with search -->
-					<div ng-if="(showMaterials || registUser) && !isMobileView" class="row text-center">
+					<div ng-if="search && (showMaterials || registUser) && !isMobileView" class="row text-center">
 						<img class="margin-top-3x" src="../images/topoBiama.png"/>
 					</div>
 
@@ -401,7 +401,7 @@
 								</span>
 							</div>
 						</div>
-						<div ng-if="showMaterials && !isMobileView">
+						<div ng-if="search && showMaterials && !isMobileView">
 							<div class="padding sectionScrollSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
 									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">

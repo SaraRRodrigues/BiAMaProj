@@ -5,7 +5,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService", "$http", "jQuer
 		//jQuery("#footerMainMobile").hide();
 		/* my current page */
 		$scope.namePage='biamaPage';
-		
+
 		console.log('window width: ', window.innerWidth);
 	
     $scope.loading = true;

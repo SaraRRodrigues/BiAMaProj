@@ -11,7 +11,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	} else {
 		$scope.isMobileView=false;
     }
-    
+
     $scope.loading = true;
     $scope.showSchools = false;
     $scope.showMyQuestions=false;
