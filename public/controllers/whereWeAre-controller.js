@@ -1,9 +1,10 @@
-app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "$http" ,"$sce", "$route", "jQuery", function($scope, BiAMaInfoService, LibraryMaterialInfoService, $http, $sce, $route){
+app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "$http" ,"$sce", "$route", "jQuery", "$location", function($scope, BiAMaInfoService, LibraryMaterialInfoService, $http, $sce, $route, $location){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
     /* my current page */
     $scope.namePage='whereWeAre';
+    $scope.nameclick='whereWeAre';
 
     var window_width = $( window ).width();
 	if(window_width <= 1024) {
@@ -16,7 +17,10 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
     $scope.schools=[];
     $scope.pathURL='https://www.google.com/maps/';
 
-    $scope.nameclick='whereWeAre';
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
 	$scope.changeColorClick = function(name) {
 		$scope.userDetails = false;
 		$scope.search = false;
@@ -69,9 +73,6 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		}else {
 			$scope.zoomInIFrame = true;
 		}
-    }
-    $scope.reloadPage = function() {
-        $route.reload();
     }
 }])
 

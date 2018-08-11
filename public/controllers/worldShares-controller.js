@@ -45,6 +45,10 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
           }
       } 
     });
+    
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
 
     $scope.openDetailsWorldShare = function(image) {
         for(var index=0; index<$scope.worldShareData.length; ++index) {
@@ -88,11 +92,22 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         $scope.imageWorldShare=res[2];
         $scope.numberOfNewShares[0].insert=false;
         $scope.openWorldShareUploadLabel=false;
+
+        for(var index=0; index<$scope.worldShareData.length; ++index) {
+            if(index===$scope.worldShareData.length-1) {
+              var result = ($scope.worldShareData[index].title).split("s");
+              var numberTitle=result[1];
+              $scope.title='ws' + (parseInt(numberTitle)+1);
+            }
+        } 
+        //$scope.uploadedFile($scope.imageWorldShare)
     }
     
     $scope.cancelInsertWorldShare = function() {
         $scope.descriptionWorldShare='';
         $scope.imageWorldShare='';
+        $scope.openWorldShareUploadLabel=true;
+        $scope.savePhoto=false;
     }
 
     $scope.saveConfigInsertWorldShare = function (image, description) {  
@@ -105,6 +120,34 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'description': description
             }
             $http.post('/insertWorldShares', data);
+        }
+    }
+
+    $scope.postUpload = function(valueInput) {
+        console.log('x: ', valueInput);
+        var inputResult = jQuery('#uploadPictureWorldShare');
+
+        console.log('file: ', inputResult);
+        var fd = new FormData();
+        fd.append('file', inputResult);
+
+        
+    }
+    $scope.uploadedFile=function(element) {
+        if(element !== undefined || element !== null || element !== '') {
+            $scope.currentFile = element.files[0];
+            /* var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var output = jQuery('#output');
+                output.src = URL.createObjectURL(element.files[0]);
+            }
+            reader.readAsDataURL(element.files[0]); */
+       
+
+            var assetLocalPath=""+$scope.currentFile.name;
+            var file = new File([""],assetLocalPath);
+            alert(file.name);
         }
     }
 }])

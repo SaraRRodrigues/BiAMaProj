@@ -71,6 +71,10 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.indexQuestionAnswer=1;
     }
 
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+    
     $scope.getAnswersOfQuestion = function(index) {
         $scope.descriptionQuestion=$scope.myQuestions[index].text_question;
         for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){

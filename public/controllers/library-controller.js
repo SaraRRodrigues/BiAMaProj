@@ -49,9 +49,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 
 	$scope.nameclick='library';
 	$scope.changeColorClick = function(name) {
-		debugger
-		//$route.navigated = false;
-		//$route.navigate([$route.url]);
 		$scope.locationMaterial=false;
 		$scope.zoomInMaterial=false;
 		$scope.showCategory=false;
@@ -60,6 +57,10 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.userDetails = false;
 		$scope.search = false;
 		$scope.nameclick=name;
+	}
+
+	$scope.goToHomePage = function() {
+		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
 	/* get information of material and of library - when i do get library */

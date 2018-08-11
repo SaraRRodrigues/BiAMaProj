@@ -28,6 +28,16 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.favorites = [];
     $scope.descriptionAnswer=[];
 
+    if($scope.userName !== undefined) {
+        $scope.doLogin=false;
+    } else {
+        $scope.doLogin=true;
+    }
+
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+
     /* get favorites material */
 	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
 	getMyFavorites.then(function(result) {
@@ -37,7 +47,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.favoriteDetails=[];
         $scope.favoriteMaterials=[];
         $scope.favoriteQuestions=[];
-
+        
         for(var index=0; index<$scope.favoritesInfo.length; ++index) {
             if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
                 if($scope.favoritesInfo[index].question_id == -1) {

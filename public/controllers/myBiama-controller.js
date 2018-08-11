@@ -18,7 +18,11 @@ app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuer
 		$scope.userDetails = false;
 		$scope.search = false;
 		$scope.nameclick=name;
-    }
+	}
+	
+	$scope.goToHomePage = function() {
+		window.setTimeout("location.href = 'http://localhost:8080'")
+	}
 
 	$scope.loading=true;
 	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});

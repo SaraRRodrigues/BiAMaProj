@@ -12,7 +12,7 @@ app.constant('jQuery', window.jQuery)
 	$routeProvider
 	 .when('/BiAMa/whereWeAre', {
 	  templateUrl: 'views/whereWeAre',
-	  controller: 'WhereWeAreController',
+	  controller: 'WhereWeAreController'
 	})
 	$routeProvider.when('/BiAMa/biamaPage', {
 		templateUrl: 'views/biamaPage',
@@ -101,6 +101,8 @@ app.constant('jQuery', window.jQuery)
 	} else {
 		$scope.isMobileView=false;
 	}
+	$scope.namePage='index';
+	$scope.nameclick='index';
 
 	$scope.showSearch = false;
 	$scope.userDetails = false;
@@ -153,6 +155,10 @@ app.constant('jQuery', window.jQuery)
 
 	}); 
   
+	$scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+	
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
 			$scope.showSearch = false;
@@ -182,7 +188,6 @@ app.constant('jQuery', window.jQuery)
 		$scope.search = false;
 	}
 
-	$scope.nameclick='biamaPage';
 	$scope.changeColorClick = function(name) {
 		$scope.userDetails = false;
 		$scope.search = false;

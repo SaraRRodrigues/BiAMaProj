@@ -24,18 +24,28 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
     $scope.openImageUploadLabel=false;
     $scope.uploadPhoto='';
     $scope.new_birthdate='';
+    $scope.showPerfilDetails=false;
 
     $scope.initUserDetails= function() {
-        for(var index=0; index<$scope.users.length; ++index) {
-            if($scope.users[index].id === $scope.idUserLoggerIn){
-                $scope.name=$scope.users[index].name;
-                $scope.username=$scope.users[index].username;
-                $scope.imageUser=$scope.users[index].image;
-                $scope.email=$scope.users[index].email;
-                $scope.birthdateValue=$scope.users[index].birthdate;
-                $scope.password=$scope.users[index].password;
+        if($scope.users !== undefined) {
+            $scope.showPerfilDetails=true;
+            for(var index=0; index<$scope.users.length; ++index) {
+                if($scope.users[index].id === $scope.idUserLoggerIn){
+                    $scope.name=$scope.users[index].name;
+                    $scope.username=$scope.users[index].username;
+                    $scope.imageUser=$scope.users[index].image;
+                    $scope.email=$scope.users[index].email;
+                    $scope.birthdateValue=$scope.users[index].birthdate;
+                    $scope.password=$scope.users[index].password;
+                }
             }
+        } else {
+            $scope.showPerfilDetails=false;
         }
+    }
+
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
     }
     
     $scope.clickUserDetails = function() {

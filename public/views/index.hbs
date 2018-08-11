@@ -283,15 +283,15 @@
 			</div>
 		</div>
 		<div class="divController" >
-			<header ng-if="!isMobileView" class="masthead text-white text-center">
+			<header ng-if="!isMobileView && namePage=='index'" class="masthead text-white text-center">
 				<nav>
 					<div style="background-color: gray;padding-bottom: 31px;padding-top: 11px;">
 						<i class="float-left fas fa-circle redCircle margin-right margin-left"></i>
 						<i class="float-left fas fa-circle orangeCircle margin-right"></i>
 						<i class="float-left fas fa-circle greenCircle margin-right-3x"></i>
 
-						<i class="float-left fa fa-chevron-left arrows margin-right-2x"></i>						
-						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>
+						<!--<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" ng-click="goToHomePage()"></i>						
+						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>-->
 						
 					</div>
 					<div style="background-color: gray;padding-top: 1px;">
@@ -300,7 +300,7 @@
 				</nav>	
 			</header>
 			<article>
-				<div class="" style="background-color: white;">
+				<div style="background-color: white;">
 					<!-- user & search & languages-->
 					<nav class="positionOfNavDetails">
 						<!-- languages -->
@@ -311,19 +311,6 @@
 							<input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
 						</div> 
 
-						<!--<div class="padding-left-6x" style="margin-top: -25px;">
-							<label class="labelLanguage">Idioma</label>
-							<div class="separatorLanguage"></div>
-							<label class="selectLanguage"></label>
-							<label class="languageSize">[{languageSelected}]</label>
-							<i ng-click="getLanguages()" class="fas fa-caret-down"></i>	
-							<div ng-if="showLanguages">
-								<div ng-repeat="language in languages">
-									<label ng-click="selectLanguage(language)" class="languagesDiv">[{language}]</label>
-									<br>
-								</div>
-							</div>
-						</div>	-->
 						<!-- details user -->
 						<div ng-if="!isMobileView" class="row">
 							<nav class="padding-left-3x">

@@ -10,7 +10,11 @@ app.controller("NotificationsController", ['$scope', "NotificationService", "$ht
 		$scope.isMobileView=true;
 	} else {
 		$scope.isMobileView=false;
-	}
+    }
+    
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
 }])
 
 

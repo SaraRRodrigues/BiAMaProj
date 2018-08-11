@@ -86,6 +86,7 @@
             <div ng-if="!isMobileView" class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
+            <i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>
             <div ng-if="!isMobileView" class="padding-left-4x">
                 <h1 ng-if="showWorldShares" class="subtitles">Partilhar com o Mundo</h1> 
             </div>
@@ -109,17 +110,20 @@
                         </div>
                         <br>
                         <div ng-if="openWorldShareUploadLabel">
-                            <input type="file" id="uploadPictureWorldShare" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+                            <form method="post" enctype="multipart/form-data">
+                                <input type="file" id="uploadPictureWorldShare" file-model="valueInput" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
+                                <input type="submit" name="submit" value="submit" ng-click="postUpload(valueInput)">
+                            </form>
                             <button ng-click="saveUploadFile()">Guardar</button>
                         </div>
                     </div>
                     <div ng-if="isMobileView" style="display: inline-flex;margin-left: 21px;margin-top: 20px;">
-                        <div ng-if="!openWorldShareUploadLabel">
-                            <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
+                        <i ng-if="!savePhoto" class="fas fa-plus-circle cursorPointer" style="font-size: 30px;border-style: dotted;width: 117px;height: 68px;padding: 13px;" ng-click="openWorldShareUpload()"></i>
+                        <div ng-if="savePhoto">
+                            <img id="output" src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
                         </div>
-                        <i class="fas fa-plus-circle cursorPointer" style="font-size: 30px;border-style: dotted;width: 117px;height: 68px;padding: 13px;" ng-click="openWorldShareUpload()"></i>
                         <br>
-                        <div class="perfilDetails" ng-if="openWorldShareUploadLabel">
+                        <div ng-if="openWorldShareUploadLabel">
                             <input type="file" id="uploadPictureWorldShare" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
                             <button ng-click="saveUploadFile()">Guardar</button>
                         </div>
@@ -141,22 +145,6 @@
                 <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter" ng-src="../images/worldSharesForum/[{bigImage}]"  width="40%" height="40%" alt="foto"/><br>
             </div>
         </div>
-        <footer ng-if="!isMobileView" class="w3-bar w3-center footer">
-			<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-			<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
-
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
-
-			<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-			<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
-
-			<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-			<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
-
-			<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-			<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
-		</footer>
     </body>
 </html>
 

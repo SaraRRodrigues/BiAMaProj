@@ -56,27 +56,27 @@
     <body ng-app="myApp" ng-controller="PerfilController">
         <div >
              <!-- header -->
-        <div ng-if="isMobileView" class="container-fluid">
-            <div class="header">
-                <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
+            <div ng-if="isMobileView" class="container-fluid">
+                <div class="header">
+                    <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
+                        <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
+                    </div>
+                    <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
+                        <h2 class="subtitles" style="font-size: 16px;">O meu perfil</h2>
+                    </div>
+                    <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
+                        <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                        <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
+                    </div>
+                    <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -55px;">
+                        <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                        <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
+                    </div>
+                    <div class="col-sm-1">
+                        <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="    width: 201px;margin-top: 2px;margin-left: 74px;"></input>
+                    </div>
                 </div>
-                <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 class="subtitles" style="font-size: 16px;">O meu perfil</h2>
-                </div>
-                <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -55px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="    width: 201px;margin-top: 2px;margin-left: 74px;"></input>
-                </div>
-            </div>
-        </div> 
+            </div> 
             <!--image biama -->
             <div ng-if="!isMobileView" class="row text-center">
                 <img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -88,9 +88,13 @@
                 <div class="imageLeft">
                     <img class="margin-top-3x" src="../images/leftBiama.png"/>
                 </div>
+                <i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>
 			    <h1 class="subtitles">O meu perfil</h1>
-		    </div>
-            <div>
+                <div ng-if="!showPerfilDetails">
+                    Efetue login para obter ao seu perfil.
+                </div>
+            </div>
+            <div ng-if="showPerfilDetails">
                 <br>
                 <div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
                     <!-- user photo -->
@@ -138,21 +142,5 @@
                 </div>
             </div>
         </div>
-        <footer ng-if="!isMobileView" class="w3-bar w3-center footer">
-			<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-			<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
-
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
-
-			<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-			<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
-
-			<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-			<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
-
-			<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-			<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
-		</footer>
     </body>
 </html>

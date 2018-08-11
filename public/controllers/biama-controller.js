@@ -14,7 +14,11 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService", "$http", "jQuer
         $scope.loading = false;
         var data=result.data.biamaDetails;
         $scope.descriptionBiama=data[0].description;
-    });
+		});
+
+		$scope.goToHomePage = function() {
+			window.setTimeout("location.href = 'http://localhost:8080'")
+		}
 }])
 
 app.factory("BiAMaInfoService", function($q, $http, $timeout){

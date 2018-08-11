@@ -23,8 +23,11 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 		$scope.nameclick=name;
 	}
 
+	$scope.goToHomePage = function() {
+		window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+
 	$scope.clickTopSearch = function() {
-		debugger
 		if($scope.showSearch){
 			$scope.showSearch = false;
 		}else {

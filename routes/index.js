@@ -1,7 +1,6 @@
 
 var express = require('express');
 var router = express.Router();
-var path = require('path');
 
 var userService = require('../services/userService');
 var biamaInfoService = require('../services/biamaInformationService');
@@ -222,7 +221,6 @@ router.post('/insertWorldShares', (req, resp, next) => {
 	});
 });
 
-
 /* INSERT question : forum */
 router.post('/insertAnswer', (req, resp, next) => {
 	var answer = req.body;
@@ -247,12 +245,12 @@ router.post('/deleteFavoriteQuestion', (req, resp, next) => {
 	});
 });
 
-router.get('/views/:name', (req, resp, next) => {
+/*para poder fazer o refresh*/ 
+router.get('/BiAMa/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
 
-/*para poder fazer o refresh*/ 
-router.get('/BiAMa/:name', (req, resp, next) => {
+router.get('/views/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
 
