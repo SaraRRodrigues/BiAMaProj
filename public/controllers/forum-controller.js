@@ -1,6 +1,6 @@
 
-app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope, $http){
-	
+app.controller("ForumController", ['$scope', "$http","$route", "jQuery", function($scope, $http, $route){
+
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 	/* my current page */
@@ -21,6 +21,10 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 		$scope.userDetails = false;
 		$scope.search = false;
 		$scope.nameclick=name;
+	}
+
+	$scope.reloadForum = function() {
+		$route.reload();
 	}
 
 	$scope.goToHomePage = function() {
@@ -47,7 +51,7 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	  controller: 'QuestionsUsersForumController'
 	});
 	$routeProvider.when('/BiAMa/worldSharesForum', {
-		templateUrl: 'views/worldShareForum',
+		templateUrl: 'views/worldSharesForum',
 		controller: 'WorldShareForumController'
 	  });
 	

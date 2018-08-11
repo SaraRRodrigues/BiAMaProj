@@ -1,5 +1,5 @@
 
-app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesService", function($scope, $http, CuriositiesService){
+app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesService", "jQuery", function($scope, $http, CuriositiesService){
 
     $scope.loading=true;
     $scope.descriptionCuriosity=[];
@@ -22,6 +22,10 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
             }
     });
 
+    $scope.goToForum = function() {
+      window.setTimeout("location.href = 'http://localhost:8080'")
+    } 
+    
     $scope.openDetailsCuriosity = function(image) {
       for(var index=0; index<$scope.descriptionCuriosity.length; ++index) {
 				if($scope.descriptionCuriosity[index].image === image){

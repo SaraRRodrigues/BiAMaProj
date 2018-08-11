@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "$http", "LikeQuestionService", "LikeAnswerService", "$route", function($scope, UserForumQuestionService, $http, LikeQuestionService, LikeAnswerService, $route){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "$http", "LikeQuestionService", "LikeAnswerService", "$route", "jQuery", function($scope, UserForumQuestionService, $http, LikeQuestionService, LikeAnswerService, $route){
 
 
     var window_width = $( window ).width();
@@ -39,6 +39,10 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.calculateAnswerId($scope.details);
     });
     
+    $scope.goToForum = function() {
+      window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
     $scope.calculateAnswerId = function(details) {
       $scope.biggestId=0;
       for(var index=0; index<details.length; ++index){

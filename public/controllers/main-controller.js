@@ -27,7 +27,7 @@ app.constant('jQuery', window.jQuery)
 		controller: 'MyBiamaController'
 	  });
 
-	$routeProvider.when('/BiAMa/forum', {
+	$routeProvider.when('/BiAMa/forumPage', {
 	templateUrl: 'views/forumPage',
 	controller: 'ForumController'
 	});

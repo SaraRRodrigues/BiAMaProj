@@ -1,5 +1,5 @@
 
-app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "$http", function($scope,WorldSharesForumService,MyBiamaService, $http){
+app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "$http", "jQuery", function($scope,WorldSharesForumService,MyBiamaService, $http){
 
     var window_width = $( window ).width();
     if(window_width <= 1024) {
@@ -33,6 +33,10 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
           $scope.worldShareData.push(data[index]);
       }
     });
+
+    $scope.goToForum = function() {
+      window.setTimeout("location.href = 'http://localhost:8080'")
+    }
 
     $scope.openDetailsWorldShare = function(image) {
       for(var index=0; index<$scope.worldShareData.length; ++index) {

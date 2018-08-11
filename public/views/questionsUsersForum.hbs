@@ -3,24 +3,42 @@
 		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+		<!-- font awesome styles -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
+		<!-- jQuery files -->
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		
+		<!-- -->
+		<!--<script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) { options.async = true; });</script>-->
+
+		<!-- angular files -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
+		
+		<!-- bootstrap styles -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<!-- languages file -->
+		<script type="application/json" src="jsonLabels/en.json"></script>
+ 	
 		<!-- Firebase -->
 		<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 		<!-- AngularFire -->
 		<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
 
 		<!--footer controllers-->
 		<script type="text/javascript" src="../controllers/main-controller.js"></script>
 		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
 		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
 		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
-        <script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
+		<script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
 		<script type="text/javascript" src="../controllers/library-controller.js"></script>
@@ -71,7 +89,8 @@
 		<div ng-if="!isMobileView" class="titlesOnCenter">
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
-            </div> 
+            </div>
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToForum()"></i>
 			<h1 ng-if="!showQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 		</div>
 		<div ng-if="loading">
@@ -216,23 +235,6 @@
 				</div>
 			</div>
 		</div>
-		<footer ng-if="!isMobileView" class="w3-bar w3-center footer">
-			<a href="/BiAMa/biamaPage" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-			<a href="/BiAMa/biamaPage" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
-
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-			<a href="/BiAMa/whereWeAre" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
-
-			<a href="/BiAMa/library" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-			<a href="/BiAMa/library" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
-
-			<a href="/BiAMa/myBiama" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-			<a href="/BiAMa/myBiama" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
-
-			<a href="/BiAMa/forum" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-			<a href="/BiAMa/forum" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
-		</footer>
-        
 	</body>
 </html>
 
