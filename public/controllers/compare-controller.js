@@ -1,4 +1,4 @@
-app.controller("CompareController", ['$scope',"CompareMaterialService","jQuery", "$http", function($scope, CompareMaterialService, $http){
+app.controller("CompareController", ['$scope',"CompareMaterialService", "$http", "jQuery", function($scope, CompareMaterialService, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -16,7 +16,7 @@ app.controller("CompareController", ['$scope',"CompareMaterialService","jQuery",
     $scope.searchToCompare=true;
     $scope.materialToCompare=[];
     $scope.loading = true;
-    $scope.doLogin=true;
+    $scope.doLogin=false;
 
     $scope.searchMaterial = function() {
         $scope.searchToCompare=true;

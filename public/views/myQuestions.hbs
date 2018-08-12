@@ -62,6 +62,8 @@
                 <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
                     <h2 class="subtitles" style="font-size: 14px;">As minhas perguntas</h2>
                 </div>
+                <i ng-if="isMobileView" class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;" ng-click="goToHomePage()"></i>
+
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
@@ -86,7 +88,7 @@
             <div ng-if="!isMobileView" class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-            <i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>
+            <i ng-if="!isMobileView"class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>
             <div ng-if="!isMobileView" class="padding-left-4x">
                 <h1 ng-if="!showMyQuestions" class="subtitles">As minhas perguntas</h1> 
             </div>

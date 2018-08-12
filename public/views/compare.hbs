@@ -76,7 +76,7 @@
                     <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 class="subtitles" style="font-size: 16px;">Partilhar com o Mundo</h2>
+                    <h2 class="subtitles" style="font-size: 16px;">Comparar Materiais</h2>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
@@ -107,7 +107,7 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
             <div ng-if="!isMobileView" class="padding-left-4x">
-                <h1 class="subtitles">Comparar Materiais</h1> 
+                <h1 class="subtitles">Comparar Materiais</h1>
             </div>
             <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
                 <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
@@ -118,13 +118,9 @@
                 </div>
             </div>
             <br>
-            <div ng-if="!doLogin" class="ui-widget">
+            <div class="ui-widget">
                 <input id="tags" style="width: 195px;">
                 <button ng-click="selectedMaterial()">OK</button>
-            </div>
-             <div ng-if="doLogin" class="ui-widget">
-                <input id="tags" disabled style="width: 195px;">
-                <button ng-click="selectedMaterial()" disabled>OK</button>
             </div>
             <div ng-if="doLogin">
                 <h4>Efetue login para obter comparações entre materiais.</h4>

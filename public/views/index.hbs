@@ -135,9 +135,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div ng-if="isMobileView" class="row">
 				<nav class="padding-left-3x">
-					<div class="navDetailsUser" ng-if="userDetails" style="margin-top: -762px;"><br>
+					<div class="navDetailsUser" ng-if="userDetails"><br>
 						<div ng-if="!confirmSession">
 							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 							<a>Favoritos</a><br>
