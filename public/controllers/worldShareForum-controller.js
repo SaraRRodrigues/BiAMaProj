@@ -1,6 +1,12 @@
 
 app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "$http", "jQuery", function($scope,WorldSharesForumService,MyBiamaService, $http){
 
+    $scope.nameclick='forum'
+
+    /* hide footer of index page because of click in buttons footer reload page */
+    jQuery("#footerMainMobile").hide();
+    /* my current page */
+  
     var window_width = $( window ).width();
     if(window_width <= 1024) {
       $scope.isMobileView=true;

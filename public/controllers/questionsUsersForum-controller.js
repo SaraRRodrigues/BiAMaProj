@@ -1,6 +1,11 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "$http", "LikeQuestionService", "LikeAnswerService", "$route", "jQuery", function($scope, UserForumQuestionService, $http, LikeQuestionService, LikeAnswerService, $route){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","$http", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, $http){
 
+    $scope.nameclick='forum'
+    
+    /* hide footer of index page because of click in buttons footer reload page */
+    jQuery("#footerMainMobile").hide();
+    /* my current page */
 
     var window_width = $( window ).width();
     if(window_width <= 1024) {
@@ -38,11 +43,19 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.details=data;
         $scope.calculateAnswerId($scope.details);
     });
-    
+
     $scope.goToForum = function() {
       window.setTimeout("location.href = 'http://localhost:8080'")
     }
 
+    $scope.clickTopSearch = function() {
+      if($scope.showSearch){
+        $scope.showSearch = false;
+      }else {
+        $scope.showSearch = true;
+      }
+    }
+    
     $scope.calculateAnswerId = function(details) {
       $scope.biggestId=0;
       for(var index=0; index<details.length; ++index){
@@ -85,6 +98,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     }
     $scope.clickOnAnswer = function() {
       $scope.showDivAnswer=true;
+
     }
     $scope.putAnswer = function(textAnswer) {
       var data = {
@@ -96,6 +110,15 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       
       $http.post('/insertAnswer', data);
       $scope.showDivAnswer=false;
+      var resultAnswer = {
+        numberOfQuestion: $scope.indexQuestionAnswer,
+        text: textAnswer,
+        likes: $scope.likes,
+        favorite: false
+      }
+      $scope.indexQuestionAnswer+=1;
+      $scope.descriptionAnswer.push(resultAnswer);
+
     }
     
     $scope.addToFavoritesQuestion = function(){

@@ -144,7 +144,7 @@
 				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 				
-                <div class="dropup ">
+                <div class="dropup">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
@@ -162,32 +162,6 @@
                 </div>
 			</div>
 		</div>
-        <!-- footer -->
-
-        <div class="container">
-            <div>
-                <a href="/BiAMa/libraryMobile">
-                    <img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected" src="../images/mobile/library.png"/>
-                    <img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/library.png"/>
-                </a>
-                <a href="/BiAMa/whereWeAreMobile">
-                    <img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/location.png"/>
-                    <img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/location.png"/>
-                </a>
-                <a href="/BiAMa/library">
-                    <img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none;height: 161px; " class="buttonNotSelected " src="../images/mobile/photo.png"/>
-                    <img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none; height: 161px;" class="buttonSelected " src="../images/mobile/photo.png"/>
-                </a>
-                <a href="/BiAMa/library">
-                    <img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/biamaPage.png"/>
-                    <img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none;" class="buttonSelected " src="../images/mobile/biamaPage.png"/>
-                </a>
-                <a href="/BiAMa/forum">
-                    <img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none; " class="buttonNotSelected " src="../images/mobile/questions.png"/>
-                    <img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none; " class="buttonSelected " src="../images/mobile/questions.png"/>
-                </a>
-            </div>
-        </div>
 	</body>
 </html>
 

@@ -1,32 +1,24 @@
 
-app.controller("ForumController", ['$scope', "$http","$route", "jQuery", function($scope, $http, $route){
+app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope, $http){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 	/* my current page */
 	$scope.namePage='forum';
-
-	$scope.showSearch = false;
-	$scope.userDetails = false;
+	$scope.nameclick='forum';
 	
-  var window_width = $( window ).width();
+  	var window_width = $( window ).width();
 	if(window_width <= 1024) {
 		$scope.isMobileView=true;
 	} else {
 		$scope.isMobileView=false;
 	}
-
-	$scope.nameclick='forum';
+	
 	$scope.changeColorClick = function(name) {
 		$scope.userDetails = false;
 		$scope.search = false;
 		$scope.nameclick=name;
 	}
-
-	$scope.reloadForum = function() {
-		$route.reload();
-	}
-
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
@@ -39,6 +31,17 @@ app.controller("ForumController", ['$scope', "$http","$route", "jQuery", functio
 		}
 	}
 
+	$scope.reloadQuestions = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/questionsForumMobile'")
+	}
+
+	$scope.reloadCuriosities = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForum'")
+	}
+
+	$scope.reloadWorldShares = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForum'")
+	}
 }])
 .config(function($routeProvider, $locationProvider) {
 

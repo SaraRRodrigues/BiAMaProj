@@ -57,7 +57,7 @@
 			</div>
 			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>						
 
-			<h1 class="subtitles">Fórum</h1>
+			<h1 class="subtitles">Forum</h1>
 		</div>
 		<div class="titlesOnCenter" ng-click="reloadForum()">
 			<a href="/BiAMa/questionsUsersForum">
@@ -70,28 +70,6 @@
 				<img class="margin-right-3x" src="../images/worldShares.JPG"/>
 			</a>
 		</div>
-		<footer ng-if="isMobileView">
-			<a href="/BiAMa/biamaPage">
-				<img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
-				<img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
-			</a>
-			<a href="/BiAMa/whereWeAre">
-				<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
-				<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
-			</a>
-			<a href="/BiAMa/library">
-				<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
-				<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
-			</a>
-			<a href="/BiAMa/biamaPage">
-				<img ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-				<img ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-			</a>
-			<a href="/BiAMa/forum">
-				<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
-				<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
-			</a>
-		</footer>
 	</body>
 </html>
 

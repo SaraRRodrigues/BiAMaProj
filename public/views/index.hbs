@@ -87,10 +87,6 @@
 			<div ng-if="search" class="row text-center">
 				<img class="margin-top-3x" src="../images/topoBiama.png"/>
 			</div>
-			<!-- spinner loading page -->
-			<div ng-if="loading">
-				<div class="loading-icon-footer-info"></div>
-			</div>
 			<!-- show categories and materials -->
 			<div ng-if="search" class="container">
 				<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
@@ -139,10 +135,9 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="row">
 				<nav class="padding-left-3x">
-					<div class="navDetailsUser" ng-if="userDetails" style="margin-top: -245px;"><br>
+					<div class="navDetailsUser" ng-if="userDetails" style="margin-top: -762px;"><br>
 						<div ng-if="!confirmSession">
 							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 							<a>Favoritos</a><br>
@@ -515,8 +510,9 @@
 					<img ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
 					<img ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
 				</a>
-				<a href="/BiAMa/forumPageMobile" style="width:20%; color:#E4A73F; text-decoration:none" class="w3-bar-item buttonNotSelected w3-mobile">
-					<img ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
+				<a href="/BiAMa/forumPageMobile">
+					<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
+					<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
 				</a>
 			</div>
 		</div>

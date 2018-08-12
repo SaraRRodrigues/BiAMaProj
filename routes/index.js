@@ -245,13 +245,14 @@ router.post('/deleteFavoriteQuestion', (req, resp, next) => {
 	});
 });
 
+router.get('/views/:name', (req, resp, next) => {
+	resp.render(`views/${req.params.name}`);
+});
 /*para poder fazer o refresh*/ 
 router.get('/BiAMa/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
 
-router.get('/views/:name', (req, resp, next) => {
-	resp.render(`views/${req.params.name}`);
-});
+
 
 module.exports = router;

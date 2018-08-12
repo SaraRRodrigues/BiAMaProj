@@ -1,6 +1,12 @@
 
 app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesService", "jQuery", function($scope, $http, CuriositiesService){
 
+    $scope.nameclick='forum'
+
+    /* hide footer of index page because of click in buttons footer reload page */
+    jQuery("#footerMainMobile").hide();
+    /* my current page */
+  
     $scope.loading=true;
     $scope.descriptionCuriosity=[];
     $scope.showCuriosity=true;

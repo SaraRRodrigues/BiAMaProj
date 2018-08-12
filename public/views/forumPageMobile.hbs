@@ -43,30 +43,9 @@
 		 
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp"  ng-controller="ForumController">
-        <!-- header -->
+	<body ng-app="myApp" ng-controller="ForumController">
+       <!-- header -->
         <div class="container-fluid">
-            <div class="header">
-                <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
-                </div>
-                <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 class="subtitles" style="font-size: 16px;">Forum</h2>
-                </div>
-                <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -86px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="    width: 149px;margin-left: 74px;"></input>
-                </div>
-            </div>
-        </div> 
-        <!--<div class="container-fluid">
             <div class="header margin-top-3x">
                 <div class="margin-left-4x  col-sm-4">
                     <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
@@ -86,46 +65,17 @@
                     <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style=" width: 340px; margin-top: 17px;"></input>
                 </div>
             </div>
-        </div> -->
+        </div> 
         <!-- spinner loading page -->
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div class="titlesOnCenter" style="margin-top: 50px;">
-			<a href="/BiAMa/questionsUsersForum">
-				<img src="../images/questions.png" />
-			</a>
-			<a href="/BiAMa/curiositiesForum">
-				<img src="../images/curiositiesForum.png" />
-			</a>
-			<a href="/BiAMa/worldSharesForum">
-				<img src="../images/forumWorldShares.png"/>
-			</a>
+		<div class="titlesOnCenter" style="margin-top: 50px;"  ng-click="reloadForum()">
+			
+			<img src="../images/questionsUser.png" width="637px" height="418px" ng-click="reloadQuestions()"/>
+			<img src="../images/curiositiesUser.png" width="637px" height="418px" ng-click="reloadCuriosities()"/>
+			<img src="../images/userWorldShares.png" width="637px" height="418px" ng-click="reloadWorldShares()"/>
+			
 		</div>
-		<!--<div ng-if="isMobileView">
-			<a href="/BiAMa/libraryMobile">
-				<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
-				<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
-			</a>
-			<a href="/BiAMa/whereWeAreMobile">
-				<img ng-if="nameclick !== 'whereWeAreMobile'" ng-click="changeColorClick('whereWeAreMobile')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
-				<img ng-if="nameclick === 'whereWeAreMobile'" ng-click="changeColorClick('whereWeAreMobile')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
-			</a>
-			<a href="/BiAMa/library">
-				<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
-				<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
-			</a>
-			<a href="/BiAMa/biamaPageMobile">
-				<img ng-if="nameclick !== 'biamaPageMobile'" ng-click="changeColorClick('biamaPageMobile')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-				<img ng-if="nameclick === 'biamaPageMobile'" ng-click="changeColorClick('biamaPageMobile')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-			</a>
-			<a href="/BiAMa/forumPageMobile">
-				<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
-				<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
-			</a>
-		</div>-->
 	</body>
 </html>
-
-
-
