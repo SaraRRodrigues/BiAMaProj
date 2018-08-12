@@ -95,6 +95,14 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         }
     }*/
 
+    $scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+
     $scope.reload = function() {
         $route.reload();
     }
