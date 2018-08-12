@@ -177,7 +177,9 @@ app.constant('jQuery', window.jQuery)
 	}
 
 	$scope.disableSearch = function(buttonClick) {
-		
+		if(buttonClick === 'favorites') {
+			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+		}
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;

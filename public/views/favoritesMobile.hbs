@@ -49,69 +49,50 @@
 	</head>
     <body ng-app="myApp" ng-controller="FavoritesController">
         <!-- header -->
-        <div ng-if="isMobileView" class="container-fluid">
-            <div class="header">
-                <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
+        <!-- header -->
+        <div class="container-fluid">
+            <div class="header margin-top-3x">
+                <div class="margin-left-4x  col-sm-4">
+                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
                 </div>
-                <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 ng-if="!doLogin" class="subtitles" style="font-size: 16px;">Favoritos
-						<i ng-if="isMobileView" ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
-					</h2>
-					<div ng-if="isMobileView && doLogin">
-						<h2 class="subtitles">Favoritos</h2> 
-						<h4>Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
+                <div ng-if="!showSearch" class="col-sm-6">
+                    <h2 ng-if="locationMaterial" class="subtitles">Onde estamos?</h2>
+                    <h2 ng-if="!doLogin && !locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;" ng-click="goToHomePage()"></i>
+                        <i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
+                    </h2>
+                    <div ng-if="doLogin">
+						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;" ng-click="goToHomePage()"></i></h2>
 					</div>
 					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
 					</div>
                 </div>
-                <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
+                <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
+                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -55px;">
+                <div ng-if="showSearch" class="margin-top col-sm-2">
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
+                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
                 <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="width: 201px;margin-top: 2px;margin-left: 74px;"></input>
+                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style=" width: 340px; margin-top: 17px;"></input>
                 </div>
             </div>
         </div> 
-		<!--image biama -->
-        <div ng-if="!isMobileView" class="row text-center">
-            <img class="margin-top-3x" src="../images/topoBiama.png"/>
+        <div class="alignCenter" ng-if="doLogin">
+            <h1>Efetue Login por favor e volte a entrar nos seus favoritos.</h1>
         </div>
-        <div ng-if="!isMobileView" class="imageRight">
-            <img src="../images/rightBiama.png"/>
-        </div>
-        <div ng-if="!isMobileView" class="titlesOnCenter">
-            <div class="imageLeft">
-                <img class="margin-top-3x" src="../images/leftBiama.png"/>
-            </div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>						
-       		<h1 ng-if="!doLogin" class="subtitles">Favoritos
-				<i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
-			</h1> 
-			<h1 ng-if="doLogin" class="subtitles">Favoritos</h1> 
-			<h4 ng-if="doLogin">Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
-			
-			<div ng-if="showFavoritesButton && !isMobileView && !doLogin" ng-repeat="fav in favoritesButton">
-				<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
-			</div>
-	    </div>
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
 		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
-        <div ng-if="!loading && showFavorites">
+        <div ng-if="!loading && showFavorites" class="alignCenter">
 			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
-				<img ng-if="!isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
-				<img ng-if="isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="35%" height="130px" alt="foto"/>
+				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="30%" height="20%" alt="foto"/>
 			</div>
 			<div ng-if="favorites.length===0 && !doLogin">
-				<h4>Não tem favoritos associados</h4>
+				<h4 style="font-size:18px">Não tem favoritos associados</h4>
 			</div>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
                 <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
@@ -122,13 +103,9 @@
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
 				<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
-					<div ng-if="!showDivAnswer" ng-class="(!isMobileView) ? 'margin-left-10x' : 'margin-left-x'">
+					<div ng-if="!showDivAnswer" class="margin-left-x">
 						<!-- Question -->
 						<img class="imageButton" src="../images/user.png">
-						<div ng-if="!isMobileView" class="borderQuestion">
-							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
-						</div>
 						<div ng-if="isMobileView" class="borderQuestionMobile">
 							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
 							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
@@ -139,11 +116,6 @@
 							<div ng-if="$index%2!==0" class="borderQuestion">
 								<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
 								<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
-							</div>
-							<div ng-if="$index%2===0 && !isMobileView"  class="borderAnswerNoMargin">
-								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-								<img class="imageButtonLeft" src="../images/user.png">
-								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
 							</div>
 							<div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
 								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
@@ -163,18 +135,18 @@
 			</div>
 		</div>
         <div ng-if="!showFavorites && !locationMaterial && !zoomInMaterial">
-			<div class="titlesOnCenter sectionScroll">
-				<img class="margin-bottom-2x margin-left-2x" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="27%" height="130px" alt="foto"/><br>
+			<div class="titlesOnCenter sectionScrollMobile sectionDetails">
+				<img class="center-block margin-bottom-2x" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="40%" height="30%" alt="foto"/><br>
 				<div class="titlesOnCenter">
 					<!-- Favorite -->
-					<i ng-click="clickFavorite(detailsFavorite)" ng-if="detailsFavorite.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
-					<i ng-click="clickFavorite(detailsFavorite)" ng-if="!detailsFavorite.isFavorite" class="far fa-star cursorPointer iconMedium"></i>
+					<i ng-click="clickFavorite(detailsFavorite)" ng-if="detailsFavorite.isFavorite" class="fas fa-star cursorPointer iconMedium" style="font-size: 52px;margin-right: 46px;"></i>
+					<i ng-click="clickFavorite(detailsFavorite)" ng-if="!detailsFavorite.isFavorite" class="far fa-star cursorPointer iconMedium" style="font-size: 52px;margin-right: 46px;"></i>
 					<!-- Location -->
-					<i ng-click="clickLocation(detailsFavorite)" class="fas fa-map-marker-alt cursorPointer iconMedium"></i>
+					<i ng-click="clickLocation(detailsFavorite)" class="fas fa-map-marker-alt cursorPointer iconMedium" style="font-size: 52px;margin-right: 29px;"></i>
 					<!-- Zoom in -->
-					<i ng-click="clickZoomIn(detailsFavorite)" class="fas fa-search-plus cursorPointer iconMedium"></i>
+					<i ng-click="clickZoomIn(detailsFavorite)" class="fas fa-search-plus cursorPointer iconMedium" style="font-size: 52px;margin-right: 29px;"></i>
 				</div>
-				<p>[{detailsFavorite.description}]
+				<p style="font-size:34px">[{detailsFavorite.description}]
 				</p>
 				<div ng-if="clickAddFavoriteMaterial">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
@@ -185,16 +157,12 @@
 			</div>
 		</div>
         <div ng-if="locationMaterial">
-			<div class="titlesOnCenter"> 
-				<i ng-click="reloadPage()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
-				<h1 class="subtitles">Onde estamos</h1>
-			</div>
 			<div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>
 			</div>	
 			<div ng-if="!loading" class="titlesOnCenter">
-				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
-				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="90%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="90%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 				<div>
 					<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
 					<label class="margin-right-4x">[{descriptionLocation}]</label>
@@ -214,10 +182,12 @@
 			</div>
 		</div>
         <div ng-if="zoomInMaterial">
-			<div>
-				<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
-				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="47%" height="460px" alt="foto"/><br>
-			</div>
+			<button type="button" class="close" aria-label="Close" ng-click="closeMaterial()" style="font-size: 105px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div>
+				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%" alt="foto"/><br>
+            </div>
 		</div>
     </body>
 </html>

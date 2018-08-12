@@ -28,56 +28,60 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.favorites = [];
     $scope.descriptionAnswer=[];
 
-    
     $scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
-	}
+    }
 
-    /* get favorites material */
-	var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-	getMyFavorites.then(function(result) {
-        $scope.loading = false;
-		var data=result.data.favoriteDetails;
-        $scope.favoritesInfo=data;
-        $scope.favoriteDetails=[];
-        $scope.favoriteMaterials=[];
-        $scope.favoriteQuestions=[];
-
-        for(var index=0; index<$scope.favoritesInfo.length; ++index) {
-            if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
-                if($scope.favoritesInfo[index].question_id == -1) {
-                    $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
-                } else {
-                    $scope.favoriteQuestions.push($scope.favoritesInfo[index])
-                }
-            }
-        }
-    });
+    var splitLocation = location.href.split('=');
+    $scope.idUserLoggerIn =splitLocation[1];
     
-    /* get information of material and of library - when i do get library */
-    var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-    getMaterialInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.materialsCategories;
-        $scope.materialsCategories=data;
-        for(var index=0; index<$scope.materialsCategories.length; ++index){
-            if(index<MINIMUM_CATEGORIES){
-                $scope.categories.push($scope.materialsCategories[index])
-            } else {
-                break;
-            }
-        }
-        $scope.getFavInMaterials();
-        
-    });
-    
-    if($scope.userName !== undefined) {
+    if($scope.idUserLoggerIn !== undefined) {
         $scope.doLogin=false;
     } else {
         $scope.doLogin=true;
         $scope.loading = true;
     }
 
+    if($scope.idUserLoggerIn !== undefined){
+        /* get favorites material */
+        var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+        getMyFavorites.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.favoriteDetails;
+            $scope.favoritesInfo=data;
+            $scope.favoriteDetails=[];
+            $scope.favoriteMaterials=[];
+            $scope.favoriteQuestions=[];
+
+            for(var index=0; index<$scope.favoritesInfo.length; ++index) {
+                if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
+                    if($scope.favoritesInfo[index].question_id == -1) {
+                        $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
+                    } else {
+                        $scope.favoriteQuestions.push($scope.favoritesInfo[index])
+                    }
+                }
+            }
+        });
+
+        /* get information of material and of library - when i do get library */
+        var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+        getMaterialInfo.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.materialsCategories;
+            $scope.materialsCategories=data;
+            for(var index=0; index<$scope.materialsCategories.length; ++index){
+                if(index<MINIMUM_CATEGORIES){
+                    $scope.categories.push($scope.materialsCategories[index])
+                } else {
+                    break;
+                }
+            }
+            $scope.getFavInMaterials();
+            
+        });
+    }
+    
     /*$scope.getValues = function(){
 
         var value = document.getElementById('selectedFav');
