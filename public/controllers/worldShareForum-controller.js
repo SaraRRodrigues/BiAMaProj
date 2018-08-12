@@ -44,6 +44,14 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       window.setTimeout("location.href = 'http://localhost:8080'")
     }
 
+    $scope.clickTopSearch = function() {
+      if($scope.showSearch){
+        $scope.showSearch = false;
+      }else {
+        $scope.showSearch = true;
+      }
+    }
+    
     $scope.openDetailsWorldShare = function(image) {
       for(var index=0; index<$scope.worldShareData.length; ++index) {
 				if($scope.worldShareData[index].image === image){

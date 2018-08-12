@@ -40,7 +40,7 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	}
 
 	$scope.reloadWorldShares = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForum'")
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile'")
 	}
 }])
 .config(function($routeProvider, $locationProvider) {
