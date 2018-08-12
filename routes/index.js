@@ -253,6 +253,4 @@ router.get('/BiAMa/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
 
-
-
 module.exports = router;

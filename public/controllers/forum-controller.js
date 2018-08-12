@@ -36,7 +36,7 @@ app.controller("ForumController", ['$scope', "$http", "jQuery", function($scope,
 	}
 
 	$scope.reloadCuriosities = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForum'")
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForumMobile'")
 	}
 
 	$scope.reloadWorldShares = function() {

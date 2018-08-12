@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- jQuery files -->
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
+		<!--footer controllers-->
+		<script type="text/javascript" src="../controllers/main-controller.js"></script>
+		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
+		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
+        <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
+		<script type="text/javascript" src="../controllers/library-controller.js"></script>
+		<script type="text/javascript" src="../controllers/myBiama-controller.js"></script>
+
+		<!--details user controllers-->
+		<script type="text/javascript" src="../controllers/perfil-controller.js"></script>
+		<script type="text/javascript" src="../controllers/favorites-controller.js"></script>
+		<script type="text/javascript" src="../controllers/notifications-controller.js"></script>
+		<script type="text/javascript" src="../controllers/questions-controller.js"></script>
+		<script type="text/javascript" src="../controllers/worldShares-controller.js"></script>
+		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
+		<script type="text/javascript" src="../controllers/login-controller.js"></script>
+		<script type="text/javascript" src="../controllers/resultsMaterials-controller.js"></script>
+		 
+		<base href="/"/>
+	</head>
+	<body ng-app="myApp" ng-controller="CuriosityForumController">
+		 <!-- header -->
+        <div class="container-fluid">
+            <div class="header margin-top-3x">
+                <div class="margin-left-4x  col-sm-4">
+                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+                </div>
+                <div ng-if="!showSearch" class="col-sm-6">
+                    <h2 class="subtitles">Curiosidades</h2>
+                </div>
+                <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
+                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                </div>
+                <div ng-if="showSearch" class="margin-top col-sm-2">
+                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                </div>
+                <div class="col-sm-1">
+                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style=" width: 340px; margin-top: 17px;"></input>
+                </div>
+            </div>
+        </div> 
+        <div ng-if="loading">
+            <div class="loading-icon-footer-info"></div>
+        </div>
+        <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile" style="margin-bottom: -198px;margin-top: 90px;">
+            <div ng-repeat="curiosity in descriptionCuriosity">
+                <img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
+                <h2>[{curiosity.title}]</h2>
+                <h3>[{curiosity.descriptionCuriosity}]</h3>
+            </div>
+        </div>
+        <div ng-if="showCuriosityDetails" class="sectionDetails">
+            <h1 class="subtitles titlesOnCenter">Partilha [{curiosityInfo.curiosity}]</h1>
+            <p style="font-size: 31px;">[{curiosityInfo.description}]</p>
+            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
+        </div>
+        <button ng-if="showBigImage" type="button" class="close" aria-label="Close" ng-click="closeCuriosityImage()" style="font-size: 105px;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div ng-if="showBigImage">
+            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile" ng-src="../images/curiosities/[{bigImage}]" alt="foto" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%"/><br>
+        </div>
+	</body>
+</html>
+
+
+
