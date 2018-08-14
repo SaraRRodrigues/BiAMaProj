@@ -40,7 +40,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       }
     });
 
-    $scope.goToForum = function() {
+    $scope.goToHomePage = function() {
       window.setTimeout("location.href = 'http://localhost:8080'")
     }
 

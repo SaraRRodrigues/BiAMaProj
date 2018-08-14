@@ -184,6 +184,11 @@ app.constant('jQuery', window.jQuery)
 		if(buttonClick == 'questions') {
 			location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
 		}
+
+		if(buttonClick == 'world_share') {
+			location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile?userName=' + $scope.idUserLoggerIn;
+		}
+
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
