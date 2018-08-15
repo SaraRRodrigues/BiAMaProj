@@ -220,7 +220,7 @@ a {
   border-bottom-right-radius: 10px 10px;
 }
 .lineWhite {
-  border-bottom: 1px solid white;
+  border-bottom: 3px solid white;
 }
 
 .perfilDetails{
@@ -315,6 +315,20 @@ a {
   padding-top:10px;
   text-align: justify;
 }
+
+.divNotificationsMobile {
+  background-color: #FDF5E6;
+  margin-left: 227px;
+  margin-top: -212px;
+  height:840px;
+  float:left;
+  border-radius:5px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+  text-align: justify;
+}
+
 .circleNotification {
   width: 21px;
   margin-left: 137px;
@@ -708,6 +722,15 @@ legend {
 
 .dateNotification {
   font-size: 10px;
+}
+
+.dateNotificationMobile {
+  font-size: 25px;
+  color: orange;
+}
+
+.notificationTextMobile {
+  font-size: 30px;
 }
 
 ui.autocomplete{
