@@ -220,6 +220,10 @@ a {
   border-bottom-right-radius: 10px 10px;
 }
 .lineWhite {
+  border-bottom: 1px solid white;
+}
+
+.lineWhiteMobile {
   border-bottom: 3px solid white;
 }
 

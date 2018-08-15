@@ -74,13 +74,13 @@
         <div ng-if="loading">
             <div class="loading-icon-footer-info"></div>
         </div>
-        <div class="divNotificationsMobile sectionScrollNotification" style="margin-top: 63px;">
+        <div ng-if="myNotifications.length>0" class="divNotificationsMobile sectionScrollNotification" style="margin-top: 63px;">
             <div ng-repeat="notification in myNotifications">
                 <div ng-if="notification.insert" style="padding:14px">
                     <h6 class="notificationTextMobile">[{notification.text_notification}]</h6>
                     <h6 class="dateNotificationMobile">[{notification.date_notification}]</h6>
                 </div>
-                <div class="lineWhite margin-bottom margin-top"></div>									
+                <div class="lineWhiteMobile margin-bottom margin-top"></div>									
             </div>
         </div>
 	</body>
