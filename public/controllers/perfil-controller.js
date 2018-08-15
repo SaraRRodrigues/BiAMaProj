@@ -26,6 +26,22 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
     $scope.new_birthdate='';
     $scope.showPerfilDetails=false;
 
+    $scope.getData = function() {
+
+        $scope.showPerfilDetails=true;
+        var splitLocation = location.href.split('&');
+      
+        $scope.idUserLoggerIn = splitLocation[0].split('=')[1];
+        $scope.username = splitLocation[1].split('=')[1];
+        $scope.password = splitLocation[2].split('=')[1];
+        $scope.imageUser = splitLocation[3].split('=')[1];
+        $scope.birth = (splitLocation[4].split('=')[1]).split('-');
+
+        $scope.birthdateValue = $scope.birth[0] + '/' + $scope.birth[1] + '/' + $scope.birth[2];
+        $scope.name = splitLocation[5].split('=')[1];
+        $scope.email = splitLocation[6].split('=')[1];
+    }
+   
     $scope.initUserDetails= function() {
         if($scope.users !== undefined) {
             $scope.showPerfilDetails=true;
@@ -39,11 +55,19 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
                     $scope.password=$scope.users[index].password;
                 }
             }
-        } else {
-            $scope.showPerfilDetails=false;
         }
     }
 
+    $scope.initUserDetails();
+
+    $scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+    }
+    
     $scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
     }
@@ -85,24 +109,37 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
 
         //fazer update na base de dados
         if(!$scope.invalidEmail && !$scope.fieldsEmpty && !$scope.invalidDate && !$scope.invalidPhoto) {
-            for(var index=0; index<$scope.users.length; ++index) {
-                if($scope.users[index].id === $scope.idUserLoggerIn){
-                    $scope.updateUserDetails($scope.users[index].id, $scope.users[index].name, 
-                        email, $scope.birthdateValue, image, 
-                        username, password);
-                    break;
+            if($scope.users !== undefined) {
+                for(var index=0; index<$scope.users.length; ++index) {
+                    if($scope.users[index].id === $scope.idUserLoggerIn){
+                        $scope.updateUserDetails($scope.users[index].id, $scope.users[index].name, 
+                            email, $scope.birthdateValue, image, 
+                            username, password);
+                        break;
+                    }
                 }
+            } else {
+                $scope.updateUserDetails($scope.idUserLoggerIn, $scope.name, 
+                    email, $scope.birthdateValue, image, 
+                    username, password);
             }
         }
         $scope.upgradeInformations=false;
     }
 
     $scope.validDataNotEquals = function(username, password) {
-		for(var index=0; index<$scope.users.length; ++index) {
-			if(username === $scope.users[index].username) {
-				return false;
-			}
-		}
+        if($scope.users !== undefined) {
+            for(var index=0; index<$scope.users.length; ++index) {
+                if(username === $scope.users[index].username) {
+                    return false;
+                }
+            }
+        } else {
+            if(username === $scope.username) {
+                return false;
+            }
+        }
+        
 		return true;
     },
     
@@ -168,6 +205,7 @@ app.controller("PerfilController", ['$scope', "$http", "jQuery", function($scope
         $scope.openImageUploadLabel=true;
     }
 
-    $scope.initUserDetails();
-    
+    if($scope.users === undefined) {
+        $scope.getData();
+    }
 }])

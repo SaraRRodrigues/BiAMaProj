@@ -194,6 +194,12 @@ app.constant('jQuery', window.jQuery)
 
 		}
 
+		if(buttonClick == 'perfil') {
+			location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+		}
+
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
@@ -299,6 +305,16 @@ app.constant('jQuery', window.jQuery)
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;
 				$scope.userPassword = $scope.users[index].password;
+				$scope.userImage = $scope.users[index].image;
+				$scope.userEmail = $scope.users[index].email;
+				$scope.nameUser=$scope.users[index].name;
+				$scope.userBirthdate = $scope.users[index].birthdate;
+
+				var splitDateBirth = $scope.userBirthdate.split('/');
+				$scope.dayBirth = splitDateBirth[0];
+				$scope.monthBirth = splitDateBirth[1];
+				$scope.yearBirth = splitDateBirth[2];
+
 				if($scope.userName !== null && $scope.userName === username){
 					if($scope.userPassword !== null && $scope.userPassword === password){
 						$scope.userLoggedIn=$scope.users[index].username;

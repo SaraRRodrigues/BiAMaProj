@@ -233,6 +233,14 @@ a {
   width: 300px;
   margin-left: 550px;
 }
+
+.perfilDetailsMobile{
+  font-size:12px;
+  background-color: #F9F1E4;
+  width: 547px;
+  margin-left: 550px;
+}
+
 .inputsCenter{
   text-align:center
 }
@@ -697,6 +705,13 @@ a {
   margin-top: 28px;
   margin-left: 19px;
   width: 18%;
+}
+
+.imagePerfilMobile {
+  float: left;
+  margin-top: 28px;
+  margin-left: 19px;
+  width: 30%;
 }
 
 .labelPerfilName{
