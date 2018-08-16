@@ -208,6 +208,19 @@ a {
   border-radius:5px;
 }
 
+.navDetailsUserMobile{
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  background-color: #F9F1E4;
+  width: 328px;
+  height: 553px;
+  font-size:27px;
+  border-bottom-left-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+  position: absolute;
+}
+
 .navDetailsUser{
   z-index: 1;
   position: relative;
@@ -225,6 +238,10 @@ a {
 
 .lineWhiteMobile {
   border-bottom: 3px solid white;
+}
+
+.imageUserNavDetailsMobile {
+  width: 125px;
 }
 
 .perfilDetails{
@@ -313,6 +330,20 @@ a {
   padding-right:30px;
   padding-top:10px;
 }
+
+.divInitSessionMobile {
+  background-color:#E0E0E0;
+  margin-left:180px;
+  margin-top: -140px;
+  width: 398px;
+  height:437px;
+  float:left;
+  border-radius:5px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+}
+
 
 .divNotifications {
   background-color:#E0E0E0;
@@ -419,6 +450,12 @@ a {
   background-color:#e68a009c;
   color:white;
   width: 100px;
+}
+
+.registSessionMobile{
+  background-color:#e68a009c;
+  color:white;
+  width: 124px;
 }
 
 .inputUserName{

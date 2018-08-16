@@ -85,6 +85,72 @@
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<div ng-if="isMobileView" class="row">
+				<nav class="padding-left-3x">
+					<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+						<div ng-if="!confirmSession">
+							<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+							<a>Favoritos</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a>As minhas perguntas</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a>Partilhar com o Mundo</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a>Notificações</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a>Perfil</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a>Comparar</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+							
+							<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
+								<div class="alignCenter">
+									<h2 class="initSessionColor">Iniciar Sessão</h2>
+									
+									<div class="lineWhiteInitSession"></div><br>
+									<div ng-if="users === 'loadUser'">
+										<div class="loading-icon"></div>
+									</div>
+									<div ng-if="users !== 'loadUser'">
+										<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+										<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+										<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+										<!-- login with firebase providers -->
+										<div>
+											<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+											<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+										</div>
+										<br>
+										<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
+									</div>												
+								</div>
+							</div>
+						</div>
+						<div ng-if="confirmSession">
+							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+							<a ng-click="disableSearch('favorites')">Favoritos</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="disableSearch('questions')">As minhas perguntas</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a class="notificationPosition" ng-click="disableSearch('notification')">Notificações</a>
+							<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
+							<div ng-if="notificationNumber" class="circleNotification"></div>
+							<br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="disableSearch('perfil')">Perfil</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="disableSearch('compare')">Comparar</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="logout()">Terminar Sessão</a><br>
+							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+						</div>
+					</div>
+				</nav>
+			</div>
 		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites" class="alignCenter">
 			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
