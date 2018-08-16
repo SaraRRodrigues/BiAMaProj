@@ -529,6 +529,13 @@ a {
   text-align: justify;
 }
 
+.sectionDetailsCuriosities{
+  width: 32%;
+  max-width: 800px;
+  margin: 0 auto; 
+  text-align: justify;
+}
+
 .sectionScrollMobile {
   padding:49px;
   height:1200px;
@@ -889,4 +896,12 @@ scrollMobile {
   bottom: 15px;
   right: 56px;
   font-size: 22px;
+}
+
+
+/* arrow left */
+
+.backArrow {
+  color: orange;
+  font-size: 40px;
 }

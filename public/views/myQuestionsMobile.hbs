@@ -72,13 +72,6 @@
             </div>
         </div> 
        <div class="titlesOnCenter">
-            <div ng-if="!isMobileView" class="imageLeft">
-                <img class="margin-top-3x" src="../images/leftBiama.png"/>
-            </div>
-            <i ng-if="!isMobileView"class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>
-            <div ng-if="!isMobileView" class="padding-left-4x">
-                <h1 ng-if="!showMyQuestions" class="subtitles">As minhas perguntas</h1> 
-            </div>
             <div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>
 			</div>
@@ -94,23 +87,7 @@
                     <div ng-if="!showDivAnswer" ng-class="margin-left-x">
                         <!-- Question -->
                         <img class="imageButton" src="../images/user.png">
-                        <div ng-if="!isMobileView" class="borderQuestion">
-                            <label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-                            <div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
-                                <i class="far fa-star favoriteButton cursorPointer"></i>
-                            </div>
-                            <div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()">
-                                <i class="fas fa-star favoriteButton cursorPointer"></i>
-                            </div>
-                            <div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
-                                <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
-                            </div>
-                            <div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
-                                <i class="far fa-thumbs-up likeButton cursorPointer" ></i>
-                            </div>
-                            <h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
-                        </div>
-                        <div ng-if="isMobileView" class="borderQuestionMobile">
+                        <div class="borderQuestionMobile">
                             <label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
                             <div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
                                 <i class="far fa-star favoriteButton cursorPointer"></i>
@@ -145,24 +122,7 @@
                                 </div>
                                 <h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
                             </div>
-                            <div ng-if="$index%2===0 && !isMobileView"  class="borderAnswer">
-                                <div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
-                                    <i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
-                                </div>
-                                <div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
-                                    <i class="far fa-star favoriteButtonLeft cursorPointer"></i>
-                                </div>
-                                <div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
-                                    <i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
-                                </div>
-                                <div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
-                                    <i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
-                                </div>
-                                <label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-                                <img class="imageButtonLeft" src="../images/user.png">
-                                <h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
-                            </div>
-                            <div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
+                            <div ng-if="$index%2===0"  class="borderAnswerMobile">
                                 <div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
                                     <i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
                                 </div>

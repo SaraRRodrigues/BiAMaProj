@@ -55,20 +55,20 @@
 			<div class="imageLeft">
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToForum()"></i>
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToForum()"></i>
 			<h1 class="subtitles">Curiosidades</h1>
 		</div>
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!loading && showCuriosity" class="sectionDetails sectionScroll" style="margin-bottom: -198px;">
+		<div ng-if="!loading && showCuriosity" class="sectionDetailsCuriosities sectionScroll" style="margin-bottom: -198px;">
 			<div ng-repeat="curiosity in descriptionCuriosity">
 				<img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="23%" height="30%" />
 				<h4>[{curiosity.title}]</h4>
 				<h6>[{curiosity.descriptionCuriosity}]</h6>
 			</div>
 		</div>
-		<div ng-if="showCuriosityDetails" class="sectionDetails">
+		<div ng-if="showCuriosityDetails" class="sectionDetailsCuriosities">
 			<h1 class="subtitles titlesOnCenter">Partilha [{curiosityInfo.curiosity}]</h1>
 			<p>[{curiosityInfo.description}]</p>
 			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto"/><br>

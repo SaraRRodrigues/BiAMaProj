@@ -55,7 +55,7 @@
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToForum()"></i>
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToForum()"></i>
 			<h1 ng-if="!showQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 		</div>
 		<div ng-if="loading">
@@ -70,7 +70,7 @@
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 			</div>
 			<div class="titlesOnCenter" style="margin-left:590px;">
-				<div ng-if="!showDivAnswer" ng-style="(isMobileView) ? 'margin-left: 20px;' : 'margin-left:400px'">
+				<div ng-if="!showDivAnswer" ng-style="margin-left:400px">
 					<!-- Question -->
 					<img class="imageButton" src="../images/user.png">
 					<div class="borderQuestion">

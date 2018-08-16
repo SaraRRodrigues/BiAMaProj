@@ -177,29 +177,37 @@ app.constant('jQuery', window.jQuery)
 	}
 
 	$scope.disableSearch = function(buttonClick) {
-		if(buttonClick === 'favorites') {
-			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+
+		if($scope.isMobileView) {
+			if(buttonClick === 'favorites') {
+				location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'questions') {
+				location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'world_share') {
+				location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'notification') {
+				location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+	
+			}
+	
+			if(buttonClick == 'perfil') {
+				location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+			}
+	
+			if(buttonClick == 'compare') {
+				location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+	
+			}
 		}
-
-		if(buttonClick == 'questions') {
-			location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
-		}
-
-		if(buttonClick == 'world_share') {
-			location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile?userName=' + $scope.idUserLoggerIn;
-		}
-
-		if(buttonClick == 'notification') {
-			location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
-
-		}
-
-		if(buttonClick == 'perfil') {
-			location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
-		}
-
+		
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;

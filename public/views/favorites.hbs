@@ -48,49 +48,19 @@
 		<base href="/"/>
 	</head>
     <body ng-app="myApp" ng-controller="FavoritesController">
-        <!-- header -->
-        <div ng-if="isMobileView" class="container-fluid">
-            <div class="header">
-                <div class="col-sm-4" style="margin-top: 12px;margin-bottom: 30px;">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()" style="margin-top: -16px;margin-left: -234px;">
-                </div>
-                <div ng-if="!showSearch" class="col-sm-6" style="margin-top: -83px;">
-                    <h2 ng-if="!doLogin" class="subtitles" style="font-size: 16px;">Favoritos
-						<i ng-if="isMobileView" ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
-					</h2>
-					<div ng-if="isMobileView && doLogin">
-						<h2 class="subtitles">Favoritos</h2> 
-						<h4>Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
-					</div>
-					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
-						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
-					</div>
-                </div>
-                <div ng-if="!showSearch" class="margin-top-2x col-sm-1" style="margin-top: -41px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2" style="margin-top: -55px;">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" style=" margin-top: -18px;">
-                </div>
-                <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="width: 201px;margin-top: 2px;margin-left: 74px;"></input>
-                </div>
-            </div>
-        </div> 
+       
 		<!--image biama -->
-        <div ng-if="!isMobileView" class="row text-center">
+        <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
         </div>
-        <div ng-if="!isMobileView" class="imageRight">
+        <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
-        <div ng-if="!isMobileView" class="titlesOnCenter">
+        <div class="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;font-size: 40px;" ng-click="goToHomePage()"></i>						
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>						
        		<h1 ng-if="!doLogin" class="subtitles">Favoritos
 				<i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
 			</h1> 
@@ -107,8 +77,7 @@
 		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites">
 			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
-				<img ng-if="!isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
-				<img ng-if="isMobileView" class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="35%" height="130px" alt="foto"/>
+				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
 			</div>
 			<div ng-if="favorites.length===0 && !doLogin">
 				<h4>Não tem favoritos associados</h4>
@@ -122,14 +91,10 @@
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
 				<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
-					<div ng-if="!showDivAnswer" ng-class="(!isMobileView) ? 'margin-left-10x' : 'margin-left-x'">
+					<div ng-if="!showDivAnswer" ng-class="margin-left-10x">
 						<!-- Question -->
 						<img class="imageButton" src="../images/user.png">
-						<div ng-if="!isMobileView" class="borderQuestion">
-							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
-						</div>
-						<div ng-if="isMobileView" class="borderQuestionMobile">
+						<div class="borderQuestion">
 							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
 							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
 						</div>
@@ -140,12 +105,7 @@
 								<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
 								<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 							</div>
-							<div ng-if="$index%2===0 && !isMobileView"  class="borderAnswerNoMargin">
-								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-								<img class="imageButtonLeft" src="../images/user.png">
-								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
-							</div>
-							<div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
+							<div ng-if="$index%2===0"  class="borderAnswerNoMargin">
 								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
 								<img class="imageButtonLeft" src="../images/user.png">
 								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
