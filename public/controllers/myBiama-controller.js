@@ -6,6 +6,8 @@ app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuer
 	/* my current page */
 	$scope.namePage='myBiama';
 
+	$scope.showMyBiamaConf = false;
+
 	var window_width = $( window ).width();
 	if(window_width <= 1024) {
 		$scope.isMobileView=true;
@@ -31,4 +33,13 @@ app.controller("MyBiamaController", ['$scope', "$http", "MyBiamaService", "jQuer
 			var data=result.data.biamaDetails;
 			$scope.descriptionMyBiama=data[0].description;
 	});
+
+	$scope.createMyBiama = function() {
+		
+		if($scope.showMyBiamaConf){
+			$scope.showMyBiamaConf = false;
+        }else {
+			$scope.showMyBiamaConf = true;
+        }
+	}
 }])

@@ -48,29 +48,57 @@
 		<div class="imageRight">
 			<img src="../images/rightBiama.png"/>
 		</div>
-		<div class="titlesOnCenter"> 
+		<div> 
 			<div class="imageLeft">
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>						
-
-			<h1 class="subtitles">A sua BiAMa</h1>
-			
-			<div ng-if="loading">
-				<div class="loading-icon-footer-info"></div>
-			</div>
-			<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
-			<div ng-if="!loading" class="sectionDetails">
-				<p>[{descriptionMyBiama}]</p>
-			</div>
-			<div ng-if="!loading" class="sectionDetails">
-				<div>
-					<i class="far fa-file-pdf"></i>
-					<label class="margin-right-3x">Formulário para Aderir</label>
-
-					<i class="far fa-file-pdf"></i>
-					<label>Construir a sua BiAMa</label>
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>
+			<div class="titlesOnCenter" ng-if="!showMyBiamaConf">
+				<h1 class="subtitles">A sua BiAMa</h1>
+				<div ng-if="loading">
+					<div class="loading-icon-footer-info"></div>
 				</div>
+				<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
+				<div ng-if="!loading" class="sectionDetails">
+					<p>[{descriptionMyBiama}]</p>
+				</div>
+				<div ng-if="!loading" class="sectionDetails">
+					<div>
+						<i class="far fa-file-pdf"></i>
+						<label class="margin-right-3x">Formulário para Aderir</label>
+
+						<i class="far fa-file-pdf" ng-click="createMyBiama()"></i>
+						<label>Construir a sua BiAMa</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="myBiamaConfig" ng-if="showMyBiamaConf">
+				<h2 class="subtitles">Your BiAMa</h2><br>
+				<!-- Description -->
+				<h5 class="subtitles biamaTitlesStyle"><b>Description</b></h5>
+				<textarea class="biamaTextAreaStyle" placeholder="Insert description of your BiAMa"></textarea><br>
+				<!-- location -->
+				<h5 class="subtitles biamaTitlesStyle"><b>Location</b></h5>
+				<input class="biamaConfigFields" type="text" placeholder="Select location of your BiAMa"></input><br>
+
+				<!-- library content -->
+				<h2 class="subtitles">Your Library materials</h2><br>
+				<!-- category of material - options: animal, ceramic, composite, metal, mineral, polymers, vegetable-->
+				<h5 class="subtitles biamaTitlesStyle"><b>Category</b></h5>
+				<input class="biamaConfigFields" type="text" placeholder="Select category of material"><br>
+				<!-- color of material - options: black, white, gray, blue, beige, green, pink, orange, brown, yellow, diamond, red -->
+				<h5 class="subtitles biamaTitlesStyle"><b>Color</b></h5>
+				<input class="biamaConfigFields" type="text" placeholder=""><br>
+				<!-- code of material -->
+				<h5 class="subtitles biamaTitlesStyle "><b>Code</b></h5>
+				<input class="biamaConfigFields" type="text" value="lastCode + 1"><br>
+				<!-- image of material -->
+				<h5 class="subtitles biamaTitlesStyle"><b>Image</b></h5>
+				<input class="biamaConfigFields" type="file" placeholder="Select image of material"><br>
+				<!-- description of material -->
+				<h5 class="subtitles biamaTitlesStyle"><b>Description</b></h5>
+				<textarea class="biamaTextAreaStyle" placeholder="Insert description of material"></textarea><br>
 			</div>
 		</div>
 	</body>

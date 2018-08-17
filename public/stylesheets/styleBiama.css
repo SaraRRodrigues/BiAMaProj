@@ -903,6 +903,30 @@ scrollListMaterial {
   text-align: center;
 }
 
+.myBiamaConfig {
+  float: left;
+  margin-left: 170px;
+  background-color: antiquewhite;
+  padding: 37px;
+  padding-bottom:40px;
+  margin-bottom: 37px;
+}
+
+.biamaConfigFields {
+  width: 305px;
+  border-radius: 5px;
+  border-style: groove;
+}
+
+.biamaTextAreaStyle {
+  width: 305px;
+  border-radius: 5px;
+  border-style: dashed;
+}
+
+.biamaTitlesStyle {
+  margin-bottom:auto;
+}
 /***************MOBILE CSS***************/
 /*scroll of images on library categories*/
 scrollMobile {
