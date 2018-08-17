@@ -1,4 +1,4 @@
-app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumService", "$http", "jQuery", function($scope,WorldSharesService,ForumService,$http){
+app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumService","UserWorldShareService", "$http", "jQuery", function($scope,WorldSharesService,ForumService,UserWorldShareService,$http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -27,9 +27,54 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     if($scope.idUserLoggerIn !== undefined) {
         $scope.confirmSession=true;
     } else {
+        $scope.loading = true;
         $scope.confirmSession=false;
     }
+
+    $scope.logout = function(){
+		$scope.confirmSession = false;
+		/*firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});*/
+	}
     
+    $scope.confirmSessionAction = function (username, password) {
+
+		$scope.users = 'loadUser';
+		var getAllUsers = UserWorldShareService.getUsers(function(users){});
+		
+		getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+			for(var index=0; index<$scope.users.length; ++index){
+				$scope.userName = $scope.users[index].username;
+				$scope.userPassword = $scope.users[index].password;
+				$scope.userImage = $scope.users[index].image;
+				$scope.userEmail = $scope.users[index].email;
+				$scope.nameUser=$scope.users[index].name;
+				$scope.userBirthdate = $scope.users[index].birthdate;
+
+				var splitDateBirth = $scope.userBirthdate.split('/');
+				$scope.dayBirth = splitDateBirth[0];
+				$scope.monthBirth = splitDateBirth[1];
+				$scope.yearBirth = splitDateBirth[2];
+
+				if($scope.userName !== null && $scope.userName === username){
+					if($scope.userPassword !== null && $scope.userPassword === password){
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
+						$scope.confirmSession = true;
+						break;
+					}
+				}
+			}
+		});
+    }
+
     $scope.loading = true;
     $scope.showWorldShares=true;
     $scope.addWorldShare=false;
@@ -252,4 +297,94 @@ app.factory("ForumService", function($q, $http, $timeout){
       return {
         getForum: getForum
       };
+});
+
+app.factory("UserWorldShareService", function($q, $http, $timeout){
+    
+	var getUsers = function() {
+		var deferred = $q.defer();
+	
+ 		$timeout(function() {
+		  deferred.resolve($http.get('/users',  {cache:true}));
+		}, 2000); 
+	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/users', true);
+		xhr.send();*/
+
+		return deferred.promise;
+	};
+
+	var getMyQuestionsLogged = function() {
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/myQuest', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/myQuest'));
+		}, 2000);
+
+		return deferred.promise;
+	};
+
+	var insertLibraryUserDetails = function() {
+		var deferred = $q.defer();
+
+		
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/insertLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.post('/insertLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	var getLibraryUserDetails = function() {
+		
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/getLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/getLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	return {
+		getUsers: getUsers,
+		getMyQuestionsLogged: getMyQuestionsLogged,
+		insertLibraryUserDetails: insertLibraryUserDetails,
+		getLibraryUserDetails: getLibraryUserDetails
+	};
 });

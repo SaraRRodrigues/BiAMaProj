@@ -12,6 +12,27 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 		$scope.isMobileView=false;
 	}
 
+    var splitLocation = location.href.split('=');
+    $scope.idUserLoggerIn =splitLocation[1];
+    
+    if($scope.idUserLoggerIn !== undefined) {
+        $scope.confirmSession=true;
+    } else {
+        $scope.loading = true;
+        $scope.confirmSession=false;
+    }
+
+    $scope.logout = function(){
+		$scope.confirmSession = false;
+		/*firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});*/
+	}
     $scope.loading = true;
     $scope.favoriteQuestion=false;
     $scope.favoriteAnswer=false;
