@@ -83,6 +83,10 @@ a {
   text-align: center;
 }
 
+.alignRight {
+  text-align: right;
+}
+
 .buttonBorder {
   border-radius:5px;
 }
