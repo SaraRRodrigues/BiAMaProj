@@ -20,6 +20,15 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 	} else {
 		$scope.isMobileView=false;
     } 
+
+    var splitLocation = location.href.split('=');
+    $scope.idUserLoggerIn =splitLocation[1];
+
+    if($scope.idUserLoggerIn !== undefined) {
+        $scope.confirmSession=true;
+    } else {
+        $scope.confirmSession=false;
+    }
     
     $scope.loading = true;
     $scope.showWorldShares=true;
@@ -45,6 +54,48 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
           }
       } 
     });
+
+    $scope.getRequest = function(buttonClick) {
+
+		if($scope.isMobileView) {
+			if(buttonClick === 'favorites') {
+				location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'questions') {
+				location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'world_share') {
+				location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'notification') {
+				location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+	
+			}
+	
+			if(buttonClick == 'perfil') {
+				location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+			}
+	
+			if(buttonClick == 'compare') {
+				location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+	
+			}
+		}
+		
+		if(buttonClick === 'notification') {
+			$scope.userDetails = true;
+			$scope.notificationNumber=true;
+		} else {
+			$scope.userDetails = false;
+			$scope.notificationNumber = false;
+		}
+		$scope.search = false;
+	}
     
     $scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
@@ -108,6 +159,23 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         $scope.imageWorldShare='';
         $scope.openWorldShareUploadLabel=true;
         $scope.savePhoto=false;
+    }
+
+    $scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+			$scope.showSearch = false;
+		}
+    }
+
+    $scope.showInitSessionDiv = function () {
+		if($scope.showInitSession){
+			$scope.showInitSession = false;
+		}else {
+			$scope.showInitSession = true;
+		}
     }
 
     $scope.saveConfigInsertWorldShare = function (image, description) {  

@@ -75,14 +75,6 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         window.setTimeout("location.href = 'http://localhost:8080'")
     }
     
-    $scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
-		}
-    }
-    
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
@@ -140,7 +132,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 		});
     }
 
-    $scope.disableSearch = function(buttonClick) {
+    $scope.getRequest = function(buttonClick) {
 
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {

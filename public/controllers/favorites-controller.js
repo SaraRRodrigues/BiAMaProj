@@ -37,10 +37,24 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     
     if($scope.idUserLoggerIn !== undefined) {
         $scope.doLogin=false;
+        $scope.confirmSession=true;
     } else {
         $scope.doLogin=true;
         $scope.loading = true;
+        $scope.confirmSession=false;
     }
+
+    $scope.logout = function(){
+		$scope.confirmSession = false;
+		/*firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});*/
+	}
 
     if($scope.idUserLoggerIn !== undefined){
         /* get favorites material */
@@ -151,7 +165,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 		});
     }
 
-    $scope.disableSearch = function(buttonClick) {
+    $scope.getRequest = function(buttonClick) {
 
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
