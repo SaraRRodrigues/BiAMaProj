@@ -205,7 +205,6 @@ router.get('/getLibraryUser', (req, resp, next) => {
 	});
 });
 
-
 /* GET world shares forum: forum */
 router.get('/worldSharesForum', (req, resp, next) => {
 	worldShareForumService.getWorldSharesForum((error, worldShareForumDetails) => {
@@ -242,6 +241,14 @@ router.post('/deleteFavoriteQuestion', (req, resp, next) => {
 	var favorite = req.body;
 	deleteFavoriteService.deleteFavoriteQuestion(favorite,(error, deleteServiceDetails) => {
 		resp.json({deleteServiceDetails})
+	});
+});
+
+/* INSERT my biama */
+router.post('/insertMyBiama', (req, resp, next) => {
+	var myBiama = req.body;
+	userService.insertMyBiama(myBiama,(error, myBiamaDetails) => {
+		resp.json({myBiamaDetails})
 	});
 });
 

@@ -1,5 +1,5 @@
 
-app.controller("MyBiamaController", ['$scope', "MyBiamaService","jQuery","$http",function($scope, MyBiamaService,$http){
+app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService","jQuery","$http",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService,$http){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -19,30 +19,47 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","jQuery","$http"
 	$scope.showAddNewMaterial = false;
 	$scope.newMaterials=[];
 	$scope.errorInsertImage=false;
+	$scope.categories = [];
+	$scope.createdMyBiama = true;
 
-	$scope.optionCategories = ['animal', 'ceramic', 'composite', 'metal', 'mineral', 'polymers', 'vegetable'];
-	
-	jQuery( function() {
-		var availableTags = $scope.optionCategories;
-	jQuery( "#tags" ).autocomplete({
-		source: availableTags
+	$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
+	/* get information of material and of library - when i do get library */
+    $scope.getMaterialInfo.then(function(result) {
+        $scope.loading = false;
+		var data=result.data.materialsCategories;
+		$scope.materialsCategories=data;
+		for(var index=0; index<$scope.materialsCategories.length; ++index){
+			if(index<7){
+				$scope.categories.push($scope.materialsCategories[index].category)
+			} else {
+				break;
+			}
+		}
+		jQuery( function() {
+			var availableTags = $scope.categories;
+		jQuery( "#category" ).autocomplete({
+			source: availableTags
+		});
+		} );
+		$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
 	});
-	} );
 
-	jQuery( function() {
-		$scope.availableTags = $scope.optionCategories;
-	jQuery( "#category" ).autocomplete({
-		source: $scope.availableTags
-	});
-	});
-
-	$scope.optionColors = ['black', 'white', 'gray', 'blue', 'beige', 'green', 'pink', 'orange', 'brown', 'yellow', 'diamond', 'red'];
+	$scope.optionColors = ['preto', 'branco', 'cinzento', 'azul', 'beje', 'verde', 'rosa', 'laranja', 'castanho', 'amarelo', 'diamante', 'vermelho'];
 	jQuery( function() {
 		$scope.availableTags = $scope.optionColors;
 	jQuery( "#colors" ).autocomplete({
 		source: $scope.availableTags
 	});
 	});
+
+	$scope.locationBiama = ['Instituto Superior Técnico', 'Escola Superior de Educação de Lisboa', 'Instituto Superior de Engenharia de Lisboa'];
+	jQuery( function() {
+		$scope.availableTags = $scope.locationBiama;
+	jQuery( "#location" ).autocomplete({
+		source: $scope.availableTags
+	});
+	});
+
 
 	var window_width = $( window ).width();
 	if(window_width <= 1024) {
@@ -68,6 +85,13 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","jQuery","$http"
 			$scope.loading = false;
 			var data=result.data.biamaDetails;
 			$scope.descriptionMyBiama=data[0].description;
+	});
+
+	var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+    getBiamaInfo.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.biamaDetails;
+        $scope.idLibrary=data[data.length-1]+1;
 	});
 
 	$scope.createMyBiama = function() {
@@ -182,8 +206,28 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","jQuery","$http"
 
 			/* END: Materials of my biama */
 
-			
+			insertMyBiamaOnDB();
 		}
+	}
+
+	$scope.insertMyBiamaOnDB = function() {
+		var locationIframe = '';
+		if($scope.locationNewBiama == 'Instituto Superior Técnico') {
+			locationIframe = 'embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654';
+		} else if($scope.locationNewBiama == 'Escola Superior de Educação de Lisboa') {
+			locationIframe = 'embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919';
+		} else if($scope.locationNewBiama == 'Instituto Superior de Engenharia de Lisboa') {
+			locationIframe = '';
+		}
+		var data = {
+			'idLibrary': $scope.idLibrary,
+			'location': locationIframe,
+			'description':  $scope.descriptionNewBiama,
+			'locationDescription': $scope.locationNewBiama
+		}
+		$http.post('/insertMyBiama', data);
+
+		$scope.createdMyBiama = true;
 	}
 
 	$scope.insertImage = function(image) {
@@ -230,3 +274,61 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","jQuery","$http"
         }
 	}
 }])
+
+app.factory("MaterialsBiamaService", function($q, $http, $timeout){
+	
+	var getSchoolOfMaterial = function(data) {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+          deferred.resolve($http.get('/materialSchool', 
+          {params: {
+            'data': data
+          }}));
+		}, 1000);
+	
+		return deferred.promise;
+	};
+	  
+	var getMaterial = function() {
+		var deferred = $q.defer();
+	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/materialsCategories', true);
+		xhr.send();*/
+
+		$timeout(function() {
+		  deferred.resolve($http.get('/materialsCategories'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getSchoolOfMaterial: getSchoolOfMaterial,
+		getMaterial: getMaterial
+	  };
+});
+
+app.factory("MyBiAMaInfoService", function($q, $http, $timeout){
+    
+	var getBiAMaInfo = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/biamaInfo'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+	
+	  return {
+		getBiAMaInfo: getBiAMaInfo
+	  };
+});

@@ -7,7 +7,8 @@ module.exports = {
 	'getMyQuestionsLogged': getMyQuestionsLogged,
 	'insertUserSettings': insertUserSettings,
 	'insertLibraryUserDetails': insertLibraryUserDetails,
-	'getLibraryUserDetails': getLibraryUserDetails
+	'getLibraryUserDetails': getLibraryUserDetails,
+	'insertMyBiama': insertMyBiama
 }
 function getUsers(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -105,7 +106,6 @@ function getLibraryUserDetails(data, cb){
 
 function insertLibraryUserDetails(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        console.log('value: ', data);
 		var idLibraryDetail = data.idLibrary;
 		var idUserDetail = data.idUser;
 		if(err) {
@@ -119,5 +119,25 @@ function insertLibraryUserDetails(data, cb){
 			cb(null, result.rows)
 		});
 	});
+}
+
+function insertMyBiama(data, cb){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		var idLibrary = data.idLibrary;
+		var location = data.locationIframe;
+		var description = data.descriptionNewBiama;
+		var locationDescription = data.locationNewBiama;
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query(`INSERT INTO "Library" VALUES ($1, $2, $3, $4)`, [idLibrary, location, description, locationDescription], function(err, result) {
+			done();
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+
 }
 

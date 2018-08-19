@@ -83,7 +83,7 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionNewBiama" placeholder="Insira descrição da sua BiAMa" required></textarea><br>
 				<!-- location -->
 				<h5 class="subtitles biamaTitlesStyle"><b>Localização</b></h5>
-				<input class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br><br>
+				<input id="location" class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br><br>
 				<!-- library content -->
 
 				<h2 class="subtitles">Material</h2><br>
@@ -94,7 +94,7 @@
 					<input id="category" class="biamaConfigFields" ng-model="categoryMaterial" type="text" placeholder="Selecione a categoria do material" required><br>
 				</div>
 				<a ng-click="allCategories()" class="float-right">Todas as categorias</a><br>
-				<div class="alignRight" ng-show="showAllCategories" ng-repeat="category in optionCategories">
+				<div class="alignRight" ng-show="showAllCategories" ng-repeat="category in categories">
 					<h7>[{category}]</h7>
 				</div>
 
@@ -123,8 +123,10 @@
 				<h5 class="subtitles biamaTitlesStyle"><b>Descrição</b></h5>
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
-				
 			</form>
+			<div ng-if="createdMyBiama">
+				<h6>Para finalizar o processo, crie uma conta para aceder à sua BiAMa.</h6>
+			</div>
 		</div>
 	</body>
 </html>
