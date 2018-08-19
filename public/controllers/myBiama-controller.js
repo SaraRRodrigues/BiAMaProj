@@ -15,6 +15,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","$http","jQuery"
 	$scope.codeMaterial = '';
 	$scope.imageMaterial = '';
 	$scope.descriptionMaterial = '';
+	$scope.showInsertedImage = false;
 
 	$scope.optionCategories = ['animal', 'ceramic', 'composite', 'metal', 'mineral', 'polymers', 'vegetable'];
 	
@@ -77,7 +78,29 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","$http","jQuery"
 	}
 
 	$scope.saveInfo = function(descBiama, locationBiama, categoryBiama, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial) {
-		debugger
+		
+		if($scope.descriptionNewBiama !== '' && $scope.locationNewBiama !== '' && $scope.categoryMaterial !== ''
+		&& $scope.colorMaterial !== '' && $scope.codeMaterial !== '' && $scope.imageMaterial !== '' && $scope.descriptionMaterial !== '') {
+
+			// Default export is a4 paper, portrait, using milimeters for units
+			var doc = new jsPDF()
+			
+			doc.text('Hello world!', 10, 10)
+			doc.save('a4.pdf')
+		}
+	}
+
+	$scope.insertImage = function(image) {
+		
+		if($scope.showInsertedImage){
+			$scope.showInsertedImage = false;
+        }else {
+			$scope.showInsertedImage = true;
+			
+        }
+		var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
+        var res = splitDeviceRe.exec(($("#image").val()));
+		$scope.imageMaterial=res[2];
 	}
 
 	$scope.allCategories = function() {
