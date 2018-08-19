@@ -908,6 +908,7 @@ scrollListMaterial {
 }
 
 .myBiamaConfig {
+  width: 385px;
   float: left;
   margin-left: 170px;
   background-color: antiquewhite;

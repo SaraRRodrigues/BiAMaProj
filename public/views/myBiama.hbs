@@ -83,9 +83,10 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionNewBiama" placeholder="Insira descrição da sua BiAMa" required></textarea><br>
 				<!-- location -->
 				<h5 class="subtitles biamaTitlesStyle"><b>Localização</b></h5>
-				<input class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br>
+				<input class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br><br>
 				<!-- library content -->
-				<h2 class="subtitles">Materiais</h2><br>
+
+				<h2 class="subtitles">Material</h2><br>
 
 				<!-- category of material - options: animal, ceramic, composite, metal, mineral, polymers, vegetable-->
 				<h5 class="subtitles biamaTitlesStyle"><b>Categoria</b></h5>
@@ -112,12 +113,17 @@
 				<input class="biamaConfigFields" ng-model="codeMaterial" type="text" value="lastCode + 1" required><br>
 				<!-- image of material -->
 				<h5 class="subtitles biamaTitlesStyle"><b>Imagem do material</b></h5>
+				<i ng-if="showInsertedImage && !errorInsertImage" class="fas fa-minus float-right" ng-click="removeMaterial()"></i>
 				<input ng-if="!showInsertedImage" id="image" class="biamaConfigFields" ng-model="imageMaterial" type="file" placeholder="Insira uma imagem do material" required><button ng-if="!showInsertedImage" ng-click="insertImage(imageMaterial)">OK</button><br>
-				<h6 ng-if="showInsertedImage">[{imageMaterial}]</h6>
+				
+				<h6 ng-if="errorInsertImage">Preencha os dados anteriores, por favor.</h6>
+				<img ng-if="showInsertedImage && !errorInsertImage" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="25%" height="12%" alt="foto"/>
+
 				<!-- description of material -->
 				<h5 class="subtitles biamaTitlesStyle"><b>Descrição</b></h5>
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
+				
 			</form>
 		</div>
 	</body>
