@@ -124,9 +124,9 @@ function insertLibraryUserDetails(data, cb){
 function insertMyBiama(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		var idLibrary = data.idLibrary;
-		var location = data.locationIframe;
-		var description = data.descriptionNewBiama;
-		var locationDescription = data.locationNewBiama;
+		var location = data.location;
+		var description = data.description;
+		var locationDescription = data.locationDescription;
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}

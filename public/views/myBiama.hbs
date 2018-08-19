@@ -75,7 +75,9 @@
 					</div>
 				</div>
 			</div>
-			
+			<div ng-if="createdMyBiama">
+				<h6>Para finalizar o processo, crie uma conta para aceder à sua BiAMa.</h6>
+			</div>
 			<form class="myBiamaConfig" ng-hide="!showMyBiamaConf">
 				<h2 class="subtitles">Sua BiAMa</h2><br>
 				<!-- Description -->
@@ -124,9 +126,7 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
 			</form>
-			<div ng-if="createdMyBiama">
-				<h6>Para finalizar o processo, crie uma conta para aceder à sua BiAMa.</h6>
-			</div>
+			
 		</div>
 	</body>
 </html>

@@ -20,7 +20,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.newMaterials=[];
 	$scope.errorInsertImage=false;
 	$scope.categories = [];
-	$scope.createdMyBiama = true;
+	$scope.createdMyBiama = false;
 
 	$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 	/* get information of material and of library - when i do get library */
@@ -91,7 +91,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
     getBiamaInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.biamaDetails;
-        $scope.idLibrary=data[data.length-1]+1;
+        $scope.idLibrary=data[data.length-1].id_library+1;
 	});
 
 	$scope.createMyBiama = function() {
@@ -114,7 +114,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		
 		if($scope.descriptionNewBiama !== '' && $scope.locationNewBiama !== '' && $scope.categoryMaterial !== ''
 		&& $scope.colorMaterial !== '' && $scope.codeMaterial !== '' && $scope.imageMaterial !== '' && $scope.descriptionMaterial !== '') {
-		
+			$scope.codeMaterial = $scope.codeMaterial + "";
 			// Default export is a4 paper, portrait, using milimeters for units
 			var doc = new jsPDF()
 			
@@ -206,22 +206,22 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			/* END: Materials of my biama */
 
-			insertMyBiamaOnDB();
+			$scope.insertMyBiamaOnDB();
 		}
 	}
 
 	$scope.insertMyBiamaOnDB = function() {
-		var locationIframe = '';
+		$scope.locationIframe = '';
 		if($scope.locationNewBiama == 'Instituto Superior Técnico') {
-			locationIframe = 'embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654';
+			$scope.locationIframe = 'embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654';
 		} else if($scope.locationNewBiama == 'Escola Superior de Educação de Lisboa') {
-			locationIframe = 'embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919';
+			$scope.locationIframe = 'embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919';
 		} else if($scope.locationNewBiama == 'Instituto Superior de Engenharia de Lisboa') {
-			locationIframe = '';
+			$scope.locationIframe = '';
 		}
 		var data = {
 			'idLibrary': $scope.idLibrary,
-			'location': locationIframe,
+			'location': $scope.locationIframe,
 			'description':  $scope.descriptionNewBiama,
 			'locationDescription': $scope.locationNewBiama
 		}
