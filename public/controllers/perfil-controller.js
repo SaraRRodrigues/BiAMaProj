@@ -39,8 +39,8 @@ app.controller("PerfilController", ['$scope',"UserPerfilService", "$http", "jQue
             $scope.name=$scope.users[index].name;
             $scope.birthdateValue = $scope.users[index].birthdate;
 
-            if($scope.userName !== null && $scope.userName === username){
-                if($scope.userPassword !== null && $scope.userPassword === password){
+            if($scope.userName !== null && $scope.userName === $scope.username){
+                if($scope.userPassword !== null && $scope.userPassword === $scope.password){
                     $scope.userLoggedIn=$scope.users[index].username;
                     $scope.idUserLoggerIn=$scope.users[index].id;
                     $scope.confirmSession = true;

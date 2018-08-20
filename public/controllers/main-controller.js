@@ -122,6 +122,7 @@ app.constant('jQuery', window.jQuery)
 	$scope.languages = ['Português', 'Inglês']
 	$scope.biamaPage = true;
 	$scope.compareMaterials = [];
+	$scope.resultSearch = [];
 	$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
 	$scope.getAllUsers = UserService.getUsers(function(users){});
 	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
@@ -148,19 +149,44 @@ app.constant('jQuery', window.jQuery)
 		$scope.loading = false;
 		var data=result.data.comparationDetails;
 		$scope.materialComparation=data;
+		$scope.materialsToSearch = data;
 
 		for(var index=0; index<$scope.materialComparation.length; ++index) {
 			$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
 		}
-
 	}); 
   
 	$scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 	
+	$scope.initMiniSearch = function() {
+
+		var inputMini = jQuery("#miniSearch").val();
+
+		for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+			var resultMaterial = {
+				'name': $scope.materialsToSearch[index].name,
+				'category': $scope.materialsToSearch[index].category
+			}
+			if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+				$scope.resultSearch.push(resultMaterial);
+			} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+				$scope.resultSearch.push(resultMaterial);
+			} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+				$scope.resultSearch.push(resultMaterial);
+			} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+				$scope.resultSearch.push($scope.materialsToSearch[index].name);
+			}
+		}
+
+		$scope.miniSearchResults = true;
+	}
+
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
+
+			
 			$scope.showSearch = false;
 		}else {
 			$scope.showSearch = true;

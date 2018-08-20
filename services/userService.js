@@ -8,7 +8,8 @@ module.exports = {
 	'insertUserSettings': insertUserSettings,
 	'insertLibraryUserDetails': insertLibraryUserDetails,
 	'getLibraryUserDetails': getLibraryUserDetails,
-	'insertMyBiama': insertMyBiama
+	'insertMyBiama': insertMyBiama,
+	'insertLibraryMaterialDetails': insertLibraryMaterialDetails
 }
 function getUsers(cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -138,6 +139,21 @@ function insertMyBiama(data, cb){
 			cb(null, result.rows)
 		});
 	});
-
 }
 
+function insertLibraryMaterialDetails(data, cb) {
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		var idLibrary = data.idLibrary;
+		var idMaterial = data.idMaterial;
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query(`INSERT INTO "Library_Material" VALUES ($1, $2)`, [idLibrary, idMaterial], function(err, result) {
+			done();
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}

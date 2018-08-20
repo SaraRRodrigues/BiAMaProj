@@ -42,6 +42,7 @@ a {
 .margin-top-4x {margin-top:35px}
 .margin-top-5x {margin-top:70px}
 .margin-top-6x {margin-top:120px}
+.margin-top-line-white {margin-top: -12px}
 
 .margin-bottom {margin-bottom:5px}
 .margin-bottom-2x {margin-bottom:15px}
@@ -732,8 +733,6 @@ a {
 }
 
 .descriptionAnswer{
-  margin-left: 283px; 
-  margin-top: 13px; 
   width:250px; 
   text-align: right; 
 }

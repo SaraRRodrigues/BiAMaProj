@@ -124,25 +124,40 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
 			</form>
-			<div ng-if="createdMyBiama" class="divInitSessionMyBiama">
-				<div class="alignCenter">
-					<h5 class="initSessionColor">Iniciar Sessão</h5>
-					<div class="lineWhiteInitSession"></div><br>
-					<div ng-if="users === 'loadUser'">
-						<div class="loading-icon"></div>
+			<div ng-if="registUser">
+				<div class="titlesOnCenter"> 
+					<h1 class="subtitles">Registar</h1>
+				</div>
+				<!-- user photo -->
+				<div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
+					<div class="form-group">
+						<img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
+						<input class="center-block minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
 					</div>
-					<div ng-if="users !== 'loadUser'">
-						<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-						<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-						<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-						<!-- login with firebase providers -->
-						<div>
-							<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-							<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
-						</div>
-						<br>
-						<button class="registSession" type="button" ng-click="regist()">Registar</button>
-					</div>												
+					
+					<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px margin-top-line-white"></div>
+					<input class="center-block inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
+					<br>
+					<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px margin-top-line-white"></div>
+					<input class="center-block inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
+					<br>
+					<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px margin-top-line-white"></div>
+					<!-- edit mode -->
+					<input class="center-block inputsCenter inputDetails" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA" style="margin-left: 106px;"/>
+					<br>
+					<div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px margin-top-line-white"></div>
+					<input class="center-block inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
+					<br>
+					<button class="center-block inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
+				</div>
+				<div ng-if="emptyData">
+					<h3>Preencha todos os campos por favor.</h3>
+				</div>
+				<div ng-if="usernameRepeated">
+					<h3>Nome já existente.</h3>
+				</div>
+				<div ng-if="underAge">
+					<h3>Para efetuar o registo tem de ser maior de idade.</h3>
 				</div>
 			</div>
 		</div>

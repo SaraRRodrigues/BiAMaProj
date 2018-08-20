@@ -1,5 +1,5 @@
 
-app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService","jQuery","$http",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService,$http){
+app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService", "UserMyBiamaService","$http", "jQuery",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService, UserMyBiamaService,$http){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -38,12 +38,14 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 				break;
 			}
 		}
+		console.log('materiais: ', $scope.materialsCategories);
 		jQuery( function() {
 			var availableTags = $scope.categories;
 		jQuery( "#category" ).autocomplete({
 			source: availableTags
 		});
 		} );
+
 		$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
 		$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
 	});
@@ -97,6 +99,20 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
         $scope.loading = false;
         var data=result.data.biamaDetails;
 		$scope.idLibrary=data[data.length-1].id_library+1;
+		console.log('id library: ', $scope.idLibrary);
+	});
+
+	var getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
+	getUsersMyBiama.then(function(usersDB) {
+		$scope.users = usersDB.data.users;
+	});
+
+	var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
+	getMyBiamaLibraryUser.then(function(result) {
+		$scope.loading = false;
+		var data=result.data.userLibrary;
+		$scope.userLibrary=data;
+		console.log('library user: ', $scope.userLibrary);
 	});
 
 	$scope.createMyBiama = function() {
@@ -216,7 +232,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: Materials of my biama */
 
 			$scope.insertMyBiamaOnDB();
-			$scope.insertMaterialOnLibraries();
 		}
 	}
 
@@ -237,9 +252,78 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		}
 		$http.post('/insertMyBiama', data);
 		$scope.createdMyBiama = true;
+		$scope.registUser = true;
 		$scope.showBiamaInitPage = false;
 		$scope.showMyBiamaConf = false;
 
+	}
+
+	$scope.insertUser = function(name, username, email, birthdate, password) {
+
+		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
+			$scope.emptyData=true;
+		} else {
+			var idUser = $scope.users[$scope.users.length-1].id;
+			$scope.insertedIdUser=idUser;
+			var data = {
+				'idUser': parseInt(idUser)+1,
+				'name': name,
+				'email': email,
+				'birthdate': birthdate.toLocaleDateString(), 
+				'username': username,
+				'password': password,
+				'image': $scope.image
+			}
+			if($scope.image == undefined) {
+				data.image='noImage';
+			}
+
+			var validData = $scope.validDataNotEquals(data.username, data.password);
+			
+			if(validData) {
+				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+				if(validBirthdate){
+					$http.post('/insertUserDetails', data);
+
+					var dataLibraryUser = {
+						'idUser': data.idUser,
+						'idLibrary': $scope.idLibrary
+					}
+
+					$http.post('/insertLibraryUser', dataLibraryUser);
+
+				} else {
+					$scope.underAge=true;
+				}
+			} else {
+				$scope.usernameRepeated=true;
+			}
+		}
+
+		$scope.insertMaterialOnLibraries();
+	}
+
+	$scope.validDataNotEquals = function(username, password) {
+		for(var index=0; index<$scope.users.length; ++index) {
+			if(username === $scope.users[index].username) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	$scope.validDateOfBirth = function(dateOfBirth) {
+		var resultBirth = dateOfBirth.split("/");
+
+		var currentDate = new Date();
+		currentDate=currentDate.toLocaleDateString();
+		var resultCurrentDate = currentDate.split("/");
+
+		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+		if(calculateYear < 18) {
+			return false;
+		}
+		return true;
 	}
 
 	$scope.insertMaterialOnLibraries = function() {
@@ -253,8 +337,17 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			'category': $scope.categoryMaterial,
 			'description': $scope.descriptionMaterial,
 		}
-		debugger
+
 		$http.post('/insertMaterial', data);
+		
+		var dataLibraryMaterial = {
+			'idLibrary': $scope.idLibrary,
+			'idMaterial': data.idMaterial
+		}
+
+		$http.post('/insertLibraryMaterial', dataLibraryMaterial);
+
+		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
 	$scope.insertImage = function(image) {
@@ -358,4 +451,94 @@ app.factory("MyBiAMaInfoService", function($q, $http, $timeout){
 	  return {
 		getBiAMaInfo: getBiAMaInfo
 	  };
+});
+
+app.factory("UserMyBiamaService", function($q, $http, $timeout){
+    
+	var getUsers = function() {
+		var deferred = $q.defer();
+	
+ 		$timeout(function() {
+		  deferred.resolve($http.get('/users',  {cache:true}));
+		}, 2000); 
+	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/users', true);
+		xhr.send();*/
+
+		return deferred.promise;
+	};
+
+	var getMyQuestionsLogged = function() {
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/myQuest', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/myQuest'));
+		}, 2000);
+
+		return deferred.promise;
+	};
+
+	var insertLibraryUserDetails = function() {
+		var deferred = $q.defer();
+
+		
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/insertLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.post('/insertLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	var getLibraryUserDetails = function() {
+		
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/getLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/getLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	return {
+		getUsers: getUsers,
+		getMyQuestionsLogged: getMyQuestionsLogged,
+		insertLibraryUserDetails: insertLibraryUserDetails,
+		getLibraryUserDetails: getLibraryUserDetails
+	};
 });

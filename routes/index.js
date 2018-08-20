@@ -206,6 +206,14 @@ router.post('/insertLibraryUser', (req, resp, next) => {
 	});
 });
 
+/* INSERT user material details: used on regist of user */
+router.post('/insertLibraryMaterial', (req, resp, next) => {
+	var data = req.body;
+	userService.insertLibraryMaterialDetails(data, (error, userLibrary) => {
+		resp.json({userLibrary})
+	});
+});
+
 /* GET user library details: used on regist of user */
 router.get('/getLibraryUser', (req, resp, next) => {
 	var data = req.body;
