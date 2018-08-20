@@ -379,7 +379,7 @@
 					
 					<!--image biama -->
 					<div ng-if="search && !showMaterials && !openMaterialDetail && !isMobileView" class="row text-center">
-						<img ng-if="!miniSearchResults" class="margin-top-6x" src="../images/topoBiamaHome.png"/>
+						<img ng-if="showInitSearch" class="margin-top-6x" src="../images/topoBiamaHome.png"/>
 					</div>
 
 					<!-- image biama with search -->
@@ -390,7 +390,7 @@
 					<!-- titles of page & search -->
 					<div class="row text-center" style="padding-bottom: 252px;">
 						<ng-view></ng-view>
-						<div ng-if="!openMaterialDetail && search && !isMobileView && !miniSearchResults" class="col-sm-4 col-sm-offset-4">
+						<div ng-if="!openMaterialDetail && search && !isMobileView && showInitSearch" class="col-sm-4 col-sm-offset-4">
 							<div class="ui-widget input-group stylish-input-group">
 								<input id="tags_search" style="width: 385px;">
 								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
@@ -479,6 +479,7 @@
 					</div>
 				</div>
 				<div ng-if="miniSearchResults">
+					<i ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">
 							<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>

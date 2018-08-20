@@ -123,6 +123,7 @@ app.constant('jQuery', window.jQuery)
 	$scope.biamaPage = true;
 	$scope.compareMaterials = [];
 	$scope.resultSearch = [];
+	$scope.showInitSearch=true;
 	$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
 	$scope.getAllUsers = UserService.getUsers(function(users){});
 	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
@@ -180,6 +181,7 @@ app.constant('jQuery', window.jQuery)
 			}
 		}
 
+		$scope.showInitSearch=false;
 		$scope.miniSearchResults = true;
 	}
 
@@ -502,24 +504,25 @@ app.constant('jQuery', window.jQuery)
 		$scope.openedMaterial=material;
 	}
 
+	$scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+	}
+
 	$scope.closeMaterial = function() {
 		if($scope.searchValue === 'Materiais'){
 			$scope.showCategoryMaterial=false;
 			$scope.showProjectMaterial=false;
-			$scope.showMaterials=true;
-		}
-
-		if($scope.searchValue === 'Projeto de materiais') {
+		} else if($scope.searchValue === 'Projeto de materiais') {
 			$scope.showProjectMaterial=true;
 			$scope.showCategoryMaterial=false;
-			$scope.showMaterials=true;
-		} 
-		
-		if($scope.searchValue ==='Categoria de materiais'){
+		} else if($scope.searchValue ==='Categoria de materiais'){
 			$scope.showCategoryMaterial=true;
 			$scope.showProjectMaterial=false;
-			$scope.showMaterials=true;
-		}
+		} 
 		$scope.showDetailsOfMaterial=false;
 	}
 
