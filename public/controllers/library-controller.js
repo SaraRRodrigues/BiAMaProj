@@ -17,8 +17,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	} else {
 		$scope.isMobileView=false;
 	}
-	console.log('width library ', $scope.isMobileView);
-
+	
 	$scope.loading = true;
 	$scope.category = '';
 	$scope.materialInfo = null;

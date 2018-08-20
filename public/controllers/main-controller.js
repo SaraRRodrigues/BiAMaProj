@@ -76,6 +76,11 @@ app.constant('jQuery', window.jQuery)
 		controller: 'WhereWeAreController'
 	})
 	
+	$routeProvider.when('/BiAMa/qrCodeMobile', {
+		templateUrl: 'views/qrCodeMobile',
+		controller: 'QrCodeController'
+	})
+	
 	$routeProvider.when('/BiAMa/biamaPageMobile', {
 		templateUrl: 'views/biamaPageMobile',
 		controller: 'BiamaController'
@@ -187,8 +192,6 @@ app.constant('jQuery', window.jQuery)
 
 	$scope.clickTopSearch = function() {
 		if($scope.showSearch){
-
-			
 			$scope.showSearch = false;
 		}else {
 			$scope.showSearch = true;

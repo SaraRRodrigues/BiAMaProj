@@ -38,25 +38,26 @@
 
 
 		<!--footer controllers-->
-		<script type="text/javascript" src="controllers/main-controller.js"></script>
-		<script type="text/javascript" src="controllers/biama-controller.js"></script>
-		<script type="text/javascript" src="controllers/whereWeAre-controller.js"></script>
-		<script type="text/javascript" src="controllers/forum-controller.js"></script>
+		<script type="text/javascript" src="../controllers/main-controller.js"></script>
+		<script type="text/javascript" src="../controllers/biama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/whereWeAre-controller.js"></script>
+		<script type="text/javascript" src="../controllers/forum-controller.js"></script>
 		<script type="text/javascript" src="../controllers/curiosityForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/questionsUsersForum-controller.js"></script>
         <script type="text/javascript" src="../controllers/worldShareForum-controller.js"></script>
-		<script type="text/javascript" src="controllers/library-controller.js"></script>
-		<script type="text/javascript" src="controllers/myBiama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/library-controller.js"></script>
+		<script type="text/javascript" src="../controllers/myBiama-controller.js"></script>
+		<script type="text/javascript" src="../controllers/qrCode-controller.js"></script>
 
 		<!--details user controllers-->
-		<script type="text/javascript" src="controllers/perfil-controller.js"></script>
-		<script type="text/javascript" src="controllers/favorites-controller.js"></script>
-		<script type="text/javascript" src="controllers/notifications-controller.js"></script>
-		<script type="text/javascript" src="controllers/questions-controller.js"></script>
-		<script type="text/javascript" src="controllers/worldShares-controller.js"></script>
-		<script type="text/javascript" src="controllers/compare-controller.js"></script>
-		<script type="text/javascript" src="controllers/login-controller.js"></script>
-		<script type="text/javascript" src="controllers/resultsMaterials-controller.js"></script>
+		<script type="text/javascript" src="../controllers/perfil-controller.js"></script>
+		<script type="text/javascript" src="../controllers/favorites-controller.js"></script>
+		<script type="text/javascript" src="../controllers/notifications-controller.js"></script>
+		<script type="text/javascript" src="../controllers/questions-controller.js"></script>
+		<script type="text/javascript" src="../controllers/worldShares-controller.js"></script>
+		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
+		<script type="text/javascript" src="../controllers/login-controller.js"></script>
+		<script type="text/javascript" src="../controllers/resultsMaterials-controller.js"></script>
 
 		<base href="/"/>
 	</head>
@@ -512,7 +513,7 @@
 					<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
 					<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
 				</a>
-				<a href="/BiAMa/libraryMobile">
+				<a href="/BiAMa/qrCodeMobile">
 					<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none; width: 64px;height: 53px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
 					<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none; width: 64px;height: 53px;" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
 				</a>
