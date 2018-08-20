@@ -71,6 +71,15 @@ router.get('/categories', (req, resp, next) => {
 	});
 });
 
+/* INSERT material: my new biama  */
+router.post('/insertMaterial', (req, resp, next) => {
+	var data = req.body;
+	categoryInfoService.insertMaterialDetails(data, (error, categoryDetails) => {
+		resp.json({categoryDetails})
+	});
+});
+
+
 /* GET user question: forum */
 router.get('/userQuestions', (req, resp, next) => {
 	userQuestionService.getUserQuestion((error, questionDetails) => {

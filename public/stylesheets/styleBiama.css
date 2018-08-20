@@ -335,6 +335,19 @@ a {
   padding-top:10px;
 }
 
+.divInitSessionMyBiama {
+  background-color:#E0E0E0;
+  margin-left:235px;
+  margin-top: 38px;
+  width: 222px;
+  height:266px;
+  float:left;
+  border-radius:5px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+}
+
 .divInitSessionMobile {
   background-color:#E0E0E0;
   margin-left:180px;

@@ -21,6 +21,9 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.errorInsertImage=false;
 	$scope.categories = [];
 	$scope.createdMyBiama = false;
+	$scope.loading = true;
+	$scope.showBiamaInitPage = true;
+	$scope.biamaUp = false;
 
 	$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 	/* get information of material and of library - when i do get library */
@@ -41,6 +44,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			source: availableTags
 		});
 		} );
+		$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
 		$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
 	});
 
@@ -82,23 +86,26 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.loading=true;
 	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
 	getMyBiamaInfo.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.biamaDetails;
-			$scope.descriptionMyBiama=data[0].description;
+		$scope.loading = false;
+		$scope.biamaUp = true;
+		var data=result.data.biamaDetails;
+		$scope.descriptionMyBiama=data[0].description;
 	});
 
 	var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
     getBiamaInfo.then(function(result) {
         $scope.loading = false;
         var data=result.data.biamaDetails;
-        $scope.idLibrary=data[data.length-1].id_library+1;
+		$scope.idLibrary=data[data.length-1].id_library+1;
 	});
 
 	$scope.createMyBiama = function() {
 		
 		if($scope.showMyBiamaConf){
+			$scope.showBiamaInitPage = true;
 			$scope.showMyBiamaConf = false;
         }else {
+			$scope.showBiamaInitPage = false;
 			$scope.showMyBiamaConf = true;
 			
         }
@@ -180,6 +187,8 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			doc.setFontType("italic");
 			doc.text(25, 140, 'Imagem');
 
+			$scope.typeMaterial = $scope.categoryMaterial;
+
 			var category = $scope.categoryMaterial.charAt(0).toUpperCase() + $scope.categoryMaterial.slice(1);
 			var img = new Image;
 			img.onload = function() {
@@ -207,6 +216,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: Materials of my biama */
 
 			$scope.insertMyBiamaOnDB();
+			$scope.insertMaterialOnLibraries();
 		}
 	}
 
@@ -226,8 +236,25 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			'locationDescription': $scope.locationNewBiama
 		}
 		$http.post('/insertMyBiama', data);
-
 		$scope.createdMyBiama = true;
+		$scope.showBiamaInitPage = false;
+		$scope.showMyBiamaConf = false;
+
+	}
+
+	$scope.insertMaterialOnLibraries = function() {
+		
+		var data = {
+			'idMaterial': $scope.idMaterial,
+			'type': $scope.typeMaterial,
+			'color':  $scope.colorMaterial,
+			'code': $scope.codeMaterial,
+			'name': $scope.imageMaterial,
+			'category': $scope.categoryMaterial,
+			'description': $scope.descriptionMaterial,
+		}
+		debugger
+		$http.post('/insertMaterial', data);
 	}
 
 	$scope.insertImage = function(image) {

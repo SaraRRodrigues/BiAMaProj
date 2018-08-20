@@ -9,7 +9,7 @@ function getInformationOfBiama(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Library"', function(err, result) {
+		client.query('SELECT * FROM "Library" ORDER BY "Library".id_library ASC ', function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);

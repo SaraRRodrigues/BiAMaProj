@@ -56,28 +56,26 @@
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
 			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>
-			<div class="titlesOnCenter" ng-if="!showMyBiamaConf">
+			<div class="titlesOnCenter" ng-if="showBiamaInitPage">
 				<h1 class="subtitles">A sua BiAMa</h1>
 				<div ng-if="loading">
 					<div class="loading-icon-footer-info"></div>
 				</div>
 				<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
 				<div ng-if="!loading" class="sectionDetails">
-					<p>[{descriptionMyBiama}]</p>
-				</div>
-				<div ng-if="!loading" class="sectionDetails">
-					<div>
-						<i class="far fa-file-pdf"></i>
-						<label class="margin-right-3x">Formulário para Aderir</label>
-
-						<i class="far fa-file-pdf" ng-click="createMyBiama()"></i>
-						<label>Construir a sua BiAMa</label>
+					<div class="sectionDetails">
+						<p>[{descriptionMyBiama}]</p>
 					</div>
 				</div>
+				<div ng-if="biamaUp">
+					<i class="far fa-file-pdf"></i>
+					<label class="margin-right-3x">Formulário para Aderir</label>
+
+					<i class="far fa-file-pdf" ng-click="createMyBiama()"></i>
+					<label>Construir a sua BiAMa</label>
+				</div>
 			</div>
-			<div ng-if="createdMyBiama">
-				<h6>Para finalizar o processo, crie uma conta para aceder à sua BiAMa.</h6>
-			</div>
+			
 			<form class="myBiamaConfig" ng-hide="!showMyBiamaConf">
 				<h2 class="subtitles">Sua BiAMa</h2><br>
 				<!-- Description -->
@@ -126,7 +124,27 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
 			</form>
-			
+			<div ng-if="createdMyBiama" class="divInitSessionMyBiama">
+				<div class="alignCenter">
+					<h5 class="initSessionColor">Iniciar Sessão</h5>
+					<div class="lineWhiteInitSession"></div><br>
+					<div ng-if="users === 'loadUser'">
+						<div class="loading-icon"></div>
+					</div>
+					<div ng-if="users !== 'loadUser'">
+						<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+						<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+						<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+						<!-- login with firebase providers -->
+						<div>
+							<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+							<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+						</div>
+						<br>
+						<button class="registSession" type="button" ng-click="regist()">Registar</button>
+					</div>												
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
