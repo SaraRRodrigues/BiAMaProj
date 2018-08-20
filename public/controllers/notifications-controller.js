@@ -4,7 +4,8 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
     jQuery("#footerMain").hide();
     /* my current page */
     $scope.namePage='notifications';
-    $scope.loading = true;
+	$scope.loading = true;
+	$scope.showNotificationClick = false;
 
     var window_width = $( window ).width();
 	if(window_width <= 1024) {
@@ -80,7 +81,12 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 
 		});*/
 	}
-    
+	
+	$scope.openNotification = function(notification) {
+		$scope.currentNotification=notification;
+		$scope.showNotificationClick = true;
+	}
+
     $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';

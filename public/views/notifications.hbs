@@ -67,7 +67,7 @@
             </div>
 			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>
             <div class="padding-left-4x">
-                <h1 style="subtitles margin-top-title">A minha partilha 1</h1> 
+                <h2 class="subtitles margin-top-4x">[{currentNotification}]</h2> 
             </div>
             
             <div ng-if="notificationNumber" class="divNotifications sectionScrollNotification">
@@ -76,7 +76,7 @@
                 </div>
                 <div ng-repeat="notification in notifications">
                     <div ng-if="notification.insert">
-                       <h6>[{notification.text_notification}]</h6>
+                       <h6 ng-click="openNotification(notification.text_notification)">[{notification.text_notification}]</h6>
                        <h6 class="dateNotification">[{notification.date_notification}]</h6>
                     </div>
                    <div class="lineWhite margin-bottom margin-top"></div>									
