@@ -63,35 +63,43 @@
 	</head>
 
 	<body ng-app="myApp" ng-controller="MainController">
-		<div ng-if="isMobileView">
+		<div ng-if="isMobileView" style="padding-bottom: 174px;">
 			<!-- header -->
 			<div ng-if="search" class="container-fluid">
 				<div class="header">
 					<div class="col-sm-4">
 						<div ng-if="!showSearch" class="margin-top-2x col-sm-1">
-							<img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img class="float-right margin-top-1x" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 							<img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 						</div>
-						<img style="margin-top:-10px" ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+						<img ng-if="!userDetails && !enableUserIcon && isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+						<img ng-if="!userDetails && !isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+
 					</div>
 					
 					<div ng-if="showSearch" class="margin-top col-sm-2">
-						<img style="margin-top: -77px;" class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-						<img style="margin-top: -77px;" class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+						<img style="margin-top: -77px;" class="float-right" ng-if="!showSearch && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
+						<img style="margin-top: -77px;" class="float-right" ng-if="showSearch  && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
+
+						<button class="float-right margin-top-1x" ng-if="showSearch && !userDetails && isMobileView" ng-click="initMiniSearch()">Ok</button>
+						
+						<img class="float-right" ng-if="!showSearch && !userDetails && isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
+						<img class="float-right" ng-if="showSearch  && !userDetails && isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
 					</div>
 					<div class="col-sm-1">
-						<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style="float: right;margin-right: 57px;margin-top: -62px;    width: 128px;"></input>
-						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
+						<input id="miniSearch" class="inputMinSearch" ng-if="isMobileView && showSearch && !userDetails" type="text" style="margin-top: 12px;float: left;width: 167px;"></input>
+						<input id="miniSearch" class="inputMinSearch" ng-if="!isMobileView && showSearch && !userDetails" type="text" style="float: right;margin-right: 57px;margin-top: -62px;width: 128px;"></input>
+						<button ng-if="showSearch && !userDetails && !isMobileView" ng-click="initMiniSearch()">Ok</button>
 					</div>
 				</div>
 			</div> 
 			<!-- image biama with search -->
-			<div ng-if="search" class="row text-center">
+			<div ng-if="showInitSearch && !showMaterials && !openMaterialDetail" class="row text-center">
 				<img class="margin-top-3x" src="../images/topoBiama.png"/>
 			</div>
 			<!-- show categories and materials -->
 			<div ng-if="search" class="container">
-				<div ng-if="!openMaterialDetail && search" class="col-sm-4 col-sm-offset-4">
+				<div ng-if="!openMaterialDetail && search && showInitSearch" class="col-sm-4 col-sm-offset-4">
 					<div class="ui-widget input-group stylish-input-group" style="top: 50%;left: 50%;margin-left: -105px;">
 						<input id="tags_search" style="margin-top: 25px; margin-left: 24px;">
 						<span style="padding: 4px;padding-left: 22px;">
@@ -302,7 +310,7 @@
 					<nav class="positionOfNavDetails">
 						<!-- languages -->
 						<div ng-if="!isMobileView" class="float-left padding-left-3x">
-							<img class="" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
+							<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
 							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 							<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
@@ -389,9 +397,12 @@
 					</div>
 
 					<!-- titles of page & search -->
-					<div class="row text-center" style="padding-bottom: 252px;">
+					<div class="row text-center">
 						<ng-view></ng-view>
-						<div ng-if="!openMaterialDetail && search && !isMobileView && showInitSearch" class="col-sm-4 col-sm-offset-4">
+						<div ng-if="loading">
+							<div class="loading-icon-footer-info"></div>
+						</div>
+						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4" style="padding-bottom: 252px;">
 							<div class="ui-widget input-group stylish-input-group">
 								<input id="tags_search" style="width: 385px;">
 								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
@@ -437,7 +448,7 @@
 								</div>
 							</div>
 						</div>
-						<div ng-if="registUser && !isMobileView">
+						<div ng-if="registUser">
 							<div class="titlesOnCenter"> 
 								<h1 class="subtitles">Registar</h1>
 							</div>
@@ -473,14 +484,14 @@
 								<h3>Para efetuar o registo tem de ser maior de idade.</h3>
 							</div>
 						</div>
-						<div class="perfilDetails center-block" ng-if="openImageUploadLabel && !isMobileView">
+						<div class="perfilDetails center-block" ng-if="openImageUploadLabel">
 							<input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
 							<button ng-click="saveUploadFile()">Guardar</button>
 						</div>
 					</div>
 				</div>
+				<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
 				<div ng-if="miniSearchResults">
-					<i ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">
 							<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>

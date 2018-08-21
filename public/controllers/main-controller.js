@@ -169,32 +169,46 @@ app.constant('jQuery', window.jQuery)
 	$scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
-
-		for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-			var resultMaterial = {
-				'name': $scope.materialsToSearch[index].name,
-				'category': $scope.materialsToSearch[index].category
+		if(inputMini !== '') {
+			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+				var resultMaterial = {
+					'name': $scope.materialsToSearch[index].name,
+					'category': $scope.materialsToSearch[index].category
+				}
+				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push($scope.materialsToSearch[index].name);
+				}
 			}
-			if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-				$scope.resultSearch.push(resultMaterial);
-			} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-				$scope.resultSearch.push(resultMaterial);
-			} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-				$scope.resultSearch.push(resultMaterial);
-			} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-				$scope.resultSearch.push($scope.materialsToSearch[index].name);
-			}
+	
+			$scope.showInitSearch=false;
+			$scope.miniSearchResults = true;
 		}
-
-		$scope.showInitSearch=false;
-		$scope.miniSearchResults = true;
 	}
 
 	$scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
+		$scope.miniSearchResults = false;
+		$scope.showInitSearch=true;
+
+		if($scope.isMobileView) {
+			if($scope.showSearch){
+				$scope.enableUserIcon=false;
+				$scope.showSearch = false;
+			}else {
+				$scope.enableUserIcon=true;
+				$scope.showSearch = true;
+			}
+		} else {
+			if($scope.showSearch){
+				$scope.showSearch = false;
+			}else {
+				$scope.showSearch = true;
+			}
 		}
 	}
 
@@ -513,6 +527,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.openMaterialDetail=false; 
 		$scope.showInitSearch=true;
 		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
 	}
 
 	$scope.closeMaterial = function() {
