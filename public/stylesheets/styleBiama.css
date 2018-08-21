@@ -992,3 +992,15 @@ scrollMobile {
   color: orange;
   font-size: 40px;
 }
+
+.sizeOfInputMinMobile {
+  width: 233px;
+  height: 43px;
+  margin-top: 20px;
+  background-color: white;
+  font-size: 30px;
+}
+
+.buttonOk {
+  font-size:26px
+}
