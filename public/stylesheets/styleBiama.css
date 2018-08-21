@@ -48,6 +48,7 @@ a {
 .margin-bottom {margin-bottom:5px}
 .margin-bottom-2x {margin-bottom:15px}
 .margin-bottom-3x {margin-bottom:25px}
+.margin-bottom-5x {margin-bottom:100px}
  
 .padding {padding: 20px}
 
@@ -580,6 +581,13 @@ a {
 
 .sectionDetails{
   width: 76%;
+  max-width: 800px;
+  margin: 0 auto; 
+  text-align: justify;
+}
+
+.sectionDetailsMyBiama {
+  width: 53%;
   max-width: 800px;
   margin: 0 auto; 
   text-align: justify;
