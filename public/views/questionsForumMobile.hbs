@@ -61,15 +61,16 @@
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
-                <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style=" width: 340px; margin-top: 17px;"></input>
+                <div class="col-sm-4">
+                     <input id="miniSearch" class="inputMinSearch sizeOfInputMinMobile" ng-if="showSearch && !userDetails" type="text"></input>
+					<button class="buttonOk" ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
                 </div>
             </div>
         </div> 
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="!loading && !showQuestionDetails" class="titlesOnCenter" ng-repeat="question in questions track by $index">
+		<div ng-if="!loading && !showQuestionDetails && showAllQuestions" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 			<a class="questionX" ng-click="getQuestion(question.id_question, $index)" style="font-size: 33px;">Pergunta [{$index+1}]</a><br>
 			<div class="separateQuestions"></div>
 		</div>
@@ -148,6 +149,36 @@
 				</div>
 				<div ng-if="clickAddLike || clickRemoveLike">
 					<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
+				</div>
+			</div>
+		</div>
+		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
+		<div ng-if="miniSearchResults" class="margin-top-5x">
+			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
+				<div class="thumbnail">
+					<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
+				</div>
+			</div>
+		</div>
+		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
+			<div class="row container">
+				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+				<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
+					<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
+					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showProjectMaterial" style="margin-top: 82px;">
+					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
+				</div>
+				<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+					<h4 class="margin-right-5x margin-top-6x" style="font-size: 32px;">Category</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.category}]</h5>
+					<h4 class="margin-right-5x" style="font-size: 32px;">Code</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.code}]</h5>
+					<h4 class="margin-right-5x" style="font-size: 32px;">Description</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.description}]</h5>
 				</div>
 			</div>
 		</div>
