@@ -8,6 +8,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 
 		$scope.miniSearchResults=false;
 		$scope.resultSearch = [];
+		$scope.showInitSearch=true;
 	
     $scope.loading = true;
     var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
