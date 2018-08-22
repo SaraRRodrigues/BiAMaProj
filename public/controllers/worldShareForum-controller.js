@@ -183,10 +183,10 @@ app.factory("WorldSharesForumService", function($q, $http, $timeout){
     };
   });
 
-  app.factory("WorldSharesForumMaterialService", function($q, $http, $timeout){
+app.factory("WorldSharesForumMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
-  
+
     /*var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       var resp = this;
@@ -197,19 +197,19 @@ app.factory("WorldSharesForumService", function($q, $http, $timeout){
       }
       
     }
-  
+
     xhr.open('GET','/compareMaterials', true);
     xhr.send();*/
-  
+
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
         }, 4000);
-  
+
         return deferred.promise;
     };
-  
-  
+
+
     return {
         getMaterialComparation: getMaterialComparation
     };
-  });
+});
