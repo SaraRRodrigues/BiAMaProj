@@ -1,5 +1,5 @@
 
-app.controller("PerfilController", ['$scope',"UserPerfilService", "$http", "jQuery", function($scope,UserPerfilService, $http){
+app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMaterialService", "$http", "jQuery", function($scope, UserPerfilService, PerfilMaterialService, $http){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -26,6 +26,9 @@ app.controller("PerfilController", ['$scope',"UserPerfilService", "$http", "jQue
     $scope.new_birthdate='';
     $scope.showPerfilDetails=false;
     $scope.loading=true;
+    $scope.resultSearch = [];
+    $scope.showDetailsOfMaterial=false;
+    $scope.miniSearchResults=false;
 
     var getAllUsers = UserPerfilService.getUsers(function(users){});
     getAllUsers.then(function(usersDB) {
@@ -66,6 +69,71 @@ app.controller("PerfilController", ['$scope',"UserPerfilService", "$http", "jQue
         $scope.email = splitLocation[6].split('=')[1];
     }
    
+    $scope.getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
+    $scope.getMaterials.then(function(result) {
+      $scope.loading = false;
+      var data=result.data.comparationDetails;
+      $scope.materialsToSearch = data;
+  
+      });
+
+    $scope.initMiniSearch = function() {
+
+      var inputMini = jQuery("#miniSearch").val();
+      if(inputMini !== '') {
+        for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+          var resultMaterial = {
+            'name': $scope.materialsToSearch[index].name,
+            'category': $scope.materialsToSearch[index].category,
+            'description': $scope.materialsToSearch[index].description,
+            'code': $scope.materialsToSearch[index].code
+          }
+          if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+            $scope.resultSearch.push(resultMaterial);
+          } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+            $scope.resultSearch.push(resultMaterial);
+          } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+            $scope.resultSearch.push(resultMaterial);
+          } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+            $scope.resultSearch.push($scope.materialsToSearch[index].name);
+          }
+        }
+    
+        $scope.showInitSearch=false;
+        $scope.miniSearchResults = true;
+
+        $scope.showMaterialDetails=false;
+        $scope.showForum = false;
+        $scope.showQuestionDetails=false;
+        
+		$scope.showPerfilDetails=false;
+      }
+    }
+
+    $scope.closeMaterial = function(){
+      $scope.miniSearchResults=false;
+      $scope.showDetailsOfMaterial=false;
+      $scope.showPerfilDetails=true;
+    }
+  
+    $scope.closeMiniSearch = function() {
+      $scope.miniSearchResults = false;
+      $scope.search=true;
+      $scope.openMaterialDetail=false; 
+      $scope.showInitSearch=true;
+      $scope.showSearch=false;
+	  $scope.enableUserIcon=false;
+      $scope.showPerfilDetails=true;
+    }
+  
+    $scope.openMaterial = function(material) {
+      $scope.miniSearchResults=false;
+      $scope.showDetailsOfMaterial=true;
+      $scope.showMaterials=false;
+      $scope.openedMaterial=material;
+      $scope.showPerfilDetails=false;
+    }
+    
     $scope.initUserDetails= function() {
         if($scope.users !== undefined) {
             $scope.showPerfilDetails=true;
@@ -434,4 +502,35 @@ app.factory("UserPerfilService", function($q, $http, $timeout){
 		insertLibraryUserDetails: insertLibraryUserDetails,
 		getLibraryUserDetails: getLibraryUserDetails
 	};
+});
+
+app.factory("PerfilMaterialService", function($q, $http, $timeout){
+    var getMaterialComparation = function() {
+        var deferred = $q.defer();
+
+    /*var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      var resp = this;
+      if (this.readyState == 4 && this.status == 200) {
+        var response = resp.response;
+        debugger
+        deferred.resolve(response);
+      }
+      
+    }
+
+    xhr.open('GET','/compareMaterials', true);
+    xhr.send();*/
+
+        $timeout(function() {
+        deferred.resolve($http.get('/compareMaterials'));
+        }, 4000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMaterialComparation: getMaterialComparation
+    };
 });
