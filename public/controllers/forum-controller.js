@@ -67,6 +67,15 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			$scope.showForum = false;
 		}
 	}
+	
+	$scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+			$scope.showSearch = false;
+		}
+	}
 
 	$scope.closeMaterial = function(){
 		$scope.miniSearchResults=false;

@@ -88,6 +88,16 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       }
     }
 
+    
+    $scope.clickUserDetails = function() {
+      if($scope.userDetails){
+        $scope.userDetails = false;
+      }else {
+        $scope.userDetails = true;
+        $scope.showSearch = false;
+      }
+    }
+
     $scope.closeMaterial = function(){
       $scope.miniSearchResults=false;
       $scope.showDetailsOfMaterial=false;

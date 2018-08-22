@@ -46,6 +46,15 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     $scope.goToHomePage = function() {
       window.setTimeout("location.href = 'http://localhost:8080'")
     }
+    
+    $scope.clickUserDetails = function() {
+      if($scope.userDetails){
+        $scope.userDetails = false;
+      }else {
+        $scope.userDetails = true;
+        $scope.showSearch = false;
+      }
+    }
 
     $scope.clickTopSearch = function() {
       if($scope.showSearch){

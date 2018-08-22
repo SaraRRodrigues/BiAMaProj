@@ -115,6 +115,16 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       $scope.showQuestionDetails=false;
     }
   
+    
+    $scope.clickUserDetails = function() {
+      if($scope.userDetails){
+        $scope.userDetails = false;
+      }else {
+        $scope.userDetails = true;
+        $scope.showSearch = false;
+      }
+    }
+
     $scope.openMaterial = function(material) {
       $scope.miniSearchResults=false;
       $scope.showDetailsOfMaterial=true;

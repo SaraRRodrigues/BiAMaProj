@@ -128,6 +128,16 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	
+	$scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+			$scope.showSearch = false;
+		}
+	}
+
 	$scope.openCategory = function(category) {
 		$scope.showCategory = true;
 		$scope.category = category;
