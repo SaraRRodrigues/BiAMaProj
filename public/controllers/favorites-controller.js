@@ -107,7 +107,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
       $scope.enableUserIcon=false;
       $scope.showMaterialDetails=false;
       $scope.showQuestionDetails=false;
-      
+
       $scope.showMaterials=true;
     }
   
@@ -701,7 +701,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     };
   });
   
-  app.factory("FavoritesMaterialService", function($q, $http, $timeout){
+app.factory("FavoritesMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
 
