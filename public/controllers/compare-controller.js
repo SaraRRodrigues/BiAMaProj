@@ -2,38 +2,152 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
-    /* my current page */
-    $scope.namePage='compare';
     
-    var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
+    /* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
+		}
+	}
+
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='compare';
+		$scope.showMaterialsCompare=false;
+		$scope.searchToCompare=true;
+		$scope.materialToCompare=[];
+		$scope.loading = true;
+		$scope.doLogin=false;
+		$scope.compareMaterials=[];
+		$scope.showInputToCompare=true;
+	
+		$scope.resultSearch = [];
+		$scope.showDetailsOfMaterial=false;
+		$scope.miniSearchResults=false;
+		$scope.showLabelCompare=true;
+	}
+
+	/* verify if user is logged in */
+	$scope.validateUserLoggedIn = function() {
+		var splitLocation = location.href.split('=');
+		$scope.idUserLoggerIn =splitLocation[1];
+	
+		if($scope.idUserLoggerIn !== undefined) {
+			$scope.confirmSession=true;
+		} else {
+			$scope.loading = true;
+			$scope.confirmSession=false;
+		}
+	}
+
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of materials to display when compare materials */
+	$scope.getAllRequests = function() {
+		var getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+		});
+
+		var getMaterialsToCompare = CompareMyMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterialsToCompare.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialComparation=data;
+	
+			for(var index=0; index<$scope.materialComparation.length; ++index) {
+				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+			}
+	
+			jQuery( function() {
+				var availableTags = $scope.compareMaterials;
+				jQuery( "#tags" ).autocomplete({
+					source: availableTags
+				});
+			});
+		});
+	}
+
+	/* redirect to homepage with arrow */
+	$scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+	
+	/* user select material on search to compare */
+	$scope.selectedMaterial = function() {
+
+        $scope.showMaterial=true;
+        var valueSearchMaterial=jQuery( "#tags" ).val();
+        var result=valueSearchMaterial.split('-');
+
+        var type=result[0];
+        var category=result[1];
+
+        for(var index=0; index<$scope.materialComparation.length; ++index) {
+            if($scope.materialComparation[index].type === type && $scope.materialComparation[index].category === category) {
+                var result = {
+                    'image': $scope.materialComparation[index].name,
+                    'category': $scope.materialComparation[index].category,
+                    'text': $scope.materialComparation[index].description
+                }
+                $scope.materialToCompare.push(result);
+                break;
+            }
+        }
+        $scope.showMaterialsCompare=true;
     }
+    /* -------------- END DESKTOP & MOBILE -------------- */
+	
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
+	$scope.openMaterial = function(material) {
+		$scope.miniSearchResults=false;
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+		
+		$scope.showMaterialsCompare=false;
+		$scope.showInputToCompare=false;
+		$scope.showLabelCompare=false;
+	}
 
-    $scope.getMaterials = CompareMyMaterialService.getMaterialComparation(function(infoMaterial){});
-    $scope.showMaterialsCompare=false;
-    $scope.searchToCompare=true;
-    $scope.materialToCompare=[];
-    $scope.loading = true;
-    $scope.doLogin=false;
-	$scope.compareMaterials=[];
-	$scope.showInputToCompare=true;
+	/* close material that are opened */
+	$scope.closeMaterial = function(){
+		$scope.miniSearchResults=false;
+		$scope.showDetailsOfMaterial=false;
+		$scope.showMaterialsCompare=true;
+		$scope.showLabelCompare=true;
+	}
 
-    $scope.resultSearch = [];
-    $scope.showDetailsOfMaterial=false;
-	$scope.miniSearchResults=false;
-	$scope.showLabelCompare=true;
+	/* open and close the small search icon */
+	$scope.clickTopSearch = function() {
+        if($scope.showSearch){
+            $scope.showSearch = false;
+        }else {
+            $scope.showSearch = true;
+        }
+	}
+	
+	/* close the results of small search */
+	$scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
+		$scope.showMaterialsCompare=true;
+		$scope.showInputToCompare=true;
+		$scope.showDetailsOfMaterial=false;
+		$scope.showLabelCompare=true;
+	}
 
-	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
-    $scope.getMaterials.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.comparationDetails;
-      $scope.materialsToSearch = data;
-  
-      });
-
+	/* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
 
       var inputMini = jQuery("#miniSearch").val();
@@ -68,91 +182,27 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
       }
     }
 
-    $scope.closeMaterial = function(){
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=false;
-	  $scope.showMaterialsCompare=true;
-	  $scope.showLabelCompare=true;
-    }
-  
-    $scope.closeMiniSearch = function() {
-      $scope.miniSearchResults = false;
-      $scope.search=true;
-      $scope.openMaterialDetail=false; 
-      $scope.showInitSearch=true;
-      $scope.showSearch=false;
-	  $scope.enableUserIcon=false;
-	  $scope.showMaterialsCompare=true;
-	  $scope.showInputToCompare=true;
-	  $scope.showDetailsOfMaterial=false;
-	  $scope.showLabelCompare=true;
-    }
-  
-    $scope.openMaterial = function(material) {
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=true;
-      $scope.showMaterials=false;
-	  $scope.openedMaterial=material;
-	  
-	  $scope.showMaterialsCompare=false;
-	  $scope.showInputToCompare=false;
-	  $scope.showLabelCompare=false;
+	/* open and close the section of user details and search icon */
+    $scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+			$scope.showSearch = false;
+		}
 	}
 	
-    $scope.searchMaterial = function() {
-        $scope.searchToCompare=true;
+	/* section of init session in user details section */
+	$scope.showInitSessionDiv = function () {
+		if($scope.showInitSession){
+			$scope.showInitSession = false;
+		}else {
+			$scope.showInitSession = true;
+		}
     }
-
-    $scope.selectedMaterial = function() {
-
-        $scope.showMaterial=true;
-        var valueSearchMaterial=jQuery( "#tags" ).val();
-        var result=valueSearchMaterial.split('-');
-
-        var type=result[0];
-        var category=result[1];
-
-        for(var index=0; index<$scope.materialComparation.length; ++index) {
-            if($scope.materialComparation[index].type === type && $scope.materialComparation[index].category === category) {
-                var result = {
-                    'image': $scope.materialComparation[index].name,
-                    'category': $scope.materialComparation[index].category,
-                    'text': $scope.materialComparation[index].description
-                }
-                $scope.materialToCompare.push(result);
-                break;
-            }
-        }
-        $scope.showMaterialsCompare=true;
-    }
-
-    $scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
-    }
-
-    var splitLocation = location.href.split('=');
-    $scope.idUserLoggerIn =splitLocation[1];
-
-    if($scope.idUserLoggerIn !== undefined) {
-        $scope.confirmSession=true;
-    } else {
-        $scope.loading = true;
-        $scope.confirmSession=false;
-    }
-
-    $scope.logout = function(){
-		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error);
-
-		});*/
-	}
     
-    $scope.confirmSessionAction = function (username, password) {
+    /* confirmed user logged in */
+	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
 		var getAllUsers = UserCompareService.getUsers(function(users){});
@@ -183,33 +233,9 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			}
         });
     }
-
-    $scope.clickTopSearch = function() {
-        if($scope.showSearch){
-            $scope.showSearch = false;
-        }else {
-            $scope.showSearch = true;
-        }
-    }
-
-    $scope.clickUserDetails = function() {
-		if($scope.userDetails){
-			$scope.userDetails = false;
-		}else {
-			$scope.userDetails = true;
-			$scope.showSearch = false;
-		}
-    }
-
-    $scope.showInitSessionDiv = function () {
-		if($scope.showInitSession){
-			$scope.showInitSession = false;
-		}else {
-			$scope.showInitSession = true;
-		}
-    }
-
-    $scope.getRequest = function(buttonClick) {
+	
+	/* routes of click on links page */
+	$scope.getRequest = function(buttonClick) {
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
@@ -250,52 +276,36 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 		$scope.search = false;
 	}
 
-    $scope.getMaterials.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.comparationDetails;
-        $scope.materialComparation=data;
+	/* logout of user details section */
+	$scope.logout = function(){
+		$scope.confirmSession = false;
+	}
 
-        for(var index=0; index<$scope.materialComparation.length; ++index) {
-            $scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
-        }
-
-        jQuery( function() {
-            var availableTags = $scope.compareMaterials;
-        jQuery( "#tags" ).autocomplete({
-            source: availableTags
-        });
-        } );
-    }); 
-
-    jQuery("#ui-id-1").css("font-size", "26px");
+	/* regist new user on user details section */
+	$scope.regist = function() {
+		$scope.userDetails = false;
+		$scope.registUser=true;
+		$scope.search=false;
+	}
+	/* -------------- END MOBILE -------------- */
+	
+	/* init CompareController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
+	$scope.validateUserLoggedIn();
     
 }])
 app.factory("CompareMyMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
-        var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			if (this.readyState == 4 && this.status == 200) {
-				var response = resp.response;
-				debugger
-				deferred.resolve(response);
-			}
-			
-		}
-
-		xhr.open('GET','/compareMaterials', true);
-		xhr.send();*/
-
+		var deferred = $q.defer();
+		
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
         }, 4000);
 
         return deferred.promise;
     };
-
-
     return {
         getMaterialComparation: getMaterialComparation
     };
@@ -310,112 +320,24 @@ app.factory("UserCompareService", function($q, $http, $timeout){
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
 	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
-
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
-	var getLibraryUserDetails = function() {
-		
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	return {
-		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
-		getLibraryUserDetails: getLibraryUserDetails
+		getUsers: getUsers
 	};
 });
 
 app.factory("CompareMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
-        var deferred = $q.defer();
-
-    /*var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      var resp = this;
-      if (this.readyState == 4 && this.status == 200) {
-        var response = resp.response;
-        debugger
-        deferred.resolve(response);
-      }
-      
-    }
-
-    xhr.open('GET','/compareMaterials', true);
-    xhr.send();*/
-
+		var deferred = $q.defer();
+		
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
         }, 4000);
 
         return deferred.promise;
     };
-
 
     return {
         getMaterialComparation: getMaterialComparation
