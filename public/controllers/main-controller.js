@@ -37,11 +37,6 @@ app.constant('jQuery', window.jQuery)
 		controller: 'PerfilController'
 	});
 
-	$routeProvider.when('/BiAMa/searchResult', {
-		templateUrl: 'views/resultSearch',
-		controller: 'SearchController'
-	});
-
 	$routeProvider.when('/BiAMa/favorites', {
 		templateUrl: 'views/favorites',
 		controller: 'FavoritesController'
@@ -90,10 +85,7 @@ app.constant('jQuery', window.jQuery)
 		templateUrl: 'views/forumPageMobile',
 		controller: 'ForumController'
 	})
-	/*$routeProvider.when('/BiAMa/login', {
-		templateUrl: 'views/login',
-		controller: 'LoginController'
-	});*/
+	
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })

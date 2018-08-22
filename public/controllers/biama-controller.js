@@ -1,36 +1,60 @@
-app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialService", "UserBiamaService", "$http", "jQuery", function($scope,  BiAMaInfoService, BiamaMaterialService, UserBiamaService, $http){
+app.controller("BiamaController", ['$scope', "BiAMaInfoService", "UserBiamaService", "$http", "jQuery", function($scope,  BiAMaInfoService, UserBiamaService, $http){
 		
-		/* hide footer of index page because of click in buttons footer reload page */
-		jQuery("#footerMain").hide();
-		//jQuery("#footerMainMobile").hide();
+	/* hide footer of index page because of click in buttons footer reload page */
+	jQuery("#footerMain").hide();
+
+	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
+		}
+	}
+
+	/* init my variables data */
+	$scope.initData = function() {
 		/* my current page */
 		$scope.namePage='biamaPage';
-
 		$scope.miniSearchResults=false;
 		$scope.resultSearch = [];
 		$scope.showInitSearch=true;
+	}
+
+    /* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of biama and materials to display on search */
+	$scope.getAllRequests = function() {
+
+		$scope.loading = true;
+		var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+		getBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.biamaDetails;
+			$scope.descriptionBiama=data[0].description;
+		});
 	
-    $scope.loading = true;
-    var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-    getBiamaInfo.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.biamaDetails;
-		$scope.descriptionBiama=data[0].description;
-	});
+		/* this request needs only on results of small search results */
+		if($scope.isMobileView) {
+			$scope.loading = true;
+			$scope.getMaterials = BiAMaInfoService.getMaterialComparation(function(infoMaterial){});
+			$scope.getMaterials.then(function(result) {
+				$scope.loading = false;
+				var data=result.data.comparationDetails;
+				$scope.materialsToSearch = data;
+		
+			});
+		}
+	}
 
-	$scope.loading = true;
-	$scope.getMaterials = BiamaMaterialService.getMaterialComparation(function(infoMaterial){});
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialsToSearch = data;
-
-	});
-
+	/* -------------- END DESKTOP & MOBILE -------------- */
+	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
 	$scope.openMaterial = function(material) {
 		$scope.showDetailsOfMaterial=true;
 		$scope.showMaterials=false;
@@ -38,24 +62,27 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		$scope.miniSearchResults=false;
 	}
 
+	/* close material that are opened */
 	$scope.closeMaterial = function() {
 		$scope.miniSearchResults=true;
 		$scope.showDetailsOfMaterial=false;
 	}
 
+	/* open and close the small search icon */
 	$scope.clickTopSearch = function() {
 		$scope.miniSearchResults = false;
 		$scope.showInitSearch=true;
 
-			if($scope.showSearch){
-				$scope.enableUserIcon=false;
-				$scope.showSearch = false;
-			}else {
-				$scope.enableUserIcon=true;
-				$scope.showSearch = true;
-			}
+		if($scope.showSearch){
+			$scope.enableUserIcon=false;
+			$scope.showSearch = false;
+		}else {
+			$scope.enableUserIcon=true;
+			$scope.showSearch = true;
+		}
 	}
 
+	/* close the results of small search */
 	$scope.closeMiniSearch = function() {
 		$scope.miniSearchResults = false;
 		$scope.search=true;
@@ -65,6 +92,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		$scope.enableUserIcon=false;
 	}
 
+	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
@@ -92,15 +120,17 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		}
 	}
 
+	/* open and close the section of user details and search icon */
 	$scope.clickUserDetails = function() {
-		if($scope.userDetails){
+		if($scope.userDetails) {
 			$scope.userDetails = false;
-		}else {
+		} else {
 			$scope.userDetails = true;
 			$scope.showSearch = false;
 		}
 	}
 
+	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -109,6 +139,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		}
 	}
 
+	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -141,6 +172,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		});
 	}
 	
+	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
@@ -179,15 +211,23 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		$scope.search = false;
 	}
 
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 	}
 
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+	/* -------------- END MOBILE -------------- */
+
+	/* init BiAMaController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
 }])
 
 app.factory("BiAMaInfoService", function($q, $http, $timeout){
@@ -200,41 +240,21 @@ app.factory("BiAMaInfoService", function($q, $http, $timeout){
 		}, 2000);
 	
 		return deferred.promise;
-	  };
-	
-	  return {
-		getBiAMaInfo: getBiAMaInfo
-	  };
-});
-
-app.factory("BiamaMaterialService", function($q, $http, $timeout){
-	var getMaterialComparation = function() {
-			var deferred = $q.defer();
-
-	/*var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var resp = this;
-		if (this.readyState == 4 && this.status == 200) {
-			var response = resp.response;
-			debugger
-			deferred.resolve(response);
-		}
-		
-	}
-
-	xhr.open('GET','/compareMaterials', true);
-	xhr.send();*/
-
-			$timeout(function() {
-			deferred.resolve($http.get('/compareMaterials'));
-			}, 4000);
-
-			return deferred.promise;
 	};
 
+	var getMaterialComparation = function() {
+		var deferred = $q.defer();
 
+		$timeout(function() {
+		deferred.resolve($http.get('/compareMaterials'));
+		}, 4000);
+
+		return deferred.promise;
+	};
+	
 	return {
-			getMaterialComparation: getMaterialComparation
+		getBiAMaInfo: getBiAMaInfo,
+		getMaterialComparation: getMaterialComparation
 	};
 });
 
@@ -246,85 +266,12 @@ app.factory("UserBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
 
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
-	var getLibraryUserDetails = function() {
-		
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	return {
-		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
-		getLibraryUserDetails: getLibraryUserDetails
+		getUsers: getUsers
 	};
 });
 
