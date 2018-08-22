@@ -66,8 +66,9 @@
                     <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
-                <div class="col-sm-1">
-                    <input class="inputMinSearch" ng-if="showSearch && !userDetails" type="text" style=" width: 340px; margin-top: 17px;"></input>
+                <div class="col-sm-4">
+					<input id="miniSearch" class="inputMinSearch sizeOfInputMinMobile" ng-if="showSearch && !userDetails" type="text"></input>
+					<button class="buttonOk" ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
                 </div>
             </div>
         </div>
@@ -75,72 +76,72 @@
             <div class="loading-icon-footer-info"></div>
         </div>
         <div class="row">
-				<nav class="padding-left-3x">
-					<div class="navDetailsUserMobile" ng-if="userDetails"><br>
-						<div ng-if="!confirmSession">
-							<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a>Favoritos</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>As minhas perguntas</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Partilhar com o Mundo</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Notificações</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Perfil</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Comparar</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
-							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-							
-							<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
-								<div class="alignCenter">
-									<h2 class="initSessionColor">Iniciar Sessão</h2>
-									
-									<div class="lineWhiteInitSession"></div><br>
-									<div ng-if="users === 'loadUser'">
-										<div class="loading-icon"></div>
-									</div>
-									<div ng-if="users !== 'loadUser'">
-										<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-										<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-										<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-										<!-- login with firebase providers -->
-										<div>
-											<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-											<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
-										</div>
-										<br>
-										<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
-									</div>												
+			<nav class="padding-left-3x">
+				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<div ng-if="!confirmSession">
+						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+						<a>Favoritos</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>As minhas perguntas</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Partilhar com o Mundo</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Notificações</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Perfil</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Comparar</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+						
+						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
+							<div class="alignCenter">
+								<h2 class="initSessionColor">Iniciar Sessão</h2>
+								
+								<div class="lineWhiteInitSession"></div><br>
+								<div ng-if="users === 'loadUser'">
+									<div class="loading-icon"></div>
 								</div>
+								<div ng-if="users !== 'loadUser'">
+									<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+									<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+									<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+									<!-- login with firebase providers -->
+									<div>
+										<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+										<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+									</div>
+									<br>
+									<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
+								</div>												
 							</div>
 						</div>
-						<div ng-if="confirmSession">
-							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a ng-click="getRequest('favorites')">Favoritos</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
-							<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
-							<div ng-if="notificationNumber" class="circleNotification"></div>
-							<br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('perfil')">Perfil</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('compare')">Comparar</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="logout()">Terminar Sessão</a><br>
-							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-						</div>
 					</div>
-				</nav>
+					<div ng-if="confirmSession">
+						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+						<a ng-click="getRequest('favorites')">Favoritos</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
+						<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
+						<div ng-if="notificationNumber" class="circleNotification"></div>
+						<br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('perfil')">Perfil</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('compare')">Comparar</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="logout()">Terminar Sessão</a><br>
+						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+					</div>
+				</div>
+			</nav>
 		</div>
-        <div class="titlesOnCenter">
+        <div class="titlesOnCenter" style="margin-top: 68px;">
             <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
                 <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
                     <figure>
@@ -150,6 +151,7 @@
                 </div>
             </div>
             <br>
+			<h4 ng-if="showLabelCompare" class="subtitles" style="font-size: 33px;">Pesquise materiais para comparar</h4>
             <div class="ui-widget" style="font-size: 26px;">
                 <input id="tags" style="width: 337px;margin-top: 8px;font-size: 26px;">
                 <button ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;">OK</button>
@@ -158,6 +160,36 @@
                 <h4>Efetue login para obter comparações entre materiais.</h4>
             </div>
         </div>
+		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium" style="margin-top: -89px;"></i>
+		<div ng-if="miniSearchResults" class="margin-top-5x" style="margin-top: -55px;">
+			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
+				<div class="thumbnail">
+					<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
+				</div>
+			</div>
+		</div>
+		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" style="margin-top: -55px;">
+			<div class="row container">
+				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium" style="margin-top: -40px;"></i>
+				<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+					<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="90%" height="290px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="90%" height="290px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="90%" height="290px" alt="foto"/>
+				</div>
+				<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+					<h4 class="margin-right-5x margin-top-6x" style="font-size: 32px;">Category</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.category}]</h5>
+					<h4 class="margin-right-5x" style="font-size: 32px;">Code</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.code}]</h5>
+					<h4 class="margin-right-5x" style="font-size: 32px;">Description</h4>
+					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.description}]</h5>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
 
