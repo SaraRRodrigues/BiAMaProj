@@ -1,4 +1,4 @@
-app.controller("BiamaController", ['$scope', "BiAMaInfoService", "UserBiamaService", "$http", "jQuery", function($scope,  BiAMaInfoService, UserBiamaService, $http){
+app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialService", "UserBiamaService", "$http", "jQuery", function($scope,  BiAMaInfoService, BiamaMaterialService, UserBiamaService, $http){
 		
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -37,7 +37,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService", "UserBiamaServi
 		/* this request needs only on results of small search results */
 		if($scope.isMobileView) {
 			$scope.loading = true;
-			$scope.getMaterials = BiAMaInfoService.getMaterialComparation(function(infoMaterial){});
+			$scope.getMaterials = BiamaMaterialService.getMaterialComparation(function(infoMaterial){});
 			$scope.getMaterials.then(function(result) {
 				$scope.loading = false;
 				var data=result.data.comparationDetails;
@@ -46,12 +46,12 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService", "UserBiamaServi
 			});
 		}
 	}
-
-	/* -------------- END DESKTOP & MOBILE -------------- */
+	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
 
 	/* -------------- INIT MOBILE -------------- */
 	/* open material of small search result */
@@ -241,20 +241,26 @@ app.factory("BiAMaInfoService", function($q, $http, $timeout){
 	
 		return deferred.promise;
 	};
-
-	var getMaterialComparation = function() {
-		var deferred = $q.defer();
-
-		$timeout(function() {
-		deferred.resolve($http.get('/compareMaterials'));
-		}, 4000);
-
-		return deferred.promise;
-	};
 	
 	return {
-		getBiAMaInfo: getBiAMaInfo,
-		getMaterialComparation: getMaterialComparation
+		getBiAMaInfo: getBiAMaInfo
+	};
+});
+
+app.factory("BiamaMaterialService", function($q, $http, $timeout){
+	var getMaterialComparation = function() {
+			var deferred = $q.defer();
+
+			$timeout(function() {
+			deferred.resolve($http.get('/compareMaterials'));
+			}, 4000);
+
+			return deferred.promise;
+	};
+
+
+	return {
+			getMaterialComparation: getMaterialComparation
 	};
 });
 
@@ -266,12 +272,85 @@ app.factory("UserBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
+	
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/users', true);
+		xhr.send();*/
 
 		return deferred.promise;
 	};
 
+	var getMyQuestionsLogged = function() {
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			deferred.resolve(resp);
+		}
+
+		xhr.open('GET','/myQuest', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/myQuest'));
+		}, 2000);
+
+		return deferred.promise;
+	};
+
+	var insertLibraryUserDetails = function() {
+		var deferred = $q.defer();
+
+		
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/insertLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.post('/insertLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
+	var getLibraryUserDetails = function() {
+		
+		var deferred = $q.defer();
+
+		/*var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var resp = this;
+			var response = resp.response;
+			deferred.resolve(response);
+		}
+
+		xhr.open('GET','/getLibraryUser', true);
+		xhr.send();*/
+
+		$timeout(function() {
+			deferred.resolve($http.get('/getLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
 	return {
-		getUsers: getUsers
+		getUsers: getUsers,
+		getMyQuestionsLogged: getMyQuestionsLogged,
+		insertLibraryUserDetails: insertLibraryUserDetails,
+		getLibraryUserDetails: getLibraryUserDetails
 	};
 });
 
