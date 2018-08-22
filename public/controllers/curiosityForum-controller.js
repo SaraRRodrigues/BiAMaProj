@@ -1,168 +1,186 @@
 
 app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesService","CuriositiesMaterialService","CuriositiesBiamaService", "jQuery", function($scope, $http, CuriositiesService, CuriositiesMaterialService, CuriositiesBiamaService){
 
-    $scope.nameclick='forum'
+  /* hide footer of index page because of click in buttons footer reload page */
+  jQuery("#footerMainMobile").hide();
 
-    /* hide footer of index page because of click in buttons footer reload page */
-    jQuery("#footerMainMobile").hide();
+  /* define view of app */
+  $scope.viewType = function() {
+    var window_width = $( window ).width();
+    if(window_width < 1024) {
+      $scope.isMobileView=true;
+    } else {
+      $scope.isMobileView=false;
+    }
+  }
+
+  /* init my variables data */
+  $scope.initData = function() {
     /* my current page */
-  
+    $scope.nameclick='forum'
     $scope.loading=true;
     $scope.descriptionCuriosity=[];
     $scope.showCuriosity=true;
     $scope.showBigImage=false;
     $scope.resultSearch = [];
     $scope.showDetailsOfMaterial=false;
-    $scope.miniSearchResults=false;
+    $scope.miniSearchResults=false;  
+  }
 
-    var window_width = $( window ).width();
-    if(window_width <= 1024) {
-      $scope.isMobileView=true;
-    } else {
-      $scope.isMobileView=false;
-    }
+  /* -------------- INIT DESKTOP & MOBILE -------------- */
+  /* get materials curiosities to display */
+  $scope.getAllRequests = function() {
 
     var getCuriosities = CuriositiesService.getCuriosities(function(infoCuriosities){});
     getCuriosities.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.curiosityDetails;
-            for(var index=0; index<data.length; ++index){
-              $scope.descriptionCuriosity.push(data[index]);
-            }
+      $scope.loading = false;
+      var data=result.data.curiosityDetails;
+      for(var index=0; index<data.length; ++index){
+        $scope.descriptionCuriosity.push(data[index]);
+      }
     });
 
-    $scope.getMaterials = CuriositiesMaterialService.getMaterialComparation(function(infoMaterial){});
-    $scope.getMaterials.then(function(result) {
+    var getMaterials = CuriositiesMaterialService.getMaterialComparation(function(infoMaterial){});
+    getMaterials.then(function(result) {
       $scope.loading = false;
       var data=result.data.comparationDetails;
       $scope.materialsToSearch = data;
-  
-      });
 
-    $scope.goToForum = function() {
-      window.setTimeout("location.href = 'http://localhost:8080'")
-    } 
+    });
+  }
 
-    $scope.goToHomePage = function() {
-      window.setTimeout("location.href = 'http://localhost:8080'")
-    }
-    
-    $scope.clickUserDetails = function() {
-      if($scope.userDetails){
-        $scope.userDetails = false;
-      }else {
-        $scope.userDetails = true;
-        $scope.showSearch = false;
+	/* redirect to homepage with arrow */
+  $scope.goToHomePage = function() {
+    window.setTimeout("location.href = 'http://localhost:8080'")
+  }
+
+  /* open details of curiosity when clicks on material curiosity */ 
+  $scope.openDetailsCuriosity = function(image) {
+    for(var index=0; index<$scope.descriptionCuriosity.length; ++index) {
+      if($scope.descriptionCuriosity[index].image === image){
+          $scope.curiosityInfo={
+            'image':$scope.descriptionCuriosity[index].image,
+            'description': $scope.descriptionCuriosity[index].descriptionCuriosity,
+            "curiosity": index+1
+          }
+          $scope.showCuriosityDetails=true;
+          $scope.showCuriosity=false;
+          break;
       }
     }
+  }
 
-    $scope.clickTopSearch = function() {
-      if($scope.showSearch){
-        $scope.showSearch = false;
-      }else {
-        $scope.showSearch = true;
-      }
+  /* open big image of curiosity (large image size) */
+  $scope.openBigImage = function(image) {
+    $scope.showBigImage=true;
+    $scope.showCuriosityDetails=false;
+    $scope.bigImage=image;
+  }
+
+  /* close the image that are opened */
+  $scope.closeCuriosityImage = function() {
+    $scope.showBigImage=false;
+    $scope.showCuriosityDetails=true;
+  }
+  /* -------------- END DESKTOP & MOBILE -------------- */
+
+  /* -------------- INIT MOBILE -------------- */
+  /* open material of small search result */
+  $scope.openMaterial = function(material) {
+    $scope.miniSearchResults=false;
+    $scope.showDetailsOfMaterial=true;
+    $scope.showMaterials=false;
+    $scope.openedMaterial=material;
+    $scope.showLocation=false;
+    $scope.showAllQuestions=false;
+    $scope.showCuriosity=false;
+  }
+
+  /* close material that are opened */
+  $scope.closeMaterial = function(){
+    $scope.miniSearchResults=false;
+    $scope.showDetailsOfMaterial=false;
+    $scope.showLocation=true;
+    $scope.showForum = true;
+    $scope.showAllQuestions=true;
+    $scope.showQuestionDetails=false;
+    $scope.showCuriosity=true;
+  }
+
+  /* open and close the small search icon */
+  $scope.clickTopSearch = function() {
+    if($scope.showSearch){
+      $scope.showSearch = false;
+    }else {
+      $scope.showSearch = true;
     }
+  }
 
-    $scope.initMiniSearch = function() {
+	/* close the results of small search */
+  $scope.closeMiniSearch = function() {
+    $scope.miniSearchResults = false;
+    $scope.search=true;
+    $scope.openMaterialDetail=false; 
+    $scope.showInitSearch=true;
+    $scope.showSearch=false;
+    $scope.enableUserIcon=false;
+    $scope.showCategory=false;
+    $scope.showMaterialDetails=false;
+    $scope.showLocation=true;
+    $scope.showForum = true;
+    $scope.showAllQuestions=true;
+    $scope.showQuestionDetails=false;
+    $scope.showCuriosity=true;
+  }
 
-      var inputMini = jQuery("#miniSearch").val();
-      if(inputMini !== '') {
-        for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-          var resultMaterial = {
-            'name': $scope.materialsToSearch[index].name,
-            'category': $scope.materialsToSearch[index].category,
-            'description': $scope.materialsToSearch[index].description,
-            'code': $scope.materialsToSearch[index].code
-          }
-          if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push($scope.materialsToSearch[index].name);
-          }
+  /* action of click button "Ok" present on small search line */
+  $scope.initMiniSearch = function() {
+
+    var inputMini = jQuery("#miniSearch").val();
+    if(inputMini !== '') {
+      for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+        var resultMaterial = {
+          'name': $scope.materialsToSearch[index].name,
+          'category': $scope.materialsToSearch[index].category,
+          'description': $scope.materialsToSearch[index].description,
+          'code': $scope.materialsToSearch[index].code
         }
-    
-        $scope.showInitSearch=false;
-        $scope.miniSearchResults = true;
-
-        $scope.showCategory=true;
-        $scope.showMaterialDetails=false;
-        $scope.showLocation=false;
-        $scope.showForum = false;
-        $scope.showAllQuestions=false;
-        $scope.showQuestionDetails=false;
-
-        $scope.showCuriosity=false;
+        if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+          $scope.resultSearch.push(resultMaterial);
+        } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+          $scope.resultSearch.push(resultMaterial);
+        } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+          $scope.resultSearch.push(resultMaterial);
+        } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+          $scope.resultSearch.push($scope.materialsToSearch[index].name);
+        }
       }
-    }
+  
+      $scope.showInitSearch=false;
+      $scope.miniSearchResults = true;
 
-    $scope.closeMaterial = function(){
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=false;
-      $scope.showLocation=true;
-      $scope.showForum = true;
-      $scope.showAllQuestions=true;
-      $scope.showQuestionDetails=false;
-      $scope.showCuriosity=true;
-    }
-  
-    $scope.closeMiniSearch = function() {
-      $scope.miniSearchResults = false;
-      $scope.search=true;
-      $scope.openMaterialDetail=false; 
-      $scope.showInitSearch=true;
-      $scope.showSearch=false;
-      $scope.enableUserIcon=false;
-      $scope.showCategory=false;
+      $scope.showCategory=true;
       $scope.showMaterialDetails=false;
-      $scope.showLocation=true;
-      $scope.showForum = true;
-      $scope.showAllQuestions=true;
-      $scope.showQuestionDetails=false;
-      $scope.showCuriosity=true;
-    }
-  
-    $scope.openMaterial = function(material) {
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=true;
-      $scope.showMaterials=false;
-      $scope.openedMaterial=material;
       $scope.showLocation=false;
+      $scope.showForum = false;
       $scope.showAllQuestions=false;
+      $scope.showQuestionDetails=false;
+
       $scope.showCuriosity=false;
     }
-    
-    $scope.openDetailsCuriosity = function(image) {
-      for(var index=0; index<$scope.descriptionCuriosity.length; ++index) {
-				if($scope.descriptionCuriosity[index].image === image){
-            $scope.curiosityInfo={
-              'image':$scope.descriptionCuriosity[index].image,
-              'description': $scope.descriptionCuriosity[index].descriptionCuriosity,
-              "curiosity": index+1
-            }
-            $scope.showCuriosityDetails=true;
-            $scope.showCuriosity=false;
-            break;
-				}
-			}
-    }
+  }
 
-    $scope.openBigImage = function(image) {
-      $scope.showBigImage=true;
-      $scope.showCuriosityDetails=false;
-      $scope.bigImage=image;
+  /* open and close the section of user details and search icon */
+  $scope.clickUserDetails = function() {
+    if($scope.userDetails){
+      $scope.userDetails = false;
+    }else {
+      $scope.userDetails = true;
+      $scope.showSearch = false;
     }
+  }
 
-    $scope.closeCuriosityImage = function() {
-      $scope.showBigImage=false;
-      $scope.showCuriosityDetails=true;
-    }
-
-    
+  /* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -170,8 +188,9 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 			$scope.showInitSession = true;
 		}
 	}
-
-	$scope.confirmSessionAction = function (username, password) {
+    
+  /* confirmed user logged in */
+  $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
 		var getAllUsers = CuriositiesBiamaService.getUsers(function(users){});
@@ -202,59 +221,67 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 			}
 		});
 	}
-	
-    $scope.getRequest = function(buttonClick) {
 
-      if(buttonClick === 'favorites') {
-        location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
-      }
+  /* routes of click on links page */
+  $scope.getRequest = function(buttonClick) {
 
-      if(buttonClick == 'questions') {
-        location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
-      }
-
-      if(buttonClick == 'world_share') {
-        location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
-      }
-
-      if(buttonClick == 'notification') {
-        location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
-      }
-
-      if(buttonClick == 'perfil') {
-        location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-        + $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-        + '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
-      }
-
-      if(buttonClick == 'compare') {
-        location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
-      }
-      
-      if(buttonClick === 'notification') {
-        $scope.userDetails = true;
-        $scope.notificationNumber=true;
-      } else {
-        $scope.userDetails = false;
-        $scope.notificationNumber = false;
-      }
-      $scope.search = false;
+    if(buttonClick === 'favorites') {
+      location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
     }
 
-    $scope.logout = function(){
-      $scope.confirmSession = false;
+    if(buttonClick == 'questions') {
+      location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
     }
 
-    $scope.regist = function() {
+    if(buttonClick == 'world_share') {
+      location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+    }
+
+    if(buttonClick == 'notification') {
+      location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+    }
+
+    if(buttonClick == 'perfil') {
+      location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+      + $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+      + '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+    }
+
+    if(buttonClick == 'compare') {
+      location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+    }
+    
+    if(buttonClick === 'notification') {
+      $scope.userDetails = true;
+      $scope.notificationNumber=true;
+    } else {
       $scope.userDetails = false;
-      $scope.registUser=true;
-      $scope.search=false;
+      $scope.notificationNumber = false;
     }
+    $scope.search = false;
+  }  
+  
+  /* logout of user details section */
+  $scope.logout = function(){
+    $scope.confirmSession = false;
+  }
+  
+  /* regist new user on user details section */
+  $scope.regist = function() {
+    $scope.userDetails = false;
+    $scope.registUser=true;
+    $scope.search=false;
+  }
+    
+  /* init CuriosityForumController  */
+	$scope.viewType();
+	$scope.initData();
+  $scope.getAllRequests();
 }])
 
 app.factory("CuriositiesService", function($q, $http, $timeout){
 
-var getCuriosities = function() {
+  var getCuriosities = function() {
     var deferred = $q.defer();
 
     $timeout(function() {
@@ -273,27 +300,12 @@ app.factory("CuriositiesMaterialService", function($q, $http, $timeout){
   var getMaterialComparation = function() {
       var deferred = $q.defer();
 
-  /*var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    var resp = this;
-    if (this.readyState == 4 && this.status == 200) {
-      var response = resp.response;
-      debugger
-      deferred.resolve(response);
-    }
-    
-  }
-
-  xhr.open('GET','/compareMaterials', true);
-  xhr.send();*/
-
       $timeout(function() {
       deferred.resolve($http.get('/compareMaterials'));
       }, 4000);
 
       return deferred.promise;
   };
-
 
   return {
       getMaterialComparation: getMaterialComparation
@@ -308,84 +320,11 @@ app.factory("CuriositiesBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
 
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
-	var getLibraryUserDetails = function() {
-		
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	return {
-		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
-		getLibraryUserDetails: getLibraryUserDetails
+		getUsers: getUsers
 	};
 });
