@@ -1,143 +1,87 @@
 
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "MaterialOfLibraryService", "$sce", "$route", "FavoritesService", "LibraryMaterialService","LibraryBiamaService", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, MaterialOfLibraryService, $sce, $route, FavoritesService, LibraryMaterialService, LibraryBiamaService){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "$sce", "$route", "FavoritesService", "LibraryMaterialService","LibraryBiamaService", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, $sce, $route, FavoritesService, LibraryMaterialService, LibraryBiamaService){
 
-
-	
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
-	/* my current page */
-	$scope.namePage='library';
-
-	$scope.showSearch = false;
-	$scope.userDetails = false;
-
-	var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
-	}
 	
-	$scope.loading = true;
-	$scope.category = '';
-	$scope.materialInfo = null;
-	$scope.favoriteMaterial = false;
-	$scope.locationMaterial = false;
-	$scope.zoomInMaterial = false;
-	$scope.pathURL='https://www.google.com/maps/';
-	$scope.clickAddFavoriteMaterial=false;
-	$scope.categories=[];
-	$scope.resultSearch= [];
-	$scope.getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-	$scope.getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
-	$scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-
-	$scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
+	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
 		}
 	}
-
-	$scope.goTo = function() {
-		$scope.showCategory=false;
-		$scope.showMaterialDetails=false;
-		$scope.locationMaterial=false;
-		$scope.zoomInMaterial=false;
-	}
-
-	$scope.nameclick='library';
-	$scope.changeColorClick = function(name) {
-		$scope.locationMaterial=false;
-		$scope.zoomInMaterial=false;
-		$scope.showCategory=false;
-		$scope.showMaterialDetails=false;
-		$scope.loading=false;
+	
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='library';
+		$scope.nameclick='library';
+		$scope.showSearch = false;
 		$scope.userDetails = false;
-		$scope.search = false;
-		$scope.nameclick=name;
+		$scope.loading = true;
+		$scope.category = '';
+		$scope.materialInfo = null;
+		$scope.favoriteMaterial = false;
+		$scope.locationMaterial = false;
+		$scope.zoomInMaterial = false;
+		$scope.pathURL='https://www.google.com/maps/';
+		$scope.clickAddFavoriteMaterial=false;
+		$scope.categories=[];
+		$scope.resultSearch= [];
 	}
 
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of materials to display when compare materials */
+	$scope.getAllRequests = function() {
+		$scope.getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+		$scope.getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
+		$scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+	
+		/* get category of material */
+		$scope.getCategoryInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.categoryDetails;
+					$scope.categoryDetails=data;
+		});
+
+		/* get favorites material */
+		$scope.getMyFavorites.then(function(result) {
+			var data=result.data.favoriteDetails;
+			$scope.favoriteDetails=data;
+		});
+
+		$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
+		$scope.getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+
+		});
+
+		/* get information of material and of library - when i do get library */
+		$scope.getMaterialInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.materialsCategories;
+			$scope.materialsCategories=data;
+			for(var index=0; index<$scope.materialsCategories.length; ++index){
+				if(index<7){
+					$scope.categories.push($scope.materialsCategories[index])
+				} else {
+					break;
+				}
+			}
+		});
+	}
+	
+	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
-	/* get information of material and of library - when i do get library */
-    $scope.getMaterialInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.materialsCategories;
-		$scope.materialsCategories=data;
-		for(var index=0; index<$scope.materialsCategories.length; ++index){
-			if(index<7){
-				$scope.categories.push($scope.materialsCategories[index])
-			} else {
-				break;
-			}
-		}
-	});
-
-	/* get category of material */
-	$scope.getCategoryInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.categoryDetails;
-				$scope.categoryDetails=data;
-	});
-
-	/* get favorites material */
-	$scope.getMyFavorites.then(function(result) {
-		var data=result.data.favoriteDetails;
-		$scope.favoriteDetails=data;
-	});
-
-	$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialsToSearch = data;
-
-	});
-
-	$scope.initMiniSearch = function() {
-
-		var inputMini = jQuery("#miniSearch").val();
-		if(inputMini !== '') {
-			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-				var resultMaterial = {
-					'name': $scope.materialsToSearch[index].name,
-					'category': $scope.materialsToSearch[index].category,
-					'description': $scope.materialsToSearch[index].description,
-					'code': $scope.materialsToSearch[index].code
-				}
-				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push($scope.materialsToSearch[index].name);
-				}
-			}
-	
-			$scope.showInitSearch=false;
-			$scope.miniSearchResults = true;
-
-			$scope.showCategory=true;
-			$scope.showMaterialDetails=false;
-		}
-	}
-
-	
-	$scope.clickUserDetails = function() {
-		if($scope.userDetails){
-			$scope.userDetails = false;
-		}else {
-			$scope.userDetails = true;
-			$scope.showSearch = false;
-		}
-	}
-
+	/* open categories of library */
 	$scope.openCategory = function(category) {
 		$scope.showCategory = true;
 		$scope.category = category;
@@ -150,6 +94,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	/* open details material */
 	$scope.openDetailsMaterial = function(material) {
 		for(var index=0; index<$scope.categoryDetails.length; ++index) {
 			if($scope.categoryDetails[index].id === material.id){
@@ -187,7 +132,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			}
 		}
 	}
-
+	
+	/* click on button of favorite material */
 	$scope.clickFavorite = function(favoriteMaterial) {
 		$scope.idFavoriteMaterial=0;
 		
@@ -247,6 +193,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	/* click on button of zoom in to zoom material */
 	$scope.clickZoomIn = function(material) {
 		if($scope.zoomInMaterial){
 			$scope.zoomInMaterial = false;
@@ -255,6 +202,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			//ir buscar a imagem do material que se quer fazer zoom 
 		}
 	}
+
+	/* click on button of location to locate material */
 	$scope.clickLocation = function(material) {
 		for(var index=0; index<$scope.materialsCategories.length; ++index) {
 			if($scope.materialsCategories[index].material_id === material.idMaterial){
@@ -271,6 +220,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	/* select school to open map of location on screen */
 	$scope.selectSchool = function (locationSchool) {
 		for(var index=0; index <$scope.materialsCategories.length; ++index) {
 			if($scope.materialsCategories[index].locationDescription === locationSchool){
@@ -281,33 +231,12 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
-	$scope.closeMaterial = function(){
-		$scope.miniSearchResults=true;
-		$scope.showDetailsOfMaterial=false;
-	}
-
+	/* close zoom in of material that are opened */
 	$scope.closeZoomInMaterial = function() {
 		$scope.zoomInMaterial = false;
 	}
 
-	$scope.closeMiniSearch = function() {
-		$scope.miniSearchResults = false;
-		$scope.search=true;
-		$scope.openMaterialDetail=false; 
-		$scope.showInitSearch=true;
-		$scope.showSearch=false;
-		$scope.enableUserIcon=false;
-		$scope.showCategory=false;
-		$scope.showMaterialDetails=false;
-	}
-
-	$scope.openMaterial = function(material) {
-		$scope.showDetailsOfMaterial=true;
-		$scope.showMaterials=false;
-		$scope.openedMaterial=material;
-		$scope.miniSearchResults=false;
-	}
-
+	/* resize iframe to screen size */
 	$scope.expandIframe = function(){
 		if($scope.zoomInIFrame){
 			$scope.zoomInIFrame = false;
@@ -320,6 +249,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$route.reload();
 	}
 
+	/* get schools to show schools on options of material location */
 	$scope.getSchools = function () {
 		$scope.getSchoolsOfMaterial();
 		if($scope.showSchools){
@@ -329,6 +259,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	/* get schools of material is located */
 	$scope.getSchoolsOfMaterial = function() {
 		/* get schools of material */
 		$scope.loadingSchool=true;
@@ -341,7 +272,86 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
             $scope.schools=data;
         });
 	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
+
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
+	$scope.openMaterial = function(material) {
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+		$scope.miniSearchResults=false;
+	}
+
+	/* close material that are opened */
+	$scope.closeMaterial = function(){
+		$scope.miniSearchResults=true;
+		$scope.showDetailsOfMaterial=false;
+	}
+
+	/* open and close the small search icon */
+	$scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+
+	/* close the results of small search */
+	$scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
+		$scope.showCategory=false;
+		$scope.showMaterialDetails=false;
+	}
+
+	/* action of click button "Ok" present on small search line */
+	$scope.initMiniSearch = function() {
+
+		var inputMini = jQuery("#miniSearch").val();
+		if(inputMini !== '') {
+			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+				var resultMaterial = {
+					'name': $scope.materialsToSearch[index].name,
+					'category': $scope.materialsToSearch[index].category,
+					'description': $scope.materialsToSearch[index].description,
+					'code': $scope.materialsToSearch[index].code
+				}
+				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push(resultMaterial);
+				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+					$scope.resultSearch.push($scope.materialsToSearch[index].name);
+				}
+			}
 	
+			$scope.showInitSearch=false;
+			$scope.miniSearchResults = true;
+
+			$scope.showCategory=true;
+			$scope.showMaterialDetails=false;
+		}
+	}
+
+	/* open and close the section of user details and search icon */
+	$scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
+		}else {
+			$scope.userDetails = true;
+			$scope.showSearch = false;
+		}
+	}
+
+	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -350,6 +360,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		}
 	}
 
+	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -381,7 +392,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			}
 		});
 	}
-	
+
+	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
@@ -420,15 +432,24 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.search = false;
 	}
 
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 	}
 
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+	/* -------------- END MOBILE -------------- */
+
+	/* init CompareController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
+
 }])
 
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
@@ -448,16 +469,6 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	  
 	var getMaterial = function() {
 		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/materialsCategories', true);
-		xhr.send();*/
 
 		$timeout(function() {
 		  deferred.resolve($http.get('/materialsCategories'));
@@ -476,16 +487,6 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
     
 	var getCategory = function() {
 		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/categories', true);
-		xhr.send();*/
 
 		$timeout(function() {
 		  deferred.resolve($http.get('/categories'));
@@ -495,34 +496,7 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 	  };
 	
 	  return {
-			getCategory: getCategory
-	  };
-});
-
-app.factory("MaterialOfLibraryService", function($q, $http, $timeout){
-    
-	var getMaterialDetails = function() {
-		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/biamaInfo', true);
-		xhr.send();*/
-
-		$timeout(function() {
-		  deferred.resolve($http.get('/biamaInfo'));
-		}, 3000);
-	
-		return deferred.promise;
-	  };
-	
-	  return {
-			getMaterialDetails: getMaterialDetails
+		getCategory: getCategory
 	  };
 });
 
@@ -530,16 +504,6 @@ app.factory("FavoritesService", function($q, $http, $timeout){
     
 	var getMyFavorites = function() {
 		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/favorites', true);
-		xhr.send();*/
 
 		$timeout(function() {
 		  deferred.resolve($http.get('/favorites'));
@@ -555,27 +519,13 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 
 app.factory("LibraryMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
-			var deferred = $q.defer();
+		var deferred = $q.defer();
 
-	/*var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var resp = this;
-		if (this.readyState == 4 && this.status == 200) {
-			var response = resp.response;
-			debugger
-			deferred.resolve(response);
-		}
-		
-	}
+		$timeout(function() {
+		deferred.resolve($http.get('/compareMaterials'));
+		}, 4000);
 
-	xhr.open('GET','/compareMaterials', true);
-	xhr.send();*/
-
-			$timeout(function() {
-			deferred.resolve($http.get('/compareMaterials'));
-			}, 4000);
-
-			return deferred.promise;
+		return deferred.promise;
 	};
 
 
@@ -592,84 +542,11 @@ app.factory("LibraryBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
 
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
-	var getLibraryUserDetails = function() {
-		
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	return {
-		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
-		getLibraryUserDetails: getLibraryUserDetails
+		getUsers: getUsers
 	};
 });

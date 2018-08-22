@@ -3,39 +3,87 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
-	/* my current page */
-	$scope.namePage='forum';
-	$scope.nameclick='forum';
 	
-  	var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
+  	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
+		}
 	}
 
-	$scope.resultSearch = [];
-    $scope.showDetailsOfMaterial=false;
-	$scope.miniSearchResults=false;
-	$scope.showForum = true;
-
-	$scope.getMaterials = ForumMaterialService.getMaterialComparation(function(infoMaterial){});
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialsToSearch = data;
-
-    });
-	
-	$scope.changeColorClick = function(name) {
-		$scope.userDetails = false;
-		$scope.search = false;
-		$scope.nameclick=name;
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='forum';
+		$scope.nameclick='forum';
+		$scope.resultSearch = [];
+		$scope.showDetailsOfMaterial=false;
+		$scope.miniSearchResults=false;
+		$scope.showForum = true;
 	}
+
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of materials to display when compare materials */
+	$scope.getAllRequests = function() {
+		var getMaterials = ForumMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+	
+		});
+	}
+
+	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
+	
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
+	$scope.openMaterial = function(material) {
+		$scope.miniSearchResults=false;
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+        $scope.showLocation=false;
+	}
 
+	/* close material that are opened */
+	$scope.closeMaterial = function(){
+		$scope.miniSearchResults=false;
+        $scope.showDetailsOfMaterial=false;
+		$scope.showLocation=true;
+		$scope.showForum = true;
+	}
+
+	/* open and close the small search icon */
+	$scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+
+	/* close the results of small search */
+    $scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
+		$scope.showCategory=false;
+        $scope.showMaterialDetails=false;
+		$scope.showLocation=true;
+		$scope.showForum = true;
+	}
+
+	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
@@ -68,6 +116,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 		}
 	}
 	
+	/* open and close the section of user details and search icon */
 	$scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
@@ -77,54 +126,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 		}
 	}
 
-	$scope.closeMaterial = function(){
-		$scope.miniSearchResults=false;
-        $scope.showDetailsOfMaterial=false;
-		$scope.showLocation=true;
-		$scope.showForum = true;
-	}
-
-    $scope.closeMiniSearch = function() {
-		$scope.miniSearchResults = false;
-		$scope.search=true;
-		$scope.openMaterialDetail=false; 
-		$scope.showInitSearch=true;
-		$scope.showSearch=false;
-		$scope.enableUserIcon=false;
-		$scope.showCategory=false;
-        $scope.showMaterialDetails=false;
-		$scope.showLocation=true;
-		$scope.showForum = true;
-	}
-
-	$scope.openMaterial = function(material) {
-		$scope.miniSearchResults=false;
-		$scope.showDetailsOfMaterial=true;
-		$scope.showMaterials=false;
-		$scope.openedMaterial=material;
-        $scope.showLocation=false;
-	}
-	
-	$scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
-		}
-	}
-
-	$scope.reloadQuestions = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/questionsForumMobile'")
-	}
-
-	$scope.reloadCuriosities = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForumMobile'")
-	}
-
-	$scope.reloadWorldShares = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile'")
-	}
-
+	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -132,7 +134,8 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			$scope.showInitSession = true;
 		}
 	}
-
+	
+	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -164,7 +167,8 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			}
 		});
 	}
-	
+
+	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
@@ -203,15 +207,36 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 		$scope.search = false;
 	}
 
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 	}
 
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+
+	/* refresh questions */
+	$scope.reloadQuestions = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/questionsForumMobile'")
+	}
+
+	/* refresh curiosities */
+	$scope.reloadCuriosities = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForumMobile'")
+	}
+
+	/* refresh world shares */
+	$scope.reloadWorldShares = function() {
+		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile'")
+	}
+	/* init CompareController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
 }])
 .config(function($routeProvider, $locationProvider) {
 
@@ -234,29 +259,14 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 app.factory("ForumMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
-			var deferred = $q.defer();
-
-	/*var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var resp = this;
-		if (this.readyState == 4 && this.status == 200) {
-			var response = resp.response;
-			debugger
-			deferred.resolve(response);
-		}
+		var deferred = $q.defer();
 		
-	}
+		$timeout(function() {
+		deferred.resolve($http.get('/compareMaterials'));
+		}, 4000);
 
-	xhr.open('GET','/compareMaterials', true);
-	xhr.send();*/
-
-			$timeout(function() {
-			deferred.resolve($http.get('/compareMaterials'));
-			}, 4000);
-
-			return deferred.promise;
+		return deferred.promise;
 	};
-
 
 	return {
 			getMaterialComparation: getMaterialComparation
@@ -271,30 +281,12 @@ app.factory("ForumBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
 
 		return deferred.promise;
 	};
 
 	var getMyQuestionsLogged = function() {
 		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
 
 		$timeout(function() {
 			deferred.resolve($http.get('/myQuest'));

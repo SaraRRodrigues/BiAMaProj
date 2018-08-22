@@ -50,7 +50,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.confirmSession=false;
         }
 
-        debugger
         if($scope.idUserLoggerIn !== undefined){
             /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
