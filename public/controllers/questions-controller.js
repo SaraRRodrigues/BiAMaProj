@@ -32,7 +32,12 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 			console.log(error);
 
 		});*/
-	}
+    }
+    
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
     $scope.loading = true;
     $scope.favoriteQuestion=false;
     $scope.favoriteAnswer=false;

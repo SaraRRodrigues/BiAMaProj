@@ -128,6 +128,10 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       window.setTimeout("location.href = 'http://localhost:8080'")
     }
 
+    $scope.goToHomePage = function() {
+      window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
     $scope.clickTopSearch = function() {
       if($scope.showSearch){
         $scope.showSearch = false;
