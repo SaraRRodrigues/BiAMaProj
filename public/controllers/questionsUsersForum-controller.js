@@ -426,27 +426,12 @@ app.factory("LikeAnswerService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
   
-    /*var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      var resp = this;
-      if (this.readyState == 4 && this.status == 200) {
-        var response = resp.response;
-        debugger
-        deferred.resolve(response);
-      }
-      
-    }
-  
-    xhr.open('GET','/compareMaterials', true);
-    xhr.send();*/
-  
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
         }, 4000);
   
         return deferred.promise;
     };
-  
   
     return {
         getMaterialComparation: getMaterialComparation
@@ -461,84 +446,11 @@ app.factory("LikeAnswerService", function($q, $http, $timeout){
        $timeout(function() {
         deferred.resolve($http.get('/users',  {cache:true}));
       }, 2000); 
-    
-      /*var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        var resp = this;
-        deferred.resolve(resp);
-      }
-  
-      xhr.open('GET','/users', true);
-      xhr.send();*/
   
       return deferred.promise;
     };
-  
-    var getMyQuestionsLogged = function() {
-      var deferred = $q.defer();
-  
-      /*var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        var resp = this;
-        deferred.resolve(resp);
-      }
-  
-      xhr.open('GET','/myQuest', true);
-      xhr.send();*/
-  
-      $timeout(function() {
-        deferred.resolve($http.get('/myQuest'));
-      }, 2000);
-  
-      return deferred.promise;
-    };
-  
-    var insertLibraryUserDetails = function() {
-      var deferred = $q.defer();
-  
-      
-      /*var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        var resp = this;
-        var response = resp.response;
-        deferred.resolve(response);
-      }
-  
-      xhr.open('GET','/insertLibraryUser', true);
-      xhr.send();*/
-  
-      $timeout(function() {
-        deferred.resolve($http.post('/insertLibraryUser'));
-      }, 2000);
-  
-      return deferred.promise;
-    }
-  
-    var getLibraryUserDetails = function() {
-      
-      var deferred = $q.defer();
-  
-      /*var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        var resp = this;
-        var response = resp.response;
-        deferred.resolve(response);
-      }
-  
-      xhr.open('GET','/getLibraryUser', true);
-      xhr.send();*/
-  
-      $timeout(function() {
-        deferred.resolve($http.get('/getLibraryUser'));
-      }, 2000);
-  
-      return deferred.promise;
-    }
   
     return {
-      getUsers: getUsers,
-      getMyQuestionsLogged: getMyQuestionsLogged,
-      insertLibraryUserDetails: insertLibraryUserDetails,
-      getLibraryUserDetails: getLibraryUserDetails
+      getUsers: getUsers
     };
   });

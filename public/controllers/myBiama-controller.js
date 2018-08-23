@@ -397,31 +397,8 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 app.factory("MaterialsBiamaService", function($q, $http, $timeout){
 	
-	var getSchoolOfMaterial = function(data) {
-		var deferred = $q.defer();
-	
-		$timeout(function() {
-          deferred.resolve($http.get('/materialSchool', 
-          {params: {
-            'data': data
-          }}));
-		}, 1000);
-	
-		return deferred.promise;
-	};
-	  
 	var getMaterial = function() {
 		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/materialsCategories', true);
-		xhr.send();*/
 
 		$timeout(function() {
 		  deferred.resolve($http.get('/materialsCategories'));
@@ -431,7 +408,6 @@ app.factory("MaterialsBiamaService", function($q, $http, $timeout){
 	  };
 	
 	  return {
-		getSchoolOfMaterial: getSchoolOfMaterial,
 		getMaterial: getMaterial
 	  };
 });
@@ -461,72 +437,13 @@ app.factory("UserMyBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
 
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	var getLibraryUserDetails = function() {
 		
 		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
 
 		$timeout(function() {
 			deferred.resolve($http.get('/getLibraryUser'));
@@ -537,8 +454,6 @@ app.factory("UserMyBiamaService", function($q, $http, $timeout){
 
 	return {
 		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
 		getLibraryUserDetails: getLibraryUserDetails
 	};
 });
