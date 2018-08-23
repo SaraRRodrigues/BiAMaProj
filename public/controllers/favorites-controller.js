@@ -582,8 +582,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	$scope.initData();
 	$scope.getAllRequests();
     $scope.validateUserLoggedIn();
-    
-   
 }])
 
 app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){

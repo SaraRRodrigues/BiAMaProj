@@ -3,35 +3,49 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
-	/* my current page */
-    $scope.namePage='qrCode';
-    $scope.showSearch = false;
-	$scope.userDetails = false;
-	$scope.miniSearchResults=false;
-	$scope.showDetailsOfMaterial=false;
-	$scope.resultSearch= [];
-	$scope.showQrCode = true;
-	
-	$scope.getMaterials = QrCodeMaterialService.getMaterialComparation(function(infoMaterial){});
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialsToSearch = data;
 
-	});
-	
-    $scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
+	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width <= 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
 		}
-    }
-    
-    $scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='qrCode';
+		$scope.showSearch = false;
+		$scope.userDetails = false;
+		$scope.miniSearchResults=false;
+		$scope.showDetailsOfMaterial=false;
+		$scope.resultSearch= [];
+		$scope.showQrCode = true;
+	}
+
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get materials to display on search */
+	$scope.getAllRequests = function() {
+		$scope.getMaterials = QrCodeMaterialService.getMaterialComparation(function(infoMaterial){});
+		$scope.getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+	
+		});
+	}
+
+	/* redirect to homepage with arrow */
+	$scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
+
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
 	$scope.openMaterial = function(material) {
 		$scope.showDetailsOfMaterial=true;
 		$scope.showMaterials=false;
@@ -40,7 +54,8 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		$scope.showLocation=false;
 		$scope.showQrCode = false;
 	}
-	
+
+	/* close material that are opened */
 	$scope.closeMaterial = function(){
 		$scope.miniSearchResults=true;
         $scope.showDetailsOfMaterial=false;
@@ -48,6 +63,16 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		$scope.showQrCode = true;
 	}
 
+	/* open and close the small search icon */
+    $scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+    }
+
+	/* close the results of small search */
     $scope.closeMiniSearch = function() {
 		$scope.miniSearchResults = false;
 		$scope.search=true;
@@ -61,6 +86,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		$scope.showQrCode = true;
 	}
 
+	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
@@ -92,6 +118,8 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 			$scope.showQrCode = false;
 		}
 	}
+
+	/* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
@@ -101,6 +129,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		}
 	}
 
+	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -109,6 +138,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		}
 	}
 
+	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -141,6 +171,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		});
 	}
 	
+	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
@@ -179,42 +210,34 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 		$scope.search = false;
 	}
 
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 	}
 
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+	/* -------------- END MOBILE -------------- */
+
+	/* init CompareController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
 }])
 
 app.factory("QrCodeMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
-			var deferred = $q.defer();
-
-	/*var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var resp = this;
-		if (this.readyState == 4 && this.status == 200) {
-			var response = resp.response;
-			debugger
-			deferred.resolve(response);
-		}
-		
-	}
-
-	xhr.open('GET','/compareMaterials', true);
-	xhr.send();*/
-
-			$timeout(function() {
+		var deferred = $q.defer();
+		$timeout(function() {
 			deferred.resolve($http.get('/compareMaterials'));
-			}, 4000);
+		}, 4000);
 
-			return deferred.promise;
+		return deferred.promise;
 	};
-
 
 	return {
 			getMaterialComparation: getMaterialComparation

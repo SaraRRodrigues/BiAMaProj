@@ -2,47 +2,241 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
-    /* my current page */
-    $scope.namePage='worldShares';	
 
-    $scope.numberOfNewShares=[
-        {
-        'insert': true
+    /* define view of app */
+    $scope.viewType = function() {
+        var window_width = $( window ).width();
+        if(window_width < 1024) {
+            $scope.isMobileView=true;
+        } else {
+            $scope.isMobileView=false;
         }
-    ];
-    $scope.descriptionWorldShare='';
-    $scope.savePhoto=false;
-    $scope.openWorldShareUploadLabel=false;
-
-    $scope.resultSearch = [];
-    $scope.showDetailsOfMaterial=false;
-    $scope.miniSearchResults=false;
-
-    var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
-    } 
-
-    var splitLocation = location.href.split('=');
-    $scope.idUserLoggerIn =splitLocation[1];
-
-    if($scope.idUserLoggerIn !== undefined) {
-        $scope.confirmSession=true;
-    } else {
-        $scope.loading = true;
-        $scope.confirmSession=false;
     }
 
-    $scope.getMaterials = WorldShareMaterialService.getMaterialComparation(function(infoMaterial){});
-    $scope.getMaterials.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.comparationDetails;
-      $scope.materialsToSearch = data;
-  
-      });
+    /* init my variables data */
+    $scope.initData = function() {
+        /* my current page */
+        $scope.namePage='worldShares';
+        $scope.descriptionWorldShare='';
+        $scope.savePhoto=false;
+        $scope.openWorldShareUploadLabel=false;
 
+        $scope.resultSearch = [];
+        $scope.showDetailsOfMaterial=false;
+        $scope.miniSearchResults=false;
+        $scope.loading = true;
+        $scope.showWorldShares=true;
+        $scope.addWorldShare=false;
+        $scope.numberOfNewShares=[
+            {
+            'insert': true
+            }
+        ];
+    }
+
+    /* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() { 
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.confirmSession=true;
+        } else {
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+    }
+    /* -------------- INIT DESKTOP -------------- */
+    /* open add section of world share */
+    $scope.openAddWorldShare = function() {
+        $scope.addWorldShare=true;
+        $scope.showWorldShares=false;
+    }
+
+    /* open image of user */
+    $scope.openWorldShareUpload = function() {
+        $scope.openWorldShareUploadLabel=true;
+    }
+    
+    /* save upload file */
+    $scope.saveUploadFile = function () {
+        $scope.savePhoto=true;
+        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
+        var res = splitDeviceRe.exec(($("#uploadPictureWorldShare").val()));
+        $scope.imageWorldShare=res[2];
+        $scope.numberOfNewShares[0].insert=false;
+        $scope.openWorldShareUploadLabel=false;
+
+        for(var index=0; index<$scope.worldShareData.length; ++index) {
+            if(index===$scope.worldShareData.length-1) {
+              var result = ($scope.worldShareData[index].title).split("s");
+              var numberTitle=result[1];
+              $scope.title='ws' + (parseInt(numberTitle)+1);
+            }
+        } 
+        //$scope.uploadedFile($scope.imageWorldShare)
+    }
+    /* -------------- END DESKTOP -------------- */
+
+    /* -------------- INIT DESKTOP & MOBILE -------------- */
+    /* get information of my world shares on forum to display */
+    $scope.getAllRequests = function() {
+        var getMaterials = WorldShareMaterialService.getMaterialComparation(function(infoMaterial){});
+        getMaterials.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.comparationDetails;
+          $scope.materialsToSearch = data;
+      
+        });
+
+        var getMyWorldShares = WorldSharesService.getAllMyWorldShares(function(infoMyWorldShares){});
+        getMyWorldShares.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.worldShareDetails;
+
+            $scope.worldShareItems=[];
+            $scope.worldShareData=[];
+            $scope.shareNumber=[];
+            for(var index=0; index<data.length; ++index) {
+                $scope.worldShareItems.push(data[index].image);
+                $scope.worldShareData.push(data[index]);
+                $scope.forumType=data[index].type_forum; 
+
+                if(index===data.length-1) {
+                    var result = (data[index].title).split("s");
+                    var numberTitle=result[1];
+                    $scope.title='ws' + (parseInt(numberTitle)+1);
+                }
+            }
+        });
+    }
+
+    /* redirect to homepage with arrow */
+    $scope.goToHomePage = function() {
+        window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
+    /* open details of world share when clicks on material world share */
+    $scope.openDetailsWorldShare = function(image) {
+        for(var index=0; index<$scope.worldShareData.length; ++index) {
+            if($scope.worldShareData[index].image === image){
+                $scope.worldSharesInfo={
+                    'image':$scope.worldShareData[index].image,
+                    'description': $scope.worldShareData[index].descriptionShare,
+                    "share": index+1
+                }
+                $scope.showWorldSharesDetails=true;
+                $scope.showWorldShares=false;
+                break;
+            }
+        }
+    }
+
+    /* open big image of world share (large image size) */
+    $scope.openBigImage = function(image) {
+        $scope.showBigImage=true;
+        $scope.showWorldSharesDetails=false;
+        $scope.bigImage=image;
+    }
+
+    /* close the image that are opened */
+    $scope.closeWorldShareImage = function() {
+        $scope.showBigImage=false;
+        $scope.showWorldSharesDetails=true;
+    }
+
+    /* cancel insert of world share */
+    $scope.cancelInsertWorldShare = function() {
+        $scope.descriptionWorldShare='';
+        $scope.imageWorldShare='';
+        $scope.openWorldShareUploadLabel=true;
+        $scope.savePhoto=false;
+    }
+
+    /* insert world share on database */
+    $scope.saveConfigInsertWorldShare = function (image, description) {  
+        debugger
+        if(image !== undefined) {
+            var data = {
+                'forumType': $scope.forumType, 
+                'title': $scope.title,
+                'image': image,
+                'description': description
+            }
+            $http.post('/insertWorldShares', data);
+        }
+    }
+
+    /*  post upload file */
+    $scope.postUpload = function(valueInput) {
+        console.log('x: ', valueInput);
+        var inputResult = jQuery('#uploadPictureWorldShare');
+
+        console.log('file: ', inputResult);
+        var fd = new FormData();
+        fd.append('file', inputResult);
+
+        
+    }
+
+    /* create file on directory of image uploaded*/
+    $scope.uploadedFile=function(element) {
+        if(element !== undefined || element !== null || element !== '') {
+            $scope.currentFile = element.files[0];
+            /* var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var output = jQuery('#output');
+                output.src = URL.createObjectURL(element.files[0]);
+            }
+            reader.readAsDataURL(element.files[0]); */
+       
+
+            var assetLocalPath=""+$scope.currentFile.name;
+            var file = new File([""],assetLocalPath);
+            alert(file.name);
+        }
+    }
+    /* -------------- END DESKTOP & MOBILE -------------- */
+
+    /* -------------- INIT MOBILE -------------- */
+    /* open material of small search result */
+    $scope.openMaterial = function(material) {
+        $scope.miniSearchResults=false;
+        $scope.showDetailsOfMaterial=true;
+        $scope.showMaterials=false;
+        $scope.openedMaterial=material;
+        $scope.showWorldShares=false;
+    }
+
+    /* close material that are opened */
+    $scope.closeMaterial = function(){
+        $scope.miniSearchResults=false;
+        $scope.showDetailsOfMaterial=false; 
+        $scope.showWorldShares=true;
+    }
+
+    /* open and close the small search icon */
+    $scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+    }
+
+    /* close the results of small search */
+    $scope.closeMiniSearch = function() {
+        $scope.miniSearchResults = false;
+        $scope.search=true;
+        $scope.openMaterialDetail=false; 
+        $scope.showInitSearch=true;
+        $scope.showSearch=false;
+        $scope.enableUserIcon=false;
+        $scope.showWorldShares=true;
+    }
+
+    /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
 
       var inputMini = jQuery("#miniSearch").val();
@@ -76,51 +270,26 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
       }
     }
 
-    $scope.closeMaterial = function(){
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=false; 
-      $scope.showWorldShares=true;
-
-    }
-  
-    $scope.closeMiniSearch = function() {
-      $scope.miniSearchResults = false;
-      $scope.search=true;
-      $scope.openMaterialDetail=false; 
-      $scope.showInitSearch=true;
-      $scope.showSearch=false;
-      $scope.enableUserIcon=false;
-      $scope.showWorldShares=true;
-    }
-  
-    $scope.openMaterial = function(material) {
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=true;
-      $scope.showMaterials=false;
-      $scope.openedMaterial=material;
-      $scope.showWorldShares=false;
-    }
-
-    $scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
+    /* open and close the section of user details and search icon */
+    $scope.clickUserDetails = function() {
+		if($scope.userDetails){
+			$scope.userDetails = false;
 		}else {
-			$scope.showSearch = true;
+			$scope.userDetails = true;
+			$scope.showSearch = false;
 		}
     }
-    
-    $scope.logout = function(){
-		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error);
 
-		});*/
-	}
-    
+    /* section of init session in user details section */
+    $scope.showInitSessionDiv = function () {
+		if($scope.showInitSession){
+			$scope.showInitSession = false;
+		}else {
+			$scope.showInitSession = true;
+		}
+    }
+
+    /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -153,31 +322,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 		});
     }
 
-    $scope.loading = true;
-    $scope.showWorldShares=true;
-    $scope.addWorldShare=false;
-    $scope.getMyWorldShares = WorldSharesService.getAllMyWorldShares(function(infoMyWorldShares){});
-
-    $scope.getMyWorldShares.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.worldShareDetails;
-
-      $scope.worldShareItems=[];
-      $scope.worldShareData=[];
-      $scope.shareNumber=[];
-      for(var index=0; index<data.length; ++index) {
-          $scope.worldShareItems.push(data[index].image);
-          $scope.worldShareData.push(data[index]);
-          $scope.forumType=data[index].type_forum; 
-
-          if(index===data.length-1) {
-            var result = (data[index].title).split("s");
-            var numberTitle=result[1];
-            $scope.title='ws' + (parseInt(numberTitle)+1);
-          }
-      } 
-    });
-
+    /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
 
 		if($scope.isMobileView) {
@@ -218,129 +363,34 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 			$scope.notificationNumber = false;
 		}
 		$scope.search = false;
+    }
+    
+    /* logout of user details section */
+    $scope.logout = function(){
+		$scope.confirmSession = false;
+		/*firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});*/
 	}
     
-    $scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
+    /* regist new user on user details section */
+    $scope.regist = function() {
+        $scope.userDetails = false;
+        $scope.registUser=true;
+        $scope.search=false;
     }
+    /* -------------- END MOBILE -------------- */
 
-    $scope.openDetailsWorldShare = function(image) {
-        for(var index=0; index<$scope.worldShareData.length; ++index) {
-            if($scope.worldShareData[index].image === image){
-                $scope.worldSharesInfo={
-                    'image':$scope.worldShareData[index].image,
-                    'description': $scope.worldShareData[index].descriptionShare,
-                    "share": index+1
-                }
-                $scope.showWorldSharesDetails=true;
-                $scope.showWorldShares=false;
-                break;
-            }
-        }
-    }
-
-    $scope.openBigImage = function(image) {
-        $scope.showBigImage=true;
-        $scope.showWorldSharesDetails=false;
-        $scope.bigImage=image;
-    }
-
-    $scope.closeWorldShareImage = function() {
-        $scope.showBigImage=false;
-        $scope.showWorldSharesDetails=true;
-    }
-
-    $scope.openAddWorldShare = function() {
-        $scope.addWorldShare=true;
-        $scope.showWorldShares=false;
-    }
-
-    $scope.openWorldShareUpload = function() {
-        $scope.openWorldShareUploadLabel=true;
-    }
-    
-    $scope.saveUploadFile = function () {
-        $scope.savePhoto=true;
-        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
-        var res = splitDeviceRe.exec(($("#uploadPictureWorldShare").val()));
-        $scope.imageWorldShare=res[2];
-        $scope.numberOfNewShares[0].insert=false;
-        $scope.openWorldShareUploadLabel=false;
-
-        for(var index=0; index<$scope.worldShareData.length; ++index) {
-            if(index===$scope.worldShareData.length-1) {
-              var result = ($scope.worldShareData[index].title).split("s");
-              var numberTitle=result[1];
-              $scope.title='ws' + (parseInt(numberTitle)+1);
-            }
-        } 
-        //$scope.uploadedFile($scope.imageWorldShare)
-    }
-    
-    $scope.cancelInsertWorldShare = function() {
-        $scope.descriptionWorldShare='';
-        $scope.imageWorldShare='';
-        $scope.openWorldShareUploadLabel=true;
-        $scope.savePhoto=false;
-    }
-
-    $scope.clickUserDetails = function() {
-		if($scope.userDetails){
-			$scope.userDetails = false;
-		}else {
-			$scope.userDetails = true;
-			$scope.showSearch = false;
-		}
-    }
-
-    $scope.showInitSessionDiv = function () {
-		if($scope.showInitSession){
-			$scope.showInitSession = false;
-		}else {
-			$scope.showInitSession = true;
-		}
-    }
-
-    $scope.saveConfigInsertWorldShare = function (image, description) {  
-        debugger
-        if(image !== undefined) {
-            var data = {
-                'forumType': $scope.forumType, 
-                'title': $scope.title,
-                'image': image,
-                'description': description
-            }
-            $http.post('/insertWorldShares', data);
-        }
-    }
-
-    $scope.postUpload = function(valueInput) {
-        console.log('x: ', valueInput);
-        var inputResult = jQuery('#uploadPictureWorldShare');
-
-        console.log('file: ', inputResult);
-        var fd = new FormData();
-        fd.append('file', inputResult);
-
-        
-    }
-    $scope.uploadedFile=function(element) {
-        if(element !== undefined || element !== null || element !== '') {
-            $scope.currentFile = element.files[0];
-            /* var reader = new FileReader();
-
-            reader.onload = function(event) {
-                var output = jQuery('#output');
-                output.src = URL.createObjectURL(element.files[0]);
-            }
-            reader.readAsDataURL(element.files[0]); */
-       
-
-            var assetLocalPath=""+$scope.currentFile.name;
-            var file = new File([""],assetLocalPath);
-            alert(file.name);
-        }
-    }
+    /* init QuestionsController  */
+    $scope.viewType();
+    $scope.initData();
+    $scope.getAllRequests();
+    $scope.validateUserLoggedIn();
 }])
 
 app.factory("WorldSharesService", function($q, $http, $timeout){

@@ -41,6 +41,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
 	
 	/* -------------- INIT MOBILE -------------- */
 	/* open material of small search result */
@@ -233,6 +234,8 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	$scope.reloadWorldShares = function() {
 		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile'")
 	}
+	/* -------------- END MOBILE -------------- */
+
 	/* init CompareController  */
 	$scope.viewType();
 	$scope.initData();

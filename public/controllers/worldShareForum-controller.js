@@ -1,56 +1,153 @@
 
 app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "WorldSharesForumMaterialService","WorldShareForumBiamaService", "$http", "jQuery", function($scope,WorldSharesForumService,MyBiamaService, WorldSharesForumMaterialService, WorldShareForumBiamaService, $http){
 
-    $scope.nameclick='forum'
-
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMainMobile").hide();
-    /* my current page */
-  
-    var window_width = $( window ).width();
-    if(window_width <= 1024) {
-      $scope.isMobileView=true;
-    } else {
-      $scope.isMobileView=false;
-    }
-    
-    $scope.loading=true;
-    $scope.showWorldShares=true;
-    $scope.showWorldSharesDetails=false;
-    $scope.resultSearch = [];
-    $scope.showDetailsOfMaterial=false;
-    $scope.miniSearchResults=false;
 
-    var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-    getMyBiamaInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.biamaDetails;
-        $scope.descriptionMyBiama=data[0].description;
-    });
-
-    var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
-    getWorldSharesForum.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.worldShareForumDetails;
-
-      $scope.worldShareItems=[];
-      $scope.worldShareData=[];
-      $scope.shareNumber=[];
-      
-      for(var index=0; index<data.length; ++index) {
-          $scope.worldShareItems.push(data[index].image);
-          $scope.worldShareData.push(data[index]);
+    /* define view of app */
+	  $scope.viewType = function() {
+      var window_width = $( window ).width();
+      if(window_width < 1024) {
+        $scope.isMobileView=true;
+      } else {
+        $scope.isMobileView=false;
       }
-    });
+    }
 
-    $scope.getMaterials = WorldSharesForumMaterialService.getMaterialComparation(function(infoMaterial){});
-    $scope.getMaterials.then(function(result) {
-      $scope.loading = false;
-      var data=result.data.comparationDetails;
-      $scope.materialsToSearch = data;
-  
+    /* init my variables data */
+    $scope.initData = function() {
+      /* my current page */
+      $scope.nameclick='forum';
+      $scope.loading=true;
+      $scope.showWorldShares=true;
+      $scope.showWorldSharesDetails=false;
+      $scope.resultSearch = [];
+      $scope.showDetailsOfMaterial=false;
+      $scope.miniSearchResults=false;
+    }
+
+    /* -------------- INIT DESKTOP & MOBILE -------------- */
+    /* get information of world shares on forum to display */
+    $scope.getAllRequests = function() {
+      var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+      getMyBiamaInfo.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.biamaDetails;
+          $scope.descriptionMyBiama=data[0].description;
       });
 
+      var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
+      getWorldSharesForum.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.worldShareForumDetails;
+
+        $scope.worldShareItems=[];
+        $scope.worldShareData=[];
+        $scope.shareNumber=[];
+        
+        for(var index=0; index<data.length; ++index) {
+            $scope.worldShareItems.push(data[index].image);
+            $scope.worldShareData.push(data[index]);
+        }
+      });
+
+      $scope.getMaterials = WorldSharesForumMaterialService.getMaterialComparation(function(infoMaterial){});
+      $scope.getMaterials.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.comparationDetails;
+        $scope.materialsToSearch = data;
+    
+      });
+    }
+
+    /* redirect to homepage with arrow */
+    $scope.goToHomePage = function() {
+      window.setTimeout("location.href = 'http://localhost:8080'")
+    }
+
+    /* open details of world share when clicks on material world share */
+    $scope.openDetailsWorldShare = function(image) {
+      for(var index=0; index<$scope.worldShareData.length; ++index) {
+				if($scope.worldShareData[index].image === image){
+            $scope.worldSharesInfo={
+              'image':$scope.worldShareData[index].image,
+              'description': $scope.worldShareData[index].descriptionShare,
+              "share": index+1
+            }
+            $scope.showWorldSharesDetails=true;
+            $scope.showWorldShares=false;
+            break;
+				}
+			}
+    }
+
+    /* open big image of world share (large image size) */
+    $scope.openBigImage = function(image) {
+      $scope.showBigImage=true;
+      $scope.showWorldSharesDetails=false;
+      $scope.bigImage=image;
+    }
+
+    /* close the image that are opened */
+    $scope.closeWorldShareImage = function() {
+      $scope.showBigImage=false;
+      $scope.showWorldSharesDetails=true;
+    }
+    /* -------------- END DESKTOP & MOBILE -------------- */
+
+    /* -------------- INIT MOBILE -------------- */
+	  /* open material of small search result */
+    $scope.openMaterial = function(material) {
+      $scope.miniSearchResults=false;
+      $scope.showDetailsOfMaterial=true;
+      $scope.showMaterials=false;
+      $scope.openedMaterial=material;
+      $scope.showLocation=false;
+      $scope.showAllQuestions=false;
+      $scope.showCuriosity=false;
+      $scope.showWorldShares=false;
+    }
+
+    /* close material that are opened */
+    $scope.closeMaterial = function(){
+      $scope.miniSearchResults=false;
+      $scope.showDetailsOfMaterial=false;
+      $scope.showLocation=true;
+      $scope.showForum = true;
+      $scope.showAllQuestions=true;
+      $scope.showQuestionDetails=false;
+      $scope.showCuriosity=true;
+      $scope.showWorldShares=true;
+    }
+
+    /* open and close the small search icon */
+    $scope.clickTopSearch = function() {
+      if($scope.showSearch){
+        $scope.showSearch = false;
+      }else {
+        $scope.showSearch = true;
+      }
+    }
+
+    /* close the results of small search */
+    $scope.closeMiniSearch = function() {
+      $scope.miniSearchResults = false;
+      $scope.search=true;
+      $scope.openMaterialDetail=false; 
+      $scope.showInitSearch=true;
+      $scope.showSearch=false;
+      $scope.enableUserIcon=false;
+      $scope.showCategory=false;
+      $scope.showMaterialDetails=false;
+      $scope.showLocation=true;
+      $scope.showForum = true;
+      $scope.showAllQuestions=true;
+      $scope.showQuestionDetails=false;
+      $scope.showCuriosity=true;
+      $scope.showWorldShares=true;
+    }
+
+    /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
 
       var inputMini = jQuery("#miniSearch").val();
@@ -88,7 +185,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       }
     }
 
-    
+    /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
       if($scope.userDetails){
         $scope.userDetails = false;
@@ -98,82 +195,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       }
     }
 
-    $scope.closeMaterial = function(){
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=false;
-      $scope.showLocation=true;
-      $scope.showForum = true;
-      $scope.showAllQuestions=true;
-      $scope.showQuestionDetails=false;
-      $scope.showCuriosity=true;
-      $scope.showWorldShares=true;
-    }
-  
-    $scope.closeMiniSearch = function() {
-      $scope.miniSearchResults = false;
-      $scope.search=true;
-      $scope.openMaterialDetail=false; 
-      $scope.showInitSearch=true;
-      $scope.showSearch=false;
-      $scope.enableUserIcon=false;
-      $scope.showCategory=false;
-      $scope.showMaterialDetails=false;
-      $scope.showLocation=true;
-      $scope.showForum = true;
-      $scope.showAllQuestions=true;
-      $scope.showQuestionDetails=false;
-      $scope.showCuriosity=true;
-      $scope.showWorldShares=true;
-    }
-  
-    $scope.openMaterial = function(material) {
-      $scope.miniSearchResults=false;
-      $scope.showDetailsOfMaterial=true;
-      $scope.showMaterials=false;
-      $scope.openedMaterial=material;
-      $scope.showLocation=false;
-      $scope.showAllQuestions=false;
-      $scope.showCuriosity=false;
-      $scope.showWorldShares=false;
-    }
-
-    $scope.goToHomePage = function() {
-      window.setTimeout("location.href = 'http://localhost:8080'")
-    }
-
-    $scope.clickTopSearch = function() {
-      if($scope.showSearch){
-        $scope.showSearch = false;
-      }else {
-        $scope.showSearch = true;
-      }
-    }
-    
-    $scope.openDetailsWorldShare = function(image) {
-      for(var index=0; index<$scope.worldShareData.length; ++index) {
-				if($scope.worldShareData[index].image === image){
-            $scope.worldSharesInfo={
-              'image':$scope.worldShareData[index].image,
-              'description': $scope.worldShareData[index].descriptionShare,
-              "share": index+1
-            }
-            $scope.showWorldSharesDetails=true;
-            $scope.showWorldShares=false;
-            break;
-				}
-			}
-    }
-
-    $scope.openBigImage = function(image) {
-      $scope.showBigImage=true;
-      $scope.showWorldSharesDetails=false;
-      $scope.bigImage=image;
-    }
-
-    $scope.closeWorldShareImage = function() {
-      $scope.showBigImage=false;
-      $scope.showWorldSharesDetails=true;
-    }
+    /* section of init session in user details section */
     $scope.showInitSessionDiv = function () {
       if($scope.showInitSession){
         $scope.showInitSession = false;
@@ -181,7 +203,8 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
         $scope.showInitSession = true;
       }
     }
-  
+    
+    /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
   
       $scope.users = 'loadUser';
@@ -213,7 +236,8 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
         }
       });
     }
-    
+
+    /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
   
       if(buttonClick === 'favorites') {
@@ -251,16 +275,25 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       }
       $scope.search = false;
     }
-  
+
+    /* logout of user details section */
     $scope.logout = function(){
       $scope.confirmSession = false;
     }
   
+    /* regist new user on user details section */
     $scope.regist = function() {
       $scope.userDetails = false;
       $scope.registUser=true;
       $scope.search=false;
     }
+    /* -------------- END MOBILE -------------- */
+
+    /* init QuestionsController  */
+    $scope.viewType();
+    $scope.initData();
+    $scope.getAllRequests();
+
 }])
 
 app.factory("WorldSharesForumService", function($q, $http, $timeout){

@@ -2,43 +2,128 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
-    /* my current page */
-    $scope.namePage='whereWeAre';
-    $scope.nameclick='whereWeAre';
-
-    var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
+    
+   	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
+		}
     }
-    
-    $scope.loading = true;
-    $scope.schools=[];
-    $scope.resultSearch = [];
-    $scope.showDetailsOfMaterial=false;
-    $scope.miniSearchResults=false;
-    $scope.showLocation=true;
-    $scope.pathURL='https://www.google.com/maps/';
+	
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='whereWeAre';
+		$scope.nameclick='whereWeAre';
+		$scope.loading = true;
+		$scope.schools=[];
+		$scope.resultSearch = [];
+		$scope.showDetailsOfMaterial=false;
+		$scope.miniSearchResults=false;
+		$scope.showLocation=true;
+		$scope.pathURL='https://www.google.com/maps/';
+	}
 
-	$scope.getMaterials = WhereWeAreMaterialService.getMaterialComparation(function(infoMaterial){});
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialsToSearch = data;
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of my favorites, my questions and answer to display */
+    $scope.getAllRequests = function() {
+		var getMaterials = WhereWeAreMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+	
+		});
 
-    });
-    
-    $scope.goToHomePage = function() {
+		var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+    	getBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.biamaDetails;
+			$scope.biamaDetails=data;
+			/**default - url of ESELx */
+			$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
+			$scope.schools=$scope.biamaDetails;
+		});
+	}
+	
+	/* redirect to homepage with arrow */
+	$scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
+	}
+
+	/* get schools to show schools on options of material location */
+    $scope.getSchools = function () {
+        if($scope.showSchools){
+			$scope.showSchools = false;
+		}else {
+			$scope.showSchools = true;
+		}
     }
 
-	$scope.changeColorClick = function(name) {
-		$scope.userDetails = false;
-		$scope.search = false;
-		$scope.nameclick=name;
+    /* select school to open map of location on screen */
+    $scope.selectSchool = function (locationSchool) {
+        for(var index=0; index <$scope.biamaDetails.length; ++index) {
+            if($scope.biamaDetails[index].locationDescription === locationSchool){
+                $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[index].location)
+                $scope.descriptionLocation = $scope.biamaDetails[index].locationDescription;
+                break;
+            }
+        }
     }
 
+	/* resize iframe to screen size */
+    $scope.expandIframe = function(){
+        if($scope.zoomInIFrame){
+			$scope.zoomInIFrame = false;
+		}else {
+			$scope.zoomInIFrame = true;
+		}
+	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
+
+    /* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
+	$scope.openMaterial = function(material) {
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+        $scope.miniSearchResults=false;
+        $scope.showLocation=false;
+	}
+	
+	/* close material that are opened */
+	$scope.closeMaterial = function(){
+		$scope.miniSearchResults=true;
+        $scope.showDetailsOfMaterial=false;
+        $scope.showLocation=true;
+	}
+
+	/* open and close the small search icon */
+	$scope.clickTopSearch = function() {
+		if($scope.showSearch){
+			$scope.showSearch = false;
+		}else {
+			$scope.showSearch = true;
+		}
+	}
+	
+	/* close the results of small search */
+	$scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
+		$scope.showCategory=false;
+        $scope.showMaterialDetails=false;
+        $scope.showLocation=true;
+	}
+
+	/* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
@@ -70,81 +155,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		}
 	}
     
-    $scope.clickTopSearch = function() {
-		if($scope.showSearch){
-			$scope.showSearch = false;
-		}else {
-			$scope.showSearch = true;
-		}
-    }
-  
-    $scope.goTo = function(name) {
-		
-    }
-    
-    var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-    getBiamaInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.biamaDetails;
-        $scope.biamaDetails=data;
-        /**default - url of ESELx */
-        $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-        $scope.schools=$scope.biamaDetails;
-    });
-
-    $scope.getSchools = function () {
-        if($scope.showSchools){
-			$scope.showSchools = false;
-		}else {
-			$scope.showSchools = true;
-		}
-    }
-
-    $scope.closeMaterial = function(){
-		$scope.miniSearchResults=true;
-        $scope.showDetailsOfMaterial=false;
-        $scope.showLocation=true;
-	}
-
-    $scope.closeMiniSearch = function() {
-		$scope.miniSearchResults = false;
-		$scope.search=true;
-		$scope.openMaterialDetail=false; 
-		$scope.showInitSearch=true;
-		$scope.showSearch=false;
-		$scope.enableUserIcon=false;
-		$scope.showCategory=false;
-        $scope.showMaterialDetails=false;
-        $scope.showLocation=true;
-	}
-
-	$scope.openMaterial = function(material) {
-		$scope.showDetailsOfMaterial=true;
-		$scope.showMaterials=false;
-		$scope.openedMaterial=material;
-        $scope.miniSearchResults=false;
-        $scope.showLocation=false;
-    }
-    
-    $scope.selectSchool = function (locationSchool) {
-        for(var index=0; index <$scope.biamaDetails.length; ++index) {
-            if($scope.biamaDetails[index].locationDescription === locationSchool){
-                $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[index].location)
-                $scope.descriptionLocation = $scope.biamaDetails[index].locationDescription;
-                break;
-            }
-        }
-    }
-
-    $scope.expandIframe = function(){
-        if($scope.zoomInIFrame){
-			$scope.zoomInIFrame = false;
-		}else {
-			$scope.zoomInIFrame = true;
-		}
-	}
-	
-	
+    /* open and close the section of user details and search icon */
 	$scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
@@ -153,7 +164,8 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 			$scope.showSearch = false;
 		}
 	}
-
+	
+	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -162,6 +174,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		}
 	}
 
+	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
@@ -194,6 +207,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		});
 	}
 	
+	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
@@ -232,15 +246,23 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.search = false;
 	}
 
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 	}
 
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+	/* -------------- END MOBILE -------------- */
+
+	/* init WhereWeAreController  */
+	$scope.viewType();
+	$scope.initData();
+    $scope.getAllRequests();
 }])
 
 app.factory("BiAMaInfoService", function($q, $http, $timeout){
