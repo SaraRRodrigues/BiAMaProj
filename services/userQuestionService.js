@@ -3,7 +3,8 @@ var pg = require('pg');
 
 module.exports = {
 	'getQuestionAnswer': getQuestionAnswer,
-	'getUserQuestion': getUserQuestion
+	'getUserQuestion': getUserQuestion,
+	'getMyQuestionsLogged': getMyQuestionsLogged
 		
 }
 function getQuestionAnswer(cb){
@@ -49,4 +50,3 @@ function getMyQuestionsLogged(cb){
 		});
 	});
 }
-

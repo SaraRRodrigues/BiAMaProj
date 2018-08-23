@@ -362,20 +362,20 @@
 									</div>
 									<div ng-if="confirmSession">
 										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-										<a href="/BiAMa/favorites" ng-click="disableSearch('favorites')">Favoritos</a><br>
+										<a href="/BiAMa/favorites?id=[{idUserLoggerIn}]" ng-click="disableSearch('favorites')">Favoritos</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/myQuestions" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
+										<a href="/BiAMa/myQuestions?id=[{idUserLoggerIn}]" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/worldShare" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
+										<a href="/BiAMa/worldShare?id=[{idUserLoggerIn}]" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a class="notificationPosition" href="/BiAMa/notifications" ng-click="disableSearch('notification')">Notificações</a>
+										<a class="notificationPosition" href="/BiAMa/notifications?id=[{idUserLoggerIn}]" ng-click="disableSearch('notification')">Notificações</a>
 										<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
 										<div ng-if="notificationNumber" class="circleNotification"></div>
 										<br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/perfilPage" ng-click="disableSearch('perfil')">Perfil</a><br>
+										<a href="/BiAMa/perfilPage?id=[{idUserLoggerIn}]" ng-click="disableSearch('perfil')">Perfil</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/compare" ng-click="disableSearch('compare')">Comparar</a><br>
+										<a href="/BiAMa/compare?id=[{idUserLoggerIn}]" ng-click="disableSearch('compare')">Comparar</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
 										<a ng-click="logout()">Terminar Sessão</a><br>
 										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>

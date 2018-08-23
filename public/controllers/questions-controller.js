@@ -55,16 +55,26 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     $scope.getAllRequests = function() {
         
         $scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-        $scope.getMyQuestions = QuestionService.getMyQuestions(function(infoMyQuestions){});
+        //$scope.getMyQuestions = QuestionService.getMyQuestions(function(infoMyQuestions){});
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getAnswerQuestionInfo = QuestionService.getQuestionAnswer(function(infoUserAnswer){});
     
+        /*$scope.getMyQuestions.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.questions;
+            $scope.myQuestionDetails=data;
+            console.log('a: ', $scope.myQuestionDetails);
+        });*/
+        debugger
+
+        $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getMyQuestions.then(function(result) {
             $scope.loading = false;
             var data=result.data.questions;
             $scope.myQuestionDetails=data;
+            console.log('a: ', $scope.myQuestionDetails);
         });
-    
+
         $scope.getUserQuestionInfo.then(function(result) {
             $scope.loading = false;
             var data=result.data.questionDetails;
@@ -76,7 +86,6 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
           $scope.loading = false;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
-      
         });
 
         $scope.getAnswerQuestionInfo.then(function(result) {
@@ -440,9 +449,10 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 
 	/* init QuestionsController  */
 	$scope.viewType();
-	$scope.initData();
-    $scope.getAllRequests();
+    $scope.initData();
     $scope.validateUserLoggedIn();
+    $scope.getAllRequests();
+    
 }])
 
 app.factory("QuestionService", function($q, $http, $timeout){
@@ -473,11 +483,25 @@ app.factory("QuestionService", function($q, $http, $timeout){
 
 		return deferred.promise;
     };
+
+    var getAllMyQuestions = function(data) {
+        debugger
+        var deferred = $q.defer();
+		$timeout(function() {
+            deferred.resolve($http.get('/allMyQuestions', 
+            {params: {
+                'data': data
+            }}));
+		}, 2000);
+
+		return deferred.promise;
+    }
     
     return {
         getUserQuestionInfo: getUserQuestionInfo,
         getQuestionAnswer: getQuestionAnswer,
-        getMyQuestions: getMyQuestions
+        getMyQuestions: getMyQuestions,
+        getAllMyQuestions: getAllMyQuestions
     };
 });
 

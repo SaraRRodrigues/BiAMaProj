@@ -40,7 +40,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.validateUserLoggedIn = function() { 
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
-        
+        debugger
         if($scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
@@ -72,6 +72,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 }
             });
     
+            
             /* get information of material and of library - when i do get library */
             var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
             getMaterialInfo.then(function(result) {
@@ -578,7 +579,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.closeMaterialZoomInMaterial = function(){
 		$scope.zoomInMaterial = false;
     }
-    
     /* -------------- END MOBILE -------------- */
 	
 	/* init FavoriteController  */

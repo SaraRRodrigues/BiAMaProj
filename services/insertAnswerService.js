@@ -4,7 +4,7 @@ var pg = require('pg');
 module.exports = {
 	'putAnswer': putAnswer	
 }
-function putAnswer( data, cb){
+function putAnswer(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		var textAnswer = data.text;
 		var likes = data.likes;

@@ -154,6 +154,14 @@ router.get('/myQuest', (req, resp, next) => {
 	});
 });
 
+/* GET my questions logged in: My questions */
+router.get('/allMyQuestions', (req, resp, next) => {
+	var data = req.query.data;
+	questionService.getAllMyQuestions(data, (error, questions) => {
+		resp.json({questions})
+	});
+});
+
 /* GET my notifications: Notifications */
 router.get('/myNotifications', (req, resp, next) => {
 	notificationService.getMyNotifications((error, notificationDetails) => {
