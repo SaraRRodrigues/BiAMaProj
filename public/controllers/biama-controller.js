@@ -1,5 +1,5 @@
-app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialService", "UserBiamaService", "$http", "jQuery", function($scope,  BiAMaInfoService, BiamaMaterialService, UserBiamaService, $http){
-		
+app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialService", "UserBiamaService", "$http", "jQuery", "$location", function($scope,  BiAMaInfoService, BiamaMaterialService, UserBiamaService, $http, $location){
+
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
 
@@ -22,6 +22,21 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		$scope.showInitSearch=true;
 	}
 
+	/* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() {
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.doLogin=false;
+            $scope.confirmSession=true;
+        } else {
+            $scope.doLogin=true;
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+    }
+    
     /* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
@@ -49,7 +64,11 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		window.setTimeout("location.href = 'http://localhost:8080'")
+		if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
 
@@ -143,9 +162,9 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = UserBiamaService.getUsers(function(users){});
+		$scope.getAllUsers = UserBiamaService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;
@@ -228,6 +247,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
+	$scope.validateUserLoggedIn();
 }])
 
 app.factory("BiAMaInfoService", function($q, $http, $timeout){

@@ -27,6 +27,20 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     $scope.miniSearchResults=false;  
   }
 
+  /* verify if user is logged in */
+  $scope.validateUserLoggedIn = function() {
+    var splitLocation = location.href.split('=');
+    $scope.idUserLoggerIn =splitLocation[1];
+    
+    if($scope.idUserLoggerIn !== undefined) {
+        $scope.doLogin=false;
+        $scope.confirmSession=true;
+    } else {
+        $scope.doLogin=true;
+        $scope.loading = true;
+        $scope.confirmSession=false;
+    }
+  }
   /* -------------- INIT DESKTOP & MOBILE -------------- */
   /* get materials curiosities to display */
   $scope.getAllRequests = function() {
@@ -51,7 +65,11 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 
 	/* redirect to homepage with arrow */
   $scope.goToHomePage = function() {
-    window.setTimeout("location.href = 'http://localhost:8080'")
+    if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
   }
 
   /* open details of curiosity when clicks on material curiosity */ 
@@ -277,6 +295,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 	$scope.viewType();
 	$scope.initData();
   $scope.getAllRequests();
+  $scope.validateUserLoggedIn();
 }])
 
 app.factory("CuriositiesService", function($q, $http, $timeout){

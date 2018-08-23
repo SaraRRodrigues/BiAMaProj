@@ -1,19 +1,39 @@
 <html>
 	<head>
+		<title>{{title}}</title>
+
 		<link rel='stylesheet' href='/stylesheets/styleBiama.css' />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+		<!-- font awesome styles -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
+		<!-- jQuery files -->
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		
+		<!-- -->
+		<!--<script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) { options.async = true; });</script>-->
+
+		<!-- angular files -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 		<script type="text/javascript" src="https://code.angularjs.org/1.6.9/angular-route.js"></script>
+		
+		<!-- bootstrap styles -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+		<!-- languages file -->
+		<script type="application/json" src="jsonLabels/en.json"></script>
+ 	
 		<!-- Firebase -->
 		<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 		<!-- AngularFire -->
 		<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
 
 		<!--footer controllers-->
 		<script type="text/javascript" src="../controllers/main-controller.js"></script>
@@ -27,7 +47,6 @@
 		<script type="text/javascript" src="../controllers/myBiama-controller.js"></script>
 		<script type="text/javascript" src="../controllers/qrCode-controller.js"></script>
 
-
 		<!--details user controllers-->
 		<script type="text/javascript" src="../controllers/perfil-controller.js"></script>
 		<script type="text/javascript" src="../controllers/favorites-controller.js"></script>
@@ -37,7 +56,7 @@
 		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
 		<script type="text/javascript" src="../controllers/login-controller.js"></script>
 		<script type="text/javascript" src="../controllers/resultsMaterials-controller.js"></script>
-		 
+
 		<base href="/"/>
 	</head>
 	<body ng-app="myApp" ng-controller="BiamaController">

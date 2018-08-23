@@ -40,6 +40,20 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		$scope.biamaUp = false;
 	}
 
+	/* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() {
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.doLogin=false;
+            $scope.confirmSession=true;
+        } else {
+            $scope.doLogin=true;
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+    }
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
@@ -100,7 +114,11 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		window.setTimeout("location.href = 'http://localhost:8080'")
+		if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
 	}
 
 	/* display mode of create biama */
@@ -416,6 +434,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
+    $scope.validateUserLoggedIn();
 }])
 
 app.factory("MaterialsBiamaService", function($q, $http, $timeout){

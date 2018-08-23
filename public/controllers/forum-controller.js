@@ -25,6 +25,20 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 		$scope.showForum = true;
 	}
 
+	/* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() {
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.doLogin=false;
+            $scope.confirmSession=true;
+        } else {
+            $scope.doLogin=true;
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+    }
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of materials to display when compare materials */
 	$scope.getAllRequests = function() {
@@ -39,7 +53,11 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		window.setTimeout("location.href = 'http://localhost:8080'")
+		if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
 	
@@ -240,6 +258,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
+    $scope.validateUserLoggedIn();
 }])
 .config(function($routeProvider, $locationProvider) {
 

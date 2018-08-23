@@ -131,6 +131,22 @@ app.constant('jQuery', window.jQuery)
 		$scope.showInitSearch=true;
 	}
 	 
+	/* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() { 
+		debugger
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.doLogin=false;
+            $scope.confirmSession=true;
+        } else {
+            $scope.doLogin=true;
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+	}
+	
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of user, library and materials to display */
 	$scope.getAllRequests = function() { 
@@ -172,7 +188,11 @@ app.constant('jQuery', window.jQuery)
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
+        if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
 	}
 
 	/* change color of button */
@@ -568,6 +588,7 @@ app.constant('jQuery', window.jQuery)
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
+	$scope.validateUserLoggedIn();
 	$scope.initDataFirebase();
 }])
 

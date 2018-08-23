@@ -113,7 +113,11 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
+        if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
     }
 
     /* open details of world share when clicks on material world share */

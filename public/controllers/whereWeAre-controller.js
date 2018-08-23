@@ -27,6 +27,21 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.pathURL='https://www.google.com/maps/';
 	}
 
+	/* verify if user is logged in */
+    $scope.validateUserLoggedIn = function() {
+        var splitLocation = location.href.split('=');
+        $scope.idUserLoggerIn =splitLocation[1];
+        
+        if($scope.idUserLoggerIn !== undefined) {
+            $scope.doLogin=false;
+            $scope.confirmSession=true;
+        } else {
+            $scope.doLogin=true;
+            $scope.loading = true;
+            $scope.confirmSession=false;
+        }
+    }
+
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of my favorites, my questions and answer to display */
     $scope.getAllRequests = function() {
@@ -51,7 +66,11 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-        window.setTimeout("location.href = 'http://localhost:8080'")
+        if($scope.idUserLoggerIn !== undefined) {
+			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+		} else {
+			location.href = 'http://localhost:8080?username=' + 'anonymous';
+		}
 	}
 
 	/* get schools to show schools on options of material location */
@@ -262,7 +281,8 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	/* init WhereWeAreController  */
 	$scope.viewType();
 	$scope.initData();
-    $scope.getAllRequests();
+	$scope.getAllRequests();
+    $scope.validateUserLoggedIn();
 }])
 
 app.factory("BiAMaInfoService", function($q, $http, $timeout){

@@ -272,15 +272,11 @@ router.post('/insertMyBiama', (req, resp, next) => {
 router.get('/views/:name', (req, resp, next) => {
 	resp.render(`views/${req.params.name}`);
 });
+
 /*para poder fazer o refresh*/ 
 router.get('/BiAMa/:name', (req, resp, next) => {
-	console.log('params:', req.params)
+	console.log('X: params:', req.params)
 	resp.render(`views/${req.params.name}`);
 });
 
-/*para poder fazer o refresh*/ 
-router.get('/BiAMa/:name/:atributes', (req, resp, next) => {
-	console.log('params:', req.params)
-	resp.render(`views/${req.params.name}`);
-});
 module.exports = router;
