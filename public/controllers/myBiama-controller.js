@@ -3,118 +3,107 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
-	/* my current page */
-	$scope.namePage='myBiama';
 
-	$scope.showMyBiamaConf = false;
-	$scope.showAllOptions = false;
-	$scope.descriptionNewBiama = '';
-	$scope.locationNewBiama = '';
-	$scope.categoryMaterial = '';
-	$scope.colorMaterial = '';
-	$scope.codeMaterial = '';
-	$scope.imageMaterial = '';
-	$scope.descriptionMaterial = '';
-	$scope.showInsertedImage = false;
-	$scope.showAddNewMaterial = false;
-	$scope.newMaterials=[];
-	$scope.errorInsertImage=false;
-	$scope.categories = [];
-	$scope.createdMyBiama = false;
-	$scope.loading = true;
-	$scope.showBiamaInitPage = true;
-	$scope.biamaUp = false;
-
-	$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
-	/* get information of material and of library - when i do get library */
-    $scope.getMaterialInfo.then(function(result) {
-        $scope.loading = false;
-		var data=result.data.materialsCategories;
-		$scope.materialsCategories=data;
-		for(var index=0; index<$scope.materialsCategories.length; ++index){
-			if(index<7){
-				$scope.categories.push($scope.materialsCategories[index].category)
-			} else {
-				break;
-			}
+	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width <= 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
 		}
-		console.log('materiais: ', $scope.materialsCategories);
-		jQuery( function() {
-			var availableTags = $scope.categories;
-		jQuery( "#category" ).autocomplete({
-			source: availableTags
-		});
-		} );
-
-		$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
-		$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
-	});
-
-	$scope.optionColors = ['preto', 'branco', 'cinzento', 'azul', 'beje', 'verde', 'rosa', 'laranja', 'castanho', 'amarelo', 'diamante', 'vermelho'];
-	jQuery( function() {
-		$scope.availableTags = $scope.optionColors;
-	jQuery( "#colors" ).autocomplete({
-		source: $scope.availableTags
-	});
-	});
-
-	$scope.locationBiama = ['Instituto Superior Técnico', 'Escola Superior de Educação de Lisboa', 'Instituto Superior de Engenharia de Lisboa'];
-	jQuery( function() {
-		$scope.availableTags = $scope.locationBiama;
-	jQuery( "#location" ).autocomplete({
-		source: $scope.availableTags
-	});
-	});
-
-
-	var window_width = $( window ).width();
-	if(window_width <= 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
 	}
 
-	$scope.nameclick='myBiama';
-	$scope.changeColorClick = function(name) {
-		$scope.userDetails = false;
-		$scope.search = false;
-		$scope.nameclick=name;
+	/* init my variables data */
+	$scope.initData = function() {
+		/* my current page */
+		$scope.namePage='myBiama';
+		$scope.nameclick='myBiama';
+
+		$scope.showMyBiamaConf = false;
+		$scope.showAllOptions = false;
+		$scope.descriptionNewBiama = '';
+		$scope.locationNewBiama = '';
+		$scope.categoryMaterial = '';
+		$scope.colorMaterial = '';
+		$scope.codeMaterial = '';
+		$scope.imageMaterial = '';
+		$scope.descriptionMaterial = '';
+		$scope.showInsertedImage = false;
+		$scope.showAddNewMaterial = false;
+		$scope.newMaterials=[];
+		$scope.errorInsertImage=false;
+		$scope.categories = [];
+		$scope.createdMyBiama = false;
+		$scope.loading = true;
+		$scope.showBiamaInitPage = true;
+		$scope.biamaUp = false;
+	}
+
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of biama and materials to display on search */
+	$scope.getAllRequests = function() {
+		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
+		/* get information of material and of library - when i do get library */
+		$scope.getMaterialInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.materialsCategories;
+			$scope.materialsCategories=data;
+			for(var index=0; index<$scope.materialsCategories.length; ++index){
+				if(index<7){
+					$scope.categories.push($scope.materialsCategories[index].category)
+				} else {
+					break;
+				}
+			}
+			console.log('materiais: ', $scope.materialsCategories);
+			jQuery( function() {
+				var availableTags = $scope.categories;
+			jQuery( "#category" ).autocomplete({
+				source: availableTags
+			});
+			} );
+	
+			$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
+			$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
+		});
+	
+		$scope.loading=true;
+		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+		getMyBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			$scope.biamaUp = true;
+			var data=result.data.biamaDetails;
+			$scope.descriptionMyBiama=data[0].description;
+		});
+
+		var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+		getBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.biamaDetails;
+			$scope.idLibrary=data[data.length-1].id_library+1;
+		});
+
+		var getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
+		getUsersMyBiama.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+		});
+
+		var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
+		getMyBiamaLibraryUser.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.userLibrary;
+			$scope.userLibrary=data;
+		});
+
 	}
 	
+	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
-	$scope.loading=true;
-	var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-	getMyBiamaInfo.then(function(result) {
-		$scope.loading = false;
-		$scope.biamaUp = true;
-		var data=result.data.biamaDetails;
-		$scope.descriptionMyBiama=data[0].description;
-	});
-
-	var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-    getBiamaInfo.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.biamaDetails;
-		$scope.idLibrary=data[data.length-1].id_library+1;
-		console.log('id library: ', $scope.idLibrary);
-	});
-
-	var getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
-	getUsersMyBiama.then(function(usersDB) {
-		$scope.users = usersDB.data.users;
-	});
-
-	var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
-	getMyBiamaLibraryUser.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.userLibrary;
-		$scope.userLibrary=data;
-		console.log('library user: ', $scope.userLibrary);
-	});
-
+	/* display mode of create biama */
 	$scope.createMyBiama = function() {
 		
 		if($scope.showMyBiamaConf){
@@ -127,11 +116,13 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
         }
 	}
 
+	/* remove material that been inserted*/
 	$scope.removeMaterial = function() {
 		$scope.imageMaterial='';
 		$scope.showInsertedImage = false;
 	}
 
+	/* save information of new biama in pdf file */
 	$scope.saveInfo = function(descBiama, locationBiama, categoryBiama, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial) {
 		$scope.showMaterials = false;
 		
@@ -235,6 +226,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		}
 	}
 
+	/* insert new biama on database */
 	$scope.insertMyBiamaOnDB = function() {
 		$scope.locationIframe = '';
 		if($scope.locationNewBiama == 'Instituto Superior Técnico') {
@@ -258,6 +250,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 	}
 
+	/* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
 
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
@@ -303,6 +296,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		$scope.insertMaterialOnLibraries();
 	}
 
+	/* validate if data not exists already */
 	$scope.validDataNotEquals = function(username, password) {
 		for(var index=0; index<$scope.users.length; ++index) {
 			if(username === $scope.users[index].username) {
@@ -312,6 +306,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		return true;
 	}
 
+	/* validate date of birth format */
 	$scope.validDateOfBirth = function(dateOfBirth) {
 		var resultBirth = dateOfBirth.split("/");
 
@@ -326,6 +321,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		return true;
 	}
 
+	/* insert material that been inserted on new biama form  */
 	$scope.insertMaterialOnLibraries = function() {
 		
 		var data = {
@@ -350,6 +346,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		window.setTimeout("location.href = 'http://localhost:8080'")
 	}
 
+	/* insert image on new biama form */
 	$scope.insertImage = function(image) {
 
 		if($scope.categoryMaterial !== '') {
@@ -374,6 +371,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		}
 	}
 
+	/* filter of categories - shows all categories that are in database */
 	$scope.allCategories = function() {
 		
 		if($scope.showAllCategories){
@@ -384,6 +382,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
         }
 	}
 
+	/* filter of colors - shows all colors that are in database */
 	$scope.allColors = function() {
 		
 		if($scope.showAllColors){
@@ -393,6 +392,30 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			
         }
 	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
+
+	/* search of colors */
+	$scope.optionColors = ['preto', 'branco', 'cinzento', 'azul', 'beje', 'verde', 'rosa', 'laranja', 'castanho', 'amarelo', 'diamante', 'vermelho'];
+	jQuery( function() {
+		$scope.availableTags = $scope.optionColors;
+	jQuery( "#colors" ).autocomplete({
+		source: $scope.availableTags
+	});
+	});
+
+	/* search of schools */
+	$scope.locationBiama = ['Instituto Superior Técnico', 'Escola Superior de Educação de Lisboa', 'Instituto Superior de Engenharia de Lisboa'];
+	jQuery( function() {
+		$scope.availableTags = $scope.locationBiama;
+	jQuery( "#location" ).autocomplete({
+		source: $scope.availableTags
+	});
+	});
+
+	/* init MainController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
 }])
 
 app.factory("MaterialsBiamaService", function($q, $http, $timeout){
