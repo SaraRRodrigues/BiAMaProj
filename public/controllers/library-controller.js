@@ -34,7 +34,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	}
 
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
-	/* get information of materials to display when compare materials */
+	/* get information of materials to display materials */
 	$scope.getAllRequests = function() {
 		$scope.getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
 		$scope.getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
@@ -445,7 +445,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	}
 	/* -------------- END MOBILE -------------- */
 
-	/* init CompareController  */
+	/* init LibraryController  */
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();

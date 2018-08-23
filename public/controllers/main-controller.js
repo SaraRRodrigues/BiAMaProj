@@ -1,5 +1,6 @@
 //var angular = require('angular');
 var app = angular.module("myApp", ['ngRoute'])
+
 app.constant('jQuery', window.jQuery)
 .run(['$route', angular.noop])
 .config(function($interpolateProvider,$httpProvider) {
@@ -9,27 +10,26 @@ app.constant('jQuery', window.jQuery)
 })
 .config(function($routeProvider, $locationProvider, $httpProvider) {
 	
-	$routeProvider
-	 .when('/BiAMa/whereWeAre', {
-	  templateUrl: 'views/whereWeAre',
-	  controller: 'WhereWeAreController'
+	$routeProvider.when('/BiAMa/whereWeAre', {
+		templateUrl: 'views/whereWeAre',
+		controller: 'WhereWeAreController'
 	})
 	$routeProvider.when('/BiAMa/biamaPage', {
 		templateUrl: 'views/biamaPage',
 		controller: 'BiamaController'
 	})
 	$routeProvider.when('/BiAMa/library', {
-	  templateUrl: 'views/library',
-	  controller: 'LibraryController'
+		templateUrl: 'views/library',
+		controller: 'LibraryController'
 	});
 	$routeProvider.when('/BiAMa/myBiama', {
 		templateUrl: 'views/myBiama',
 		controller: 'MyBiamaController'
-	  });
+	});
 
 	$routeProvider.when('/BiAMa/forumPage', {
-	templateUrl: 'views/forumPage',
-	controller: 'ForumController'
+		templateUrl: 'views/forumPage',
+		controller: 'ForumController'
 	});
 
 	$routeProvider.when('/BiAMa/perfilPage', {
@@ -51,14 +51,16 @@ app.constant('jQuery', window.jQuery)
 		templateUrl: 'views/worldShare',
 		controller: 'WorldShareController'
 	});
+
 	$routeProvider.when('/BiAMa/notifications', {
 		templateUrl: 'views/notifications',
 		controller: 'NotificationsController'
 	});
+
 	$routeProvider.when('/BiAMa/compare', {
 		templateUrl: 'views/compare',
 		controller: 'CompareController'
-	})
+	});
 	
 	/* mobile view */
 	$routeProvider.when('/BiAMa/libraryMobile', {
@@ -90,74 +92,319 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
  
-.controller('MainController',['$scope', "UserService","MyBiamaService", "CompareMaterialService", "NotificationService", "$http", "jQuery", function($scope, UserService, MyBiamaService, CompareMaterialService,NotificationService, $http) {
+.controller('MainController',['$scope', "UserService", "CompareMaterialService", "NotificationService", "$http", "jQuery", function($scope, UserService, CompareMaterialService,NotificationService, $http) {
 	
-	var window_width = $( window ).width();
-	if(window_width < 1024) {
-		$scope.isMobileView=true;
-	} else {
-		$scope.isMobileView=false;
-	}
-	$scope.namePage='index';
-	$scope.nameclick='index';
-
-	$scope.showSearch = false;
-	$scope.userDetails = false;
-	$scope.search = true;
-	$scope.showLanguages = false;
-	$scope.languageSelected = 'Português'
-	$scope.initSession = false;
-	$scope.confirmSession = false;
-	$scope.showInitSession = false;
-	$scope.usernameModel = '';
-	$scope.passwordModel = '';
-	$scope.logoutLabel = false;
-	$scope.terminateLogin = false;
-	$scope.materials=[];
-	$scope.showDetailsOfMaterial=false;
-	$scope.loading=true;
-	$scope.languages = ['Português', 'Inglês']
-	$scope.biamaPage = true;
-	$scope.compareMaterials = [];
-	$scope.resultSearch = [];
-	$scope.showInitSearch=true;
-	$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
-	$scope.getAllUsers = UserService.getUsers(function(users){});
-	$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
-
-	jQuery( function() {
-		var availableTags = $scope.compareMaterials;
-	jQuery( "#tags" ).autocomplete({
-		source: availableTags
-	});
-	} );
-
-	$scope.getLibraryUser.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.userLibrary;
-		$scope.userLibrary=data;
-	});
-
-	$scope.getAllUsers.then(function(usersDB) {
-		$scope.loading=false;
-		$scope.users = usersDB.data.users;
-	});
-
-	$scope.getMaterials.then(function(result) {
-		$scope.loading = false;
-		var data=result.data.comparationDetails;
-		$scope.materialComparation=data;
-		$scope.materialsToSearch = data;
-
-		for(var index=0; index<$scope.materialComparation.length; ++index) {
-			$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+	/* define view of app */
+	$scope.viewType = function() {
+		var window_width = $( window ).width();
+		if(window_width < 1024) {
+			$scope.isMobileView=true;
+		} else {
+			$scope.isMobileView=false;
 		}
-	}); 
-  
+	}
+	
+	/* init my variables data */
+	$scope.initData = function() {
+		$scope.namePage='index';
+		$scope.nameclick='index';
+	
+		$scope.showSearch = false;
+		$scope.userDetails = false;
+		$scope.search = true;
+		$scope.showLanguages = false;
+		$scope.languageSelected = 'Português'
+		$scope.initSession = false;
+		$scope.confirmSession = false;
+		$scope.showInitSession = false;
+		$scope.usernameModel = '';
+		$scope.passwordModel = '';
+		$scope.logoutLabel = false;
+		$scope.terminateLogin = false;
+		$scope.materials=[];
+		$scope.showDetailsOfMaterial=false;
+		$scope.loading=true;
+		$scope.languages = ['Português', 'Inglês']
+		$scope.biamaPage = true;
+		$scope.compareMaterials = [];
+		$scope.resultSearch = [];
+		$scope.showInitSearch=true;
+	}
+	 
+	/* -------------- INIT DESKTOP & MOBILE -------------- */
+	/* get information of user, library and materials to display */
+	$scope.getAllRequests = function() { 
+		$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
+		$scope.getAllUsers = UserService.getUsers(function(users){});
+		$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+		
+		$scope.getLibraryUser.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.userLibrary;
+			$scope.userLibrary=data;
+		});
+	
+		$scope.getAllUsers.then(function(usersDB) {
+			$scope.loading=false;
+			$scope.users = usersDB.data.users;
+		});
+	
+		$scope.getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialComparation=data;
+			$scope.materialsToSearch = data;
+	
+			for(var index=0; index<$scope.materialComparation.length; ++index) {
+				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+			}
+		}); 
+
+		var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
+   		getNotifications.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.loading = true;
+    	});
+	}
+	
+	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
         window.setTimeout("location.href = 'http://localhost:8080'")
 	}
+
+	/* change color of button */
+	$scope.changeColorClick = function(name) {
+		$scope.userDetails = false;
+		$scope.search = false;
+		$scope.nameclick=name;
+	}
+
+	/* configuration of firebase */
+	$scope.initDataFirebase = function() {
+		var config = {
+			apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
+			authDomain: "fir-biama.firebaseapp.com",
+			databaseURL: "https://fir-biama.firebaseio.com",
+			projectId: "fir-biama",
+			storageBucket: "fir-biama.appspot.com",
+			messagingSenderId: "861577986516"
+		};
 	
+		firebase.initializeApp(config);
+	}
+
+	/* login with google with firebase */
+	$scope.loginWithGoogle = function() {
+		
+		const provider = new firebase.auth.GoogleAuthProvider();
+
+    	firebase.auth().signInWithPopup(provider)
+            .then(result => {
+
+				const user = result.user;
+				//window.setTimeout("location.href = 'http://localhost:8080'")
+            })
+			.catch(console.log)
+		
+		$scope.confirmSession = true;
+		$scope.validateUserLogin();
+	}
+
+	/* login with facebook with firebase */
+	$scope.loginWithFacebook = function() {
+		
+		const provider = new firebase.auth.FacebookAuthProvider();
+
+    	firebase.auth().signInWithPopup(provider)
+            .then(result => {
+				
+				const user = result.user;
+				$scope.confirmSession = true;
+				//window.setTimeout("location.href = 'http://localhost:8080'")
+            })
+			.catch(console.log)
+	}
+
+	/* validate date of birth format */
+	$scope.validDateOfBirth = function(dateOfBirth) {
+		var resultBirth = dateOfBirth.split("/");
+
+		var currentDate = new Date();
+		currentDate=currentDate.toLocaleDateString();
+		var resultCurrentDate = currentDate.split("/");
+
+		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+		if(calculateYear < 18) {
+			return false;
+		}
+		return true;
+	},
+
+	/* validate if data not exists already */
+	$scope.validDataNotEquals = function(username, password) {
+		for(var index=0; index<$scope.users.length; ++index) {
+			if(username === $scope.users[index].username) {
+				return false;
+			}
+		}
+		return true;
+	},
+
+	/* created user: insert user on database */
+	$scope.insertUser = function(name, username, email, birthdate, password) {
+		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
+			$scope.emptyData=true;
+		} else {
+			var idUser = $scope.users[$scope.users.length-1].id;
+			$scope.insertedIdUser=idUser;
+			var data = {
+				'idUser': parseInt(idUser)+1,
+				'name': name,
+				'email': email,
+				'birthdate': birthdate.toLocaleDateString(), 
+				'username': username,
+				'password': password,
+				'image': $scope.image
+			}
+			if($scope.image == undefined) {
+				data.image='noImage';
+			}
+
+			var validData = $scope.validDataNotEquals(data.username, data.password);
+			
+			if(validData) {
+				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+				if(validBirthdate){
+					$http.post('/insertUserDetails', data);
+					
+					var dataLibraryUser = {
+						'idUser': parseInt($scope.insertedIdUser)+1,
+						'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
+					}
+
+					$http.post('/insertLibraryUser', dataLibraryUser);
+				} else {
+					$scope.underAge=true;
+				}
+			} else {
+				$scope.usernameRepeated=true;
+			}
+		}
+	}
+
+	/* open image of user */
+	$scope.openImageUpload = function() {
+        $scope.openImageUploadLabel=true;
+	}
+	
+	/* save upload file */
+	$scope.saveUploadFile = function () {
+        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
+        var res = splitDeviceRe.exec(($("#uploadPicture").val()));
+        $scope.image=res[2];
+        
+        $scope.openImageUploadLabel=false;
+	}
+	
+	/* selected type of materials */
+	$scope.selectedMaterialSearch = function() {
+		$scope.openMaterialDetail=false;
+
+		var valueSearchMaterial=jQuery( "#tags_search" ).val();
+		$scope.searchValue=valueSearchMaterial;
+
+		$scope.materials=[];
+		
+		if(valueSearchMaterial === 'Materiais') {
+			$scope.materials=$scope.materialComparation;
+			$scope.showCategoryMaterial=false;
+			$scope.showProjectMaterial=false;
+		} 
+		if(valueSearchMaterial === 'Categoria de materiais') {
+			var firstCategory = $scope.materialComparation[0].category;
+			for(var index=1; index<$scope.materialComparation.length; ++index) {
+				if(firstCategory !== $scope.materialComparation[index].category){
+					$scope.materials.push($scope.materialComparation[index].name);
+				} else {
+					break;
+				}
+			}
+			$scope.showCategoryMaterial=true;
+			$scope.showProjectMaterial=false;
+		} 
+		if(valueSearchMaterial === 'Projeto de materiais') {
+			for(var index=0; index<$scope.materialComparation.length; ++index) {
+				if($scope.materialComparation[index].code > parseInt('46')){
+					$scope.materials.push($scope.materialComparation[index].name);
+				} 
+			}	
+			$scope.showProjectMaterial=true;
+			$scope.showCategoryMaterial=false;
+		}
+		$scope.showDetailsOfMaterial=false;
+        $scope.showMaterials=true;
+	}
+	/* -------------- END DESKTOP & MOBILE -------------- */
+
+	/* -------------- INIT MOBILE -------------- */
+	/* open material of small search result */
+	$scope.openMaterial = function(material) {
+		$scope.showDetailsOfMaterial=true;
+		$scope.showMaterials=false;
+		$scope.openedMaterial=material;
+	}
+
+	/* close material that are opened */
+	$scope.closeMaterial = function() {
+		if($scope.searchValue === 'Materiais'){
+			$scope.showCategoryMaterial=false;
+			$scope.showProjectMaterial=false;
+		} else if($scope.searchValue === 'Projeto de materiais') {
+			$scope.showProjectMaterial=true;
+			$scope.showCategoryMaterial=false;
+		} else if($scope.searchValue ==='Categoria de materiais'){
+			$scope.showCategoryMaterial=true;
+			$scope.showProjectMaterial=false;
+		} 
+		$scope.showDetailsOfMaterial=false;
+	}
+
+	/* open and close the small search icon */
+	$scope.clickTopSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.showInitSearch=true;
+
+		if($scope.isMobileView) {
+			if($scope.showSearch){
+				$scope.enableUserIcon=false;
+				$scope.showSearch = false;
+			}else {
+				$scope.enableUserIcon=true;
+				$scope.showSearch = true;
+			}
+		} else {
+			if($scope.showSearch){
+				$scope.showSearch = false;
+			}else {
+				$scope.showSearch = true;
+			}
+		}
+	}
+
+	/* close the results of small search */
+	$scope.closeMiniSearch = function() {
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showInitSearch=true;
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
+	}
+
+	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 
 		var inputMini = jQuery("#miniSearch").val();
@@ -183,27 +430,7 @@ app.constant('jQuery', window.jQuery)
 		}
 	}
 
-	$scope.clickTopSearch = function() {
-		$scope.miniSearchResults = false;
-		$scope.showInitSearch=true;
-
-		if($scope.isMobileView) {
-			if($scope.showSearch){
-				$scope.enableUserIcon=false;
-				$scope.showSearch = false;
-			}else {
-				$scope.enableUserIcon=true;
-				$scope.showSearch = true;
-			}
-		} else {
-			if($scope.showSearch){
-				$scope.showSearch = false;
-			}else {
-				$scope.showSearch = true;
-			}
-		}
-	}
-
+	/* open and close the section of user details and search icon */
 	$scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
@@ -213,6 +440,49 @@ app.constant('jQuery', window.jQuery)
 		}
 	}
 
+	/* section of init session in user details section */
+	$scope.showInitSessionDiv = function () {
+		if($scope.showInitSession){
+			$scope.showInitSession = false;
+		}else {
+			$scope.showInitSession = true;
+		}
+	}
+	
+	/* confirmed user logged in */
+	$scope.confirmSessionAction = function (username, password) {
+
+		$scope.users = 'loadUser';
+		var getAllUsers = UserService.getUsers(function(users){});
+		
+		getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+			for(var index=0; index<$scope.users.length; ++index){
+				$scope.userName = $scope.users[index].username;
+				$scope.userPassword = $scope.users[index].password;
+				$scope.userImage = $scope.users[index].image;
+				$scope.userEmail = $scope.users[index].email;
+				$scope.nameUser=$scope.users[index].name;
+				$scope.userBirthdate = $scope.users[index].birthdate;
+
+				var splitDateBirth = $scope.userBirthdate.split('/');
+				$scope.dayBirth = splitDateBirth[0];
+				$scope.monthBirth = splitDateBirth[1];
+				$scope.yearBirth = splitDateBirth[2];
+
+				if($scope.userName !== null && $scope.userName === username){
+					if($scope.userPassword !== null && $scope.userPassword === password){
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
+						$scope.confirmSession = true;
+						break;
+					}
+				}
+			}
+		});
+	}
+
+	/* routes of click on links page */
 	$scope.disableSearch = function(buttonClick) {
 
 		if($scope.isMobileView) {
@@ -255,79 +525,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.search = false;
 	}
 
-	$scope.changeColorClick = function(name) {
-		$scope.userDetails = false;
-		$scope.search = false;
-		$scope.nameclick=name;
-	}
-
-	$scope.getLanguages = function() {
-		if($scope.showLanguages){
-			$scope.showLanguages = false;
-		}else {
-			$scope.showLanguages = true;
-		}
-	}
-
-	$scope.initSession = function () {
-		$scope.initSession = true;
-	}
-
-	$scope.showInitSessionDiv = function () {
-		if($scope.showInitSession){
-			$scope.showInitSession = false;
-		}else {
-			$scope.showInitSession = true;
-		}
-	}
-
-	$scope.initDataFirebase = function() {
-		var config = {
-			apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
-			authDomain: "fir-biama.firebaseapp.com",
-			databaseURL: "https://fir-biama.firebaseio.com",
-			projectId: "fir-biama",
-			storageBucket: "fir-biama.appspot.com",
-			messagingSenderId: "861577986516"
-		};
-	
-		firebase.initializeApp(config);
-	}
-
-	$scope.initDataFirebase();
-	$scope.loginWithGoogle = function() {
-		
-		const provider = new firebase.auth.GoogleAuthProvider();
-
-    	firebase.auth().signInWithPopup(provider)
-            .then(result => {
-
-				const user = result.user;
-				//window.setTimeout("location.href = 'http://localhost:8080'")
-            })
-			.catch(console.log)
-		
-		$scope.confirmSession = true;
-		$scope.validateUserLogin();
-	}
-
-	$scope.validateUserLogin = function() {
-	}
-
-	$scope.loginWithFacebook = function() {
-		
-		const provider = new firebase.auth.FacebookAuthProvider();
-
-    	firebase.auth().signInWithPopup(provider)
-            .then(result => {
-				
-				const user = result.user;
-				$scope.confirmSession = true;
-				//window.setTimeout("location.href = 'http://localhost:8080'")
-            })
-			.catch(console.log)
-	}
-
+	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
 		firebase.auth().signOut().then(function() {
@@ -339,212 +537,38 @@ app.constant('jQuery', window.jQuery)
 
 		});
 	}
-	
-	$scope.confirmSessionAction = function (username, password) {
 
-		$scope.users = 'loadUser';
-		var getAllUsers = UserService.getUsers(function(users){});
-		
-		getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
-			for(var index=0; index<$scope.users.length; ++index){
-				$scope.userName = $scope.users[index].username;
-				$scope.userPassword = $scope.users[index].password;
-				$scope.userImage = $scope.users[index].image;
-				$scope.userEmail = $scope.users[index].email;
-				$scope.nameUser=$scope.users[index].name;
-				$scope.userBirthdate = $scope.users[index].birthdate;
-
-				var splitDateBirth = $scope.userBirthdate.split('/');
-				$scope.dayBirth = splitDateBirth[0];
-				$scope.monthBirth = splitDateBirth[1];
-				$scope.yearBirth = splitDateBirth[2];
-
-				if($scope.userName !== null && $scope.userName === username){
-					if($scope.userPassword !== null && $scope.userPassword === password){
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
-						break;
-					}
-				}
-			}
-		});
-	}
-	
-	$scope.selectLanguage = function(language){
-		$scope.languageSelected = language;
-	}
-
+	/* regist new user on user details section */
 	$scope.regist = function() {
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
 	}
+	/* -------------- END MOBILE -------------- */
 
-	$scope.validDateOfBirth = function(dateOfBirth) {
-		var resultBirth = dateOfBirth.split("/");
+	jQuery( function() {
+		var availableTags = $scope.compareMaterials;
+		jQuery( "#tags" ).autocomplete({
+			source: availableTags
+		});
+	});
 
-		var currentDate = new Date();
-		currentDate=currentDate.toLocaleDateString();
-		var resultCurrentDate = currentDate.split("/");
-
-		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
-		if(calculateYear < 18) {
-			return false;
-		}
-		return true;
-	},
-
-	$scope.validDataNotEquals = function(username, password) {
-		for(var index=0; index<$scope.users.length; ++index) {
-			if(username === $scope.users[index].username) {
-				return false;
-			}
-		}
-		return true;
-	},
-
-	$scope.insertUser = function(name, username, email, birthdate, password) {
-		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
-			$scope.emptyData=true;
-		} else {
-			var idUser = $scope.users[$scope.users.length-1].id;
-			$scope.insertedIdUser=idUser;
-			var data = {
-				'idUser': parseInt(idUser)+1,
-				'name': name,
-				'email': email,
-				'birthdate': birthdate.toLocaleDateString(), 
-				'username': username,
-				'password': password,
-				'image': $scope.image
-			}
-			if($scope.image == undefined) {
-				data.image='noImage';
-			}
-
-			var validData = $scope.validDataNotEquals(data.username, data.password);
-			
-			if(validData) {
-				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
-				if(validBirthdate){
-					$http.post('/insertUserDetails', data);
-					
-					var dataLibraryUser = {
-						'idUser': parseInt($scope.insertedIdUser)+1,
-						'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
-					}
-
-					$http.post('/insertLibraryUser', dataLibraryUser);
-				} else {
-					$scope.underAge=true;
-				}
-			} else {
-				$scope.usernameRepeated=true;
-			}
-		}
-	}
-
-	$scope.openImageUpload = function() {
-        $scope.openImageUploadLabel=true;
-	}
-	
-	$scope.saveUploadFile = function () {
-        var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
-        var res = splitDeviceRe.exec(($("#uploadPicture").val()));
-        $scope.image=res[2];
-        
-        $scope.openImageUploadLabel=false;
-	}
-	
 	jQuery( function() {
         $scope.itemSearch = [
 			'Materiais',
 			'Categoria de materiais',
 			'Projeto de materiais'
 		];
-    jQuery( "#tags_search" ).autocomplete({
-        source: $scope.itemSearch
-    });
-	} );
-	
-	$scope.selectedMaterialSearch = function() {
-		$scope.openMaterialDetail=false;
+		jQuery( "#tags_search" ).autocomplete({
+			source: $scope.itemSearch
+		});
+	});
 
-		var valueSearchMaterial=jQuery( "#tags_search" ).val();
-		$scope.searchValue=valueSearchMaterial;
-
-		$scope.materials=[];
-		
-		if(valueSearchMaterial === 'Materiais') {
-			$scope.materials=$scope.materialComparation;
-			$scope.showCategoryMaterial=false;
-			$scope.showProjectMaterial=false;
-		} 
-		if(valueSearchMaterial === 'Categoria de materiais') {
-			var firstCategory = $scope.materialComparation[0].category;
-			for(var index=1; index<$scope.materialComparation.length; ++index) {
-				if(firstCategory !== $scope.materialComparation[index].category){
-					$scope.materials.push($scope.materialComparation[index].name);
-				} else {
-					break;
-				}
-			}
-			$scope.showCategoryMaterial=true;
-			$scope.showProjectMaterial=false;
-		} 
-		if(valueSearchMaterial === 'Projeto de materiais') {
-			for(var index=0; index<$scope.materialComparation.length; ++index) {
-				if($scope.materialComparation[index].code > parseInt('46')){
-					$scope.materials.push($scope.materialComparation[index].name);
-				} 
-			}	
-			$scope.showProjectMaterial=true;
-			$scope.showCategoryMaterial=false;
-		}
-		$scope.showDetailsOfMaterial=false;
-        $scope.showMaterials=true;
-	}
-	
-	$scope.openMaterial = function(material) {
-		$scope.showDetailsOfMaterial=true;
-		$scope.showMaterials=false;
-		$scope.openedMaterial=material;
-	}
-
-	$scope.closeMiniSearch = function() {
-		$scope.miniSearchResults = false;
-		$scope.search=true;
-		$scope.openMaterialDetail=false; 
-		$scope.showInitSearch=true;
-		$scope.showSearch=false;
-		$scope.enableUserIcon=false;
-	}
-
-	$scope.closeMaterial = function() {
-		if($scope.searchValue === 'Materiais'){
-			$scope.showCategoryMaterial=false;
-			$scope.showProjectMaterial=false;
-		} else if($scope.searchValue === 'Projeto de materiais') {
-			$scope.showProjectMaterial=true;
-			$scope.showCategoryMaterial=false;
-		} else if($scope.searchValue ==='Categoria de materiais'){
-			$scope.showCategoryMaterial=true;
-			$scope.showProjectMaterial=false;
-		} 
-		$scope.showDetailsOfMaterial=false;
-	}
-
-	$scope.getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
-
-    $scope.getNotifications.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.notificationDetails;
-        $scope.notifications=data;
-		$scope.numberOfNotifications=$scope.notifications.length;
-		$scope.loading = true;
-    });
+	/* init MainController  */
+	$scope.viewType();
+	$scope.initData();
+	$scope.getAllRequests();
+	$scope.initDataFirebase();
 }])
 
 app.factory("NotificationService", function($q, $http, $timeout){
@@ -573,71 +597,12 @@ app.factory("UserService", function($q, $http, $timeout){
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
 	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/users', true);
-		xhr.send();*/
-
 		return deferred.promise;
 	};
-
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			deferred.resolve(resp);
-		}
-
-		xhr.open('GET','/myQuest', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
 
 	var getLibraryUserDetails = function() {
 		
 		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
 
 		$timeout(function() {
 			deferred.resolve($http.get('/getLibraryUser'));
@@ -648,65 +613,21 @@ app.factory("UserService", function($q, $http, $timeout){
 
 	return {
 		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
 		getLibraryUserDetails: getLibraryUserDetails
 	};
-});
-
-app.factory("MyBiamaService", function($q, $http, $timeout){
-    
-	var getMyBiamaInfo = function() {
-		var deferred = $q.defer();
-	
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/myBiamaInfo', true);
-		xhr.send();*/
-
-		$timeout(function() {
-		  deferred.resolve($http.get('/myBiamaInfo'));
-		}, 3000);
-	
-		return deferred.promise;
-	  };
-	
-	  return {
-		getMyBiamaInfo: getMyBiamaInfo
-	  };
 });
 
 app.factory("CompareMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
 
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			if (this.readyState == 4 && this.status == 200) {
-				var response = resp.response;
-				debugger
-				deferred.resolve(response);
-			}
-			
-		}
-
-		xhr.open('GET','/compareMaterials', true);
-		xhr.send();*/
-
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
         }, 4000);
 
         return deferred.promise;
-    };
-
-
+	};
+	
     return {
         getMaterialComparation: getMaterialComparation
     };
