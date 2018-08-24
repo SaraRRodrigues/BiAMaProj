@@ -119,7 +119,7 @@ router.get('/curiosities', (req, resp, next) => {
 /* GET world shares: forum */
 router.get('/worldMyShares', (req, resp, next) => {
 	var data = req.query.data;
-	worldShareService.getAllMyWorldShares((error, worldShareDetails) => {
+	worldShareService.getAllMyWorldShares(data, (error, worldShareDetails) => {
 		resp.json({worldShareDetails})
 	});
 });
@@ -144,13 +144,6 @@ router.get('/favorites', (req, resp, next) => {
 router.get('/myQuestions', (req, resp, next) => {
 	questionService.getMyQuestions((error, questionDetails) => {
 		resp.json({questionDetails})
-	});
-});
-
-/* GET my questions logged in: My questions */
-router.get('/myQuest', (req, resp, next) => {
-	userService.getMyQuestionsLogged((error, questions) => {
-		resp.json({questions})
 	});
 });
 

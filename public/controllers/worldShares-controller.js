@@ -89,7 +89,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
       
         });
 
-        var getMyWorldShares = WorldSharesService.getAllMyWorldShares(function(infoMyWorldShares){});
+        var getMyWorldShares = WorldSharesService.getAllMyWorldShares( $scope.idUserLoggerIn, function(infoMyWorldShares){});
         getMyWorldShares.then(function(result) {
             $scope.loading = false;
             var data=result.data.worldShareDetails;
@@ -393,8 +393,9 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* init QuestionsController  */
     $scope.viewType();
     $scope.initData();
-    $scope.getAllRequests();
     $scope.validateUserLoggedIn();
+    $scope.getAllRequests();
+   
 }])
 
 app.factory("WorldSharesService", function($q, $http, $timeout){
@@ -403,7 +404,10 @@ app.factory("WorldSharesService", function($q, $http, $timeout){
         var deferred = $q.defer();
 
         $timeout(function() {
-            deferred.resolve($http.get('/worldMyShares'));
+            deferred.resolve($http.get('/worldMyShares', 
+            {params: {
+                'data': data
+            }}));
         }, 2000);
         
         return deferred.promise;

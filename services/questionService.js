@@ -23,7 +23,6 @@ function getMyQuestions(cb){
 function getAllMyQuestions(data, cb) {
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		var userId=data;
-		console.log(userId);
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}

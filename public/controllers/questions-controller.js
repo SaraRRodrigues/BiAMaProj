@@ -55,24 +55,14 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     $scope.getAllRequests = function() {
         
         $scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
-        //$scope.getMyQuestions = QuestionService.getMyQuestions(function(infoMyQuestions){});
+        $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getAnswerQuestionInfo = QuestionService.getQuestionAnswer(function(infoUserAnswer){});
     
-        /*$scope.getMyQuestions.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.questions;
-            $scope.myQuestionDetails=data;
-            console.log('a: ', $scope.myQuestionDetails);
-        });*/
-        debugger
-
-        $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getMyQuestions.then(function(result) {
             $scope.loading = false;
             var data=result.data.questions;
             $scope.myQuestionDetails=data;
-            console.log('a: ', $scope.myQuestionDetails);
         });
 
         $scope.getUserQuestionInfo.then(function(result) {
@@ -465,6 +455,7 @@ app.factory("QuestionService", function($q, $http, $timeout){
 
         return deferred.promise;
     };
+    
     var getQuestionAnswer = function() {
         var deferred = $q.defer();
 
@@ -473,15 +464,6 @@ app.factory("QuestionService", function($q, $http, $timeout){
         }, 2000);
 
         return deferred.promise;
-    };
-
-    var getMyQuestions = function() {
-		var deferred = $q.defer();
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
     };
 
     var getAllMyQuestions = function(data) {
@@ -500,7 +482,6 @@ app.factory("QuestionService", function($q, $http, $timeout){
     return {
         getUserQuestionInfo: getUserQuestionInfo,
         getQuestionAnswer: getQuestionAnswer,
-        getMyQuestions: getMyQuestions,
         getAllMyQuestions: getAllMyQuestions
     };
 });

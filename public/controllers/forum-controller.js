@@ -307,62 +307,7 @@ app.factory("ForumBiamaService", function($q, $http, $timeout){
 		return deferred.promise;
 	};
 
-	var getMyQuestionsLogged = function() {
-		var deferred = $q.defer();
-
-		$timeout(function() {
-			deferred.resolve($http.get('/myQuest'));
-		}, 2000);
-
-		return deferred.promise;
-	};
-
-	var insertLibraryUserDetails = function() {
-		var deferred = $q.defer();
-
-		
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/insertLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.post('/insertLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
-	var getLibraryUserDetails = function() {
-		
-		var deferred = $q.defer();
-
-		/*var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			var resp = this;
-			var response = resp.response;
-			deferred.resolve(response);
-		}
-
-		xhr.open('GET','/getLibraryUser', true);
-		xhr.send();*/
-
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
-
-		return deferred.promise;
-	}
-
 	return {
-		getUsers: getUsers,
-		getMyQuestionsLogged: getMyQuestionsLogged,
-		insertLibraryUserDetails: insertLibraryUserDetails,
-		getLibraryUserDetails: getLibraryUserDetails
+		getUsers: getUsers
 	};
 });
