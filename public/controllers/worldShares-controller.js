@@ -158,8 +158,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     }
 
     /* insert world share on database */
-    $scope.saveConfigInsertWorldShare = function (image, description) {  
-        debugger
+    $scope.saveConfigInsertWorldShare = function (image, description) {
         if(image !== undefined) {
             var data = {
                 'forumType': $scope.forumType, 

@@ -133,7 +133,6 @@ app.constant('jQuery', window.jQuery)
 	 
 	/* verify if user is logged in */
     $scope.validateUserLoggedIn = function() { 
-		debugger
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
         
@@ -174,16 +173,7 @@ app.constant('jQuery', window.jQuery)
 			for(var index=0; index<$scope.materialComparation.length; ++index) {
 				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
 			}
-		}); 
-
-		var getNotifications = NotificationService.getMyNotifications(function(infoNotification){});
-   		getNotifications.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.loading = true;
-    	});
+		});
 	}
 	
 	/* redirect to homepage with arrow */
@@ -471,7 +461,6 @@ app.constant('jQuery', window.jQuery)
 	
 	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
-
 		$scope.users = 'loadUser';
 		var getAllUsers = UserService.getUsers(function(users){});
 		
@@ -536,6 +525,13 @@ app.constant('jQuery', window.jQuery)
 		}
 		
 		if(buttonClick === 'notification') {
+			var getNotifications = NotificationService.getMyNotifications($scope.idUserLoggerIn, function(infoNotification){});
+				getNotifications.then(function(result) {
+				$scope.loading = false;
+				var data=result.data.notificationDetails;
+				$scope.notifications=data;
+				$scope.numberOfNotifications=$scope.notifications.length;
+			});
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
 		} else {
@@ -587,17 +583,20 @@ app.constant('jQuery', window.jQuery)
 	/* init MainController  */
 	$scope.viewType();
 	$scope.initData();
-	$scope.getAllRequests();
 	$scope.validateUserLoggedIn();
+	$scope.getAllRequests();
 	$scope.initDataFirebase();
 }])
 
 app.factory("NotificationService", function($q, $http, $timeout){
-    var getMyNotifications = function() {
+    var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
         $timeout(function() {
-        deferred.resolve($http.get('/myNotifications'));
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
         }, 2000);
 
         return deferred.promise;

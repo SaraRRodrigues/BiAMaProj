@@ -304,29 +304,14 @@ app.factory("BiAMaInfoService", function($q, $http, $timeout){
 
 app.factory("WhereWeAreMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
-			var deferred = $q.defer();
+		var deferred = $q.defer();
 
-	/*var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var resp = this;
-		if (this.readyState == 4 && this.status == 200) {
-			var response = resp.response;
-			debugger
-			deferred.resolve(response);
-		}
-		
-	}
+		$timeout(function() {
+		deferred.resolve($http.get('/compareMaterials'));
+		}, 4000);
 
-	xhr.open('GET','/compareMaterials', true);
-	xhr.send();*/
-
-			$timeout(function() {
-			deferred.resolve($http.get('/compareMaterials'));
-			}, 4000);
-
-			return deferred.promise;
+		return deferred.promise;
 	};
-
 
 	return {
 			getMaterialComparation: getMaterialComparation

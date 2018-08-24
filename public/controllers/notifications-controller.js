@@ -49,7 +49,7 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
         
         });
 
-        var getMyNotifications = MyNotificationService.getMyNotifications(function(infoNotification){});
+        var getMyNotifications = MyNotificationService.getMyNotifications($scope.idUserLoggerIn,function(infoNotification){});
         getMyNotifications.then(function(result) {
             $scope.loading = false;
             var data=result.data.notificationDetails;
@@ -254,18 +254,21 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 
     /* init NotificationsController  */
 	$scope.viewType();
-	$scope.initData();
-    $scope.getAllRequests();
+    $scope.initData();
     $scope.validateUserLoggedIn();
+    $scope.getAllRequests();
 
 }])
 
 app.factory("MyNotificationService", function($q, $http, $timeout){
-    var getMyNotifications = function() {
+    var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
         $timeout(function() {
-        deferred.resolve($http.get('/myNotifications'));
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
         }, 2000);
 
         return deferred.promise;

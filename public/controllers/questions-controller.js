@@ -467,7 +467,6 @@ app.factory("QuestionService", function($q, $http, $timeout){
     };
 
     var getAllMyQuestions = function(data) {
-        debugger
         var deferred = $q.defer();
 		$timeout(function() {
             deferred.resolve($http.get('/allMyQuestions', 

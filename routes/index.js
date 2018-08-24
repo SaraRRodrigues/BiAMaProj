@@ -157,7 +157,8 @@ router.get('/allMyQuestions', (req, resp, next) => {
 
 /* GET my notifications: Notifications */
 router.get('/myNotifications', (req, resp, next) => {
-	notificationService.getMyNotifications((error, notificationDetails) => {
+	var data = req.query.data;
+	notificationService.getMyNotifications(data, (error, notificationDetails) => {
 		resp.json({notificationDetails})
 	});
 });

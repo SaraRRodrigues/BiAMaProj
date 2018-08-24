@@ -40,7 +40,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.validateUserLoggedIn = function() { 
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
-        debugger
+        
         if($scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
