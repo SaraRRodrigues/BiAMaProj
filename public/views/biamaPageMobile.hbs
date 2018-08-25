@@ -73,12 +73,15 @@
 				</div>
             </div>
         </div>
+		<!-- loading spinner -->
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<!-- section of user details -->
 		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -96,6 +99,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -119,6 +123,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -142,6 +147,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- content of biama page -->
 		<div ng-if="!loading && showInitSearch" class="sectionDetailsMyBiama">
 			<h1 class="subtitles alignCenter" style="font-size:40px">O que é a BiAMa?</h1>
 			<p class="margin-bottom-5x" style="font-size:34px">[{descriptionBiama}]</p>
@@ -149,6 +155,7 @@
 			<img class="center-block" ng-if="!loading" src="../images/suaBiAMa.JPG" width="100%"/>
 			<p class="margin-bottom-5x" style="font-size:34px">[{descriptionBiama}]</p>
 		</div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -157,6 +164,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

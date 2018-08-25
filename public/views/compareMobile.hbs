@@ -49,7 +49,6 @@
 		<base href="/"/>
 	</head>
 	<body ng-app="myApp" ng-controller="CompareController">
-        
         <!-- header -->
         <div class="container-fluid">
             <div class="header margin-top-3x">
@@ -73,12 +72,15 @@
                 </div>
             </div>
         </div>
+		<!-- loading spinner -->
         <div ng-if="loading">
             <div class="loading-icon-footer-info"></div>
         </div>
+		<!-- section of user details -->
         <div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -96,6 +98,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -119,6 +122,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -142,6 +146,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- content of compare page -->
         <div class="titlesOnCenter" style="margin-top: 68px;">
             <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
                 <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
@@ -161,6 +166,7 @@
                 <h4>Efetue login para obter comparações entre materiais.</h4>
             </div>
         </div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium" style="margin-top: -89px;"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x" style="margin-top: -55px;">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -169,6 +175,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" style="margin-top: -55px;">
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium" style="margin-top: -40px;"></i>

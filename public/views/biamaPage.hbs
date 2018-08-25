@@ -60,24 +60,26 @@
 		<base href="/"/>
 	</head>
 	<body ng-app="myApp" ng-controller="BiamaController">
-		 <!--image biama -->
+		<!--image biama -->
         <div class="row text-center">
             <img class="margin-top-3x" src="../images/topoBiama.png"/>
         </div>
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
+		<!-- title and image left -->
 		<div class="titlesOnCenter"> 
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
             </div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>						
-
+			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>
 			<h1 class="subtitles">O que é a BiAMa?</h1>
 		</div>
+		<!-- loading spinner -->
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<!-- content of biama page  -->
 		<div ng-if="!loading" class="sectionDetails">
 			<p>[{descriptionBiama}]
 			</p>

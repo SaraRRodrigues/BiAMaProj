@@ -68,12 +68,15 @@
                 </div>
             </div>
         </div> 
+		<!-- loading spinner -->
         <div ng-if="loading">
             <div class="loading-icon-footer-info"></div>
         </div>
+		<!-- section of user details -->
 		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -91,6 +94,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -114,6 +118,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -137,6 +142,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- show curiosity -->
         <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile" style="margin-bottom: -198px;margin-top: 90px;">
             <div ng-repeat="curiosity in descriptionCuriosity">
                 <img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
@@ -144,17 +150,20 @@
                 <h3>[{curiosity.descriptionCuriosity}]</h3>
             </div>
         </div>
+		<!-- show curiosity details -->
         <div ng-if="showCuriosityDetails" class="sectionDetails">
             <h1 class="subtitles titlesOnCenter">Partilha [{curiosityInfo.curiosity}]</h1>
             <p style="font-size: 31px;">[{curiosityInfo.description}]</p>
             <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
         </div>
+		<!-- if click on image get the big image -->
         <button ng-if="showBigImage" type="button" class="close" aria-label="Close" ng-click="closeCuriosityImage()" style="font-size: 105px;">
             <span aria-hidden="true">&times;</span>
         </button>
         <div ng-if="showBigImage">
             <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile" ng-src="../images/curiosities/[{bigImage}]" alt="foto" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%"/><br>
         </div>
+		<!-- small search results -->
         <i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -163,6 +172,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
