@@ -76,6 +76,7 @@
 		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -93,6 +94,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -116,6 +118,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -139,6 +142,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- content of forum page -->
 		<div ng-if="showForum" class="titlesOnCenter" style="margin-top: 50px;"  ng-click="reloadForum()">
 			
 			<img src="../images/questionsUser.png" width="637px" height="418px" ng-click="reloadQuestions()"/>
@@ -146,6 +150,7 @@
 			<img src="../images/userWorldShares.png" width="637px" height="418px" ng-click="reloadWorldShares()"/>
 			
 		</div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -154,6 +159,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

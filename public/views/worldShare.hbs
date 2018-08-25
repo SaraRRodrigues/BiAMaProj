@@ -61,6 +61,7 @@
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
+        <!-- content of world share page, title and image left -->
         <div class="titlesOnCenter">
             <div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
@@ -72,11 +73,13 @@
             <div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>
 			</div>
+            <!-- show world shares -->
             <div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
                 <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
                 <br>
                 <i ng-if="!loading" class="fas fa-plus-circle cursorPointer" style="font-size: 77px;" ng-click="openAddWorldShare()"></i>
             </div>
+            <!-- section of add world share -->
             <div ng-if="addWorldShare && !loading" class="container center-block" ng-style="(!isMobileView)? 'background-color:#E4A73F; width:600px; height:400px; border-radius:2px;':'background-color:#E4A73F; width:349px; height:400px; border-radius:2px;'">
                 <div style="background-color:white;padding:10px;margin-top: 10px;height: 378px;margin-left: 6px;margin-right: 6px;">
                     <h1>Nome do Projeto</h1>
@@ -88,6 +91,7 @@
                             <img src="../images/worldSharesForum/[{imageWorldShare}]" style="border-style: dotted;width: 117px;height: 68px;">
                         </div>
                         <br>
+                        <!-- upload world share -->
                         <div ng-if="openWorldShareUploadLabel">
                             <form method="post" enctype="multipart/form-data">
                                 <input type="file" id="uploadPictureWorldShare" file-model="valueInput" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
@@ -97,15 +101,18 @@
                         </div>
                     </div>
                     <br>
+                    <!-- buttons to confirm of cancel action add world share-->
                     <button class="buttonConfirm" ng-click="saveConfigInsertWorldShare(imageWorldShare, descriptionWorldShare)">Confimar</button>
                     <button ng-click="cancelInsertWorldShare()">Cancelar</button>
                 </div>
             </div>
+            <!-- if click on world share, is showed details of world share -->
             <div ng-if="showWorldSharesDetails && !addWorldShare" class="sectionDetails">
                 <h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
                 <p>[{worldSharesInfo.description}]</p>
                 <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)"  alt="foto"/><br>
             </div>
+            <!-- if clicks on world share image, show big image -->
             <div ng-if="showBigImage && !addWorldShare">
                 <button type="button" class="close" aria-label="Close" ng-click="closeWorldShareImage()">
                     <span aria-hidden="true">&times;</span>

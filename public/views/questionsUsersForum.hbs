@@ -52,6 +52,7 @@
         <div class="imageRight">
             <img src="../images/rightBiama.png"/>
         </div>
+		<!-- title and image left -->
 		<div class="titlesOnCenter">
 			<div class="imageLeft">
                 <img class="margin-top-3x" src="../images/leftBiama.png"/>
@@ -59,13 +60,16 @@
 			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToForum()"></i>
 			<h1 ng-if="!showQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 		</div>
+		<!-- loading spinner -->
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<!-- show number of questions -->
 		<div ng-if="!loading && !showQuestionDetails" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 			<a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
 			<div class="separateQuestions"></div>
 		</div>
+		<!-- if click on question, show details of question -->
 		<div ng-if="showQuestionDetails">
 			<div class="titlesOnCenter"> 
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
@@ -94,6 +98,7 @@
 					<!-- Answers -->
 					<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
 						<img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
+						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestion">
 							<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
@@ -110,6 +115,7 @@
 							</div>
 							<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 						</div>
+						<!-- answer align to right -->
 						<div ng-if="$index%2===0"  class="borderAnswer">
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
@@ -129,16 +135,19 @@
 						</div>
 					</div>
 				</div>
-				<div ng-if="!isMobileView"> 
+				<!-- button to response of questions -->
+				<div> 
 					<button ng-if="!showDivAnswer" class="buttonAnswer" ng-click="clickOnAnswer()">Responder</button>
 					<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
 						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
 						<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>
 				</div>
+				<!-- add question to favorites -->
 				<div class="margin-top-3x" ng-if="clickAddFavorite || clickRemoveFavorite">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 				</div>
+				<!-- put likes on question -->
 				<div ng-if="clickAddLike || clickRemoveLike">
 					<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 				</div>

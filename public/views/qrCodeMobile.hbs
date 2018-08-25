@@ -143,9 +143,11 @@
 				</div>
 			</nav>
 		</div>
+		<!-- content of qr code page -->
         <div ng-if="showQrCode" class="text-center">
             <h2>QRCode em desenvolvimento</h2>
         </div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -154,6 +156,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

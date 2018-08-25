@@ -80,16 +80,20 @@
 					<button class="buttonOk" ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
                 </div>
             </div>
-        </div> 
+        </div>
+		<!-- go to login --> 
         <div class="alignCenter" ng-if="doLogin">
             <h1>Efetue Login por favor e volte a entrar nos seus favoritos.</h1>
         </div>
+		<!-- loading spinner -->
         <div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
-		<div ng-if="isMobileView" class="row">
+		<!-- section of user details -->
+		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -107,6 +111,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -130,6 +135,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -153,6 +159,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- show favorites questions -->
 		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites" class="alignCenter">
 			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
@@ -201,6 +208,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- show favorites materials -->
         <div ng-if="!showFavorites && !locationMaterial && !zoomInMaterial">
 			<div class="titlesOnCenter sectionScrollMobile sectionDetails">
 				<img class="center-block margin-bottom-2x" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="40%" height="30%" alt="foto"/><br>
@@ -223,6 +231,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- show location of material -->
         <div ng-if="locationMaterial">
 			<div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>
@@ -248,6 +257,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- show image with zoom in -->
         <div ng-if="zoomInMaterial">
 			<button type="button" class="close" aria-label="Close" ng-click="closeMaterialZoomInMaterial()" style="font-size: 105px;">
                 <span aria-hidden="true">&times;</span>
@@ -256,6 +266,7 @@
 				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%" alt="foto"/><br>
             </div>
 		</div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -264,6 +275,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

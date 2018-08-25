@@ -73,12 +73,15 @@
                 </div>
             </div>
         </div>
+		<!-- loading spinner -->
         <div ng-if="loading">
             <div class="loading-icon-footer-info"></div>
         </div>
-        <div ng-if="isMobileView" class="row">
+		<!-- section of user details -->
+        <div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -96,6 +99,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -119,6 +123,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -142,6 +147,7 @@
 				</div>
 			</nav>
 		</div>
+		<!-- show notification details -->
         <div ng-if="myNotifications.length>0 && showNotifications" class="divNotificationsMobile sectionScrollNotification" style="margin-top: 63px;">
             <div ng-repeat="notification in myNotifications">
                 <div ng-if="notification.insert" style="padding:14px">
@@ -151,6 +157,7 @@
                 <div class="lineWhiteMobile margin-bottom margin-top"></div>									
             </div>
         </div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -159,6 +166,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

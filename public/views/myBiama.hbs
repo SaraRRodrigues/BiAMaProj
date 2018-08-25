@@ -62,22 +62,27 @@
 		<div class="imageRight">
 			<img src="../images/rightBiama.png"/>
 		</div>
+		<!-- content of my biama page and image left -->
 		<div> 
 			<div class="imageLeft">
 				<img class="margin-top-3x" src="../images/leftBiama.png"/>
 			</div>
 			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>
+			
 			<div class="titlesOnCenter" ng-if="showBiamaInitPage">
+				<!-- my biama title -->
 				<h1 class="subtitles">A sua BiAMa</h1>
 				<div ng-if="loading">
 					<div class="loading-icon-footer-info"></div>
 				</div>
 				<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
+				<!-- my biama description -->
 				<div ng-if="!loading" class="sectionDetails">
 					<div class="sectionDetails">
 						<p>[{descriptionMyBiama}]</p>
 					</div>
 				</div>
+				<!-- form to create your biama -->
 				<div ng-if="biamaUp">
 					<i class="far fa-file-pdf"></i>
 					<label class="margin-right-3x">Formulário para Aderir</label>
@@ -86,7 +91,7 @@
 					<label>Construir a sua BiAMa</label>
 				</div>
 			</div>
-			
+			<!-- section of configuration of your biama -->
 			<form class="myBiamaConfig" ng-hide="!showMyBiamaConf">
 				<h2 class="subtitles">Sua BiAMa</h2><br>
 				<!-- Description -->
@@ -135,6 +140,7 @@
 				<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
 				<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
 			</form>
+			<!-- section of regist user -->
 			<div ng-if="registUser">
 				<div class="titlesOnCenter"> 
 					<h1 class="subtitles">Registar</h1>
@@ -161,12 +167,15 @@
 					<br>
 					<button class="center-block inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
 				</div>
+				<!-- error message: empty data -->
 				<div ng-if="emptyData">
 					<h3>Preencha todos os campos por favor.</h3>
 				</div>
+				<!-- error message: username replicated -->
 				<div ng-if="usernameRepeated">
 					<h3>Nome já existente.</h3>
 				</div>
+				<!-- error message: under age to continue -->
 				<div ng-if="underAge">
 					<h3>Para efetuar o registo tem de ser maior de idade.</h3>
 				</div>

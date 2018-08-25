@@ -68,12 +68,15 @@
                 </div>
             </div>
         </div> 
+		<!-- loading spinner -->
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<!-- section of user details -->
 		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -91,6 +94,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -114,6 +118,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -137,18 +142,17 @@
 				</div>
 			</nav>
 		</div>
-		<div ng-if="!loading" class="sectionDetails" >
-			<p>[{descriptionBiama}]
-			</p>
-		</div>
+		<!-- show world shares -->
 		<div ng-if="showWorldShares" class="titlesOnCenter sectionScrollMobile" style="margin-top:40px">
 			<img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="47%" height="40%" alt="foto"/>
 		</div>
+		<!-- if click on world share, is showed details of world share -->
 		<div ng-if="showWorldSharesDetails" class="sectionDetails">
 			<h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
 			<p style="font-size: 31px;">[{worldSharesInfo.description}]</p>
 			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)" alt="foto" width="60%" height="25%"/><br>
 		</div>
+		<!-- if clicks on world share image, show big image -->
         <button ng-if="showBigImage" type="button" class="close" aria-label="Close" ng-click="closeWorldShareImage()" style="font-size: 105px;">
             <span aria-hidden="true">&times;</span>
         </button>

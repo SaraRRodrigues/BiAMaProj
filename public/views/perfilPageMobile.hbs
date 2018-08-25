@@ -73,75 +73,81 @@
                 </div>
             </div>
         </div>
+		<!-- loading spinner -->
         <div ng-if="loading">
             <div class="loading-icon-footer-info"></div>
         </div>
+		<!-- section of user details -->
         <div class="row">
-				<nav class="padding-left-3x">
-					<div class="navDetailsUserMobile" ng-if="userDetails"><br>
-						<div ng-if="!confirmSession">
-							<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a>Favoritos</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>As minhas perguntas</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Partilhar com o Mundo</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Notificações</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Perfil</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a>Comparar</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
-							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-							
-							<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
-								<div class="alignCenter">
-									<h2 class="initSessionColor">Iniciar Sessão</h2>
-									
-									<div class="lineWhiteInitSession"></div><br>
-									<div ng-if="users === 'loadUser'">
-										<div class="loading-icon"></div>
-									</div>
-									<div ng-if="users !== 'loadUser'">
-										<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-										<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-										<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-										<!-- login with firebase providers -->
-										<div>
-											<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-											<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
-										</div>
-										<br>
-										<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
-									</div>												
+			<nav class="padding-left-3x">
+				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
+					<div ng-if="!confirmSession">
+						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+						<a>Favoritos</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>As minhas perguntas</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Partilhar com o Mundo</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Notificações</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Perfil</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a>Comparar</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+						
+						<!-- section of init session -->
+						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
+							<div class="alignCenter">
+								<h2 class="initSessionColor">Iniciar Sessão</h2>
+								
+								<div class="lineWhiteInitSession"></div><br>
+								<div ng-if="users === 'loadUser'">
+									<div class="loading-icon"></div>
 								</div>
+								<div ng-if="users !== 'loadUser'">
+									<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+									<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+									<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+									<!-- login with firebase providers -->
+									<div>
+										<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+										<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+									</div>
+									<br>
+									<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
+								</div>												
 							</div>
 						</div>
-						<div ng-if="confirmSession">
-							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a ng-click="getRequest('favorites')">Favoritos</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
-							<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
-							<div ng-if="notificationNumber" class="circleNotification"></div>
-							<br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('perfil')">Perfil</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="getRequest('compare')">Comparar</a><br>
-							<div class="lineWhiteMobile margin-bottom margin-top"></div>
-							<a ng-click="logout()">Terminar Sessão</a><br>
-							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-						</div>
 					</div>
-				</nav>
+					<!-- content if init session -->
+					<div ng-if="confirmSession">
+						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+						<a ng-click="getRequest('favorites')">Favoritos</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
+						<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
+						<div ng-if="notificationNumber" class="circleNotification"></div>
+						<br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('perfil')">Perfil</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="getRequest('compare')">Comparar</a><br>
+						<div class="lineWhiteMobile margin-bottom margin-top"></div>
+						<a ng-click="logout()">Terminar Sessão</a><br>
+						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+					</div>
+				</div>
+			</nav>
 		</div>
+		<!-- content of perfil page -->
         <div ng-if="showPerfilDetails">
             <br>
             <div ng-if="!openImageUploadLabel && !loading" class="perfilDetailsMobile center-block" style="font-size: 23px;text-align: center;padding-bottom: 24px;">
@@ -152,11 +158,11 @@
                     <label class="minTitleBiAMa labelPerfilName" style="font-size: 30px;">[{name}]</label>
                 </div>
                 <br><br><br><br><br>
-
+				<!-- username -->
                 <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username" readonly/>
                 <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
                 <br>
-
+				<!-- e-mail -->
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                 <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail" readonly/>
                 <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
@@ -165,30 +171,34 @@
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                 <!-- edit mode -->
                 <input ng-show="upgradeDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
-                <!-- -->
+                <!-- view mode -->
                 <input ng-show="editDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
-                <!-- Info of service -->
+                <!-- date of birth of service -->
                 <h4 ng-show="!editDate">[{birthdateValue}]</h4>
-
+				<!-- password -->
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                 <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password" readonly/>
                 <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
                 <br>
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                
+                <!-- buttons to update and save data -->
                 <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="updateData()">Alterar dados</button>
                 <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
-                <h5 ng-if="fieldsEmpty" style="font-size: 30px;">Campos inválidos.</h5>
+                
+				<!-- error messages: user entry data on fields -->
+				<h5 ng-if="fieldsEmpty" style="font-size: 30px;">Campos inválidos.</h5>
                 <h5 ng-if="!fieldsEmpty && invalidEmail" style="font-size: 30px;">Email inválido.</h5>
                 <h5 ng-if="invalidDate" style="font-size: 30px;">Data de nascimento inválida.</h5>
                 <h5 ng-if="usernameRepeatedPerfil" style="font-size: 30px;">Nome já existente.</h5>
                 <h5 ng-if="underAgePerfil" style="font-size: 30px;">Para efetuar o registo tem de ser maior de idade.</h5>
             </div>
+			<!-- update photo -->
             <div class="perfilDetailsMobile" ng-if="openImageUploadLabel">
                 <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
                 <button ng-click="saveUploadFile()">Guardar</button>
             </div>
         </div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -197,6 +207,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>

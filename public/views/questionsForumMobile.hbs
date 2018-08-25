@@ -68,12 +68,15 @@
                 </div>
             </div>
         </div> 
+		<!-- loading spinner -->
 		<div ng-if="loading">
 			<div class="loading-icon-footer-info"></div>
 		</div>
+		<!-- section of user details -->
 		<div class="row">
 			<nav class="padding-left-3x">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
 						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a>Favoritos</a><br>
@@ -91,6 +94,7 @@
 						<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
+						<!-- section of init session -->
 						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
@@ -114,6 +118,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- content if init session -->
 					<div ng-if="confirmSession">
 						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 						<a ng-click="getRequest('favorites')">Favoritos</a><br>
@@ -137,10 +142,12 @@
 				</div>
 			</nav>
 		</div>
+		<!-- show number of questions -->
 		<div ng-if="!loading && !showQuestionDetails && showAllQuestions" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 			<a class="questionX" ng-click="getQuestion(question.id_question, $index)" style="font-size: 33px;">Pergunta [{$index+1}]</a><br>
 			<div class="separateQuestions"></div>
 		</div>
+		<!-- if click on question, show details of question -->
 		<div ng-if="showQuestionDetails" style="margin-top: 109px;">
 			<div class="titlesOnCenter"> 
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
@@ -169,6 +176,7 @@
 					<!-- Answers -->
 					<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
 						<img ng-if="$index%2!==0 && isMobileView" class="imageButtonMobile" src="../images/user.png" style="width:130px">
+						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestionMobile">
 							<label class="margin-right-8x" style="font-size:28px">Resposta [{answerQuestion.numberOfQuestion}]</label>
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()" style="margin-top:-40px">
@@ -185,6 +193,7 @@
 							</div>
 							<h5 class="descriptionQuestion" style="margin-top:41px;font-size:28px">[{answerQuestion.text}]</h5>
 						</div>
+						<!-- answer align to right -->
 						<div ng-if="$index%2===0"  class="borderAnswerMobile">
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer" style="font-size:32px"></i>
@@ -204,6 +213,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- button to response of questions -->
 				<div>
 					<button ng-if="!showDivAnswer" class="buttonAnswerMobile" ng-click="clickOnAnswer()" style="margin-left:353px">Responder</button>
 					<div ng-if="showDivAnswer" class="titlesOnCenter" style="padding-top: 39px; background-color: lightgray;margin-right:147px">
@@ -211,14 +221,17 @@
 						<button class="buttonAnswerMobile" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>
 				</div>
+				<!-- add question to favorites -->
 				<div class="margin-top-3x" ng-if="clickAddFavorite || clickRemoveFavorite">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 				</div>
+				<!-- put likes on question -->
 				<div ng-if="clickAddLike || clickRemoveLike">
 					<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 				</div>
 			</div>
 		</div>
+		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
@@ -227,6 +240,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- if click on result image -->
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
