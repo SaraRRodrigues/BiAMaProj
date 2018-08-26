@@ -101,10 +101,10 @@
 						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestion">
 							<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion(answerQuestion)">
+							<div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
 								<i class="fas fa-star favoriteButton cursorPointer"></i>
 							</div>
-							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+							<div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
 								<i class="far fa-star favoriteButton cursorPointer"></i>
 							</div>
 							<div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
@@ -117,10 +117,10 @@
 						</div>
 						<!-- answer align to right -->
 						<div ng-if="$index%2===0"  class="borderAnswerNoMargin">
-							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+							<div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
 							</div>
-							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
+							<div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
 								<i class="far fa-star favoriteButtonLeft cursorPointer"></i>
 							</div>
 							<div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">

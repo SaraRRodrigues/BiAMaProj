@@ -256,6 +256,14 @@ router.post('/insertFavoriteQuestion', (req, resp, next) => {
 	});
 });
 
+/* INSERT favorite answer : forum */
+router.post('/insertFavoriteAnswer', (req, resp, next) => {
+	var favorite = req.body;
+	insertFavoriteService.insertFavoriteQuestion(favorite ,(error, insertServiceDetails) => {
+		resp.json({insertServiceDetails})
+	});
+});
+
 /* GET all favorites : forum */
 router.get('/allFavorites', (req, resp, next) => {
 	favoriteService.getAllFavorites((error, allFavoritesDetails) => {
@@ -271,6 +279,17 @@ router.post('/deleteFavoriteQuestion', (req, resp, next) => {
 		resp.json({deleteServiceDetails})
 	});
 });
+
+
+/* DELETE favorite answer : forum */
+router.post('/deleteFavoriteAnswer', (req, resp, next) => {
+	var favorite = req.body;
+	console.log('favorite: ', favorite);
+	deleteFavoriteService.deleteFavoriteAnswer(favorite,(error, deleteServiceDetails) => {
+		resp.json({deleteServiceDetails})
+	});
+});
+
 
 /* INSERT my biama */
 router.post('/insertMyBiama', (req, resp, next) => {

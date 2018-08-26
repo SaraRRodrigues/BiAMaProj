@@ -132,6 +132,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
         if($scope.details[indexAnswer].id_question == $scope.questions[index].id_question){
           var resultAnswer = {
+            id: $scope.details[indexAnswer].id_answer,
             numberOfQuestion: $scope.indexQuestionAnswer,
             text: $scope.details[indexAnswer].text_answer,
             likes: $scope.details[indexAnswer].likesAnswer,
@@ -178,7 +179,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           idFavorite:  parseInt($scope.nextIdFavorite)+1,
           idUser: $scope.idUserLoggerIn,
           idMaterial: null,
-          idQuestion: $scope.idQuestion
+          idQuestion: $scope.idQuestion,
+          idAnswer: -1
         }
         $http.post('/insertFavoriteQuestion', data);
 
@@ -200,10 +202,51 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         }
         $http.post('/deleteFavoriteQuestion', data);
 
-        $scope.clickAddFavorite=false;
+        $scope.favoriteAnswer=false;
         $scope.goToLogin=false;
       } else {
-        $scope.clickAddFavorite=false;
+        $scope.favoriteAnswer=false;
+        $scope.goToLogin=true;
+      }
+      
+    }
+
+    /* add to favorites question */
+    $scope.addToFavoritesAnswer = function(answerQuestion){
+      debugger
+      /* get favorites material */
+      if($scope.idUserLoggerIn !== undefined) {
+        var data = {
+          idFavorite: parseInt($scope.nextIdFavorite)+1,
+          idUser: $scope.idUserLoggerIn,
+          idMaterial: null,
+          idQuestion: -1,
+          idAnswer: answerQuestion.id
+        }
+        $http.post('/insertFavoriteAnswer', data);
+
+        answerQuestion.favorite=true;
+        $scope.goToLogin=false;
+      } else {
+        answerQuestion.favorite=false;
+        $scope.goToLogin=true;
+      }
+      
+    }
+
+    /* remove from favorites answer */
+    $scope.removeFromFavoritesAnswer = function(answer) {
+      if($scope.idUserLoggerIn !== undefined) {
+        debugger
+        var data = {
+          'idAnswer':parseInt(answer.id)
+        }
+        $http.post('/deleteFavoriteAnswer', data);
+
+        answer.favorite=false;
+        $scope.goToLogin=false;
+      } else {
+        answer.favorite=false;
         $scope.goToLogin=true;
       }
       
