@@ -431,7 +431,7 @@ app.constant('jQuery', window.jQuery)
 				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
 				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push($scope.materialsToSearch[index].name);
+					$scope.resultSearch.push(resultMaterial);
 				}
 			}
 	
