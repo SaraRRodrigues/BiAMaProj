@@ -1,4 +1,4 @@
-app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "WhereWeAreMaterialService","WhereWeAreBiamaService", "$http" ,"$sce", "$route", "jQuery", "$location", function($scope, BiAMaInfoService, LibraryMaterialInfoService, WhereWeAreMaterialService, WhereWeAreBiamaService, $http, $sce, $route, $location){
+app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRegistService", "$http" ,"$sce", "$route", "jQuery", "$location", function($scope, RegistMaterialService, UserRegistService, $http, $sce, $route, $location){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -16,52 +16,35 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	/* init my variables data */
 	$scope.initData = function() {
 		/* my current page */
-		$scope.namePage='whereWeAre';
-		$scope.nameclick='whereWeAre';
+		$scope.namePage='registUser';
+		$scope.nameclick='registUser';
 		$scope.loading = true;
-		$scope.schools=[];
-		$scope.resultSearch = [];
-		$scope.showDetailsOfMaterial=false;
-		$scope.miniSearchResults=false;
-		$scope.showLocation=true;
-		$scope.registUser=false;
-		$scope.pathURL='https://www.google.com/maps/';
+        $scope.registUser=true;
+        $scope.resultSearch= [];
 	}
-
-	/* verify if user is logged in */
-    $scope.validateUserLoggedIn = function() {
-        var splitLocation = location.href.split('=');
-        $scope.idUserLoggerIn =splitLocation[1];
-        
-        if($scope.idUserLoggerIn !== undefined) {
-            $scope.doLogin=false;
-            $scope.confirmSession=true;
-        } else {
-            $scope.doLogin=true;
-            $scope.loading = true;
-            $scope.confirmSession=false;
-        }
-    }
 
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of my favorites, my questions and answer to display */
     $scope.getAllRequests = function() {
-		var getMaterials = WhereWeAreMaterialService.getMaterialComparation(function(infoMaterial){});
+		var getMaterials = RegistMaterialService.getMaterialComparation(function(infoMaterial){});
 		getMaterials.then(function(result) {
 			$scope.loading = false;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
 	
-		});
-
-		var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-    	getBiamaInfo.then(function(result) {
+        });
+        
+        $scope.getAllUsers = UserRegistService.getUsers(function(users){});
+        $scope.getAllUsers.then(function(usersDB) {
+			$scope.loading=false;
+			$scope.users = usersDB.data.users;
+        });
+        
+        $scope.getLibraryUser = UserRegistService.getLibraryUserDetails(function(infoMyBiama){});
+        $scope.getLibraryUser.then(function(result) {
 			$scope.loading = false;
-			var data=result.data.biamaDetails;
-			$scope.biamaDetails=data;
-			/**default - url of ESELx */
-			$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-			$scope.schools=$scope.biamaDetails;
+			var data=result.data.userLibrary;
+			$scope.userLibrary=data;
 		});
 	}
 	
@@ -72,34 +55,72 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		} else {
 			location.href = 'http://localhost:8080?username=' + 'anonymous';
 		}
+    }
+
+    /* validate date of birth format */
+	$scope.validDateOfBirth = function(dateOfBirth) {
+		var resultBirth = dateOfBirth.split("/");
+
+		var currentDate = new Date();
+		currentDate=currentDate.toLocaleDateString();
+		var resultCurrentDate = currentDate.split("/");
+
+		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+		if(calculateYear < 18) {
+			return false;
+		}
+		return true;
 	}
 
-	/* get schools to show schools on options of material location */
-    $scope.getSchools = function () {
-        if($scope.showSchools){
-			$scope.showSchools = false;
-		}else {
-			$scope.showSchools = true;
+	/* validate if data not exists already */
+	$scope.validDataNotEquals = function(username, password) {
+		for(var index=0; index<$scope.users.length; ++index) {
+			if(username === $scope.users[index].username) {
+				return false;
+			}
 		}
-    }
+		return true;
+	}
+    
+    /* created user: insert user on database */
+	$scope.insertUser = function(name, username, email, birthdate, password) {
+		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
+			$scope.emptyData=true;
+		} else {
+			var idUser = $scope.users[$scope.users.length-1].id;
+			$scope.insertedIdUser=idUser;
+			var data = {
+				'idUser': parseInt(idUser)+1,
+				'name': name,
+				'email': email,
+				'birthdate': birthdate.toLocaleDateString(), 
+				'username': username,
+				'password': password,
+				'image': $scope.image
+			}
+			if($scope.image == undefined) {
+				data.image='noImage';
+			}
 
-    /* select school to open map of location on screen */
-    $scope.selectSchool = function (locationSchool) {
-        for(var index=0; index <$scope.biamaDetails.length; ++index) {
-            if($scope.biamaDetails[index].locationDescription === locationSchool){
-                $scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[index].location)
-                $scope.descriptionLocation = $scope.biamaDetails[index].locationDescription;
-                break;
-            }
-        }
-    }
+			var validData = $scope.validDataNotEquals(data.username, data.password);
+			
+			if(validData) {
+				var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+				if(validBirthdate){
+					$http.post('/insertUserDetails', data);
+					
+					var dataLibraryUser = {
+						'idUser': parseInt($scope.insertedIdUser)+1,
+						'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
+					}
 
-	/* resize iframe to screen size */
-    $scope.expandIframe = function(){
-        if($scope.zoomInIFrame){
-			$scope.zoomInIFrame = false;
-		}else {
-			$scope.zoomInIFrame = true;
+					$http.post('/insertLibraryUser', dataLibraryUser);
+				} else {
+					$scope.underAge=true;
+				}
+			} else {
+				$scope.usernameRepeated=true;
+			}
 		}
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
@@ -111,14 +132,14 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.showMaterials=false;
 		$scope.openedMaterial=material;
         $scope.miniSearchResults=false;
-        $scope.showLocation=false;
+        $scope.registUser=false;
 	}
 	
 	/* close material that are opened */
 	$scope.closeMaterial = function(){
 		$scope.miniSearchResults=true;
         $scope.showDetailsOfMaterial=false;
-        $scope.showLocation=true;
+        $scope.registUser=false;
 	}
 
 	/* open and close the small search icon */
@@ -137,10 +158,8 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.openMaterialDetail=false; 
 		$scope.showInitSearch=true;
 		$scope.showSearch=false;
-		$scope.enableUserIcon=false;
-		$scope.showCategory=false;
-        $scope.showMaterialDetails=false;
-        $scope.showLocation=true;
+        $scope.enableUserIcon=false; 
+        $scope.registUser=true;
 	}
 
 	/* action of click button "Ok" present on small search line */
@@ -169,9 +188,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 			$scope.showInitSearch=false;
 			$scope.miniSearchResults = true;
 
-			$scope.showCategory=true;
-            $scope.showMaterialDetails=false;
-            $scope.showLocation=false;
+            $scope.registUser=false;
 		}
 	}
     
@@ -283,27 +300,9 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
-    $scope.validateUserLoggedIn();
 }])
 
-app.factory("BiAMaInfoService", function($q, $http, $timeout){
-    
-	var getBiAMaInfo = function() {
-		var deferred = $q.defer();
-	
-		$timeout(function() {
-		  deferred.resolve($http.get('/biamaInfo'));
-		}, 2000);
-	
-		return deferred.promise;
-	  };
-	
-	  return {
-		getBiAMaInfo: getBiAMaInfo
-	  };
-});
-
-app.factory("WhereWeAreMaterialService", function($q, $http, $timeout){
+app.factory("RegistMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
 		var deferred = $q.defer();
 
@@ -319,7 +318,7 @@ app.factory("WhereWeAreMaterialService", function($q, $http, $timeout){
 	};
 });
 
-app.factory("WhereWeAreBiamaService", function($q, $http, $timeout){
+app.factory("UserRegistService", function($q, $http, $timeout){
     
 	var getUsers = function() {
 		var deferred = $q.defer();
@@ -327,11 +326,23 @@ app.factory("WhereWeAreBiamaService", function($q, $http, $timeout){
  		$timeout(function() {
 		  deferred.resolve($http.get('/users',  {cache:true}));
 		}, 2000); 
-
+	
 		return deferred.promise;
 	};
 
+	var getLibraryUserDetails = function() {
+		
+		var deferred = $q.defer();
+
+		$timeout(function() {
+			deferred.resolve($http.get('/getLibraryUser'));
+		}, 2000);
+
+		return deferred.promise;
+	}
+
 	return {
-		getUsers: getUsers
+		getUsers: getUsers,
+		getLibraryUserDetails: getLibraryUserDetails
 	};
 });

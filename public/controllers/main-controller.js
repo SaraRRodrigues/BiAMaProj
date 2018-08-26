@@ -61,6 +61,11 @@ app.constant('jQuery', window.jQuery)
 		templateUrl: 'views/compare',
 		controller: 'CompareController'
 	});
+
+	$routeProvider.when('/BiAMa/registUser', {
+		templateUrl: 'views/registUser',
+		controller: 'RegistUserController'
+	});
 	
 	/* mobile view */
 	$routeProvider.when('/BiAMa/libraryMobile', {
@@ -88,6 +93,11 @@ app.constant('jQuery', window.jQuery)
 		controller: 'ForumController'
 	})
 	
+	$routeProvider.when('/BiAMa/registUserMobile', {
+		templateUrl: 'views/registUserMobile',
+		controller: 'RegistUserController'
+	});
+
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
@@ -135,15 +145,21 @@ app.constant('jQuery', window.jQuery)
     $scope.validateUserLoggedIn = function() { 
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
-        
-        if($scope.idUserLoggerIn !== undefined) {
-            $scope.doLogin=false;
-            $scope.confirmSession=true;
-        } else {
-            $scope.doLogin=true;
+        if($scope.idUserLoggerIn === 'anonymous') {
+			$scope.doLogin=true;
             $scope.loading = true;
             $scope.confirmSession=false;
-        }
+		} else {
+			if($scope.idUserLoggerIn !== undefined)  {
+				$scope.doLogin=false;
+				$scope.confirmSession=true;
+			} else {
+				$scope.doLogin=true;
+				$scope.loading = true;
+				$scope.confirmSession=false;
+			}
+		}
+        
 	}
 	
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
@@ -444,9 +460,11 @@ app.constant('jQuery', window.jQuery)
 	$scope.clickUserDetails = function() {
 		if($scope.userDetails){
 			$scope.userDetails = false;
+			$scope.showInitSession=false;
 		}else {
 			$scope.userDetails = true;
 			$scope.showSearch = false;
+			$scope.showInitSession=false;
 		}
 	}
 
@@ -522,6 +540,10 @@ app.constant('jQuery', window.jQuery)
 				location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 	
 			}
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				location.href = 'http://localhost:8080/BiAMa/registUserMobile';
+			}
 		}
 		
 		if(buttonClick === 'notification') {
@@ -538,6 +560,8 @@ app.constant('jQuery', window.jQuery)
 			$scope.userDetails = false;
 			$scope.notificationNumber = false;
 		}
+
+		$scope.registUser=false;
 		$scope.search = false;
 	}
 
@@ -559,6 +583,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.userDetails = false;
 		$scope.registUser=true;
 		$scope.search=false;
+		$scope.showInitSession=false;
 	}
 	/* -------------- END MOBILE -------------- */
 
