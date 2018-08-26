@@ -102,6 +102,15 @@ router.get('/userLikeQuestions', (req, resp, next) => {
 	});
 });
 
+/* UPDATE like question: forum */
+router.post('/updateLikeQuestion', (req, resp, next) => {
+	var data = req.body;
+	console.log('data: ', data);
+	likeQuestionService.updateLikeQuestion(data, (error, questionDetails) => {
+		resp.json({questionDetails})
+	});
+});
+
 /* GET like question: forum */
 router.get('/userLikeAnswers', (req, resp, next) => {
 	likeAnswerService.getLikeAnswer((error, questionDetails) => {

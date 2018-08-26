@@ -86,11 +86,11 @@
 						<div ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
 							<i class="fas fa-star favoriteButton cursorPointer"></i>
 						</div>
-						<div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
-							<i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+						<div ng-if="!questionFavorite.like" ng-click="addLikeQuestion()">
+							<i class="far fa-thumbs-up likeButton cursorPointer"></i>
 						</div>
-						<div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
-							<i class="far fa-thumbs-up likeButton cursorPointer" ></i>
+						<div ng-if="questionFavorite.like" ng-click="removeLikeQuestion()">
+							<i class="fas fa-thumbs-up likeButton cursorPointer" ></i>
 						</div>
 						<h5 class="descriptionQuestion">[{questionFavorite.description}]</h5>
 					</div>
@@ -148,7 +148,7 @@
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 				</div>
 				<!-- put likes on question -->
-				<div ng-if="clickAddLike || clickRemoveLike">
+				<div ng-if="goToLogin">
 					<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 				</div>
 			</div>
