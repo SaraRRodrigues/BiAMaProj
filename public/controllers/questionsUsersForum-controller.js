@@ -38,6 +38,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       $scope.showDetailsOfMaterial=false;
       $scope.miniSearchResults=false;
       $scope.showAllQuestions=true;
+      $scope.favoriteQuestion=false;
     }
 
     /* verify if user is logged in */
@@ -86,6 +87,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       getFavorites.then(function(result) {
           $scope.loading = false;
           var data=result.data.allFavoritesDetails;
+          $scope.favorites = data;
           $scope.nextIdFavorite = data[data.length-1].id_favorite;
       });
     }
@@ -121,14 +123,29 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         }
       }
       
-      $scope.showDivAnswer
       /* reset indexQuestionAnswer: number of answer of questions */
       $scope.indexQuestionAnswer=1;
     }
 
     /* get answers of question with index(is question id) */
     $scope.getAnswersOfQuestion = function(index) {
-      $scope.descriptionQuestion=$scope.questions[index].text_question;
+      //$scope.descriptionQuestion=$scope.questions[index].text_question;
+      
+      for(var indexFav=0; indexFav< $scope.favorites.length; ++indexFav) {
+        if($scope.questions[index].id_question == $scope.favorites[indexFav].question_id) {
+          $scope.favoriteQuestion=true;
+          
+          break;
+        } else {
+          $scope.favoriteQuestion=false;
+        }
+      }
+      debugger
+      $scope.questionFavorite = {
+        'favorite':$scope.favoriteQuestion,
+        'description':  $scope.questions[index].text_question
+      }
+      
       for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
         if($scope.details[indexAnswer].id_question == $scope.questions[index].id_question){
           var resultAnswer = {
@@ -136,7 +153,13 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             numberOfQuestion: $scope.indexQuestionAnswer,
             text: $scope.details[indexAnswer].text_answer,
             likes: $scope.details[indexAnswer].likesAnswer,
+            id_question: $scope.details[indexAnswer].id_question,
             favorite: false
+          }
+          for(var indexFav=0; indexFav< $scope.favorites.length; ++indexFav) {
+            if(resultAnswer.id == $scope.favorites[indexFav].answer_id) {
+              resultAnswer.favorite=true;
+            } 
           }
           $scope.indexQuestionAnswer+=1;
           $scope.descriptionAnswer.push(resultAnswer);
@@ -184,10 +207,10 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         }
         $http.post('/insertFavoriteQuestion', data);
 
-        $scope.clickAddFavorite=true;
+        $scope.questionFavorite.favorite=true;
         $scope.goToLogin=false;
       } else {
-        $scope.clickAddFavorite=false;
+        $scope.questionFavorite.favorite=false;
         $scope.goToLogin=true;
       }
       
@@ -195,17 +218,17 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* remove from favorites question */
     $scope.removeFromFavoritesQuestion = function(question) {
+      debugger
       if($scope.idUserLoggerIn !== undefined) {
-        debugger
         var data = {
           'idQuestion':question-1
         }
         $http.post('/deleteFavoriteQuestion', data);
 
-        $scope.favoriteAnswer=false;
+        $scope.questionFavorite.favorite=false;
         $scope.goToLogin=false;
       } else {
-        $scope.favoriteAnswer=false;
+        $scope.questionFavorite.favorite=false;
         $scope.goToLogin=true;
       }
       
