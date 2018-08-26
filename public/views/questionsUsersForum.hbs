@@ -75,7 +75,7 @@
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 			</div>
 			<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
-				<div ng-if="!showDivAnswer" style="margin-left-5x">
+				<div ng-if="!showDivAnswer" class="margin-left-5x">
 					<!-- Question -->
 					<img class="imageButton" src="../images/user.png">
 					<div class="borderQuestion">
@@ -116,7 +116,7 @@
 							<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 						</div>
 						<!-- answer align to right -->
-						<div ng-if="$index%2===0"  class="borderAnswer">
+						<div ng-if="$index%2===0"  class="borderAnswerNoMargin">
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
 							</div>
