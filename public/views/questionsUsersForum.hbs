@@ -83,7 +83,7 @@
 						<div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
 							<i class="far fa-star favoriteButton cursorPointer"></i>
 						</div>
-						<div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()">
+						<div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
 							<i class="fas fa-star favoriteButton cursorPointer"></i>
 						</div>
 						<div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
@@ -101,7 +101,7 @@
 						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestion">
 							<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
+							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion(answerQuestion)">
 								<i class="fas fa-star favoriteButton cursorPointer"></i>
 							</div>
 							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()">
@@ -144,7 +144,7 @@
 					</div>
 				</div>
 				<!-- add question to favorites -->
-				<div class="margin-top-3x" ng-if="clickAddFavorite || clickRemoveFavorite">
+				<div class="margin-top-3x" ng-if="goToLogin">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 				</div>
 				<!-- put likes on question -->

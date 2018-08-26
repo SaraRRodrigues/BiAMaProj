@@ -240,17 +240,17 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* refresh questions */
 	$scope.reloadQuestions = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/questionsForumMobile'")
+		location.href = 'http://localhost:8080/BiAMa/questionsForumMobile?userName=' + $scope.idUserLoggerIn;
 	}
 
 	/* refresh curiosities */
 	$scope.reloadCuriosities = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/curiositiesForumMobile'")
+		location.href = 'http://localhost:8080/BiAMa/curiositiesForumMobile?userName=' + $scope.idUserLoggerIn;
 	}
 
 	/* refresh world shares */
 	$scope.reloadWorldShares = function() {
-		window.setTimeout("location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile'")
+		location.href = 'http://localhost:8080/BiAMa/worldSharesForumMobile?userName=' + $scope.idUserLoggerIn;
 	}
 	/* -------------- END MOBILE -------------- */
 

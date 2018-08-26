@@ -256,9 +256,17 @@ router.post('/insertFavoriteQuestion', (req, resp, next) => {
 	});
 });
 
+/* GET all favorites : forum */
+router.get('/allFavorites', (req, resp, next) => {
+	favoriteService.getAllFavorites((error, allFavoritesDetails) => {
+		resp.json({allFavoritesDetails})
+	});
+});
+
 /* DELETE favorite question : forum */
 router.post('/deleteFavoriteQuestion', (req, resp, next) => {
 	var favorite = req.body;
+	console.log('favorite: ', favorite);
 	deleteFavoriteService.deleteFavoriteQuestion(favorite,(error, deleteServiceDetails) => {
 		resp.json({deleteServiceDetails})
 	});

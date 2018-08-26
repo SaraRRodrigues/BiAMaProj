@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService", "QuestionsForumMaterialService", "QuestionsForumBiamaService","$http", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, QuestionsForumMaterialService, QuestionsForumBiamaService, $http){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","FavoritesQuestionForumService", "QuestionsForumMaterialService", "QuestionsForumBiamaService","$http", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, FavoritesQuestionForumService, QuestionsForumMaterialService, QuestionsForumBiamaService, $http){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMainMobile").hide();
@@ -80,6 +80,13 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         var data=result.data.comparationDetails;
         $scope.materialsToSearch = data;
 
+      });
+
+      var getFavorites = FavoritesQuestionForumService.getAllFavorites(function(infoFavorites){});
+      getFavorites.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.allFavoritesDetails;
+          $scope.nextIdFavorite = data[data.length-1].id_favorite;
       });
     }
     
@@ -165,34 +172,41 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* add to favorites question */
     $scope.addToFavoritesQuestion = function(){
-      if($scope.showInitSession){
-        /*var data = {
-          idFavorite: 0,
-          idUser: 0,
+      /* get favorites material */
+      if($scope.idUserLoggerIn !== undefined) {
+        var data = {
+          idFavorite:  parseInt($scope.nextIdFavorite)+1,
+          idUser: $scope.idUserLoggerIn,
           idMaterial: null,
           idQuestion: $scope.idQuestion
-        };
+        }
         $http.post('/insertFavoriteQuestion', data);
-        */
-      } else {
+
         $scope.clickAddFavorite=true;
+        $scope.goToLogin=false;
+      } else {
+        $scope.clickAddFavorite=false;
+        $scope.goToLogin=true;
       }
+      
     }
 
     /* remove from favorites question */
-    $scope.removeFromFavoritesQuestion = function() {
-      if($scope.showInitSession){
-        /*var data = {
-          idFavorite: 0,
-          idUser: 0,
-          idMaterial: null,
-          idQuestion: $scope.idQuestion
-        };
-        $http.post('/insertFavoriteQuestion', data);
-        */
+    $scope.removeFromFavoritesQuestion = function(question) {
+      if($scope.idUserLoggerIn !== undefined) {
+        debugger
+        var data = {
+          'idQuestion':question-1
+        }
+        $http.post('/deleteFavoriteQuestion', data);
+
+        $scope.clickAddFavorite=false;
+        $scope.goToLogin=false;
       } else {
-        $scope.clickRemoveFavorite=true;
+        $scope.clickAddFavorite=false;
+        $scope.goToLogin=true;
       }
+      
     }
 
     /* add like on question */
@@ -465,7 +479,7 @@ app.factory("LikeQuestionService", function($q, $http, $timeout){
     return {
       getLikesQuestion: getLikesQuestion
     };
-  });
+});
 
 app.factory("LikeAnswerService", function($q, $http, $timeout){
 
@@ -482,37 +496,54 @@ app.factory("LikeAnswerService", function($q, $http, $timeout){
     return {
       getLikesAnswer: getLikesAnswer
     };
-  });
+});
 
-  app.factory("QuestionsForumMaterialService", function($q, $http, $timeout){
-    var getMaterialComparation = function() {
-        var deferred = $q.defer();
-  
-        $timeout(function() {
-        deferred.resolve($http.get('/compareMaterials'));
-        }, 4000);
-  
-        return deferred.promise;
-    };
-  
-    return {
-        getMaterialComparation: getMaterialComparation
-    };
-  });
-
-  app.factory("QuestionsForumBiamaService", function($q, $http, $timeout){
-    
-    var getUsers = function() {
+app.factory("QuestionsForumMaterialService", function($q, $http, $timeout){
+  var getMaterialComparation = function() {
       var deferred = $q.defer();
-    
-       $timeout(function() {
-        deferred.resolve($http.get('/users',  {cache:true}));
-      }, 2000); 
-  
+
+      $timeout(function() {
+      deferred.resolve($http.get('/compareMaterials'));
+      }, 4000);
+
       return deferred.promise;
-    };
+  };
+
+  return {
+      getMaterialComparation: getMaterialComparation
+  };
+});
+
+app.factory("QuestionsForumBiamaService", function($q, $http, $timeout){
   
-    return {
-      getUsers: getUsers
-    };
-  });
+  var getUsers = function() {
+    var deferred = $q.defer();
+  
+      $timeout(function() {
+      deferred.resolve($http.get('/users',  {cache:true}));
+    }, 2000); 
+
+    return deferred.promise;
+  };
+
+  return {
+    getUsers: getUsers
+  };
+});
+
+app.factory("FavoritesQuestionForumService", function($q, $http, $timeout){
+    
+	var getAllFavorites = function(data) {
+		var deferred = $q.defer();
+
+		$timeout(function() {
+		  deferred.resolve($http.get('/allFavorites'));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+
+	  return {
+			getAllFavorites: getAllFavorites
+	  };
+});

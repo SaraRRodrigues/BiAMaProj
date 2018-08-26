@@ -2,7 +2,8 @@ var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 var pg = require('pg');
 
 module.exports = {
-	'getMyFavorites': getMyFavorites	
+	'getMyFavorites': getMyFavorites,
+	'getAllFavorites': getAllFavorites	
 }
 function getMyFavorites(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -12,6 +13,20 @@ function getMyFavorites(data, cb){
 			return console.error('error fetching client from pool', err);
 		}
 		client.query('SELECT * FROM "Favorite" WHERE "Favorite".user_id=$1 ORDER BY "Favorite".question_id ASC',[userId], function(err, result) {
+			done();
+			if(err) {
+				return console.error('error running query', err);
+			}
+			cb(null, result.rows)
+		});
+	});
+}
+function getAllFavorites(cb) {
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		if(err) {
+			return console.error('error fetching client from pool', err);
+		}
+		client.query('SELECT * FROM "Favorite" ORDER BY "Favorite".id_favorite', function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);

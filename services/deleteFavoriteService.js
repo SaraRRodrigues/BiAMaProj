@@ -7,11 +7,11 @@ module.exports = {
 function deleteFavoriteQuestion(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         console.log('value2: ', data);
-		var idMaterial = data.idFavorite;
+		var idQuestion = data.idQuestion;
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query(`DELETE FROM "Favorite" WHERE "Favorite".id_favorite=$1`, [idMaterial], function(err, result) {
+		client.query(`DELETE FROM "Favorite" WHERE "Favorite".question_id=$1`, [idQuestion], function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);
