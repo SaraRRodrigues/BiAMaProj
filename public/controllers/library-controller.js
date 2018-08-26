@@ -1,5 +1,5 @@
 
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "$sce", "$route", "FavoritesService", "LibraryMaterialService","LibraryBiamaService", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, $sce, $route, FavoritesService, LibraryMaterialService, LibraryBiamaService){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "$sce", "$route", "FavoritesLibraryService", "LibraryMaterialService","LibraryBiamaService", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, $sce, $route, FavoritesLibraryService, LibraryMaterialService, LibraryBiamaService){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -52,7 +52,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.getAllRequests = function() {
 		$scope.getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
 		$scope.getCategoryInfo = CategoryInfoService.getCategory(function(infoCategory){});
-		$scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+		$scope.getMyFavorites = FavoritesLibraryService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
 	
 		/* get category of material */
 		$scope.getCategoryInfo.then(function(result) {
@@ -519,13 +519,15 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 	  };
 });
 
-app.factory("FavoritesService", function($q, $http, $timeout){
+app.factory("FavoritesLibraryService", function($q, $http, $timeout){
     
 	var getMyFavorites = function() {
 		var deferred = $q.defer();
 
 		$timeout(function() {
-		  deferred.resolve($http.get('/favorites'));
+		  deferred.resolve($http.get('/favorites',{params: {
+            'data': data
+            }}));
 		}, 2000);
 	
 		return deferred.promise;

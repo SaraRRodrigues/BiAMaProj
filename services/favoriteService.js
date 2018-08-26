@@ -4,12 +4,14 @@ var pg = require('pg');
 module.exports = {
 	'getMyFavorites': getMyFavorites	
 }
-function getMyFavorites(cb){
+function getMyFavorites(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+		var userId = data;
+		console.log('userid: ', userId);
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Favorite" ORDER BY "Favorite".id_favorite ASC', function(err, result) {
+		client.query('SELECT * FROM "Favorite" WHERE "Favorite".user_id=$1 ORDER BY "Favorite".question_id ASC',[userId], function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);

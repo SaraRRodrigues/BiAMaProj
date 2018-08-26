@@ -12,7 +12,7 @@ function getQuestionAnswer(cb){
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
-		client.query('SELECT * FROM "Question" INNER JOIN "Answer" ON "Question".id_question="Answer".id_question ORDER BY "Question".id_question ASC', function(err, result) {
+		client.query('SELECT * FROM "Question" INNER JOIN "Answer" ON "Question".id_question="Answer".id_question ORDER BY "Answer".id_answer ASC', function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);

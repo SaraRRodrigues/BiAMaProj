@@ -1,4 +1,4 @@
-app.controller("MyQuestionsController", ['$scope', "QuestionService", "FavoritesService", "UserQuestionService","MyQuestionsMaterialService", "$http", "jQuery", function($scope, QuestionService,FavoritesService,UserQuestionService, MyQuestionsMaterialService,$http){
+app.controller("MyQuestionsController", ['$scope', "QuestionService", "FavoritesQuestionService", "UserQuestionService","MyQuestionsMaterialService", "$http", "jQuery", function($scope, QuestionService,FavoritesQuestionService,UserQuestionService, MyQuestionsMaterialService,$http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -54,7 +54,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 	/* get information of my favorites, my questions and answer to display */
     $scope.getAllRequests = function() {
         
-        $scope.getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+        $scope.getMyFavorites = FavoritesQuestionService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
         $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getAnswerQuestionInfo = QuestionService.getQuestionAnswer(function(infoUserAnswer){});
@@ -517,4 +517,23 @@ app.factory("MyQuestionsMaterialService", function($q, $http, $timeout){
     return {
         getMaterialComparation: getMaterialComparation
     };
+});
+app.factory("FavoritesQuestionService", function($q, $http, $timeout){
+    
+	var getMyFavorites = function() {
+		var deferred = $q.defer();
+
+		$timeout(function() {
+          deferred.resolve($http.get('/favorites',
+          {params: {
+            'data': data
+            }}));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+
+	  return {
+			getMyFavorites: getMyFavorites
+	  };
 });

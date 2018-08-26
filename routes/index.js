@@ -135,7 +135,8 @@ router.get('/forum', (req, resp, next) => {
 
 /* GET favorites: favorites */
 router.get('/favorites', (req, resp, next) => {
-	favoriteService.getMyFavorites((error, favoriteDetails) => {
+	var data = req.query.data;
+	favoriteService.getMyFavorites(data, (error, favoriteDetails) => {
 		resp.json({favoriteDetails})
 	});
 });

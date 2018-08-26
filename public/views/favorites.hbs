@@ -80,14 +80,14 @@
 		<!-- show favorites questions -->
 		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites">
-			<div ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
+			<div class="titlesOnCenter" ng-if="showMaterials" ng-repeat="fav in favorites" style="margin-top: 10px;">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="130px" alt="foto"/>
 			</div>
-			<div ng-if="favorites.length===0 && !doLogin">
+			<div class="titlesOnCenter" ng-if="favorites.length===0 && !doLogin">
 				<h4>Não tem favoritos associados</h4>
 			</div>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
-                <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
+                <a class="questionX" ng-click="getQuestion((question.question_id), $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestions"></div>
             </div>
            	<div ng-if="showQuestionDetails">
@@ -95,7 +95,7 @@
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
 				<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
-					<div ng-if="!showDivAnswer" ng-class="margin-left-10x">
+					<div ng-if="!showDivAnswer" class="margin-left-5x">
 						<!-- Question -->
 						<img class="imageButton" src="../images/user.png">
 						<div class="borderQuestion">

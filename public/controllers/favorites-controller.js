@@ -52,7 +52,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
         if($scope.idUserLoggerIn !== undefined){
             /* get favorites material */
-            var getMyFavorites = FavoritesService.getMyFavorites(function(infoFavorites){});
+            var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {
                 $scope.loading = false;
                 var data=result.data.favoriteDetails;
@@ -71,7 +71,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                     }
                 }
             });
-    
             
             /* get information of material and of library - when i do get library */
             var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
@@ -175,11 +174,14 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* open favorites button */
     $scope.openFavoritesButton = function(){
         if($scope.showFavoritesButton){
-			$scope.showFavoritesButton = false;
+            $scope.showFavoritesButton = false;
+            $scope.showQuestionDetails=true;
 		}else {
             $scope.showFavoritesButton = true;
             $scope.showMyQuestions = false;
             $scope.showMaterials = false;
+            $scope.showQuestionDetails=false;
+            $scope.descriptionAnswer=[];
 		}
         $scope.favoritesButton = ['Materiais', 'Perguntas']
     }
@@ -676,4 +678,23 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
     return {
         getMaterialComparation: getMaterialComparation
     };
+});
+
+app.factory("FavoritesService", function($q, $http, $timeout){
+    
+	var getMyFavorites = function(data) {
+		var deferred = $q.defer();
+
+		$timeout(function() {
+		  deferred.resolve($http.get('/favorites',{params: {
+            'data': data
+            }}));
+		}, 2000);
+	
+		return deferred.promise;
+	  };
+
+	  return {
+			getMyFavorites: getMyFavorites
+	  };
 });
