@@ -153,7 +153,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             id: $scope.details[indexAnswer].id_answer,
             numberOfQuestion: $scope.indexQuestionAnswer,
             text: $scope.details[indexAnswer].text_answer,
-            likes: $scope.details[indexAnswer].likesAnswer,
+            likes: $scope.details[indexAnswer].likes_answer,
             id_question: $scope.details[indexAnswer].id_question,
             favorite: false
           }
@@ -299,6 +299,44 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           $http.post('updateLikeQuestion', data);
           $scope.goToLogin=false;
         }
+      } else {
+        $scope.goToLogin=true;
+      }
+    }
+
+    /* add like on answer */
+    $scope.addLikeAnswer = function(answer) {
+      if($scope.idUserLoggerIn !== undefined) {
+        debugger
+        answer.likes=answer.likes+1;
+        var data = {
+          'like': answer.likes,
+          'id_answer': answer.id
+        }
+        $http.post('updateLikeAnswer', data);
+        $scope.goToLogin=false;
+        answerQuestion.likes=true;
+      } else {
+        $scope.goToLogin=true;
+      }
+    }
+
+    /* remove like of question */
+    $scope.removeLikeAnswer = function(answer) {
+      if($scope.idUserLoggerIn !== undefined) {
+        debugger
+        if(answer.likes > 0) {
+          
+          answer.likes=answer.likes-1;
+          var data = {
+            'like': answer.likes,
+            'id_answer': answer.id
+          }
+          $http.post('updateLikeAnswer', data);
+          $scope.goToLogin=false;
+          answerQuestion.likes=true;
+        }
+        
       } else {
         $scope.goToLogin=true;
       }

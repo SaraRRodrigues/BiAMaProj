@@ -118,6 +118,14 @@ router.get('/userLikeAnswers', (req, resp, next) => {
 	});
 });
 
+/* UPDATE like answer: forum */
+router.post('/updateLikeAnswer', (req, resp, next) => {
+	var data = req.body;
+	likeAnswerService.updateLikeAnswer(data, (error, questionDetails) => {
+		resp.json({questionDetails})
+	});
+});
+
 /* GET curiosities: forum */
 router.get('/curiosities', (req, resp, next) => {
 	curiosityService.getCuriosities((error, curiosityDetails) => {

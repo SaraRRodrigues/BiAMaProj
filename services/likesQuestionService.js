@@ -24,7 +24,6 @@ function updateLikeQuestion(data, cb){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		var likesQuestion = data.like;
 		var idQuestion = data.id_question;
-		console.log(data)
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
