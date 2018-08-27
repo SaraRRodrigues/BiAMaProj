@@ -269,7 +269,20 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		}
 		$http.post('/insertMyBiama', data);
 		$scope.createdMyBiama = true;
-		$scope.registUser = true;
+		debugger
+		if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
+			$scope.registUser = true;
+		} else {
+			var data = {
+				'id_notification': parseInt($scope.currentNotificationId)+1,
+				'text_notification': 'A sua BiAMa foi criada',
+				'date_notification': 'Agora mesmo',
+				'insert_notification': 'yes',
+				'id_user': $scope.idUserLoggerIn
+			}
+			$http.post('/insertNotifications', data);
+			window.setTimeout("location.href = 'http://localhost:8080'")
+		}
 		$scope.showBiamaInitPage = false;
 		$scope.showMyBiamaConf = false;
 
@@ -318,26 +331,16 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			}
 
 			/* insert notification */
-			debugger
 			if($scope.createdMyBiama) {
-				if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== '') {
+				if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
 					var data = {
 						'id_notification': parseInt($scope.currentNotificationId)+1,
 						'text_notification': 'A sua BiAMa foi criada pelo utilizador ' + name,
 						'date_notification': 'Agora mesmo',
 						'insert_notification': 'yes',
-						'id_user': $scope.idUserLoggerIn
+						'id_user': 'anonymous'
 					}
-				} else {
-					var data = {
-						'id_notification': parseInt($scope.currentNotificationId)+1,
-						'text_notification': 'A sua BiAMa foi criada pelo utilizador ' + name,
-						'date_notification': 'Agora mesmo',
-						'insert_notification': 'yes',
-						'id_user': parseInt(idUser)+1
-					}
-				}
-				
+				} 
 				$http.post('/insertNotifications', data);
 			}
 		}
