@@ -1,4 +1,4 @@
-app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumService","UserWorldShareService", "WorldShareMaterialService", "$http", "jQuery", function($scope,WorldSharesService,ForumService,UserWorldShareService, WorldShareMaterialService,$http){
+app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumService","UserWorldShareService", "WorldShareMaterialService","NotificationWorldShareService", "$http", "jQuery", function($scope,WorldSharesService,ForumService,UserWorldShareService, WorldShareMaterialService, NotificationWorldShareService, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -109,6 +109,15 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 }
             }
         });
+
+        var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+		});
     }
 
     /* redirect to homepage with arrow */
@@ -159,6 +168,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* insert world share on database */
     $scope.saveConfigInsertWorldShare = function (image, description) {
+        debugger
         if(image !== undefined) {
             var data = {
                 'forumType': $scope.forumType, 
@@ -167,6 +177,16 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'description': description
             }
             $http.post('/insertWorldShares', data);
+
+            debugger
+            var data = {
+                'id_notification': parseInt($scope.currentNotificationId)+1,
+                'text_notification': 'Nova partilha do mundo',
+                'date_notification': 'Agora mesmo',
+                'insert_notification': 'yes',
+                'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
+            }
+            $http.post('/insertNotifications', data);
         }
     }
 
@@ -464,5 +484,35 @@ app.factory("WorldShareMaterialService", function($q, $http, $timeout){
 
     return {
         getMaterialComparation: getMaterialComparation
+    };
+});
+
+app.factory("NotificationWorldShareService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+	
+	var getAllNotifications = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/allNotifications'));
+		}, 2000);
+	
+		return deferred.promise;
+	};
+
+    return {
+		getMyNotifications: getMyNotifications,
+		getAllNotifications: getAllNotifications
     };
 });

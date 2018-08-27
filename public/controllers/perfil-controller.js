@@ -1,4 +1,4 @@
-app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMaterialService", "$http", "jQuery", function($scope, UserPerfilService, PerfilMaterialService, $http){
+app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMaterialService","NotificationPerfilService", "$http", "jQuery", function($scope, UserPerfilService, PerfilMaterialService, NotificationPerfilService, $http){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -80,6 +80,16 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
         });
+
+        var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+				debugger
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+		});
     
     }
     
@@ -244,8 +254,14 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
-			$scope.userDetails = false;
+            $scope.userDetails = false;
+            $scope.upgradeInformations=false;
+            $scope.editDate=false;
+            $scope.upgradeDate=true;
 		}else {
+            $scope.upgradeInformations=true;
+            $scope.editDate=true;
+            $scope.upgradeDate=false;
 			$scope.userDetails = true;
 			$scope.showSearch = false;
 		}
@@ -433,6 +449,15 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             var validBirthdate = $scope.validDateOfBirth(data.birthdate);
             if(validBirthdate){
                 $http.post('/updateUserDetails', data);
+
+                var data = {
+					'id_notification': parseInt($scope.currentNotificationId)+1,
+					'text_notification': 'Alterou os seus dados pessoais',
+					'date_notification': 'Agora mesmo',
+					'insert_notification': 'yes',
+					'id_user': id
+				}
+				$http.post('/insertNotifications', data);
             } else {
                 $scope.underAgePerfil=true;
             }
@@ -497,5 +522,35 @@ app.factory("PerfilMaterialService", function($q, $http, $timeout){
 
     return {
         getMaterialComparation: getMaterialComparation
+    };
+});
+
+app.factory("NotificationPerfilService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+	
+	var getAllNotifications = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/allNotifications'));
+		}, 2000);
+	
+		return deferred.promise;
+	};
+
+    return {
+		getMyNotifications: getMyNotifications,
+		getAllNotifications: getAllNotifications
     };
 });

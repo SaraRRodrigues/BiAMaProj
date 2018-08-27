@@ -1,5 +1,5 @@
 
-app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService", "UserMyBiamaService","$http", "jQuery",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService, UserMyBiamaService,$http){
+app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService", "UserMyBiamaService","NotificationMyBiamaService","$http", "jQuery",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService, UserMyBiamaService,NotificationMyBiamaService,$http){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -70,7 +70,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					break;
 				}
 			}
-			console.log('materiais: ', $scope.materialsCategories);
 			jQuery( function() {
 				var availableTags = $scope.categories;
 			jQuery( "#category" ).autocomplete({
@@ -108,6 +107,16 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.loading = false;
 			var data=result.data.userLibrary;
 			$scope.userLibrary=data;
+		});
+
+		var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+				debugger
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
 		});
 
 	}
@@ -148,7 +157,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		&& $scope.colorMaterial !== '' && $scope.codeMaterial !== '' && $scope.imageMaterial !== '' && $scope.descriptionMaterial !== '') {
 			$scope.codeMaterial = $scope.codeMaterial + "";
 			// Default export is a4 paper, portrait, using milimeters for units
-			var doc = new jsPDF()
+			var doc = new jsPDF();
 			
 			doc.text('A sua BiAMa', 10, 10)
 
@@ -309,6 +318,18 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			} else {
 				$scope.usernameRepeated=true;
 			}
+
+			/* insert notification */
+			if($scope.createdMyBiama) {
+				var data = {
+					'id_notification': parseInt($scope.currentNotificationId)+1,
+					'text_notification': 'A sua BiAMa foi criada pelo utilizador ' + name,
+					'date_notification': 'Agora mesmo',
+					'insert_notification': 'yes',
+					'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
+				}
+				$http.post('/insertNotifications', data);
+			}
 		}
 
 		$scope.insertMaterialOnLibraries();
@@ -433,8 +454,8 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* init MainController  */
 	$scope.viewType();
 	$scope.initData();
-	$scope.getAllRequests();
     $scope.validateUserLoggedIn();
+	$scope.getAllRequests();
 }])
 
 app.factory("MaterialsBiamaService", function($q, $http, $timeout){
@@ -498,4 +519,34 @@ app.factory("UserMyBiamaService", function($q, $http, $timeout){
 		getUsers: getUsers,
 		getLibraryUserDetails: getLibraryUserDetails
 	};
+});
+
+app.factory("NotificationMyBiamaService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+	
+	var getAllNotifications = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/allNotifications'));
+		}, 2000);
+	
+		return deferred.promise;
+	};
+
+    return {
+		getMyNotifications: getMyNotifications,
+		getAllNotifications: getAllNotifications
+    };
 });

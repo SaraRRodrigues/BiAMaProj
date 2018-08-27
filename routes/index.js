@@ -181,6 +181,21 @@ router.get('/myNotifications', (req, resp, next) => {
 	});
 });
 
+/* GET my notifications: Notifications */
+router.get('/allNotifications', (req, resp, next) => {
+	notificationService.getAllNotifications((error, notificationDetails) => {
+		resp.json({notificationDetails})
+	});
+});
+
+/* INSERT notifications: Notifications */
+router.post('/insertNotifications', (req, resp, next) => {
+	var data = req.body;
+	notificationService.insertMyNotifications(data, (error, notificationDetails) => {
+		resp.json({notificationDetails})
+	});
+});
+
 /* GET my perfil: Perfil */
 router.get('/myPerfil', (req, resp, next) => {
 	perfilService.getMyPerfil((error, perfilDetails) => {
