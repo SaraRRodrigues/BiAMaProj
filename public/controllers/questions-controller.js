@@ -1,4 +1,4 @@
-app.controller("MyQuestionsController", ['$scope', "QuestionService", "FavoritesQuestionService", "UserQuestionService","MyQuestionsMaterialService", "$http", "jQuery", function($scope, QuestionService,FavoritesQuestionService,UserQuestionService, MyQuestionsMaterialService,$http){
+app.controller("MyQuestionsController", ['$scope', "QuestionService", "FavoritesQuestionService", "UserQuestionService","MyQuestionsMaterialService", "NotificationMyQuestionService","$http", "jQuery", function($scope, QuestionService,FavoritesQuestionService,UserQuestionService, MyQuestionsMaterialService, NotificationMyQuestionService, $http){
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -58,7 +58,12 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getAnswerQuestionInfo = QuestionService.getQuestionAnswer(function(infoUserAnswer){});
-    
+        $scope.getAllUsers = UserQuestionService.getUsers(function(users){});
+
+		$scope.getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+        });
+        
         $scope.getMyQuestions.then(function(result) {
             $scope.loading = false;
             var data=result.data.questions;
@@ -84,6 +89,15 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             $scope.details=data;
             $scope.calculateAnswerId($scope.details);
         });
+
+        var getNotifications = NotificationMyQuestionService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+		});
     }
 
     /* calculate answer id */
@@ -153,6 +167,15 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         
         $http.post('/insertAnswer', data);
         $scope.showDivAnswer=false;
+        
+        var data = {
+            'id_notification': parseInt($scope.currentNotificationId)+1,
+            'text_notification': 'Resposta à pergunta número ' + $scope.idQuestion,
+            'date_notification': 'Agora mesmo',
+            'insert_notification': 'yes',
+            'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
+        }
+        $http.post('/insertNotifications', data);
     }
 
     /* add to favorites question */
@@ -351,34 +374,28 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
 
-		$scope.users = 'loadUser';
-		var getAllUsers = UserQuestionService.getUsers(function(users){});
-		
-		getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
-			for(var index=0; index<$scope.users.length; ++index){
-				$scope.userName = $scope.users[index].username;
-				$scope.userPassword = $scope.users[index].password;
-				$scope.userImage = $scope.users[index].image;
-				$scope.userEmail = $scope.users[index].email;
-				$scope.nameUser=$scope.users[index].name;
-				$scope.userBirthdate = $scope.users[index].birthdate;
+        for(var index=0; index<$scope.users.length; ++index){
+            $scope.userName = $scope.users[index].username;
+            $scope.userPassword = $scope.users[index].password;
+            $scope.userImage = $scope.users[index].image;
+            $scope.userEmail = $scope.users[index].email;
+            $scope.nameUser=$scope.users[index].name;
+            $scope.userBirthdate = $scope.users[index].birthdate;
 
-				var splitDateBirth = $scope.userBirthdate.split('/');
-				$scope.dayBirth = splitDateBirth[0];
-				$scope.monthBirth = splitDateBirth[1];
-				$scope.yearBirth = splitDateBirth[2];
+            var splitDateBirth = $scope.userBirthdate.split('/');
+            $scope.dayBirth = splitDateBirth[0];
+            $scope.monthBirth = splitDateBirth[1];
+            $scope.yearBirth = splitDateBirth[2];
 
-				if($scope.userName !== null && $scope.userName === username){
-					if($scope.userPassword !== null && $scope.userPassword === password){
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
-						break;
-					}
-				}
-			}
-		});
+            if($scope.userName !== null && $scope.userName === username){
+                if($scope.userPassword !== null && $scope.userPassword === password){
+                    $scope.userLoggedIn=$scope.users[index].username;
+                    $scope.idUserLoggerIn=$scope.users[index].id;
+                    $scope.confirmSession = true;
+                    break;
+                }
+            }
+        }
     }
 
     /* routes of click on links page */
@@ -524,10 +541,7 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 		var deferred = $q.defer();
 
 		$timeout(function() {
-          deferred.resolve($http.get('/favorites',
-          {params: {
-            'data': data
-            }}));
+          deferred.resolve($http.get('/favorites'));
 		}, 2000);
 	
 		return deferred.promise;
@@ -536,4 +550,34 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 	  return {
 			getMyFavorites: getMyFavorites
 	  };
+});
+
+app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+	
+	var getAllNotifications = function() {
+		var deferred = $q.defer();
+	
+		$timeout(function() {
+		  deferred.resolve($http.get('/allNotifications'));
+		}, 2000);
+	
+		return deferred.promise;
+	};
+
+    return {
+		getMyNotifications: getMyNotifications,
+		getAllNotifications: getAllNotifications
+    };
 });

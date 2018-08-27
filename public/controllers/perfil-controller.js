@@ -83,7 +83,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
         var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
 			getNotifications.then(function(result) {
-				debugger
 			$scope.loading = false;
 			var data=result.data.notificationDetails;
 			$scope.notifications=data;

@@ -168,7 +168,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* insert world share on database */
     $scope.saveConfigInsertWorldShare = function (image, description) {
-        debugger
+        
         if(image !== undefined) {
             var data = {
                 'forumType': $scope.forumType, 
@@ -177,8 +177,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'description': description
             }
             $http.post('/insertWorldShares', data);
-
-            debugger
+            
             var data = {
                 'id_notification': parseInt($scope.currentNotificationId)+1,
                 'text_notification': 'Nova partilha do mundo',

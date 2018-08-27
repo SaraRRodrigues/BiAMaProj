@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","FavoritesQuestionForumService", "QuestionsForumMaterialService", "QuestionsForumBiamaService","$http", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, FavoritesQuestionForumService, QuestionsForumMaterialService, QuestionsForumBiamaService, $http){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","FavoritesQuestionForumService", "QuestionsForumMaterialService", "QuestionsForumBiamaService", "NotificationQuestionForumService", "$http", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, FavoritesQuestionForumService, QuestionsForumMaterialService, QuestionsForumBiamaService,NotificationQuestionForumService, $http){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMainMobile").hide();
@@ -89,6 +89,20 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           var data=result.data.allFavoritesDetails;
           $scope.favorites = data;
           $scope.nextIdFavorite = data[data.length-1].id_favorite;
+      });
+
+      $scope.getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
+      $scope.getAllUsers.then(function(usersDB) {
+        $scope.users = usersDB.data.users;
+      });
+
+      var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
+        getNotifications.then(function(result) {
+        $scope.loading = false;
+        var data=result.data.notificationDetails;
+        $scope.notifications=data;
+        $scope.numberOfNotifications=$scope.notifications.length;
+        $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
       });
     }
     
@@ -192,6 +206,28 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       }
       $scope.indexQuestionAnswer+=1;
       $scope.descriptionAnswer.push(resultAnswer);
+
+      var valueIdQuestion = parseInt($scope.idQuestion)+1;
+      var data='';
+        debugger
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "") {
+          data = {
+              'id_notification': parseInt($scope.currentNotificationId)+1,
+              'text_notification': 'Resposta à pergunta número ' + valueIdQuestion,
+              'date_notification': 'Agora mesmo',
+              'insert_notification': 'yes',
+              'id_user': $scope.idUserLoggerIn
+          }
+      } else {
+          data = {
+              'id_notification': parseInt($scope.currentNotificationId)+1,
+              'text_notification': 'Resposta à pergunta número ' + valueIdQuestion,
+              'date_notification': 'Agora mesmo',
+              'insert_notification': 'yes',
+              'id_user': 'anonymous'
+          }
+      }
+      $http.post('/insertNotifications', data);
 
     }
 
@@ -307,7 +343,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* add like on answer */
     $scope.addLikeAnswer = function(answer) {
       if($scope.idUserLoggerIn !== undefined) {
-        debugger
+        
         answer.likes=answer.likes+1;
         var data = {
           'like': answer.likes,
@@ -324,7 +360,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* remove like of question */
     $scope.removeLikeAnswer = function(answer) {
       if($scope.idUserLoggerIn !== undefined) {
-        debugger
+        
         if(answer.likes > 0) {
           
           answer.likes=answer.likes-1;
@@ -446,11 +482,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
   
-      $scope.users = 'loadUser';
-      var getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
-      
-      getAllUsers.then(function(usersDB) {
-        $scope.users = usersDB.data.users;
         for(var index=0; index<$scope.users.length; ++index){
           $scope.userName = $scope.users[index].username;
           $scope.userPassword = $scope.users[index].password;
@@ -473,7 +504,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             }
           }
         }
-      });
     }
      
     /* routes of click on links page */
@@ -647,4 +677,34 @@ app.factory("FavoritesQuestionForumService", function($q, $http, $timeout){
 	  return {
 			getAllFavorites: getAllFavorites
 	  };
+});
+
+app.factory("NotificationQuestionForumService", function($q, $http, $timeout){
+  var getMyNotifications = function(data) {
+      var deferred = $q.defer();
+
+      $timeout(function() {
+      deferred.resolve($http.get('/myNotifications', 
+      {params: {
+          'data': data
+      }}));
+      }, 2000);
+
+      return deferred.promise;
+  };
+
+var getAllNotifications = function() {
+  var deferred = $q.defer();
+
+  $timeout(function() {
+    deferred.resolve($http.get('/allNotifications'));
+  }, 2000);
+
+  return deferred.promise;
+};
+
+  return {
+  getMyNotifications: getMyNotifications,
+  getAllNotifications: getAllNotifications
+  };
 });
