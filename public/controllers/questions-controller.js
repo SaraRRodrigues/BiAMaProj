@@ -167,13 +167,13 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         
         $http.post('/insertAnswer', data);
         $scope.showDivAnswer=false;
-        
+        var valueIdQuestion = parseInt($scope.idQuestion)+1;
         var data = {
             'id_notification': parseInt($scope.currentNotificationId)+1,
-            'text_notification': 'Resposta à pergunta número ' + $scope.idQuestion,
+            'text_notification': 'Resposta à pergunta número ' + valueIdQuestion,
             'date_notification': 'Agora mesmo',
             'insert_notification': 'yes',
-            'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
+            'id_user': $scope.idUserLoggerIn
         }
         $http.post('/insertNotifications', data);
     }

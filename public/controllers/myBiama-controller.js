@@ -269,7 +269,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		}
 		$http.post('/insertMyBiama', data);
 		$scope.createdMyBiama = true;
-		debugger
+		
 		if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
 			$scope.registUser = true;
 		} else {

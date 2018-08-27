@@ -209,7 +209,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
       var valueIdQuestion = parseInt($scope.idQuestion)+1;
       var data='';
-        debugger
       if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "") {
           data = {
               'id_notification': parseInt($scope.currentNotificationId)+1,

@@ -27,7 +27,7 @@ function getAllMyQuestions(data, cb) {
 			return console.error('error fetching client from pool', err);
 		}
 		
-		client.query('SELECT * FROM "Library_User" INNER JOIN "Forum" ON "Library_User".library_id="Forum".library_id INNER JOIN "Question" ON "Question".forum_type="Forum".type_forum WHERE "Library_User".user_id=$1', [userId], function(err, result) {
+		client.query('SELECT * FROM "Library_User" INNER JOIN "Forum" ON "Library_User".library_id="Forum".library_id INNER JOIN "Question" ON "Question".forum_type="Forum".type_forum WHERE "Library_User".user_id=$1 ORDER BY "Question".id_question ASC', [userId], function(err, result) {
 			if(err) {
 				return console.error('error running query', err);
 			}
