@@ -91,16 +91,16 @@
                         <img class="imageButton" src="../images/user.png">
                         <div class="borderQuestion">
                             <label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-                            <div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()">
+                            <div ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()">
                                 <i class="far fa-star favoriteButton cursorPointer"></i>
                             </div>
-                            <div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()">
+                            <div ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
                                 <i class="fas fa-star favoriteButton cursorPointer"></i>
                             </div>
-                            <div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
+                            <div ng-if="questionFavorite.like==0" ng-click="addLikeQuestion()">
                                 <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
                             </div>
-                            <div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
+                            <div ng-if="questionFavorite.like>0" ng-click="removeLikeQuestion()">
                                 <i class="far fa-thumbs-up likeButton cursorPointer" ></i>
                             </div>
                             <h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>

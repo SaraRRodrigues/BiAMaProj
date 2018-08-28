@@ -25,6 +25,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.showMyQuestions=false;
         $scope.questions=[];
         $scope.descriptionAnswer=[];
+        $scope.likes=0;
 
         $scope.resultSearch = [];
         $scope.showDetailsOfMaterial=false;
@@ -149,6 +150,12 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             $scope.descriptionAnswer.push(resultAnswer);
           }
         }
+        $scope.questionFavorite = {
+            'idQuestion':$scope.myQuestions[index].id_question,
+            'favorite':$scope.favoriteQuestion,
+            'like': $scope.myQuestions[index].likes_question,
+            'description':  $scope.myQuestions[index].text_question
+          }
     }
 
     /* click on answer to show section of answer */
@@ -187,10 +194,10 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.getMyFavorites.then(function(result) {
             $scope.loading = false;
             $scope.showMyQuestions=true;
-            var data=result.data.favoriteDetails;
+            var data=result.data.allFavoritesDetails;
             $scope.favoriteDetails=data;
 
-            if($scope.showInitSession){
+            //if($scope.showInitSession){
                 if($scope.favoriteDetails.length===0) {
                     $scope.favoriteId=1;
                 } else {
@@ -200,71 +207,50 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
                     idFavorite: $scope.favoriteId,
                     idUser: $scope.idUserLoggerIn,
                     idMaterial: null,
-                    idQuestion: $scope.idQuestion
+                    idQuestion: $scope.idQuestion,
+                    idAnswer: -1
                 };
                 $http.post('/insertFavoriteQuestion', data);
-                
-                $scope.clickAddFavorite=true;
-            } 
+                $scope.questionFavorite.favorite=true;
+            //} 
         });
     }
   
     /* remove from favorites question */
-    $scope.removeFromFavoritesQuestion = function() {
-        $scope.showMyQuestions=false;
-        $scope.loading = true;
+    $scope.removeFromFavoritesQuestion = function(question) {
+        //$scope.showMyQuestions=false;
 
-        if($scope.showInitSession){
-            var data = {
-                idFavorite: $scope.favoriteId,
-                idUser: $scope.idUserLoggerIn,
-                idMaterial: null,
-                idQuestion: $scope.idQuestion
-            };
-            $http.post('/deleteFavoriteQuestion', data);
-            $scope.loading = false;
-            $scope.showMyQuestions=true;
-            
-            $scope.clickAddFavorite=false;
-        } 
+        var data = {
+            'idQuestion':question-1
+        }
+        $http.post('/deleteFavoriteQuestion', data);
+        //$scope.showMyQuestions=true;
+        
+        $scope.questionFavorite.favorite=false;
+        
     }
 
     /* add like on question */
     $scope.addLikeQuestion = function() {
-        if($scope.showInitSession){
-            /*var data = {
-            idFavorite: 0,
-            idUser: 0,
-            idMaterial: null,
-            idQuestion: $scope.idQuestion
-            };
-            $http.post('/insertFavoriteQuestion', data);
-            */
-            if($scope.clickAddLike) {
-                $scope.clickAddLike=false;
-            } else {
-                $scope.clickAddLike=true;
-            }
+        $scope.questionFavorite.like=$scope.questionFavorite.like+1;
+        var data = {
+            'like': $scope.questionFavorite.like,
+            'id_question': $scope.questionFavorite.idQuestion
         }
+        $http.post('updateLikeQuestion', data);
+        $scope.goToLogin=false;
     }
 
     /* remove like of question */
     $scope.removeLikeQuestion = function() {
-        if($scope.showInitSession){
-            /*var data = {
-            idFavorite: 0,
-            idUser: 0,
-            idMaterial: null,
-            idQuestion: $scope.idQuestion
-            };
-            $http.post('/insertFavoriteQuestion', data);
-            */
-
-            if($scope.clickRemoveLike) {
-                $scope.clickRemoveLike=false;
-            } else {
-                $scope.clickRemoveLike=true;
+        if($scope.questionFavorite.like > 0) {
+            $scope.questionFavorite.like=$scope.questionFavorite.like-1;
+            var data = {
+              'like': $scope.questionFavorite.like,
+              'id_question': $scope.questionFavorite.idQuestion
             }
+            $http.post('updateLikeQuestion', data);
+            $scope.goToLogin=false;
         }
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
@@ -541,7 +527,7 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 		var deferred = $q.defer();
 
 		$timeout(function() {
-          deferred.resolve($http.get('/favorites'));
+          deferred.resolve($http.get('/allFavorites'));
 		}, 2000);
 	
 		return deferred.promise;
