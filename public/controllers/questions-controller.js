@@ -98,7 +98,14 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 			$scope.notifications=data;
 			$scope.numberOfNotifications=$scope.notifications.length;
 			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-		});
+        });
+        
+        $scope.getMyFavorites.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.allFavoritesDetails;
+            $scope.nextIdFavorite = data[data.length-1].id_favorite;
+            $scope.favoriteDetails=data;
+        });
     }
 
     /* calculate answer id */
@@ -138,13 +145,16 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     /* get answers of question with index(is question id) */
     $scope.getAnswersOfQuestion = function(index) {
         $scope.descriptionQuestion=$scope.myQuestions[index].text_question;
+        debugger
         for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
           if($scope.details[indexAnswer].id_question == $scope.myQuestions[index].id_question){
             var resultAnswer = {
-              numberOfQuestion: $scope.indexQuestionAnswer,
-              text: $scope.details[indexAnswer].text_answer,
-              likes: $scope.details[indexAnswer].likesAnswer,
-              favorite: false
+                id: $scope.details[indexAnswer].id_answer,
+                numberOfQuestion: $scope.indexQuestionAnswer,
+                text: $scope.details[indexAnswer].text_answer,
+                likes: $scope.details[indexAnswer].likes_answer,
+                id_question: $scope.details[indexAnswer].id_question,
+                favorite: false
             }
             $scope.indexQuestionAnswer+=1;
             $scope.descriptionAnswer.push(resultAnswer);
@@ -155,7 +165,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             'favorite':$scope.favoriteQuestion,
             'like': $scope.myQuestions[index].likes_question,
             'description':  $scope.myQuestions[index].text_question
-          }
+        }
     }
 
     /* click on answer to show section of answer */
@@ -197,37 +207,107 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             var data=result.data.allFavoritesDetails;
             $scope.favoriteDetails=data;
 
-            //if($scope.showInitSession){
-                if($scope.favoriteDetails.length===0) {
-                    $scope.favoriteId=1;
-                } else {
-                    $scope.favoriteId=($scope.favoriteDetails[$scope.favoriteDetails.length-1].id_favorite)+1;
-                }
-                var data = {
-                    idFavorite: $scope.favoriteId,
-                    idUser: $scope.idUserLoggerIn,
-                    idMaterial: null,
-                    idQuestion: $scope.idQuestion,
-                    idAnswer: -1
-                };
-                $http.post('/insertFavoriteQuestion', data);
-                $scope.questionFavorite.favorite=true;
-            //} 
+            if($scope.favoriteDetails.length===0) {
+                $scope.favoriteId=1;
+            } else {
+                $scope.favoriteId=($scope.favoriteDetails[$scope.favoriteDetails.length-1].id_favorite)+1;
+            }
+            var data = {
+                idFavorite: $scope.favoriteId,
+                idUser: $scope.idUserLoggerIn,
+                idMaterial: null,
+                idQuestion: $scope.idQuestion,
+                idAnswer: -1
+            };
+            $http.post('/insertFavoriteQuestion', data);
+            $scope.questionFavorite.favorite=true;
+            
         });
     }
   
     /* remove from favorites question */
     $scope.removeFromFavoritesQuestion = function(question) {
-        //$scope.showMyQuestions=false;
-
         var data = {
             'idQuestion':question-1
         }
         $http.post('/deleteFavoriteQuestion', data);
-        //$scope.showMyQuestions=true;
-        
-        $scope.questionFavorite.favorite=false;
-        
+        $scope.questionFavorite.favorite=false;  
+    }
+
+    /* add to favorites question */
+    $scope.addToFavoritesAnswer = function(answerQuestion){
+        /* get favorites material */
+        if($scope.idUserLoggerIn !== undefined) {
+          var data = {
+            idFavorite: parseInt($scope.nextIdFavorite)+1,
+            idUser: $scope.idUserLoggerIn,
+            idMaterial: null,
+            idQuestion: -1,
+            idAnswer: answerQuestion.id
+          }
+          $http.post('/insertFavoriteAnswer', data);
+  
+          answerQuestion.favorite=true;
+          $scope.goToLogin=false;
+        } else {
+          answerQuestion.favorite=false;
+          $scope.goToLogin=true;
+        }
+    }
+  
+    /* remove from favorites answer */
+    $scope.removeFromFavoritesAnswer = function(answer) {
+        if($scope.idUserLoggerIn !== undefined) {
+            var data = {
+            'idAnswer':parseInt(answer.id)
+            }
+            $http.post('/deleteFavoriteAnswer', data);
+
+            answer.favorite=false;
+            $scope.goToLogin=false;
+        } else {
+            answer.favorite=false;
+            $scope.goToLogin=true;
+        }
+    }
+
+    /* add like on answer */
+    $scope.addLikeAnswer = function(answer) {
+        debugger
+        if($scope.idUserLoggerIn !== undefined) {
+            
+            answer.likes=answer.likes+1;
+            var data = {
+            'like': answer.likes,
+            'id_answer': answer.id
+            }
+            $http.post('updateLikeAnswer', data);
+            $scope.goToLogin=false;
+            answerQuestion.likes=true;
+        } else {
+            $scope.goToLogin=true;
+        }
+    }
+  
+    /* remove like of question */
+    $scope.removeLikeAnswer = function(answer) {
+        if($scope.idUserLoggerIn !== undefined) {
+            
+            if(answer.likes > 0) {
+            
+            answer.likes=answer.likes-1;
+            var data = {
+                'like': answer.likes,
+                'id_answer': answer.id
+            }
+            $http.post('updateLikeAnswer', data);
+            $scope.goToLogin=false;
+            answerQuestion.likes=true;
+            }
+            
+        } else {
+            $scope.goToLogin=true;
+        }
     }
 
     /* add like on question */

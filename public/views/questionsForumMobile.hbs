@@ -159,16 +159,16 @@
 					
 					<div class="borderQuestionMobile">
 						<label class="margin-right-8x" style="font-size:28px">Pergunta [{indexQuestion}]</label>
-						<div ng-if="!clickAddFavorite" ng-click="addToFavoritesQuestion()" style="margin-top:-40px">
+						<div ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()" style="margin-top:-40px">
 							<i class="far fa-star favoriteButton cursorPointer" style="font-size:32px"></i>
 						</div>
-						<div ng-if="clickAddFavorite" ng-click="removeFromFavoritesQuestion()" style="margin-top:-40px">
+						<div ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)" style="margin-top:-40px">
 							<i class="fas fa-star favoriteButton cursorPointer" style="font-size:32px"></i>
 						</div>
-						<div ng-if="likeQuestion>0" ng-click="addLikeQuestion()">
+						<div ng-if="questionFavorite.like==0" ng-click="addLikeQuestion()">
 							<i class="fas fa-thumbs-up likeButton cursorPointer" style="font-size:32px"></i>
 						</div>
-						<div ng-if="likeQuestion==0" ng-click="removeLikeQuestion()">
+						<div ng-if="questionFavorite.like>0" ng-click="removeLikeQuestion()">
 							<i class="far fa-thumbs-up likeButton cursorPointer" style="font-size:32px"></i>
 						</div>
 						<h5 class="descriptionQuestion" style="margin-top:41px; font-size:28px">[{descriptionQuestion}]</h5>
@@ -179,16 +179,16 @@
 						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestionMobile">
 							<label class="margin-right-8x" style="font-size:28px">Resposta [{answerQuestion.numberOfQuestion}]</label>
-							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()" style="margin-top:-40px">
+							<div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)" style="margin-top:-40px">
 								<i class="fas fa-star favoriteButton cursorPointer" style="font-size:32px"></i>
 							</div>
-							<div ng-if="!favoriteAnswer" ng-click="addToFavoritesQuestion()" style="margin-top:-40px">
+							<div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)" style="margin-top:-40px">
 								<i class="far fa-star favoriteButton cursorPointer" style="font-size:32px"></i>
 							</div>
-							<div ng-if="answerQuestion.likes!==0" ng-click="addLikeQuestion()">
+							<div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
 								<i class="fas fa-thumbs-up likeButton cursorPointer" style="font-size:32px"></i>
 							</div>
-							<div ng-if="answerQuestion.likes===0" ng-click="removeLikeQuestion()">
+							<div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
 								<i class="far fa-thumbs-up likeButton cursorPointer" style="font-size:32px"></i>
 							</div>
 							<h5 class="descriptionQuestion" style="margin-top:41px;font-size:28px">[{answerQuestion.text}]</h5>
