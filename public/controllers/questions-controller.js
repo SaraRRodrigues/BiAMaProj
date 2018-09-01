@@ -43,7 +43,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 		var splitLocation = location.href.split('=');
 		$scope.idUserLoggerIn =splitLocation[1];
 	
-		if($scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
@@ -145,7 +145,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     /* get answers of question with index(is question id) */
     $scope.getAnswersOfQuestion = function(index) {
         $scope.descriptionQuestion=$scope.myQuestions[index].text_question;
-        debugger
+
         for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
           if($scope.details[indexAnswer].id_question == $scope.myQuestions[index].id_question){
             var resultAnswer = {

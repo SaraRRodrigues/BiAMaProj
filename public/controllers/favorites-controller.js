@@ -41,7 +41,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
         
-        if($scope.idUserLoggerIn !== undefined) {
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
         } else {
@@ -50,7 +50,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.confirmSession=false;
         }
 
-        if($scope.idUserLoggerIn !== undefined){
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined){
             /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {

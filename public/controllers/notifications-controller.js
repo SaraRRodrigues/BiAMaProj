@@ -30,7 +30,7 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 		var splitLocation = location.href.split('=');
 		$scope.idUserLoggerIn =splitLocation[1];
 	
-		if($scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;

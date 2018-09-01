@@ -27,7 +27,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
         
-        if($scope.idUserLoggerIn !== undefined) {
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
         } else {
@@ -200,7 +200,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 			}
 	
 			if(buttonClick === 'whereWeAre') {
-				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn+'&refresh=true';
 			}
 
 			if(buttonClick === 'library') {

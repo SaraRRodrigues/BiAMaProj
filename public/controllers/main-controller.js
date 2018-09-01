@@ -157,7 +157,7 @@ app.constant('jQuery', window.jQuery)
             $scope.loading = true;
             $scope.confirmSession=false;
 		} else {
-			if($scope.idUserLoggerIn !== undefined)  {
+			if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined)  {
 				$scope.doLogin=false;
 				$scope.confirmSession=true;
 			} else {

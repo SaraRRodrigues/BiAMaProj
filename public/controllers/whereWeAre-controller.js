@@ -26,14 +26,17 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.showLocation=true;
 		$scope.registUser=false;
 		$scope.pathURL='https://www.google.com/maps/';
+		$scope.refresh=false;
+		$scope.userDetails=false;
 	}
 
 	/* verify if user is logged in */
     $scope.validateUserLoggedIn = function() {
         var splitLocation = location.href.split('=');
-        $scope.idUserLoggerIn =splitLocation[1];
-        
-        if($scope.idUserLoggerIn !== undefined) {
+		$scope.idUserLoggerIn =splitLocation[1];
+		$scope.refresh = splitLocation[2];
+
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== '&refresh') {
             $scope.doLogin=false;
             $scope.confirmSession=true;
         } else {
@@ -250,32 +253,58 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 			if(buttonClick === 'forum') {
 				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn;
 			}
-		}
-		
-		if(buttonClick === 'favorites') {
-			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
-		}
 
-		if(buttonClick == 'questions') {
-			location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
-		}
-
-		if(buttonClick == 'world_share') {
-			location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
-		}
-
-		if(buttonClick == 'notification') {
-			location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
-		}
-
-		if(buttonClick == 'perfil') {
-			location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
-		}
-
-		if(buttonClick == 'compare') {
-			location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			if(buttonClick === 'favorites') {
+				location.href = 'http://localhost:8080/BiAMa/favorites?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'questions') {
+				location.href = 'http://localhost:8080/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'world_share') {
+				location.href = 'http://localhost:8080/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'notification') {
+				location.href = 'http://localhost:8080/BiAMa/notifications?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'perfil') {
+				location.href = 'http://localhost:8080/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+			}
+	
+			if(buttonClick == 'compare') {
+				location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn;
+			}
+		} else {
+			if(buttonClick === 'favorites') {
+				location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'questions') {
+				location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'world_share') {
+				location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'notification') {
+				location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'perfil') {
+				location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+			}
+	
+			if(buttonClick == 'compare') {
+				location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			}
 		}
 		
 		if(buttonClick === 'notification') {

@@ -31,7 +31,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
         
-        if($scope.idUserLoggerIn !== undefined) {
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
         } else {
