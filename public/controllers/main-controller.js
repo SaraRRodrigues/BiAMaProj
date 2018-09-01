@@ -392,6 +392,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.showDetailsOfMaterial=true;
 		$scope.showMaterials=false;
 		$scope.openedMaterial=material;
+		$scope.miniSearchResults=false;
 	}
 
 	/* close material that are opened */
@@ -407,6 +408,8 @@ app.constant('jQuery', window.jQuery)
 			$scope.showProjectMaterial=false;
 		} 
 		$scope.showDetailsOfMaterial=false;
+		$scope.showInitSearch=true;
+		$scope.showResultsOfMiniSearch=false;
 	}
 
 	/* open and close the small search icon */

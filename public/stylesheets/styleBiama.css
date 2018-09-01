@@ -631,7 +631,6 @@ a {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 27px;
-  margin-bottom: 20px;
 }
 
 .sectionScrollInitSearch::-webkit-scrollbar-track
