@@ -414,6 +414,28 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
+		if(!$scope.isMobileView) {
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn;
+			}
+		}
+
 		if(buttonClick === 'favorites') {
 			$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 		}

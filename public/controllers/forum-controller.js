@@ -1,5 +1,5 @@
 
-app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiamaService", "$http", "jQuery", function($scope, ForumMaterialService, ForumBiamaService, $http){
+app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiamaService", "$http", "$window", "jQuery", function($scope, ForumMaterialService, ForumBiamaService, $http, $window){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -189,6 +189,28 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
+debugger
+		if(!$scope.isMobileView) {
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forum?userName=' + $scope.idUserLoggerIn;
+			}
+		}
 
 		if(buttonClick === 'favorites') {
 			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;

@@ -1,5 +1,5 @@
 
-app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService", "UserMyBiamaService","NotificationMyBiamaService","$http", "jQuery",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService, UserMyBiamaService,NotificationMyBiamaService,$http){
+app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaService", "MyBiAMaInfoService", "UserMyBiamaService","NotificationMyBiamaService","$http", "$window", "jQuery",function($scope, MyBiamaService,MaterialsBiamaService,MyBiAMaInfoService, UserMyBiamaService,NotificationMyBiamaService,$http, $window){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -145,6 +145,67 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.removeMaterial = function() {
 		$scope.imageMaterial='';
 		$scope.showInsertedImage = false;
+	}
+
+	/* routes of click on links page */
+	$scope.getRequest = function(buttonClick) {
+
+		if(!$scope.isMobileView) {
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn;
+			}
+		}
+
+		if(buttonClick === 'favorites') {
+			$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+		}
+
+		if(buttonClick == 'questions') {
+			$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+		}
+
+		if(buttonClick == 'world_share') {
+			$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+		}
+
+		if(buttonClick == 'notification') {
+			$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+		}
+
+		if(buttonClick == 'perfil') {
+			$window.location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+		}
+
+		if(buttonClick == 'compare') {
+			$window.location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+		}
+		
+		if(buttonClick === 'notification') {
+			$scope.userDetails = true;
+			$scope.notificationNumber=true;
+		} else {
+			$scope.userDetails = false;
+			$scope.notificationNumber = false;
+		}
+		$scope.search = false;
 	}
 
 	/* save information of new biama in pdf file */

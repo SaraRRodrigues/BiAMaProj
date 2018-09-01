@@ -1,4 +1,4 @@
-app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "WhereWeAreMaterialService","WhereWeAreBiamaService", "$http" ,"$sce", "$route", "jQuery", "$location", function($scope, BiAMaInfoService, LibraryMaterialInfoService, WhereWeAreMaterialService, WhereWeAreBiamaService, $http, $sce, $route, $location){
+app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryMaterialInfoService", "WhereWeAreMaterialService","WhereWeAreBiamaService", "$http" ,"$sce", "$route", "$window", "jQuery", function($scope, BiAMaInfoService, LibraryMaterialInfoService, WhereWeAreMaterialService, WhereWeAreBiamaService, $http, $sce, $route, $window){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -230,6 +230,28 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
+		if(!$scope.isMobileView) {
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn;
+			}
+		}
+		
 		if(buttonClick === 'favorites') {
 			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 		}
