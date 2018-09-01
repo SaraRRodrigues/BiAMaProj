@@ -992,6 +992,19 @@ scrollListMaterial {
 .round-button:hover {
   background: #5F9EA0;
 }
+
+.buttonOkMiniSearch {
+  height: 27px;
+  border-radius: 4px;
+  border: 0px;
+  color: white;
+  background: #eaab00;
+}
+
+.buttonOkMiniSearch:hover {
+  background: #5F9EA0;
+  color:#eaab00
+}
 /***************MOBILE CSS***************/
 /*scroll of images on library categories*/
 scrollMobile {

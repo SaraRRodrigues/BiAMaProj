@@ -282,7 +282,7 @@
 							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
-							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="round-button">OK</button>
+							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
 							<h5 ng-if="noResultsOnSearch">Não existem resultados.</h5>
 						</div> 
 
@@ -435,14 +435,11 @@
 							<button ng-click="saveUploadFile()">Guardar</button>
 						</div>
 					</div>
-				</div>
-				
+				</div>	
 			</article>
 			<!-- small search results -->
-							<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-
+			<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
 			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right">
-
 				<div>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">
