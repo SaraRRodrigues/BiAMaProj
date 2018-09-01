@@ -1,5 +1,5 @@
 
-app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "$sce", "$route", "FavoritesLibraryService", "LibraryMaterialService","LibraryBiamaService", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, $sce, $route, FavoritesLibraryService, LibraryMaterialService, LibraryBiamaService){
+app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoService", "CategoryInfoService", "$sce", "$route", "FavoritesLibraryService", "LibraryMaterialService","LibraryBiamaService", "$window", "jQuery" ,function($scope, $http, LibraryMaterialInfoService, CategoryInfoService, $sce, $route, FavoritesLibraryService, LibraryMaterialService, LibraryBiamaService, $window){
 
 	/* hide footer of index page because of click in buttons footer reload page */
 	jQuery("#footerMain").hide();
@@ -37,8 +37,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
     $scope.validateUserLoggedIn = function() {
         var splitLocation = location.href.split('=');
         $scope.idUserLoggerIn =splitLocation[1];
-        
-        if($scope.idUserLoggerIn !== undefined) {
+		
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
             $scope.confirmSession=true;
         } else {
@@ -415,29 +415,29 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
-			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'questions') {
-			location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'world_share') {
-			location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'notification') {
-			location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'perfil') {
-			location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+			$window.location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
 			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
 			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
 		}
 
 		if(buttonClick == 'compare') {
-			location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 		
 		if(buttonClick === 'notification') {
@@ -521,7 +521,7 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 
 app.factory("FavoritesLibraryService", function($q, $http, $timeout){
     
-	var getMyFavorites = function() {
+	var getMyFavorites = function(data) {
 		var deferred = $q.defer();
 
 		$timeout(function() {

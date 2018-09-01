@@ -98,6 +98,11 @@ app.constant('jQuery', window.jQuery)
 		controller: 'RegistUserController'
 	});
 
+	$routeProvider.when('/BiAMa/favoritesMobile', {
+		templateUrl: 'views/favoritesMobile',
+		controller: 'FavoritesController'
+	});
+
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
 })
@@ -139,6 +144,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.compareMaterials = [];
 		$scope.resultSearch = [];
 		$scope.showInitSearch=true;
+		$scope.userGoogle=null;
 	}
 	 
 	/* verify if user is logged in */
@@ -224,19 +230,23 @@ app.constant('jQuery', window.jQuery)
 
 	/* login with google with firebase */
 	$scope.loginWithGoogle = function() {
-		
 		const provider = new firebase.auth.GoogleAuthProvider();
-
-    	firebase.auth().signInWithPopup(provider)
+		firebase.auth().signInWithPopup(provider).then(result => {
+			
+			//window.setTimeout("location.href = 'http://localhost:8080'")
+		})
+		.catch(console.log)
+    	/*firebase.onuth().signInWithPopup(provider)
             .then(result => {
 
 				const user = result.user;
 				//window.setTimeout("location.href = 'http://localhost:8080'")
             })
 			.catch(console.log)
-		
+		*/
+
 		$scope.confirmSession = true;
-		$scope.validateUserLogin();
+		//$scope.validateUserLogin();
 	}
 
 	/* login with facebook with firebase */
@@ -432,7 +442,7 @@ app.constant('jQuery', window.jQuery)
 
 	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
-
+		$scope.resultSearch=[];
 		var inputMini = jQuery("#miniSearch").val();
 		if(inputMini !== '') {
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
@@ -451,8 +461,14 @@ app.constant('jQuery', window.jQuery)
 				}
 			}
 	
-			$scope.showInitSearch=false;
-			$scope.miniSearchResults = true;
+			if($scope.resultSearch.length == 0) {
+				$scope.noResultsOnSearch=true;
+			} else {
+				$scope.showInitSearch=false;
+				$scope.miniSearchResults = true;
+				$scope.noResultsOnSearch=false;
+			}
+			
 		}
 	}
 
@@ -568,14 +584,20 @@ app.constant('jQuery', window.jQuery)
 	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
-		firebase.auth().signOut().then(function() {
+		/*firebase.auth().signOut().then(function() {
 			// Sign-out successful.
+			debugger
+			//const user = result.user;
+			
 		
 		}, function(error) {
 			// An error happened.
 			console.log(error);
 
-		});
+		});*/
+		firebase.auth().signOut().then(() => {
+	
+		})
 	}
 
 	/* regist new user on user details section */

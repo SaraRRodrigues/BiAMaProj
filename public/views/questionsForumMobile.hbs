@@ -153,7 +153,7 @@
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 			</div>
 			<div class="titlesOnCenter" style="margin-left:161px;">
-				<div ng-if="!showDivAnswer" ng-style="(isMobileView) ? 'margin-left: 20px;' : 'margin-left:400px'">
+				<div ng-if="!showDivAnswer" ng-style="margin-left: 20px;">
 					<!-- Question -->
 					<img class="imageButtonMobile" src="../images/user.png" style="width:130px">
 					
@@ -175,7 +175,7 @@
 					</div>
 					<!-- Answers -->
 					<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
-						<img ng-if="$index%2!==0 && isMobileView" class="imageButtonMobile" src="../images/user.png" style="width:130px">
+						<img ng-if="$index%2!==0" class="imageButtonMobile" src="../images/user.png" style="width:130px">
 						<!-- answer align to left -->
 						<div ng-if="$index%2!==0" class="borderQuestionMobile">
 							<label class="margin-right-8x" style="font-size:28px">Resposta [{answerQuestion.numberOfQuestion}]</label>

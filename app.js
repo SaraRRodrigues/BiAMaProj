@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('dotenv').config()
-
 var indexRouter = require('./routes/index');
 //var biama1 = require('../views/biamaPage');
 //var perfilRouter = require('./routes/perfil');

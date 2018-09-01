@@ -103,15 +103,14 @@ a {
   line-height: 1.5;
 }
 .inputLink {
+  font-family: Arial Narrow, sans-serif;
   background-color:#D3D3D3;
   width: 550px;
   text-align: center;
-  margin-top:20px;
   border-radius: 5px;
   border: 0px;
-  height: 23px; 
-  font-size: 12px; 
-  font-weight: bold;
+  font-size: 13px; 
+  font-weight: 800;
   color:black
 }
 
@@ -952,6 +951,18 @@ scrollListMaterial {
 
 .biamaTitlesStyle {
   margin-bottom:auto;
+}
+.round-button {
+  height: 33px;
+  border: 2px solid #f5f5f5;
+  border-radius: 50%;
+  color: black;
+  background: white;
+  box-shadow: 0 0 3px grey;
+  font-size: 13px;
+}
+.round-button:hover {
+  background: grey;
 }
 /***************MOBILE CSS***************/
 /*scroll of images on library categories*/

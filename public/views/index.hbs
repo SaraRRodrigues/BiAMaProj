@@ -261,17 +261,16 @@
 		<div class="divController" >
 			<header ng-if="!isMobileView && namePage=='index'" class="masthead text-white text-center">
 				<nav>
-					<div style="background-color: gray;padding-bottom: 31px;padding-top: 11px;">
+					<div style="padding: 10px;">
 						<i class="float-left fas fa-circle redCircle margin-right margin-left"></i>
 						<i class="float-left fas fa-circle orangeCircle margin-right"></i>
 						<i class="float-left fas fa-circle greenCircle margin-right-3x"></i>
 
 						<!--<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" ng-click="goToHomePage()"></i>						
 						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>-->
-						
+						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt"></input>
 					</div>
 					<div style="background-color: gray;padding-top: 1px;">
-						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt" style="margin-top: -36px;"></input>
 					</div>
 				</nav>	
 			</header>
@@ -281,11 +280,12 @@
 					<nav class="positionOfNavDetails">
 						<!-- search -->
 						<div ng-if="!isMobileView" class="float-left padding-left-3x">
-							<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()">
-							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
+							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
+							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
-							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
+							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="round-button">OK</button>
+							<h5 ng-if="noResultsOnSearch">Não existem resultados.</h5>
 						</div> 
 
 						<!-- section of user details -->
@@ -363,7 +363,7 @@
 					
 					<!--image biama -->
 					<div ng-if="search && !showMaterials && !openMaterialDetail && !isMobileView" class="row text-center">
-						<img ng-if="showInitSearch" class="margin-top-6x" src="../images/topoBiamaHome.png"/>
+						<img ng-if="showInitSearch" class="margin-top-6x" src="../images/topoBiamaHome.png" width="352px"/>
 					</div>
 
 					<!-- image biama with search -->
@@ -379,9 +379,10 @@
 						</div>
 						<!-- section of big search-->
 						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4" style="padding-bottom: 252px;">
-							<div class="ui-widget input-group stylish-input-group">
-								<input id="tags_search" style="width: 385px;">
-								<span class="input-group-addon" style="padding: 4px;padding-left: 22px;">
+							
+							<div class="ui-widget input-group stylish-input-group" style="    background-color:#E4A73F;padding: 4px;padding-left: 7px;border-radius: 10px;">
+								<input id="tags_search" style="height: 27px;width: 295px;border: 0px;border-radius: 9px;">
+								<span class="input-group-addon" style="    background-color: transparent;border: 0px;">
 									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
 								</span>
 							</div>

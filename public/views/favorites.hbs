@@ -69,7 +69,7 @@
 			<h1 ng-if="doLogin" class="subtitles">Favoritos</h1> 
 			<h4 ng-if="doLogin">Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
 			
-			<div ng-if="showFavoritesButton && !isMobileView" ng-repeat="fav in favoritesButton">
+			<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 				<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
 			</div>
 	    </div>
