@@ -145,6 +145,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.resultSearch = [];
 		$scope.showInitSearch=true;
 		$scope.userGoogle=null;
+		$scope.showResultsOfMiniSearch=false;
 	}
 	 
 	/* verify if user is logged in */
@@ -412,6 +413,7 @@ app.constant('jQuery', window.jQuery)
 	$scope.clickTopSearch = function() {
 		$scope.miniSearchResults = false;
 		$scope.showInitSearch=true;
+		$scope.showResultsOfMiniSearch=false;
 
 		if($scope.isMobileView) {
 			if($scope.showSearch){
@@ -438,6 +440,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.showInitSearch=true;
 		$scope.showSearch=false;
 		$scope.enableUserIcon=false;
+		$scope.showResultsOfMiniSearch=false;
 	}
 
 	/* action of click button "Ok" present on small search line */
@@ -465,10 +468,11 @@ app.constant('jQuery', window.jQuery)
 				$scope.noResultsOnSearch=true;
 			} else {
 				$scope.showInitSearch=false;
+				$scope.showSearch=false;
 				$scope.miniSearchResults = true;
 				$scope.noResultsOnSearch=false;
+				$scope.showResultsOfMiniSearch=true;
 			}
-			
 		}
 	}
 

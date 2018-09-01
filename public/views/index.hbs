@@ -270,8 +270,6 @@
 						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>-->
 						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt"></input>
 					</div>
-					<div style="background-color: gray;padding-top: 1px;">
-					</div>
 				</nav>	
 			</header>
 			<article>
@@ -366,6 +364,11 @@
 						<img ng-if="showInitSearch" class="margin-top-6x" src="../images/topoBiamaHome.png" width="352px"/>
 					</div>
 
+					<!-- image biama with results search -->
+					<div ng-if="showResultsOfMiniSearch && !isMobileView" class="row text-center">
+						<img class="margin-top-3x" src="../images/topoBiama.png"/>
+					</div>
+
 					<!-- image biama with search -->
 					<div ng-if="search && (showMaterials || registUser) && !isMobileView" class="row text-center">
 						<img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -433,16 +436,21 @@
 						</div>
 					</div>
 				</div>
-				<!-- small search results -->
-				<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
-				<div ng-if="miniSearchResults">
+				
+			</article>
+			<!-- small search results -->
+							<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+
+			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right">
+
+				<div>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">
 							<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
 						</div>
 					</div>
 				</div>
-			</article>
+			</div>
 			<!-- footer of desktop view -->
 			<footer ng-if="!isMobileView" class="w3-bar w3-center" id="footerMain">
 				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>

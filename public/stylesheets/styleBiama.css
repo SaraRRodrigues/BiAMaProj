@@ -626,6 +626,34 @@ a {
 	background-color: #eaab00;
 }
 
+.sectionScrollInitSearch{
+  height: 423px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 27px;
+  margin-bottom: 20px;
+}
+
+.sectionScrollInitSearch::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollInitSearch::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollInitSearch::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eaab00;
+}
+
 .sectionScroll{
   padding:15px;
   height:400px;
@@ -953,16 +981,16 @@ scrollListMaterial {
   margin-bottom:auto;
 }
 .round-button {
-  height: 33px;
+  height: 27px;
   border: 2px solid #f5f5f5;
   border-radius: 50%;
   color: black;
   background: white;
   box-shadow: 0 0 3px grey;
-  font-size: 13px;
+  font-size: 9px;
 }
 .round-button:hover {
-  background: grey;
+  background: #5F9EA0;
 }
 /***************MOBILE CSS***************/
 /*scroll of images on library categories*/
