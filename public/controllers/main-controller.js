@@ -613,30 +613,33 @@ app.constant('jQuery', window.jQuery)
 	}
 	/* -------------- END MOBILE -------------- */
 
-	jQuery( function() {
-		var availableTags = $scope.compareMaterials;
-		jQuery( "#tags" ).autocomplete({
-			source: availableTags
+	$scope.tagsOfSearch = function() {
+		jQuery( function() {
+			var availableTags = $scope.compareMaterials;
+			jQuery( "#tags" ).autocomplete({
+				source: availableTags
+			});
 		});
-	});
-
-	jQuery( function() {
-        $scope.itemSearch = [
-			'Materiais',
-			'Categoria de materiais',
-			'Projeto de materiais'
-		];
-		jQuery( "#tags_search" ).autocomplete({
-			source: $scope.itemSearch
+	
+		jQuery( function() {
+			$scope.itemSearch = [
+				'Materiais',
+				'Categoria de materiais',
+				'Projeto de materiais'
+			];
+			jQuery( "#tags_search" ).autocomplete({
+				source: $scope.itemSearch
+			});
 		});
-	});
-
+	}
+	
 	/* init MainController  */
 	$scope.viewType();
 	$scope.initData();
 	$scope.validateUserLoggedIn();
 	$scope.getAllRequests();
 	$scope.initDataFirebase();
+	$scope.tagsOfSearch();
 }])
 
 app.factory("NotificationService", function($q, $http, $timeout){
