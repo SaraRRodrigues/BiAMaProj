@@ -256,8 +256,8 @@
 			</div>
 		</div>
 		<!-- DESKTOP VIEW -->
-		<div class="divController" >
-			<header ng-if="!isMobileView && namePage=='index'" class="masthead text-white text-center">
+		<div class="divController" id="divControllerMain">
+			<header ng-if="!isMobileView && namePage=='index'" id="headerMain" class="masthead text-white text-center">
 				<nav>
 					<div style="padding: 10px;">
 						<i class="float-left fas fa-circle redCircle margin-right margin-left"></i>
@@ -273,9 +273,9 @@
 			<article style="padding: 7px;">
 				<div style="background-color: white;">
 					<!-- user & search & languages-->
-					<nav class="positionOfNavDetails">
+					<nav class="positionOfNavDetails" id="searchMain">
 						<!-- search -->
-						<div ng-if="!isMobileView" class="float-left padding-left-3x">
+						<div ng-if="!isMobileView"  class="float-left padding-left-3x">
 							<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
 							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
@@ -285,7 +285,7 @@
 						</div> 
 
 						<!-- section of user details -->
-						<div ng-if="!isMobileView" class="row">
+						<div ng-if="!isMobileView" id="userDetailsMain" class="row">
 							<nav class="padding-left-3x">
 								<div class="navDetailsUser" ng-if="userDetails"><br>
 									<!-- content if not init session -->
@@ -325,7 +325,7 @@
 														<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
 													</div>
 													<br>
-													<a href="/BiAMa/registUser" class="registSession" ng-click="regist()">Registar</a>
+													<a href="" class="registSession" ng-click="disableSearch('regist')">Registar</a>
 													<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
 												</div>												
 											</div>
@@ -334,20 +334,20 @@
 									<!-- content if init session -->
 									<div ng-if="confirmSession">
 										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-										<a href="/BiAMa/favorites?id=[{idUserLoggerIn}]" ng-click="disableSearch('favorites')">Favoritos</a><br>
+										<a href="/BiAMa/favorites?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('favorites')">Favoritos</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/myQuestions?id=[{idUserLoggerIn}]" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
+										<a href="/BiAMa/myQuestions?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('questions')">As minhas perguntas</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/worldShare?id=[{idUserLoggerIn}]" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
+										<a href="/BiAMa/worldShare?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('world_share')">Partilhar com o Mundo</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a class="notificationPosition" href="/BiAMa/notifications?id=[{idUserLoggerIn}]" ng-click="disableSearch('notification')">Notificações</a>
+										<a class="notificationPosition" href="/BiAMa/notifications?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('notification')">Notificações</a>
 										<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
 										<div ng-if="notificationNumber" class="circleNotification"></div>
 										<br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/perfilPage?id=[{idUserLoggerIn}]" ng-click="disableSearch('perfil')">Perfil</a><br>
+										<a href="/BiAMa/perfilPage?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('perfil')">Perfil</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="/BiAMa/compare?id=[{idUserLoggerIn}]" ng-click="disableSearch('compare')">Comparar</a><br>
+										<a href="/BiAMa/compare?id=[{idUserLoggerIn}]&redirect" ng-click="disableSearch('compare')">Comparar</a><br>
 										<div class="lineWhite margin-bottom margin-top"></div>
 										<a ng-click="logout()">Terminar Sessão</a><br>
 										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
@@ -449,20 +449,20 @@
 			</div>
 			<!-- footer of desktop view -->
 			<footer ng-if="!isMobileView" class="w3-bar w3-center" id="footerMain" style="margin-top: -55px;padding-left: 7px; padding-right: 7px;padding-bottom: 8px;">
-				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
+				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
+				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 
-				<a href="/BiAMa/whereWeAre?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-				<a href="/BiAMa/whereWeAre?id=[{idUserLoggerIn}]" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
+				<a href="/BiAMa/whereWeAre?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
+				<a href="/BiAMa/whereWeAre?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
 
-				<a href="/BiAMa/library?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-				<a href="/BiAMa/library?id=[{idUserLoggerIn}]" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
+				<a href="/BiAMa/library?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
+				<a href="/BiAMa/library?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
 
-				<a href="/BiAMa/myBiama?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-				<a href="/BiAMa/myBiama?id=[{idUserLoggerIn}]" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
+				<a href="/BiAMa/myBiama?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
+				<a href="/BiAMa/myBiama?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
 
-				<a href="/BiAMa/forumPage?id=[{idUserLoggerIn}]" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-				<a href="/BiAMa/forumPage?id=[{idUserLoggerIn}]" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
+				<a href="/BiAMa/forumPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:#E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
+				<a href="/BiAMa/forumPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
 			</footer>
 			<!-- footer of mobile view -->
 			<div ng-if="isMobileView">

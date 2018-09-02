@@ -44,8 +44,6 @@
 		<script type="text/javascript" src="../controllers/questions-controller.js"></script>
 		<script type="text/javascript" src="../controllers/worldShares-controller.js"></script>
 		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
-		<script type="text/javascript" src="../controllers/login-controller.js"></script>
-		<script type="text/javascript" src="../controllers/resultsMaterials-controller.js"></script>
 		
 		<script type="text/javascript" src="qrcode.js"></script>
 		<script type="text/javascript" src="qrcode.min.js"></script>
@@ -184,35 +182,37 @@
         <div ng-if="showQrCode" class="text-center">
             <h2>QRCode em desenvolvimento</h2>
         </div>
-		<!-- small search results -->
-		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
-		<div ng-if="miniSearchResults" class="margin-top-5x">
-			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
-				<div class="thumbnail">
-					<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
+		<!-- show details of material if click on material -->
+		<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
+			<div class="row container" style=" margin-bottom: 60px;">
+				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
+				<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+					<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+					<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+				</div>
+				<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+					<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+				</div>
+				<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+					<h4 class="margin-right-5x margin-top-6x">Category</h4>
+					<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+					<h4 class="margin-right-5x">Code</h4>
+					<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+					<h4 class="margin-right-5x">Description</h4>
+					<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
 				</div>
 			</div>
 		</div>
-		<!-- if click on result image -->
-		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
-			<div class="row container">
-				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-				<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
-					<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
-				</div>
-				<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
-					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-				</div>
-				<div class="col-md-5 order-md-1" ng-if="showProjectMaterial" style="margin-top: 82px;">
-					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
-				</div>
-				<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-					<h4 class="margin-right-5x margin-top-6x" style="font-size: 32px;">Category</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.category}]</h5>
-					<h4 class="margin-right-5x" style="font-size: 32px;">Code</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.code}]</h5>
-					<h4 class="margin-right-5x" style="font-size: 32px;">Description</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.description}]</h5>
+		<!-- small search results -->
+		<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+		<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right" style="    margin-left: 7px;margin-right: 7px; margin-top: 4px;margin-bottom: 11px;">
+			<div>
+				<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
+					<div class="thumbnail">
+						<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
+					</div>
 				</div>
 			</div>
 		</div>

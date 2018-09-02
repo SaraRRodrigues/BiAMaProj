@@ -39,11 +39,11 @@
 		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp" ng-controller="WhereWeAreController">
-		<div ng-show="refresh=='true'" style="background-color: white;">
+	<body ng-app="myApp" ng-controller="WhereWeAreController" style=" padding: 12px;">
+		<div ng-show="redirect" style="background-color: white;">
 			
 			<!-- user & search & languages-->
-			<nav class="positionOfNavDetails">
+			<nav class="positionOfNavDetails" style="margin-top:10px">
 				<!-- search -->
 				<div ng-if="!isMobileView" class="float-left padding-left-3x">
 					<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
@@ -127,62 +127,97 @@
 				</div>
 			</nav>
 		</div>
-					
-		</div>
-		<!--image biama -->
-        <div class="row text-center">
-            <img class="margin-top-3x" src="../images/topoBiama.png"/>
-        </div>
-        <div class="imageRight">
-            <img src="../images/rightBiama.png"/>
-        </div>
-		<!-- title and image left -->
-		<div class="titlesOnCenter">
-			<div class="imageLeft">
-                <img class="margin-top-3x" src="../images/leftBiama.png"/>
-            </div>
-			<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>						
-			<h1 class="subtitles">Onde estamos</h1>
-		</div>
-		<!-- loading spinner -->
-		<div ng-if="loading">
-			<div class="loading-icon-footer-info"></div>
-		</div>	
-		<!-- content of where we are page -->
-		<div ng-if="!loading" class="titlesOnCenter">
-			<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
-			<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-			<div>
-				<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
-				<label class="margin-right-4x">[{descriptionLocation}]</label>
+		<div style="border: 7px solid #C0C0C0; border-radius: 5px;">
+			<!--image biama -->
+			<div class="row text-center">
+				<img class="margin-top-3x" src="../images/topoBiama.png"/>
+			</div>
+			<div ng-if="!miniSearchResults && !showDetailsOfMaterial" class="imageRight">
+				<img src="../images/rightBiama.png"/>
+			</div>
+			<!-- title and image left -->
+			<div ng-if="!miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter">
+				<div class="imageLeft">
+					<img class="margin-top-3x" src="../images/leftBiama.png"/>
+				</div>
+				<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x backArrow" ng-click="goToHomePage()"></i>						
+				<h1 class="subtitles">Onde estamos</h1>
+			</div>
+			<!-- loading spinner -->
+			<div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
+			</div>	
+			<!-- content of where we are page -->
+			<div ng-if="!loading && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter">
+				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<div>
+					<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
+					<label class="margin-right-4x">[{descriptionLocation}]</label>
 
-				<label>Pesquise um local ou endereço</label>
-				<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
-				<div ng-if="showSchools">
-					<div ng-repeat="biama in biamaDetails">
-						<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
-						<br>
+					<label>Pesquise um local ou endereço</label>
+					<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
+					<div ng-if="showSchools">
+						<div ng-repeat="biama in biamaDetails">
+							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
+							<br>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- show details of material if click on material -->
+			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
+				<div class="row container" style=" margin-bottom: 60px;">
+					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
+					<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
+					</div>
+					<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+					</div>
+					<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+					</div>
+					<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+						<h4 class="margin-right-5x margin-top-6x">Category</h4>
+						<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+						<h4 class="margin-right-5x">Code</h4>
+						<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+						<h4 class="margin-right-5x">Description</h4>
+						<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+					</div>
+				</div>
+			</div>
+			<!-- small search results -->
+			<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right" style="    margin-left: 7px;margin-right: 7px; margin-top: 4px;margin-bottom: 11px;">
+				<div>
+					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
+						<div class="thumbnail">
+							<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- footer of desktop view -->
+			<footer ng-if="!isMobileView" class="w3-bar w3-center">
+				<a href="" ng-if="nameclick !== 'biamaPage'" ng-click="getRequest('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
+				<a href="" ng-if="nameclick === 'biamaPage'" ng-click="getRequest('biamaPage')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
+
+				<a href="" ng-if="nameclick !== 'whereWeAre'" ng-click="getRequest('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class=" w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
+				<a href="" ng-if="nameclick === 'whereWeAre'" ng-click="getRequest('whereWeAre')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
+
+				<a href="" ng-if="nameclick !== 'library'" ng-click="getRequest('library')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
+				<a href="" ng-if="nameclick === 'library'" ng-click="getRequest('library')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
+
+				<a href="" ng-if="nameclick !== 'myBiama'" ng-click="getRequest('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
+				<a href="" ng-if="nameclick === 'myBiama'" ng-click="getRequest('myBiama')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
+
+				<a href="" ng-if="nameclick !== 'forum'" ng-click="getRequest('forum')" style="width:20%; color:#E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
+				<a href="" ng-if="nameclick === 'forum'" ng-click="getRequest('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
+			</footer>
 		</div>
-		<!-- footer of desktop view -->
-		<footer ng-if="!isMobileView" class="w3-bar w3-center" style="padding-left: 15px;padding-right: 15px;">
-			<a href="" ng-if="nameclick !== 'biamaPage'" ng-click="getRequest('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
-			<a href="" ng-if="nameclick === 'biamaPage'" ng-click="getRequest('biamaPage')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
-
-			<a href="" ng-if="nameclick !== 'whereWeAre'" ng-click="getRequest('whereWeAre')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class=" w3-bar-item buttonNotSelected w3-mobile">Onde Estamos</a>
-			<a href="" ng-if="nameclick === 'whereWeAre'" ng-click="getRequest('whereWeAre')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Onde Estamos</a>
-
-			<a href="" ng-if="nameclick !== 'library'" ng-click="getRequest('library')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Biblioteca</a>
-			<a href="" ng-if="nameclick === 'library'" ng-click="getRequest('library')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Biblioteca</a>
-
-			<a href="" ng-if="nameclick !== 'myBiama'" ng-click="getRequest('myBiama')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">A sua BiAMa</a>
-			<a href="" ng-if="nameclick === 'myBiama'" ng-click="getRequest('myBiama')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">A sua BiAMa</a>
-
-			<a href="" ng-if="nameclick !== 'forum'" ng-click="getRequest('forum')" style="width:20%; color:#E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonNotSelected w3-mobile">Fórum</a>
-			<a href="" ng-if="nameclick === 'forum'" ng-click="getRequest('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
-		</footer>
+		
 	</body>
 </html>
 

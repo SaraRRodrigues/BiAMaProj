@@ -1,7 +1,11 @@
-app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRegistService", "$http" ,"$sce", "$route", "jQuery", "$location", function($scope, RegistMaterialService, UserRegistService, $http, $sce, $route, $location){
+app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRegistService", "$http" ,"$sce", "$route", "$window", "jQuery", function($scope, RegistMaterialService, UserRegistService, $http, $sce, $route, $window){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
+	jQuery("#headerMain").hide();
+	jQuery("#searchMain").hide();
+	jQuery("#userDetailsMain").hide();
+	jQuery("#divControllerMain").removeClass("divController");
     
    	/* define view of app */
 	$scope.viewType = function() {
@@ -21,6 +25,21 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 		$scope.loading = true;
         $scope.registUser=true;
         $scope.resultSearch= [];
+	}
+
+	/* verify if user is logged in */
+	$scope.validateUserLoggedIn = function() {
+		var splitLocation = location.href.split('=');
+		var splitParams = splitLocation[1].split('&');
+		$scope.idUserLoggerIn =splitParams[0];
+		$scope.redirect = splitParams[1];
+	
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+			$scope.confirmSession=true;
+		} else {
+			$scope.loading = true;
+			$scope.confirmSession=false;
+		}
 	}
 
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
@@ -164,15 +183,13 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 	/* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
-
+		$scope.resultSearch=[];
 		var inputMini = jQuery("#miniSearch").val();
 		if(inputMini !== '') {
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
 				var resultMaterial = {
 					'name': $scope.materialsToSearch[index].name,
-					'category': $scope.materialsToSearch[index].category,
-					'description': $scope.materialsToSearch[index].description,
-					'code': $scope.materialsToSearch[index].code
+					'category': $scope.materialsToSearch[index].category
 				}
 				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
@@ -181,14 +198,20 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
 				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push($scope.materialsToSearch[index].name);
+					$scope.resultSearch.push(resultMaterial);
 				}
 			}
-	
-			$scope.showInitSearch=false;
-			$scope.miniSearchResults = true;
 
-            $scope.registUser=false;
+			if($scope.resultSearch.length == 0) {
+				$scope.noResultsOnSearch=true;
+			} else {
+				$scope.showInitSearch=false;
+				$scope.showSearch=false;
+				$scope.miniSearchResults = true;
+				$scope.noResultsOnSearch=false;
+				$scope.showResultsOfMiniSearch=true;
+				$scope.registUser=false;
+			}
 		}
 	}
     
@@ -248,19 +271,19 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
-			location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'questions') {
-			location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'world_share') {
-			location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'notification') {
-			location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'perfil') {
@@ -300,6 +323,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	$scope.viewType();
 	$scope.initData();
 	$scope.getAllRequests();
+	$scope.validateUserLoggedIn();
 }])
 
 app.factory("RegistMaterialService", function($q, $http, $timeout){

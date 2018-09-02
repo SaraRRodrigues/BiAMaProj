@@ -1,7 +1,11 @@
-app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService","UserFavoriteService","FavoritesMaterialService","$route", "$sce", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,UserFavoriteService,FavoritesMaterialService,$route, $sce) {
+app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService","UserFavoriteService","FavoritesMaterialService","$route", "$sce","$window", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,UserFavoriteService,FavoritesMaterialService,$route, $sce, $window) {
     
     /* hide footer of index page because of click in buttons footer reload page */
-	jQuery("#footerMain").hide();
+    jQuery("#footerMain").hide();
+	jQuery("#headerMain").hide();
+	jQuery("#searchMain").hide();
+	jQuery("#userDetailsMain").hide();
+	jQuery("#divControllerMain").removeClass("divController");
 
     /* define view of app */
 	$scope.viewType = function() {
@@ -39,7 +43,9 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* verify if user is logged in */
     $scope.validateUserLoggedIn = function() { 
         var splitLocation = location.href.split('=');
-        $scope.idUserLoggerIn =splitLocation[1];
+		var splitParams = splitLocation[1].split('&');
+		$scope.idUserLoggerIn =splitParams[0];
+		$scope.redirect = splitParams[1];
         
         if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
             $scope.doLogin=false;
@@ -436,38 +442,45 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
-
-      var inputMini = jQuery("#miniSearch").val();
-      if(inputMini !== '') {
-        for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-          var resultMaterial = {
-            'name': $scope.materialsToSearch[index].name,
-            'category': $scope.materialsToSearch[index].category,
-            'description': $scope.materialsToSearch[index].description,
-            'code': $scope.materialsToSearch[index].code
-          }
-          if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push(resultMaterial);
-          } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-            $scope.resultSearch.push($scope.materialsToSearch[index].name);
-          }
+        $scope.resultSearch=[];
+        var inputMini = jQuery("#miniSearch").val();
+        if(inputMini !== '') {
+            for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+                var resultMaterial = {
+                  'name': $scope.materialsToSearch[index].name,
+                  'category': $scope.materialsToSearch[index].category
+                }
+                if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                }
+            }
+        
+            if($scope.resultSearch.length == 0) {
+                $scope.noResultsOnSearch=true;
+            } else {
+                $scope.showInitSearch=false;
+                $scope.miniSearchResults = true;
+                $scope.showCategory=true;
+                $scope.showMaterialDetails=false;
+                $scope.showLocation=false;
+                $scope.showForum = false;
+                $scope.showAllQuestions=false;
+                $scope.showQuestionDetails=false;
+                $scope.showCuriosity=false;
+                $scope.showSearch=false;
+                $scope.noResultsOnSearch=false;
+                
+                $scope.showFavorites = true;
+                $scope.showCategory = false;
+                $scope.showMaterials=false;
+            }
         }
-    
-        $scope.showInitSearch=false;
-        $scope.miniSearchResults = true;
-
-        $scope.showMaterialDetails=false;
-        $scope.showForum = false;
-        $scope.showQuestionDetails=false;
-
-        $scope.showFavorites = true;
-        $scope.showCategory = false;
-        $scope.showMaterials=false;
-      }
     }
 
     /* open and close the section of user details and search icon */
@@ -524,36 +537,81 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
    
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
-
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
-				location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 			}
 	
 			if(buttonClick == 'questions') {
-				location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
 			}
 	
 			if(buttonClick == 'world_share') {
-				location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
 			}
 	
 			if(buttonClick == 'notification') {
-				location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
 	
 			}
 	
 			if(buttonClick == 'perfil') {
-				location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				$window.location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
 				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
 				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
 			}
 	
 			if(buttonClick == 'compare') {
-				location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
-	
+				$window.location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 			}
-		}
+		} else {
+
+            if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href =  'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
+			if(buttonClick === 'favorites') {
+				$window.location.href = 'http://localhost:8080/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'questions') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'world_share') {
+				$window.location.href = 'http://localhost:8080/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'notification') {
+				$window.location.href = 'http://localhost:8080/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'perfil') {
+				$window.location.href = 'http://localhost:8080/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail + '&redirect';
+			}
+	
+			if(buttonClick == 'compare') {
+				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn;
+			}
+        }
 		
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
