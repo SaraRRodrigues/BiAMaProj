@@ -150,21 +150,22 @@ app.constant('jQuery', window.jQuery)
 	 
 	/* verify if user is logged in */
     $scope.validateUserLoggedIn = function() { 
-        var splitLocation = location.href.split('=');
-        $scope.idUserLoggerIn =splitLocation[1];
-        if($scope.idUserLoggerIn === 'anonymous') {
-			$scope.doLogin=true;
-            $scope.loading = true;
-            $scope.confirmSession=false;
+        if(!$scope.isMobileView) {
+			var splitLocation = location.href.split('=');
+			//var splitParams = splitLocation[1].split('&');
+			$scope.idUserLoggerIn =splitLocation[1];
+			$scope.redirect = splitLocation[2];
+		
 		} else {
-			if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined)  {
-				$scope.doLogin=false;
-				$scope.confirmSession=true;
-			} else {
-				$scope.doLogin=true;
-				$scope.loading = true;
-				$scope.confirmSession=false;
-			}
+			var splitLocation = location.href.split('=');
+			$scope.idUserLoggerIn =splitLocation[1];
+		}
+
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+			$scope.confirmSession=true;
+		} else {
+			$scope.loading = true;
+			$scope.confirmSession=false;
 		}
         
 	}
@@ -534,7 +535,7 @@ app.constant('jQuery', window.jQuery)
 
 	/* routes of click on links page */
 	$scope.disableSearch = function(buttonClick) {
-		debugger
+		
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;

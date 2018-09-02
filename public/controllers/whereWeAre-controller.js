@@ -36,19 +36,23 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 
 	/* verify if user is logged in */
     $scope.validateUserLoggedIn = function() {
-        var splitLocation = location.href.split('=');
-		var splitParams = splitLocation[1].split('&');
-		$scope.idUserLoggerIn =splitParams[0];
-		$scope.redirect = splitParams[1];
+        if(!$scope.isMobileView) {
+			var splitLocation = location.href.split('=');
+			var splitParams = splitLocation[1].split('&');
+			$scope.idUserLoggerIn =splitParams[0];
+			$scope.redirect = splitParams[1];
+		
+		} else {
+			var splitLocation = location.href.split('=');
+			$scope.idUserLoggerIn =splitLocation[1];
+		}
 
-        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
-            $scope.doLogin=false;
-            $scope.confirmSession=true;
-        } else {
-            $scope.doLogin=true;
-            $scope.loading = true;
-            $scope.confirmSession=false;
-        }
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+			$scope.confirmSession=true;
+		} else {
+			$scope.loading = true;
+			$scope.confirmSession=false;
+		}
     }
 
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
