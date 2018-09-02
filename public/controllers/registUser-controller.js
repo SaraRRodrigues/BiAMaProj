@@ -134,6 +134,8 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 					}
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
+
+					$window.location.href="http://localhost:8080";
 				} else {
 					$scope.underAge=true;
 				}
