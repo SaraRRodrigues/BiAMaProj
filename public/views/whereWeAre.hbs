@@ -39,11 +39,11 @@
 		<script type="text/javascript" src="../controllers/compare-controller.js"></script>
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp" ng-controller="WhereWeAreController" style=" padding: 12px;">
-		<div ng-show="redirect" style="background-color: white;">
+	<body class="paddingBody" ng-app="myApp" ng-controller="WhereWeAreController">
+		<div class="backgroundColor" ng-show="redirect">
 			
 			<!-- user & search & languages-->
-			<nav class="positionOfNavDetails" style="margin-top:10px">
+			<nav class="positionOfNavDetails alignUserAndSearchIcons">
 				<!-- search -->
 				<div ng-if="!isMobileView" class="float-left padding-left-3x">
 					<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
@@ -127,7 +127,7 @@
 				</div>
 			</nav>
 		</div>
-		<div style="border: 7px solid #C0C0C0; border-radius: 5px;">
+		<div class="borderPageLine fontFamily">
 			<!--image biama -->
 			<div class="row text-center">
 				<img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -149,8 +149,8 @@
 			</div>	
 			<!-- content of where we are page -->
 			<div ng-if="!loading && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter">
-				<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
-				<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" allowfullscreen></iframe>
+				<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" allowfullscreen></iframe>
 				<div>
 					<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
 					<label class="margin-right-4x">[{descriptionLocation}]</label>
@@ -167,7 +167,7 @@
 			</div>
 			<!-- show details of material if click on material -->
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
-				<div class="row container" style=" margin-bottom: 60px;">
+				<div class="row container marginBottomMaterialDetails">
 					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
 					<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
@@ -189,8 +189,8 @@
 				</div>
 			</div>
 			<!-- small search results -->
-			<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right" style="    margin-left: 7px;margin-right: 7px; margin-top: 4px;margin-bottom: 11px;">
+			<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium alignIconCloseOfMiniSearch"></i>
+			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right marginResultsMiniSearch">
 				<div>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">

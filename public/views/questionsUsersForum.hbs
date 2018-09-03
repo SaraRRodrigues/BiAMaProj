@@ -42,12 +42,12 @@
 		
 		<base href="/"/>
 	</head>
-	<body ng-app="myApp" ng-controller="QuestionsUsersForumController" style=" padding: 12px;">
+	<body class="paddingBody" ng-app="myApp" ng-controller="QuestionsUsersForumController">
 		<!-- user details and mini search -->
 		<div ng-show="redirect">
-			<div style="background-color: white;">
+			<div class="backgroundColor">
 				<!-- user & search & languages-->
-				<nav class="positionOfNavDetails" style="margin-top:10px">
+				<nav class="positionOfNavDetails alignUserAndSearchIcons">
 					<!-- search -->
 					<div ng-if="!isMobileView" class="float-left padding-left-3x">
 						<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
@@ -132,7 +132,7 @@
 				</nav>
 			</div>
 		</div>
-		<div style="border: 7px solid #C0C0C0; border-radius: 5px;">
+		<div class="borderPageLine fontFamily">
 			<!--image biama -->
 			<div class="row text-center">
 				<img class="margin-top-3x" src="../images/topoBiama.png"/>
@@ -162,7 +162,7 @@
 				<div class="titlesOnCenter"> 
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
-				<div class="titlesOnCenter" style="margin-left: 274px;margin-bottom: 45px;">
+				<div class="titlesOnCenter alignQuestionsForum">
 					<div ng-if="!showDivAnswer" class="margin-left-5x">
 						<!-- Question -->
 						<img class="imageButton" src="../images/user.png">
@@ -243,7 +243,7 @@
 			</div>
 			<!-- show details of material if click on material -->
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
-				<div class="row container" style=" margin-bottom: 60px;">
+				<div class="row container marginBottomMaterialDetails">
 					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
 					<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
@@ -265,8 +265,8 @@
 				</div>
 			</div>
 			<!-- small search results -->
-			<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right" style="    margin-left: 7px;margin-right: 7px; margin-top: 4px;margin-bottom: 11px;">
+			<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium alignIconCloseOfMiniSearch"></i>
+			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right marginResultsMiniSearch">
 				<div>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">

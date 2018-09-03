@@ -61,9 +61,9 @@
 		<base href="/"/>
 	</head>
 
-	<body ng-app="myApp" ng-controller="MainController" style=" padding: 12px;">
+	<body class="paddingBody" ng-app="myApp" ng-controller="MainController">
 		<!-- MOBILE VIEW -->
-		<div ng-if="isMobileView" style="padding-bottom: 174px;">
+		<div class="paddingBottomMobile" ng-if="isMobileView">
 			<!-- header -->
 			<div ng-if="search" class="container-fluid">
 				<div class="header">
@@ -78,8 +78,8 @@
 					</div>
 					
 					<div ng-if="showSearch" class="margin-top col-sm-2">
-						<img style="margin-top: -77px;" class="float-right" ng-if="!showSearch && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
-						<img style="margin-top: -77px;" class="float-right" ng-if="showSearch  && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
+						<img class="float-right marginSearchMobile" ng-if="!showSearch && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
+						<img class="float-right marginSearchMobile" ng-if="showSearch  && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
 
 						<button class="float-right margin-top-1x" ng-if="showSearch && !userDetails && isMobileView" ng-click="initMiniSearch()">Ok</button>
 						
@@ -87,8 +87,8 @@
 						<img class="float-right" ng-if="showSearch  && !userDetails && isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
 					</div>
 					<div class="col-sm-1">
-						<input id="miniSearch" class="inputMinSearch" ng-if="isMobileView && showSearch && !userDetails" type="text" style="margin-top: 12px;float: left;width: 167px;"></input>
-						<input id="miniSearch" class="inputMinSearch" ng-if="!isMobileView && showSearch && !userDetails" type="text" style="float: right;margin-right: 57px;margin-top: -62px;width: 128px;"></input>
+						<input id="miniSearch" class="inputMinSearch marginMiniSearchMobile" ng-if="isMobileView && showSearch && !userDetails" type="text"></input>
+						<input id="miniSearch" class="inputMinSearch marginMiniSearchDesktop" ng-if="!isMobileView && showSearch && !userDetails" type="text"></input>
 						<button ng-if="showSearch && !userDetails && !isMobileView" ng-click="initMiniSearch()">Ok</button>
 					</div>
 				</div>
@@ -100,10 +100,10 @@
 			<!-- show categories and materials -->
 			<div ng-if="search" class="container">
 				<div ng-if="!openMaterialDetail && search && showInitSearch" class="col-sm-4 col-sm-offset-4">
-					<div class="ui-widget input-group stylish-input-group" style="top: 50%;left: 50%;margin-left: -105px;">
-						<input id="tags_search" style="margin-top: 25px; margin-left: 24px;">
-						<span style="padding: 4px;padding-left: 22px;">
-							<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()" style="margin-right: 17px;"></span>
+					<div class="ui-widget input-group stylish-input-group divInputSearch">
+						<input id="tags_search" class="inputSearch">
+						<span class="spanIconSearch">
+							<span class="glyphicon glyphicon-search cursorPointer iconSearch" ng-click="selectedMaterialSearch()"></span>
 						</span>
 					</div>
 				</div>
@@ -168,7 +168,7 @@
 							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 							
 							<!-- section of init session -->
-							<div class="divInitSession" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;">
+							<div class="divInitSession sectionInitSession" ng-if="showInitSession">
 								<div class="alignCenter">
 									<h5 class="initSessionColor">Iniciar Sessão</h5>
 									
@@ -233,8 +233,8 @@
 					<div class="loading-icon-footer-info"></div>
 				</div>	
 				<div ng-if="!loading" class="titlesOnCenter">
-					<iframe ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-					<iframe ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
+					<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
 					
 					<div class="dropup ">
 						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
@@ -259,7 +259,7 @@
 		<div class="divController" id="divControllerMain">
 			<header ng-if="!isMobileView && namePage=='index'" id="headerMain" class="masthead text-white text-center">
 				<nav>
-					<div style="padding: 10px;">
+					<div class="headerDesktop">
 						<i class="float-left fas fa-circle redCircle margin-right margin-left"></i>
 						<i class="float-left fas fa-circle orangeCircle margin-right"></i>
 						<i class="float-left fas fa-circle greenCircle margin-right-3x"></i>
@@ -270,8 +270,8 @@
 					</div>
 				</nav>	
 			</header>
-			<article style="padding: 7px;">
-				<div style="background-color: white;">
+			<article class="paddingDesktop">
+				<div class="backgroundColor">
 					<!-- user & search & languages-->
 					<nav class="positionOfNavDetails" id="searchMain">
 						<!-- search -->
@@ -376,12 +376,12 @@
 					<div class="row text-center">
 						<ng-view></ng-view>
 						<!-- section of big search-->
-						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4" style="margin-bottom: 236px;">
-							<div ng-if="!loading" class="ui-widget input-group stylish-input-group" style="    background-color:#E4A73F;padding: 4px;padding-left: 7px;border-radius: 10px;">
-								<select class="form-control" id="tags_search" style="height: 27px;width: 295px;border: 0px;border-radius: 9px;position:initial" ng-click="tagsOfSearch()">
+						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4 divDetailMaterialDesktop">
+							<div ng-if="!loading" class="ui-widget input-group stylish-input-group searchInputStyle">
+								<select class="form-control selectionInputSearch" id="tags_search"  ng-click="tagsOfSearch()">
 									<option ng-repeat="item in itemSearch">[{item}]</option>
 								</select>
-								<span class="input-group-addon" style="background-color: transparent;border: 0px;">
+								<span class="input-group-addon searchIcon">
 									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()"></span>
 								</span>
 							</div>
@@ -407,7 +407,7 @@
 						</div>
 						<!-- show details of material if click on material -->
 						<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
-							<div class="row container" style=" margin-bottom: 60px;">
+							<div class="row container marginBottomMaterialDetails">
 								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
 								<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
@@ -437,8 +437,8 @@
 				</div>	
 			</article>
 			<!-- small search results -->
-			<i ng-if="miniSearchResults" style="margin-top:-20px" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right" style="    margin-left: 7px;margin-right: 7px; margin-top: 4px;margin-bottom: 11px;">
+			<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium alignIconCloseOfMiniSearch"></i>
+			<div ng-if="miniSearchResults" class="sectionScrollInitSearch float-right marginResultsMiniSearch">
 				<div>
 					<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 						<div class="thumbnail">
@@ -448,7 +448,7 @@
 				</div>
 			</div>
 			<!-- footer of desktop view -->
-			<footer ng-if="!isMobileView" class="w3-bar w3-center" id="footerMain" style="margin-top: -55px;padding-left: 7px; padding-right: 7px;padding-bottom: 8px;">
+			<footer ng-if="!isMobileView" class="w3-bar w3-center footerDesktop" id="footerMain">
 				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick !== 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: #E4A73F; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonNotSelected buttonAlignment w3-mobile">BiAMa</a>
 				<a href="/BiAMa/biamaPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'biamaPage'" ng-click="changeColorClick('biamaPage')" style="width:20%;color: white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="buttonSelected buttonAlignment w3-mobile">BiAMa</a>
 
