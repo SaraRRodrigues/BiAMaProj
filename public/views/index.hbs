@@ -271,7 +271,7 @@
 				</nav>	
 			</header>
 			<article class="paddingDesktop">
-				<div class="backgroundColor">
+				<div class="backgroundColorDesktop" style="background-color: white;">
 					<!-- user & search & languages-->
 					<nav class="positionOfNavDetails" id="searchMain">
 						<!-- search -->
@@ -378,10 +378,10 @@
 						<!-- section of big search-->
 						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4 divDetailMaterialDesktop">
 							<div ng-if="!loading" class="ui-widget input-group stylish-input-group searchInputStyle">
-								<select class="form-control selectionInputSearch" id="tags_search"  ng-click="tagsOfSearch()">
+								<select class="form-control" id="tags_search"  ng-click="tagsOfSearch()" style="height: 27px;width: 295px;border: 0px;border-radius: 9px;position:initial">
 									<option ng-repeat="item in itemSearch">[{item}]</option>
 								</select>
-								<span class="input-group-addon searchIcon">
+								<span class="input-group-addon" style="background-color: transparent; border: 0px;">
 									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()"></span>
 								</span>
 							</div>

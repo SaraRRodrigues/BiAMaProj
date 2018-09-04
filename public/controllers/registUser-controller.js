@@ -29,6 +29,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 	/* verify if user is logged in */
 	$scope.validateUserLoggedIn = function() {
+		debugger
 		if(!$scope.isMobileView) {
 			var splitLocation = location.href.split('=');
 			var splitParams = splitLocation[1].split('&');
@@ -40,7 +41,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
 
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
@@ -246,7 +247,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = WhereWeAreBiamaService.getUsers(function(users){});
+		var getAllUsers = UserRegistService.getUsers(function(users){});
 		
 		getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
@@ -278,30 +279,78 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
-		if(buttonClick === 'favorites') {
-			$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
-		}
+		if(!$scope.isMobileView) {
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'http://localhost:8080/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href = 'http://localhost:8080/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 
-		if(buttonClick == 'questions') {
-			$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
-		}
+			if(buttonClick === 'library') {
+				$window.location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 
-		if(buttonClick == 'world_share') {
-			$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
-		}
+			if(buttonClick === 'myBiama') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 
-		if(buttonClick == 'notification') {
-			$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
-		}
+			if(buttonClick === 'forum') {
+				$window.location.href = 'http://localhost:8080/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 
-		if(buttonClick == 'perfil') {
-			location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-			+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-			+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
-		}
-
-		if(buttonClick == 'compare') {
-			location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			if(buttonClick === 'favorites') {
+				$window.location.href = 'http://localhost:8080/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'questions') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'world_share') {
+				$window.location.href = 'http://localhost:8080/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'notification') {
+				$window.location.href = 'http://localhost:8080/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+	
+			if(buttonClick == 'perfil') {
+				$window.location.href = 'http://localhost:8080/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail + '&redirect';
+			}
+	
+			if(buttonClick == 'compare') {
+				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+		} else {
+			if(buttonClick === 'favorites') {
+				$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'questions') {
+				$window.location.href = 'http://localhost:8080/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'world_share') {
+				$window.location.href = 'http://localhost:8080/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'notification') {
+				$window.location.href = 'http://localhost:8080/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+			}
+	
+			if(buttonClick == 'perfil') {
+				$window.location.href = 'http://localhost:8080/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
+				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
+				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+			}
+	
+			if(buttonClick == 'compare') {
+				$window.location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			}
 		}
 		
 		if(buttonClick === 'notification') {
