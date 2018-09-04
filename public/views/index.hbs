@@ -381,7 +381,7 @@
 								<select class="form-control" id="tags_search"  ng-click="tagsOfSearch()" style="height: 27px;width: 295px;border: 0px;border-radius: 9px;position:initial">
 									<option ng-repeat="item in itemSearch">[{item}]</option>
 								</select>
-								<span class="input-group-addon" style="background-color: transparent; border: 0px;">
+								<span class="input-group-addon searchIcon" style="background-color: transparent; border: 0px;">
 									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()"></span>
 								</span>
 							</div>
@@ -391,7 +391,7 @@
 						</div>
 						<!-- show result of search -->
 						<div ng-if="search && showMaterials && !isMobileView">
-							<div class="padding sectionScrollSearch">
+							<div class="padding sectionScrollInitSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
 									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
 										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>

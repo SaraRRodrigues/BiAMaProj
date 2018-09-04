@@ -1246,3 +1246,20 @@ backgroundColorDesktop {
   width: 117px;
   height: 68px;
 }
+
+.marginOfIframe {
+  margin-left: 23px;
+}
+
+.whereWeAreLocationDetails {
+  border-radius: 4px;
+  margin-left: 328px;
+  margin-right: 312px;
+  background-color: lightgrey;
+  margin-top: 10px;
+}
+
+.borderLocations {
+  border-bottom: 3px solid lightgrey;
+  background-color:white;
+}

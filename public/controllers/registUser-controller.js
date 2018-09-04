@@ -1,4 +1,4 @@
-app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRegistService", "$http" ,"$sce", "$route", "$window", "jQuery", function($scope, RegistMaterialService, UserRegistService, $http, $sce, $route, $window){
+app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRegistService","NotificationRegistService", "$http" ,"$sce", "$route", "$window", "jQuery", function($scope, RegistMaterialService, UserRegistService,NotificationRegistService, $http, $sce, $route, $window){
    
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -354,6 +354,14 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 		}
 		
 		if(buttonClick === 'notification') {
+
+			var getNotifications = NotificationRegistService.getMyNotifications($scope.idUserLoggerIn, function(infoNotification){});
+				getNotifications.then(function(result) {
+				$scope.loading = false;
+				var data=result.data.notificationDetails;
+				$scope.notifications=data;
+				$scope.numberOfNotifications=$scope.notifications.length;
+			});
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
 		} else {
@@ -382,6 +390,26 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	$scope.getAllRequests();
 	$scope.validateUserLoggedIn();
 }])
+
+app.factory("NotificationRegistService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMyNotifications: getMyNotifications
+    };
+});
 
 app.factory("RegistMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
