@@ -22,6 +22,7 @@ a {
 .margin-left-8x {margin-left:140px}
 .margin-left-9x {margin-left:150px}
 .margin-left-9x1 {margin-left:300px}
+.margin-left-9x2 {margin-left:350px}
 .margin-left-10x {margin-left:400px}
 .margin-left-x {margin-left: -253px;}
 
@@ -548,6 +549,12 @@ a {
   width: 80%;
   height: 40%;
 }
+
+.textAreaMyAnswer{
+  width: 61%;
+  height: 40%;
+}
+
 .loading-icon {
   position: relative;
   width: 20px;
