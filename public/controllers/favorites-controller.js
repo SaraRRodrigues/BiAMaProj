@@ -85,7 +85,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             /* get information of material and of library - when i do get library */
             var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
             getMaterialInfo.then(function(result) {
-                $scope.loading = false;
+                $scope.loading = true;
                 var data=result.data.materialsCategories;
                 $scope.materialsCategories=data;
                 for(var index=0; index<$scope.materialsCategories.length; ++index){
@@ -156,6 +156,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 }
             }
         }
+        
+        $scope.loading=false;
     }
 
     /* redirect to homepage with arrow */

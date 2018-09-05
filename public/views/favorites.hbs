@@ -177,6 +177,9 @@
 					<a class="questionX" ng-click="getQuestion((question.question_id), $index)">Pergunta [{$index+1}]</a><br>
 					<div class="separateQuestions"></div>
 				</div>
+				<div class="titlesOnCenter" ng-if="showMyQuestions && favoriteQuestions.length===0 && !doLogin">
+					<h4>Não tem perguntas associadas</h4>
+				</div>
 				<div ng-if="showQuestionDetails">
 					<div class="titlesOnCenter"> 
 						<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>

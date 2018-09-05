@@ -156,8 +156,8 @@
 			<!-- show categories on browser -->
 			<div ng-if="!loading && !showCategory && !showMaterialDetails && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter sectionScroll">
 				<div ng-repeat="category in categories">
-					<h1>[{image.category}]</h1>
-					<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="47%" height="170px" alt="foto"/>
+					<h1 class="libraryCategoriesDesktop">[{category.category}]</h1>
+					<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="75%" height="170px" alt="foto"/>
 				</div>
 			</div>
 			<!-- show material of category selected -->
@@ -197,26 +197,25 @@
 			<!-- show location of material -->
 			<div ng-if="locationMaterial">
 				<div class="titlesOnCenter"> 
-					<i ng-click="reloadPage()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
 					<h1 class="subtitles">Onde estamos</h1>
 				</div>
 				<div ng-if="loading">
 					<div class="loading-icon-footer-info"></div>
 				</div>	
 				<div ng-if="!loading" class="titlesOnCenter">
-					<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="200" frameborder="0" allowfullscreen></iframe>
-					<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="650" height="300" frameborder="0" allowfullscreen></iframe>
+					<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="400" height="180" frameborder="0" allowfullscreen></iframe>
+					<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="400" height="300" frameborder="0" allowfullscreen></iframe>
 					<div>
-						<i ng-click="expandIframe();" class="fas fa-map-marker-alt"></i>
+						<i ng-click="expandIframe();" class="fas fa-map-marker-alt cursorPointer"></i>
 						<label class="margin-right-4x">[{descriptionLocation}]</label>
 
 						<label>Pesquise um local ou endereço</label>
-						<i ng-click="getSchools()" class="fas fa-caret-down"></i>	
+						<i ng-click="getSchools()" class="fas fa-caret-down cursorPointer"></i>	
 						<div ng-if="showSchools">
 							<div class="loadSchool" ng-if="loadingSchool">
 								<div class="loading-icon-footer-info"></div>
 							</div>
-							<div ng-if="!loadingSchool" ng-repeat="biama in schools">
+							<div class="borderLocations" ng-if="!loadingSchool" ng-repeat="biama in schools">
 								<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
 								<br>
 							</div>

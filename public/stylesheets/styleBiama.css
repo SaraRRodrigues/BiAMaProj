@@ -575,7 +575,8 @@ a {
 .subtitles {
   font-weight: normal;
   color: #5F9EA0;
-  font:bold
+  font:bold;
+  font-size: 31px;
 }
 
 .sectionDetails{
@@ -1262,4 +1263,12 @@ backgroundColorDesktop {
 .borderLocations {
   border-bottom: 3px solid lightgrey;
   background-color:white;
+}
+
+.libraryCategoriesDesktop {
+  font-size: 17px;
+  background-color: lightgray;
+  margin-left: 48px;
+  margin-right: 48px;
+  border-radius: 5px;
 }

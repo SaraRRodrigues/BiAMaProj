@@ -104,9 +104,17 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.goToHomePage = function() {
 		if($scope.idUserLoggerIn !== undefined) {
 			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+			if($scope.showCategory){
+				location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		} else {
 			location.href = 'http://localhost:8080?username=' + 'anonymous';
+			if($scope.showCategory){
+				location.href = 'http://localhost:8080?userName=anonymous' + '&redirect';
+			}
 		}
+
+		
 	}
 
 	/* open categories of library */
@@ -176,8 +184,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 				$scope.idFavoriteMaterial=$scope.favoriteDetails[index].id_favorite+1;
 			}
 		}
+		debugger
 		if($scope.materialInfo.isFavorite) {
-			if($scope.showInitSession ){
+			if($scope.confirmSession){
 				$scope.materialInfo.isFavorite=false;
 				/* update table of favorites to remove this favorite material */
 				var data = {
@@ -188,13 +197,13 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 				};
 				$scope.clickAddFavoriteMaterial=false;
 				$http.post('/deleteFavoriteQuestion', data);
-			}  else if(!$scope.showInitSession) {
+			}  else if(!$scope.confirmSession) {
 				$scope.clickAddFavoriteMaterial=true;
 			}
 
 		} else {
 			$scope.materialInfo.isFavorite=true;
-			if($scope.showInitSession ){
+			if($scope.confirmSession){
 				if(!$scope.favAlreadyExists){
 					var data = {
 						idFavorite: $scope.idFavoriteMaterial,
@@ -215,7 +224,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 				}
 				
 				$scope.clickAddFavoriteMaterial=false;
-			} else if(!$scope.showInitSession) {
+			} else if(!$scope.confirmSession) {
 				$scope.clickAddFavoriteMaterial=true;
 			}
 		}
