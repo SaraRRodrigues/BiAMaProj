@@ -325,6 +325,11 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn;
 			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		}
 		
 		if(buttonClick === 'notification') {

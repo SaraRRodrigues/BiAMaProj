@@ -556,6 +556,11 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
+            }
+            
+            if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
         }
 		

@@ -29,7 +29,6 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 	/* verify if user is logged in */
 	$scope.validateUserLoggedIn = function() {
-		debugger
 		if(!$scope.isMobileView) {
 			var splitLocation = location.href.split('=');
 			var splitParams = splitLocation[1].split('&');
@@ -324,6 +323,11 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 		} else {
 			if(buttonClick === 'favorites') {

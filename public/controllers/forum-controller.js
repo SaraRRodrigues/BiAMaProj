@@ -260,6 +260,11 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect=true';
 			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		} else {
 			if(buttonClick === 'favorites') {
 				$window.location.href = 'http://localhost:8080/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;

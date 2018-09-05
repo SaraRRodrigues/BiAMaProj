@@ -111,7 +111,7 @@
 												<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
 											</div>
 											<br>
-											<a href="/BiAMa/registUser" class="registSession" ng-click="regist()">Registar</a>
+											<a class="registSession" ng-click="getRequest('regist')">Registar</a>
 											<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
 										</div>												
 									</div>
@@ -219,7 +219,7 @@
 					<!-- image of material -->
 					<h5 class="subtitles biamaTitlesStyle"><b>Imagem do material</b></h5>
 					<i ng-if="showInsertedImage && !errorInsertImage" class="fas fa-minus float-right" ng-click="removeMaterial()"></i>
-					<input ng-if="!showInsertedImage" id="image" class="biamaConfigFields" ng-model="imageMaterial" type="file" placeholder="Insira uma imagem do material" required><button ng-if="!showInsertedImage" ng-click="insertImage(imageMaterial)">OK</button><br>
+					<input ng-if="!showInsertedImage" id="image" class="biamaConfigFields" ng-model="imageMaterial" type="file" placeholder="Insira uma imagem do material" required><button ng-if="!showInsertedImage" ng-click="insertImage(categoryMaterial,imageMaterial)">OK</button><br>
 					
 					<h6 ng-if="errorInsertImage">Preencha os dados anteriores, por favor.</h6>
 					<img ng-if="showInsertedImage && !errorInsertImage" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="25%" height="12%" alt="foto"/>
@@ -238,6 +238,7 @@
 					<div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
 						<div class="form-group">
 							<img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
+							<br>
 							<input class="center-block minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
 						</div>
 						

@@ -12,6 +12,7 @@ a {
 .margin-left {margin-left:5px}
 .margin-left-2x {margin-left:10px}
 .margin-left-3x {margin-left:20px}
+.margin-left-3x10 {margin-left:40px}
 .margin-left-3x1 {margin-left:50px}
 .margin-left-4x {margin-left:60px}
 .margin-left-5x {margin-left:80px}
@@ -507,6 +508,7 @@ a {
   text-transform: uppercase;
   width:130px;
   margin-top:25px;
+  margin-bottom: 10px;
 }
 
 .buttonConfirm{
@@ -530,10 +532,17 @@ a {
 
 
 .answerDiv {
+  background-color: lightgray;
+  margin-left: 6%;
+  padding-top: 10px;
+  margin-right: 30%;
+  margin-top: 35px;
+  /*
   background-color:lightgray;
   margin-left: 30%;
   padding-top: 39px;
   margin-right: 30%;
+  */
 }
 .textAreaAnswerDiv{
   width: 80%;
@@ -577,6 +586,13 @@ a {
   color: #5F9EA0;
   font:bold;
   font-size: 31px;
+}
+
+.biamaDescWidth {
+  width: 37%;
+  max-width: 800px;
+  margin: 0 auto; 
+  text-align: justify;
 }
 
 .sectionDetails{
@@ -688,12 +704,13 @@ a {
 .separateQuestions{
   margin-bottom:10px;
   color:#E0E0E0; 
-  margin-left:520px; 
+  margin-left:424px; 
   width:200px; 
   border:1px solid
 }
 
 .borderQuestion{
+  border-radius: 7px;
   border:5px solid #eaab00;
   width:340px;
   background-color: #eaab00;
@@ -702,7 +719,8 @@ a {
 }
 
 .borderQuestionMobile{
-  border:5px solid #eaab00;
+  border-radius: 7px;
+  border:5px solid #b89a48;
   width:677px;
   background-color: #eaab00;
   margin-top: 20px;
@@ -718,7 +736,6 @@ a {
 }
 .imageButton {
   float:left;
-  height: 14%;
   border: 4px solid #eaab00;
 }
 
@@ -739,6 +756,7 @@ a {
 }
 
 .borderAnswer{
+  border-radius: 7px;
   border:5px solid #70c0c1;
   width:340px;
   margin-left: 220px;
@@ -748,6 +766,7 @@ a {
 }
 
 .borderAnswerNoMargin{
+  border-radius: 7px;
   border:5px solid #70c0c1;
   width:340px;
   margin-top: 20px;
@@ -756,6 +775,7 @@ a {
 }
 
 .borderAnswerMobile{
+  border-radius: 7px;
   border:5px solid #70c0c1;
   width:677px;
   background-color: #70c0c1;
@@ -956,9 +976,8 @@ scrollListMaterial {
 }
 
 .myBiamaConfig {
-  width: 385px;
   float: left;
-  margin-left: 170px;
+  margin-left: 42px;
   background-color: antiquewhite;
   padding: 37px;
   padding-bottom:40px;

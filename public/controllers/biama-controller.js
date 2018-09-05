@@ -281,6 +281,11 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		}
 		
 		if(buttonClick === 'notification') {

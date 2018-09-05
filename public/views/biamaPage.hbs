@@ -114,8 +114,7 @@
 													<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
 												</div>
 												<br>
-												<a href="/BiAMa/registUser" class="registSession" ng-click="regist()">Registar</a>
-												<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
+												<a class="registSession" ng-click="getRequest('regist')">Registar</a>												<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
 											</div>												
 										</div>
 									</div>
@@ -168,7 +167,7 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- content of biama page  -->
-			<div ng-if="!loading && !miniSearchResults && !showDetailsOfMaterial" class="sectionDetails">
+			<div ng-if="!loading && !miniSearchResults && !showDetailsOfMaterial" class="biamaDescWidth">
 				<p>[{descriptionBiama}]
 				</p>
 			</div>

@@ -109,7 +109,7 @@
 													<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
 												</div>
 												<br>
-												<a href="/BiAMa/registUser" class="registSession" ng-click="regist()">Registar</a>
+												<a class="registSession" ng-click="getRequest('regist')">Registar</a>
 												<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
 											</div>												
 										</div>
@@ -164,7 +164,7 @@
             <!-- content of perfil page -->
             <div ng-if="showPerfilDetails && !miniSearchResults && !showDetailsOfMaterial">
                 <br>
-                <div ng-if="!openImageUploadLabel" class="perfilDetails alignCenter center-block">
+                <div ng-if="!openImageUploadLabel" class="perfilDetails center-block titlesOnCenter">
                     <!-- user photo -->
                     <div>
                         <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil" readonly >

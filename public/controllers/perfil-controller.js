@@ -91,7 +91,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                 $scope.email = $scope.users[index].email;
                 $scope.name=$scope.users[index].name;
                 $scope.birthdateValue = $scope.users[index].birthdate;
-                
+
                 if($scope.userName !== null && $scope.userName === $scope.username){
                     if($scope.userPassword !== null && $scope.userPassword === $scope.password){
                         $scope.userLoggedIn=$scope.users[index].username;
@@ -413,6 +413,11 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
+            }
+            
+            if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
         }
 		

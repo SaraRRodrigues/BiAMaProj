@@ -97,7 +97,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.loading = false;
 			$scope.biamaUp = true;
 			var data=result.data.biamaDetails;
-			$scope.descriptionMyBiama=data[0].description;
+			$scope.descriptionsOfBiama=data;
 		});
 
 		var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
@@ -117,7 +117,23 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.loading = false;
 			var data=result.data.userLibrary;
 			$scope.userLibrary=data;
+
+			for(var index=0; index<$scope.userLibrary.length; ++index) {
+				if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
+					$scope.myLibrary = $scope.userLibrary[index].library_id;
+					break;
+				}
+			}
+			for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
+				if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
+					$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
+					break;
+				}
+			}
 		});
+
+
+		
 
 		var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
 			getNotifications.then(function(result) {
@@ -165,12 +181,17 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	}
 	
 	/* save information of new biama in pdf file */
-	$scope.saveInfo = function(descBiama, locationBiama, categoryBiama, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial) {
+	$scope.saveInfo = function(descBiama, locationBiama, categoryMaterial, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial) {
 		$scope.showMaterials = false;
+
+		$scope.categoryMaterial=categoryMaterial;
 		
-		if($scope.descriptionNewBiama !== '' && $scope.locationNewBiama !== '' && $scope.categoryMaterial !== ''
-		&& $scope.colorMaterial !== '' && $scope.codeMaterial !== '' && $scope.imageMaterial !== '' && $scope.descriptionMaterial !== '') {
-			$scope.codeMaterial = $scope.codeMaterial + "";
+		if(descBiama !== '' && locationBiama !== '' && categoryMaterial !== ''
+		&& colorMaterial !== '' && codeMaterial !== '' && imageMaterial !== '' && descriptionMaterial !== '') {
+			$scope.codeMaterial = codeMaterial + "";
+			$scope.descriptionNewBiama = descBiama;
+			$scope.locationNewBiama = locationBiama;
+
 			// Default export is a4 paper, portrait, using milimeters for units
 			var doc = new jsPDF();
 			
@@ -183,7 +204,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			doc.setFont("courier");
 			doc.setFontType("normal");
-			doc.text(25, 40, $scope.descriptionNewBiama);
+			doc.text(25, 40, descBiama);
 			/* END: description of my biama */
 
 			/* INIT: location of my biama */
@@ -193,7 +214,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			doc.setFont("courier");
 			doc.setFontType("normal");
-			doc.text(25, 60, $scope.locationNewBiama);
+			doc.text(25, 60, locationBiama);
 			/* END: location of my biama */
 
 			/* INIT: Materials of my biama */
@@ -208,7 +229,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			doc.setFont("courier");
 			doc.setFontType("normal");
-			doc.text(30, 90, $scope.categoryMaterial);
+			doc.text(30, 90, categoryMaterial);
 			/* END: category of my biama */
 
 			/* Color of material */
@@ -218,7 +239,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			doc.setFont("courier");
 			doc.setFontType("normal");
-			doc.text(30, 110, $scope.colorMaterial);
+			doc.text(30, 110, colorMaterial);
 			/* END: color of my biama */
 
 			/* Code of material */
@@ -259,7 +280,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			doc.setFont("courier");
 			doc.setFontType("normal");
-			doc.text(30, 200, $scope.descriptionMaterial);
+			doc.text(30, 200, descriptionMaterial);
 			/* END: image of my biama */
 
 			/* END: Materials of my biama */
@@ -416,9 +437,8 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	}
 
 	/* insert image on new biama form */
-	$scope.insertImage = function(image) {
-
-		if($scope.categoryMaterial !== '') {
+	$scope.insertImage = function(category,image) {
+		if(category !== '') {
 			
 			if($scope.showInsertedImage){
 				$scope.showInsertedImage = false;
@@ -433,7 +453,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			
 			$scope.material = {
 				'image': $scope.imageMaterial,
-				'category': $scope.categoryMaterial
+				'category': category
 			}
 		} else {
 			$scope.errorInsertImage=true;
@@ -638,6 +658,11 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			if(buttonClick == 'compare') {
 				$window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		} else {
 
 			if(buttonClick === 'favorites') {
@@ -694,6 +719,28 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		source: $scope.availableTags
 	});
 	});
+
+	
+    /* logout of user details section */
+    $scope.logout = function(){
+		$scope.confirmSession = false;
+		/*firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		
+		}, function(error) {
+			// An error happened.
+			console.log(error);
+
+		});*/
+    }
+   
+    /* regist new user on user details section */
+	$scope.regist = function() {
+		$scope.userDetails = false;
+		$scope.registUser=true;
+		$scope.search=false;
+    }
+
 
 	/* init MainController  */
 	$scope.viewType();
@@ -809,4 +856,21 @@ app.factory("MyBiamaMaterialService", function($q, $http, $timeout){
     return {
         getMaterialComparation: getMaterialComparation
     };
+});
+
+app.factory("MyBiamaService", function($q, $http, $timeout){
+    
+	var getMyBiamaInfo = function() {
+		var deferred = $q.defer();
+	
+ 		$timeout(function() {
+		  deferred.resolve($http.get('/myBiamaInfo',  {cache:true}));
+		}, 2000); 
+
+		return deferred.promise;
+	};
+
+	return {
+		getMyBiamaInfo: getMyBiamaInfo
+	};
 });

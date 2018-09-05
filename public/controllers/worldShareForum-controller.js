@@ -1,5 +1,5 @@
 
-app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "MyBiamaService", "WorldSharesForumMaterialService","WorldShareForumBiamaService", "$http", "$window", "jQuery", function($scope,WorldSharesForumService,MyBiamaService, WorldSharesForumMaterialService, WorldShareForumBiamaService, $http, $window){
+app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService", "WorldSharesForumMaterialService","WorldShareForumBiamaService", "$http", "$window", "jQuery", function($scope,WorldSharesForumService, WorldSharesForumMaterialService, WorldShareForumBiamaService, $http, $window){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMainMobile").hide();
@@ -54,13 +54,6 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
     /* -------------- INIT DESKTOP & MOBILE -------------- */
     /* get information of world shares on forum to display */
     $scope.getAllRequests = function() {
-      var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-      getMyBiamaInfo.then(function(result) {
-          $scope.loading = false;
-          var data=result.data.biamaDetails;
-          $scope.descriptionMyBiama=data[0].description;
-      });
-
       var getWorldSharesForum = WorldSharesForumService.getWorldSharesForum(function(infoWorldSharesForum){});
       getWorldSharesForum.then(function(result) {
         $scope.loading = false;
@@ -347,6 +340,11 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
         if(buttonClick == 'compare') {
           $window.location.href = 'http://localhost:8080/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
+
+        if(buttonClick == 'regist') {
+          $scope.regist();
+          $window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+        }
       }
       
       if(buttonClick === 'notification') {
@@ -430,19 +428,3 @@ app.factory("WorldShareForumBiamaService", function($q, $http, $timeout){
 	};
 });
 
-app.factory("MyBiamaService", function($q, $http, $timeout){
-    
-	var getMyBiamaInfo = function() {
-		var deferred = $q.defer();
-	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/myBiamaInfo',  {cache:true}));
-		}, 2000); 
-
-		return deferred.promise;
-	};
-
-	return {
-		getMyBiamaInfo: getMyBiamaInfo
-	};
-});
