@@ -43,10 +43,27 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* verify if user is logged in */
 	$scope.validateUserLoggedIn = function() {
 		if(!$scope.isMobileView) {
-			var splitLocation = location.href.split('=');
-			var splitParams = splitLocation[1].split('&');
-			$scope.idUserLoggerIn =splitParams[0];
-			$scope.redirect = splitParams[1];
+            var splitLocation = location.href.split('=');
+            var splitParams = [];
+            for( var i = 0; i < splitLocation.length; ++i) {
+                var x= splitLocation[i].split('&');
+                if(i>=2) {
+                    splitParams.push(x[0]);
+                }
+            }
+
+            $scope.showPerfilDetails=true;
+            $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
+            $scope.userName = splitParams[0];
+            $scope.userPassword = splitParams[1];
+            $scope.imageUser = splitParams[2];
+            $scope.birth = (splitParams[3].split('&')[0]).split('-');
+    
+            $scope.birthdateValue = $scope.birth[0] + '/' + $scope.birth[1] + '/' + $scope.birth[2];
+            $scope.name = splitParams[4].split('&')[0];
+            $scope.email = splitParams[5].split('&')[0];
+        
+			$scope.redirect = splitLocation[7].split('&')[1];
 		
 		} else {
 			var splitLocation = location.href.split('=');
@@ -74,7 +91,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                 $scope.email = $scope.users[index].email;
                 $scope.name=$scope.users[index].name;
                 $scope.birthdateValue = $scope.users[index].birthdate;
-    
+                
                 if($scope.userName !== null && $scope.userName === $scope.username){
                     if($scope.userPassword !== null && $scope.userPassword === $scope.password){
                         $scope.userLoggedIn=$scope.users[index].username;
@@ -542,8 +559,9 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 	$scope.viewType();
 	$scope.initData();
     $scope.getAllRequests();
-    $scope.initUserDetails();
+    
     $scope.validateUserLoggedIn();
+    $scope.initUserDetails();
 
     if($scope.isMobileView) {
         $scope.getData();

@@ -64,7 +64,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {
-                $scope.loading = false;
+                $scope.loading = true;
                 var data=result.data.favoriteDetails;
                 $scope.favoritesInfo=data;
                 $scope.favoriteDetails=[];
@@ -80,6 +80,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         }
                     }
                 }
+                $scope.loading = false;
             });
             
             /* get information of material and of library - when i do get library */
@@ -96,8 +97,9 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                     }
                 }
                 $scope.getFavInMaterials();
-                
+                $scope.loading = false;
             });
+            
         }
     }
     
@@ -156,16 +158,20 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 }
             }
         }
-        
-        $scope.loading=false;
     }
 
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
 			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+			if(!$scope.zoomInMaterial){
+				location.href = 'http://localhost:8080/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		} else {
 			location.href = 'http://localhost:8080?username=' + 'anonymous';
+			if(!$scope.zoomInMaterial){
+				location.href = 'http://localhost:8080?userName=anonymous' + '&redirect';
+			}
 		}
     }
 
@@ -421,6 +427,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.showQuestionDetails=false;
   
         $scope.showMaterials=true;
+        $scope.zoomInMaterial = false;
     }
 
 	/* open and close the small search icon */

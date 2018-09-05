@@ -103,7 +103,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		if($scope.idUserLoggerIn !== undefined) {
+			/* go to homepage */
 			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+			/* go to library categories */
 			if($scope.showCategory){
 				location.href = 'http://localhost:8080/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
@@ -113,8 +115,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 				location.href = 'http://localhost:8080?userName=anonymous' + '&redirect';
 			}
 		}
-
-		
 	}
 
 	/* open categories of library */

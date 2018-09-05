@@ -164,14 +164,14 @@
             <!-- content of perfil page -->
             <div ng-if="showPerfilDetails && !miniSearchResults && !showDetailsOfMaterial">
                 <br>
-                <div ng-if="!openImageUploadLabel" class="perfilDetails center-block">
+                <div ng-if="!openImageUploadLabel" class="perfilDetails alignCenter center-block">
                     <!-- user photo -->
                     <div>
                         <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil" readonly >
                         <img ng-show="upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil cursorPointer" ng-click="openImageUpload()">
                         <label class="minTitleBiAMa labelPerfilName">[{name}]</label>
                     </div>
-                    <br><br><br><br>
+                    <br><br><br><br><br>
                     <!-- username -->
                     <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username" readonly/>
                     <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>

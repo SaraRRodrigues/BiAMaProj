@@ -162,7 +162,7 @@
 			</div>
 			<!-- show material of category selected -->
 			<div ng-if="showCategory && !showMaterialDetails && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter sectionScroll">
-				<img ng-repeat="image in materialOfCategory track by $index" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/categories/[{category}]/[{materialOfCategory[$index].name}]" ng-click="openDetailsMaterial(materialOfCategory[$index])" width="35%" height="150px" alt="foto"/>
+				<img ng-repeat="image in materialOfCategory track by $index" class="margin-bottom-2x cursorPointer margin-left-2x borderOfImages" ng-src="../images/categories/[{category}]/[{materialOfCategory[$index].name}]" ng-click="openDetailsMaterial(materialOfCategory[$index])" width="35%" height="150px" alt="foto"/>
 			</div>
 			<!-- if click on material: material details-->
 			<div ng-if="!loading">
