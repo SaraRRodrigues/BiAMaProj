@@ -908,7 +908,7 @@ scrollListMaterial {
 
 .sectionScrollCompare{
   padding:15px;
-  height:208px;
+  height:250px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -1120,7 +1120,9 @@ backgroundColorDesktop {
 }
 
 .sizeOfInputSearchToCompare {
-  width: 195px;
+  width: 315px;
+  border-radius: 4px;
+  border: solid burlywood;
 }
 
 .favoritesAlignQuestions {
@@ -1294,4 +1296,8 @@ backgroundColorDesktop {
 
 .borderOfImages {
   border-radius: 9px;
+}
+
+.descCompare {
+  text-align: justify;
 }

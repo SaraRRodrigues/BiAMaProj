@@ -174,21 +174,21 @@
                 <div class="padding-left-4x">
                     <h1 class="subtitles">Comparar Materiais</h1>
                 </div>
-                <div ng-if="loading">
-                    <div class="loading-icon-footer-info"></div>
-                </div>
                 <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
-                    <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
+                    <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare margin-top-2x">     
                         <figure>
-                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="35%" height="150px" alt="foto"/>
-                            <figcaption>[{material.text}]</figcaption>
+                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="55%" height="150px" alt="foto"/>
+                            <figcaption class="descCompare">[{material.text}]</figcaption>
                         </figure>
                     </div>
                 </div>
                 <br>
                 <div class="ui-widget">
                     <input id="tags" class="sizeOfInputSearchToCompare">
-                    <button ng-click="selectedMaterial()">OK</button>
+					<i class="fas fa-plus-circle cursorPointer" ng-click="selectedMaterial()"></i>
+                </div>
+				<div ng-if="loading">
+                    <div class="loading-icon-footer-info"></div>
                 </div>
                 <div ng-if="doLogin">
                     <h4>Efetue login para obter comparações entre materiais.</h4>
