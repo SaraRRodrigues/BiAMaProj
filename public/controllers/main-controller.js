@@ -625,7 +625,7 @@ app.constant('jQuery', window.jQuery)
 
 			if(buttonClick == 'regist') {
 				$scope.regist();
-				$window.location.href = 'http://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 		}
 		if(buttonClick === 'notification') {

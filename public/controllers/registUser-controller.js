@@ -6,7 +6,8 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	jQuery("#searchMain").hide();
 	jQuery("#userDetailsMain").hide();
 	jQuery("#divControllerMain").removeClass("divController");
-    
+	
+	debugger
    	/* define view of app */
 	$scope.viewType = function() {
 		var window_width = $( window ).width();
@@ -109,6 +110,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
     
     /* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
+		debugger
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
 			$scope.emptyData=true;
 		} else {
@@ -141,7 +143,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
 
-					$window.location.href="http://localhost:8080";
+					$window.location.href="https://biamaweb.herokuapp.com";
 				} else {
 					$scope.underAge=true;
 				}
