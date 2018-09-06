@@ -612,7 +612,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			}
 	
 			if(buttonClick == 'notification') {
-				$window.location.href = 'http://localhost:8080/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick == 'perfil') {
