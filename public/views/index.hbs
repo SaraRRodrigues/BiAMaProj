@@ -74,9 +74,10 @@
 						</div>
 						<img ng-if="!userDetails && !enableUserIcon && isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
 						<img ng-if="!userDetails && !isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
-
 					</div>
-					
+					<div ng-if="loading">
+						<div class="loading-icon-footer-info"></div>
+					</div>
 					<div ng-if="showSearch" class="margin-top col-sm-2">
 						<img class="float-right marginSearchMobile" ng-if="!showSearch && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
 						<img class="float-right marginSearchMobile" ng-if="showSearch  && !userDetails && !isMobileView" ng-click="clickTopSearch()" src="../images/search.png">
@@ -99,13 +100,16 @@
 			</div>
 			<!-- show categories and materials -->
 			<div ng-if="search" class="container">
-				<div ng-if="!openMaterialDetail && search && showInitSearch" class="col-sm-4 col-sm-offset-4">
+				<div ng-if="!openMaterialDetail && !loading && search && showInitSearch" class="col-sm-4 col-sm-offset-4">
 					<div class="ui-widget input-group stylish-input-group divInputSearch">
 						<input id="tags_search" class="inputSearch">
 						<span class="spanIconSearch">
 							<span class="glyphicon glyphicon-search cursorPointer iconSearch" ng-click="selectedMaterialSearch()"></span>
 						</span>
 					</div>
+				</div>
+				<div ng-if="loading">
+					<div class="loading-icon-footer-info"></div>
 				</div>
 				<div ng-if="showMaterials">
 					<div class="padding sectionScrollSearch">
@@ -233,6 +237,7 @@
 					<div class="loading-icon-footer-info"></div>
 				</div>	
 				<div ng-if="!loading" class="titlesOnCenter">
+
 					<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
 					<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
 					
@@ -389,13 +394,13 @@
 						</div>
 
 						<div ng-if="loading">
-								<div class="loading-icon-footer-info"></div>
-							</div>
+							<div class="loading-icon-footer-info"></div>
+						</div>
 						<!-- show result of search -->
 						<div ng-if="search && showMaterials && !isMobileView" class="margin-top-4x1">
-							<div class="padding sectionScrollSearch">
-								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+							<i ng-click="closeMaterial()" class="fas fa-times cursorPointer iconCloseMaterialSearch float-right iconMedium"></i>
 
+							<div class="padding sectionScrollSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
 									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
 										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
@@ -411,8 +416,8 @@
 						</div>
 						<!-- show details of material if click on material -->
 						<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
+							<i ng-click="closeMaterial()" class="fas fa-times cursorPointer marginIconCloseMaterialDetails float-right iconMedium"></i>
 							<div class="row container marginBottomMaterialDetails">
-								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
 								<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 								</div>
@@ -423,12 +428,12 @@
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
 								</div>
 								<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-									<h4 class="margin-right-5x margin-top-6x">Category</h4>
+									<h4 class="margin-right-5x margin-top-5x">Category</h4>
 									<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
 									<h4 class="margin-right-5x">Code</h4>
 									<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
 									<h4 class="margin-right-5x">Description</h4>
-									<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+									<h5 class="margin-right-5x descMaterialDetailsWidth">[{openedMaterial.description}]</h5>
 								</div>
 							</div>
 						</div>

@@ -1342,3 +1342,17 @@ backgroundColorDesktop {
 .marginBottomSearch {
   margin-bottom:250px;
 }
+
+.iconCloseMaterialSearch {
+  margin-top: -27px;
+  margin-right: 31px;
+}
+
+.descMaterialDetailsWidth {
+  width: 315px;
+}
+
+.marginIconCloseMaterialDetails {
+  margin-top: 68px;
+  margin-right: -399px;
+}

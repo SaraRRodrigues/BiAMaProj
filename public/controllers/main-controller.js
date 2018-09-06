@@ -206,7 +206,6 @@ app.constant('jQuery', window.jQuery)
 			$scope.loading = false;
 			
 		});
-		$scope.loading = false;
 	}
 	
 	/* redirect to homepage with arrow */
@@ -358,6 +357,7 @@ app.constant('jQuery', window.jQuery)
 	
 	/* selected type of materials */
 	$scope.selectedMaterialSearch = function() {
+
 		$scope.openMaterialDetail=false;
 		$scope.showInitSearch=false;
 
@@ -394,6 +394,7 @@ app.constant('jQuery', window.jQuery)
 		}
 		$scope.showDetailsOfMaterial=false;
 		$scope.showMaterials=true;
+	
 
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
