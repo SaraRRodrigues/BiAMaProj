@@ -129,6 +129,13 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 			$scope.notifications=data;
 			$scope.numberOfNotifications=$scope.notifications.length;
 			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+        });
+        
+        var getAllUsers = UserWorldShareService.getUsers(function(users){});
+        getAllUsers.then(function(usersDB) {
+            $scope.users = usersDB.data.users;
+            debugger
+			
 		});
     }
 
@@ -333,35 +340,31 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
+        
+        for(var index=0; index<$scope.users.length; ++index){
+            $scope.userName = $scope.users[index].username;
+            $scope.userPassword = $scope.users[index].password;
+            $scope.userImage = $scope.users[index].image;
+            $scope.userEmail = $scope.users[index].email;
+            $scope.nameUser=$scope.users[index].name;
+            $scope.userBirthdate = $scope.users[index].birthdate;
 
-		$scope.users = 'loadUser';
-		var getAllUsers = UserWorldShareService.getUsers(function(users){});
+            var splitDateBirth = $scope.userBirthdate.split('/');
+            $scope.dayBirth = splitDateBirth[0];
+            $scope.monthBirth = splitDateBirth[1];
+            $scope.yearBirth = splitDateBirth[2];
+
+            if($scope.userName !== null && $scope.userName === username){
+                if($scope.userPassword !== null && $scope.userPassword === password){
+                    $scope.userLoggedIn=$scope.users[index].username;
+                    $scope.idUserLoggerIn=$scope.users[index].id;
+                    $scope.confirmSession = true;
+                    break;
+                }
+            }
+        }
+
 		
-		getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
-			for(var index=0; index<$scope.users.length; ++index){
-				$scope.userName = $scope.users[index].username;
-				$scope.userPassword = $scope.users[index].password;
-				$scope.userImage = $scope.users[index].image;
-				$scope.userEmail = $scope.users[index].email;
-				$scope.nameUser=$scope.users[index].name;
-				$scope.userBirthdate = $scope.users[index].birthdate;
-
-				var splitDateBirth = $scope.userBirthdate.split('/');
-				$scope.dayBirth = splitDateBirth[0];
-				$scope.monthBirth = splitDateBirth[1];
-				$scope.yearBirth = splitDateBirth[2];
-
-				if($scope.userName !== null && $scope.userName === username){
-					if($scope.userPassword !== null && $scope.userPassword === password){
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
-						break;
-					}
-				}
-			}
-		});
     }
 
     /* routes of click on links page */

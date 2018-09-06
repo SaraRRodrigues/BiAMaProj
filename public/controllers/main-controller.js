@@ -178,26 +178,35 @@ app.constant('jQuery', window.jQuery)
 		$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
 		
 		$scope.getLibraryUser.then(function(result) {
-			$scope.loading = false;
+			$scope.loading = true;
 			var data=result.data.userLibrary;
 			$scope.userLibrary=data;
+			
+			$scope.loading = false;
 		});
 	
 		$scope.getAllUsers.then(function(usersDB) {
-			$scope.loading=false;
+			$scope.loading=true;
 			$scope.users = usersDB.data.users;
+			
+			$scope.loading = false;
 		});
 	
 		$scope.getMaterials.then(function(result) {
-			$scope.loading = false;
+			$scope.loading = true;
 			var data=result.data.comparationDetails;
 			$scope.materialComparation=data;
 			$scope.materialsToSearch = data;
 	
+			$scope.materials = $scope.materialComparation;
+
 			for(var index=0; index<$scope.materialComparation.length; ++index) {
 				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
 			}
+			$scope.loading = false;
+			
 		});
+		$scope.loading = false;
 	}
 	
 	/* redirect to homepage with arrow */
@@ -350,6 +359,7 @@ app.constant('jQuery', window.jQuery)
 	/* selected type of materials */
 	$scope.selectedMaterialSearch = function() {
 		$scope.openMaterialDetail=false;
+		$scope.showInitSearch=false;
 
 		var valueSearchMaterial=jQuery( "#tags_search" ).val();
 		$scope.searchValue=valueSearchMaterial;
@@ -383,7 +393,8 @@ app.constant('jQuery', window.jQuery)
 			$scope.showCategoryMaterial=false;
 		}
 		$scope.showDetailsOfMaterial=false;
-        $scope.showMaterials=true;
+		$scope.showMaterials=true;
+
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
 
@@ -411,6 +422,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.showDetailsOfMaterial=false;
 		$scope.showInitSearch=true;
 		$scope.showResultsOfMiniSearch=false;
+		$scope.showMaterials = false;
 	}
 
 	/* open and close the small search icon */

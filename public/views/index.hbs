@@ -124,7 +124,7 @@
 				</div>
 				<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2">
 					<div class="row container">
-						<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial"></i>
+						<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium "></i>
 						<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 							<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
 						</div>
@@ -223,7 +223,7 @@
 			<!-- zoom in material -->
 			<div ng-if="zoomInMaterial">
 				<div>
-					<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
+					<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium closeOpenMaterial"></i>
 					<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
 				</div>
 			</div>
@@ -376,8 +376,8 @@
 					<div class="row text-center">
 						<ng-view></ng-view>
 						<!-- section of big search-->
-						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4 divDetailMaterialDesktop">
-							<div ng-if="!loading" class="ui-widget input-group stylish-input-group searchInputStyle">
+						<div ng-if="!openMaterialDetail && search && showInitSearch && !isMobileView" class="col-sm-4 col-sm-offset-4 ">
+							<div ng-if="!loading" class="ui-widget input-group stylish-input-group searchInputStyle marginBottomSearch">
 								<select class="form-control" id="tags_search"  ng-click="tagsOfSearch()" style="height: 27px;width: 295px;border: 0px;border-radius: 9px;position:initial">
 									<option ng-repeat="item in itemSearch">[{item}]</option>
 								</select>
@@ -385,13 +385,17 @@
 									<span class="glyphicon glyphicon-search cursorPointer" ng-click="selectedMaterialSearch()"></span>
 								</span>
 							</div>
-							<div ng-if="loading">
+							
+						</div>
+
+						<div ng-if="loading">
 								<div class="loading-icon-footer-info"></div>
 							</div>
-						</div>
 						<!-- show result of search -->
-						<div ng-if="search && showMaterials && !isMobileView">
-							<div class="padding sectionScrollInitSearch">
+						<div ng-if="search && showMaterials && !isMobileView" class="margin-top-4x1">
+							<div class="padding sectionScrollSearch">
+								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
+
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
 									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
 										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
@@ -408,7 +412,7 @@
 						<!-- show details of material if click on material -->
 						<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
 							<div class="row container marginBottomMaterialDetails">
-								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
+								<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
 								<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 								</div>
