@@ -7,7 +7,6 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	jQuery("#userDetailsMain").hide();
 	jQuery("#divControllerMain").removeClass("divController");
 	
-	debugger
    	/* define view of app */
 	$scope.viewType = function() {
 		var window_width = $( window ).width();
@@ -110,7 +109,6 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
     
     /* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
-		debugger
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
 			$scope.emptyData=true;
 		} else {
