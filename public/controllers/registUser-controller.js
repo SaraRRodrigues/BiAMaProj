@@ -76,9 +76,9 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'http://localhost:8080?userName=' + $scope.idUserLoggerIn;
+			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'http://localhost:8080?username=' + 'anonymous';
+			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
 		}
     }
 
