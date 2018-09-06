@@ -578,7 +578,7 @@ app.constant('jQuery', window.jQuery)
 			}
 			if(buttonClick == 'regist') {
 				$scope.regist();
-				$window.location.href = 'http://localhost:8080/BiAMa/registUserMobile';
+				$window.location.href = 'http://biamaweb.herokuapp.com/BiAMa/registUserMobile';
 			}
 		} else {
 			if(buttonClick === 'biamaPage') {
@@ -625,7 +625,7 @@ app.constant('jQuery', window.jQuery)
 
 			if(buttonClick == 'regist') {
 				$scope.regist();
-				$window.location.href = 'http://localhost:8080/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'http://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 		}
 		if(buttonClick === 'notification') {
