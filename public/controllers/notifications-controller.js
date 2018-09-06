@@ -27,6 +27,8 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
         $scope.resultSearch = [];
         $scope.showDetailsOfMaterial=false;
         $scope.miniSearchResults=false;
+        $scope.userDetails=true;
+        $scope.notificationNumber = true;
     }
     
     /* verify if user is logged in */
@@ -65,7 +67,8 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
         getMyNotifications.then(function(result) {
             $scope.loading = false;
             var data=result.data.notificationDetails;
-            $scope.myNotifications=data;    
+            $scope.myNotifications=data;   
+            $scope.notifications=data; 
         });
     }
 	

@@ -1,4 +1,4 @@
-app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService","UserFavoriteService","FavoritesMaterialService","$route", "$sce","$window", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,UserFavoriteService,FavoritesMaterialService,$route, $sce, $window) {
+app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "LibraryMaterialInfoService","QuestionFavoriteService","UserFavoriteService","FavoritesMaterialService","NotificationFavService", "$route", "$sce","$window", function($scope, $http, FavoritesService, LibraryMaterialInfoService,QuestionFavoriteService,UserFavoriteService,FavoritesMaterialService,NotificationFavService, $route, $sce, $window) {
     
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -612,7 +612,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			}
 	
 			if(buttonClick == 'notification') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'http://localhost:8080/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick == 'perfil') {
@@ -632,12 +632,21 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         }
 		
 		if(buttonClick === 'notification') {
+            var getNotifications = NotificationFavService.getMyNotifications($scope.idUserLoggerIn, function(infoNotification){});
+				getNotifications.then(function(result) {
+				$scope.loading = false;
+				var data=result.data.notificationDetails;
+				$scope.notifications=data;
+				$scope.numberOfNotifications=$scope.notifications.length;
+            });
+            
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
 		} else {
 			$scope.userDetails = false;
 			$scope.notificationNumber = false;
-		}
+        }
+        
 		$scope.search = false;
 	}
 
@@ -773,4 +782,24 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	  return {
 			getMyFavorites: getMyFavorites
 	  };
+});
+
+app.factory("NotificationFavService", function($q, $http, $timeout){
+    var getMyNotifications = function(data) {
+        var deferred = $q.defer();
+
+        $timeout(function() {
+        deferred.resolve($http.get('/myNotifications', 
+        {params: {
+            'data': data
+        }}));
+        }, 2000);
+
+        return deferred.promise;
+    };
+
+
+    return {
+        getMyNotifications: getMyNotifications
+    };
 });
