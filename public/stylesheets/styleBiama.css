@@ -419,6 +419,32 @@ a {
   color: white;
   margin-left: -19px;
 }
+.sectionScrollAddWorldShare {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 296px;
+  padding-right: 17px;
+}
+
+.sectionScrollAddWorldShare::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollAddWorldShare::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollAddWorldShare::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eaab00;
+}
 
 .sectionScrollDescMaterial {
   overflow-y: auto;
@@ -1298,7 +1324,7 @@ backgroundColorDesktop {
 }
 
 .plusWorldShareFontSize {
-  font-size: 77px;
+  font-size: 45px;
 }
 
 .divAddWorldShare {
@@ -1391,4 +1417,13 @@ backgroundColorDesktop {
 .marginIconCloseMaterialDetails {
   margin-top: 68px;
   margin-right: -399px;
+}
+
+.widthOfAddWorldShareSection {
+  width: 356px;
+}
+
+.buttonsAddWorldShare {
+  margin-top: 29px;
+  float: left;
 }

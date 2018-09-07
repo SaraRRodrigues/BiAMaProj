@@ -156,7 +156,7 @@
 				<img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
 			</div>
 			<!-- if click on world share, is showed details of world share -->
-			<div ng-if="showWorldSharesDetails" class="sectionDetails">
+			<div ng-if="showWorldSharesDetails" class="sectionDetails widthOfAddWorldShareSection">
 				<h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
 				<p>[{worldSharesInfo.description}]</p>
 				<img class="margin-bottom-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)"  alt="foto"/><br>

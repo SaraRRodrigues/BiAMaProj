@@ -162,13 +162,14 @@
                     <div class="loading-icon-footer-info"></div>
                 </div>
                 <!-- show world shares -->
-                <div ng-if="showWorldShares" class="titlesOnCenter sectionScroll">
+                <div ng-if="showWorldShares" class="titlesOnCenter sectionScrollAddWorldShare">
                     <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
                     <br>
-                    <i ng-if="!loading" class="fas fa-plus-circle cursorPointer plusWorldShareFontSize" ng-click="openAddWorldShare()"></i>
                 </div>
+				<i ng-if="!loading && showWorldShares" class="fas fa-plus-circle cursorPointer plusWorldShareFontSize margin-top-4x " ng-click="openAddWorldShare()"></i>
+
                 <!-- section of add world share -->
-                <div ng-if="addWorldShare && !loading" class="container center-block divAddWorldShare">
+                <div ng-if="addWorldShare && !loading" class="container center-block divAddWorldShare" style="width: 356px;">
                     <div class="divInsideAddWorldShare">
                         <h1>Nome do Projeto</h1>
                         <div class="divider"></div>
@@ -182,10 +183,9 @@
                             <!-- upload world share -->
                             <div ng-if="openWorldShareUploadLabel">
                                 <form method="post" enctype="multipart/form-data">
-                                    <input type="file" id="uploadPictureWorldShare" file-model="valueInput" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
-                                    <input type="submit" name="submit" value="submit" ng-click="postUpload(valueInput)">
+                                    <input type="file" id="uploadPictureWorldShare" file-model="valueInput" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto" style="width: 0px;">
                                 </form>
-                                <button ng-click="saveUploadFile()">Guardar</button>
+                                <button class="buttonsAddWorldShare" ng-click="saveUploadFile()">Guardar</button>
                             </div>
                         </div>
                         <br>

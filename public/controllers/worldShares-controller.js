@@ -68,6 +68,8 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* open image of user */
     $scope.openWorldShareUpload = function() {
         $scope.openWorldShareUploadLabel=true;
+        $scope.savePhoto=false;
+
     }
     
     /* save upload file */
@@ -186,7 +188,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* insert world share on database */
     $scope.saveConfigInsertWorldShare = function (image, description) {
-        
+    
         if(image !== undefined) {
             var data = {
                 'forumType': $scope.forumType, 
@@ -204,6 +206,9 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
             }
             $http.post('/insertNotifications', data);
+                
+            $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+            
         }
     }
 
