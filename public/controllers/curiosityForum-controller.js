@@ -84,7 +84,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
       }
 		} else {
       if($scope.showCuriosityDetails || $scope.showBigImage) {
-				$window.location.href = '/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
       } else {
         location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
       }

@@ -81,9 +81,17 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
       if($scope.idUserLoggerIn !== undefined) {
-        location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+        if($scope.showWorldSharesDetails || $scope.showBigImage) {
+          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/worldSharesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+        } else {
+          $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+        }
       } else {
-        location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+        if($scope.showWorldSharesDetails || $scope.showBigImage) {
+          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/worldSharesForum?userName=anonymous' + '&redirect';
+        } else {
+          $window.location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+        }
       }
     }
 
