@@ -134,7 +134,6 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         var getAllUsers = UserWorldShareService.getUsers(function(users){});
         getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
-            debugger
 			
 		});
     }
