@@ -323,7 +323,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			}
 	
 			if(buttonClick == 'compare') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compare?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 
 			if(buttonClick == 'regist') {

@@ -576,15 +576,15 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+	
 			}
 		} else {
-
             if(buttonClick === 'biamaPage') {
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick === 'whereWeAre') {
-				$window.location.href =  'https://biamaweb.herokuapp.com/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 
 			if(buttonClick === 'library') {
@@ -622,7 +622,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			}
 	
 			if(buttonClick == 'compare') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compare?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
             }
             
             if(buttonClick == 'regist') {
