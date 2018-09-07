@@ -75,10 +75,19 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 
 	/* redirect to homepage with arrow */
   $scope.goToHomePage = function() {
+    debugger
     if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+      if($scope.showCuriosityDetails || $scope.showBigImage) {
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+      } else {
+        location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+      }
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+      if($scope.showCuriosityDetails || $scope.showBigImage) {
+				$window.location.href = '/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
+      } else {
+        location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+      }
 		}
   }
 

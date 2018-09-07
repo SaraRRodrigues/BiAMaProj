@@ -627,7 +627,11 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     }
   
     $scope.goToForum = function() {
-      window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+      if(!$scope.showQuestionDetails) {
+        $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+      } else {
+        $window.location.href = '/BiAMa/questionsUsersForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+      }
     }
    /* -------------- END MOBILE -------------- */
 
