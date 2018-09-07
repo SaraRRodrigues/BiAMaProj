@@ -166,16 +166,13 @@
 					</div>
 					<img ng-if="!loading" src="../images/suaBiAMa.JPG"/>
 					<!-- my biama description -->
-					<div ng-if="!loading" class="sectionDetails">
+					<div class="sectionDetails">
 						<div class="sectionDetails">
 							<p>[{descriptionMyBiama}]</p>
 						</div>
 					</div>
 					<!-- form to create your biama -->
-					<div ng-if="biamaUp">
-						<i class="far fa-file-pdf"></i>
-						<label class="margin-right-3x">Formulário para Aderir</label>
-
+					<div ng-if="biamaUp" class="margin-left-9x11">
 						<i class="far fa-file-pdf" ng-click="createMyBiama()"></i>
 						<label>Construir a sua BiAMa</label>
 					</div>

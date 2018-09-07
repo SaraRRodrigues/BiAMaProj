@@ -67,10 +67,12 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
+		
+		
 		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 		/* get information of material and of library - when i do get library */
 		$scope.getMaterialInfo.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			var data=result.data.materialsCategories;
 			$scope.materialsCategories=data;
 			for(var index=0; index<$scope.materialsCategories.length; ++index){
@@ -89,66 +91,75 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 			$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
 			$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
+			$scope.loading=false;
 		});
 	
-		$scope.loading=true;
 		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
 		getMyBiamaInfo.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			$scope.biamaUp = true;
 			var data=result.data.biamaDetails;
 			$scope.descriptionsOfBiama=data;
+			$scope.loading=false;
 		});
 
 		var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
 		getBiamaInfo.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			var data=result.data.biamaDetails;
 			$scope.idLibrary=data[data.length-1].id_library+1;
+			$scope.loading=false;
 		});
 
 		var getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
 		getUsersMyBiama.then(function(usersDB) {
+			$scope.loading=true;
 			$scope.users = usersDB.data.users;
+			$scope.loading=false;
 		});
 
 		var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
 		getMyBiamaLibraryUser.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			var data=result.data.userLibrary;
 			$scope.userLibrary=data;
 
-			for(var index=0; index<$scope.userLibrary.length; ++index) {
-				if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
-					$scope.myLibrary = $scope.userLibrary[index].library_id;
-					break;
+			if($scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== undefined ){
+				for(var index=0; index<$scope.userLibrary.length; ++index) {
+					if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
+						$scope.myLibrary = $scope.userLibrary[index].library_id;
+						break;
+					}
 				}
-			}
-			for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
-				if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
-					$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
-					break;
+	
+				for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
+					if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
+						$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
+						break;
+					}
 				}
+			} else {
+				$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
 			}
+			$scope.loading=false;
+			
 		});
-
-
-		
-
 		var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
 			getNotifications.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			var data=result.data.notificationDetails;
 			$scope.notifications=data;
 			$scope.numberOfNotifications=$scope.notifications.length;
 			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+			$scope.loading=false;
 		});
 
 		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
 		getMaterials.then(function(result) {
-			$scope.loading = false;
+			$scope.loading=true;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
+			$scope.loading=false;
 		});
 	}
 	

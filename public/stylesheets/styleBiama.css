@@ -23,6 +23,7 @@ a {
 .margin-left-9x {margin-left:150px}
 .margin-left-9x0 {margin-left:213px}
 .margin-left-9x1 {margin-left:300px}
+.margin-left-9x11 {margin-left:314px}
 .margin-left-9x2 {margin-left:350px}
 .margin-left-10x {margin-left:400px}
 .margin-left-10x1 {margin-left:487px}
@@ -1355,8 +1356,8 @@ backgroundColorDesktop {
 .libraryCategoriesDesktop {
   font-size: 17px;
   background-color: lightgray;
-  margin-left: 48px;
-  margin-right: 48px;
+  margin-left: 163px;
+  margin-right: 162px;
   border-radius: 5px;
 }
 
