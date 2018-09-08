@@ -4,7 +4,6 @@ var app = angular.module("myApp", ['ngRoute'])
 app.constant('jQuery', window.jQuery)
 .run(['$route', angular.noop])
 .config(function($interpolateProvider,$httpProvider) {
-	$httpProvider.useApplyAsync(true);
     $interpolateProvider.startSymbol('[{');
 	$interpolateProvider.endSymbol('}]');
 })
@@ -107,7 +106,7 @@ app.constant('jQuery', window.jQuery)
 	$locationProvider.html5Mode(true);
 })
  
-.controller('MainController',['$scope', "UserService", "CompareMaterialService", "NotificationService", "$http","$window", "jQuery", function($scope, UserService, CompareMaterialService,NotificationService, $http, $window) {
+.controller('MainController',['$scope', "UserService", "MaterialService", "NotificationService", "$http","$window", "jQuery", function($scope, UserService, MaterialService,NotificationService, $http, $window) {
 	
 	/* define view of app */
 	$scope.viewType = function() {
@@ -175,7 +174,7 @@ app.constant('jQuery', window.jQuery)
 	$scope.getAllRequests = function() { 
 		$scope.getLibraryUser = UserService.getLibraryUserDetails(function(infoMyBiama){});
 		$scope.getAllUsers = UserService.getUsers(function(users){});
-		$scope.getMaterials = CompareMaterialService.getMaterialComparation(function(infoMaterial){});
+		$scope.getMaterials = MaterialService.getMaterials(function(infoMaterial){});
 		
 		$scope.getLibraryUser.then(function(result) {
 			$scope.loading = true;
@@ -194,17 +193,10 @@ app.constant('jQuery', window.jQuery)
 	
 		$scope.getMaterials.then(function(result) {
 			$scope.loading = true;
-			var data=result.data.comparationDetails;
-			$scope.materialComparation=data;
+			var data=result.data.categoryDetails;
 			$scope.materialsToSearch = data;
-	
-			$scope.materials = $scope.materialComparation;
-
-			for(var index=0; index<$scope.materialComparation.length; ++index) {
-				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
-			}
+			$scope.materials = $scope.materialsToSearch;
 			$scope.loading = false;
-			
 		});
 	}
 	
@@ -367,15 +359,15 @@ app.constant('jQuery', window.jQuery)
 		$scope.materials=[];
 
 		if(valueSearchMaterial === 'Materiais') {
-			$scope.materials=$scope.materialComparation;
+			$scope.materials=$scope.materialsToSearch;
 			$scope.showCategoryMaterial=false;
 			$scope.showProjectMaterial=false;
 		} 
 		if(valueSearchMaterial === 'Categoria de materiais') {
-			var firstCategory = $scope.materialComparation[0].category;
-			for(var index=1; index<$scope.materialComparation.length; ++index) {
-				if(firstCategory !== $scope.materialComparation[index].category){
-					$scope.materials.push($scope.materialComparation[index].name);
+			var firstCategory = $scope.materialsToSearch[0].category;
+			for(var index=1; index<$scope.materialsToSearch.length; ++index) {
+				if(firstCategory !== $scope.materialsToSearch[index].category){
+					$scope.materials.push($scope.materialsToSearch[index].name);
 				} else {
 					break;
 				}
@@ -384,9 +376,9 @@ app.constant('jQuery', window.jQuery)
 			$scope.showProjectMaterial=false;
 		} 
 		if(valueSearchMaterial === 'Projeto de materiais') {
-			for(var index=0; index<$scope.materialComparation.length; ++index) {
-				if($scope.materialComparation[index].code > parseInt('46')){
-					$scope.materials.push($scope.materialComparation[index].name);
+			for(var index=0; index<$scope.materialsToSearch.length; ++index) {
+				if($scope.materialsToSearch[index].code > parseInt('46')){
+					$scope.materials.push($scope.materialsToSearch[index].name);
 				} 
 			}	
 			$scope.showProjectMaterial=true;
@@ -679,12 +671,6 @@ app.constant('jQuery', window.jQuery)
 	/* -------------- END MOBILE -------------- */
 
 	$scope.tagsOfSearch = function() {
-		jQuery( function() {
-			var availableTags = $scope.compareMaterials;
-			jQuery( "#tags" ).autocomplete({
-				source: availableTags
-			});
-		});
 	
 		jQuery( function() {
 			$scope.itemSearch = [
@@ -756,18 +742,18 @@ app.factory("UserService", function($q, $http, $timeout){
 	};
 });
 
-app.factory("CompareMaterialService", function($q, $http, $timeout){
-    var getMaterialComparation = function() {
+app.factory("MaterialService", function($q, $http, $timeout){
+    var getMaterials = function() {
         var deferred = $q.defer();
 
         $timeout(function() {
-        deferred.resolve($http.get('/compareMaterials'));
+        deferred.resolve($http.get('/categories'));
         }, 4000);
 
         return deferred.promise;
 	};
 	
     return {
-        getMaterialComparation: getMaterialComparation
+        getMaterials: getMaterials
     };
 });

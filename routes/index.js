@@ -337,7 +337,6 @@ router.get('/views/:name', (req, resp, next) => {
 
 /*para poder fazer o refresh*/ 
 router.get('/BiAMa/:name', (req, resp, next) => {
-	console.log('X: params:', req.params)
 	resp.render(`views/${req.params.name}`);
 });
 

@@ -87,6 +87,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             $scope.loading = false;
             var data=result.data.questionDetails;
             $scope.myQuestions=data;
+            $scope.questions=data;
         });
     
         $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
@@ -195,6 +196,17 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         };
         
         $http.post('/insertAnswer', data);
+
+        $scope.showDivAnswer=false;
+        var resultAnswer = {
+          numberOfQuestion: $scope.indexQuestionAnswer,
+          text: textAnswer,
+          likes: $scope.likes,
+          favorite: false
+        }
+        $scope.indexQuestionAnswer+=1;
+        $scope.descriptionAnswer.push(data);
+
         $scope.showDivAnswer=false;
         var valueIdQuestion = parseInt($scope.idQuestion)+1;
         var data = {
@@ -678,11 +690,11 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 		}, 2000);
 	
 		return deferred.promise;
-	  };
-
-	  return {
-			getMyFavorites: getMyFavorites
-	  };
+    };
+   
+    return {
+        getMyFavorites: getMyFavorites
+    };
 });
 
 app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
