@@ -73,7 +73,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			$scope.materialComparation=data;
 	
 			for(var index=0; index<$scope.materialComparation.length; ++index) {
-				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].category)
+				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].color)
 			}
 	
 			jQuery( function() {
@@ -102,10 +102,10 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
         var result=valueSearchMaterial.split('-');
 
         var type=result[0];
-        var category=result[1];
+        var color=result[1];
 
         for(var index=0; index<$scope.materialComparation.length; ++index) {
-            if($scope.materialComparation[index].type === type && $scope.materialComparation[index].category === category) {
+            if($scope.materialComparation[index].type === type && $scope.materialComparation[index].color === color) {
                 var result = {
                     'image': $scope.materialComparation[index].name,
                     'category': $scope.materialComparation[index].category,
