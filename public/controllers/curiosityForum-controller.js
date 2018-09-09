@@ -84,7 +84,13 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
           $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForumMobile?userName=' + $scope.idUserLoggerIn;
         }
       } else {
-        location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+        if(!$scope.isMobileView) {
+          location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+
+        } else {
+          location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+
+        }
       }
 		} else {
       if($scope.showCuriosityDetails || $scope.showBigImage) {
