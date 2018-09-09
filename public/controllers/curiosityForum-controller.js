@@ -78,7 +78,11 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     debugger
     if($scope.idUserLoggerIn !== undefined) {
       if($scope.showCuriosityDetails || $scope.showBigImage) {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+        if(!$scope.isMobileView) {
+          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+        } else {
+          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForumMobile?userName=' + $scope.idUserLoggerIn;
+        }
       } else {
         location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
       }
