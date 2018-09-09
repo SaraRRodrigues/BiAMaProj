@@ -555,7 +555,6 @@ app.constant('jQuery', window.jQuery)
 
 	/* routes of click on links page */
 	$scope.disableSearch = function(buttonClick) {
-		debugger
 		if($scope.isMobileView) {
 
 			if(buttonClick === 'library') {

@@ -102,17 +102,25 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
+		debugger
 		if($scope.idUserLoggerIn !== undefined) {
-			/* go to homepage */
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 			/* go to library categories */
 			if($scope.showCategory){
-				location.href = 'https://biamaweb.herokuapp.com/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+				if(!$scope.isMobileView) {
+					location.href = 'https://biamaweb.herokuapp.com/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+				} else {
+					location.href = 'https://biamaweb.herokuapp.com/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn;
+				}
+			} else {
+				/* go to homepage */
+				location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			
 			if($scope.showCategory){
 				location.href = 'https://biamaweb.herokuapp.com?userName=anonymous' + '&redirect';
+			} else {
+				location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
 			}
 		}
 	}

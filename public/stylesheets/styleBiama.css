@@ -1503,3 +1503,8 @@ backgroundColorDesktop {
 .widthOfSearchInputMobile {
   width: 157px;
 }
+
+.footerOfMobile {
+  margin-top: 128px;
+  background-color: white;
+}
