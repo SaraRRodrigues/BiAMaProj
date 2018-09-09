@@ -559,7 +559,23 @@ app.constant('jQuery', window.jQuery)
 		if($scope.isMobileView) {
 
 			if(buttonClick === 'library') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'biamaPage') {
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/biamaPageMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'whereWeAre') {
+				$window.location.href =  'https://biamaweb.herokuapp.com/BiAMa/whereWeAreMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'qrCode') {
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/qrCodeMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick === 'forum') {
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
 			}
 
 			if(buttonClick === 'favorites') {
