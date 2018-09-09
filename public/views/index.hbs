@@ -271,7 +271,7 @@
 
 						<!--<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" ng-click="goToHomePage()"></i>						
 						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>-->
-						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt"></input>
+						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt" style="margin-right: 365px;"></input>
 					</div>
 				</nav>	
 			</header>
@@ -332,7 +332,7 @@
 													<br>
 													<a href="" class="registSession" ng-click="disableSearch('regist')">Registar</a>
 													<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
-												</div>												
+												</div>			
 											</div>
 										</div>
 									</div>
@@ -361,7 +361,12 @@
 							</nav>
 						</div>
 					</nav>
-					
+					<div ng-if="confirmSession" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
+						Login efetuado com sucesso.
+					</div>
+					<div ng-if="errorLogin" class="alert alert-danger center-block sucessMessageLogin titlesOnCenter">
+						Erro a efetuar o login. Tente novamente.
+					</div>
 					<!--image biama -->
 					<div ng-if="search && !showMaterials && !openMaterialDetail && !isMobileView" class="row text-center">
 						<img ng-if="showInitSearch" class="margin-top-6x" src="../images/topoBiamaHome.png" width="352px"/>
@@ -376,6 +381,7 @@
 					<div ng-if="search && (showMaterials || registUser) && !isMobileView" class="row text-center">
 						<img class="margin-top-3x" src="../images/topoBiama.png"/>
 					</div>
+					
 
 					<!-- titles of page & search -->
 					<div class="row text-center">

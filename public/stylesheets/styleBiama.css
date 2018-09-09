@@ -37,6 +37,7 @@ a {
 .margin-right-5x{margin-right: 80px;}
 .margin-right-6x{margin-right: 147px;}
 .margin-right-7x{margin-right: 210px;}
+.margin-right-7x1{margin-right: 370px;}
 .margin-right-8x{margin-right: 382px;}
 
 .marginNavPesquisa {margin-left:250px}
@@ -117,7 +118,7 @@ a {
   border: 0px;
   font-size: 13px; 
   font-weight: 800;
-  color:black
+  color:black;
 }
 
 .divBody {
@@ -1426,4 +1427,8 @@ backgroundColorDesktop {
 .buttonsAddWorldShare {
   margin-top: 29px;
   float: left;
+}
+
+.sucessMessageLogin {
+  width: 574px;
 }

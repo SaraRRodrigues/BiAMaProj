@@ -533,7 +533,13 @@ app.constant('jQuery', window.jQuery)
 						$scope.userLoggedIn=$scope.users[index].username;
 						$scope.idUserLoggerIn=$scope.users[index].id;
 						$scope.confirmSession = true;
-						break;
+						
+						setTimeout(function() {
+							$(".alert").fadeOut().empty();
+						}, 2000);
+
+					} else {
+						$scope.errorLogin = true;
 					}
 				}
 			}
