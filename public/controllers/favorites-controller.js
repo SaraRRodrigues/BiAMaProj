@@ -165,7 +165,11 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         if($scope.idUserLoggerIn !== undefined) {
 			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 			if(!$scope.zoomInMaterial){
-				location.href = 'https://biamaweb.herokuapp.com/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+                if(!$scope.isMobileView) {
+                    location.href = 'https://biamaweb.herokuapp.com/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+                } else {
+                    location.href = 'https://biamaweb.herokuapp.com/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+                }
 			}
 		} else {
 			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
