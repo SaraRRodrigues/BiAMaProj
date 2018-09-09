@@ -742,6 +742,34 @@ a {
 	background-color: #eaab00;
 }
 
+.sectionScrollSearchIndexMobile{
+
+  margin-bottom:100px;
+  height: 376px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sectionScrollSearchIndexMobile::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollSearchIndexMobile::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.sectionScrollSearchIndexMobile::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #eaab00;
+}
+
 
 .sectionScrollInitSearch{
   height: 423px;
@@ -1212,10 +1240,21 @@ backgroundColorDesktop {
   margin-top:-20px
 }
 
+.alignIconCloseOfMiniSearchMobile {
+  margin-top:-197px
+}
+
 .marginResultsMiniSearch {
   margin-left: 7px;
   margin-right: 7px; 
   margin-top: 4px;
+  margin-bottom: 11px;
+}
+
+.marginResultsMiniSearchMobile {
+  margin-left: 7px;
+  margin-right: 7px; 
+  margin-top: -165px;
   margin-bottom: 11px;
 }
 
@@ -1429,6 +1468,38 @@ backgroundColorDesktop {
   float: left;
 }
 
+/* messages */
 .sucessMessageLogin {
   width: 574px;
+}
+
+
+.footerMobile {
+  margin-top: 147px;
+  margin-left: 15px;
+}
+
+.marginBottomMobileSearch{
+  margin-bottom: -314px;
+}
+
+.iconCloseOnSearchMobile {
+  margin-top: -27px;
+}
+
+.marginOfDetailsMaterialMobile {
+  margin-top: -58px;
+  margin-left: 59px;
+}
+
+.widthOfDescMaterialMobile {
+  width: 182px;
+}
+
+.divUserDetailsMobile {
+  margin-top: -162px;
+}
+
+.widthOfSearchInputMobile {
+  width: 157px;
 }

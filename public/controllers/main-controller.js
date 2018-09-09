@@ -416,6 +416,12 @@ app.constant('jQuery', window.jQuery)
 		$scope.showInitSearch=true;
 		$scope.showResultsOfMiniSearch=false;
 		$scope.showMaterials = false;
+
+		$scope.miniSearchResults = false;
+		$scope.search=true;
+		$scope.openMaterialDetail=false; 
+		$scope.showSearch=false;
+		$scope.enableUserIcon=false;
 	}
 
 	/* open and close the small search icon */
@@ -479,11 +485,12 @@ app.constant('jQuery', window.jQuery)
 				$scope.noResultsOnSearch=true;
 			} else {
 				$scope.showInitSearch=false;
-				$scope.showSearch=false;
+				$scope.showSearch=true;
 				$scope.miniSearchResults = true;
 				$scope.noResultsOnSearch=false;
 				$scope.showResultsOfMiniSearch=true;
 			}
+			$scope.userDetails = false;
 		}
 	}
 
