@@ -294,8 +294,11 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
         }
 		
 		if(buttonClick === 'notification') {
-			$scope.userDetails = true;
-			$scope.notificationNumber=true;
+            if(!$scope.isMobileView) {
+                $scope.userDetails = true;
+                $scope.notificationNumber=true;
+            } 
+			
 		} else {
 			$scope.userDetails = false;
 			$scope.notificationNumber = false;
