@@ -55,11 +55,11 @@
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6">
                     <h2 ng-if="locationMaterial" class="subtitles">Onde estamos?</h2>
-                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;" ng-click="goToHomePage()"></i>
+                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" style="color: orange;" ng-click="goToHomePage()"></i>
                         <i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
                     </h2>
                     <div ng-if="doLogin">
-						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left fa fa-chevron-left arrows margin-right-2x" style="color: orange;" ng-click="goToHomePage()"></i></h2>
+						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" style="color: orange;" ng-click="goToHomePage()"></i></h2>
 					</div>
 					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>

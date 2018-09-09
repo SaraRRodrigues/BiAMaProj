@@ -102,7 +102,6 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		debugger
 		if($scope.idUserLoggerIn !== undefined) {
 			/* go to library categories */
 			if($scope.showCategory){
