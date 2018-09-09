@@ -55,11 +55,11 @@
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6">
                     <h2 ng-if="locationMaterial" class="subtitles">Onde estamos?</h2>
-                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" style="color: orange;" ng-click="goToHomePage()"></i>
+                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow"   ng-click="goToHomePage()"></i>
                         <i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
                     </h2>
                     <div ng-if="doLogin">
-						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" style="color: orange;" ng-click="goToHomePage()"></i></h2>
+						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow"   ng-click="goToHomePage()"></i></h2>
 					</div>
 					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
@@ -110,7 +110,7 @@
 						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 						
 						<!-- section of init session -->
-						<div class="divInitSessionMobile" ng-if="showInitSession" style="margin-left: -10px;margin-top: 6px;position: absolute;">
+						<div class="divInitSessionMobile marginDivInitSession" ng-if="showInitSession">
 							<div class="alignCenter">
 								<h2 class="initSessionColor">Iniciar Sessão</h2>
 								
@@ -277,22 +277,22 @@
 		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" >
 			<div class="row container">
 				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-				<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
+				<div class=" col-md-5 order-md-1 marginMaterialList" ng-if="!showCategoryMaterial && !showProjectMaterial">
 					<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="55%" height="260px" alt="foto"/>
 				</div>
-				<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial" style="margin-top: 82px;">
+				<div class=" col-md-5 order-md-1 marginMaterialList" ng-if="showCategoryMaterial && !showProjectMaterial" >
 					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
 				</div>
-				<div class="col-md-5 order-md-1" ng-if="showProjectMaterial" style="margin-top: 82px;">
+				<div class=" col-md-5 order-md-1 marginMaterialList" ng-if="showProjectMaterial" >
 					<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="55%" height="260px" alt="foto"/>
 				</div>
 				<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-					<h4 class="margin-right-5x margin-top-6x" style="font-size: 32px;">Category</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.category}]</h5>
-					<h4 class="margin-right-5x" style="font-size: 32px;">Code</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.code}]</h5>
-					<h4 class="margin-right-5x" style="font-size: 32px;">Description</h4>
-					<h5 class="margin-right-5x" style="font-size: 26px;">[{openedMaterial.description}]</h5>
+					<h4 class="margin-right-5x margin-top-6x categoryMaterialSize">Category</h4>
+					<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.category}]</h5>
+					<h4 class="margin-right-5x" >Code</h4>
+					<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.code}]</h5>
+					<h4 class="margin-right-5x" >Description</h4>
+					<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.description}]</h5>
 				</div>
 			</div>
 		</div>

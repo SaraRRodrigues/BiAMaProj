@@ -357,7 +357,7 @@ a {
   padding-top:10px;
 }
 
-.divInitSessionMobile {
+.divInitSessionMobile marginDivInitSession {
   background-color:#E0E0E0;
   margin-left:180px;
   margin-top: -140px;
@@ -1507,4 +1507,34 @@ backgroundColorDesktop {
 .footerOfMobile {
   margin-top: 128px;
   background-color: white;
+}
+
+.marginDivInitSession {
+  margin-left: -10px;
+  margin-top: 6px;
+  position: absolute;
+}
+
+.biamaTitlesFontSize {
+  font-size:40px
+}
+
+.descOfBiama {
+  font-size:34px
+}
+
+.marginMaterialList {
+  margin-top: 82px;
+}
+
+.categoryMaterialSize {
+  font-size: 32px;
+}
+
+.detailsOfMaterial {
+  font-size: 26px;
+}
+
+.marginOfForumPage {
+  margin-top: 50px;
 }
