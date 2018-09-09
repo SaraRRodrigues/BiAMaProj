@@ -27,8 +27,10 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
         $scope.resultSearch = [];
         $scope.showDetailsOfMaterial=false;
         $scope.miniSearchResults=false;
-        $scope.userDetails=true;
-        $scope.notificationNumber = true;
+        if(!$scope.isMobileView) {
+            $scope.userDetails=true;
+            $scope.notificationNumber = true;
+        }
     }
     
     /* verify if user is logged in */
@@ -292,12 +294,15 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
         }
+        debugger
 		
 		if(buttonClick === 'notification') {
             if(!$scope.isMobileView) {
                 $scope.userDetails = true;
                 $scope.notificationNumber=true;
-            } 
+            } else {
+               $scope.userDetails = false;
+            }
 			
 		} else {
 			$scope.userDetails = false;
