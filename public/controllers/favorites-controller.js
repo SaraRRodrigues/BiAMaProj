@@ -53,14 +53,14 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
 
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" ) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
 			$scope.confirmSession=false;
         }
         
-        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined){
+        if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" ){
             /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {

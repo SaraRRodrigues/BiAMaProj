@@ -70,7 +70,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
 
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" ) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
