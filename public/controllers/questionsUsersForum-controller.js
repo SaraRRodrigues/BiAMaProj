@@ -129,9 +129,21 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
       if($scope.idUserLoggerIn !== undefined) {
-        location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+        if(!$scope.showDivAnswer) {
+          if(!$scope.isMobileView) {
+            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+          } else {
+            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
+          }
+        } else {
+          location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+        }
       } else {
-        location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+        if(!$scope.showDivAnswer) {
+          location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=anonymous' + '&redirect';
+        } else {
+          location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+        }
       }
     }
 
