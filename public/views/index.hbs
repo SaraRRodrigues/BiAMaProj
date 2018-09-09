@@ -483,28 +483,28 @@
 				<a href="https://biamaweb.herokuapp.com/BiAMa/forumPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
 			</footer>
 			<!-- footer of mobile view -->
-			<div ng-if="isMobileView" class="footerMobile">
-				<a href="/BiAMa/libraryMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'library'" ng-click="changeColorClick('library')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
-					<img ng-if="nameclick === 'library'" ng-click="changeColorClick('library')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
+			<footer ng-if="isMobileView" id="footerMobile">
+				<a href="https://biamaweb.herokuapp.com/BiAMa/libraryMobile?id=[{idUserLoggerIn}]">
+					<img ng-if="nameclick !== 'library'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
+					<img ng-if="nameclick === 'library'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
 				</a>
-				<a href="/BiAMa/whereWeAreMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
-					<img ng-if="nameclick === 'whereWeAre'" ng-click="changeColorClick('whereWeAre')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
+				<a href="https://biamaweb.herokuapp.com/BiAMa/whereWeAreMobile?id=[{idUserLoggerIn}]">
+					<img ng-if="nameclick !== 'whereWeAre'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
+					<img ng-if="nameclick === 'whereWeAre'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
 				</a>
-				<a href="/BiAMa/qrCodeMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: #E4A73F; text-decoration:none; width: 64px;height: 53px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
-					<img ng-if="nameclick === 'libraryMobile'" ng-click="changeColorClick('libraryMobile')" style="color: white; text-decoration:none; width: 64px;height: 53px;" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
+				<a href="https://biamaweb.herokuapp.com/BiAMa/qrCodeMobile?id=[{idUserLoggerIn}]">
+					<img ng-if="nameclick !== 'library'" style="color: #E4A73F; text-decoration:none; width: 64px;height: 53px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
+					<img ng-if="nameclick === 'library'" style="color: white; text-decoration:none; width: 64px;height: 53px;" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
 				</a>
-				<a href="/BiAMa/biamaPageMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'myBiama'" ng-click="changeColorClick('myBiama')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-					<img ng-if="nameclick === 'myBiama'" ng-click="changeColorClick('myBiama')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
+				<a href="https://biamaweb.herokuapp.com/BiAMa/biamaPageMobile?id=[{idUserLoggerIn}]">
+					<img ng-if="nameclick !== 'biamaPage'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
+					<img ng-if="nameclick === 'biamaPage'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
 				</a>
-				<a href="/BiAMa/forumPageMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'forum'" ng-click="changeColorClick('forum')" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
-					<img ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/questions.png"/>
+				<a href="https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?id=[{idUserLoggerIn}]">
+					<img ng-if="nameclick !== 'forum'" style="width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
 				</a>
-			</div>
+			</footer>
 		</div>
+		
 	</body>
 </html>

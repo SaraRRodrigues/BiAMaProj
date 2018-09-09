@@ -184,7 +184,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 				$scope.idFavoriteMaterial=$scope.favoriteDetails[index].id_favorite+1;
 			}
 		}
-		debugger
+
 		if($scope.materialInfo.isFavorite) {
 			if($scope.confirmSession){
 				$scope.materialInfo.isFavorite=false;
