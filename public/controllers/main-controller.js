@@ -555,8 +555,13 @@ app.constant('jQuery', window.jQuery)
 
 	/* routes of click on links page */
 	$scope.disableSearch = function(buttonClick) {
-		
+		debugger
 		if($scope.isMobileView) {
+
+			if(buttonClick === 'library') {
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
+
 			if(buttonClick === 'favorites') {
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 			}

@@ -484,25 +484,12 @@
 			</footer>
 			<!-- footer of mobile view -->
 			<footer ng-if="isMobileView" id="footerMobile">
-				<a href="https://biamaweb.herokuapp.com/BiAMa/libraryMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'library'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/library.png"/>
-					<img ng-if="nameclick === 'library'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/library.png"/>
-				</a>
-				<a href="https://biamaweb.herokuapp.com/BiAMa/whereWeAreMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'whereWeAre'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/location.png"/>
-					<img ng-if="nameclick === 'whereWeAre'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/location.png"/>
-				</a>
-				<a href="https://biamaweb.herokuapp.com/BiAMa/qrCodeMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'library'" style="color: #E4A73F; text-decoration:none; width: 64px;height: 53px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/photo.png"/>
-					<img ng-if="nameclick === 'library'" style="color: white; text-decoration:none; width: 64px;height: 53px;" class="buttonSelected buttonAlignment" src="../images/mobile/photo.png"/>
-				</a>
-				<a href="https://biamaweb.herokuapp.com/BiAMa/biamaPageMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'biamaPage'" style="color: #E4A73F; text-decoration:none; width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-					<img ng-if="nameclick === 'biamaPage'" style="color: white; text-decoration:none; width: 64px;" class="buttonSelected buttonAlignment" src="../images/mobile/biamaPage.png"/>
-				</a>
-				<a href="https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?id=[{idUserLoggerIn}]">
-					<img ng-if="nameclick !== 'forum'" style="width: 64px;" class="buttonNotSelected buttonAlignment" src="../images/mobile/questions.png"/>
-				</a>
+				<img ng-click="disableSearch('library')" src="../images/mobile/library.png">
+				<img ng-click="disableSearch('whereWeAre')" src="../images/mobile/location.png">
+				<img ng-click="disableSearch('qrCode')" src="../images/mobile/photo.png">
+				<img ng-click="disableSearch('biamaPage')" src="../images/mobile/biamaPage.png">
+				<img ng-click="disableSearch('forum')" src="../images/mobile/questions.png">
+				
 			</footer>
 		</div>
 		
