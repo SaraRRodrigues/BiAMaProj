@@ -207,7 +207,7 @@
 							</div>
 							<label class="margin-left-9x1" style="font-size:28px">Resposta [{answerQuestion.numberOfQuestion}]</label>
 							<img class="imageButtonLeft" src="../images/user.png" style="width:120px">
-							<h5 class="descriptionAnswer"  style="font-size:28px">[{answerQuestion.text}]</h5>
+							<h5 class="descriptionAnswerMobile"  style="font-size:28px">[{answerQuestion.text}]</h5>
 						</div>
 					</div>
 				</div>
@@ -215,7 +215,7 @@
 				<div>
 					<button ng-if="!showDivAnswer" class="buttonAnswerMobile" ng-click="clickOnAnswer()" style="margin-left:353px">Responder</button>
 					<div ng-if="showDivAnswer" class="titlesOnCenter" style="padding-top: 39px; background-color: lightgray;margin-right:147px">
-						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..." ></textarea><br>
+						<textarea class="textAreaAnswerDiv fontSizeTextArea"  ng-model="textAnswer" placeholder="..." ></textarea><br>
 						<button class="buttonAnswerMobile" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>
 				</div>

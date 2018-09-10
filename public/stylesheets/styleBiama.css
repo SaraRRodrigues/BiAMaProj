@@ -921,6 +921,12 @@ a {
   text-align: right; 
 }
 
+.descriptionAnswerMobile{
+  width:250px; 
+  margin-right: -33px;
+  float: right;
+}
+
 .borderZoomMaterial {
   border-radius:10px;
 }
@@ -1537,4 +1543,8 @@ backgroundColorDesktop {
 
 .marginOfForumPage {
   margin-top: 50px;
+}
+
+.fontSizeTextArea {
+  font-size: 36px;
 }
