@@ -218,6 +218,7 @@ app.constant('jQuery', window.jQuery)
 
 	/* configuration of firebase */
 	$scope.initDataFirebase = function() {
+		
 		var config = {
 			apiKey: "AIzaSyBsHmuOee9ByAiOeFq3_z8fdGD86aNINEc",
 			authDomain: "fir-biama.firebaseapp.com",
@@ -226,7 +227,8 @@ app.constant('jQuery', window.jQuery)
 			storageBucket: "fir-biama.appspot.com",
 			messagingSenderId: "861577986516"
 		};
-	
+
+
 		firebase.initializeApp(config);
 	}
 
@@ -245,18 +247,29 @@ app.constant('jQuery', window.jQuery)
 				$scope.monthBirth = '';
 				$scope.yearBirth = '';
 
-			var data = {
-				'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
-				'name': result.user.displayName,
-				'email' : result.user.email,
-				'birthdate': '',
-				'image': "noImage",
-				'username': result.user.displayName,
-				'password': ''
-			}
-			
-			$http.post('/insertUserDetails', data);
-
+				for (var i=0; i < $scope.users.length; ++i) {
+					if($scope.users[i].username == $scope.nameUser) {
+						$scope.usernameDuplicated = true;
+						$scope.confirmSession = false;
+						break;
+					} else {
+						$scope.confirmSession = true;
+					}
+				}
+				if(!$scope.usernameDuplicated) {
+					var data = {
+						'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
+						'name': result.user.displayName,
+						'email' : result.user.email,
+						'birthdate': '',
+						'image': "noImage",
+						'username': result.user.displayName,
+						'password': ''
+					}
+					
+					$http.post('/insertUserDetails', data);
+				}
+		
 			//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
 		})
 		.catch(console.log)
@@ -269,20 +282,49 @@ app.constant('jQuery', window.jQuery)
 			.catch(console.log)
 		*/
 		
-		$scope.confirmSession = true;
 		//$scope.validateUserLogin();
 	}
 
 	/* login with facebook with firebase */
 	$scope.loginWithFacebook = function() {
 		
+		$scope.facebookInDeveloping = true;
 		const provider = new firebase.auth.FacebookAuthProvider();
 
     	firebase.auth().signInWithPopup(provider)
             .then(result => {
-				
-				const user = result.user;
-				$scope.confirmSession = true;
+				$scope.idUserLoggerIn=parseInt($scope.users[$scope.users.length-1].id)+1;
+				$scope.userName = result.user.displayName;
+				$scope.userPassword = '';
+				$scope.nameUser = result.user.displayName;
+				$scope.userEmail = result.user.email;
+				$scope.userImage = "noImage";
+				$scope.dayBirth = '';
+				$scope.monthBirth = '';
+				$scope.yearBirth = '';
+
+				for (var i=0; i < $scope.users.length; ++i) {
+					if($scope.users[i].username == $scope.nameUser) {
+						$scope.usernameDuplicated = true;
+						$scope.confirmSession = false;
+						break;
+					} else {
+						$scope.confirmSession = true;
+					}
+				}
+				if(!$scope.usernameDuplicated) {
+					var data = {
+						'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
+						'name': result.user.displayName,
+						'email' : result.user.email,
+						'birthdate': '',
+						'image': "noImage",
+						'username': result.user.displayName,
+						'password': ''
+					}
+					
+					$http.post('/insertUserDetails', data);
+				}
 				//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
             })
 			.catch(console.log)
