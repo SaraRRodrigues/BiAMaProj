@@ -169,7 +169,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* get answers of question with index(is question id) */
     $scope.getAnswersOfQuestion = function(index) {
-      //$scope.descriptionQuestion=$scope.questions[index].text_question;
+      $scope.descriptionQuestion=$scope.questions[index].text_question;
       
       for(var indexFav=0; indexFav< $scope.favorites.length; ++indexFav) {
         if($scope.questions[index].id_question == $scope.favorites[indexFav].question_id) {
