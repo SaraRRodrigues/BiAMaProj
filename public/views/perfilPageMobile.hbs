@@ -148,12 +148,12 @@
 		<!-- content of perfil page -->
         <div ng-if="showPerfilDetails">
             <br>
-            <div ng-if="!openImageUploadLabel && !loading" class="perfilDetailsMobile center-block" style="font-size: 23px;text-align: center;padding-bottom: 24px;">
+            <div ng-if="!openImageUploadLabel && !loading" class="perfilDetailsMobile center-block perfilDetailsMobile">
                 <!-- user photo -->
                 <div>
                     <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile" readonly >
                     <img ng-show="upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile cursorPointer" ng-click="openImageUpload()">
-                    <label class="minTitleBiAMa labelPerfilName" style="font-size: 30px;">[{name}]</label>
+                    <label class="minTitleBiAMa labelPerfilName perfilMessagesMobile">[{name}]</label>
                 </div>
                 <br><br><br><br><br>
 				<!-- username -->
@@ -184,11 +184,11 @@
                 <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
                 
 				<!-- error messages: user entry data on fields -->
-				<h5 ng-if="fieldsEmpty" style="font-size: 30px;">Campos inválidos.</h5>
-                <h5 ng-if="!fieldsEmpty && invalidEmail" style="font-size: 30px;">Email inválido.</h5>
-                <h5 ng-if="invalidDate" style="font-size: 30px;">Data de nascimento inválida.</h5>
-                <h5 ng-if="usernameRepeatedPerfil" style="font-size: 30px;">Nome já existente.</h5>
-                <h5 ng-if="underAgePerfil" style="font-size: 30px;">Para efetuar o registo tem de ser maior de idade.</h5>
+				<h5 class="perfilMessagesMobile" ng-if="fieldsEmpty">Campos inválidos.</h5>
+                <h5 class="perfilMessagesMobile" ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
+                <h5 class="perfilMessagesMobile" ng-if="invalidDate">Data de nascimento inválida.</h5>
+                <h5 class="perfilMessagesMobile" ng-if="usernameRepeatedPerfil">Nome já existente.</h5>
+                <h5 class="perfilMessagesMobile" ng-if="underAgePerfil">Para efetuar o registo tem de ser maior de idade.</h5>
             </div>
 			<!-- update photo -->
             <div class="perfilDetailsMobile" ng-if="openImageUploadLabel">

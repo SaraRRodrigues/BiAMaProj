@@ -146,9 +146,9 @@
 			</nav>
 		</div>
 		<!-- show notification details -->
-        <div ng-if="myNotifications.length>0 && showNotifications" class="divNotificationsMobile sectionScrollNotification" style="margin-top: 63px;">
+        <div ng-if="myNotifications.length>0 && showNotifications" class="divNotificationsMobile sectionScrollNotification notificationSection">
             <div ng-repeat="notification in myNotifications">
-                <div ng-if="notification.insert" style="padding:14px">
+                <div class="paddingNotification" ng-if="notification.insert">
                     <h6 class="notificationTextMobile">[{notification.text_notification}]</h6>
                     <h6 class="dateNotificationMobile">[{notification.date_notification}]</h6>
                 </div>

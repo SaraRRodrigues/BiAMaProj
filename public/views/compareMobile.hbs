@@ -145,7 +145,7 @@
 			</nav>
 		</div>
 		<!-- content of compare page -->
-        <div class="titlesOnCenter" style="margin-top: 68px;">
+        <div class="titlesOnCenter compareContentMobile">
             <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
                 <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
                     <figure>
@@ -155,7 +155,7 @@
                 </div>
             </div>
             <br>
-			<h4 ng-if="showLabelCompare" class="subtitles" style="font-size: 33px;">Pesquise materiais para comparar</h4>
+			<h4 ng-if="showLabelCompare" class="subtitles sizeOfSearchMaterialCompare">Pesquise materiais para comparar</h4>
             <div class="ui-widget" style="font-size: 26px;">
                 <input id="tags" style="width: 337px;margin-top: 8px;font-size: 26px;">
                 <button ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;">OK</button>
@@ -165,8 +165,8 @@
             </div>
         </div>
 		<!-- small search results -->
-		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium" style="margin-top: -89px;"></i>
-		<div ng-if="miniSearchResults" class="margin-top-5x" style="margin-top: -55px;">
+		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium iconOfMiniSearchCompare"></i>
+		<div ng-if="miniSearchResults" class="margin-top-5x marginOfMiniSearchResults">
 			<div class="col-md-4" ng-repeat="material in resultSearch track by $index">
 				<div class="thumbnail">
 					<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/miniSearch/[{material.name}]" width="35%" height="150px" alt="foto"/>
@@ -174,9 +174,9 @@
 			</div>
 		</div>
 		<!-- if click on result image -->
-		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2" style="margin-top: -55px;">
+		<div ng-if="showDetailsOfMaterial" class="col-sm-4 col-sm-offset-2 marginOfMiniSearchResults">
 			<div class="row container">
-				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium" style="margin-top: -40px;"></i>
+				<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium materialDetailsInCompare"></i>
 				<div class=" col-md-5 order-md-1 marginMaterialList" ng-if="!showCategoryMaterial && !showProjectMaterial">
 					<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="90%" height="290px" alt="foto"/>
 				</div>

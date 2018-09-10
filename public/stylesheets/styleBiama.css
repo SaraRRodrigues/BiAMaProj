@@ -47,6 +47,7 @@ a {
 .margin-top-2x {margin-top:15px}
 .margin-top-3x {margin-top:25px}
 .margin-top-4x {margin-top:35px}
+.margin-top-4x0 {margin-top:40px}
 .margin-top-4x1 {margin-top:45px}
 .margin-top-5x {margin-top:70px}
 .margin-top-6x {margin-top:120px}
@@ -1547,4 +1548,143 @@ backgroundColorDesktop {
 
 .fontSizeTextArea {
   font-size: 36px;
+}
+
+.compareContentMobile {
+  margin-top: 68px;
+}
+
+.sizeOfSearchMaterialCompare {
+  font-size: 33px;
+}
+
+.marginOfMiniSearchResults {
+  margin-top: -55px;
+}
+
+.materialDetailsInCompare {
+  margin-top: -40px;
+}
+
+.iconOfMiniSearchCompare {
+  margin-top: -89px;
+}
+
+.descriptionOfMaterialMobile {
+  font-size: 31px;
+}
+
+.curiosityBigImage {
+  font-size: 105px;
+}
+
+.worldShareBigImage {
+  font-size: 105px;
+}
+
+.curiosityDetails {
+  margin-bottom: -198px;
+  margin-top: 90px;
+}
+
+.showBigImage {
+  margin-top: 87px;
+  margin-left: 124px;
+}
+
+.fontSizeNoFav {
+  font-size:18px
+}
+
+.questionsFavMobile {
+  margin-left: 274px;
+  margin-bottom: 45px;
+}
+
+.zoomInFav {
+  font-size: 105px;
+}
+
+.imageOfZoomInMaterialMobile {
+  margin-top: 87px;
+  margin-left: 124px;
+}
+
+.buttonFavInFav {
+  font-size: 52px;
+  margin-right: 46px;
+}
+
+.buttonLocationInFav {
+  font-size: 52px;
+  margin-right: 29px;
+}
+
+.detailsFavSize {
+  font-size:34px
+}
+
+.notificationSection {
+  margin-top: 63px;
+}
+
+.paddingNotification {
+  padding:14px
+}
+
+.perfilMessagesMobile {
+  font-size: 30px;
+}
+
+.perfilDetailsMobile {
+  font-size: 23px;
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.questionForumLabelMobile {
+  font-size:28px
+}
+
+.descriptAnswerMobile {
+  margin-top:41px;
+  font-size:28px
+}
+
+.iconsOnQuestionsForumMobile {
+  font-size:32px
+}
+
+.imageUserQuestions {
+  width:120px
+}
+
+.buttonAnswerForumMobile {
+  margin-left:353px
+}
+
+.divAnswerMobile {
+  padding-top: 39px; 
+  background-color: lightgray;
+  margin-right:147px
+}
+
+.questionLabel {
+  font-size: 33px;
+}
+
+.divQuestionDetails {
+  margin-top: 109px;
+}
+
+.marginOfDetailsQuestionMobile {
+  margin-top:-40px
+}
+
+.imageQuestionForumMobile {
+  width:130px
+}
+
+.divAnswerQuestionMobile {
+  margin-left:161px;
 }

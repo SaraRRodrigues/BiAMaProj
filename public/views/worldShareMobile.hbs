@@ -143,21 +143,21 @@
 			</nav>
 		</div>
 		<!-- show world shares -->
-		<div ng-if="showWorldShares" class="titlesOnCenter sectionScrollMobile" style="margin-top:40px">
+		<div ng-if="showWorldShares" class="titlesOnCenter sectionScrollMobile margin-top-4x0">
 			<img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="47%" height="40%" alt="foto"/>
 		</div>
 		<!-- if click on world share, is showed details of world share -->
 		<div ng-if="showWorldSharesDetails" class="sectionDetails">
 			<h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
-			<p style="font-size: 31px;">[{worldSharesInfo.description}]</p>
+			<p class="descriptionOfMaterialMobile">[{worldSharesInfo.description}]</p>
 			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)" alt="foto" width="60%" height="25%"/><br>
 		</div>
 		<!-- if clicks on world share image, show big image -->
-        <button ng-if="showBigImage" type="button" class="close" aria-label="Close" ng-click="closeWorldShareImage()" style="font-size: 105px;">
+        <button ng-if="showBigImage" type="button" class="close worldShareBigImage" aria-label="Close" ng-click="closeWorldShareImage()">
             <span aria-hidden="true">&times;</span>
         </button>
 		<div ng-if="showBigImage">
-			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile" ng-src="../images/worldSharesForum/[{bigImage}]" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%" alt="foto"/><br>
+			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile imageOfZoomInMaterialMobile" ng-src="../images/worldSharesForum/[{bigImage}]"  width="75%" height="60%" alt="foto"/><br>
 		</div>
 		<!-- small search results -->
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>

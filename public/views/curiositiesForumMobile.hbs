@@ -141,7 +141,7 @@
 			</nav>
 		</div>
 		<!-- show curiosity -->
-        <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile" style="margin-bottom: -198px;margin-top: 90px;">
+        <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile curiosityDetails">
             <div ng-repeat="curiosity in descriptionCuriosity">
                 <img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
                 <h2>[{curiosity.title}]</h2>
@@ -151,15 +151,15 @@
 		<!-- show curiosity details -->
         <div ng-if="showCuriosityDetails" class="sectionDetails">
             <h1 class="subtitles titlesOnCenter">Partilha [{curiosityInfo.curiosity}]</h1>
-            <p style="font-size: 31px;">[{curiosityInfo.description}]</p>
+            <p class="descriptionOfMaterialMobile">[{curiosityInfo.description}]</p>
             <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
         </div>
 		<!-- if click on image get the big image -->
-        <button ng-if="showBigImage" type="button" class="close" aria-label="Close" ng-click="closeCuriosityImage()" style="font-size: 105px;">
+        <button ng-if="showBigImage" type="button" class="close curiosityBigImage" aria-label="Close" ng-click="closeCuriosityImage()">
             <span aria-hidden="true">&times;</span>
         </button>
         <div ng-if="showBigImage">
-            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile" ng-src="../images/curiosities/[{bigImage}]" alt="foto" style="margin-top: 87px;margin-left: 124px;" width="75%" height="60%"/><br>
+            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile showBigImage" ng-src="../images/curiosities/[{bigImage}]" alt="foto" width="75%" height="60%"/><br>
         </div>
 		<!-- small search results -->
         <i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
