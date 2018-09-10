@@ -235,6 +235,28 @@ app.constant('jQuery', window.jQuery)
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(result => {
 			
+				$scope.idUserLoggerIn=parseInt($scope.users[$scope.users.length-1].id)+1;
+				$scope.userName = result.user.displayName;
+				$scope.userPassword = '';
+				$scope.nameUser = result.user.displayName;
+				$scope.userEmail = result.user.email;
+				$scope.userImage = "noImage";
+				$scope.dayBirth = '';
+				$scope.monthBirth = '';
+				$scope.yearBirth = '';
+
+			var data = {
+				'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
+				'name': result.user.displayName,
+				'email' : result.user.email,
+				'birthdate': '',
+				'image': "noImage",
+				'username': result.user.displayName,
+				'password': ''
+			}
+			
+			$http.post('/insertUserDetails', data);
+
 			//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
 		})
 		.catch(console.log)
@@ -246,7 +268,7 @@ app.constant('jQuery', window.jQuery)
             })
 			.catch(console.log)
 		*/
-
+		
 		$scope.confirmSession = true;
 		//$scope.validateUserLogin();
 	}
