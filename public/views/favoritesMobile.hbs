@@ -51,15 +51,15 @@
         <div class="container-fluid">
             <div class="header margin-top-3x">
                 <div class="margin-left-4x  col-sm-4">
-                    <img ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+                    <img class="iconUser" ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
                 </div>
-                <div ng-if="!showSearch" class="col-sm-6">
+                <div ng-if="!showSearch" class="col-sm-6 margin-top-3x">
                     <h2 ng-if="locationMaterial" class="subtitles">Onde estamos?</h2>
-                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow"   ng-click="goToHomePage()"></i>
+                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile"   ng-click="goToHomePage()"></i>
                         <i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
                     </h2>
                     <div ng-if="doLogin">
-						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow"   ng-click="goToHomePage()"></i></h2>
+						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile"   ng-click="goToHomePage()"></i></h2>
 					</div>
 					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
@@ -163,7 +163,7 @@
 			<div class="margin-top-1x" ng-if="showMaterials" ng-repeat="fav in favorites">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="30%" height="20%" alt="foto"/>
 			</div>
-			<div ng-if="favorites.length===0 && !doLogin">
+			<div ng-if="favorites.length===0 && !doLogin && !loading">
 				<h4 class="fontSizeNoFav">Não tem favoritos associados</h4>
 			</div>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">

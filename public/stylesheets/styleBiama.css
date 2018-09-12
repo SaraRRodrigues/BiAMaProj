@@ -657,7 +657,7 @@ a {
   font-weight: normal;
   color: #5F9EA0;
   font:bold;
-  font-size: 31px;
+  font-size: 40px;
 }
 
 .biamaDescWidth {
@@ -1197,6 +1197,7 @@ scrollMobile {
 .backArrow {
   color: orange;
   font-size: 26px;
+  cursor: pointer;
 }
 
 .sizeOfInputMinMobile {
@@ -1687,4 +1688,16 @@ backgroundColorDesktop {
 
 .divAnswerQuestionMobile {
   margin-left:161px;
+}
+
+.iconUser {
+  width: 125px
+}
+
+.sizeOfArrowMobile {
+  font-size: 38px;
+}
+
+.widthOfSearchIcon {
+  width: 101px;
 }
