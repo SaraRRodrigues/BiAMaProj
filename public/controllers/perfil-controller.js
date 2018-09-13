@@ -51,7 +51,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     splitParams.push(x[0]);
                 }
             }
-
+debugger
             $scope.showPerfilDetails=true;
             $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
             $scope.userName = splitParams[0];
@@ -87,16 +87,16 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             for(var index=0; index<$scope.users.length; ++index){
                 $scope.username = $scope.users[index].username;
                 $scope.password = $scope.users[index].password;
-                $scope.imageUser = $scope.users[index].image;
-                $scope.email = $scope.users[index].email;
-                $scope.name=$scope.users[index].name;
-                $scope.birthdateValue = $scope.users[index].birthdate;
-
+               
                 if($scope.userName !== null && $scope.userName === $scope.username){
                     if($scope.userPassword !== null && $scope.userPassword === $scope.password){
                         $scope.userLoggedIn=$scope.users[index].username;
                         $scope.idUserLoggerIn=$scope.users[index].id;
                         $scope.confirmSession = true;
+                        $scope.imageUser = $scope.users[index].image;
+                        $scope.email = $scope.users[index].email;
+                        $scope.name=$scope.users[index].name;
+                        $scope.birthdateValue = $scope.users[index].birthdate;        
                         break;
                     }
                 }
