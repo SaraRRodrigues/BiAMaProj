@@ -108,27 +108,30 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.getAllRequests = function() {
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
-          $scope.loading = false;
+          $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
+          $scope.loading = false;
       
         });
 
         /*  */
         var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
         getUserQuestionInfo.then(function(result) {
-            $scope.loading = false;
+            $scope.loading = true;
             var data=result.data.questionDetails;
             $scope.questions=data;
+            $scope.loading = false;
         });
 
         /*  */
         var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
         getAnswerQuestionInfo.then(function(result) {
-            $scope.loading = false;
+            $scope.loading = true;
             var data=result.data.questionDetails;
             $scope.details=data;
             $scope.calculateAnswerId($scope.details);
+            $scope.loading = false;
         });
     }
 
@@ -514,6 +517,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 $scope.showMaterials=false;
             }
         }
+        $scope.detailsFavMaterial=false;
+        $scope.detailsFavQuestion=false;
     }
 
     /* open and close the section of user details and search icon */
