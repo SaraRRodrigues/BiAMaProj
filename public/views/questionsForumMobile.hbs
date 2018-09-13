@@ -50,7 +50,7 @@
                     <img class="iconUser" ng-if="!userDetails" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6 margin-top-3x">
-                    <h2 class="subtitles">Perguntas dos Utilizadores<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i></h2>
+                    <h2 class="subtitles">Perguntas dos Utilizadores<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile"   ng-click="goToHomePage()"></i></h2>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
@@ -215,7 +215,7 @@
 				<div>
 					<button ng-if="!showDivAnswer" class="buttonAnswerMobile buttonAnswerForumMobile" ng-click="clickOnAnswer()">Responder</button>
 					<div ng-if="showDivAnswer" class="titlesOnCenter divAnswerMobile">
-						<textarea class="textAreaAnswerDiv fontSizeTextArea"  ng-model="textAnswer" placeholder="..." ></textarea><br>
+						<textarea class="textAreaAnswerDiv fontSizeTextArea" ng-model="textAnswer" placeholder="..." ></textarea><br>
 						<button class="buttonAnswerMobile" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>
 				</div>

@@ -162,16 +162,16 @@
                         <div class="borderMyQuestionMobile">
                             <label class="margin-right-8x questionForumLabelMobile">Pergunta [{indexQuestion}]</label>
 							<div class="marginOfDetailsQuestionMobile" ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()">
-                                <i class="far fa-star favoriteButton cursorPointer"></i>
+                                <i class="far fa-star favoriteButton cursorPointer iconsOnQuestionsForumMobile"></i>
                             </div>
                             <div class="marginOfDetailsQuestionMobile" ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
-                                <i class="fas fa-star favoriteButton cursorPointer"></i>
+                                <i class="fas fa-star favoriteButton cursorPointer iconsOnQuestionsForumMobile"></i>
                             </div>
                             <div ng-if="questionFavorite.like==0" ng-click="addLikeQuestion()">
-                                <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+                                <i class="fas fa-thumbs-up likeButton cursorPointer iconsOnQuestionsForumMobile"></i>
                             </div>
                             <div ng-if="questionFavorite.like>0" ng-click="removeLikeQuestion()">
-                                <i class="far fa-thumbs-up likeButton cursorPointer" ></i>
+                                <i class="far fa-thumbs-up likeButton cursorPointer iconsOnQuestionsForumMobile" ></i>
                             </div>
                             <h5 class="descriptionQuestion descriptAnswerMobile">[{descriptionQuestion}]</h5>
                         </div>
@@ -183,35 +183,35 @@
 							<div ng-if="$index%2!==0" class="borderQuestionMobile">
                                 <label class="margin-right-8x questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
                                 <div class="marginOfDetailsQuestionMobile" ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
-                                    <i class="fas fa-star favoriteButton cursorPointer"></i>
+                                    <i class="fas fa-star favoriteButton cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div class="marginOfDetailsQuestionMobile" ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
-                                    <i class="far fa-star favoriteButton cursorPointer"></i>
+                                    <i class="far fa-star favoriteButton cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
-                                    <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+                                    <i class="fas fa-thumbs-up likeButton cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
-                                    <i class="far fa-thumbs-up likeButton cursorPointer"></i>
+                                    <i class="far fa-thumbs-up likeButton cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <h5 class="descriptionQuestion descriptAnswerMobile">[{answerQuestion.text}]</h5>
                             </div>
 							<!-- answer align to right -->
                             <div ng-if="$index%2===0"  class="borderAnswerMobile">
                                 <div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
-                                    <i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
+                                    <i class="fas fa-star favoriteButtonLeft cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
-                                    <i class="far fa-star favoriteButtonLeft cursorPointer"></i>
+                                    <i class="far fa-star favoriteButtonLeft cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
-                                    <i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
+                                    <i class="far fa-thumbs-up likeButtonLeft cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
                                 <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
-                                    <i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
+                                    <i class="fas fa-thumbs-up likeButtonLeft cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
-                                <label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-                                <img class="imageButtonLeft" src="../images/user.png">
+                                <label class="margin-right-9x1 questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                <img class="imageButtonLeft imageUserQuestions" src="../images/user.png">
                                 <h5 class="descriptionAnswerMobile questionForumLabelMobile">[{answerQuestion.text}]</h5>
                             </div>
                         </div>
@@ -219,10 +219,10 @@
                 </div>
 				<!-- button to response of questions -->
                 <div> 
-					<button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
-					<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
-						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
-						<button class="buttonConfirm" ng-click="putAnswer(textAnswer)">Responder</button>
+					<button ng-if="!showDivAnswer" class="buttonAnswerMobile buttonAnswerForumMobile" ng-click="clickOnAnswer()">Responder</button>
+					<div ng-if="showDivAnswer" class="titlesOnCenter divAnswerMobile margin-left-9x">
+						<textarea class="textAreaAnswerDiv fontSizeTextArea"  ng-model="textAnswer" placeholder="..."></textarea><br>
+						<button class="buttonAnswerMobile" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>
 				</div>
             </div>
