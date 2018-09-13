@@ -1701,3 +1701,7 @@ backgroundColorDesktop {
 .widthOfSearchIcon {
   width: 101px;
 }
+
+.marginOfArrow {
+  margin-left: -53px;
+}

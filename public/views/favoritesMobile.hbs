@@ -55,22 +55,22 @@
                 </div>
                 <div ng-if="!showSearch" class="col-sm-6 margin-top-3x">
                     <h2 ng-if="locationMaterial" class="subtitles">Onde estamos?</h2>
-                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile"   ng-click="goToHomePage()"></i>
+                    <h2 ng-if="!locationMaterial" class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i>
                         <i ng-click="openFavoritesButton()" class="fas fa-caret-down"></i>
                     </h2>
                     <div ng-if="doLogin">
-						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile"   ng-click="goToHomePage()"></i></h2>
+						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i></h2>
 					</div>
 					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
 					</div>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                    <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
                 <div ng-if="showSearch" class="margin-top col-sm-2">
-                    <img class="float-right" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+                    <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
                 <div class="col-sm-4">
