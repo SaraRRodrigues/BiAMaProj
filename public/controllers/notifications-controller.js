@@ -293,8 +293,7 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 				$scope.regist();
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
-        }
-        debugger
+        }        
 		
 		if(buttonClick === 'notification') {
             if(!$scope.isMobileView) {

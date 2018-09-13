@@ -864,6 +864,16 @@ a {
   height: 155px;
 }
 
+.borderMyQuestionMobile{
+  border-radius: 7px;
+  border: 5px solid #b89a48;
+  width: 677px;
+  background-color: #eaab00;
+  margin-top: 20px;
+  height: 155px;
+  font-size: 35px;
+}
+
 .favoriteButton {
   float: right;
 }
@@ -1532,7 +1542,7 @@ backgroundColorDesktop {
 }
 
 .widthOfSearchInputMobile {
-  width: 157px;
+  width: 148px;
 }
 
 .footerOfMobile {
