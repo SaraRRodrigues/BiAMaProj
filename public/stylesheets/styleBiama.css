@@ -1750,3 +1750,7 @@ backgroundColorDesktop {
 .detailPageMobile {
   font-size: 35px;
 }
+
+.marginOfQuestionsForum {
+  margin-left: -61px;
+}
