@@ -146,9 +146,9 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show number of questions -->
-            <div ng-if="!showMyQuestions" class="titlesOnCenter" ng-repeat="question in myQuestionDetails track by $index">
+            <div ng-if="!showMyQuestions" class="titlesOnCenter detailPageMobile" ng-repeat="question in myQuestionDetails track by $index">
                 <a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
-                <div class="separateQuestions"></div>
+                <div class="separateQuestionsMobile"></div>
             </div>
 			<!-- if click on question, show details of question -->
             <div ng-if="showMyQuestions">

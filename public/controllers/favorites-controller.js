@@ -166,7 +166,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			if($scope.zoomInMaterial){
+			if($scope.zoomInMaterial || $scope.showQuestionDetails){
                 if(!$scope.isMobileView) {
                     location.href = 'https://biamaweb.herokuapp.com/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
                 } else {

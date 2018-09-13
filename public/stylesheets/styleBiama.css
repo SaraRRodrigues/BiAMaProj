@@ -838,6 +838,14 @@ a {
   border:1px solid
 }
 
+.separateQuestionsMobile{
+  margin-bottom: 17px;
+  color: #E0E0E0;
+  margin-left: 328px;
+  width: 350px;
+  border: 1px solid;
+}
+
 .borderQuestion{
   border-radius: 7px;
   border:5px solid #eaab00;
@@ -1718,7 +1726,7 @@ backgroundColorDesktop {
 }
 
 .fontSizeFavOptions {
-  font-size: 42px;
+  font-size: 35px;
 }
 
 .marginFavOptions {
@@ -1727,4 +1735,8 @@ backgroundColorDesktop {
   padding: 20px;
   margin-left: -22px;
   border-bottom: 4px solid white;
+}
+
+.detailPageMobile {
+  font-size: 35px;
 }
