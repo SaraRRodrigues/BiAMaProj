@@ -187,19 +187,34 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.showMyQuestions = false;
             $scope.showMaterials = true;
             $scope.showQuestionDetails = false;
+            $scope.detailsFavMaterial = true; 
+            $scope.detailsFavQuestion = false;
         }else {
             $scope.showMyQuestions = true;
             $scope.showMaterials = false;
+            $scope.detailsFavQuestion = true; 
+            $scope.detailsFavMaterial = false; 
            // $scope.showQuestionDetails = true;
         }
+        
     }
 
     /* open favorites button */
     $scope.openFavoritesButton = function(){
+        $scope.detailsFavMaterial = false;
+        $scope.detailsFavQuestion = false;
         if($scope.showFavoritesButton){
             $scope.showFavoritesButton = false;
             $scope.showQuestionDetails=true;
+            
+            if($scope.showQuestionDetails) {
+                $scope.selectFav = true;
+                $scope.showQuestionDetails=false;
+            } else {
+                $scope.showQuestionDetails=true;
+            }
 		}else {
+            $scope.selectFav = false;
             $scope.showFavoritesButton = true;
             $scope.showMyQuestions = false;
             $scope.showMaterials = false;

@@ -61,8 +61,8 @@
                     <div ng-if="doLogin">
 						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i></h2>
 					</div>
-					<div ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
-						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
+					<div class="marginFavOptions" ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
+						<h5 class="cursorPointer fontSizeFavOptions" ng-click="selectFavorite(fav)">[{fav}]</h5>
 					</div>
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
@@ -163,9 +163,8 @@
 			<div class="margin-top-1x" ng-if="showMaterials" ng-repeat="fav in favorites">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="30%" height="20%" alt="foto"/>
 			</div>
-			<div ng-if="favorites.length===0 && !doLogin && !loading">
-				<h4 class="fontSizeNoFav">Não tem favoritos associados</h4>
-			</div>
+			<h1 ng-if="favorites.length===0 && !loading && detailsFavMaterial">Não tem materiais favoritos.</h1>
+			<h1 ng-if="favoriteQuestions.length===0 && !loading && detailsFavQuestion">Não tem perguntas favoritas.</h1>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
                 <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestions"></div>
@@ -206,6 +205,7 @@
 				</div>
 			</div>
 		</div>
+		<h1 class="alignCenter" ng-if="selectFav && !loading">Selecione uma opção de favoritos</h1>
 		<!-- show favorites materials -->
         <div ng-if="!showFavorites && !locationMaterial && !zoomInMaterial">
 			<div class="titlesOnCenter sectionScrollMobile sectionDetails">

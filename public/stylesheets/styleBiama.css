@@ -1593,10 +1593,6 @@ backgroundColorDesktop {
   margin-left: 124px;
 }
 
-.fontSizeNoFav {
-  font-size:18px
-}
-
 .questionsFavMobile {
   margin-left: 274px;
   margin-bottom: 45px;
@@ -1704,4 +1700,16 @@ backgroundColorDesktop {
 
 .marginOfArrow {
   margin-left: -53px;
+}
+
+.fontSizeFavOptions {
+  font-size: 42px;
+}
+
+.marginFavOptions {
+  background-color: lightgrey;
+  width: 233px;
+  padding: 20px;
+  margin-left: -22px;
+  border-bottom: 4px solid white;
 }
