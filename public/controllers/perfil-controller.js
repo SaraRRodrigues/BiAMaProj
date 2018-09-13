@@ -51,7 +51,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     splitParams.push(x[0]);
                 }
             }
-debugger
+
             $scope.showPerfilDetails=true;
             $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
             $scope.userName = splitParams[0];
