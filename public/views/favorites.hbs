@@ -184,7 +184,7 @@
 						<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 					</div>
 					<div class="titlesOnCenter favoritesAlignQuestions">
-						<div ng-if="!showDivAnswer" class="margin-left-10x1">
+						<div ng-if="!showDivAnswer" class="margin-left-9x0">
 							<!-- Question -->
 							<img class="imageButton" src="../images/user.png">
 							<div class="borderQuestion">
@@ -207,10 +207,10 @@
 						</div>
 					</div>
 					<div> 
-						<button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
+						<button ng-if="!showDivAnswer" class="buttonAnswer" ng-click="clickOnAnswer()">Responder</button>
 						<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
 							<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
-							<button class="buttonConfirm" ng-click="putAnswer(textAnswer)">Responder</button>
+							<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
 						</div>
 					</div>
 				</div>

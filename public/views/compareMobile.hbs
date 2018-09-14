@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-sm-4">
 					<input id="miniSearch" class="inputMinSearch widthOfSearchInputMobile " ng-if="showSearch && !userDetails" type="text"></input>
-					<button class="buttonOk" ng-if="showSearch && !userDetails" ng-click="initMiniSearch()">Ok</button>
+					<button class="buttonOkMiniSearch glyphicon glyphicon-ok " ng-if="showSearch && !userDetails" ng-click="initMiniSearch()"></button>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
 			<h4 ng-if="showLabelCompare" class="subtitles sizeOfSearchMaterialCompare">Pesquise materiais para comparar</h4>
             <div class="ui-widget" style="font-size: 26px;">
                 <input id="tags" style="width: 337px;margin-top: 8px;font-size: 26px;">
-                <button ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;">OK</button>
+                <button ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;"></button>
             </div>
             <div ng-if="doLogin">
                 <h4>Efetue login para obter comparações entre materiais.</h4>
