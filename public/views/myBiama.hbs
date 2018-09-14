@@ -268,6 +268,12 @@
 					</div>
 				</div>
 			</div>
+			<div ng-if="createdMyBiama" class="myBiama alert-success center-block sucessMessageLogin titlesOnCenter">
+				A sua BiAMa foi criada com sucesso.
+			</div>
+			<div ng-if="!createdMyBiama" class="myBiama alert-danger center-block sucessMessageLogin titlesOnCenter">
+				Erro a criar sua BiAMa.
+			</div>
 			<!-- show details of material if click on material -->
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
 				<div class="row container marginBottomMaterialDetails">

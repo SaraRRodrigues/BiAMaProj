@@ -46,6 +46,60 @@
 		<!-- user details and mini search -->
 		<div ng-show="redirect">
 			<div class="backgroundColorDesktop">
+				<div ng-if="insertedAnswer" class="questionForum alert-success center-block sucessMessageLogin titlesOnCenter">
+					Resposta enviada com sucesso.
+				</div>
+				<div ng-if="!insertedAnswer" class="questionForum alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a enviar a resposta.
+				</div>
+				<div ng-if="insertedFavoriteQuestion" class="questionFavorite alert-success center-block sucessMessageLogin titlesOnCenter">
+					Adicionou pergunta aos seus favoritos.
+				</div>
+				<div ng-if="!insertedFavoriteQuestion" class="questionFavorite alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a adicionar pergunta aos favoritos.
+				</div>
+				<div ng-if="removedFavoriteQuestion" class="removeQuestionFavorite alert-success center-block sucessMessageLogin titlesOnCenter">
+					Removeu pergunta dos seus favoritos.
+				</div>
+				<div ng-if="!removedFavoriteQuestion" class="removeQuestionFavorite alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a remover pergunta dos favoritos.
+				</div>
+				<div ng-if="insertedFavoriteAnswer" class="answerFavorite alert-success center-block sucessMessageLogin titlesOnCenter">
+					Adicionou resposta aos seus favoritos.
+				</div>
+				<div ng-if="!insertedFavoriteAnswer" class="answerFavorite alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a adicionar resposta aos favoritos.
+				</div>
+				<div ng-if="removedFavoriteAnswer" class="removeAnswerFavorite alert-success center-block sucessMessageLogin titlesOnCenter">
+					Removeu resposta dos seus favoritos.
+				</div>
+				<div ng-if="!removedFavoriteAnswer" class="removeAnswerFavorite alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a remover resposta dos favoritos.
+				</div>
+				<div ng-if="addedLikeQuestion" class="answerFavorite alert-success center-block sucessMessageLogin titlesOnCenter">
+					Adicionou like na pergunta.
+				</div>
+				<div ng-if="!addedLikeQuestion" class="answerFavorite alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a adicionar like na pergunta.
+				</div>
+				<div ng-if="removedLikeQuestion" class="removeLikeQuestion alert-success center-block sucessMessageLogin titlesOnCenter">
+					Removeu like da resposta.
+				</div>
+				<div ng-if="!removedLikeQuestion" class="removeLikeQuestion alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a remover like na resposta.
+				</div>
+				<div ng-if="addedLikeAnswer" class="addLikeAnswer alert-success center-block sucessMessageLogin titlesOnCenter">
+					Adicionou like na resposta.
+				</div>
+				<div ng-if="!addedLikeAnswer" class="addLikeAnswer alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a adicionar like na resposta.
+				</div>
+				<div ng-if="removedLikeAnswer" class="removeLikeAnswer alert-success center-block sucessMessageLogin titlesOnCenter">
+					Removeu like da resposta.
+				</div>
+				<div ng-if="!removedLikeAnswer" class="removeLikeAnswer alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a remover like na resposta.
+				</div>
 				<!-- user & search & languages-->
 				<nav class="positionOfNavDetails alignUserAndSearchIcons">
 					<!-- search -->

@@ -332,8 +332,13 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$http.post('/insertNotifications', data);
 			window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
 		}
+
 		$scope.showBiamaInitPage = false;
 		$scope.showMyBiamaConf = false;
+
+		setTimeout(function() {
+			$(".myBiama").fadeOut().empty();
+		}, 2000);
 
 	}
 

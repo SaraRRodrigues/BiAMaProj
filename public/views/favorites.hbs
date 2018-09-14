@@ -50,6 +50,12 @@
        	<!-- user details and mini search -->
 		<div ng-show="redirect">
 			<div class="backgroundColorDesktop">
+				<div ng-if="insertedAnswer" class="favoriteQuestionForum alert-success center-block sucessMessageLogin titlesOnCenter">
+					Resposta enviada com sucesso.
+				</div>
+				<div ng-if="!insertedAnswer" class="favoriteQuestionForum alert-danger center-block sucessMessageLogin titlesOnCenter">
+					Erro a enviar a resposta.
+				</div>
 				<!-- user & search & languages-->
 				<nav class="positionOfNavDetails alignUserAndSearchIcons">
 					<!-- search -->

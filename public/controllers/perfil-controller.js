@@ -132,6 +132,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* action of update information of user details */
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
+        $scope.updatedData=false;
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
@@ -173,6 +174,12 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     email, $scope.birthdateValue, image, 
                     username, password);
             }
+
+            setTimeout(function() {
+                $(".updateData").fadeOut().empty();
+            }, 2000);
+
+            $scope.updatedData=true;
         }
         $scope.upgradeInformations=false;
     }

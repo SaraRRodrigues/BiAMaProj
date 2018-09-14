@@ -196,6 +196,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'image': image,
                 'description': description
             }
+            $scope.insertedWorldShare = false;
             $http.post('/insertWorldShares', data);
             
             var data = {
@@ -209,6 +210,11 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 
             $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
             
+            setTimeout(function() {
+                $(".insertWorldShare").fadeOut().empty();
+            }, 2000);
+            
+            $scope.insertedWorldShare = true;
         }
     }
 

@@ -424,8 +424,15 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
           idAnswer: $scope.biggestId
         };
         
+        $scope.insertedAnswer=false;
         $http.post('/insertAnswer', data);
         $scope.showDivAnswer=false;
+
+        setTimeout(function() {
+            $(".favoriteQuestionForum").fadeOut().empty();
+        }, 2000);
+
+        $scope.insertedAnswer=true;
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
 

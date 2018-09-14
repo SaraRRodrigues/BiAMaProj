@@ -620,6 +620,15 @@ app.constant('jQuery', window.jQuery)
 		});
 	}
 
+	/**/
+	$scope.selectOption = function() {
+		$scope.needInitSession=true;
+
+		setTimeout(function() {
+			$(".needInitSession").fadeOut().empty();
+		}, 2000);
+	}
+
 	/* routes of click on links page */
 	$scope.disableSearch = function(buttonClick) {
 		if($scope.isMobileView) {

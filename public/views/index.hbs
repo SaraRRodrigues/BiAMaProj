@@ -151,21 +151,24 @@
 						<!-- content if not init session -->
 						<div ng-if="!confirmSession">
 							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a>Favoritos</a><br>
+							<a ng-click="selectOption()">Favoritos</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a>As minhas perguntas</a><br>
+							<a ng-click="selectOption()">As minhas perguntas</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a>Partilhar com o Mundo</a><br>
+							<a ng-click="selectOption()">Partilhar com o Mundo</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a>Notificações</a><br>
+							<a ng-click="selectOption()">Notificações</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a>Perfil</a><br>
+							<a ng-click="selectOption()">Perfil</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a>Comparar</a><br>
+							<a ng-click="selectOption()">Comparar</a><br>
 							<div class="lineWhite margin-bottom margin-top"></div>
 							<a ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 							
+							<div ng-if="!needInitSession" class="needInitSession alert-danger center-block sucessMessageLogin titlesOnCenter">
+								Tem de iniciar sessão para obter as suas informações.
+							</div>
 							<!-- section of init session -->
 							<div class="divInitSession sectionInitSession" ng-if="showInitSession">
 								<div class="alignCenter">
@@ -378,7 +381,6 @@
 						<img class="margin-top-3x" src="../images/topoBiama.png"/>
 					</div>
 					
-
 					<!-- titles of page & search -->
 					<div class="row text-center">
 						<ng-view></ng-view>
@@ -445,6 +447,12 @@
 					</div>
 				</div>	
 			</article>
+			<div ng-if="confirmSession && isMobileView" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
+				Login efetuado com sucesso.
+			</div>
+			<div ng-if="errorLogin && isMobileView" class="alert alert-danger center-block sucessMessageLogin titlesOnCenter">
+				Erro a efetuar o login. Tente novamente.
+			</div>
 			<!-- small search results -->
 			<i ng-if="miniSearchResults && !isMobileView" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium alignIconCloseOfMiniSearch"></i>
 			<i ng-if="miniSearchResults && isMobileView" ng-click="closeMiniSearch()" class="fas fa-times cursorPointer float-right iconMedium alignIconCloseOfMiniSearchMobile"></i>

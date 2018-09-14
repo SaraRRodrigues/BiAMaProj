@@ -221,7 +221,9 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         idQuestion: $scope.idQuestion,
         idAnswer: $scope.biggestId
       };
-      
+
+      $scope.insertedAnswer=false;
+
       $http.post('/insertAnswer', data);
       $scope.showDivAnswer=false;
       var resultAnswer = {
@@ -252,7 +254,14 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
               'id_user': 'anonymous'
           }
       }
+
       $http.post('/insertNotifications', data);
+
+      setTimeout(function() {
+        $(".questionForum").fadeOut().empty();
+      }, 2000);
+
+      $scope.insertedAnswer=true;
 
     }
 
@@ -267,6 +276,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           idQuestion: $scope.idQuestion,
           idAnswer: -1
         }
+        $scope.insertedFavoriteQuestion=false;
         $http.post('/insertFavoriteQuestion', data);
 
         $scope.questionFavorite.favorite=true;
@@ -275,7 +285,12 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.questionFavorite.favorite=false;
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".questionFavorite").fadeOut().empty();
+      }, 2000);
       
+      $scope.insertedFavoriteQuestion=true;
     }
 
     /* remove from favorites question */
@@ -284,6 +299,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         var data = {
           'idQuestion':question-1
         }
+
+        $scope.removedFavoriteQuestion=false;
         $http.post('/deleteFavoriteQuestion', data);
 
         $scope.questionFavorite.favorite=false;
@@ -292,7 +309,13 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.questionFavorite.favorite=false;
         $scope.goToLogin=true;
       }
-      
+
+      setTimeout(function() {
+        $(".removeQuestionFavorite").fadeOut().empty();
+      }, 2000);
+
+      $scope.removedFavoriteQuestion=true;
+
     }
 
     /* add to favorites question */
@@ -306,6 +329,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           idQuestion: -1,
           idAnswer: answerQuestion.id
         }
+
+        $scope.insertedFavoriteAnswer=false;
         $http.post('/insertFavoriteAnswer', data);
 
         answerQuestion.favorite=true;
@@ -315,6 +340,11 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.goToLogin=true;
       }
       
+      setTimeout(function() {
+        $(".answerFavorite").fadeOut().empty();
+      }, 2000);
+
+      $scope.insertedFavoriteAnswer=true;
     }
 
     /* remove from favorites answer */
@@ -323,6 +353,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         var data = {
           'idAnswer':parseInt(answer.id)
         }
+
+        $scope.removedFavoriteAnswer=true;
         $http.post('/deleteFavoriteAnswer', data);
 
         answer.favorite=false;
@@ -331,6 +363,12 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         answer.favorite=false;
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".removeAnswerFavorite").fadeOut().empty();
+      }, 2000);
+
+      $scope.removedFavoriteAnswer=true;
     }
 
     /* add like on question */
@@ -341,11 +379,19 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           'like': $scope.questionFavorite.like,
           'id_question': $scope.questionFavorite.idQuestion
         }
+
+        $scope.addedLikeQuestion=false;
         $http.post('updateLikeQuestion', data);
         $scope.goToLogin=false;
       } else {
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".addLikeQuestion").fadeOut().empty();
+      }, 2000);
+
+      $scope.addedLikeQuestion=true;
     }
 
     /* remove like of question */
@@ -357,12 +403,20 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             'like': $scope.questionFavorite.like,
             'id_question': $scope.questionFavorite.idQuestion
           }
+
+          $scope.removedLikeQuestion=false;
           $http.post('updateLikeQuestion', data);
           $scope.goToLogin=false;
         }
       } else {
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".removeLikeQuestion").fadeOut().empty();
+      }, 2000);
+
+      $scope.removedLikeQuestion=true;
     }
 
     /* add like on answer */
@@ -374,12 +428,20 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           'like': answer.likes,
           'id_answer': answer.id
         }
+
+        $scope.addedLikeAnswer=false;
         $http.post('updateLikeAnswer', data);
         $scope.goToLogin=false;
         answerQuestion.likes=true;
       } else {
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".addLikeAnswer").fadeOut().empty();
+      }, 2000);
+
+      $scope.addedLikeAnswer=true;
     }
 
     /* remove like of question */
@@ -393,6 +455,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             'like': answer.likes,
             'id_answer': answer.id
           }
+
+          $scope.removedLikeAnswer=false;
           $http.post('updateLikeAnswer', data);
           $scope.goToLogin=false;
           answerQuestion.likes=true;
@@ -401,6 +465,12 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       } else {
         $scope.goToLogin=true;
       }
+
+      setTimeout(function() {
+        $(".removeLikeAnswer").fadeOut().empty();
+      }, 2000);
+
+      $scope.removedLikeAnswer=false;
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
 
