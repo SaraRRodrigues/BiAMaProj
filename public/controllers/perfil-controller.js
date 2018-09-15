@@ -97,8 +97,11 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                         $scope.email = $scope.users[index].email;
                         $scope.name=$scope.users[index].name;
                         $scope.birthdateValue = $scope.users[index].birthdate;        
-                        break;
+                        
                     }
+                    break;
+                } else {
+                    break;
                 }
             }
         });
@@ -132,7 +135,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* action of update information of user details */
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
-        $scope.updatedData=false;
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
@@ -151,11 +153,25 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.invalidDate=true;
         } else {
             if(!$scope.editDate && birthdate.includes("/") ){
-                $scope.birthdateValue=birthdate;             
+                $scope.birthdateValue=birthdate;      
             } else if($scope.editDate){
-                $scope.birthdateValue=birthdate.toLocaleDateString();
+                
+                if(birthdate !== ''){
+                    if(birthdate instanceof Date) {
+                        $scope.invalidDate=false; 
+                        $scope.birthdateValue=birthdate.toLocaleDateString();
+                    } else {
+                        $scope.invalidDate=false; 
+                    }
+                   
+                } else {
+                    $scope.invalidDate=true; 
+                }
+                
+                      
+            } else {
+                $scope.invalidDate=true;
             }
-            $scope.invalidDate=false;
         }
 
         //fazer update na base de dados
@@ -174,12 +190,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     email, $scope.birthdateValue, image, 
                     username, password);
             }
-
-            setTimeout(function() {
-                $(".updateData").fadeOut().empty();
-            }, 2000);
-
-            $scope.updatedData=true;
         }
         $scope.upgradeInformations=false;
     }
@@ -291,16 +301,18 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
             $scope.userDetails = false;
-            $scope.upgradeInformations=false;
-            $scope.editDate=false;
+            $scope.editDate=true;
             $scope.upgradeDate=true;
-		}else {
             $scope.upgradeInformations=true;
+            $scope.upgradeDate=false;
+		}else {
             $scope.editDate=true;
             $scope.upgradeDate=false;
 			$scope.userDetails = true;
-			$scope.showSearch = false;
-		}
+            $scope.showSearch = false;
+            $scope.upgradeInformations=true;
+        }
+       $scope.birthdateValue='';
     }
 
     /* section of init session in user details section */
@@ -338,8 +350,8 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 						$scope.userLoggedIn=$scope.users[index].username;
 						$scope.idUserLoggerIn=$scope.users[index].id;
 						$scope.confirmSession = true;
-						break;
-					}
+                    }
+                    break;
 				}
 			}
         });
@@ -521,6 +533,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* update information of user */
     $scope.updateUserDetails = function(id, name, email, birthdate, image, username, password) { 
         $scope.loadingSchool=true;
+        $scope.usernameRepeatedPerfil=false;
         var data = {
             'idUser': id,
             'name': name,
@@ -535,6 +548,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         if(validData) {
             var validBirthdate = $scope.validDateOfBirth(data.birthdate);
             if(validBirthdate){
+                $scope.updatedData=false;
                 $http.post('/updateUserDetails', data);
 
                 var data = {
@@ -544,7 +558,16 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 					'insert_notification': 'yes',
 					'id_user': id
 				}
-				$http.post('/insertNotifications', data);
+                $http.post('/insertNotifications', data);
+              
+                setTimeout(function() {
+                    $(".updateData").fadeOut().empty();
+                }, 2000);
+    
+                $scope.clickSaveData=true;
+                $scope.updatedData=true;
+
+                $scope.birthdateValue='';
             } else {
                 $scope.underAgePerfil=true;
             }
