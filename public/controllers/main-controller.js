@@ -622,9 +622,10 @@ app.constant('jQuery', window.jQuery)
 
 	/**/
 	$scope.selectOption = function() {
-		$scope.needInitSession=true;
+		$scope.needInitSession=false;
+		$scope.clickOnNeedInitSession=true;
 
-		setTimeout(function() {
+		$window.setTimeout(function() {
 			$(".needInitSession").fadeOut().empty();
 		}, 2000);
 	}
