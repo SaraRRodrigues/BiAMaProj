@@ -23,6 +23,7 @@ a {
 .margin-left-9x {margin-left:150px}
 .margin-left-9x00 {margin-left:180px}
 .margin-left-9x0 {margin-left:213px}
+.margin-left-9x01 {margin-left:227px}
 .margin-left-9x1 {margin-left:300px}
 .margin-left-9x11 {margin-left:314px}
 .margin-left-9x2 {margin-left:350px}
@@ -613,6 +614,15 @@ a {
   margin-right: 30%;
   */
 }
+
+.answerDivFav {
+  background-color: lightgray;
+  margin-left: 24%;
+  padding-top: 10px;
+  margin-right: 45%;
+  margin-top: 35px;
+}
+
 .textAreaAnswerDiv{
   width: 80%;
   height: 40%;
