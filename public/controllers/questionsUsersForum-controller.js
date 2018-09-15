@@ -128,7 +128,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         if(!$scope.showDivAnswer) {
           if(!$scope.isMobileView) {
             location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
@@ -210,7 +210,11 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* click on answer to show section of answer */
     $scope.clickOnAnswer = function() {
-      $scope.showDivAnswer=true;
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== "undefined"){
+        $scope.showDivAnswer=true;
+      } else {
+        $scope.goToLogin=true;
+      }
     }
 
     /* user answer */
@@ -238,7 +242,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
       var valueIdQuestion = parseInt($scope.idQuestion)+1;
       var data='';
-      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "") {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== "undefined") {
           data = {
               'id_notification': parseInt($scope.currentNotificationId)+1,
               'text_notification': 'Resposta à pergunta número ' + valueIdQuestion,
@@ -270,7 +274,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     $scope.addToFavoritesQuestion = function(){
       $scope.clickAddFavQuestion=true;
       /* get favorites material */
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         var data = {
           idFavorite:  parseInt($scope.nextIdFavorite)+1,
           idUser: $scope.idUserLoggerIn,
@@ -298,7 +302,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* remove from favorites question */
     $scope.removeFromFavoritesQuestion = function(question) {
       $scope.clickRemoveFavQuestion=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         var data = {
           'idQuestion':question-1
         }
@@ -325,7 +329,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     $scope.addToFavoritesAnswer = function(answerQuestion){
       $scope.clickAddFavAnswer=true;
       /* get favorites material */
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         var data = {
           idFavorite: parseInt($scope.nextIdFavorite)+1,
           idUser: $scope.idUserLoggerIn,
@@ -354,7 +358,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* remove from favorites answer */
     $scope.removeFromFavoritesAnswer = function(answer) {
       $scope.clickRemoveFavAnswer=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         var data = {
           'idAnswer':parseInt(answer.id)
         }
@@ -379,7 +383,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* add like on question */
     $scope.addLikeQuestion = function() {
       $scope.clickAddLikeQuestion=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         $scope.questionFavorite.like=$scope.questionFavorite.like+1;
         var data = {
           'like': $scope.questionFavorite.like,
@@ -403,7 +407,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* remove like of question */
     $scope.removeLikeQuestion = function() {
       $scope.clickRemoveLikeQuestion=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         if($scope.questionFavorite.like > 0) {
           $scope.questionFavorite.like=$scope.questionFavorite.like-1;
           var data = {
@@ -429,7 +433,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* add like on answer */
     $scope.addLikeAnswer = function(answer) {
       $scope.clickAddLikeAnswer=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         
         answer.likes=answer.likes+1;
         var data = {
@@ -454,7 +458,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* remove like of question */
     $scope.removeLikeAnswer = function(answer) {
       $scope.clickRemoveLikeAnswer=true;
-      if($scope.idUserLoggerIn !== undefined) {
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         
         if(answer.likes > 0) {
           

@@ -190,6 +190,10 @@
                 <h5 class="perfilMessagesMobile" ng-if="usernameRepeatedPerfil">Nome já existente.</h5>
                 <h5 class="perfilMessagesMobile" ng-if="underAgePerfil">Para efetuar o registo tem de ser maior de idade.</h5>
             </div>
+
+			<div ng-if="updatedData && clickSaveData" class="textToInitSession updateData alert-success center-block sucessMessageLogin titlesOnCenter">
+				As alterações do seu perfil foram efetuadas com sucesso.
+			</div>
 			<!-- update photo -->
             <div class="perfilDetailsMobile" ng-if="openImageUploadLabel">
                 <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">

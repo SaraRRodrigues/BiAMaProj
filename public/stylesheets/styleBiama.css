@@ -1767,3 +1767,7 @@ backgroundColorDesktop {
 .marginOfQuestionsForum {
   margin-left: -61px;
 }
+
+.textToInitSession {
+  font-size: 36px;
+}
