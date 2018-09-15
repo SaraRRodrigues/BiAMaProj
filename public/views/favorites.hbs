@@ -194,18 +194,18 @@
 							<!-- Question -->
 							<img class="imageButton" src="../images/user.png">
 							<div class="borderQuestion">
-								<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+								<label class="margin-right-6x0">Pergunta [{indexQuestion}]</label>
 								<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
 							</div>
 							<!-- Answers -->
 							<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
 								<img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
 								<div ng-if="$index%2!==0" class="borderQuestion">
-									<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+									<label class="margin-right-6x0">Resposta [{answerQuestion.numberOfQuestion}]</label>
 									<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 								</div>
 								<div ng-if="$index%2===0"  class="borderAnswerNoMargin">
-									<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+									<label class="margin-left-9x00">Resposta [{answerQuestion.numberOfQuestion}]</label>
 									<img class="imageButtonLeft" src="../images/user.png">
 									<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
 								</div>
