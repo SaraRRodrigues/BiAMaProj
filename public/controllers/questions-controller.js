@@ -35,6 +35,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.showDetailsOfMaterial=false;
         $scope.miniSearchResults=false;
         $scope.showAllQuestions=true;
+        $scope.indexQuestionAnswer=1;
 
         $scope.clickAddFavorite=false;
         $scope.clickRemoveFavorite=false;
@@ -169,6 +170,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
                 id_question: $scope.details[indexAnswer].id_question,
                 favorite: false
             }
+
             $scope.indexQuestionAnswer+=1;
             $scope.descriptionAnswer.push(resultAnswer);
           }
@@ -188,12 +190,14 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 
     /* user answer */
     $scope.putAnswer = function(textAnswer) {
+        $scope.clickOnPutAnswer=true;
         var data = {
             text: textAnswer,
             likes: $scope.likes,
             idQuestion: $scope.idQuestion,
             idAnswer: $scope.biggestId
         };
+        $scope.insertedAnswer=false;
         
         $http.post('/insertAnswer', data);
 
@@ -217,6 +221,13 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             'id_user': $scope.idUserLoggerIn
         }
         $http.post('/insertNotifications', data);
+
+        
+      setTimeout(function() {
+        $(".myQuestion").fadeOut().empty();
+      }, 2000);
+
+      $scope.insertedAnswer=true;
     }
 
     /* add to favorites question */
