@@ -611,6 +611,8 @@ app.constant('jQuery', window.jQuery)
 							$(".alert").fadeOut().empty();
 						}, 2000);
 
+						$scope.clickInitSession=true;
+
 					} else {
 						$scope.errorLogin = true;
 					}

@@ -184,12 +184,15 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         $scope.imageWorldShare='';
         $scope.openWorldShareUploadLabel=true;
         $scope.savePhoto=false;
+        $scope.addWorldShare=false;
+        $scope.showWorldShares=true;
     }
 
     /* insert world share on database */
     $scope.saveConfigInsertWorldShare = function (image, description) {
     
         if(image !== undefined) {
+            $scope.clickSaveWorldShare=true;
             var data = {
                 'forumType': $scope.forumType, 
                 'title': $scope.title,
@@ -207,14 +210,19 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 'id_user': parseInt($scope.users[$scope.users.length-1].id)+1
             }
             $http.post('/insertNotifications', data);
-                
-            $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
-            
+               
             setTimeout(function() {
                 $(".insertWorldShare").fadeOut().empty();
             }, 2000);
             
             $scope.insertedWorldShare = true;
+            $scope.errorInsertWorldShare=false;
+            $scope.clickInitSession=false;
+
+            $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+            
+        } else {
+            $scope.errorInsertWorldShare=true;
         }
     }
 

@@ -417,6 +417,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* user answer */
     $scope.putAnswer = function(textAnswer) {
+        $scope.clickPutAnswer=true;
         var data = {
           text: textAnswer,
           likes: $scope.likes,

@@ -357,7 +357,7 @@
 							</nav>
 						</div>
 					</nav>
-					<div ng-if="confirmSession" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
+					<div ng-if="confirmSession && clickInitSession" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
 						Login efetuado com sucesso.
 					</div>
 					<div ng-if="errorLogin" class="alert alert-danger center-block sucessMessageLogin titlesOnCenter">
@@ -447,7 +447,7 @@
 					</div>
 				</div>	
 			</article>
-			<div ng-if="confirmSession && isMobileView" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
+			<div ng-if="confirmSession && isMobileView && && clickInitSession" class="alert alert-success center-block sucessMessageLogin titlesOnCenter">
 				Login efetuado com sucesso.
 			</div>
 			<div ng-if="errorLogin && isMobileView" class="alert alert-danger center-block sucessMessageLogin titlesOnCenter">

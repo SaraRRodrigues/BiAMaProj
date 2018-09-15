@@ -193,10 +193,12 @@
                         <button class="buttonConfirm" ng-click="saveConfigInsertWorldShare(imageWorldShare, descriptionWorldShare)">Confimar</button>
                         <button ng-click="cancelInsertWorldShare()">Cancelar</button>
                     </div>
-					<div ng-if="!insertedWorldShare" class="insertWorldShare alert-success center-block sucessMessageLogin titlesOnCenter">
-						A sua partilha do mundo foi efetuada com sucesso.
-					</div>
                 </div>
+
+				<div ng-if="!insertedWorldShare && clickSaveWorldShare" class="insertWorldShare alert-success center-block sucessMessageLogin titlesOnCenter">
+					A sua partilha do mundo foi efetuada com sucesso.
+				</div>
+				<h5 ng-if="errorInsertWorldShare">Introduza uma partilha do mundo.</h5>
                 <!-- if click on world share, is showed details of world share -->
                 <div ng-if="showWorldSharesDetails && !addWorldShare" class="sectionDetails">
                     <h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
