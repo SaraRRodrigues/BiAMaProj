@@ -1558,6 +1558,10 @@ backgroundColorDesktop {
   width: 100px;
 }
 
+.searchInputMobile {
+  width: 235px;
+}
+
 .footerOfMobile {
   margin-top: 128px;
   background-color: white;
@@ -1770,4 +1774,20 @@ backgroundColorDesktop {
 
 .textToInitSession {
   font-size: 36px;
+}
+
+.marginOfSearchInput {
+  margin-top:24px
+}
+
+.sizeSearchInputMobile {
+  height: 53px;
+  margin-left: -133px;
+  font-size: 35px;
+}
+
+.buttonSizeSearchMobile {
+  width: 54px; 
+  font-size: 23px;    
+  height: 58px;
 }

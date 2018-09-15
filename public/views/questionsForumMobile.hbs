@@ -54,16 +54,17 @@
                 </div>
                 <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" width="45" ng-click="clickTopSearch()" src="../images/search.png">
+                    <img class="float-right" ng-if="showSearch  && !userDetails" width="90px" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
-                <div ng-if="showSearch" class="margin-top col-sm-2">
+                <div ng-if="showSearch" class="margin-top col-sm-3">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-                    <img class="float-right" ng-if="showSearch  && !userDetails" width="45" ng-click="clickTopSearch()" src="../images/search.png">
-                </div>
-                <div class="col-sm-4">
-                    <input id="miniSearch" class="inputMinSearch widthOfSearchInputMobile " ng-if="showSearch && !userDetails" type="text"></input>
-					<button class="buttonOkMiniSearch glyphicon glyphicon-ok " ng-if="showSearch && !userDetails" ng-click="initMiniSearch()"></button>
-                </div>
+					<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="90px">
+              		
+			    </div>
+                <div class="col-sm-4 marginOfSearchInput">
+					<input id="miniSearch" class="inputMinSearch searchInputMobile sizeSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
+					<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok buttonSizeSearchMobile"></button>
+				</div>
             </div>
         </div> 
 		<!-- loading spinner -->
