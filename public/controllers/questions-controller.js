@@ -80,7 +80,6 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
                 
-                debugger
                 if($scope.users[index].id === $scope.idUserLoggerIn) {
                     $scope.userName = $scope.users[index].username;
                     $scope.userPassword = $scope.users[index].password;
@@ -550,7 +549,6 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 			}
 	
 			if(buttonClick == 'perfil') {
-                debugger
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
 				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
 				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
