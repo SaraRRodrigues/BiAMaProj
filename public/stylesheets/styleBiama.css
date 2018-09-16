@@ -998,6 +998,17 @@ a {
   width: 18%;
 }
 
+.imagePerfilRegistNoMargin {
+  float: left;
+  margin-top: 28px;
+  margin-left: 19px;
+  width: 18%;
+}
+
+.dateBirthRegist {
+  margin-left: 114px;
+}
+
 .imagePerfilMobile {
   float: left;
   margin-top: 28px;
