@@ -525,7 +525,7 @@ app.constant('jQuery', window.jQuery)
 	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 		$scope.resultSearch=[];
-		var inputMiniValue = jQuery("#miniSearch").val(); 		
+		var inputMini = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
 		
 		if(inputMini !== '') {

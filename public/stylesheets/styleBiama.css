@@ -843,6 +843,15 @@ a {
   text-decoration:none;
   cursor: pointer
 }
+
+.lineSeparateQuestionMobile {
+  margin-bottom:9px;
+  color:#E0E0E0; 
+  margin-left:455px; 
+  width:200px; 
+  border:1px solid
+}
+
 .separateQuestions{
   margin-bottom:10px;
   color:#E0E0E0; 
