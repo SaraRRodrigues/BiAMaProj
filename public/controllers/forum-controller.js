@@ -89,7 +89,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		if($scope.idUserLoggerIn !== undefined) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect' && $scope.idUserLoggerIn !== 'anonymous&redirect') {
 			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 		} else {
 			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
