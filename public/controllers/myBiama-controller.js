@@ -323,6 +323,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 	/* insert new biama on database */
 	$scope.insertMyBiamaOnDB = function() {
+		$scope.clickOnInsertBiama=true;
 		$scope.locationIframe = '';
 		if($scope.locationNewBiama == 'Instituto Superior Técnico') {
 			$scope.locationIframe = 'embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654';
