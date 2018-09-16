@@ -214,7 +214,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 	/* save information of new biama in pdf file */
 	$scope.saveInfo = function(descBiama, locationBiama) {
-		debugger
 		//, categoryMaterial, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial
 		$scope.showMaterials = false;
 
@@ -318,7 +317,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: image of my biama */
 
 			/* END: Materials of my biama */
-
+			doc.save('suaBiama.pdf')
 			$scope.insertMyBiamaOnDB();
 		}
 	}
