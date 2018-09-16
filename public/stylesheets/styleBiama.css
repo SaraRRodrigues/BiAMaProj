@@ -1791,3 +1791,7 @@ backgroundColorDesktop {
   font-size: 23px;    
   height: 58px;
 }
+
+.sizeOfFigCaptionCompareMobile {
+  font-size: 26px;
+}

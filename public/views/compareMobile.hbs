@@ -63,6 +63,7 @@
                 <div ng-if="showSearch" class="margin-top col-sm-3">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 					<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="90px">
+
 			    </div>
                 <div class="col-sm-4 marginOfSearchInput">
 					<input id="miniSearch" class="inputMinSearch searchInputMobile sizeSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
@@ -150,16 +151,17 @@
                 <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare">     
                     <figure>
                         <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="35%" height="150px" alt="foto"/>
-                        <figcaption>[{material.text}]</figcaption>
+                        <figcaption class="sizeOfFigCaptionCompareMobile">[{material.text}]</figcaption>
                     </figure>
                 </div>
             </div>
             <br>
 			<h4 ng-if="showLabelCompare" class="subtitles sizeOfSearchMaterialCompare">Pesquise materiais para comparar</h4>
-            <div class="ui-widget" style="font-size: 26px;">
-                <input id="tags" style="width: 337px;margin-top: 8px;font-size: 26px;">
-                <button ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;"></button>
-            </div>
+            
+			<div class="ui-widget" style="font-size: 26px;">
+				<input id="tags" class="sizeOfInputSearchToCompare" style="width: 337px;margin-top: 8px;font-size: 40px;">
+				<i class="fas fa-plus-circle cursorPointer" ng-click="selectedMaterial()" style="width: 81px;font-size: 26px;"></i>
+			</div>
             <div ng-if="doLogin">
                 <h4>Efetue login para obter comparações entre materiais.</h4>
             </div>
