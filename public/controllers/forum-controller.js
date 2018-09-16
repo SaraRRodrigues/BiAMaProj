@@ -60,7 +60,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	
 		});
 
-		var getAllUsers = ForumBiamaService.getUsers(function(users){});
+		$scope.getAllUsers = ForumBiamaService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
@@ -196,9 +196,8 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = ForumBiamaService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

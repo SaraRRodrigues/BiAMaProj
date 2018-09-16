@@ -77,7 +77,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
     
       });
 
-      var getAllUsers = WorldShareForumBiamaService.getUsers(function(users){});
+      $scope.getAllUsers = WorldShareForumBiamaService.getUsers(function(users){});
       $scope.getAllUsers.then(function(usersDB) {
         $scope.users = usersDB.data.users;
         for(var index=0; index<$scope.users.length; ++index){
@@ -278,9 +278,8 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
     $scope.confirmSessionAction = function (username, password) {
   
       $scope.users = 'loadUser';
-      var getAllUsers = WorldShareForumBiamaService.getUsers(function(users){});
       
-      getAllUsers.then(function(usersDB) {
+      $scope.getAllUsers.then(function(usersDB) {
         $scope.users = usersDB.data.users;
         for(var index=0; index<$scope.users.length; ++index){
           $scope.userName = $scope.users[index].username;

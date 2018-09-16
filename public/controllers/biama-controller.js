@@ -203,7 +203,6 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		$scope.getAllUsers = UserBiamaService.getUsers(function(users){});
 		
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;

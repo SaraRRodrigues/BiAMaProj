@@ -267,9 +267,8 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = UserRegistService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

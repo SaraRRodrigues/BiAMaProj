@@ -84,7 +84,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			});
 		});
 
-		var getAllUsers = UserCompareService.getUsers(function(users){});
+		$scope.getAllUsers = UserCompareService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
@@ -246,9 +246,8 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = UserCompareService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

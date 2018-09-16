@@ -99,7 +99,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			}
 		});
 
-		var getAllUsers = LibraryBiamaService.getUsers(function(users){});
+		$scope.getAllUsers = LibraryBiamaService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
@@ -438,9 +438,8 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = LibraryBiamaService.getUsers(function(users){});
-		
-		getAllUsers.then(function(usersDB) {
+
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

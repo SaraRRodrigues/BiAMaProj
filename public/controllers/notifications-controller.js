@@ -73,7 +73,7 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
             $scope.notifications=data; 
         });
 
-        var getAllUsers = UserNotificationService.getUsers(function(users){});
+        $scope.getAllUsers = UserNotificationService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
@@ -208,9 +208,8 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
     $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = UserNotificationService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

@@ -57,7 +57,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 	
 		});
 
-		var getAllUsers = QrCodeBiamaService.getUsers(function(users){});
+		$scope.getAllUsers = QrCodeBiamaService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
@@ -199,9 +199,8 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 	$scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = QrCodeBiamaService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

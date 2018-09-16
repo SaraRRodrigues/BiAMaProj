@@ -72,7 +72,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 
     });
 
-    var getAllUsers = CuriositiesBiamaService.getUsers(function(users){});
+    $scope.getAllUsers = CuriositiesBiamaService.getUsers(function(users){});
     $scope.getAllUsers.then(function(usersDB) {
       $scope.users = usersDB.data.users;
       for(var index=0; index<$scope.users.length; ++index){
@@ -96,7 +96,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
               break;
           }
       }
-    });
+  });
   }
 
 	/* redirect to homepage with arrow */
@@ -267,9 +267,8 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
   $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = CuriositiesBiamaService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

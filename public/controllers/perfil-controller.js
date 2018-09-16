@@ -80,8 +80,8 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of user and materials to display on search */
 	$scope.getAllRequests = function() {
-        var getAllUsers = UserPerfilService.getUsers(function(users){});
-        getAllUsers.then(function(usersDB) {
+        $scope.getAllUsers = UserPerfilService.getUsers(function(users){});
+        $scope.getAllUsers.then(function(usersDB) {
             $scope.loading=false;
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
@@ -328,9 +328,8 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     $scope.confirmSessionAction = function (username, password) {
 
 		$scope.users = 'loadUser';
-		var getAllUsers = UserPerfilService.getUsers(function(users){});
 		
-		getAllUsers.then(function(usersDB) {
+		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;

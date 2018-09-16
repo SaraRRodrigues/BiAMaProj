@@ -133,8 +133,8 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
         });
         
-        var getAllUsers = UserWorldShareService.getUsers(function(users){});
-        getAllUsers.then(function(usersDB) {
+        $scope.getAllUsers = UserWorldShareService.getUsers(function(users){});
+        $scope.getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
                 
