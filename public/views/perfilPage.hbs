@@ -167,9 +167,11 @@
                 <div ng-if="!openImageUploadLabel" class="perfilDetails center-block titlesOnCenter">
                     <!-- user photo -->
                     <div>
-                        <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil" readonly >
-                        <img ng-show="upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil cursorPointer" ng-click="openImageUpload()">
-                        <label class="minTitleBiAMa labelPerfilName">[{name}]</label>
+                        <img ng-show="!upgradeInformations && imageUser !== 'noImage'" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil" readonly >
+                        <img ng-show="upgradeInformations && imageUser !== 'noImage'" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfil cursorPointer" ng-click="openImageUpload()">
+                        <img ng-if="imageUser === 'noImage'" src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
+
+						<label class="minTitleBiAMa labelPerfilName">[{name}]</label>
                     </div>
                     <br><br><br><br><br>
                     <!-- username -->
@@ -213,7 +215,7 @@
 				</div>
 
                 <!-- update photo -->
-                <div class="perfilDetails" ng-if="openImageUploadLabel">
+                <div class="perfilDetails center-block" ng-if="openImageUploadLabel">
                     <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
                     <button ng-click="saveUploadFile()">Guardar</button>
                 </div>
