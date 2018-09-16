@@ -149,12 +149,14 @@
 		<!-- content of perfil page -->
         <div ng-if="showPerfilDetails">
             <br>
-            <div ng-if="!openImageUploadLabel && !loading" class="perfilDetailsMobile center-block perfilDetailsMobile">
+            <div ng-if="!openImageUploadLabel && !loading" class="perfilDetailsMobile center-block">
                 <!-- user photo -->
                 <div>
-                    <img ng-show="!upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile" readonly >
-                    <img ng-show="upgradeInformations" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile cursorPointer" ng-click="openImageUpload()">
-                    <label class="minTitleBiAMa labelPerfilName perfilMessagesMobile">[{name}]</label>
+					<img ng-show="!upgradeInformations && imageUser !== 'noImage'" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile" readonly >
+					<img ng-show="upgradeInformations && imageUser !== 'noImage'" src="../images/users/[{imageUser}]" class="w3-circle imageRotation imagePerfilMobile cursorPointer" ng-click="openImageUpload()">
+                    <img ng-if="imageUser === 'noImage'" src="../images/userDetails.PNG" class="w3-circle imagePerfilMobile cursorPointer" ng-click="openImageUpload()">
+
+				    <label class="minTitleBiAMa labelPerfilName perfilMessagesMobile">[{name}]</label>
                 </div>
                 <br><br><br><br><br>
 				<!-- username -->
@@ -196,7 +198,7 @@
 				As alterações do seu perfil foram efetuadas com sucesso.
 			</div>
 			<!-- update photo -->
-            <div class="perfilDetailsMobile" ng-if="openImageUploadLabel">
+            <div class="perfilDetailsMobile center-block" ng-if="openImageUploadLabel">
                 <input type="file" id="uploadPicture" class="buttonEditPerfilPhoto cursorPointer" value="Escolha uma foto">
                 <button ng-click="saveUploadFile()">Guardar</button>
             </div>
