@@ -383,7 +383,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
 		$scope.resultSearch=[];
-		var inputMini = jQuery("#miniSearch").val();
+		var inputMiniValue = jQuery("#miniSearch").val(); 		var inputMini = inputMiniValue.toLowerCase();
 		if(inputMini !== '') {
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
 				var resultMaterial = {

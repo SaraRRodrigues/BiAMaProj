@@ -267,7 +267,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     $scope.initMiniSearch = function() {
 
         $scope.resultSearch=[];
-        var inputMini = jQuery("#miniSearch").val();
+        var inputMiniValue = jQuery("#miniSearch").val(); 		var inputMini = inputMiniValue.toLowerCase();
         if(inputMini !== '') {
             for(var index=0; index < $scope.materialsToSearch.length; ++index) {
                 var resultMaterial = {
