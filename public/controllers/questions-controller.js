@@ -81,7 +81,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             for(var index=0; index<$scope.users.length; ++index){
                 $scope.userName = $scope.users[index].username;
                 $scope.userPassword = $scope.users[index].password;
-                
+                debugger
                 if($scope.userName !== null && $scope.userName === username){
                     if($scope.userPassword !== null && $scope.userPassword === password){
                         $scope.userLoggedIn=$scope.users[index].username;
