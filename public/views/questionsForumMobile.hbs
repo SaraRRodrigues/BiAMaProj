@@ -246,10 +246,10 @@
 							<div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
 								<i class="far fa-thumbs-up likeButton cursorPointer iconsOnQuestionsForumMobile" ></i>
 							</div>
-							<h5 class="descriptionQuestion descriptAnswerMobile"></h5>[{answerQuestion.text}]</h5>
+							<h5 class="descriptionQuestion descriptAnswerMobile">[{answerQuestion.text}]</h5>
 						</div>
 						<!-- answer align to right -->
-						<div ng-if="$index%2===0"  class="borderAnswerMobile">
+						<div ng-if="$index%2===0" class="borderAnswerMobile">
 							<div ng-if="favoriteAnswer" ng-click="removeFromFavoritesQuestion()">
 								<i class="fas fa-star favoriteButtonLeft cursorPointer iconsOnQuestionsForumMobile" ></i>
 							</div>
@@ -264,7 +264,7 @@
 							</div>
 							<label class="margin-left-9x1 questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
 							<img class="imageButtonLeft imageUserQuestions" src="../images/user.png">
-							<h5 class="descriptionAnswerMobile questionForumLabelMobile">[{answerQuestion.text}]</h5>
+							<h5 class="descriptionQuestion descriptAnswerMobile">[{answerQuestion.text}]</h5>
 						</div>
 					</div>
 				</div>

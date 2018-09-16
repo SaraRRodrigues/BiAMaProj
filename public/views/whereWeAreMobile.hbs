@@ -150,23 +150,22 @@
 			<div ng-if="!loading" class="titlesOnCenter">
 				<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
 				<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
-				
-                <div class="dropup">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <div ng-if="showSchools" ng-repeat="biama in schools">
-                            <li>
-                            <a class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
-                            </li>
-                        </div>
-                    </ul>
-                    <ul class="dropdown-menu">
-                        <div class="loadSchool" ng-if="loadingSchool">
-                            <li class="loading-icon-footer-info"></li>
-                        </div>
-                    </ul>
-                </div>
+			</div>
+			<div class="dropup">
+				<button class="sizeTextOfDetails btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
+				<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<div ng-if="showSchools" ng-repeat="biama in schools">
+						<li>
+						<a class="sizeTextOfDetails languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</a>
+						</li>
+					</div>
+				</ul>
+				<ul class="dropdown-menu">
+					<div class="loadSchool" ng-if="loadingSchool">
+						<li class="loading-icon-footer-info"></li>
+					</div>
+				</ul>
 			</div>
 		</div>
 		<!-- small search results -->

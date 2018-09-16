@@ -178,7 +178,7 @@
         <!-- show material details -->
         <div ng-if="!loading" class="margin-left-2x col-sm-11">
 			<div ng-if="showMaterialDetails && !locationMaterial && !zoomInMaterial" class="titlesOnCenter sectionScroll">
-				<img class="margin-bottom-2x" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="15%" height="130px" alt="foto"/><br>
+				<img class="margin-bottom-2x" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="25%" height="175px" alt="foto"/><br>
 				<div class="titlesOnCenter">
 					<!-- Favorite -->
 					<i ng-click="clickFavorite(materialInfo)" ng-if="materialInfo.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
@@ -188,7 +188,7 @@
 					<!-- Zoom in -->
 					<i ng-click="clickZoomIn(materialInfo)" class="fas fa-search-plus cursorPointer iconMedium"></i>
 				</div>
-				<p>[{materialInfo.description}]
+				<p class="sizeTextOfDetails">[{materialInfo.description}]
 				</p>
 				<div ng-if="clickAddFavoriteMaterial">
 					<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
