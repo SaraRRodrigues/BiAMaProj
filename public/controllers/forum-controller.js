@@ -43,7 +43,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 		}
 		debugger
 
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect') {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous') {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
@@ -90,7 +90,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect') {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous') {
 			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
 		} else {
 			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';

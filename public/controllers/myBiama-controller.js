@@ -57,7 +57,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
 	
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect' ) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
