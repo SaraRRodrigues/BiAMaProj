@@ -39,7 +39,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
 
-		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" ) {
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect' ) {
 			$scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
