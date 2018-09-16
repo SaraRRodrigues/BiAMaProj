@@ -152,22 +152,26 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined") {
         if(!$scope.showDivAnswer) {
           if(!$scope.isMobileView) {
-            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
           } else {
-            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
           }
         } else if($scope.showAllQuestions){
           if(!$scope.isMobileView) {
-            location.href = 'https://biamaweb.herokuapp.com/BiAMa/questionsUsersForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/questionsUsersForum?userName=' + $scope.idUserLoggerIn + '&redirect';
           } else {
-            location.href = 'https://biamaweb.herokuapp.com/BiAMa/questionsForumMobile?userName=' + $scope.idUserLoggerIn;
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/questionsForumMobile?userName=' + $scope.idUserLoggerIn;
           }
         }
       } else {
         if(!$scope.showDivAnswer) {
-          location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=anonymous' + '&redirect';
+          if($scope.isMobileView) {
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=anonymous';
+          } else {
+            $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=anonymous' + '&redirect';
+          }
         } else {
-          location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+          $window.location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
         }
       }
     }
