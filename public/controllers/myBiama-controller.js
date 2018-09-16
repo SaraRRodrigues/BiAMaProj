@@ -213,14 +213,16 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	}
 	
 	/* save information of new biama in pdf file */
-	$scope.saveInfo = function(descBiama, locationBiama, categoryMaterial, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial) {
+	$scope.saveInfo = function(descBiama, locationBiama) {
+		debugger
+		//, categoryMaterial, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial
 		$scope.showMaterials = false;
 
-		$scope.categoryMaterial=categoryMaterial;
-		
-		if(descBiama !== '' && locationBiama !== '' && categoryMaterial !== ''
-		&& colorMaterial !== '' && codeMaterial !== '' && imageMaterial !== '' && descriptionMaterial !== '') {
-			$scope.codeMaterial = codeMaterial + "";
+		//$scope.categoryMaterial=categoryMaterial;
+		//&& categoryMaterial !== '' && colorMaterial !== '' && codeMaterial !== '' && imageMaterial !== '' && descriptionMaterial !== ''
+		if(descBiama !== '' && locationBiama !== '' ) {
+			
+			//$scope.codeMaterial = codeMaterial + "";
 			$scope.descriptionNewBiama = descBiama;
 			$scope.locationNewBiama = locationBiama;
 
@@ -250,12 +252,12 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: location of my biama */
 
 			/* INIT: Materials of my biama */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("bold");
-			doc.text(20, 70, 'Materiais da sua BiAMa');
+			doc.text(20, 70, 'Materiais da sua BiAMa');*/
 
 			/* Category of material */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("italic");
 			doc.text(25, 80, 'Categoria');
 
@@ -265,7 +267,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: category of my biama */
 
 			/* Color of material */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("italic");
 			doc.text(25, 100, 'Cor');
 
@@ -275,7 +277,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: color of my biama */
 
 			/* Code of material */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("italic");
 			doc.text(25, 120, 'Código');
 
@@ -285,7 +287,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: code of my biama */
 
 			/* Image of material */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("italic");
 			doc.text(25, 140, 'Imagem');
 
@@ -306,7 +308,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: image of my biama */
 
 			/* Description of material */
-			doc.setFont("helvetica");
+			/*doc.setFont("helvetica");
 			doc.setFontType("italic");
 			doc.text(25, 190, 'Descrição');
 

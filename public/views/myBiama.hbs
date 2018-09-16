@@ -188,43 +188,46 @@
 					<input id="location" class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br><br>
 					<!-- library content -->
 
-					<h2 class="subtitles">Material</h2><br>
+					<!--<h2 class="subtitles">Material</h2><br>-->
 
 					<!-- category of material - options: animal, ceramic, composite, metal, mineral, polymers, vegetable-->
-					<h5 class="subtitles biamaTitlesStyle"><b>Categoria</b></h5>
+					<!--<h5 class="subtitles biamaTitlesStyle"><b>Categoria</b></h5>
 					<div class="ui-widget">
 						<input id="category" class="biamaConfigFields" ng-model="categoryMaterial" type="text" placeholder="Selecione a categoria do material" required><br>
 					</div>
 					<a ng-click="allCategories()" class="float-right">Todas as categorias</a><br>
 					<div class="alignRight" ng-show="showAllCategories" ng-repeat="category in categories">
 						<h7>[{category}]</h7>
-					</div>
+					</div>-->
 
 					<!-- color of material - options: black, white, gray, blue, beige, green, pink, orange, brown, yellow, diamond, red -->
-					<h5 class="subtitles biamaTitlesStyle"><b>Cor</b></h5>
+					<!--<h5 class="subtitles biamaTitlesStyle"><b>Cor</b></h5>
 					<div class="ui-widget">
 						<input id="colors" class="biamaConfigFields" ng-model="colorMaterial" type="text" placeholder="Selecione a cor do material" required><br>
 					</div>
 					<a ng-click="allColors()" class="float-right">Todas as cores</a><br>
 					<div class="alignRight" ng-show="showAllColors" ng-repeat="color in optionColors">
 						<h7>[{color}]</h7>
-					</div>
+					</div>-->
 
 					<!-- code of material -->
-					<h5 class="subtitles biamaTitlesStyle "><b>Código do material</b></h5>
+					<!--<h5 class="subtitles biamaTitlesStyle "><b>Código do material</b></h5>
 					<input class="biamaConfigFields" ng-model="codeMaterial" type="text" value="lastCode + 1" required><br>
+					-->
 					<!-- image of material -->
-					<h5 class="subtitles biamaTitlesStyle"><b>Imagem do material</b></h5>
+					<!--<h5 class="subtitles biamaTitlesStyle"><b>Imagem do material</b></h5>
 					<i ng-if="showInsertedImage && !errorInsertImage" class="fas fa-minus float-right" ng-click="removeMaterial()"></i>
 					<input ng-if="!showInsertedImage" id="image" class="biamaConfigFields" ng-model="imageMaterial" type="file" placeholder="Insira uma imagem do material" required><button ng-if="!showInsertedImage" ng-click="insertImage(categoryMaterial,imageMaterial)">OK</button><br>
 					
 					<h6 ng-if="errorInsertImage">Preencha os dados anteriores, por favor.</h6>
 					<img ng-if="showInsertedImage && !errorInsertImage" class="margin-bottom-2x cursorPointer margin-left-2x" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="25%" height="12%" alt="foto"/>
-
+					-->
 					<!-- description of material -->
-					<h5 class="subtitles biamaTitlesStyle"><b>Descrição</b></h5>
+					
+					<!--<h5 class="subtitles biamaTitlesStyle"><b>Descrição</b></h5>
 					<textarea class="biamaTextAreaStyle" ng-model="descriptionMaterial" placeholder="Insira descrição do material" required></textarea><br>
-					<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama,categoryMaterial,colorMaterial,codeMaterial,imageMaterial,descriptionMaterial)">Guardar informação</button>
+					-->
+					<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama)">Guardar informação</button>
 				</form>
 				<!-- section of regist user -->
 				<div ng-if="registUser">
