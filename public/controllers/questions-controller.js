@@ -57,7 +57,9 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 		}
 
 		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" ) {
-			$scope.confirmSession=true;
+            
+
+            $scope.confirmSession=true;
 		} else {
 			$scope.loading = true;
 			$scope.confirmSession=false;
@@ -75,7 +77,30 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.getAllUsers = UserQuestionService.getUsers(function(users){});
 
 		$scope.getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
+            $scope.users = usersDB.data.users;
+            for(var index=0; index<$scope.users.length; ++index){
+                $scope.userName = $scope.users[index].username;
+                $scope.userPassword = $scope.users[index].password;
+                
+                if($scope.userName !== null && $scope.userName === username){
+                    if($scope.userPassword !== null && $scope.userPassword === password){
+                        $scope.userLoggedIn=$scope.users[index].username;
+                        $scope.idUserLoggerIn=$scope.users[index].id;
+                        $scope.confirmSession = true;
+                        
+                        $scope.userImage = $scope.users[index].image;
+                        $scope.userEmail = $scope.users[index].email;
+                        $scope.nameUser=$scope.users[index].name;
+                        $scope.userBirthdate = $scope.users[index].birthdate;
+    
+                        var splitDateBirth = $scope.userBirthdate.split('/');
+                        $scope.dayBirth = splitDateBirth[0];
+                        $scope.monthBirth = splitDateBirth[1];
+                        $scope.yearBirth = splitDateBirth[2];
+                        break;
+                    }
+                }
+            }
         });
         
         $scope.getMyQuestions.then(function(result) {
@@ -482,7 +507,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         for(var index=0; index<$scope.users.length; ++index){
             $scope.userName = $scope.users[index].username;
             $scope.userPassword = $scope.users[index].password;
-            debugger
+            
             if($scope.userName !== null && $scope.userName === username){
                 if($scope.userPassword !== null && $scope.userPassword === password){
                     $scope.userLoggedIn=$scope.users[index].username;
@@ -526,6 +551,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 			}
 	
 			if(buttonClick == 'perfil') {
+                debugger
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
 				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
 				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
