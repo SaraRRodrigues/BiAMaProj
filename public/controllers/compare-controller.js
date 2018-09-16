@@ -193,7 +193,8 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
     $scope.initMiniSearch = function() {
 
 		$scope.resultSearch=[];
-		var inputMiniValue = jQuery("#miniSearch").val(); 		var inputMini = inputMiniValue.toLowerCase();
+		var inputMiniValue = jQuery("#miniSearch").val(); 		
+		var inputMini = inputMiniValue.toLowerCase();
 		if(inputMini !== '') {
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
 				var resultMaterial = {
