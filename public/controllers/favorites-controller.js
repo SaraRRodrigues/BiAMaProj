@@ -127,6 +127,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
           $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
+          $scope.loading = false;
       
         });
 
@@ -136,6 +137,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.loading = true;
             var data=result.data.questionDetails;
             $scope.questions=data;
+            $scope.loading = false;
         });
 
         /*  */
@@ -145,9 +147,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             var data=result.data.questionDetails;
             $scope.details=data;
             $scope.calculateAnswerId($scope.details);
+            $scope.loading = false;
         });
 
-        $scope.loading = false;
+        
 
         $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
