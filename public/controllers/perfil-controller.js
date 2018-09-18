@@ -204,7 +204,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     }
 
     $scope.getData = function() {
-        debugger
          if(!$scope.isMobileView) {
 			var splitLocation = location.href.split('=');
 			var splitParams = splitLocation[1].split('&');
@@ -218,7 +217,8 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 		}
 
 		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ) {
-			$scope.confirmSession=true;
+            $scope.confirmSession=true;
+            $scope.showPerfilDetails=true;
 		} else {
 			$scope.loading = true;
 			$scope.confirmSession=false;
