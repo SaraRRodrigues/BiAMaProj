@@ -42,7 +42,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* verify if user is logged in */
 	$scope.validateUserLoggedIn = function() {
-        debugger
+
 		if(!$scope.isMobileView) {
             var splitLocation = location.href.split('=');
     
@@ -293,7 +293,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
-            $scope.userDetails = false;
             $scope.editDate=true;
             $scope.upgradeDate=true;
             $scope.upgradeInformations=true;
@@ -301,7 +300,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 		}else {
             $scope.editDate=true;
             $scope.upgradeDate=false;
-			$scope.userDetails = true;
             $scope.showSearch = false;
             $scope.upgradeInformations=true;
         }
