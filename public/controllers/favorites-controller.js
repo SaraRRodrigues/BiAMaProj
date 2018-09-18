@@ -736,7 +736,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
            //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 3000); 
 
        }
        function errorCallback(error){
@@ -755,7 +755,9 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 4000); 
         }
         function errorCallback(error){
             //error code
