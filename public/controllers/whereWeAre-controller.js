@@ -6,6 +6,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	jQuery("#searchMain").hide();
 	jQuery("#userDetailsMain").hide();
 	jQuery("#divControllerMain").removeClass("divController");
+	jQuery("#iconOfUser").hide();
     
    	/* define view of app */
 	$scope.viewType = function() {
@@ -32,6 +33,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 		$scope.pathURL='https://www.google.com/maps/';
 		$scope.refresh=false;
 		$scope.userDetails=false;
+		jQuery("#iconOfUser").show();
 	}
 
 	/* verify if user is logged in */
