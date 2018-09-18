@@ -80,6 +80,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         }
                     }
                 }
+
                 $scope.loading = false;
             });
             
@@ -96,9 +97,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         break;
                     }
                 }
-
-                 /* get favorites in materials */
-                 for(var index=0; index<$scope.materialsCategories.length; ++index){
+                /* get favorites in materials */
+                for(var index=0; index<$scope.materialsCategories.length; ++index){
                     for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
                         if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
                             var infoFav = {
@@ -112,9 +112,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         }
                     }
                 }
+                
                 $scope.loading = false;
             });
-            
+           
         }
     }
     
@@ -123,7 +124,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.getAllRequests = function() {
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
-          $scope.loading = false;
+          $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
       
@@ -132,7 +133,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         /*  */
         var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
         getUserQuestionInfo.then(function(result) {
-            $scope.loading = false;
+            $scope.loading = true;
             var data=result.data.questionDetails;
             $scope.questions=data;
         });
@@ -140,11 +141,14 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         /*  */
         var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
         getAnswerQuestionInfo.then(function(result) {
-            $scope.loading = false;
+            $scope.loading = true;
             var data=result.data.questionDetails;
             $scope.details=data;
             $scope.calculateAnswerId($scope.details);
         });
+
+        $scope.loading = false;
+
         $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
             $scope.users = usersDB.data.users;
@@ -757,7 +761,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 4000); 
+            }, 2000); 
         }
         function errorCallback(error){
             //error code
@@ -855,7 +859,7 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 3000); 
 
         }
         function errorCallback(error){
