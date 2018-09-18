@@ -410,9 +410,16 @@ app.factory("CuriositiesService", function($q, $http, $timeout){
   var getCuriosities = function() {
     var deferred = $q.defer();
 
-    $timeout(function() {
-      deferred.resolve($http.get('/curiosities'));
-    }, 2000);
+    $http.get('/curiosities').then(successCallback, errorCallback);
+
+    function successCallback(response){
+        //success code
+        deferred.resolve(response);
+    }
+    function errorCallback(error){
+			//error code
+			deferred.reject(status);
+    }
 
     return deferred.promise;
   };
@@ -430,6 +437,17 @@ app.factory("CuriositiesMaterialService", function($q, $http, $timeout){
       deferred.resolve($http.get('/compareMaterials'));
       }, 4000);
 
+      $http.get('/compareMaterials').then(successCallback, errorCallback);
+
+      function successCallback(response){
+          //success code
+          deferred.resolve(response);
+      }
+      function errorCallback(error){
+        //error code
+        deferred.reject(status);
+      }
+
       return deferred.promise;
   };
 
@@ -442,10 +460,17 @@ app.factory("CuriositiesBiamaService", function($q, $http, $timeout){
     
 	var getUsers = function() {
 		var deferred = $q.defer();
-	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000); 
+    
+    $http.get('/users').then(successCallback, errorCallback);
+
+    function successCallback(response){
+      //success code
+      deferred.resolve(response);
+    }
+    function errorCallback(error){
+      //error code
+      deferred.reject(status);
+    }
 
 		return deferred.promise;
 	};

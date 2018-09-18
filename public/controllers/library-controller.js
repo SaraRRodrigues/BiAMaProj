@@ -585,12 +585,16 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	var getSchoolOfMaterial = function(data) {
 		var deferred = $q.defer();
 	
-		$timeout(function() {
-          deferred.resolve($http.get('/materialSchool', 
-          {params: {
-            'data': data
-          }}));
-		}, 1000);
+		$http.get('/materialSchool', {params: {'data': data}}).then(successCallback, errorCallback);
+
+		function successCallback(response){
+			//success code
+			deferred.resolve(response);
+		}
+		function errorCallback(error){
+			//error code
+			deferred.reject(status);
+		}
 	
 		return deferred.promise;
 	};
@@ -598,9 +602,16 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	var getMaterial = function() {
 		var deferred = $q.defer();
 
-		$timeout(function() {
-		  deferred.resolve($http.get('/materialsCategories'));
-		}, 2000);
+		$http.get('/materialsCategories').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+			//error code
+			deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	  };
@@ -616,9 +627,16 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 	var getCategory = function() {
 		var deferred = $q.defer();
 
-		$timeout(function() {
-		  deferred.resolve($http.get('/categories'));
-		}, 2000);
+		$http.get('/categories').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+			//error code
+			deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	  };
@@ -633,11 +651,16 @@ app.factory("FavoritesLibraryService", function($q, $http, $timeout){
 	var getMyFavorites = function(data) {
 		var deferred = $q.defer();
 
-		$timeout(function() {
-		  deferred.resolve($http.get('/favorites',{params: {
-            'data': data
-            }}));
-		}, 2000);
+		$http.get('/favorites', {params: {'data': data}}).then(successCallback, errorCallback);
+
+		function successCallback(response){
+			//success code
+			deferred.resolve(response);
+		}
+		function errorCallback(error){
+			//error code
+			deferred.reject(status);
+		}
 	
 		return deferred.promise;
 	  };
@@ -651,9 +674,16 @@ app.factory("LibraryMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
 		var deferred = $q.defer();
 
-		$timeout(function() {
-		deferred.resolve($http.get('/compareMaterials'));
-		}, 4000);
+		$http.get('/compareMaterials').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+			//error code
+			deferred.reject(status);
+        }
 
 		return deferred.promise;
 	};
@@ -668,10 +698,17 @@ app.factory("LibraryBiamaService", function($q, $http, $timeout){
     
 	var getUsers = function() {
 		var deferred = $q.defer();
-	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000); 
+
+		$http.get('/users').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+			//error code
+			deferred.reject(status);
+        }
 
 		return deferred.promise;
 	};

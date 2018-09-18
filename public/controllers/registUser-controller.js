@@ -418,12 +418,16 @@ app.factory("NotificationRegistService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-        $timeout(function() {
-        deferred.resolve($http.get('/myNotifications', 
-        {params: {
-            'data': data
-        }}));
-        }, 2000);
+		$http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
+
+       function successCallback(response){
+           //success code
+           deferred.resolve(response);
+       }
+       function errorCallback(error){
+           //error code
+           deferred.reject(status);
+       }
 
         return deferred.promise;
     };
@@ -438,9 +442,16 @@ app.factory("RegistMaterialService", function($q, $http, $timeout){
 	var getMaterialComparation = function() {
 		var deferred = $q.defer();
 
-		$timeout(function() {
-		deferred.resolve($http.get('/compareMaterials'));
-		}, 4000);
+		$http.get('/compareMaterials').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
 		return deferred.promise;
 	};
@@ -455,9 +466,16 @@ app.factory("UserRegistService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000); 
+		$http.get('/users').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	};
@@ -466,9 +484,16 @@ app.factory("UserRegistService", function($q, $http, $timeout){
 		
 		var deferred = $q.defer();
 
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
+		$http.get('/getLibraryUser').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
 		return deferred.promise;
 	}

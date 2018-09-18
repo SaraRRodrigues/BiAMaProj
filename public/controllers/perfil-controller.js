@@ -48,7 +48,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     
             $scope.showPerfilDetails=true;
             $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
-            
             $scope.redirect = splitLocation[1].split('&')[1];
 		
 		} else {
@@ -69,6 +68,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         $scope.getAllUsers = UserPerfilService.getUsers(function(users){});
         $scope.getAllUsers.then(function(usersDB) {
             $scope.loading=true;
+            debugger
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
                
@@ -595,11 +595,18 @@ app.factory("UserPerfilService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000);
+        $http.get('/users').then(successCallback, errorCallback);
 
-		return deferred.promise;
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
+
+        return deferred.promise;
 	};
 
 	return {

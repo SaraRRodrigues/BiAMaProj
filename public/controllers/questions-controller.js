@@ -645,9 +645,16 @@ app.factory("QuestionService", function($q, $http, $timeout){
     var getUserQuestionInfo = function() {
         var deferred = $q.defer();
 
-        $timeout(function() {
-        deferred.resolve($http.get('/userQuestions'));
-        }, 2000);
+        $http.get('/userQuestions').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
         return deferred.promise;
     };
@@ -655,22 +662,33 @@ app.factory("QuestionService", function($q, $http, $timeout){
     var getQuestionAnswer = function() {
         var deferred = $q.defer();
 
-        $timeout(function() {
-        deferred.resolve($http.get('/userAnswerAndQuestion'));
-        }, 2000);
+        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
         return deferred.promise;
     };
 
     var getAllMyQuestions = function(data) {
         var deferred = $q.defer();
-		$timeout(function() {
-            deferred.resolve($http.get('/allMyQuestions', 
-            {params: {
-                'data': data
-            }}));
-		}, 2000);
 
+        $http.get('/allMyQuestions', {params: {'data': data}}).then(successCallback, errorCallback);
+
+       function successCallback(response){
+           //success code
+           deferred.resolve(response);
+       }
+       function errorCallback(error){
+           //error code
+           deferred.reject(status);
+       }
 		return deferred.promise;
     }
     
@@ -685,10 +703,17 @@ app.factory("UserQuestionService", function($q, $http, $timeout){
     
 	var getUsers = function() {
 		var deferred = $q.defer();
-	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000); 
+    
+        $http.get('/users').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	};
@@ -702,10 +727,16 @@ app.factory("MyQuestionsMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
 
+        $http.get('/compareMaterials').then(successCallback, errorCallback);
 
-        $timeout(function() {
-        deferred.resolve($http.get('/compareMaterials'));
-        }, 4000);
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
         return deferred.promise;
     };
@@ -718,10 +749,17 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
     
 	var getMyFavorites = function() {
 		var deferred = $q.defer();
+        
+        $http.get('/allFavorites').then(successCallback, errorCallback);
 
-		$timeout(function() {
-          deferred.resolve($http.get('/allFavorites'));
-		}, 2000);
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 	
 		return deferred.promise;
     };
@@ -735,22 +773,33 @@ app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-        $timeout(function() {
-        deferred.resolve($http.get('/myNotifications', 
-        {params: {
-            'data': data
-        }}));
-        }, 2000);
+        $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
+
+       function successCallback(response){
+           //success code
+           deferred.resolve(response);
+       }
+       function errorCallback(error){
+           //error code
+           deferred.reject(status);
+       }
 
         return deferred.promise;
     };
 	
 	var getAllNotifications = function() {
 		var deferred = $q.defer();
-	
-		$timeout(function() {
-		  deferred.resolve($http.get('/allNotifications'));
-		}, 2000);
+        
+        $http.get('/allNotifications').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	};

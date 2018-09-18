@@ -424,9 +424,16 @@ app.factory("WorldSharesForumService", function($q, $http, $timeout){
   var getWorldSharesForum = function() {
       var deferred = $q.defer();
   
-      $timeout(function() {
-        deferred.resolve($http.get('/worldSharesForum'));
-      }, 2000);
+      $http.get('/worldSharesForum').then(successCallback, errorCallback);
+
+      function successCallback(response){
+          //success code
+          deferred.resolve(response);
+      }
+      function errorCallback(error){
+          //error code
+          deferred.reject(status);
+      }
   
       return deferred.promise;
     };
@@ -440,9 +447,16 @@ app.factory("WorldSharesForumMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
         var deferred = $q.defer();
 
-        $timeout(function() {
-          deferred.resolve($http.get('/compareMaterials'));
-        }, 4000);
+        $http.get('/compareMaterials').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            deferred.resolve(response);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
         return deferred.promise;
     };
@@ -456,10 +470,17 @@ app.factory("WorldShareForumBiamaService", function($q, $http, $timeout){
     
 	var getUsers = function() {
 		var deferred = $q.defer();
-	
- 		$timeout(function() {
-		  deferred.resolve($http.get('/users',  {cache:true}));
-		}, 2000); 
+    
+    $http.get('/users').then(successCallback, errorCallback);
+
+    function successCallback(response){
+        //success code
+        deferred.resolve(response);
+    }
+    function errorCallback(error){
+        //error code
+        deferred.reject(status);
+    }
 
 		return deferred.promise;
 	};
