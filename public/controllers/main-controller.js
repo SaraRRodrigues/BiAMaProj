@@ -539,13 +539,18 @@ app.constant('jQuery', window.jQuery)
 					'code': $scope.materialsToSearch[index].code,
 					'description': $scope.materialsToSearch[index].description
 				}
-				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+				var type = ($scope.materialsToSearch[index].type).toLowerCase();
+				var color = ($scope.materialsToSearch[index].color).toLowerCase();
+				var category = ($scope.materialsToSearch[index].category).toLowerCase();
+				var description = ($scope.materialsToSearch[index].description).toLowerCase();
+
+				if(type.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+				} else if(color.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+				} else if(category.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+				} else if(description.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
 				}
 			}
