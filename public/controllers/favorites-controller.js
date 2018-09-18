@@ -742,6 +742,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
        function errorCallback(error){
            //error code
            deferred.reject(status);
+           alert('503 Service Unavailable');
        }
 
         return deferred.promise;
@@ -759,6 +760,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
         return deferred.promise;
     };
@@ -783,6 +785,7 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
         
 		return deferred.promise;
@@ -806,6 +809,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
 
       return deferred.promise;
@@ -822,6 +826,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
       return deferred.promise;
     };
@@ -845,6 +850,7 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
         return deferred.promise;
     };
@@ -868,6 +874,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
         function errorCallback(error){
             //error code
             deferred.reject(status);
+            alert('503 Service Unavailable');
         }
 
         return deferred.promise;
@@ -891,6 +898,7 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
        function errorCallback(error){
            //error code
            deferred.reject(status);
+           alert('503 Service Unavailable');
        }
 
         return deferred.promise;
