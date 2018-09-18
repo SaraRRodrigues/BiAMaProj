@@ -80,22 +80,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         }
                     }
                 }
-                
-                /* get favorites in materials */
-                for(var index=0; index<$scope.materialsCategories.length; ++index){
-                    for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
-                        if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
-                            var infoFav = {
-                                "materialId": $scope.materialsCategories[index].material_id,
-                                "description": $scope.materialsCategories[index].description,
-                                "category": $scope.materialsCategories[index].category,
-                                "image": $scope.materialsCategories[index].name,
-                                "isFavorite": true
-                            }
-                            $scope.favorites.push(infoFav)
-                        }
-                    }
-                }
                 $scope.loading = false;
             });
             
@@ -110,6 +94,22 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         $scope.categories.push($scope.materialsCategories[index])
                     } else {
                         break;
+                    }
+                }
+
+                 /* get favorites in materials */
+                 for(var index=0; index<$scope.materialsCategories.length; ++index){
+                    for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
+                        if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
+                            var infoFav = {
+                                "materialId": $scope.materialsCategories[index].material_id,
+                                "description": $scope.materialsCategories[index].description,
+                                "category": $scope.materialsCategories[index].category,
+                                "image": $scope.materialsCategories[index].name,
+                                "isFavorite": true
+                            }
+                            $scope.favorites.push(infoFav)
+                        }
                     }
                 }
                 $scope.loading = false;
@@ -806,7 +806,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
   
 app.factory("FavoritesMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
-        var deferred = $q.defer();
+       var deferred = $q.defer();
 
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
@@ -829,7 +829,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 		  deferred.resolve($http.get('/favorites',{params: {
             'data': data
             }}));
-		}, 3000);
+		}, 2000);
 	
         return deferred.promise;
 	  };
