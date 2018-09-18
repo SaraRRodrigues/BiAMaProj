@@ -1,4 +1,4 @@
-app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMaterialService","NotificationPerfilService", "$http", "$window", "jQuery", function($scope, UserPerfilService, PerfilMaterialService, NotificationPerfilService, $http, $window){
+app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMaterialService","NotificationPerfilService", "$http","$window", "jQuery", function($scope, UserPerfilService, PerfilMaterialService, NotificationPerfilService, $http, $window){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMain").hide();
@@ -63,7 +63,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.name = splitParams[4].split('&')[0];
             $scope.email = splitParams[5].split('&')[0];
         
-			$scope.redirect = splitLocation[7].split('&')[1];
+            $scope.redirect = splitLocation[7].split('&')[1];
 		
 		} else {
 			var splitLocation = location.href.split('=');

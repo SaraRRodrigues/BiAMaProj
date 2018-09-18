@@ -41,7 +41,6 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			var splitLocation = location.href.split('=');
 			$scope.idUserLoggerIn =splitLocation[1];
 		}
-		debugger
 
 		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous') {
 			$scope.confirmSession=true;

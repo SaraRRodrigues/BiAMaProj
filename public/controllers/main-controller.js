@@ -104,10 +104,11 @@ app.constant('jQuery', window.jQuery)
 
 	// configure html5 to get links working on jsfiddle
 	$locationProvider.html5Mode(true);
+	$httpProvider.defaults.cache = true;
 })
  
-.controller('MainController',['$scope', "UserService", "MaterialService", "NotificationService", "$http","$window", "jQuery", function($scope, UserService, MaterialService,NotificationService, $http, $window) {
-	
+.controller('MainController',['$scope', "UserService", "MaterialService", "NotificationService", "$http","$window","jQuery", function($scope, UserService, MaterialService,NotificationService, $http, $window) {
+
 	/* define view of app */
 	$scope.viewType = function() {
 		var window_width = $( window ).width();
@@ -145,6 +146,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.showInitSearch=true;
 		$scope.userGoogle=null;
 		$scope.showResultsOfMiniSearch=false;
+		$scope.iconOfUser=false;
 	}
 	 
 	/* verify if user is logged in */
