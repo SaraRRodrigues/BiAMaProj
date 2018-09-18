@@ -297,11 +297,17 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.upgradeDate=true;
             $scope.upgradeInformations=true;
             $scope.upgradeDate=false;
+            if($scope.isMobileView){
+                $scope.userDetails=false;
+            }
 		}else {
             $scope.editDate=true;
             $scope.upgradeDate=false;
             $scope.showSearch = false;
             $scope.upgradeInformations=true;
+            if($scope.isMobileView){
+                $scope.userDetails=true;
+            }
         }
        $scope.birthdateValue='';
     }
