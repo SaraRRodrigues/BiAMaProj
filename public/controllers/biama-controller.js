@@ -156,7 +156,9 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
 				var resultMaterial = {
 					'name': $scope.materialsToSearch[index].name,
-					'category': $scope.materialsToSearch[index].category
+					'category': $scope.materialsToSearch[index].category,
+					'code': $scope.materialsToSearch[index].code,
+					'description': $scope.materialsToSearch[index].description
 				}
 				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
