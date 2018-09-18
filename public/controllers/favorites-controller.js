@@ -734,7 +734,10 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
        }
        function errorCallback(error){
            //error code
@@ -777,7 +780,10 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -801,7 +807,10 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -842,7 +851,10 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -866,7 +878,10 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -890,7 +905,9 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
        }
        function errorCallback(error){
            //error code
