@@ -160,19 +160,33 @@
 						<!-- content if not init session -->
 						<div ng-if="!confirmSession">
 							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-							<a href="" ng-click="selectOption()">Favoritos</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Favoritos</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="selectOption()">As minhas perguntas</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">As minhas perguntas</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="selectOption()">Partilhar com o Mundo</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Partilhar com o Mundo</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="selectOption()">Notificações</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Notificações</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="selectOption()">Perfil</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Perfil</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="selectOption()">Comparar</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Comparar</a><br>
+							</span>
 							<div class="lineWhite margin-bottom margin-top"></div>
-							<a href="" ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+							</span>
 							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
 							
 							<!-- section of init session -->
@@ -302,17 +316,29 @@
 									<!-- content if not init session -->
 									<div ng-if="!confirmSession">
 										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-										<a href="" ng-click="selectOption()">Favoritos</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" class="aDisabled" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Favoritos</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="" ng-click="selectOption()">As minhas perguntas</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">As minhas perguntas</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="" ng-click="selectOption()">Partilhar com o Mundo</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Partilhar com o Mundo</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="" ng-click="selectOption()">Notificações</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Notificações</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="" ng-click="selectOption()">Perfil</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Perfil</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
-										<a href="" ng-click="selectOption()">Comparar</a><br>
+										<span title="Tem de iniciar sessão">
+											<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Comparar</a><br>
+										</span>
 										<div class="lineWhite margin-bottom margin-top"></div>
 										<a href="" ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
 										<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
@@ -338,7 +364,8 @@
 													<br>
 													<a href="" class="registSession" ng-click="disableSearch('regist')">Registar</a>
 													<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
-												</div>			
+												</div>	
+												<h5 ng-if="incorrectCredentials">Credenciais inválidas.</h5>			
 											</div>
 										</div>
 									</div>
