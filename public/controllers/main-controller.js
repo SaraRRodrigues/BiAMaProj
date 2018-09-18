@@ -597,6 +597,7 @@ app.constant('jQuery', window.jQuery)
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){
 				$scope.userName = $scope.users[index].username;
+				$scope.username = $scope.users[index].username;
 				$scope.userPassword = $scope.users[index].password;
 
 				if($scope.userName !== null && $scope.userName === username){
@@ -735,6 +736,7 @@ app.constant('jQuery', window.jQuery)
 				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
 				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
 				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail + '&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&redirect';
 			}
 
 			if(buttonClick == 'compare') {

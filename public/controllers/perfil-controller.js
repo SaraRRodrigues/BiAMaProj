@@ -54,16 +54,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
             $scope.showPerfilDetails=true;
             $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
-            $scope.userName = splitParams[0];
-            $scope.userPassword = splitParams[1];
-            $scope.imageUser = splitParams[2];
-            $scope.birth = (splitParams[3].split('&')[0]).split('-');
-    
-            $scope.birthdateValue = $scope.birth[0] + '/' + $scope.birth[1] + '/' + $scope.birth[2];
-            $scope.name = splitParams[4].split('&')[0];
-            $scope.email = splitParams[5].split('&')[0];
-        
-            $scope.redirect = splitLocation[7].split('&')[1];
 		
 		} else {
 			var splitLocation = location.href.split('=');
@@ -82,29 +72,26 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 	$scope.getAllRequests = function() {
         $scope.getAllUsers = UserPerfilService.getUsers(function(users){});
         $scope.getAllUsers.then(function(usersDB) {
-            $scope.loading=false;
+            $scope.loading=true;
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
                
                 if($scope.users[index].id === $scope.idUserLoggerIn) {
-                    $scope.userName = $scope.users[index].username;
-                    $scope.userPassword = $scope.users[index].password;
+                    $scope.username = $scope.users[index].username;
+                    $scope.password = $scope.users[index].password;
                     $scope.userLoggedIn=$scope.users[index].username;
                     $scope.idUserLoggerIn=$scope.users[index].id;
                     $scope.confirmSession = true;
                     
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
+                    $scope.imageUser = $scope.users[index].image;
+                    $scope.email = $scope.users[index].email;
+                    $scope.name=$scope.users[index].name;
+                    $scope.birthdateValue = $scope.users[index].birthdate;
 
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
                     break;
                 }
             }
+            $scope.loading=false;
         });
 
         var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
@@ -226,14 +213,14 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         var splitLocation = location.href.split('&');
       
         $scope.idUserLoggerIn = splitLocation[0].split('=')[1];
-        $scope.username = splitLocation[1].split('=')[1];
+        /*$scope.username = splitLocation[1].split('=')[1];
         $scope.password = splitLocation[2].split('=')[1];
         $scope.imageUser = splitLocation[3].split('=')[1];
         $scope.birth = (splitLocation[4].split('=')[1]).split('-');
 
         $scope.birthdateValue = $scope.birth[0] + '/' + $scope.birth[1] + '/' + $scope.birth[2];
         $scope.name = splitLocation[5].split('=')[1];
-        $scope.email = splitLocation[6].split('=')[1];
+        $scope.email = splitLocation[6].split('=')[1];*/
     }
    
     /* close material that are opened */
@@ -342,11 +329,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 				$scope.userEmail = $scope.users[index].email;
 				$scope.nameUser=$scope.users[index].name;
 				$scope.userBirthdate = $scope.users[index].birthdate;
-
-				var splitDateBirth = $scope.userBirthdate.split('/');
-				$scope.dayBirth = splitDateBirth[0];
-				$scope.monthBirth = splitDateBirth[1];
-				$scope.yearBirth = splitDateBirth[2];
 
 				if($scope.userName !== null && $scope.userName === username){
 					if($scope.userPassword !== null && $scope.userPassword === password){
