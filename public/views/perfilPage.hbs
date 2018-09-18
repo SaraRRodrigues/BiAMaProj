@@ -173,8 +173,11 @@
                     Efetue login para obter ao seu perfil.
                 </div>
             </div>
+			<div ng-if="loading">
+				<div class="loading-icon-footer-info"></div>
+			</div>
             <!-- content of perfil page -->
-            <div ng-if="showPerfilDetails && !miniSearchResults && !showDetailsOfMaterial">
+            <div ng-if="showPerfilDetails && !miniSearchResults && !showDetailsOfMaterial && !loading">
                 <br>
                 <div ng-if="!openImageUploadLabel" class="perfilDetails center-block titlesOnCenter">
                     <!-- user photo -->

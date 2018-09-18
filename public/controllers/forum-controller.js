@@ -280,9 +280,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			}
 	
 			if(buttonClick == 'perfil') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
-				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick == 'compare') {
@@ -311,9 +309,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			}
 	
 			if(buttonClick == 'perfil') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
 			}
 	
 			if(buttonClick == 'compare') {

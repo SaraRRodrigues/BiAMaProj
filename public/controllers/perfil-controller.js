@@ -209,18 +209,23 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     $scope.getData = function() {
 
-        $scope.showPerfilDetails=true;
-        var splitLocation = location.href.split('&');
-      
-        $scope.idUserLoggerIn = splitLocation[0].split('=')[1];
-        /*$scope.username = splitLocation[1].split('=')[1];
-        $scope.password = splitLocation[2].split('=')[1];
-        $scope.imageUser = splitLocation[3].split('=')[1];
-        $scope.birth = (splitLocation[4].split('=')[1]).split('-');
+         if(!$scope.isMobileView) {
+			var splitLocation = location.href.split('=');
+			var splitParams = splitLocation[1].split('&');
+			$scope.idUserLoggerIn =splitParams[0];
+			$scope.redirect = splitParams[1];
+		
+		} else {
+			var splitLocation = location.href.split('=');
+			$scope.idUserLoggerIn =splitLocation[1];
+		}
 
-        $scope.birthdateValue = $scope.birth[0] + '/' + $scope.birth[1] + '/' + $scope.birth[2];
-        $scope.name = splitLocation[5].split('=')[1];
-        $scope.email = splitLocation[6].split('=')[1];*/
+		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ) {
+			$scope.confirmSession=true;
+		} else {
+			$scope.loading = true;
+			$scope.confirmSession=false;
+		}
     }
    
     /* close material that are opened */
@@ -363,9 +368,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 			}
 	
 			if(buttonClick == 'perfil') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn + '&userName=' 
-				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail;
+                $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
 			}
 	
 			if(buttonClick == 'compare') {
@@ -410,9 +413,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 			}
 	
 			if(buttonClick == 'perfil') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&userName=' 
-				+ $scope.userName + '&userPassword=' + $scope.userPassword + '&userImage=' + $scope.userImage + '&userBirthdate=' + $scope.dayBirth + '-' + $scope.monthBirth + '-' + $scope.yearBirth 
-				+ '&nameUser=' + $scope.nameUser + '&userEmail=' + $scope.userEmail + '&redirect';
+                $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick == 'compare') {
