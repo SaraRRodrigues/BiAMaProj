@@ -42,18 +42,14 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* verify if user is logged in */
 	$scope.validateUserLoggedIn = function() {
+        debugger
 		if(!$scope.isMobileView) {
             var splitLocation = location.href.split('=');
-            var splitParams = [];
-            for( var i = 0; i < splitLocation.length; ++i) {
-                var x= splitLocation[i].split('&');
-                if(i>=2) {
-                    splitParams.push(x[0]);
-                }
-            }
-
+    
             $scope.showPerfilDetails=true;
             $scope.idUserLoggerIn = splitLocation[1].split('&')[0];
+            
+            $scope.redirect = splitLocation[1].split('&')[1];
 		
 		} else {
 			var splitLocation = location.href.split('=');
@@ -208,12 +204,13 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     }
 
     $scope.getData = function() {
-
+        debugger
          if(!$scope.isMobileView) {
 			var splitLocation = location.href.split('=');
 			var splitParams = splitLocation[1].split('&');
 			$scope.idUserLoggerIn =splitParams[0];
-			$scope.redirect = splitParams[1];
+            $scope.redirect = splitParams[1];
+            
 		
 		} else {
 			var splitLocation = location.href.split('=');
