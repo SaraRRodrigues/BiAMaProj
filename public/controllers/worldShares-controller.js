@@ -553,9 +553,19 @@ app.factory("ForumService", function($q, $http, $timeout){
     var getForum = function() {
         var deferred = $q.defer();
     
-        $timeout(function() {
-          deferred.resolve($http.get('/forum'));
-        }, 2000);
+
+        $http.get('/forum').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
     
         return deferred.promise;
       };
@@ -574,7 +584,9 @@ app.factory("UserWorldShareService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -597,7 +609,9 @@ app.factory("WorldShareMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -619,7 +633,9 @@ app.factory("NotificationWorldShareService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+			deferred.resolve(response);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code
@@ -636,7 +652,9 @@ app.factory("NotificationWorldShareService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code

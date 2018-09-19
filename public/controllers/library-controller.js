@@ -589,7 +589,9 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 
 		function successCallback(response){
 			//success code
-			deferred.resolve(response);
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000);
 		}
 		function errorCallback(error){
 			//error code
@@ -631,7 +633,9 @@ app.factory("CategoryInfoService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
         }
         function errorCallback(error){
 			//error code
@@ -655,7 +659,9 @@ app.factory("FavoritesLibraryService", function($q, $http, $timeout){
 
 		function successCallback(response){
 			//success code
-			deferred.resolve(response);
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
 		}
 		function errorCallback(error){
 			//error code
@@ -678,7 +684,9 @@ app.factory("LibraryMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
         }
         function errorCallback(error){
 			//error code
@@ -703,7 +711,9 @@ app.factory("LibraryBiamaService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
         }
         function errorCallback(error){
 			//error code

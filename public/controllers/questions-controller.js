@@ -649,7 +649,9 @@ app.factory("QuestionService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -666,7 +668,9 @@ app.factory("QuestionService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -683,7 +687,9 @@ app.factory("QuestionService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+			deferred.resolve(response);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code
@@ -708,7 +714,9 @@ app.factory("UserQuestionService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -731,7 +739,9 @@ app.factory("MyQuestionsMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -754,7 +764,9 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -777,7 +789,9 @@ app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+			deferred.resolve(response);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code

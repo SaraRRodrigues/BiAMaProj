@@ -808,9 +808,18 @@ app.factory("MyBiAMaInfoService", function($q, $http, $timeout){
 	var getBiAMaInfo = function() {
 		var deferred = $q.defer();
 	
-		$timeout(function() {
-		  deferred.resolve($http.get('/biamaInfo'));
-		}, 2000);
+		$http.get('/biamaInfo').then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 	
 		return deferred.promise;
 	  };
@@ -829,7 +838,9 @@ app.factory("UserMyBiamaService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
         }
         function errorCallback(error){
             //error code
@@ -843,10 +854,18 @@ app.factory("UserMyBiamaService", function($q, $http, $timeout){
 		
 		var deferred = $q.defer();
 
-		$timeout(function() {
-			deferred.resolve($http.get('/getLibraryUser'));
-		}, 2000);
+		$http.get('/getLibraryUser').then(successCallback, errorCallback);
 
+        function successCallback(response){
+            //success code
+			$timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 		return deferred.promise;
 	}
 
@@ -864,7 +883,9 @@ app.factory("NotificationMyBiamaService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+			deferred.resolve(response);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code
@@ -876,10 +897,19 @@ app.factory("NotificationMyBiamaService", function($q, $http, $timeout){
 	
 	var getAllNotifications = function() {
 		var deferred = $q.defer();
-	
-		$timeout(function() {
-		  deferred.resolve($http.get('/allNotifications'));
-		}, 2000);
+
+		$http.get('/allNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
+
+       function successCallback(response){
+           //success code
+           $timeout(function() {
+			deferred.resolve(response);
+	   	   }, 2000);
+       }
+       function errorCallback(error){
+           //error code
+           deferred.reject(status);
+       }
 	
 		return deferred.promise;
 	};
@@ -898,7 +928,9 @@ app.factory("MyBiamaMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 2000);
         }
         function errorCallback(error){
             //error code
@@ -921,7 +953,9 @@ app.factory("MyBiamaService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 2000);
         }
         function errorCallback(error){
             //error code
