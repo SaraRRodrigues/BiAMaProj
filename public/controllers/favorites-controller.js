@@ -866,7 +866,7 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 3000); 
+            }, 2000); 
 
         }
         function errorCallback(error){
