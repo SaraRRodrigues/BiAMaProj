@@ -199,7 +199,7 @@
 									<div ng-if="users !== 'loadUser'">
 										<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
 										<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-										<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+										<a class="confirmSessionLabel confirmButton" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
 										<!-- login with firebase providers -->
 										<div>
 											<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
@@ -353,7 +353,7 @@
 												<div ng-if="users !== 'loadUser'">
 													<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
 													<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-													<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+													<a class="confirmSessionLabel confirmButton" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
 													<!-- login with firebase providers -->
 													<div>
 														<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
@@ -521,12 +521,12 @@
 				<a href="https://biamaweb.herokuapp.com/BiAMa/forumPage?id=[{idUserLoggerIn}]&redirect" ng-if="nameclick === 'forum'" ng-click="changeColorClick('forum')" style="width:20%; color:white; text-decoration:none; font-size: 21px;font-family: Arial Narrow, sans-serif;" class="w3-bar-item buttonSelected w3-mobile">Fórum</a>
 			</footer>
 			<!-- footer of mobile view -->
-			<footer ng-if="isMobileView" id="footerMobile" class="footerOfMobile">
-				<img class="cursorPointer" ng-click="disableSearch('library')" src="../images/mobile/library.png" width="18%">
-				<img class="cursorPointer" ng-click="disableSearch('whereWeAre')" src="../images/mobile/location.png" width="18%">
-				<img class="cursorPointer" ng-click="disableSearch('qrCode')" src="../images/mobile/photo.png" width="21%">
-				<img class="cursorPointer" ng-click="disableSearch('biamaPage')" src="../images/mobile/biamaPage.png" width="18%">
-				<img class="cursorPointer" ng-click="disableSearch('forum')" src="../images/mobile/questions.png" width="18%">
+			<footer ng-if="isMobileView" id="footerMobile" class="footerOfMobile titlesOnCenter">
+				<img class="cursorPointer" ng-click="disableSearch('library')" src="../images/mobile/library.png" width="15%">
+				<img class="cursorPointer" ng-click="disableSearch('whereWeAre')" src="../images/mobile/location.png" width="15%">
+				<img class="cursorPointer" ng-click="disableSearch('qrCode')" src="../images/mobile/photo.png" width="18%">
+				<img class="cursorPointer" ng-click="disableSearch('biamaPage')" src="../images/mobile/biamaPage.png" width="15%">
+				<img class="cursorPointer" ng-click="disableSearch('forum')" src="../images/mobile/questions.png" width="15%">
 			</footer>
 		</div>
 	</body>

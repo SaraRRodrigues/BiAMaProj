@@ -553,7 +553,7 @@ a {
 .registSession{
   background-color:#e68a009c;
   color:white;    
-  font-size: 15px;
+  font-size: 13px;
   border-radius: 5px;
   padding: 5px;
 }
@@ -573,6 +573,15 @@ a {
   padding: 5px;
 }
 
+.confirmButton {
+  background-color: lightslategrey;
+  font-size: 13px;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+}
+
 .inputUserName{
   text-align: center;
   border-radius:5px;
@@ -589,7 +598,7 @@ a {
 }
 
 .confirmSessionLabel{
-  text-decoration: underline; 
+  text-decoration: none; 
   cursor: pointer
 }
 .cursorPointer {

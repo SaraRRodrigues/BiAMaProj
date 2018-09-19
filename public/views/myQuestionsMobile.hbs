@@ -118,7 +118,7 @@
 								<div ng-if="users !== 'loadUser'">
 									<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
 									<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-									<a class="confirmSessionLabel" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+									<a class="confirmSessionLabel confirmButton" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
 									<!-- login with firebase providers -->
 									<div>
 										<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
