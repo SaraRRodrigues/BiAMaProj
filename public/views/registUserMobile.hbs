@@ -97,9 +97,9 @@
                 <input class="inputsCenter inputDetails sizeInputDetails margin-left-4x" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
 
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <input class="inputsCenter inputDetails sizeInputDetails" ng-model="password" type="password" placeholder="Password"/>
+                <input class="inputsCenter inputDetails sizeInputDetails margin-bottom-3x" ng-model="password" type="password" placeholder="Password"/>
                 <br>
-                <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
+                <button class="saveButton inputsCenter buttonBorder margin-top margin-bottom margin-left sizeInputDetails" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
             </div>
             <div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyData">
                 <h3>Preencha todos os campos por favor.</h3>

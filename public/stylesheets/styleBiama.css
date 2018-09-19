@@ -564,6 +564,15 @@ a {
   width: 124px;
 }
 
+.saveButton {
+  background-color:#e68a009c;
+  color:white;
+  width: 124px;
+  font-size: 30px;
+  border-radius: 14px;
+  padding: 5px;
+}
+
 .inputUserName{
   text-align: center;
   border-radius:5px;
