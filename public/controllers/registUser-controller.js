@@ -161,7 +161,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
 
-					$window.location.href="biamaweb.herokuapp.com";
+					$window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
 				} else {
 					$scope.underAge=true;
 				}

@@ -393,6 +393,7 @@ app.constant('jQuery', window.jQuery)
 				} else {
 					$scope.underAge=true;
 				}
+
 			} else {
 				$scope.usernameRepeated=true;
 			}
