@@ -97,21 +97,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                         break;
                     }
                 }
-                /* get favorites in materials */
-                for(var index=0; index<$scope.materialsCategories.length; ++index){
-                    for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
-                        if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
-                            var infoFav = {
-                                "materialId": $scope.materialsCategories[index].material_id,
-                                "description": $scope.materialsCategories[index].description,
-                                "category": $scope.materialsCategories[index].category,
-                                "image": $scope.materialsCategories[index].name,
-                                "isFavorite": true
-                            }
-                            $scope.favorites.push(infoFav)
-                        }
-                    }
-                }
                 
                 $scope.loading = false;
             });
@@ -230,6 +215,22 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* open favorites button */
     $scope.openFavoritesButton = function(){
+        /* get favorites in materials */
+        for(var index=0; index<$scope.materialsCategories.length; ++index){
+            for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
+                if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
+                    var infoFav = {
+                        "materialId": $scope.materialsCategories[index].material_id,
+                        "description": $scope.materialsCategories[index].description,
+                        "category": $scope.materialsCategories[index].category,
+                        "image": $scope.materialsCategories[index].name,
+                        "isFavorite": true
+                    }
+                    $scope.favorites.push(infoFav)
+                }
+            }
+        }
+        
         $scope.detailsFavMaterial = false;
         $scope.detailsFavQuestion = false;
         if($scope.showFavoritesButton){
