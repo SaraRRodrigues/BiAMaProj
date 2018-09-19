@@ -1850,3 +1850,12 @@ aDisabled{
   opacity:0.5;
   text-decoration: none;
 }
+
+.borderOfImageCuriosity {
+  border-radius: 9px;
+  border: 1px grey solid;
+}
+
+.textBold {
+  font-weight: bold;
+}
