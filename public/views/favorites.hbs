@@ -178,6 +178,8 @@
 					<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
 				</div>
 			</div>
+			<h1 class="alignCenter" ng-if="selectFav && !loading">Selecione uma opção de favoritos</h1>
+
 			<!-- loading spinner -->
 			<div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>

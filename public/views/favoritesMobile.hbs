@@ -61,7 +61,7 @@
                     <div ng-if="doLogin">
 						<h2 class="subtitles">Favoritos<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i></h2>
 					</div>
-					<div class="marginFavOptions" ng-if="showFavoritesButton" ng-repeat="fav in favoritesButton">
+					<div class="marginFavOptions" ng-if="showFavoritesButton && !loading" ng-repeat="fav in favoritesButton">
 						<h5 class="cursorPointer fontSizeFavOptions" ng-click="selectFavorite(fav)">[{fav}]</h5>
 					</div>
                 </div>

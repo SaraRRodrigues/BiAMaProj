@@ -38,6 +38,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.resultSearch = [];
         $scope.showDetailsOfMaterial=false;
         $scope.miniSearchResults=false;
+
+        $scope.selectFav=true;
     }
 
     /* verify if user is logged in */
