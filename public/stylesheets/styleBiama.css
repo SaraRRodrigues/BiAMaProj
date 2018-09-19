@@ -538,8 +538,10 @@ a {
 }
 .registSession{
   background-color:#e68a009c;
-  color:white;
-  width: 100px;
+  color:white;    
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .registSessionMobile{
