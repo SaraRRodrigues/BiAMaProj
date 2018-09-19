@@ -192,13 +192,13 @@
 					<br>
 					<button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
 				</div>
-				<div ng-if="emptyData">
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyData">
 					<h3>Preencha todos os campos por favor.</h3>
 				</div>
-				<div ng-if="usernameRepeated">
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="usernameRepeated">
 					<h3>Nome já existente.</h3>
 				</div>
-				<div ng-if="underAge">
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="underAge">
 					<h3>Para efetuar o registo tem de ser maior de idade.</h3>
 				</div>
 			</div>
