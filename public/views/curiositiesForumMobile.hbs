@@ -168,9 +168,8 @@
             <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
         </div>
 		<!-- if click on image get the big image -->
-		<i ng-click="closeCuriosityImage()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-
         <div ng-if="showBigImage">
+			<i ng-click="closeCuriosityImage()" class="fas fa-times cursorPointer float-right iconMedium"></i>
             <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile showBigImage" ng-src="../images/curiosities/[{bigImage}]" alt="foto" width="75%" height="60%"/><br>
         </div>
 		<!-- small search results -->
