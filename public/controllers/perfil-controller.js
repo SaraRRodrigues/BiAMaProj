@@ -87,25 +87,24 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     break;
                 }
             }
+
+            var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
+            getMaterials.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.comparationDetails;
+                $scope.materialsToSearch = data;
+            });
+
+            var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
+                getNotifications.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.notificationDetails;
+                $scope.notifications=data;
+                $scope.numberOfNotifications=$scope.notifications.length;
+                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+            });
             $scope.loading=false;
         });
-
-        var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
-        getMaterials.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.comparationDetails;
-            $scope.materialsToSearch = data;
-        });
-
-        var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
-			getNotifications.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-		});
-    
     }
     
     /* redirect to homepage with arrow */

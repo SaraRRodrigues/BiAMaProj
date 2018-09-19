@@ -183,23 +183,24 @@ app.constant('jQuery', window.jQuery)
 			var data=result.data.userLibrary;
 			$scope.userLibrary=data;
 			
+			$scope.getAllUsers.then(function(usersDB) {
+				$scope.loading=true;
+				$scope.users = usersDB.data.users;
+				
+				$scope.loading = false;
+			});
+		
+			$scope.getMaterials.then(function(result) {
+				$scope.loading = true;
+				var data=result.data.categoryDetails;
+				$scope.materialsToSearch = data;
+				$scope.materials = $scope.materialsToSearch;
+				$scope.loading = false;
+			});
+
 			$scope.loading = false;
 		});
-	
-		$scope.getAllUsers.then(function(usersDB) {
-			$scope.loading=true;
-			$scope.users = usersDB.data.users;
-			
-			$scope.loading = false;
-		});
-	
-		$scope.getMaterials.then(function(result) {
-			$scope.loading = true;
-			var data=result.data.categoryDetails;
-			$scope.materialsToSearch = data;
-			$scope.materials = $scope.materialsToSearch;
-			$scope.loading = false;
-		});
+		
 	}
 	
 	/* redirect to homepage with arrow */

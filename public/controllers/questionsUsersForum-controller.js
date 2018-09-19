@@ -74,66 +74,65 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.questions=data;
-      });
 
-      var getAnswerQuestionInfo = UserForumQuestionService.getQuestionAnswer(function(infoUserAnswer){});
-      getAnswerQuestionInfo.then(function(result) {
-          $scope.loading = false;
-          var data=result.data.questionDetails;
-          $scope.details=data;
-          $scope.calculateAnswerId($scope.details);
-      });
-
+        var getAnswerQuestionInfo = UserForumQuestionService.getQuestionAnswer(function(infoUserAnswer){});
+        getAnswerQuestionInfo.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.questionDetails;
+            $scope.details=data;
+            $scope.calculateAnswerId($scope.details);
+        });
       
-      var getMaterials = QuestionsForumMaterialService.getMaterialComparation(function(infoMaterial){});
-      getMaterials.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.comparationDetails;
-        $scope.materialsToSearch = data;
-
-      });
-
-      var getFavorites = FavoritesQuestionForumService.getAllFavorites(function(infoFavorites){});
-      getFavorites.then(function(result) {
+        var getMaterials = QuestionsForumMaterialService.getMaterialComparation(function(infoMaterial){});
+        getMaterials.then(function(result) {
           $scope.loading = false;
-          var data=result.data.allFavoritesDetails;
-          $scope.favorites = data;
-          $scope.nextIdFavorite = data[data.length-1].id_favorite;
-      });
+          var data=result.data.comparationDetails;
+          $scope.materialsToSearch = data;
 
-      $scope.getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
-      $scope.getAllUsers.then(function(usersDB) {
-        $scope.users = usersDB.data.users;
-        for(var index=0; index<$scope.users.length; ++index){
+        });
+
+        var getFavorites = FavoritesQuestionForumService.getAllFavorites(function(infoFavorites){});
+        getFavorites.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.allFavoritesDetails;
+            $scope.favorites = data;
+            $scope.nextIdFavorite = data[data.length-1].id_favorite;
+        });
+
+        $scope.getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
+        $scope.getAllUsers.then(function(usersDB) {
+          $scope.users = usersDB.data.users;
+          for(var index=0; index<$scope.users.length; ++index){
+                  
+            if($scope.users[index].id === $scope.idUserLoggerIn) {
+                $scope.userName = $scope.users[index].username;
+                $scope.userPassword = $scope.users[index].password;
+                $scope.userLoggedIn=$scope.users[index].username;
+                $scope.idUserLoggerIn=$scope.users[index].id;
+                $scope.confirmSession = true;
                 
-          if($scope.users[index].id === $scope.idUserLoggerIn) {
-              $scope.userName = $scope.users[index].username;
-              $scope.userPassword = $scope.users[index].password;
-              $scope.userLoggedIn=$scope.users[index].username;
-              $scope.idUserLoggerIn=$scope.users[index].id;
-              $scope.confirmSession = true;
-              
-              $scope.userImage = $scope.users[index].image;
-              $scope.userEmail = $scope.users[index].email;
-              $scope.nameUser=$scope.users[index].name;
-              $scope.userBirthdate = $scope.users[index].birthdate;
+                $scope.userImage = $scope.users[index].image;
+                $scope.userEmail = $scope.users[index].email;
+                $scope.nameUser=$scope.users[index].name;
+                $scope.userBirthdate = $scope.users[index].birthdate;
 
-              var splitDateBirth = $scope.userBirthdate.split('/');
-              $scope.dayBirth = splitDateBirth[0];
-              $scope.monthBirth = splitDateBirth[1];
-              $scope.yearBirth = splitDateBirth[2];
-              break;
+                var splitDateBirth = $scope.userBirthdate.split('/');
+                $scope.dayBirth = splitDateBirth[0];
+                $scope.monthBirth = splitDateBirth[1];
+                $scope.yearBirth = splitDateBirth[2];
+                break;
+            }
           }
-        }
-      });
+        });
 
-      var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
-        getNotifications.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.notificationDetails;
-        $scope.notifications=data;
-        $scope.numberOfNotifications=$scope.notifications.length;
-        $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+        var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
+          getNotifications.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.notificationDetails;
+          $scope.notifications=data;
+          $scope.numberOfNotifications=$scope.notifications.length;
+          $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+        });
       });
     }
     

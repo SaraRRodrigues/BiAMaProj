@@ -64,51 +64,51 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			$scope.loading = false;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
-		});
 
-		var getMaterialsToCompare = CompareMyMaterialService.getMaterialComparation(function(infoMaterial){});
-		getMaterialsToCompare.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.comparationDetails;
-			$scope.materialComparation=data;
-	
-			for(var index=0; index<$scope.materialComparation.length; ++index) {
-				$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].color)
-			}
-	
-			jQuery( function() {
-				var availableTags = $scope.compareMaterials;
-				jQuery( "#tags" ).autocomplete({
-					source: availableTags
+			var getMaterialsToCompare = CompareMyMaterialService.getMaterialComparation(function(infoMaterial){});
+			getMaterialsToCompare.then(function(result) {
+				$scope.loading = false;
+				var data=result.data.comparationDetails;
+				$scope.materialComparation=data;
+		
+				for(var index=0; index<$scope.materialComparation.length; ++index) {
+					$scope.compareMaterials.push($scope.materialComparation[index].type + '-' +  $scope.materialComparation[index].color)
+				}
+		
+				jQuery( function() {
+					var availableTags = $scope.compareMaterials;
+					jQuery( "#tags" ).autocomplete({
+						source: availableTags
+					});
 				});
 			});
+
+			$scope.getAllUsers = UserCompareService.getUsers(function(users){});
+			$scope.getAllUsers.then(function(usersDB) {
+				$scope.users = usersDB.data.users;
+				for(var index=0; index<$scope.users.length; ++index){
+					
+					if($scope.users[index].id === $scope.idUserLoggerIn) {
+						$scope.userName = $scope.users[index].username;
+						$scope.userPassword = $scope.users[index].password;
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
+						$scope.confirmSession = true;
+						
+						$scope.userImage = $scope.users[index].image;
+						$scope.userEmail = $scope.users[index].email;
+						$scope.nameUser=$scope.users[index].name;
+						$scope.userBirthdate = $scope.users[index].birthdate;
+
+						var splitDateBirth = $scope.userBirthdate.split('/');
+						$scope.dayBirth = splitDateBirth[0];
+						$scope.monthBirth = splitDateBirth[1];
+						$scope.yearBirth = splitDateBirth[2];
+						break;
+					}
+				}
+			});
 		});
-
-		$scope.getAllUsers = UserCompareService.getUsers(function(users){});
-		$scope.getAllUsers.then(function(usersDB) {
-            $scope.users = usersDB.data.users;
-            for(var index=0; index<$scope.users.length; ++index){
-                
-                if($scope.users[index].id === $scope.idUserLoggerIn) {
-                    $scope.userName = $scope.users[index].username;
-                    $scope.userPassword = $scope.users[index].password;
-                    $scope.userLoggedIn=$scope.users[index].username;
-                    $scope.idUserLoggerIn=$scope.users[index].id;
-                    $scope.confirmSession = true;
-                    
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
-
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
-                    break;
-                }
-            }
-    	});
 	}
 
 	/* redirect to homepage with arrow */

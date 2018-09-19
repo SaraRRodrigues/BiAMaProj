@@ -99,50 +99,50 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
                     break;
                 }
             }
-        });
-        
-        $scope.getMyQuestions.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.questions;
-            $scope.myQuestionDetails=data;
-        });
-
-        $scope.getUserQuestionInfo.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.questionDetails;
-            $scope.myQuestions=data;
-            $scope.questions=data;
-        });
+            $scope.getMyQuestions.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.questions;
+                $scope.myQuestionDetails=data;
+            });
     
-        $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
-        $scope.getMaterials.then(function(result) {
-          $scope.loading = false;
-          var data=result.data.comparationDetails;
-          $scope.materialsToSearch = data;
-        });
-
-        $scope.getAnswerQuestionInfo.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.questionDetails;
-            $scope.details=data;
-            $scope.calculateAnswerId($scope.details);
-        });
-
-        var getNotifications = NotificationMyQuestionService.getAllNotifications(function(infoNotification){});
-			getNotifications.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+            $scope.getUserQuestionInfo.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.questionDetails;
+                $scope.myQuestions=data;
+                $scope.questions=data;
+            });
+        
+            $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
+            $scope.getMaterials.then(function(result) {
+              $scope.loading = false;
+              var data=result.data.comparationDetails;
+              $scope.materialsToSearch = data;
+            });
+    
+            $scope.getAnswerQuestionInfo.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.questionDetails;
+                $scope.details=data;
+                $scope.calculateAnswerId($scope.details);
+            });
+    
+            var getNotifications = NotificationMyQuestionService.getAllNotifications(function(infoNotification){});
+                getNotifications.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.notificationDetails;
+                $scope.notifications=data;
+                $scope.numberOfNotifications=$scope.notifications.length;
+                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+            });
+            
+            $scope.getMyFavorites.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.allFavoritesDetails;
+                $scope.nextIdFavorite = data[data.length-1].id_favorite;
+                $scope.favoriteDetails=data;
+            });
         });
         
-        $scope.getMyFavorites.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.allFavoritesDetails;
-            $scope.nextIdFavorite = data[data.length-1].id_favorite;
-            $scope.favoriteDetails=data;
-        });
     }
 
     /* calculate answer id */

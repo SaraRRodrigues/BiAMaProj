@@ -101,63 +101,62 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
       
+          var getMyWorldShares = WorldSharesService.getAllMyWorldShares( $scope.idUserLoggerIn, function(infoMyWorldShares){});
+          getMyWorldShares.then(function(result) {
+              $scope.loading = false;
+              var data=result.data.worldShareDetails;
+  
+              $scope.worldShareItems=[];
+              $scope.worldShareData=[];
+              $scope.shareNumber=[];
+              for(var index=0; index<data.length; ++index) {
+                  $scope.worldShareItems.push(data[index].image);
+                  $scope.worldShareData.push(data[index]);
+                  $scope.forumType=data[index].type_forum; 
+  
+                  if(index===data.length-1) {
+                      var result = (data[index].title).split("s");
+                      var numberTitle=result[1];
+                      $scope.title='ws' + (parseInt(numberTitle)+1);
+                  }
+              }
+          });
+  
+          var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
+              getNotifications.then(function(result) {
+              $scope.loading = false;
+              var data=result.data.notificationDetails;
+              $scope.notifications=data;
+              $scope.numberOfNotifications=$scope.notifications.length;
+              $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+          });
+          
+          $scope.getAllUsers = UserWorldShareService.getUsers(function(users){});
+          $scope.getAllUsers.then(function(usersDB) {
+              $scope.users = usersDB.data.users;
+              for(var index=0; index<$scope.users.length; ++index){
+                  
+                  if($scope.users[index].id === $scope.idUserLoggerIn) {
+                      $scope.userName = $scope.users[index].username;
+                      $scope.userPassword = $scope.users[index].password;
+                      $scope.userLoggedIn=$scope.users[index].username;
+                      $scope.idUserLoggerIn=$scope.users[index].id;
+                      $scope.confirmSession = true;
+                      
+                      $scope.userImage = $scope.users[index].image;
+                      $scope.userEmail = $scope.users[index].email;
+                      $scope.nameUser=$scope.users[index].name;
+                      $scope.userBirthdate = $scope.users[index].birthdate;
+  
+                      var splitDateBirth = $scope.userBirthdate.split('/');
+                      $scope.dayBirth = splitDateBirth[0];
+                      $scope.monthBirth = splitDateBirth[1];
+                      $scope.yearBirth = splitDateBirth[2];
+                      break;
+                  }
+              }
+          });
         });
-
-        var getMyWorldShares = WorldSharesService.getAllMyWorldShares( $scope.idUserLoggerIn, function(infoMyWorldShares){});
-        getMyWorldShares.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.worldShareDetails;
-
-            $scope.worldShareItems=[];
-            $scope.worldShareData=[];
-            $scope.shareNumber=[];
-            for(var index=0; index<data.length; ++index) {
-                $scope.worldShareItems.push(data[index].image);
-                $scope.worldShareData.push(data[index]);
-                $scope.forumType=data[index].type_forum; 
-
-                if(index===data.length-1) {
-                    var result = (data[index].title).split("s");
-                    var numberTitle=result[1];
-                    $scope.title='ws' + (parseInt(numberTitle)+1);
-                }
-            }
-        });
-
-        var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
-			getNotifications.then(function(result) {
-			$scope.loading = false;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-        });
-        
-        $scope.getAllUsers = UserWorldShareService.getUsers(function(users){});
-        $scope.getAllUsers.then(function(usersDB) {
-            $scope.users = usersDB.data.users;
-            for(var index=0; index<$scope.users.length; ++index){
-                
-                if($scope.users[index].id === $scope.idUserLoggerIn) {
-                    $scope.userName = $scope.users[index].username;
-                    $scope.userPassword = $scope.users[index].password;
-                    $scope.userLoggedIn=$scope.users[index].username;
-                    $scope.idUserLoggerIn=$scope.users[index].id;
-                    $scope.confirmSession = true;
-                    
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
-
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
-                    break;
-                }
-            }
-		});
     }
 
     /* redirect to homepage with arrow */

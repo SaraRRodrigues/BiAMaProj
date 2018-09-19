@@ -63,40 +63,39 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
         
-        });
+            var getMyNotifications = MyNotificationService.getMyNotifications($scope.idUserLoggerIn,function(infoNotification){});
+            getMyNotifications.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.notificationDetails;
+                $scope.myNotifications=data;   
+                $scope.notifications=data; 
+            });
 
-        var getMyNotifications = MyNotificationService.getMyNotifications($scope.idUserLoggerIn,function(infoNotification){});
-        getMyNotifications.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.notificationDetails;
-            $scope.myNotifications=data;   
-            $scope.notifications=data; 
-        });
-
-        $scope.getAllUsers = UserNotificationService.getUsers(function(users){});
-		$scope.getAllUsers.then(function(usersDB) {
-            $scope.users = usersDB.data.users;
-            for(var index=0; index<$scope.users.length; ++index){
-                
-                if($scope.users[index].id === $scope.idUserLoggerIn) {
-                    $scope.userName = $scope.users[index].username;
-                    $scope.userPassword = $scope.users[index].password;
-                    $scope.userLoggedIn=$scope.users[index].username;
-                    $scope.idUserLoggerIn=$scope.users[index].id;
-                    $scope.confirmSession = true;
+            $scope.getAllUsers = UserNotificationService.getUsers(function(users){});
+            $scope.getAllUsers.then(function(usersDB) {
+                $scope.users = usersDB.data.users;
+                for(var index=0; index<$scope.users.length; ++index){
                     
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
+                    if($scope.users[index].id === $scope.idUserLoggerIn) {
+                        $scope.userName = $scope.users[index].username;
+                        $scope.userPassword = $scope.users[index].password;
+                        $scope.userLoggedIn=$scope.users[index].username;
+                        $scope.idUserLoggerIn=$scope.users[index].id;
+                        $scope.confirmSession = true;
+                        
+                        $scope.userImage = $scope.users[index].image;
+                        $scope.userEmail = $scope.users[index].email;
+                        $scope.nameUser=$scope.users[index].name;
+                        $scope.userBirthdate = $scope.users[index].birthdate;
 
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
-                    break;
+                        var splitDateBirth = $scope.userBirthdate.split('/');
+                        $scope.dayBirth = splitDateBirth[0];
+                        $scope.monthBirth = splitDateBirth[1];
+                        $scope.yearBirth = splitDateBirth[2];
+                        break;
+                    }
                 }
-            }
+            });
         });
     }
 	

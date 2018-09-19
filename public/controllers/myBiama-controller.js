@@ -67,8 +67,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
-		
-		
+	
 		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 		/* get information of material and of library - when i do get library */
 		$scope.getMaterialInfo.then(function(result) {
@@ -87,101 +86,104 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			jQuery( "#category" ).autocomplete({
 				source: availableTags
 			});
-			} );
+			});
 	
 			$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
 			$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
-			$scope.loading=false;
-		});
-	
-		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-		getMyBiamaInfo.then(function(result) {
-			$scope.loading=true;
-			$scope.biamaUp = true;
-			var data=result.data.biamaDetails;
-			$scope.descriptionsOfBiama=data;
-			$scope.loading=false;
-		});
-
-		var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-		getBiamaInfo.then(function(result) {
-			$scope.loading=true;
-			var data=result.data.biamaDetails;
-			$scope.idLibrary=data[data.length-1].id_library+1;
-			$scope.loading=false;
-		});
-
-		$scope.getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
-		$scope.getUsersMyBiama.then(function(usersDB) {
-			$scope.loading=true;
-			$scope.users = usersDB.data.users;
-			$scope.loading=false;
-			for(var index=0; index<$scope.users.length; ++index){
-				
-				if($scope.users[index].id === $scope.idUserLoggerIn) {
-					$scope.userName = $scope.users[index].username;
-					$scope.userPassword = $scope.users[index].password;
-					$scope.userLoggedIn=$scope.users[index].username;
-					$scope.idUserLoggerIn=$scope.users[index].id;
-					$scope.confirmSession = true;
-					
-					$scope.userImage = $scope.users[index].image;
-					$scope.userEmail = $scope.users[index].email;
-					$scope.nameUser=$scope.users[index].name;
-					$scope.userBirthdate = $scope.users[index].birthdate;
-	  
-					var splitDateBirth = $scope.userBirthdate.split('/');
-					$scope.dayBirth = splitDateBirth[0];
-					$scope.monthBirth = splitDateBirth[1];
-					$scope.yearBirth = splitDateBirth[2];
-					break;
-				}
-			}
-		});
-
-		var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
-		getMyBiamaLibraryUser.then(function(result) {
-			$scope.loading=true;
-			var data=result.data.userLibrary;
-			$scope.userLibrary=data;
-
-			if($scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== undefined ){
-				for(var index=0; index<$scope.userLibrary.length; ++index) {
-					if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
-						$scope.myLibrary = $scope.userLibrary[index].library_id;
-						break;
-					}
-				}
-	
-				for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
-					if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
-						$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
-						break;
-					}
-				}
-			} else {
-				$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
-			}
-			$scope.loading=false;
 			
-		});
-		var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
-			getNotifications.then(function(result) {
-			$scope.loading=true;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-			$scope.loading=false;
-		});
+			var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+			getMyBiamaInfo.then(function(result) {
+				$scope.loading=true;
+				$scope.biamaUp = true;
+				var data=result.data.biamaDetails;
+				$scope.descriptionsOfBiama=data;
+				$scope.loading=false;
+			});
 
-		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
-		getMaterials.then(function(result) {
-			$scope.loading=true;
-			var data=result.data.comparationDetails;
-			$scope.materialsToSearch = data;
+			var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+			getBiamaInfo.then(function(result) {
+				$scope.loading=true;
+				var data=result.data.biamaDetails;
+				$scope.idLibrary=data[data.length-1].id_library+1;
+				$scope.loading=false;
+			});
+
+			$scope.getUsersMyBiama = UserMyBiamaService.getUsers(function(users){});
+			$scope.getUsersMyBiama.then(function(usersDB) {
+				$scope.loading=true;
+				$scope.users = usersDB.data.users;
+				$scope.loading=false;
+				for(var index=0; index<$scope.users.length; ++index){
+					
+					if($scope.users[index].id === $scope.idUserLoggerIn) {
+						$scope.userName = $scope.users[index].username;
+						$scope.userPassword = $scope.users[index].password;
+						$scope.userLoggedIn=$scope.users[index].username;
+						$scope.idUserLoggerIn=$scope.users[index].id;
+						$scope.confirmSession = true;
+						
+						$scope.userImage = $scope.users[index].image;
+						$scope.userEmail = $scope.users[index].email;
+						$scope.nameUser=$scope.users[index].name;
+						$scope.userBirthdate = $scope.users[index].birthdate;
+		
+						var splitDateBirth = $scope.userBirthdate.split('/');
+						$scope.dayBirth = splitDateBirth[0];
+						$scope.monthBirth = splitDateBirth[1];
+						$scope.yearBirth = splitDateBirth[2];
+						break;
+					}
+				}
+			});
+
+			var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
+			getMyBiamaLibraryUser.then(function(result) {
+				$scope.loading=true;
+				var data=result.data.userLibrary;
+				$scope.userLibrary=data;
+
+				if($scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== undefined ){
+					for(var index=0; index<$scope.userLibrary.length; ++index) {
+						if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
+							$scope.myLibrary = $scope.userLibrary[index].library_id;
+							break;
+						}
+					}
+		
+					for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
+						if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
+							$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
+							break;
+						}
+					}
+				} else {
+					$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
+				}
+				$scope.loading=false;
+				
+			});
+			var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
+				getNotifications.then(function(result) {
+				$scope.loading=true;
+				var data=result.data.notificationDetails;
+				$scope.notifications=data;
+				$scope.numberOfNotifications=$scope.notifications.length;
+				$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+				$scope.loading=false;
+			});
+
+			var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
+			getMaterials.then(function(result) {
+				$scope.loading=true;
+				var data=result.data.comparationDetails;
+				$scope.materialsToSearch = data;
+				$scope.loading=false;
+			});
+			
 			$scope.loading=false;
 		});
+	
+		
 	}
 	
 	/* redirect to homepage with arrow */
