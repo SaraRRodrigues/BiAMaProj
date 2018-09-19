@@ -137,6 +137,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.getAllRequests = function() {
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
+            debugger
           $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;

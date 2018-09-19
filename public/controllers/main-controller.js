@@ -495,6 +495,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.miniSearchResults = false;
 		$scope.showInitSearch=true;
 		$scope.showResultsOfMiniSearch=false;
+		$scope.showMaterials = false;
 
 		if($scope.isMobileView) {
 			if($scope.showSearch){
@@ -526,6 +527,8 @@ app.constant('jQuery', window.jQuery)
 
 	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
+		$scope.search = false;
+		$scope.showMaterials = false;
 		$scope.resultSearch=[];
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
