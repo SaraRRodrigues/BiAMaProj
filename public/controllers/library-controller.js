@@ -74,58 +74,55 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 			$scope.getMyFavorites.then(function(result) {
 				var data=result.data.favoriteDetails;
 				$scope.favoriteDetails=data;
-			});
 
-			$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
-			$scope.getMaterials.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.comparationDetails;
-				$scope.materialsToSearch = data;
+				$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
+				$scope.getMaterials.then(function(result) {
+					$scope.loading = false;
+					var data=result.data.comparationDetails;
+					$scope.materialsToSearch = data;
 
-			});
+				});
 
-			/* get information of material and of library - when i do get library */
-			$scope.getMaterialInfo.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.materialsCategories;
-				$scope.materialsCategories=data;
-				for(var index=0; index<$scope.materialsCategories.length; ++index){
-					if(index<7){
-						$scope.categories.push($scope.materialsCategories[index])
-					} else {
-						break;
+				/* get information of material and of library - when i do get library */
+				$scope.getMaterialInfo.then(function(result) {
+					$scope.loading = false;
+					var data=result.data.materialsCategories;
+					$scope.materialsCategories=data;
+					for(var index=0; index<$scope.materialsCategories.length; ++index){
+						if(index<7){
+							$scope.categories.push($scope.materialsCategories[index])
+						} else {
+							break;
+						}
 					}
-				}
-			});
-
-			$scope.getAllUsers = LibraryBiamaService.getUsers(function(users){});
-			$scope.getAllUsers.then(function(usersDB) {
-				$scope.users = usersDB.data.users;
-				for(var index=0; index<$scope.users.length; ++index){
-					
-					if($scope.users[index].id === $scope.idUserLoggerIn) {
-						$scope.userName = $scope.users[index].username;
-						$scope.userPassword = $scope.users[index].password;
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
+				});
+				$scope.getAllUsers = LibraryBiamaService.getUsers(function(users){});
+				$scope.getAllUsers.then(function(usersDB) {
+					$scope.users = usersDB.data.users;
+					for(var index=0; index<$scope.users.length; ++index){
 						
-						$scope.userImage = $scope.users[index].image;
-						$scope.userEmail = $scope.users[index].email;
-						$scope.nameUser=$scope.users[index].name;
-						$scope.userBirthdate = $scope.users[index].birthdate;
-		
-						var splitDateBirth = $scope.userBirthdate.split('/');
-						$scope.dayBirth = splitDateBirth[0];
-						$scope.monthBirth = splitDateBirth[1];
-						$scope.yearBirth = splitDateBirth[2];
-						break;
+						if($scope.users[index].id === $scope.idUserLoggerIn) {
+							$scope.userName = $scope.users[index].username;
+							$scope.userPassword = $scope.users[index].password;
+							$scope.userLoggedIn=$scope.users[index].username;
+							$scope.idUserLoggerIn=$scope.users[index].id;
+							$scope.confirmSession = true;
+							
+							$scope.userImage = $scope.users[index].image;
+							$scope.userEmail = $scope.users[index].email;
+							$scope.nameUser=$scope.users[index].name;
+							$scope.userBirthdate = $scope.users[index].birthdate;
+			
+							var splitDateBirth = $scope.userBirthdate.split('/');
+							$scope.dayBirth = splitDateBirth[0];
+							$scope.monthBirth = splitDateBirth[1];
+							$scope.yearBirth = splitDateBirth[2];
+							break;
+						}
 					}
-				}
+				});
 			});
 		});
-
-		
 	}
 	
 	/* redirect to homepage with arrow */

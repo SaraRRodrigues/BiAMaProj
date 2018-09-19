@@ -188,16 +188,15 @@ app.constant('jQuery', window.jQuery)
 				$scope.users = usersDB.data.users;
 				
 				$scope.loading = false;
-			});
-		
-			$scope.getMaterials.then(function(result) {
-				$scope.loading = true;
-				var data=result.data.categoryDetails;
-				$scope.materialsToSearch = data;
-				$scope.materials = $scope.materialsToSearch;
-				$scope.loading = false;
-			});
 
+				$scope.getMaterials.then(function(result) {
+					$scope.loading = true;
+					var data=result.data.categoryDetails;
+					$scope.materialsToSearch = data;
+					$scope.materials = $scope.materialsToSearch;
+					$scope.loading = false;
+				});
+			});
 			$scope.loading = false;
 		});
 		

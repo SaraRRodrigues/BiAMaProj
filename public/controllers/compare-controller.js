@@ -81,32 +81,31 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 						source: availableTags
 					});
 				});
-			});
-
-			$scope.getAllUsers = UserCompareService.getUsers(function(users){});
-			$scope.getAllUsers.then(function(usersDB) {
-				$scope.users = usersDB.data.users;
-				for(var index=0; index<$scope.users.length; ++index){
-					
-					if($scope.users[index].id === $scope.idUserLoggerIn) {
-						$scope.userName = $scope.users[index].username;
-						$scope.userPassword = $scope.users[index].password;
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
+				$scope.getAllUsers = UserCompareService.getUsers(function(users){});
+				$scope.getAllUsers.then(function(usersDB) {
+					$scope.users = usersDB.data.users;
+					for(var index=0; index<$scope.users.length; ++index){
 						
-						$scope.userImage = $scope.users[index].image;
-						$scope.userEmail = $scope.users[index].email;
-						$scope.nameUser=$scope.users[index].name;
-						$scope.userBirthdate = $scope.users[index].birthdate;
+						if($scope.users[index].id === $scope.idUserLoggerIn) {
+							$scope.userName = $scope.users[index].username;
+							$scope.userPassword = $scope.users[index].password;
+							$scope.userLoggedIn=$scope.users[index].username;
+							$scope.idUserLoggerIn=$scope.users[index].id;
+							$scope.confirmSession = true;
+							
+							$scope.userImage = $scope.users[index].image;
+							$scope.userEmail = $scope.users[index].email;
+							$scope.nameUser=$scope.users[index].name;
+							$scope.userBirthdate = $scope.users[index].birthdate;
 
-						var splitDateBirth = $scope.userBirthdate.split('/');
-						$scope.dayBirth = splitDateBirth[0];
-						$scope.monthBirth = splitDateBirth[1];
-						$scope.yearBirth = splitDateBirth[2];
-						break;
+							var splitDateBirth = $scope.userBirthdate.split('/');
+							$scope.dayBirth = splitDateBirth[0];
+							$scope.monthBirth = splitDateBirth[1];
+							$scope.yearBirth = splitDateBirth[2];
+							break;
+						}
 					}
-				}
+				});
 			});
 		});
 	}

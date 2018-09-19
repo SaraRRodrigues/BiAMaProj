@@ -68,7 +68,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         $scope.getAllUsers = UserPerfilService.getUsers(function(users){});
         $scope.getAllUsers.then(function(usersDB) {
             $scope.loading=true;
-            debugger
+    
             $scope.users = usersDB.data.users;
             for(var index=0; index<$scope.users.length; ++index){
                
@@ -87,22 +87,22 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     break;
                 }
             }
-
             var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
             getMaterials.then(function(result) {
                 $scope.loading = false;
                 var data=result.data.comparationDetails;
                 $scope.materialsToSearch = data;
-            });
 
-            var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
-                getNotifications.then(function(result) {
-                $scope.loading = false;
-                var data=result.data.notificationDetails;
-                $scope.notifications=data;
-                $scope.numberOfNotifications=$scope.notifications.length;
-                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+                var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
+                    getNotifications.then(function(result) {
+                    $scope.loading = false;
+                    var data=result.data.notificationDetails;
+                    $scope.notifications=data;
+                    $scope.numberOfNotifications=$scope.notifications.length;
+                    $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+                });
             });
+           
             $scope.loading=false;
         });
     }

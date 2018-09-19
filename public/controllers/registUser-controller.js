@@ -82,13 +82,13 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 						break;
 					}
 				}
-			});
-			
-			$scope.getLibraryUser = UserRegistService.getLibraryUserDetails(function(infoMyBiama){});
-			$scope.getLibraryUser.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.userLibrary;
-				$scope.userLibrary=data;
+
+				$scope.getLibraryUser = UserRegistService.getLibraryUserDetails(function(infoMyBiama){});
+				$scope.getLibraryUser.then(function(result) {
+					$scope.loading = false;
+					var data=result.data.userLibrary;
+					$scope.userLibrary=data;
+				});
 			});
         });
 	}

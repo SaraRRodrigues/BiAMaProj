@@ -142,7 +142,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
           $scope.materialsToSearch = data;
           $scope.loading = false;
       
-
             /*  */
             var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
             getUserQuestionInfo.then(function(result) {
@@ -150,22 +149,18 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 var data=result.data.questionDetails;
                 $scope.questions=data;
                 $scope.loading = false;
-            });
 
-            /*  */
-            var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
-            getAnswerQuestionInfo.then(function(result) {
-                $scope.loading = true;
-                var data=result.data.questionDetails;
-                $scope.details=data;
-                $scope.calculateAnswerId($scope.details);
-                $scope.loading = false;
+                /*  */
+                var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
+                getAnswerQuestionInfo.then(function(result) {
+                    $scope.loading = true;
+                    var data=result.data.questionDetails;
+                    $scope.details=data;
+                    $scope.calculateAnswerId($scope.details);
+                    $scope.loading = false;
+                });
             });
         });
-
-        
-
-        
     }
 
     /* calculate answer id */
