@@ -179,7 +179,13 @@ a {
 }
 
 .minTitleBiAMa {
-  color: #5F9EA0;font-size:20px
+  color: #5F9EA0;
+  font-size:20px
+}
+
+.minTitleBiAMaMobile {
+  color: #5F9EA0;
+  font-size:40px;
 }
 
 .subTitleBiAMa {
@@ -223,6 +229,10 @@ a {
 }
 .sizeMinSearch {
   font-size: 20px;
+}
+
+.sizeInputDetails {
+  font-size: 30px;
 }
 
 .inputMinSearch{

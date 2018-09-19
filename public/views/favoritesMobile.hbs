@@ -81,7 +81,7 @@
             </div>
         </div>
 		<!-- go to login --> 
-        <div class="alignCenter" ng-if="doLogin">
+        <div class="titlesOnCenter colorOfErrorMessages" ng-if="doLogin">
             <h1>Efetue Login por favor e volte a entrar nos seus favoritos.</h1>
         </div>
 		<!-- loading spinner -->
@@ -182,8 +182,8 @@
 			<div class="margin-top-1x" ng-if="showMaterials" ng-repeat="fav in favorites">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="30%" height="20%" alt="foto"/>
 			</div>
-			<h1 ng-if="favorites.length===0 && !loading && detailsFavMaterial">Não tem materiais favoritos.</h1>
-			<h1 ng-if="favoriteQuestions.length===0 && !loading && detailsFavQuestion">Não tem perguntas favoritas.</h1>
+			<h1 class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !loading && detailsFavMaterial">Não tem materiais favoritos.</h1>
+			<h1 class="titlesOnCenter colorOfErrorMessages" ng-if="favoriteQuestions.length===0 && !loading && detailsFavQuestion">Não tem perguntas favoritas.</h1>
 			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
                 <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestions"></div>

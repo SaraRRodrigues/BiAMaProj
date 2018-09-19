@@ -163,7 +163,7 @@
                 <a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestionsMobile"></div>
             </div>
-			<div class="titlesOnCenter" ng-if="myQuestionDetails.length==0">Não tem perguntas associadas.</div>
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="myQuestionDetails.length==0">Não tem perguntas associadas.</div>
 			<!-- if click on question, show details of question -->
             <div ng-if="showMyQuestions">
                 <div class="titlesOnCenter"> 

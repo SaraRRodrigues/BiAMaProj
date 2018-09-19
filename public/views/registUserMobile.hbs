@@ -80,24 +80,24 @@
 		  <!-- section of regist user -->
         <div ng-if="registUser && !loading">
             <!-- user photo -->
-            <div ng-if="!openImageUploadLabel" class="perfilDetails center-block alignCenter">
+            <div ng-if="!openImageUploadLabel" class="perfilDetailsMobile center-block alignCenter">
                 <div class="form-group">
                     <img src="../images/userDetails.PNG" class="w3-circle imagePerfil cursorPointer" ng-click="openImageUpload()">
-                    <input class="minTitleBiAMa inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
+                    <input class="minTitleBiAMaMobile inputsCenter inputDetails" ng-model="name" type="text" placeholder="Nome de Utilizador"/>
                 </div>
                 
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <input class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
+                <input class="inputsCenter inputDetails sizeInputDetails" ng-model="username" type="text" placeholder="Username"/>
                 <br>
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <input class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
+                <input class="inputsCenter inputDetails sizeInputDetails" ng-model="email" type="email" placeholder="E-mail"/>
                 <br>
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                 <!-- edit mode -->
-                <input class="inputsCenter inputDetails" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
+                <input class="inputsCenter inputDetails sizeInputDetails margin-left-4x" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
 
                 <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                <input class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
+                <input class="inputsCenter inputDetails sizeInputDetails" ng-model="password" type="password" placeholder="Password"/>
                 <br>
                 <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
             </div>
