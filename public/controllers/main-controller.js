@@ -528,8 +528,10 @@ app.constant('jQuery', window.jQuery)
 
 	/* action of click button "Ok" present on small search line */
 	$scope.initMiniSearch = function() {
-		$scope.search = false;
-		$scope.showMaterials = false;
+		if(!$scope.isMobileView) {
+			$scope.search = false;
+			$scope.showMaterials = false;
+		}
 		$scope.resultSearch=[];
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
