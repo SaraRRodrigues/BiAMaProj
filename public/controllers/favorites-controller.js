@@ -40,6 +40,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.miniSearchResults=false;
 
         $scope.selectFav=true;
+        $scope.initFavSuccess = true;
        
     }
 
@@ -87,49 +88,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
              
             });
                 
-            /* get information of material and of library - when i do get library */
-            var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-            getMaterialInfo.then(function(result) {
-                $scope.loading = true;
-
-                var data=result.data.materialsCategories;
-                $scope.materialsCategories=data;
-                for(var index=0; index<$scope.materialsCategories.length; ++index){
-                    if(index<$scope.MINIMUM_CATEGORIES){
-                        $scope.categories.push($scope.materialsCategories[index])
-                    } else {
-                        break;
-                    }
-                }
-                
-               
-            });
-
-            $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
-            $scope.getAllUsers.then(function(usersDB) {
-                $scope.users = usersDB.data.users;
-                for(var index=0; index<$scope.users.length; ++index){
-                    
-                    if($scope.users[index].id === $scope.idUserLoggerIn) {
-                        $scope.userName = $scope.users[index].username;
-                        $scope.userPassword = $scope.users[index].password;
-                        $scope.userLoggedIn=$scope.users[index].username;
-                        $scope.idUserLoggerIn=$scope.users[index].id;
-                        $scope.confirmSession = true;
-                        
-                        $scope.userImage = $scope.users[index].image;
-                        $scope.userEmail = $scope.users[index].email;
-                        $scope.nameUser=$scope.users[index].name;
-                        $scope.userBirthdate = $scope.users[index].birthdate;
-
-                        var splitDateBirth = $scope.userBirthdate.split('/');
-                        $scope.dayBirth = splitDateBirth[0];
-                        $scope.monthBirth = splitDateBirth[1];
-                        $scope.yearBirth = splitDateBirth[2];
-                        break;
-                    }
-                }
-            });
             $scope.loading = false;
         }
     }
@@ -217,25 +175,43 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* open favorites button */
     $scope.openFavoritesButton = function(){
-        /* get favorites in materials */
-        
-        if($scope.materialsCategories && $scope.favorites.length == 0) {
-            for(var index=0; index<$scope.materialsCategories.length; ++index){
-                for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
-                    if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
-                        var infoFav = {
-                            "materialId": $scope.materialsCategories[index].material_id,
-                            "description": $scope.materialsCategories[index].description,
-                            "category": $scope.materialsCategories[index].category,
-                            "image": $scope.materialsCategories[index].name,
-                            "isFavorite": true
+           /* get information of material and of library - when i do get library */
+           var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+           getMaterialInfo.then(function(result) {
+               $scope.loading = true;
+
+               var data=result.data.materialsCategories;
+               $scope.materialsCategories=data;
+               for(var index=0; index<$scope.materialsCategories.length; ++index){
+                   if(index<$scope.MINIMUM_CATEGORIES){
+                       $scope.categories.push($scope.materialsCategories[index])
+                   } else {
+                       break;
+                   }
+               }
+
+                if($scope.materialsCategories && $scope.favorites.length == 0) {
+                    for(var index=0; index<$scope.materialsCategories.length; ++index){
+                        for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
+                            if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
+                                var infoFav = {
+                                    "materialId": $scope.materialsCategories[index].material_id,
+                                    "description": $scope.materialsCategories[index].description,
+                                    "category": $scope.materialsCategories[index].category,
+                                    "image": $scope.materialsCategories[index].name,
+                                    "isFavorite": true
+                                }
+                                $scope.favorites.push(infoFav)
+                            }
                         }
-                        $scope.favorites.push(infoFav)
                     }
                 }
-            }
-        }
-        
+                
+            $scope.loading = false;
+            $scope.initFavSuccess=false;
+        });
+
+        /* get favorites in materials */
         $scope.detailsFavMaterial = false;
         $scope.detailsFavQuestion = false;
         if($scope.showFavoritesButton){
@@ -926,9 +902,9 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           $timeout(function() {
+         //  $timeout(function() {
                 deferred.resolve(response);
-           }, 2000); 
+          // }, 2000); 
        }
        function errorCallback(error){
            //error code

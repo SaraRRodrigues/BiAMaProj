@@ -189,7 +189,7 @@
 				<div class="titlesOnCenter alignUserAndSearchIcons" ng-if="showMaterials" ng-repeat="fav in favorites">
 					<img class="margin-bottom-2x cursorPointer borderOfImages" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="150px" alt="foto"/>
 				</div>
-				<div class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !doLogin">
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !initFavSuccess">
 					<h4>Não tem materiais associados</h4>
 				</div>
 				<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
