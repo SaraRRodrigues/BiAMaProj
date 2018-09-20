@@ -173,7 +173,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             $window.location.href = '/BiAMa/forumPage?userName=anonymous' + '&redirect';
           }
         } else {
-          $window.location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+          $window.location.href = '?username=' + 'anonymous';
         }
       }
     }

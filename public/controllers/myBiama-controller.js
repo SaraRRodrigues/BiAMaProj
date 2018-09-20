@@ -190,9 +190,9 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+			location.href = '?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			location.href = '?username=' + 'anonymous';
 		}
 	}
 
@@ -356,7 +356,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 				'id_user': $scope.idUserLoggerIn
 			}
 			$http.post('/insertNotifications', data);
-			window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+			window.setTimeout("location.href = ''")
 		}
 
 		$scope.showBiamaInitPage = false;
@@ -475,7 +475,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 		$http.post('/insertLibraryMaterial', dataLibraryMaterial);
 
-		window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+		window.setTimeout("location.href = ''")
 	}
 
 	/* insert image on new biama form */

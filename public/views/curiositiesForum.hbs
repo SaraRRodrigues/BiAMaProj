@@ -165,7 +165,7 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show curiosity -->
-			<div ng-if="!loading && showCuriosity && !miniSearchResults && !showDetailsOfMaterial" class="sectionDetailsCuriosities sectionScroll" style="margin-bottom: -198px;">
+			<div ng-if="!loading && showCuriosity && !miniSearchResults && !showDetailsOfMaterial" class="sectionDetailsCuriosities sectionScroll">
 				<div ng-repeat="curiosity in descriptionCuriosity">
 					<img class="cursorPointer borderOfImageCuriosity" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="29%" height="30%" />
 					<h4 class="textBold">[{curiosity.title}]</h4>

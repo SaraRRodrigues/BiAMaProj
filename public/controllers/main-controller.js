@@ -205,9 +205,9 @@ app.constant('jQuery', window.jQuery)
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+			location.href = '?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			location.href = '?username=' + 'anonymous';
 		}
 	}
 
@@ -272,14 +272,14 @@ app.constant('jQuery', window.jQuery)
 					$http.post('/insertUserDetails', data);
 				}
 		
-			//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+			//window.setTimeout("location.href = ''")
 		})
 		.catch(console.log)
     	/*firebase.onuth().signInWithPopup(provider)
             .then(result => {
 
 				const user = result.user;
-				//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+				//window.setTimeout("location.href = ''")
             })
 			.catch(console.log)
 		*/
@@ -327,7 +327,7 @@ app.constant('jQuery', window.jQuery)
 					
 					$http.post('/insertUserDetails', data);
 				}
-				//window.setTimeout("location.href = 'https://biamaweb.herokuapp.com'")
+				//window.setTimeout("location.href = ''")
             })
 			.catch(console.log)
 	}

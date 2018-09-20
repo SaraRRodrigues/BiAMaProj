@@ -103,9 +103,9 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
     if($scope.idUserLoggerIn !== undefined) {
       if($scope.showCuriosityDetails || $scope.showBigImage) {
         if(!$scope.isMobileView) {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/curiositiesForum?userName=' + $scope.idUserLoggerIn + '&redirect';
         } else {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForumMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/curiositiesForumMobile?userName=' + $scope.idUserLoggerIn;
         }
       } else {
         if(!$scope.isMobileView) {
@@ -120,7 +120,7 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
       if($scope.showCuriosityDetails || $scope.showBigImage) {
 				$window.location.href = '/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
       } else {
-        location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+        location.href = '?username=' + 'anonymous';
       }
 		}
   }

@@ -89,9 +89,9 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
 		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous') {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+			location.href = '?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			location.href = '?username=' + 'anonymous';
 		}
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */

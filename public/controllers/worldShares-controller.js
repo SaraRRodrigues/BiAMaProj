@@ -163,9 +163,9 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+			location.href = '?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			location.href = '?username=' + 'anonymous';
 		}
     }
 
@@ -239,7 +239,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
             $scope.errorInsertWorldShare=false;
             $scope.clickInitSession=false;
 
-            $window.location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+            $window.location.href = '?userName=' + $scope.idUserLoggerIn;
             
         } else {
             $scope.errorInsertWorldShare=true;

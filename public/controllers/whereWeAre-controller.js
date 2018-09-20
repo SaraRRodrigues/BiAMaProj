@@ -107,9 +107,9 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	/* redirect to homepage with arrow */
 	$scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			location.href = 'https://biamaweb.herokuapp.com?userName=' + $scope.idUserLoggerIn;
+			location.href = '?userName=' + $scope.idUserLoggerIn;
 		} else {
-			location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
+			location.href = '?username=' + 'anonymous';
 		}
 	}
 
