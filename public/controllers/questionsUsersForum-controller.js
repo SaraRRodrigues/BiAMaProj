@@ -779,7 +779,7 @@ app.factory("UserForumQuestionService", function($q, $http, $timeout){
 
     $timeout(function() {
       deferred.resolve($http.get('/userQuestions'));
-    }, 2000);
+    }, 30000);
 
     return deferred.promise;
   };
@@ -788,7 +788,7 @@ app.factory("UserForumQuestionService", function($q, $http, $timeout){
 
     $timeout(function() {
       deferred.resolve($http.get('/userAnswerAndQuestion'));
-    }, 2000);
+    }, 30000);
 
     return deferred.promise;
   };
@@ -810,7 +810,7 @@ app.factory("LikeQuestionService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -835,7 +835,7 @@ app.factory("LikeAnswerService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -860,7 +860,7 @@ app.factory("QuestionsForumMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -886,7 +886,7 @@ app.factory("QuestionsForumBiamaService", function($q, $http, $timeout){
         //success code
         $timeout(function() {
           deferred.resolve(response);
-        }, 2000);
+        }, 30000);
     }
     function errorCallback(error){
         //error code
@@ -912,7 +912,7 @@ app.factory("FavoritesQuestionForumService", function($q, $http, $timeout){
         //success code
         $timeout(function() {
           deferred.resolve(response);
-        }, 2000);
+        }, 30000);
     }
     function errorCallback(error){
         //error code
@@ -936,7 +936,7 @@ app.factory("NotificationQuestionForumService", function($q, $http, $timeout){
            //success code
           $timeout(function() {
             deferred.resolve(response);
-          }, 2000);
+          }, 30000);
        }
        function errorCallback(error){
            //error code

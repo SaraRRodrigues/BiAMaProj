@@ -749,7 +749,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
            //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 3000); 
+            }, 30000); 
 
        }
        function errorCallback(error){
@@ -770,7 +770,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 30000); 
         }
         function errorCallback(error){
             //error code
@@ -797,7 +797,7 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 30000); 
 
         }
         function errorCallback(error){
@@ -824,7 +824,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 30000); 
 
         }
         function errorCallback(error){
@@ -868,7 +868,7 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 30000); 
 
         }
         function errorCallback(error){
@@ -895,7 +895,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 30000); 
 
         }
         function errorCallback(error){
@@ -922,7 +922,7 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
            //success code
            $timeout(function() {
                 deferred.resolve(response);
-           }, 2000); 
+           }, 30000); 
        }
        function errorCallback(error){
            //error code

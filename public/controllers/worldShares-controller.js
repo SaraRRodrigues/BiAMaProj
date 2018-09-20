@@ -96,7 +96,6 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* get information of my world shares on forum to display */
     $scope.getAllRequests = function() {
 
-        
         var getMyWorldShares = WorldSharesService.getAllMyWorldShares( $scope.idUserLoggerIn, function(infoMyWorldShares){});
         getMyWorldShares.then(function(result) {
             $scope.loading = false;
@@ -124,9 +123,8 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
       
-
             var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
-                getNotifications.then(function(result) {
+            getNotifications.then(function(result) {
                 $scope.loading = false;
                 var data=result.data.notificationDetails;
                 $scope.notifications=data;
@@ -540,7 +538,7 @@ app.factory("WorldSharesService", function($q, $http, $timeout){
             {params: {
                 'data': data
             }}));
-        }, 2000);
+        }, 30000);
         
         return deferred.promise;
       };
@@ -555,14 +553,14 @@ app.factory("ForumService", function($q, $http, $timeout){
     var getForum = function() {
         var deferred = $q.defer();
     
-
         $http.get('/forum').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
             $timeout(function() {
+
                 deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -588,7 +586,7 @@ app.factory("UserWorldShareService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -613,7 +611,7 @@ app.factory("WorldShareMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000);
+            }, 30000);
         }
         function errorCallback(error){
             //error code
@@ -637,7 +635,7 @@ app.factory("NotificationWorldShareService", function($q, $http, $timeout){
            //success code
            $timeout(function() {
 			deferred.resolve(response);
-	   	   }, 3000);
+	   	   }, 30000);
        }
        function errorCallback(error){
            //error code
