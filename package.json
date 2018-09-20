@@ -28,7 +28,8 @@
     "ngx-qrcode2": "0.0.9",
     "node-restful": "^0.2.6",
     "pg": "^6.4.2",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "sync-request": "^6.0.0"
   },
   "main": "app.js",
   "devDependencies": {},

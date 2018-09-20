@@ -273,7 +273,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
             var assetLocalPath=""+$scope.currentFile.name;
             var file = new File([""],assetLocalPath);
-            alert(file.name);
+            console.log(file.name);
         }
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
@@ -507,7 +507,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 		
 		}, function(error) {
 			// An error happened.
-			console.log(error);
+			console.log(error, '503 Service Unavailable');;
 
 		});*/
 	}

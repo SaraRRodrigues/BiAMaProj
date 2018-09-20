@@ -152,16 +152,17 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 $scope.questions=data;
                 $scope.loading = false;
 
-                /*  */
-                var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
-                getAnswerQuestionInfo.then(function(result) {
-                    $scope.loading = true;
-                    var data=result.data.questionDetails;
-                    $scope.details=data;
-                    $scope.calculateAnswerId($scope.details);
-                    $scope.loading = false;
-                });
+                
             });
+        });
+        /*  */
+        var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
+        getAnswerQuestionInfo.then(function(result) {
+            $scope.loading = true;
+            var data=result.data.questionDetails;
+            $scope.details=data;
+            $scope.calculateAnswerId($scope.details);
+            $scope.loading = false;
         });
     }
 
@@ -217,7 +218,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* open favorites button */
     $scope.openFavoritesButton = function(){
         /* get favorites in materials */
-        if($scope.favorites.length == 0) {
+        
+        if($scope.materialsCategories && $scope.favorites.length == 0) {
             for(var index=0; index<$scope.materialsCategories.length; ++index){
                 for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
                     if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
@@ -262,6 +264,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.showCategory = true;
 		$scope.favorite = favorite;
         
+        if(!$scope.materialsCategories) {
+            return;
+        }
+
         for(var index=0; index<$scope.materialsCategories.length; ++index) {
             if($scope.materialsCategories[index].material_id === favorite.materialId) {
                 $scope.detailsFavorite = {
@@ -743,11 +749,13 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	var getSchoolOfMaterial = function(data) {
         var deferred = $q.defer();
 
-        $http.get('/materialSchool', {params: {'data': data}}).then(successCallback, errorCallback, 30000);
+        $http.get('/materialSchool', {params: {'data': data}}).then(successCallback, errorCallback);
 
        function successCallback(response){
            //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
 
        }
        function errorCallback(error){
@@ -762,11 +770,13 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
     var getMaterial = function() {
         var deferred = $q.defer();
      
-        $http.get('/materialsCategories').then(successCallback, errorCallback, 30000);
+        $http.get('/materialsCategories').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
         }
         function errorCallback(error){
             //error code
@@ -787,11 +797,13 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
-        $http.get('/users').then(successCallback, errorCallback, 30000);
+        $http.get('/users').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
 
         }
         function errorCallback(error){
@@ -812,11 +824,13 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getUserQuestionInfo = function() {
       var deferred = $q.defer();
 
-      $http.get('/userQuestions').then(successCallback, errorCallback, 30000);
+      $http.get('/userQuestions').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
 
         }
         function errorCallback(error){
@@ -830,7 +844,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getQuestionAnswer = function() {
       var deferred = $q.defer();
   
-        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback, 30000);
+        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
@@ -854,12 +868,14 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
        var deferred = $q.defer();
 
-        $http.get('/compareMaterials').then(successCallback, errorCallback, 30000);
+       $http.get('/compareMaterials').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
-    
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -879,11 +895,14 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	var getMyFavorites = function(data) {
 		var deferred = $q.defer();
 
-        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback, 30000);
+        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
+
         }
         function errorCallback(error){
             //error code
@@ -903,12 +922,13 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback, 30000);
+       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
 
        function successCallback(response){
            //success code
-          
-            deferred.resolve(response);
+           $timeout(function() {
+                deferred.resolve(response);
+           }, 2000); 
        }
        function errorCallback(error){
            //error code
