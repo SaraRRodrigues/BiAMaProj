@@ -1,3 +1,4 @@
+
 var connectDB = "postgres://BiAMa:1234@localhost/BiAMaDB";
 var pg = require('pg');
 
@@ -22,16 +23,23 @@ function getMyFavorites(data, cb){
 	});
 }
 function getAllFavorites(cb) {
+	var d = Date.now();
+	console.log(d);
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		if(err) {
 			return console.error('error fetching client from pool', err);
 		}
+		
 		client.query('SELECT * FROM "Favorite" ORDER BY "Favorite".id_favorite', function(err, result) {
 			done();
 			if(err) {
 				return console.error('error running query', err);
 			}
+			var d1 = Date.now();
+			console.log(d1 - d);
 			cb(null, result.rows)
 		});
+	
 	});
+
 }
