@@ -187,14 +187,14 @@
 			<!-- show favorites questions -->
 			<div ng-if="!loading && showFavorites">
 				<div class="titlesOnCenter alignUserAndSearchIcons" ng-if="showMaterials" ng-repeat="fav in favorites">
-					<img class="margin-bottom-2x cursorPointer borderOfImages" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="25%" height="150px" alt="foto"/>
+					<img class="margin-bottom-2x cursorPointer borderOfImages" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="150px" alt="foto"/>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !doLogin">
 					<h4>Não tem materiais associados</h4>
 				</div>
 				<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
 					<a class="questionX" ng-click="getQuestion((question.question_id), $index)">Pergunta [{$index+1}]</a><br>
-					<div class="separateQuestions"></div>
+					<div class="center-block separateQuestions"></div>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="showMyQuestions && favoriteQuestions.length===0 && !doLogin">
 					<h4>Não tem perguntas associadas</h4>

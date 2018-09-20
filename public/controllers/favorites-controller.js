@@ -84,51 +84,53 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                     }
                 }
 
-                 
-                /* get information of material and of library - when i do get library */
-                var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-                getMaterialInfo.then(function(result) {
-                    $scope.loading = true;
-
-                    var data=result.data.materialsCategories;
-                    $scope.materialsCategories=data;
-                    for(var index=0; index<$scope.materialsCategories.length; ++index){
-                        if(index<$scope.MINIMUM_CATEGORIES){
-                            $scope.categories.push($scope.materialsCategories[index])
-                        } else {
-                            break;
-                        }
-                    }
-                    
-                    $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
-                    $scope.getAllUsers.then(function(usersDB) {
-                        $scope.users = usersDB.data.users;
-                        for(var index=0; index<$scope.users.length; ++index){
-                            
-                            if($scope.users[index].id === $scope.idUserLoggerIn) {
-                                $scope.userName = $scope.users[index].username;
-                                $scope.userPassword = $scope.users[index].password;
-                                $scope.userLoggedIn=$scope.users[index].username;
-                                $scope.idUserLoggerIn=$scope.users[index].id;
-                                $scope.confirmSession = true;
-                                
-                                $scope.userImage = $scope.users[index].image;
-                                $scope.userEmail = $scope.users[index].email;
-                                $scope.nameUser=$scope.users[index].name;
-                                $scope.userBirthdate = $scope.users[index].birthdate;
-
-                                var splitDateBirth = $scope.userBirthdate.split('/');
-                                $scope.dayBirth = splitDateBirth[0];
-                                $scope.monthBirth = splitDateBirth[1];
-                                $scope.yearBirth = splitDateBirth[2];
-                                break;
-                            }
-                        }
-                    });
-                });
-                $scope.loading = false;
+             
             });
-           
+                
+            /* get information of material and of library - when i do get library */
+            var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+            getMaterialInfo.then(function(result) {
+                $scope.loading = true;
+
+                var data=result.data.materialsCategories;
+                $scope.materialsCategories=data;
+                for(var index=0; index<$scope.materialsCategories.length; ++index){
+                    if(index<$scope.MINIMUM_CATEGORIES){
+                        $scope.categories.push($scope.materialsCategories[index])
+                    } else {
+                        break;
+                    }
+                }
+                
+               
+            });
+
+            $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
+            $scope.getAllUsers.then(function(usersDB) {
+                $scope.users = usersDB.data.users;
+                for(var index=0; index<$scope.users.length; ++index){
+                    
+                    if($scope.users[index].id === $scope.idUserLoggerIn) {
+                        $scope.userName = $scope.users[index].username;
+                        $scope.userPassword = $scope.users[index].password;
+                        $scope.userLoggedIn=$scope.users[index].username;
+                        $scope.idUserLoggerIn=$scope.users[index].id;
+                        $scope.confirmSession = true;
+                        
+                        $scope.userImage = $scope.users[index].image;
+                        $scope.userEmail = $scope.users[index].email;
+                        $scope.nameUser=$scope.users[index].name;
+                        $scope.userBirthdate = $scope.users[index].birthdate;
+
+                        var splitDateBirth = $scope.userBirthdate.split('/');
+                        $scope.dayBirth = splitDateBirth[0];
+                        $scope.monthBirth = splitDateBirth[1];
+                        $scope.yearBirth = splitDateBirth[2];
+                        break;
+                    }
+                }
+            });
+            $scope.loading = false;
         }
     }
     
@@ -137,7 +139,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.getAllRequests = function() {
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
-            debugger
           $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;

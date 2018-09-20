@@ -573,6 +573,15 @@ a {
   padding: 5px;
 }
 
+.saveButtonDesktop {
+  background-color:#e68a009c;
+  color:white;
+  width: 76px;
+  font-size: 15px;
+  border-radius: 14px;
+  padding: 1px;
+}
+
 .confirmButton {
   background-color: lightslategrey;
   font-size: 13px;
@@ -1153,7 +1162,7 @@ scrollListMaterial {
 
 .sectionScrollCompare{
   padding:15px;
-  height:250px;
+  height:362px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -1210,6 +1219,10 @@ scrollListMaterial {
 }
 
 .detailsMaterialSearch {
+  text-align: justify;
+}
+
+.justifyText {
   text-align: justify;
 }
 
@@ -1398,7 +1411,7 @@ backgroundColorDesktop {
 }
 
 .favoritesAlignQuestions {
-  margin-left: 274px;
+  margin-left: 222px;
   margin-bottom: 45px;
 }
 
@@ -1492,7 +1505,7 @@ backgroundColorDesktop {
 }
 
 .alignQuestionsForum {
-  margin-left: 274px;
+  margin-left: 216px;
   margin-bottom: 45px;
 }
 
@@ -1892,4 +1905,8 @@ aDisabled{
 
 .textBold {
   font-weight: bold;
+}
+
+.searchLocalMobile {
+  font-size: 29px;
 }

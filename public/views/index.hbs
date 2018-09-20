@@ -440,13 +440,13 @@
 							<div class="padding sectionScrollSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
 									<div class="thumbnail" ng-if="!showCategoryMaterial && !showProjectMaterial">
-										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
+										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
 									</div>
 									<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
 									</div>
 									<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-										<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
+										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
 									</div>
 								</div>
 							</div>
@@ -465,11 +465,11 @@
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
 								</div>
 								<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
-									<h4 class="margin-right-5x margin-top-5x">Category</h4>
-									<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.category}]</h5>
-									<h4 class="margin-right-5x">Code</h4>
-									<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.code}]</h5>
-									<h4 class="margin-right-5x">Description</h4>
+									<h4 class="margin-right-5x margin-top-5x textBold">Category</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
+									<h4 class="margin-right-5x textBold">Code</h4>
+									<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
+									<h4 class="margin-right-5x textBold">Description</h4>
 									<h5 class="margin-right-5x descMaterialDetailsWidth sectionScrollDescMaterial">[{openedMaterial.description}]</h5>
 								</div>
 							</div>

@@ -77,7 +77,7 @@
 		</div>
 		<!-- section of user details -->
 		<div class="row">
-			<nav class="padding-left-3x">
+			<nav class="padding-left-3x divUserDetailsMobile">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
 					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
@@ -160,11 +160,11 @@
         <!-- show location of material -->
 		<div ng-if="showLocation">
 			<div ng-if="!loading" class="titlesOnCenter">
-				<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
-				<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="90%" width="100%" frameborder="0" allowfullscreen></iframe>
+				<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]" height="75%" width="100%" frameborder="0" allowfullscreen></iframe>
+				<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]" height="75%" width="100%" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<div class="dropup">
-				<button class="sizeTextOfDetails btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
+				<button class="center-block searchLocalMobile sizeTextOfDetails btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click="getSchools()">Pesquise um local ou endereço
 				<span class="caret"></span></button>
 				<ul class="dropdown-menu">
 					<div ng-if="showSchools" ng-repeat="biama in schools">

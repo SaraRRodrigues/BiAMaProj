@@ -73,7 +73,7 @@
         </div>
 		<!-- section of user details -->
 		<div class="row">
-			<nav class="padding-left-3x">
+			<nav class="padding-left-3x divUserDetailsMobile">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
 					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
@@ -156,7 +156,7 @@
 		<!-- show curiosity -->
         <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile curiosityDetails">
             <div ng-repeat="curiosity in descriptionCuriosity">
-                <img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
+                <img class="cursorPointer borderOfImageCuriosity" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
                 <h2 class="textBold">[{curiosity.title}]</h2>
                 <h3>[{curiosity.descriptionCuriosity}]</h3>
             </div>
@@ -165,12 +165,12 @@
         <div ng-if="showCuriosityDetails" class="sectionDetails">
             <h1 class="subtitles titlesOnCenter">Partilha [{curiosityInfo.curiosity}]</h1>
             <p class="descriptionOfMaterialMobile">[{curiosityInfo.description}]</p>
-            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
+            <img class="borderOfImageCuriosity center-block margin-bottom-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto" width="60%" height="25%"/><br>
         </div>
 		<!-- if click on image get the big image -->
         <div ng-if="showBigImage">
 			<i ng-click="closeCuriosityImage()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-            <img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile showBigImage" ng-src="../images/curiosities/[{bigImage}]" alt="foto" width="75%" height="60%"/><br>
+            <img class="borderOfImageCuriosity margin-bottom-2x center-block borderZoomMaterial imageOnCenterCuriosityMobile showBigImage" ng-src="../images/curiosities/[{bigImage}]" alt="foto" width="75%" height="50%"/><br>
         </div>
 		<!-- small search results -->
         <i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>

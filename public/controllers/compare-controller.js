@@ -132,7 +132,8 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
         for(var index=0; index<$scope.materialComparation.length; ++index) {
             if($scope.materialComparation[index].type === type && $scope.materialComparation[index].color === color) {
                 var result = {
-                    'image': $scope.materialComparation[index].name,
+					'image': $scope.materialComparation[index].name,
+					'code': $scope.materialComparation[index].code,
                     'category': $scope.materialComparation[index].category,
                     'text': $scope.materialComparation[index].description
                 }

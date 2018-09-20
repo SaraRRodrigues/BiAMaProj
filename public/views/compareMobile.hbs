@@ -77,7 +77,7 @@
         </div>
 		<!-- section of user details -->
         <div class="row">
-			<nav class="padding-left-3x">
+			<nav class="padding-left-3x divUserDetailsMobile">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
 					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
@@ -163,7 +163,7 @@
                 <div ng-repeat="material in materialToCompare track by $index" class="margin-top-4x titlesOnCenter sectionScrollCompare">     
                     <figure>
                         <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="35%" height="150px" alt="foto"/>
-                        <figcaption class="sizeOfFigCaptionCompareMobile">[{material.text}]</figcaption>
+                        <figcaption class="justifyText sizeOfFigCaptionCompareMobile">[{material.text}]</figcaption>
                     </figure>
                 </div>
             </div>

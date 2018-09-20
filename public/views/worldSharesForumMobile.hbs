@@ -52,7 +52,7 @@
                 <div ng-if="!showSearch" class="col-sm-5 margin-top-3x">
                     <h2 class="subtitles">Partilhas do mundo<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow sizeOfArrowMobile marginOfArrow"   ng-click="goToHomePage()"></i></h2>
                 </div>
-                <div ng-if="!showSearch" class="margin-top-2x col-sm-1">
+                <div ng-if="!showSearch" class="margin-top-2x col-sm-2">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
                     <img class="float-right" ng-if="showSearch  && !userDetails" width="90px" ng-click="clickTopSearch()" src="../images/search.png">
                 </div>
@@ -73,7 +73,7 @@
 		</div>
 		<!-- section of user details -->
 		<div class="row">
-			<nav class="padding-left-3x">
+			<nav class="padding-left-3x divUserDetailsMobile">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
 					<!-- content if not init session -->
 					<div ng-if="!confirmSession">
@@ -155,20 +155,20 @@
 		</div>
 		<!-- show world shares -->
 		<div ng-if="showWorldShares" class="titlesOnCenter sectionScrollMobile margin-top-4x0">
-			<img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="47%" height="40%" alt="foto"/>
+			<img ng-repeat="image in worldShareItems track by $index" class="borderOfImageCuriosity margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="47%" height="40%" alt="foto"/>
 		</div>
 		<!-- if click on world share, is showed details of world share -->
 		<div ng-if="showWorldSharesDetails" class="sectionDetails">
 			<h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
 			<p class="descriptionOfMaterialMobile">[{worldSharesInfo.description}]</p>
-			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)" alt="foto" width="60%" height="25%"/><br>
+			<img class="borderOfImageCuriosity margin-bottom-2x center-block borderZoomMaterial imageOnCenter cursorPointer" ng-src="../images/worldSharesForum/[{worldSharesInfo.image}]"  ng-click="openBigImage(worldSharesInfo.image)" alt="foto" width="60%" height="25%"/><br>
 		</div>
 		<!-- if clicks on world share image, show big image -->
         <i ng-if="showBigImage" class="fas fa-times cursorPointer float-right iconMedium" ng-click="closeWorldShareImage()">
             
         </i>
 		<div ng-if="showBigImage">
-			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile imageOfZoomInMaterialMobile" ng-src="../images/worldSharesForum/[{bigImage}]"  width="75%" height="60%" alt="foto"/><br>
+			<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenterCuriosityMobile imageOfZoomInMaterialMobile" ng-src="../images/worldSharesForum/[{bigImage}]"  width="75%" height="45%" alt="foto"/><br>
 		</div>
 		<i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>
 		<div ng-if="miniSearchResults" class="margin-top-5x">

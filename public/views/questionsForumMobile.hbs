@@ -128,7 +128,7 @@
 				<div ng-if="!removedLikeAnswer && clickRemoveLikeAnswer" class="textToInitSession removeLikeAnswer alert-danger center-block sucessMessageLogin titlesOnCenter">
 					Erro a remover like na resposta.
 				</div>
-			<nav class="padding-left-3x">
+			<nav class="padding-left-3x divUserDetailsMobile">
 				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
 				
 					<!-- content if not init session -->
@@ -212,7 +212,7 @@
 		<!-- show number of questions -->
 		<div ng-if="!loading && !showQuestionDetails && showAllQuestions" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 			<a class="questionX questionLabel" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
-			<div class="separateQuestions"></div>
+			<div class="center-block separateQuestions"></div>
 		</div>
 		<!-- if click on question, show details of question -->
 		<div class="divQuestionDetails" ng-if="showQuestionDetails">
@@ -220,7 +220,7 @@
 				<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 			</div>
 			<div class="titlesOnCenter divAnswerQuestionMobile">
-				<div class="margin-left-3x" ng-if="!showDivAnswer">
+				<div class="center-block" ng-if="!showDivAnswer">
 					<!-- Question -->
 					<img class="imageButtonMobile imageQuestionForumMobile" src="../images/user.png">
 					

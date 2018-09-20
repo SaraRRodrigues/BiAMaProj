@@ -189,8 +189,13 @@
                 <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
                     <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare margin-top-2x">     
                         <figure>
-                            <img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="55%" height="150px" alt="foto"/>
-                            <figcaption class="descCompare">[{material.text}]</figcaption>
+                            <img class="borderOfImageCuriosity margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="55%" height="150px" alt="foto"/>
+                            <figcaption class="descCompare textBold">Category</figcaption>
+							<figcaption class="descCompare">[{material.category}]</figcaption>
+							<figcaption class="descCompare textBold"> Code</figcaption>
+							<figcaption class="descCompare"> [{material.code}]</figcaption>
+						
+							<figcaption class="descCompare">[{material.text}]</figcaption>
                         </figure>
                     </div>
                 </div>

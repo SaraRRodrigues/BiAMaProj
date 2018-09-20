@@ -221,7 +221,7 @@
 			<!-- show number of questions -->
 			<div ng-if="!loading && !showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 				<a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
-				<div class="lineSeparateQuestionMobile"></div>
+				<div class="center-block lineSeparateQuestionMobile"></div>
 			</div>
 			<div ng-if="questions.length==0">Não existem perguntas neste Fórum.</div>
 			<!-- if click on question, show details of question -->
