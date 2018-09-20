@@ -157,7 +157,7 @@
         <div ng-if="!loading && showCuriosity" class="sectionDetails sectionScrollMobile curiosityDetails">
             <div ng-repeat="curiosity in descriptionCuriosity">
                 <img class="cursorPointer" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="60%" height="40%" />
-                <h2>[{curiosity.title}]</h2>
+                <h2 class="textBold">[{curiosity.title}]</h2>
                 <h3>[{curiosity.descriptionCuriosity}]</h3>
             </div>
         </div>
