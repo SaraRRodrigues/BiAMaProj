@@ -183,10 +183,10 @@
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="myQuestionDetails.length==0">Não tem perguntas associadas.</div>
                 <!-- if click on question, show details of question -->
                 <div ng-if="showMyQuestions">
-					<div ng-if="insertedAnswer && clickOnPutAnswer" class="myQuestion console.log-success center-block sucessMessageLogin titlesOnCenter">
+					<div ng-if="insertedAnswer && clickOnPutAnswer" class="myQuestion alert-success center-block sucessMessageLogin titlesOnCenter">
 						Resposta enviada com sucesso.
 					</div>
-					<div ng-if="!insertedAnswer && clickOnPutAnswer" class="myQuestion console.log-danger center-block sucessMessageLogin titlesOnCenter">
+					<div ng-if="!insertedAnswer && clickOnPutAnswer" class="myQuestion alert-danger center-block sucessMessageLogin titlesOnCenter">
 						Erro a enviar a resposta.
 					</div>
                     <div class="titlesOnCenter"> 
