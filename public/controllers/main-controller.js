@@ -655,7 +655,7 @@ app.constant('jQuery', window.jQuery)
 		if($scope.isMobileView) {
 
 			if(buttonClick === 'library') {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn;
+				$window.location.href = '/BiAMa/libraryMobile?userName=' + $scope.idUserLoggerIn;
 			}
 
 			if(buttonClick === 'biamaPage') {
