@@ -114,7 +114,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
           }
         } else {
           if(!$scope.isMobileView) {
-            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn;
+            location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
   
           } else {
             location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
