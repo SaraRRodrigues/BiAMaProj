@@ -233,27 +233,27 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 	$scope.getRequest = function(buttonClick) {
 
 		if(buttonClick === 'favorites') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'questions') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'world_share') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'notification') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'perfil') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
 		}
 
 		if(buttonClick == 'compare') {
-			$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 		
 		if(buttonClick === 'notification') {

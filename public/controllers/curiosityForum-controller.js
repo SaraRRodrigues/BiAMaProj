@@ -109,16 +109,16 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
         }
       } else {
         if(!$scope.isMobileView) {
-          location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+          location.href = '/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
 
         } else {
-          location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
+          location.href = '/BiAMa/forumPageMobile?userName=' + $scope.idUserLoggerIn;
 
         }
       }
 		} else {
       if($scope.showCuriosityDetails || $scope.showBigImage) {
-				$window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
+				$window.location.href = '/BiAMa/curiositiesForum?userName=anonymous' + '&redirect';
       } else {
         location.href = 'https://biamaweb.herokuapp.com?username=' + 'anonymous';
       }
@@ -302,76 +302,76 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
 
     if($scope.isMobileView) {
         if(buttonClick === 'favorites') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
         }
     
         if(buttonClick == 'questions') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/myQuestionsMobile?userName=' + $scope.idUserLoggerIn;
         }
     
         if(buttonClick == 'world_share') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/worldShareMobile?userName=' + $scope.idUserLoggerIn;
         }
     
         if(buttonClick == 'notification') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/notificationsMobile?userName=' + $scope.idUserLoggerIn;
         }
     
         if(buttonClick == 'perfil') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/perfilPageMobile?userId=' + $scope.idUserLoggerIn;
         }
     
         if(buttonClick == 'compare') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+          $window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
         }
         
       } else {
         if(buttonClick === 'biamaPage') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick === 'whereWeAre') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/whereWeAre?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
   
         if(buttonClick === 'library') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/library?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
   
         if(buttonClick === 'myBiama') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/myBiama?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
   
         if(buttonClick === 'forum') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/forumPage?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
   
         if(buttonClick === 'favorites') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick == 'questions') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick == 'world_share') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick == 'notification') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick == 'perfil') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/perfilPage?userId=' + $scope.idUserLoggerIn + '&redirect';
         }
     
         if(buttonClick == 'compare') {
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
         if(buttonClick == 'regist') {
           $scope.regist();
-          $window.location.href = 'https://biamaweb.herokuapp.com/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+          $window.location.href = '/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
       }
     
