@@ -898,7 +898,7 @@ app.factory("NotificationMyBiamaService", function($q, $http, $timeout){
         return deferred.promise;
     };
 	
-	var getAllNotifications = function() {
+	var getAllNotifications = function(data) {
 		var deferred = $q.defer();
 
 		$http.get('/allNotifications', {params: {'data': data}}).then(successCallback, errorCallback);

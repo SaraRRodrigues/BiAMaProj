@@ -354,8 +354,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 
 	/* close material that are opened */
 	$scope.closeMaterial = function(){
-		$scope.miniSearchResults=true;
+		$scope.miniSearchResults=false;
 		$scope.showDetailsOfMaterial=false;
+		$scope.zoomInMaterial=false;
 	}
 
 	/* open and close the small search icon */

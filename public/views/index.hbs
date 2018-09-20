@@ -91,7 +91,7 @@
 						<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 						<input id="miniSearch" class="inputMinSearch widthOfSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
 						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
-						<h5 ng-if="noResultsOnSearch">Não existem resultados.</h5>
+						<h5 ng-if="noResultsOnSearch titlesOnCenter colorOfErrorMessages">Não existem resultados.</h5>
 					</div>
 				</div>
 			</div> 
@@ -210,7 +210,7 @@
 										<!--<button class="registSession" type="button" ng-click="regist()">Registar</button>-->
 										<h2 ng-if="facebookInDeveloping">Login do Facebook em desenvolvimento.</h2>
 									</div>
-									<h3 ng-if="incorrectCredentials">Credenciais inválidas.</h3>												
+									<h3 ng-if="incorrectCredentials titlesOnCenter colorOfErrorMessages">Credenciais inválidas.</h3>												
 								</div>
 							</div>
 						</div>
@@ -289,7 +289,7 @@
 
 						<!--<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
 						<i class="float-left fa fa-chevron-right arrows margin-right-5x"></i>-->
-						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt" style="margin-right: 365px;"></input>
+						<input class="inputLink center-block" type="input" placeholder="https://www.biama.pt" style="margin-right: 365px;" disabled></input>
 					</div>
 				</nav>	
 			</header>
@@ -304,8 +304,8 @@
 							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
 							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
-							<h5 ng-if="noResultsOnSearch">Não existem resultados.</h5>
-						</div> 
+							<h5 class="colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
+						</div>
 
 						<!-- section of user details -->
 						<div ng-if="!isMobileView" id="userDetailsMain" class="row">
