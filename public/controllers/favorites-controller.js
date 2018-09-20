@@ -567,7 +567,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     $scope.confirmSessionAction = function (username, password) {
 
         $scope.users = 'loadUser';
-        
+
+        $scope.getAllUsers = UserFavoriteService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){

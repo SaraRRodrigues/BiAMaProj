@@ -81,31 +81,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 						source: availableTags
 					});
 				});
-				$scope.getAllUsers = UserCompareService.getUsers(function(users){});
-				$scope.getAllUsers.then(function(usersDB) {
-					$scope.users = usersDB.data.users;
-					for(var index=0; index<$scope.users.length; ++index){
-						
-						if($scope.users[index].id === $scope.idUserLoggerIn) {
-							$scope.userName = $scope.users[index].username;
-							$scope.userPassword = $scope.users[index].password;
-							$scope.userLoggedIn=$scope.users[index].username;
-							$scope.idUserLoggerIn=$scope.users[index].id;
-							$scope.confirmSession = true;
-							
-							$scope.userImage = $scope.users[index].image;
-							$scope.userEmail = $scope.users[index].email;
-							$scope.nameUser=$scope.users[index].name;
-							$scope.userBirthdate = $scope.users[index].birthdate;
-
-							var splitDateBirth = $scope.userBirthdate.split('/');
-							$scope.dayBirth = splitDateBirth[0];
-							$scope.monthBirth = splitDateBirth[1];
-							$scope.yearBirth = splitDateBirth[2];
-							break;
-						}
-					}
-				});
+				
 			});
 		});
 	}
@@ -126,22 +102,24 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
         var valueSearchMaterial=jQuery( "#tags" ).val();
         var result=valueSearchMaterial.split('-');
 
-        var type=result[0];
-        var color=result[1];
-
-        for(var index=0; index<$scope.materialComparation.length; ++index) {
-            if($scope.materialComparation[index].type === type && $scope.materialComparation[index].color === color) {
-                var result = {
-					'image': $scope.materialComparation[index].name,
-					'code': $scope.materialComparation[index].code,
-                    'category': $scope.materialComparation[index].category,
-                    'text': $scope.materialComparation[index].description
-                }
-                $scope.materialToCompare.push(result);
-                break;
-            }
-        }
-        $scope.showMaterialsCompare=true;
+		if(result[0] !== '') {
+			var type=result[0];
+			var color=result[1];
+	
+			for(var index=0; index<$scope.materialComparation.length; ++index) {
+				if($scope.materialComparation[index].type === type && $scope.materialComparation[index].color === color) {
+					var result = {
+						'image': $scope.materialComparation[index].name,
+						'code': $scope.materialComparation[index].code,
+						'category': $scope.materialComparation[index].category,
+						'text': $scope.materialComparation[index].description
+					}
+					$scope.materialToCompare.push(result);
+					break;
+				}
+			}
+			$scope.showMaterialsCompare=true;
+		}
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
 	
@@ -251,6 +229,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 
 		$scope.users = 'loadUser';
 		
+		$scope.getAllUsers = UserCompareService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
 			for(var index=0; index<$scope.users.length; ++index){

@@ -102,33 +102,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
           
       });
 
-      $scope.getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
-      $scope.getAllUsers.then(function(usersDB) {
-        $scope.users = usersDB.data.users;
-        for(var index=0; index<$scope.users.length; ++index){
-                
-          if($scope.users[index].id === $scope.idUserLoggerIn) {
-              $scope.userName = $scope.users[index].username;
-              $scope.userPassword = $scope.users[index].password;
-              $scope.userLoggedIn=$scope.users[index].username;
-              $scope.idUserLoggerIn=$scope.users[index].id;
-              $scope.confirmSession = true;
-              
-              $scope.userImage = $scope.users[index].image;
-              $scope.userEmail = $scope.users[index].email;
-              $scope.nameUser=$scope.users[index].name;
-              $scope.userBirthdate = $scope.users[index].birthdate;
-
-              var splitDateBirth = $scope.userBirthdate.split('/');
-              $scope.dayBirth = splitDateBirth[0];
-              $scope.monthBirth = splitDateBirth[1];
-              $scope.yearBirth = splitDateBirth[2];
-              break;
-          }
-        }
-        
-      });
-      
       var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
         getNotifications.then(function(result) {
         $scope.loading = false;
@@ -623,29 +596,36 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
   
     /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
-  
-        for(var index=0; index<$scope.users.length; ++index){
-          $scope.userName = $scope.users[index].username;
-          $scope.userPassword = $scope.users[index].password;
-          $scope.userImage = $scope.users[index].image;
-          $scope.userEmail = $scope.users[index].email;
-          $scope.nameUser=$scope.users[index].name;
-          $scope.userBirthdate = $scope.users[index].birthdate;
-  
-          var splitDateBirth = $scope.userBirthdate.split('/');
-          $scope.dayBirth = splitDateBirth[0];
-          $scope.monthBirth = splitDateBirth[1];
-          $scope.yearBirth = splitDateBirth[2];
-  
-          if($scope.userName !== null && $scope.userName === username){
-            if($scope.userPassword !== null && $scope.userPassword === password){
-              $scope.userLoggedIn=$scope.users[index].username;
-              $scope.idUserLoggerIn=$scope.users[index].id;
-              $scope.confirmSession = true;
-              break;
+      $scope.getAllUsers = QuestionsForumBiamaService.getUsers(function(users){});
+      $scope.getAllUsers.then(function(usersDB) {
+        $scope.users = usersDB.data.users;
+        
+        
+          for(var index=0; index<$scope.users.length; ++index){
+            $scope.userName = $scope.users[index].username;
+            $scope.userPassword = $scope.users[index].password;
+            $scope.userImage = $scope.users[index].image;
+            $scope.userEmail = $scope.users[index].email;
+            $scope.nameUser=$scope.users[index].name;
+            $scope.userBirthdate = $scope.users[index].birthdate;
+    
+            var splitDateBirth = $scope.userBirthdate.split('/');
+            $scope.dayBirth = splitDateBirth[0];
+            $scope.monthBirth = splitDateBirth[1];
+            $scope.yearBirth = splitDateBirth[2];
+    
+            if($scope.userName !== null && $scope.userName === username){
+              if($scope.userPassword !== null && $scope.userPassword === password){
+                $scope.userLoggedIn=$scope.users[index].username;
+                $scope.idUserLoggerIn=$scope.users[index].id;
+                $scope.confirmSession = true;
+                break;
+              }
             }
           }
-        }
+        
+      });
+      
     }
      
     /* routes of click on links page */
@@ -779,7 +759,7 @@ app.factory("UserForumQuestionService", function($q, $http, $timeout){
 
     $timeout(function() {
       deferred.resolve($http.get('/userQuestions'));
-    }, 30000);
+    }, 2000);
 
     return deferred.promise;
   };
@@ -788,7 +768,7 @@ app.factory("UserForumQuestionService", function($q, $http, $timeout){
 
     $timeout(function() {
       deferred.resolve($http.get('/userAnswerAndQuestion'));
-    }, 30000);
+    }, 2000);
 
     return deferred.promise;
   };
@@ -810,7 +790,7 @@ app.factory("LikeQuestionService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -835,7 +815,7 @@ app.factory("LikeAnswerService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -860,7 +840,7 @@ app.factory("QuestionsForumMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -886,7 +866,7 @@ app.factory("QuestionsForumBiamaService", function($q, $http, $timeout){
         //success code
         $timeout(function() {
           deferred.resolve(response);
-        }, 30000);
+        }, 2000);
     }
     function errorCallback(error){
         //error code
@@ -912,7 +892,7 @@ app.factory("FavoritesQuestionForumService", function($q, $http, $timeout){
         //success code
         $timeout(function() {
           deferred.resolve(response);
-        }, 30000);
+        }, 2000);
     }
     function errorCallback(error){
         //error code
@@ -936,7 +916,7 @@ app.factory("NotificationQuestionForumService", function($q, $http, $timeout){
            //success code
           $timeout(function() {
             deferred.resolve(response);
-          }, 30000);
+          }, 2000);
        }
        function errorCallback(error){
            //error code
