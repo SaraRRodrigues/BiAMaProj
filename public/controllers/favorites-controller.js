@@ -743,13 +743,11 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
 	var getSchoolOfMaterial = function(data) {
         var deferred = $q.defer();
 
-        $http.get('/materialSchool', {params: {'data': data}}).then(successCallback, errorCallback);
+        $http.get('/materialSchool', {params: {'data': data}}).then(successCallback, errorCallback, 30000);
 
        function successCallback(response){
            //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
+            deferred.resolve(response);
 
        }
        function errorCallback(error){
@@ -764,13 +762,11 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
     var getMaterial = function() {
         var deferred = $q.defer();
      
-        $http.get('/materialsCategories').then(successCallback, errorCallback);
+        $http.get('/materialsCategories').then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
+            deferred.resolve(response);
         }
         function errorCallback(error){
             //error code
@@ -791,13 +787,11 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
-        $http.get('/users').then(successCallback, errorCallback);
+        $http.get('/users').then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
+            deferred.resolve(response);
 
         }
         function errorCallback(error){
@@ -818,13 +812,11 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getUserQuestionInfo = function() {
       var deferred = $q.defer();
 
-      $http.get('/userQuestions').then(successCallback, errorCallback);
+      $http.get('/userQuestions').then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
+            deferred.resolve(response);
 
         }
         function errorCallback(error){
@@ -838,7 +830,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getQuestionAnswer = function() {
       var deferred = $q.defer();
   
-        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback);
+        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
@@ -862,14 +854,12 @@ app.factory("FavoritesMaterialService", function($q, $http, $timeout){
     var getMaterialComparation = function() {
        var deferred = $q.defer();
 
-       $http.get('/compareMaterials').then(successCallback, errorCallback);
+        $http.get('/compareMaterials').then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
-
+            deferred.resolve(response);
+    
         }
         function errorCallback(error){
             //error code
@@ -889,14 +879,11 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	var getMyFavorites = function(data) {
 		var deferred = $q.defer();
 
-        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback);
+        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback, 30000);
 
         function successCallback(response){
             //success code
-            $timeout(function() {
-                deferred.resolve(response);
-            }, 30000); 
-
+            deferred.resolve(response);
         }
         function errorCallback(error){
             //error code
@@ -916,13 +903,12 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
+       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback, 30000);
 
        function successCallback(response){
            //success code
-           $timeout(function() {
-                deferred.resolve(response);
-           }, 30000); 
+          
+            deferred.resolve(response);
        }
        function errorCallback(error){
            //error code
