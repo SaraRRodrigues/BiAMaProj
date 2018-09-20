@@ -174,16 +174,16 @@
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">
 				<div class="row container marginBottomMaterialDetails">
 					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
-					<div class="col-md-5 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
+					<div class="col-md-3 order-md-1" ng-if="!showCategoryMaterial && !showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 					</div>
-					<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
+					<div class="col-md-3 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
 					</div>
-					<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
+					<div class="col-md-3 order-md-1" ng-if="showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
 					</div>
-					<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
+					<div class="col-md-5 order-md-1 mb-2 detailsMaterialSearch">
 						<h4 class="margin-right-5x margin-top-6x">Category</h4>
 						<h5 class="margin-right-5x detailsOfMaterial">[{openedMaterial.category}]</h5>
 						<h4 class="margin-right-5x">Code</h4>
