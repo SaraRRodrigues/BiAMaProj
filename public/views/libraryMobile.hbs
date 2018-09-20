@@ -162,13 +162,10 @@
         <div class="container">
             <div class="row" ng-if="!loading && !showCategory && !showMaterialDetails">
                 <div class="scrollMobile">
-                    <div class="col-md-4 thumbnail" ng-repeat="category in categories">
+                    <div class="col-md-4" ng-repeat="category in categories">
                         <div class="titlesOnCenter">
-                            <div>
-                                <h1>[{image.category}]</h1>
-                                <img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="75%" height="230px" alt="foto"/>
-                                <div class="top-bottom">[{category.category}]</div>
-                            </div>
+							<img class="thumbnail margin-bottom-2x cursorPointer borderOfImageCuriosity center-block" ng-src="../images/categories/library/[{category.name}]" ng-click="openCategory(category.category)" width="43%" height="230px" alt="foto"/>
+							<div class="top-bottom">[{category.category}]</div>
                         </div>
                     </div>
                 </div>
@@ -179,7 +176,7 @@
                         <div class="titlesOnCenter">
                             <div>
                                 <h1>[{image.category}]</h1>
-                                <img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{category}]/[{materialOfCategory[$index].name}]" ng-click="openDetailsMaterial(materialOfCategory[$index])" ng-click="openDetailsMaterial(materialOfCategory[$index])" width="75%" height="200px" alt="foto"/>
+                                <img class="margin-bottom-2x cursorPointer borderOfImageCuriosity" ng-src="../images/categories/[{category}]/[{materialOfCategory[$index].name}]" ng-click="openDetailsMaterial(materialOfCategory[$index])" ng-click="openDetailsMaterial(materialOfCategory[$index])" width="75%" height="200px" alt="foto"/>
                                 <div class="top-bottom-material">Material [{image.code}]</div>
                             </div>
                         </div>
@@ -190,7 +187,7 @@
         <!-- show material details -->
         <div ng-if="!loading" class="margin-left-2x col-sm-11">
 			<div ng-if="showMaterialDetails && !locationMaterial && !zoomInMaterial" class="titlesOnCenter sectionScroll">
-				<img class="margin-bottom-2x" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="25%" height="175px" alt="foto"/><br>
+				<img class="margin-bottom-2x borderOfImageCuriosity" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="25%" height="175px" alt="foto"/><br>
 				<div class="titlesOnCenter">
 					<!-- Favorite -->
 					<i ng-click="clickFavorite(materialInfo)" ng-if="materialInfo.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
@@ -214,7 +211,7 @@
         <div ng-if="zoomInMaterial">
 			<div>
 				<i ng-click="closeZoomInMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
-				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
+				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial borderOfImageCuriosity" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="47%" height="460px" alt="foto"/><br>
 			</div>
 		</div>
         <!-- show location of material -->

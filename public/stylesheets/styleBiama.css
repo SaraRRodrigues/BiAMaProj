@@ -1295,12 +1295,12 @@ scrollMobile {
 /* put text on top right of image*/
 .top-bottom {
   width: 165px;
-  background-color:#5F9EA0;
-  color:white;
+  background-color: #5F9EA0;
+  color: white;
   opacity: 0.6;
   position: absolute;
-  bottom: 19px;
-  right: 120px;
+  bottom: 6px;
+  right: 227px;
   font-size: 22px;
 }
 
