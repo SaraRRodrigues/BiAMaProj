@@ -74,78 +74,43 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.getMyQuestions = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoMyQuestions){});
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getAnswerQuestionInfo = QuestionService.getQuestionAnswer(function(infoUserAnswer){});
-        $scope.getAllUsers = UserQuestionService.getUsers(function(users){});
+      
+        $scope.getUserQuestionInfo.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.questionDetails;
+            $scope.myQuestions=data;
+            $scope.questions=data;
+        });
 
-		$scope.getAllUsers.then(function(usersDB) {
-            $scope.users = usersDB.data.users;
-            for(var index=0; index<$scope.users.length; ++index){
-                
-                if($scope.users[index].id === $scope.idUserLoggerIn) {
-                    $scope.userName = $scope.users[index].username;
-                    $scope.userPassword = $scope.users[index].password;
-                    $scope.userLoggedIn=$scope.users[index].username;
-                    $scope.idUserLoggerIn=$scope.users[index].id;
-                    $scope.confirmSession = true;
-                    
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
+        $scope.getMyQuestions.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.questions;
+            $scope.myQuestionDetails=data;
 
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
-                    break;
-                }
-            }
-            $scope.getMyQuestions.then(function(result) {
+            $scope.getAnswerQuestionInfo.then(function(result) {
                 $scope.loading = false;
-                var data=result.data.questions;
-                $scope.myQuestionDetails=data;
+                var data=result.data.questionDetails;
+                $scope.details=data;
+                $scope.calculateAnswerId($scope.details);
 
-                $scope.getUserQuestionInfo.then(function(result) {
-                    $scope.loading = false;
-                    var data=result.data.questionDetails;
-                    $scope.myQuestions=data;
-                    $scope.questions=data;
-
-                    $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
-                    $scope.getMaterials.then(function(result) {
-                      $scope.loading = false;
-                      var data=result.data.comparationDetails;
-                      $scope.materialsToSearch = data;
-
-                       
-                    });
-
-                });
-
-                $scope.getAnswerQuestionInfo.then(function(result) {
-                    $scope.loading = false;
-                    var data=result.data.questionDetails;
-                    $scope.details=data;
-                    $scope.calculateAnswerId($scope.details);
-
-                    var getNotifications = NotificationMyQuestionService.getAllNotifications(function(infoNotification){});
-                        getNotifications.then(function(result) {
-                        $scope.loading = false;
-                        var data=result.data.notificationDetails;
-                        $scope.notifications=data;
-                        $scope.numberOfNotifications=$scope.notifications.length;
-                        $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-                    
-                        $scope.getMyFavorites.then(function(result) {
-                            $scope.loading = false;
-                            var data=result.data.allFavoritesDetails;
-                            $scope.nextIdFavorite = data[data.length-1].id_favorite;
-                            $scope.favoriteDetails=data;
-                        });
-                    });
-                });
+                
             });
         });
-        
+
+        $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
+        $scope.getMaterials.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.comparationDetails;
+            $scope.materialsToSearch = data;
+
+            
+        });
+        $scope.getMyFavorites.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.allFavoritesDetails;
+            $scope.nextIdFavorite = data[data.length-1].id_favorite;
+            $scope.favoriteDetails=data;
+        });
     }
 
     /* calculate answer id */
@@ -508,34 +473,49 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     /* confirmed user logged in */
     $scope.confirmSessionAction = function (username, password) {
 
-        for(var index=0; index<$scope.users.length; ++index){
-            $scope.userName = $scope.users[index].username;
-            $scope.userPassword = $scope.users[index].password;
-            
-            if($scope.userName !== null && $scope.userName === username){
-                if($scope.userPassword !== null && $scope.userPassword === password){
-                    $scope.userLoggedIn=$scope.users[index].username;
-                    $scope.idUserLoggerIn=$scope.users[index].id;
-                    $scope.confirmSession = true;
-                    
-                    $scope.userImage = $scope.users[index].image;
-                    $scope.userEmail = $scope.users[index].email;
-                    $scope.nameUser=$scope.users[index].name;
-                    $scope.userBirthdate = $scope.users[index].birthdate;
+        $scope.getAllUsers = UserQuestionService.getUsers(function(users){});
 
-                    var splitDateBirth = $scope.userBirthdate.split('/');
-                    $scope.dayBirth = splitDateBirth[0];
-                    $scope.monthBirth = splitDateBirth[1];
-                    $scope.yearBirth = splitDateBirth[2];
-                    break;
+		$scope.getAllUsers.then(function(usersDB) {
+            $scope.users = usersDB.data.users;
+            for(var index=0; index<$scope.users.length; ++index){
+                $scope.userName = $scope.users[index].username;
+                $scope.userPassword = $scope.users[index].password;
+                
+                if($scope.userName !== null && $scope.userName === username){
+                    if($scope.userPassword !== null && $scope.userPassword === password){
+                        $scope.userLoggedIn=$scope.users[index].username;
+                        $scope.idUserLoggerIn=$scope.users[index].id;
+                        $scope.confirmSession = true;
+                        
+                        $scope.userImage = $scope.users[index].image;
+                        $scope.userEmail = $scope.users[index].email;
+                        $scope.nameUser=$scope.users[index].name;
+                        $scope.userBirthdate = $scope.users[index].birthdate;
+    
+                        var splitDateBirth = $scope.userBirthdate.split('/');
+                        $scope.dayBirth = splitDateBirth[0];
+                        $scope.monthBirth = splitDateBirth[1];
+                        $scope.yearBirth = splitDateBirth[2];
+                        break;
+                    }
                 }
             }
-        }
+        });
     }
 
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
 
+        if(buttonClick === 'notification') {
+            var getNotifications = NotificationMyQuestionService.getAllNotifications(function(infoNotification){});
+                getNotifications.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.notificationDetails;
+                $scope.notifications=data;
+                $scope.numberOfNotifications=$scope.notifications.length;
+                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+            });
+        }
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
@@ -596,6 +576,8 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 			}
 	
 			if(buttonClick == 'notification') {
+
+
 				$window.location.href = '/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	

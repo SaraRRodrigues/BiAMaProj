@@ -121,18 +121,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         getMaterials.then(function(result) {
           $scope.loading = false;
           var data=result.data.comparationDetails;
-          $scope.materialsToSearch = data;
-      
-            var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
-            getNotifications.then(function(result) {
-                $scope.loading = false;
-                var data=result.data.notificationDetails;
-                $scope.notifications=data;
-                $scope.numberOfNotifications=$scope.notifications.length;
-                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-                    
-            });
-           
+          $scope.materialsToSearch = data;   
         });
     }
 
@@ -389,6 +378,17 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
 
+        if(buttonClick === 'notification') {
+            var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
+            getNotifications.then(function(result) {
+                $scope.loading = false;
+                var data=result.data.notificationDetails;
+                $scope.notifications=data;
+                $scope.numberOfNotifications=$scope.notifications.length;
+                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+                    
+            });
+        }
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
