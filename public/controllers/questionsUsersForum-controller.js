@@ -75,14 +75,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         var data=result.data.questionDetails;
         $scope.questions=data;
 
-        var getAnswerQuestionInfo = UserForumQuestionService.getQuestionAnswer(function(infoUserAnswer){});
-        getAnswerQuestionInfo.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.questionDetails;
-            $scope.details=data;
-            $scope.calculateAnswerId($scope.details);
-        });
-
       });
 
       
@@ -153,18 +145,27 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
 
     /* get question with questionId */
     $scope.getQuestion = function(questionId, indexQuestion) {
-      $scope.showQuestionDetails = true;
-      $scope.indexQuestion=indexQuestion+1;
-      for(var index=0; index< $scope.questions.length; ++index) {
-        if($scope.questions[index].id_question === questionId) {
-          $scope.idQuestion=$scope.questions[index].id_question;
-          $scope.likeQuestion=$scope.questions[indexQuestion].likesQuestion;
-          $scope.getAnswersOfQuestion(index);
-        }
-      }
-      
-      /* reset indexQuestionAnswer: number of answer of questions */
-      $scope.indexQuestionAnswer=1;
+
+      var getAnswerQuestionInfo = UserForumQuestionService.getQuestionAnswer(function(infoUserAnswer){});
+      getAnswerQuestionInfo.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.questionDetails;
+          $scope.details=data;
+          $scope.calculateAnswerId($scope.details);
+
+          $scope.showQuestionDetails = true;
+          $scope.indexQuestion=indexQuestion+1;
+          for(var index=0; index< $scope.questions.length; ++index) {
+            if($scope.questions[index].id_question === questionId) {
+              $scope.idQuestion=$scope.questions[index].id_question;
+              $scope.likeQuestion=$scope.questions[indexQuestion].likesQuestion;
+              $scope.getAnswersOfQuestion(index);
+            }
+          }
+          
+          /* reset indexQuestionAnswer: number of answer of questions */
+          $scope.indexQuestionAnswer=1;
+      });
     }
 
     /* get answers of question with index(is question id) */

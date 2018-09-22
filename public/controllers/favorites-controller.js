@@ -21,7 +21,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 	$scope.initData = function() {
         /* my current page */
         $scope.namePage='favorites';
-        $scope.loading = true;
         $scope.showSchools = false;
         $scope.showMyQuestions=false;
         $scope.showMaterials = true;
@@ -39,7 +38,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.showDetailsOfMaterial=false;
         $scope.miniSearchResults=false;
 
-        $scope.selectFav=true;
         $scope.initFavSuccess = true;
        
     }
@@ -60,15 +58,15 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 		if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ) {
 			$scope.confirmSession=true;
 		} else {
-			$scope.loading = true;
 			$scope.confirmSession=false;
         }
+        $scope.selectFav=true;
         
         if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ){
             /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {
-                $scope.loading = true;
+
                 var data=result.data.favoriteDetails;
                 $scope.favoritesInfo=data;
                 $scope.favoriteDetails=[];
@@ -100,18 +98,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
           $scope.loading = true;
           var data=result.data.comparationDetails;
           $scope.materialsToSearch = data;
-          $scope.loading = false;
-      
-            /*  */
-            var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
-            getUserQuestionInfo.then(function(result) {
-                $scope.loading = true;
-                var data=result.data.questionDetails;
-                $scope.questions=data;
-                $scope.loading = false;
-
-                
-            });
         });
         /*  */
         var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
@@ -178,7 +164,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
            /* get information of material and of library - when i do get library */
            var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
            getMaterialInfo.then(function(result) {
-               $scope.loading = true;
 
                var data=result.data.materialsCategories;
                $scope.materialsCategories=data;
@@ -391,17 +376,31 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     
     /* get question with questionId */
     $scope.getQuestion = function(questionId, indexQuestion) {
-        $scope.showQuestionDetails = true;
-        $scope.showMyQuestions=false;
-        $scope.indexQuestion=indexQuestion+1;
-        for(var index=0; index< $scope.questions.length; ++index) {
-          if(parseInt($scope.questions[index].id_question) === questionId) {
-            $scope.idQuestion=$scope.questions[index].id_question;
-            $scope.getAnswersOfQuestion(index);
-          }
-        }
-        /* reset indexQuestionAnswer: number of answer of questions */
-        $scope.indexQuestionAnswer=1;
+
+         /*  */
+         var getUserQuestionInfo = QuestionFavoriteService.getUserQuestionInfo(function(infoUserAnswer){});
+         getUserQuestionInfo.then(function(result) {
+             $scope.loading=true;
+             var data=result.data.questionDetails;
+             $scope.questions=data;
+             
+             $scope.showQuestionDetails = true;
+             $scope.showMyQuestions=false;
+             $scope.indexQuestion=indexQuestion+1;
+
+             for(var index=0; index< $scope.questions.length; ++index) {
+                if(parseInt($scope.questions[index].id_question) === questionId) {
+                  $scope.idQuestion=$scope.questions[index].id_question;
+                  $scope.getAnswersOfQuestion(index);
+                }
+              }
+              /* reset indexQuestionAnswer: number of answer of questions */
+              $scope.indexQuestionAnswer=1;
+              
+              $scope.loading = false;
+              
+         });
+         
     }
 
     /* get answers of question with index(is question id) */
@@ -774,7 +773,7 @@ app.factory("UserFavoriteService", function($q, $http, $timeout){
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
-        $http.get('/users').then(successCallback, errorCallback, 2000);
+        $http.get('/users').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
@@ -801,7 +800,7 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getUserQuestionInfo = function() {
       var deferred = $q.defer();
 
-      $http.get('/userQuestions').then(successCallback, errorCallback, 2000);
+      $http.get('/userQuestions').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
@@ -821,11 +820,13 @@ app.factory("QuestionFavoriteService", function($q, $http, $timeout){
     var getQuestionAnswer = function() {
       var deferred = $q.defer();
   
-        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback, 2000);
+        $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000); 
         }
         function errorCallback(error){
             //error code
@@ -872,7 +873,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
 	var getMyFavorites = function(data) {
 		var deferred = $q.defer();
 
-        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback, 2000);
+        $http.get('/favorites',{params: { 'data': data}}).then(successCallback, errorCallback);
 
         function successCallback(response){
             //success code
@@ -899,13 +900,13 @@ app.factory("NotificationFavService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback, 2000);
+       $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
 
        function successCallback(response){
            //success code
-         //  $timeout(function() {
+           $timeout(function() {
                 deferred.resolve(response);
-          // }, 2000); 
+           }, 2000); 
        }
        function errorCallback(error){
            //error code

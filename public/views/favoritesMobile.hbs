@@ -90,134 +90,136 @@
 		</div>
 		<!-- section of user details -->
 		<div class="row">
-			<div ng-if="insertedAnswer && clickPutAnswer" class="textToInitSession favoriteQuestionForum console.log-success center-block sucessMessageLogin titlesOnCenter">
+			<div ng-if="insertedAnswer && clickPutAnswer" class="textToInitSession favoriteQuestionForum alert-success center-block sucessMessageLogin titlesOnCenter">
 				Resposta enviada com sucesso.
 			</div>
-			<div ng-if="!insertedAnswer && clickPutAnswer" class="textToInitSession favoriteQuestionForum console.log-danger center-block sucessMessageLogin titlesOnCenter">
+			<div ng-if="!insertedAnswer && clickPutAnswer" class="textToInitSession favoriteQuestionForum alert-danger center-block sucessMessageLogin titlesOnCenter">
 				Erro a enviar a resposta.
 			</div>
-			<nav class="padding-left-3x divUserDetailsMobile">
-				<div class="navDetailsUserMobile" ng-if="userDetails"><br>
-					<!-- content if not init session -->
-					<div ng-if="!confirmSession">
-						<img class="imageUserNavDetailsMobile" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Favoritos</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">As minhas perguntas</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Partilhar com o Mundo</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Notificações</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Perfil</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<span title="Tem de iniciar sessão">
-							<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Comparar</a><br>
-						</span>
-						<div class="lineWhite margin-bottom margin-top"></div>
-						<a href="" ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
-						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-						
-						<!-- section of init session -->
-						<div class="divInitSessionMobile marginDivInitSession" ng-if="showInitSession">
-							<div class="alignCenter">
-								<h2 class="initSessionColor">Iniciar Sessão</h2>
-								
-								<div class="lineWhiteInitSession"></div><br>
-								<div ng-if="users === 'loadUser'">
-									<div class="loading-icon"></div>
-								</div>
-								<div ng-if="users !== 'loadUser'">
-									<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
-									<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-									<a class="confirmSessionLabel confirmButton" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
-									<!-- login with firebase providers -->
-									<div>
-										<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
-										<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+			<div class="row">
+				<nav class="padding-left-3x divUserDetailsMobile">
+					<div class="navDetailsUserMobile" ng-if="userDetails"><br>
+						<!-- content if not init session -->
+						<div ng-if="!confirmSession">
+							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Favoritos</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">As minhas perguntas</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Partilhar com o Mundo</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Notificações</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Perfil</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<span title="Tem de iniciar sessão">
+								<a href="" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Comparar</a><br>
+							</span>
+							<div class="lineWhite margin-bottom margin-top"></div>
+							<a href="" ng-click="showInitSessionDiv()">Iniciar sessão</a><br>
+							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+							
+							<!-- section of init session -->
+							<div class="divInitSessionMobile marginDivInitSession" ng-if="showInitSession">
+								<div class="alignCenter">
+									<h2 class="initSessionColor">Iniciar Sessão</h2>
+									
+									<div class="lineWhiteInitSession"></div><br>
+									<div ng-if="users === 'loadUser'">
+										<div class="loading-icon"></div>
 									</div>
-									<br>
-									<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
-								</div>												
+									<div ng-if="users !== 'loadUser'">
+										<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
+										<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
+										<a class="confirmSessionLabel confirmButtonMobile" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+										<!-- login with firebase providers -->
+										<div>
+											<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
+											<img class="cursorPointer" src="../images/logo_face.png" ng-click="loginWithFacebook()" width="10%" height="10%"/>
+										</div>
+										<br>
+										<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
+									</div>												
+								</div>
 							</div>
 						</div>
+						<!-- content if init session -->
+						<div ng-if="confirmSession">
+							<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+							<a ng-click="getRequest('favorites')">Favoritos</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
+							<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
+							<div ng-if="notificationNumber" class="circleNotification"></div>
+							<br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="getRequest('perfil')">Perfil</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="getRequest('compare')">Comparar</a><br>
+							<div class="lineWhiteMobile margin-bottom margin-top"></div>
+							<a ng-click="logout()">Terminar Sessão</a><br>
+							<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
+						</div>
 					</div>
-					<!-- content if init session -->
-					<div ng-if="confirmSession">
-						<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
-						<a ng-click="getRequest('favorites')">Favoritos</a><br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a ng-click="getRequest('questions')">As minhas perguntas</a><br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a ng-click="getRequest('world_share')">Partilhar com o Mundo</a><br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a class="notificationPosition" ng-click="getRequest('notification')">Notificações</a>
-						<label ng-if="notificationNumber" class="labelNumberNotification">[{numberOfNotifications}]</label>
-						<div ng-if="notificationNumber" class="circleNotification"></div>
-						<br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a ng-click="getRequest('perfil')">Perfil</a><br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a ng-click="getRequest('compare')">Comparar</a><br>
-						<div class="lineWhiteMobile margin-bottom margin-top"></div>
-						<a ng-click="logout()">Terminar Sessão</a><br>
-						<img src="../images/expandInitSession.PNG" ng-click="clickUserDetails()"><br><br>
-					</div>
-				</div>
-			</nav>
+				</nav>
+			</div>
 		</div>
 		<!-- show favorites questions -->
-		<i ng-if="!loading && showQuestionDetails" ng-click="reload()" class="fa fa-refresh cursorPointer float-right" aria-hidden="true"></i>
         <div ng-if="!loading && showFavorites" class="alignCenter">
 			<div class="margin-top-1x" ng-if="showMaterials" ng-repeat="fav in favorites">
 				<img class="margin-bottom-2x cursorPointer" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="30%" height="20%" alt="foto"/>
 			</div>
 			<h1 class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !loading && detailsFavMaterial">Não tem materiais favoritos.</h1>
 			<h1 class="titlesOnCenter colorOfErrorMessages" ng-if="favoriteQuestions.length===0 && !loading && detailsFavQuestion">Não tem perguntas favoritas.</h1>
-			<div ng-if="showMyQuestions" class="titlesOnCenter" ng-repeat="question in favoriteQuestions track by $index">
-                <a class="questionX" ng-click="getQuestion((question.question_id)-2, $index)">Pergunta [{$index+1}]</a><br>
-                <div class="separateQuestions"></div>
+			
+			<div ng-if="showMyQuestions" class="titlesOnCenter detailPageMobile" ng-repeat="question in favoriteQuestions track by $index">
+                <a class="questionX" ng-click="getQuestion(question.question_id, $index)">Pergunta [{$index+1}]</a><br>
+			    <div class="separateQuestionsMobile"></div>
             </div>
-           	<div ng-if="showQuestionDetails">
+           	<div ng-if="showQuestionDetails && !loading">
 				<div class="titlesOnCenter"> 
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
-				<div class="titlesOnCenter questionsFavMobile">
-					<div ng-if="!showDivAnswer" class="margin-left-x">
+				<div class="titlesOnCenter">
+					<div ng-if="!showDivAnswer" class="margin-left-9x">
 						<!-- Question -->
-						<img class="imageButton" src="../images/user.png">
-						<div ng-if="isMobileView" class="borderQuestionMobile">
-							<label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
-							<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+                        <img class="imageButtonMobile imageQuestionForumMobile" src="../images/user.png">
+						<div class="borderMyQuestionMobile">
+							<label class="margin-right-8x questionForumLabelMobile">Pergunta [{indexQuestion}]</label>
+							<h5 class="descriptionQuestion sizeTextOfDetails">[{descriptionQuestion}]</h5>
 						</div>
 						<!-- Answers -->
-						<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
-							<img ng-if="$index%2!==0" class="imageButton" src="../images/user.png">
-							<div ng-if="$index%2!==0" class="borderQuestion">
-								<label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-								<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
+						<div ng-repeat="answerQuestion in descriptionAnswer track by $index">
+							<img ng-if="$index%2!==0" class="imageButtonMobile imageQuestionForumMobile" src="../images/user.png">
+							<div ng-if="$index%2!==0" class="borderQuestionMobile">
+								<label class="margin-right-8x questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
+								<h5 class="descriptionQuestion descriptAnswerMobile">[{answerQuestion.text}]</h5>
 							</div>
-							<div ng-if="$index%2===0 && isMobileView"  class="borderAnswerMobile">
-								<label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-								<img class="imageButtonLeft" src="../images/user.png">
-								<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+							<div ng-if="$index%2===0"  class="borderAnswerMobile">
+								<label class="margin-left-9x2 questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                <img class="imageButtonLeft imageUserQuestions" src="../images/user.png">
+								<h5 class="margin-left-7x questionForumLabelMobile">[{answerQuestion.text}]</h5>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div> 
 					<button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
-					<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv">
+					<div ng-if="showDivAnswer" class="center-block titlesOnCenter answerDiv">
 						<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
 						<button class="buttonConfirm" ng-click="putAnswer(textAnswer)">Responder</button>
 					</div>

@@ -515,7 +515,7 @@ app.factory("WorldSharesService", function($q, $http, $timeout){
             {params: {
                 'data': data
             }}));
-        }, 30000);
+        }, 2000);
         
         return deferred.promise;
       };
@@ -537,7 +537,7 @@ app.factory("ForumService", function($q, $http, $timeout){
             $timeout(function() {
 
                 deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -563,7 +563,7 @@ app.factory("UserWorldShareService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -588,7 +588,7 @@ app.factory("WorldShareMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 30000);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -612,7 +612,7 @@ app.factory("NotificationWorldShareService", function($q, $http, $timeout){
            //success code
            $timeout(function() {
 			deferred.resolve(response);
-	   	   }, 30000);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code

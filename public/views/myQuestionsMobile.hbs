@@ -118,7 +118,7 @@
 								<div ng-if="users !== 'loadUser'">
 									<input class="inputUserName" ng-model="usernameModel" type="text" placeholder="Username"/>
 									<input class="inputPassword" ng-model="passwordModel" type="password" placeholder="Password"/><br>
-									<a class="confirmSessionLabel confirmButton" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
+									<a class="confirmSessionLabel confirmButtonMobile" ng-click="confirmSessionAction(usernameModel,passwordModel)">Confirmar</a><br><br>
 									<!-- login with firebase providers -->
 									<div>
 										<img class="cursorPointer" src="../images/logo_google.png" ng-click="loginWithGoogle()" width="10%" height="10%"/>
@@ -224,7 +224,7 @@
                                 <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
                                     <i class="fas fa-thumbs-up likeButtonLeft cursorPointer iconsOnQuestionsForumMobile"></i>
                                 </div>
-                                <label class="margin-right-9x1 questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                <label class="margin-left-9x02 questionForumLabelMobile">Resposta [{answerQuestion.numberOfQuestion}]</label>
                                 <img class="imageButtonLeft imageUserQuestions" src="../images/user.png">
                                 <h5 class="descriptionAnswerMobile questionForumLabelMobile">[{answerQuestion.text}]</h5>
                             </div>

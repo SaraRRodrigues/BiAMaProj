@@ -24,6 +24,7 @@ a {
 .margin-left-9x00 {margin-left:180px}
 .margin-left-9x0 {margin-left:213px}
 .margin-left-9x01 {margin-left:227px}
+.margin-left-9x02 {margin-left:288px}
 .margin-left-9x1 {margin-left:300px}
 .margin-left-9x11 {margin-left:314px}
 .margin-left-9x2 {margin-left:350px}
@@ -377,7 +378,7 @@ a {
   padding-top:10px;
 }
 
-.divInitSessionMobile marginDivInitSession {
+.divInitSessionMobile {
   background-color:#E0E0E0;
   margin-left:180px;
   margin-top: -140px;
@@ -586,6 +587,15 @@ a {
 .confirmButton {
   background-color: lightslategrey;
   font-size: 13px;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.confirmButtonMobile{
+  background-color: lightslategrey;
+  font-size: 29px;
   border-radius: 5px;
   padding: 5px;
   color: white;
@@ -1561,8 +1571,7 @@ backgroundColorDesktop {
 
 .whereWeAreLocationDetails {
   border-radius: 4px;
-  margin-left: 465px;
-  margin-right: 446px;
+  width: 418px;
   background-color: lightgrey;
   margin-top: 10px;
 }

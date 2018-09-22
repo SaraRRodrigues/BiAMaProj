@@ -178,7 +178,7 @@
                     <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="35%" height="150px" alt="foto"/>
                     <br>
                 </div>
-				<i ng-if="!loading && showWorldShares" class="fas fa-plus-circle cursorPointer plusWorldShareFontSize margin-top-4x " ng-click="openAddWorldShare()"></i>
+				<i ng-if="!loading && showWorldShares" class="fas fa-plus-circle cursorPointer plusWorldShareFontSize" ng-click="openAddWorldShare()"></i>
 
                 <!-- section of add world share -->
                 <div ng-if="addWorldShare && !loading" class="container center-block divAddWorldShare" style="width: 356px;">

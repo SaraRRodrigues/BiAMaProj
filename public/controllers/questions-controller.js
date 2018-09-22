@@ -87,14 +87,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             var data=result.data.questions;
             $scope.myQuestionDetails=data;
 
-            $scope.getAnswerQuestionInfo.then(function(result) {
-                $scope.loading = false;
-                var data=result.data.questionDetails;
-                $scope.details=data;
-                $scope.calculateAnswerId($scope.details);
-
-                
-            });
+           
         });
 
         $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
@@ -151,27 +144,35 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
     $scope.getAnswersOfQuestion = function(index) {
         $scope.descriptionQuestion=$scope.myQuestions[index].text_question;
 
-        for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
-          if($scope.details[indexAnswer].id_question == $scope.myQuestions[index].id_question){
-            var resultAnswer = {
-                id: $scope.details[indexAnswer].id_answer,
-                numberOfQuestion: $scope.indexQuestionAnswer,
-                text: $scope.details[indexAnswer].text_answer,
-                likes: $scope.details[indexAnswer].likes_answer,
-                id_question: $scope.details[indexAnswer].id_question,
-                favorite: false
-            }
+        $scope.getAnswerQuestionInfo.then(function(result) {
+            $scope.loading = true;
+            var data=result.data.questionDetails;
+            $scope.details=data;
+            $scope.calculateAnswerId($scope.details);
 
-            $scope.indexQuestionAnswer+=1;
-            $scope.descriptionAnswer.push(resultAnswer);
-          }
-        }
-        $scope.questionFavorite = {
-            'idQuestion':$scope.myQuestions[index].id_question,
-            'favorite':$scope.favoriteQuestion,
-            'like': $scope.myQuestions[index].likes_question,
-            'description':  $scope.myQuestions[index].text_question
-        }
+            for(var indexAnswer=0; indexAnswer<$scope.details.length; ++indexAnswer){
+                if($scope.details[indexAnswer].id_question == $scope.myQuestions[index].id_question){
+                  var resultAnswer = {
+                      id: $scope.details[indexAnswer].id_answer,
+                      numberOfQuestion: $scope.indexQuestionAnswer,
+                      text: $scope.details[indexAnswer].text_answer,
+                      likes: $scope.details[indexAnswer].likes_answer,
+                      id_question: $scope.details[indexAnswer].id_question,
+                      favorite: false
+                  }
+      
+                  $scope.indexQuestionAnswer+=1;
+                  $scope.descriptionAnswer.push(resultAnswer);
+                }
+              }
+              $scope.questionFavorite = {
+                  'idQuestion':$scope.myQuestions[index].id_question,
+                  'favorite':$scope.favoriteQuestion,
+                  'like': $scope.myQuestions[index].likes_question,
+                  'description':  $scope.myQuestions[index].text_question
+              }
+              $scope.loading = false;
+        });
     }
 
     /* click on answer to show section of answer */
