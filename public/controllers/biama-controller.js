@@ -58,16 +58,6 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 			$scope.loading = false;
 			var data=result.data.biamaDetails;
 			$scope.descriptionBiama=data[0].description;
-
-			/* this request needs only on results of small search results */
-			$scope.loading = true;
-			$scope.getMaterials = BiamaMaterialService.getMaterialComparation(function(infoMaterial){});
-			$scope.getMaterials.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.comparationDetails;
-				$scope.materialsToSearch = data;
-			});
-
 		});
 	}
 	
@@ -126,35 +116,45 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
 
-		if(inputMini !== '') {
-			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-				var resultMaterial = {
-					'name': $scope.materialsToSearch[index].name,
-					'category': $scope.materialsToSearch[index].category,
-					'code': $scope.materialsToSearch[index].code,
-					'description': $scope.materialsToSearch[index].description
+		/* this request needs only on results of small search results */
+		$scope.loading = true;
+		$scope.getMaterials = BiamaMaterialService.getMaterialComparation(function(infoMaterial){});
+		$scope.getMaterials.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+
+			if(inputMini !== '') {
+				for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+					var resultMaterial = {
+						'name': $scope.materialsToSearch[index].name,
+						'category': $scope.materialsToSearch[index].category,
+						'code': $scope.materialsToSearch[index].code,
+						'description': $scope.materialsToSearch[index].description
+					}
+					if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					}
 				}
-				if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
+		
+				if($scope.resultSearch.length == 0) {
+					$scope.noResultsOnSearch=true;
+				} else {
+					$scope.showInitSearch=false;
+					$scope.showSearch=false;
+					$scope.miniSearchResults = true;
+					$scope.noResultsOnSearch=false;
+					$scope.showResultsOfMiniSearch=true;
 				}
 			}
-	
-			if($scope.resultSearch.length == 0) {
-				$scope.noResultsOnSearch=true;
-			} else {
-				$scope.showInitSearch=false;
-				$scope.showSearch=false;
-				$scope.miniSearchResults = true;
-				$scope.noResultsOnSearch=false;
-				$scope.showResultsOfMiniSearch=true;
-			}
-		}
+		});
+
 	}
 
 	/* open and close the section of user details and search icon */

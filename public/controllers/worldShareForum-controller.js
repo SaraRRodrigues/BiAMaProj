@@ -218,7 +218,7 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
           $scope.miniSearchResults = true;
           $scope.noResultsOnSearch=false;
           $scope.showResultsOfMiniSearch=true;
-          
+          $scope.showWorldSharesDetails=false;
           $scope.showCategory=true;
           $scope.showMaterialDetails=false;
           $scope.showLocation=false;

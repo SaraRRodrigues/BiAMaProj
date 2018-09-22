@@ -68,6 +68,14 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
 	
+		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterials.then(function(result) {
+			$scope.loading=true;
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
+			$scope.loading=false;
+		}); 
+
 		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 		/* get information of material and of library - when i do get library */
 		$scope.getMaterialInfo.then(function(result) {
@@ -130,23 +138,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 							$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
 						}
 
-						var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
-							getNotifications.then(function(result) {
-							$scope.loading=true;
-							var data=result.data.notificationDetails;
-							$scope.notifications=data;
-							$scope.numberOfNotifications=$scope.notifications.length;
-							$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-							$scope.loading=false;
-
-							var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
-							getMaterials.then(function(result) {
-								$scope.loading=true;
-								var data=result.data.comparationDetails;
-								$scope.materialsToSearch = data;
-								$scope.loading=false;
-							});
-						});
 						$scope.loading=false;
 						
 					});
@@ -629,6 +620,18 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* routes of click on links page */
 	$scope.getRequest = function(buttonClick) {
 
+		if(buttonClick === 'notification') {
+			var getNotifications = NotificationMyBiamaService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+			$scope.loading=true;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+			$scope.loading=false;
+
+		});
+		}
 		if(!$scope.isMobileView) {
 			if(buttonClick === 'biamaPage') {
 				$window.location.href = '/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';

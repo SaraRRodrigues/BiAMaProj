@@ -110,6 +110,9 @@
             <div class="titlesOnCenter colorOfErrorMessages" ng-if="underAge">
                 <h3>Para efetuar o registo tem de ser maior de idade.</h3>
             </div>
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyBirthdate">
+				<h3>Data de nascimento por preencher.</h3>
+			</div>
         </div>
 		<!-- small search results -->
         <i ng-if="miniSearchResults" ng-click="closeMiniSearch()" class="margin-top-4x fas fa-times cursorPointer float-right iconMedium"></i>

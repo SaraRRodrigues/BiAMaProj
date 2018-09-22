@@ -93,12 +93,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* -------------- INIT DESKTOP & MOBILE -------------- */
     /* get information of favorite materials and my favorites to display */
     $scope.getAllRequests = function() {
-        var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
-        getMaterials.then(function(result) {
-          $scope.loading = true;
-          var data=result.data.comparationDetails;
-          $scope.materialsToSearch = data;
-        });
+     
         /*  */
         var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
         getAnswerQuestionInfo.then(function(result) {
@@ -470,6 +465,8 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
   
         $scope.showMaterials=true;
         $scope.zoomInMaterial = false;
+        $scope.selectFav=false;
+       
     }
 
 	/* open and close the small search icon */
@@ -491,8 +488,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.enableUserIcon=false;
         $scope.showMaterialDetails=false;
         $scope.showQuestionDetails=false;
-
-        $scope.showMaterials=true;
+        if(!$scope.showFavoritesButton) {
+            $scope.showMaterials=false;
+            $scope.selectFav=true;
+        }
     }
 
     /* action of click button "Ok" present on small search line */
@@ -500,47 +499,58 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.resultSearch=[];
         var inputMiniValue = jQuery("#miniSearch").val(); 		
         var inputMini = inputMiniValue.toLowerCase();
-        if(inputMini !== '') {
-            for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-                var resultMaterial = {
-                  'name': $scope.materialsToSearch[index].name,
-                  'category': $scope.materialsToSearch[index].category,
-                  'code': $scope.materialsToSearch[index].code,
-				  'description': $scope.materialsToSearch[index].description
+
+        var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
+        getMaterials.then(function(result) {
+            $scope.loading = true;
+            var data=result.data.comparationDetails;
+            $scope.materialsToSearch = data;
+
+            if(inputMini !== '') {
+                for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+                    var resultMaterial = {
+                    'name': $scope.materialsToSearch[index].name,
+                    'category': $scope.materialsToSearch[index].category,
+                    'code': $scope.materialsToSearch[index].code,
+                    'description': $scope.materialsToSearch[index].description
+                    }
+                    if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+                    $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+                    $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+                    $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+                    $scope.resultSearch.push(resultMaterial);
+                    }
                 }
-                if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-                  $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-                  $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-                  $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-                  $scope.resultSearch.push(resultMaterial);
+            
+                if($scope.resultSearch.length == 0) {
+                    $scope.noResultsOnSearch=true;
+                } else {
+                    $scope.showInitSearch=false;
+                    $scope.miniSearchResults = true;
+                    $scope.showCategory=true;
+                    $scope.showMaterialDetails=false;
+                    $scope.showLocation=false;
+                    $scope.showForum = false;
+                    $scope.showAllQuestions=false;
+                    $scope.showQuestionDetails=false;
+                    $scope.showCuriosity=false;
+                    $scope.showSearch=false;
+                    $scope.noResultsOnSearch=false;
+                    
+                    $scope.showFavorites = true;
+                    $scope.showCategory = false;
+                    $scope.showMaterials=false;
+                    $scope.selectFav=false;
                 }
             }
-        
-            if($scope.resultSearch.length == 0) {
-                $scope.noResultsOnSearch=true;
-            } else {
-                $scope.showInitSearch=false;
-                $scope.miniSearchResults = true;
-                $scope.showCategory=true;
-                $scope.showMaterialDetails=false;
-                $scope.showLocation=false;
-                $scope.showForum = false;
-                $scope.showAllQuestions=false;
-                $scope.showQuestionDetails=false;
-                $scope.showCuriosity=false;
-                $scope.showSearch=false;
-                $scope.noResultsOnSearch=false;
-                
-                $scope.showFavorites = true;
-                $scope.showCategory = false;
-                $scope.showMaterials=false;
-            }
-        }
-        $scope.detailsFavMaterial=false;
-        $scope.detailsFavQuestion=false;
+            $scope.detailsFavMaterial=false;
+            $scope.detailsFavQuestion=false;
+            $scope.showMyQuestions=false;
+            $scope.loading = false;
+        });
     }
 
     /* open and close the section of user details and search icon */
@@ -879,7 +889,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 3000); 
 
         }
         function errorCallback(error){

@@ -193,13 +193,16 @@
 					<button class="saveButtonDesktop inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="insertUser(name, username, email, birthdateValue, password)">Salvar</button>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyData">
-					<h3>Preencha todos os campos por favor.</h3>
+					<h5>Preencha todos os campos por favor.</h5>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="usernameRepeated">
-					<h3>Nome já existente.</h3>
+					<h4>Nome já existente.</h4>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="underAge">
-					<h3>Para efetuar o registo tem de ser maior de idade.</h3>
+					<h5>Para efetuar o registo tem de ser maior de idade.</h5>
+				</div>
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyBirthdate">
+					<h5>Data de nascimento por preencher.</h5>
 				</div>
 			</div>
 			<!-- show details of material if click on material -->
@@ -221,7 +224,7 @@
 						<h4 class="margin-right-5x textBold">Código</h4>
 						<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
 						<h4 class="margin-right-5x textBold">Descrição</h4>
-						<h5 class="margin-right-5x">[{openedMaterial.description}]</h5>
+						<h5 class="margin-right-5x scrollDescription">[{openedMaterial.description}]</h5>
 					</div>
 				</div>
 			</div>
