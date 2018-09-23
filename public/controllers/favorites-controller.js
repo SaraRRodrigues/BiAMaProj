@@ -632,6 +632,11 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 	
+            }
+            
+            if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
             if(buttonClick === 'biamaPage') {

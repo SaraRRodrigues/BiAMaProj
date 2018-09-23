@@ -118,7 +118,11 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 					break;
 				}
 			}
-			$scope.showMaterialsCompare=true;
+			if($scope.materialToCompare.length > 0) {
+				$scope.showMaterialsCompare=true;
+			} else {
+				$scope.showMaterialsCompare=false;
+			}
 		}
     }
     /* -------------- END DESKTOP & MOBILE -------------- */
@@ -284,6 +288,11 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 	
+			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
 			if(buttonClick === 'biamaPage') {

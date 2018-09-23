@@ -67,7 +67,13 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of biama and materials to display on search */
 	$scope.getAllRequests = function() {
-	
+		
+		$scope.users = 'loadUser';
+		$scope.getAllUsers = UserMyBiamaService.getUsers(function(users){});
+		$scope.getAllUsers.then(function(usersDB) {
+			$scope.users = usersDB.data.users;
+		});
+		
 		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
 		getMaterials.then(function(result) {
 			$scope.loading=true;
@@ -192,28 +198,28 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.locationNewBiama = locationBiama;
 
 			// Default export is a4 paper, portrait, using milimeters for units
-			var doc = new jsPDF();
+			$scope.doc = new jsPDF();
 			
-			doc.text('A sua BiAMa', 10, 10)
+			$scope.doc.text('A sua BiAMa', 10, 10)
 
 			/* INIT: description of my biama */
-			doc.setFont("helvetica");
-			doc.setFontType("bold");
-			doc.text(20, 30, 'Descrição da sua BiAMa');
+			$scope.doc.setFont("helvetica");
+			$scope.doc.setFontType("bold");
+			$scope.doc.text(20, 30, 'Descrição da sua BiAMa');
 
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(25, 40, descBiama);
+			$scope.doc.setFont("courier");
+			$scope.doc.setFontType("normal");
+			$scope.doc.text(25, 40, descBiama);
 			/* END: description of my biama */
 
 			/* INIT: location of my biama */
-			doc.setFont("helvetica");
-			doc.setFontType("bold");
-			doc.text(20, 50, 'Localização da sua BiAMa');
+			$scope.doc.setFont("helvetica");
+			$scope.doc.setFontType("bold");
+			$scope.doc.text(20, 50, 'Localização da sua BiAMa');
 
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(25, 60, locationBiama);
+			$scope.doc.setFont("courier");
+			$scope.doc.setFontType("normal");
+			$scope.doc.text(25, 60, locationBiama);
 			/* END: location of my biama */
 
 			/* INIT: Materials of my biama */
@@ -283,7 +289,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			/* END: image of my biama */
 
 			/* END: Materials of my biama */
-			doc.save('suaBiama.pdf')
+			
 			$scope.insertMyBiamaOnDB();
 		}
 	}
@@ -365,7 +371,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					}
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
-
+					
 				} else {
 					$scope.underAge=true;
 				}
@@ -385,6 +391,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					}
 				} 
 				$http.post('/insertNotifications', data);
+				$scope.doc.save('suaBiama.pdf');
 			}
 		}
 
@@ -587,34 +594,28 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
     /* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
-		$scope.users = 'loadUser';
+		for(var index=0; index<$scope.users.length; ++index){
+			$scope.userName = $scope.users[index].username;
+			$scope.userPassword = $scope.users[index].password;
+			$scope.userImage = $scope.users[index].image;
+			$scope.userEmail = $scope.users[index].email;
+			$scope.nameUser=$scope.users[index].name;
+			$scope.userBirthdate = $scope.users[index].birthdate;
 
-		$scope.getAllUsers = UserMyBiamaService.getUsers(function(users){});
-		$scope.getAllUsers.then(function(usersDB) {
-			$scope.users = usersDB.data.users;
-			for(var index=0; index<$scope.users.length; ++index){
-				$scope.userName = $scope.users[index].username;
-				$scope.userPassword = $scope.users[index].password;
-				$scope.userImage = $scope.users[index].image;
-				$scope.userEmail = $scope.users[index].email;
-				$scope.nameUser=$scope.users[index].name;
-				$scope.userBirthdate = $scope.users[index].birthdate;
+			var splitDateBirth = $scope.userBirthdate.split('/');
+			$scope.dayBirth = splitDateBirth[0];
+			$scope.monthBirth = splitDateBirth[1];
+			$scope.yearBirth = splitDateBirth[2];
 
-				var splitDateBirth = $scope.userBirthdate.split('/');
-				$scope.dayBirth = splitDateBirth[0];
-				$scope.monthBirth = splitDateBirth[1];
-				$scope.yearBirth = splitDateBirth[2];
-
-				if($scope.userName !== null && $scope.userName === username){
-					if($scope.userPassword !== null && $scope.userPassword === password){
-						$scope.userLoggedIn=$scope.users[index].username;
-						$scope.idUserLoggerIn=$scope.users[index].id;
-						$scope.confirmSession = true;
-						break;
-					}
+			if($scope.userName !== null && $scope.userName === username){
+				if($scope.userPassword !== null && $scope.userPassword === password){
+					$scope.userLoggedIn=$scope.users[index].username;
+					$scope.idUserLoggerIn=$scope.users[index].id;
+					$scope.confirmSession = true;
+					break;
 				}
 			}
-        });
+		}
     }
 	
 	/* routes of click on links page */
@@ -705,6 +706,11 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		}
 		

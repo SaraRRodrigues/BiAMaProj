@@ -66,6 +66,7 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 			});
 		});
 		
+		$scope.users = 'loadUser';
 		$scope.getAllUsers = UserRegistService.getUsers(function(users){});
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.users = usersDB.data.users;
@@ -252,8 +253,6 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	/* confirmed user logged in */
 	$scope.confirmSessionAction = function (username, password) {
 
-		$scope.users = 'loadUser';
-
 		for(var index=0; index<$scope.users.length; ++index){
 			$scope.userName = $scope.users[index].username;
 			$scope.userPassword = $scope.users[index].password;
@@ -353,6 +352,11 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		}
 		

@@ -74,20 +74,25 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     
     /* save upload file */
     $scope.saveUploadFile = function () {
-        $scope.savePhoto=true;
+       
         var splitDeviceRe = /^([\s\S]*?)((?:\.{1,2}|[^\\\/]+?|)(\.[^.\/\\]*|))(?:[\\\/]*)$/;
         var res = splitDeviceRe.exec(($("#uploadPictureWorldShare").val()));
-        $scope.imageWorldShare=res[2];
-        $scope.numberOfNewShares[0].insert=false;
-        $scope.openWorldShareUploadLabel=false;
+        
+        if(res[2] !== '') {
+            $scope.savePhoto=true;
+            $scope.imageWorldShare=res[2];
+            $scope.numberOfNewShares[0].insert=false;
+            $scope.openWorldShareUploadLabel=false;
 
-        for(var index=0; index<$scope.worldShareData.length; ++index) {
-            if(index===$scope.worldShareData.length-1) {
-              var result = ($scope.worldShareData[index].title).split("s");
-              var numberTitle=result[1];
-              $scope.title='ws' + (parseInt(numberTitle)+1);
-            }
-        } 
+            for(var index=0; index<$scope.worldShareData.length; ++index) {
+                if(index===$scope.worldShareData.length-1) {
+                  var result = ($scope.worldShareData[index].title).split("s");
+                  var numberTitle=result[1];
+                  $scope.title='ws' + (parseInt(numberTitle)+1);
+                }
+            } 
+        }
+       
         //$scope.uploadedFile($scope.imageWorldShare)
     }
     /* -------------- END DESKTOP -------------- */
@@ -171,12 +176,14 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         $scope.savePhoto=false;
         $scope.addWorldShare=false;
         $scope.showWorldShares=true;
+        $scope.openWorldShareUploadLabel=false;
+        $scope.errorInsertWorldShare=false;
     }
 
     /* insert world share on database */
     $scope.saveConfigInsertWorldShare = function (image, description) {
     
-        if(image !== undefined) {
+        if(image !== undefined && image !== '') {
             $scope.clickSaveWorldShare=true;
             var data = {
                 'forumType': $scope.forumType, 
@@ -377,18 +384,18 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
-
         if(buttonClick === 'notification') {
-            var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
-            getNotifications.then(function(result) {
-                $scope.loading = false;
-                var data=result.data.notificationDetails;
-                $scope.notifications=data;
-                $scope.numberOfNotifications=$scope.notifications.length;
-                $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-                    
+			var getNotifications = NotificationWorldShareService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+			$scope.loading=true;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+			$scope.loading=false;
+
             });
-        }
+        } 
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
@@ -414,6 +421,11 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 	
+            }
+            
+            if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
             if(buttonClick === 'biamaPage') {

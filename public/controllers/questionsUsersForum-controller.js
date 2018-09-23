@@ -93,15 +93,6 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
             $scope.nextIdFavorite = data[data.length-1].id_favorite; 
           
       });
-
-      var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
-        getNotifications.then(function(result) {
-        $scope.loading = false;
-        var data=result.data.notificationDetails;
-        $scope.notifications=data;
-        $scope.numberOfNotifications=$scope.notifications.length;
-        $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-      });
     }
     
     /* calculate answer id */ 
@@ -632,6 +623,18 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
   
+      if(buttonClick === 'notification') {
+        var getNotifications = NotificationQuestionForumService.getAllNotifications(function(infoNotification){});
+        getNotifications.then(function(result) {
+        $scope.loading=true;
+        var data=result.data.notificationDetails;
+        $scope.notifications=data;
+        $scope.numberOfNotifications=$scope.notifications.length;
+        $scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+        $scope.loading=false;
+  
+        });
+      } 
       if($scope.isMobileView) {
         if(buttonClick === 'favorites') {
           $window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn + '&redirect';
@@ -656,7 +659,11 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         if(buttonClick == 'compare') {
           $window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn + '&redirect';
         }
-        
+
+        if(buttonClick == 'regist') {
+          $scope.regist();
+          $window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
+        }
       } else {
         if(buttonClick === 'biamaPage') {
           $window.location.href = '/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';

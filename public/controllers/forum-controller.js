@@ -239,19 +239,19 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			}
 
 			if(buttonClick === 'favorites') {
-				$window.location.href = '/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = '/BiAMa/favorites?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
 	
 			if(buttonClick == 'questions') {
-				$window.location.href = '/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = '/BiAMa/myQuestions?userName=' + $scope.idUserLoggerIn +'&redirect';
 			}
 	
 			if(buttonClick == 'world_share') {
-				$window.location.href = '/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = '/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn +'&redirect';
 			}
 	
 			if(buttonClick == 'notification') {
-				$window.location.href = '/BiAMa/notifications?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = '/BiAMa/notifications?userName=' + $scope.idUserLoggerIn +'&redirect';
 			}
 	
 			if(buttonClick == 'perfil') {
@@ -259,7 +259,7 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			}
 	
 			if(buttonClick == 'compare') {
-				$window.location.href = '/BiAMa/compare?userName=' + $scope.idUserLoggerIn + $scope.idUserLoggerIn+'&redirect';
+				$window.location.href = '/BiAMa/compare?userName=' + $scope.idUserLoggerIn +'&redirect';
 			}
 
 			if(buttonClick == 'regist') {
@@ -289,6 +289,11 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 	
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
+			}
+			
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		}
 		

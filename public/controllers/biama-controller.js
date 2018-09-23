@@ -256,6 +256,11 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compare?userName=' + $scope.idUserLoggerIn + '&redirect';
 			}
+
+			if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+			}
 		} else {
 			if(buttonClick === 'favorites') {
 				$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
@@ -283,7 +288,7 @@ app.controller("BiamaController", ['$scope', "BiAMaInfoService","BiamaMaterialSe
 
 			if(buttonClick == 'regist') {
 				$scope.regist();
-				$window.location.href = '/BiAMa/registUser?userName=' + $scope.idUserLoggerIn + '&redirect';
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		}
 		

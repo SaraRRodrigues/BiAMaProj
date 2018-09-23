@@ -586,6 +586,7 @@ app.constant('jQuery', window.jQuery)
 
 	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
+		$scope.notificationNumber=false;
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
 		}else {
@@ -700,7 +701,7 @@ app.constant('jQuery', window.jQuery)
 			}
 			if(buttonClick == 'regist') {
 				$scope.regist();
-				$window.location.href = 'http://biamaweb.herokuapp.com/BiAMa/registUserMobile';
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
 			if(buttonClick === 'biamaPage') {
@@ -749,13 +750,6 @@ app.constant('jQuery', window.jQuery)
 			}
 		}
 		if(buttonClick === 'notification') {
-			var getNotifications = NotificationService.getMyNotifications($scope.idUserLoggerIn, function(infoNotification){});
-				getNotifications.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.notificationDetails;
-				$scope.notifications=data;
-				$scope.numberOfNotifications=$scope.notifications.length;
-			});
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
 		} else {

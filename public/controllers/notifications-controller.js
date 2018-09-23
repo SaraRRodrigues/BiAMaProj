@@ -62,16 +62,14 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
             $scope.loading = false;
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
-        
-            var getMyNotifications = MyNotificationService.getMyNotifications($scope.idUserLoggerIn,function(infoNotification){});
-            getMyNotifications.then(function(result) {
-                $scope.loading = false;
-                var data=result.data.notificationDetails;
-                $scope.myNotifications=data;   
-                $scope.notifications=data; 
-               
-            });
-            
+        });
+        var getMyNotifications = MyNotificationService.getMyNotifications($scope.idUserLoggerIn,function(infoNotification){});
+        getMyNotifications.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.notificationDetails;
+            $scope.myNotifications=data;   
+            $scope.notifications=data; 
+            $scope.numberOfNotifications=$scope.notifications.length;           
         });
     }
 	
@@ -175,11 +173,13 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 
     /* section of init session in user details section */
     $scope.showInitSessionDiv = function () {
+        $scope.notificationNumber=false;
 		if($scope.showInitSession){
-			$scope.showInitSession = false;
+            $scope.showInitSession = false;
 		}else {
 			$scope.showInitSession = true;
-		}
+        }
+        
     }
 
     /* confirmed user logged in */
@@ -243,6 +243,11 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
 			if(buttonClick == 'compare') {
 				$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 	
+            }
+            
+            if(buttonClick == 'regist') {
+				$scope.regist();
+				$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
 			}
 		} else {
             if(buttonClick === 'biamaPage') {

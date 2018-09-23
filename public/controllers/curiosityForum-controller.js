@@ -301,6 +301,11 @@ app.controller("CuriosityForumController", ['$scope', "$http", "CuriositiesServi
           $window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
         }
         
+        if(buttonClick == 'regist') {
+          $scope.regist();
+          $window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
+        }
+        
       } else {
         if(buttonClick === 'biamaPage') {
           $window.location.href = '/BiAMa/biamaPage?userName=' + $scope.idUserLoggerIn + '&redirect';

@@ -232,6 +232,10 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 			$window.location.href = '/BiAMa/compareMobile?userName=' + $scope.idUserLoggerIn;
 		}
 		
+		if(buttonClick == 'regist') {
+			$scope.regist();
+			$window.location.href = '/BiAMa/registUserMobile?userName=' + $scope.idUserLoggerIn;
+		}
 		if(buttonClick === 'notification') {
 			$scope.userDetails = true;
 			$scope.notificationNumber=true;
