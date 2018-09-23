@@ -444,14 +444,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* logout of user details section */
     $scope.logout = function(){
 		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error);
-
-		});*/
     }
    
     /* regist new user on user details section */
@@ -574,11 +566,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         return re.test(email);
     }
 
-    /* validate date of birth format */
-    $scope.validBirthDate = function(birthdate) {
-       /* var pattern =/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/;
-        return pattern.test(birthdate);*/
-    }
     /* -------------- END MOBILE -------------- */
 
 	/* init PerfilController  */

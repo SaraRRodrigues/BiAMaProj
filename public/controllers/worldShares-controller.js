@@ -92,8 +92,6 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
                 }
             } 
         }
-       
-        //$scope.uploadedFile($scope.imageWorldShare)
     }
     /* -------------- END DESKTOP -------------- */
 
@@ -230,24 +228,6 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
         
     }
 
-    /* create file on directory of image uploaded*/
-    $scope.uploadedFile=function(element) {
-        if(element !== undefined || element !== null || element !== '') {
-            $scope.currentFile = element.files[0];
-            /* var reader = new FileReader();
-
-            reader.onload = function(event) {
-                var output = jQuery('#output');
-                output.src = URL.createObjectURL(element.files[0]);
-            }
-            reader.readAsDataURL(element.files[0]); */
-       
-
-            var assetLocalPath=""+$scope.currentFile.name;
-            var file = new File([""],assetLocalPath);
-            console.log(file.name);
-        }
-    }
     /* -------------- END DESKTOP & MOBILE -------------- */
 
     /* -------------- INIT MOBILE -------------- */
@@ -491,14 +471,6 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* logout of user details section */
     $scope.logout = function(){
 		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error, '503 Service Unavailable');;
-
-		});*/
 	}
     
     /* regist new user on user details section */

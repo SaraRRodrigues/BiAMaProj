@@ -152,8 +152,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			$scope.loading=false;
 		});
-	
-		
 	}
 	
 	/* redirect to homepage with arrow */
@@ -186,14 +184,10 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 	/* save information of new biama in pdf file */
 	$scope.saveInfo = function(descBiama, locationBiama) {
-		//, categoryMaterial, colorMaterial, codeMaterial,imageMaterial,descriptionMaterial
 		$scope.showMaterials = false;
 
-		//$scope.categoryMaterial=categoryMaterial;
-		//&& categoryMaterial !== '' && colorMaterial !== '' && codeMaterial !== '' && imageMaterial !== '' && descriptionMaterial !== ''
 		if(descBiama !== '' && locationBiama !== '' ) {
 			
-			//$scope.codeMaterial = codeMaterial + "";
 			$scope.descriptionNewBiama = descBiama;
 			$scope.locationNewBiama = locationBiama;
 
@@ -221,74 +215,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.doc.setFontType("normal");
 			$scope.doc.text(25, 60, locationBiama);
 			/* END: location of my biama */
-
-			/* INIT: Materials of my biama */
-			/*doc.setFont("helvetica");
-			doc.setFontType("bold");
-			doc.text(20, 70, 'Materiais da sua BiAMa');*/
-
-			/* Category of material */
-			/*doc.setFont("helvetica");
-			doc.setFontType("italic");
-			doc.text(25, 80, 'Categoria');
-
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(30, 90, categoryMaterial);
-			/* END: category of my biama */
-
-			/* Color of material */
-			/*doc.setFont("helvetica");
-			doc.setFontType("italic");
-			doc.text(25, 100, 'Cor');
-
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(30, 110, colorMaterial);
-			/* END: color of my biama */
-
-			/* Code of material */
-			/*doc.setFont("helvetica");
-			doc.setFontType("italic");
-			doc.text(25, 120, 'Código');
-
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(30, 130, $scope.codeMaterial);
-			/* END: code of my biama */
-
-			/* Image of material */
-			/*doc.setFont("helvetica");
-			doc.setFontType("italic");
-			doc.text(25, 140, 'Imagem');
-
-			$scope.typeMaterial = $scope.categoryMaterial;
-
-			var category = $scope.categoryMaterial.charAt(0).toUpperCase() + $scope.categoryMaterial.slice(1);
-			var img = new Image;
-			img.onload = function() {
-				doc.addImage(this, 30, 150, 40, 30);
-				doc.setFont("courier");
-				doc.setFontType("normal");
-				//doc.save("test.pdf");
-				doc.save('suaBiama.pdf')
-			};
-			img.crossOrigin = "";  // for demo as we are at different origin than image
-			img.src = "../images/categories/" + category + '/' + $scope.imageMaterial;  // some random imgur image
-
-			/* END: image of my biama */
-
-			/* Description of material */
-			/*doc.setFont("helvetica");
-			doc.setFontType("italic");
-			doc.text(25, 190, 'Descrição');
-
-			doc.setFont("courier");
-			doc.setFontType("normal");
-			doc.text(30, 200, descriptionMaterial);
-			/* END: image of my biama */
-
-			/* END: Materials of my biama */
 			
 			$scope.insertMyBiamaOnDB();
 		}
@@ -746,14 +672,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
     /* logout of user details section */
     $scope.logout = function(){
 		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error);
-
-		});*/
     }
    
     /* regist new user on user details section */

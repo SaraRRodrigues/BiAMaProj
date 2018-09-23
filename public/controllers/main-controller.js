@@ -270,20 +270,8 @@ app.constant('jQuery', window.jQuery)
 					
 					$http.post('/insertUserDetails', data);
 				}
-		
-			//window.setTimeout("location.href = ''")
 		})
 		.catch(console.log)
-    	/*firebase.onuth().signInWithPopup(provider)
-            .then(result => {
-
-				const user = result.user;
-				//window.setTimeout("location.href = ''")
-            })
-			.catch(console.log)
-		*/
-		
-		//$scope.validateUserLogin();
 	}
 
 	/* login with facebook with firebase */
@@ -764,20 +752,6 @@ app.constant('jQuery', window.jQuery)
 	/* logout of user details section */
 	$scope.logout = function(){
 		$scope.confirmSession = false;
-		/*firebase.auth().signOut().then(function() {
-			// Sign-out successful.
-			debugger
-			//const user = result.user;
-			
-		
-		}, function(error) {
-			// An error happened.
-			console.log(error);
-
-		});*/
-		firebase.auth().signOut().then(() => {
-	
-		})
 	}
 
 	/* regist new user on user details section */
@@ -878,8 +852,10 @@ app.factory("MaterialService", function($q, $http, $timeout){
 		$http.get('/categories').then(successCallback, errorCallback);
 
         function successCallback(response){
-            //success code
-            deferred.resolve(response);
+			//success code
+			$timeout(function() {
+				deferred.resolve(response);
+			}, 2000); 
         }
         function errorCallback(error){
 			//error code
