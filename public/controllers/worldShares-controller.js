@@ -131,9 +131,17 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* redirect to homepage with arrow */
     $scope.goToHomePage = function() {
         if($scope.idUserLoggerIn !== undefined) {
-			location.href = '?userName=' + $scope.idUserLoggerIn;
+            if($scope.addWorldShare) {
+                $window.location.href = '/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
+            } else {
+                $window.location.href = '?userName=' + $scope.idUserLoggerIn;
+            }
 		} else {
-			location.href = '?username=' + 'anonymous';
+            if($scope.addWorldShare) {
+                $window.location.href = '/BiAMa/worldShare?userName=' + $scope.idUserLoggerIn + '&redirect';
+            } else {
+                $window.location.href = '?username=' + 'anonymous';
+            }
 		}
     }
 

@@ -63,30 +63,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.selectFav=true;
         
         if($scope.idUserLoggerIn !== "" && $scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== 'anonymous&redirect'  && $scope.idUserLoggerIn !== 'anonymous' ){
-            /* get favorites material */
-            var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
-            getMyFavorites.then(function(result) {
-
-                var data=result.data.favoriteDetails;
-                $scope.favoritesInfo=data;
-                $scope.favoriteDetails=[];
-                $scope.favoriteMaterials=[];
-                $scope.favoriteQuestions=[];
-    
-                for(var index=0; index<$scope.favoritesInfo.length; ++index) {
-                    if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
-                        if($scope.favoritesInfo[index].question_id == -1) {
-                            $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
-                        } else {
-                            $scope.favoriteQuestions.push($scope.favoritesInfo[index])
-                        }
-                    }
-                }
-
-             
-            });
-                
-            $scope.loading = false;
+          
         }
     }
     
@@ -137,6 +114,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* select type of favorite: question or material */
     $scope.selectFavorite = function(favorite){
+        $scope.loading=true;
         $scope.showFavoritesButton=false;
 		if(favorite == 'Materiais'){
             $scope.showMyQuestions = false;
@@ -170,6 +148,26 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                    }
                }
 
+                 /* get favorites material */
+            var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
+            getMyFavorites.then(function(result) {
+
+                var data=result.data.favoriteDetails;
+                $scope.favoritesInfo=data;
+                $scope.favoriteDetails=[];
+                $scope.favoriteMaterials=[];
+                $scope.favoriteQuestions=[];
+    
+                for(var index=0; index<$scope.favoritesInfo.length; ++index) {
+                    if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
+                        if($scope.favoritesInfo[index].question_id == -1) {
+                            $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
+                        } else {
+                            $scope.favoriteQuestions.push($scope.favoritesInfo[index])
+                        }
+                    }
+                }
+
                 if($scope.materialsCategories && $scope.favorites.length == 0) {
                     for(var index=0; index<$scope.materialsCategories.length; ++index){
                         for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
@@ -187,8 +185,12 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                     }
                 }
                 
-            $scope.loading = false;
-            $scope.initFavSuccess=false;
+
+                $scope.loading = false;
+                $scope.initFavSuccess=false;
+             
+            });
+               
         });
 
         /* get favorites in materials */

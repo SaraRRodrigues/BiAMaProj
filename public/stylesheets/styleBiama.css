@@ -43,6 +43,7 @@ a {
 .margin-right-6x0{margin-right: 194px;}
 .margin-right-6x1{margin-right: 198px;}
 .margin-right-7x{margin-right: 210px;}
+.margin-right-7x01{margin-right: 234px;}
 .margin-right-7x1{margin-right: 370px;}
 .margin-right-8x{margin-right: 382px;}
 
@@ -439,7 +440,7 @@ a {
 
 .labelNumberNotification {
   color: white;
-  margin-left: -19px;
+  margin-left: -26px;
 }
 .sectionScrollAddWorldShare {
   overflow-y: auto;
@@ -988,13 +989,26 @@ scrollOfDescription {
   font-size: 35px;
 }
 
-.favoriteButton {
+.favoriteButtonMobile {
   float: right;
 }
-.likeButton {
+
+.favoriteButton {
+  margin-top: -23px;
+  float: right;
+}
+
+.likeButtonMobile {
   margin-right: 3px;
   float: right;
 }
+
+.likeButton {
+  margin-top: -23px;
+  margin-right: 20px;
+  float: right;
+}
+
 .imageButton {
   float:left;
   border: 4px solid #eaab00;
@@ -1058,6 +1072,10 @@ scrollOfDescription {
   width:250px; 
   margin-right: -33px;
   float: right;
+}
+
+.descriptionAnswerFav {
+  text-align: right;
 }
 
 .borderZoomMaterial {
@@ -1130,6 +1148,12 @@ legend {
   border:none; 
   background: transparent; 
   outline: 0;
+}
+
+.inputDetailsPerfil {
+  border:none; 
+  outline: 0;
+  font-size: 17px;
 }
 
 .dateNotification {
@@ -1956,4 +1980,16 @@ aDisabled{
 
 .searchLocalMobile {
   font-size: 29px;
+}
+
+.marginsOfUserQuestionIcon {
+  margin-top: -3px;
+}
+
+.widthOfAnswerDiv {
+  width: 387px;
+}
+
+.widthOfLibraryCategory {
+  width: 252px;
 }

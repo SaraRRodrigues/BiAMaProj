@@ -190,32 +190,32 @@
                     </div>
                     <br><br><br><br><br>
                     <!-- username -->
-                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username" readonly/>
-                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="username" type="text" placeholder="Username"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="username" type="text" placeholder="Username" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="username" type="text" placeholder="Username"/>
                     <br>
                     <!-- e-mail -->
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail" readonly/>
-                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="email" type="email" placeholder="E-mail"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="email" type="email" placeholder="E-mail" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="email" type="email" placeholder="E-mail"/>
                     <br>
 
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                     <!-- edit mode -->
-                    <input ng-show="upgradeDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
+                    <input ng-show="upgradeDate" class="inputsCenter inputDetailsPerfil" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
                     <!-- view mode -->
-                    <input ng-show="editDate" class="inputsCenter inputDetails margin-left-3x1" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
+                    <input ng-show="editDate && !isEditable" class="inputsCenter inputDetailsPerfil" ng-model="birthdateValue" type="date" placeholder="DD-MM-AAAA"/>
                     <!-- date of birth of service -->
-                    <h6 ng-show="!editDate">[{birthdateValue}]</h6>
+                    <h6 ng-show="!editDate && !isEditable" class="inputDetailsPerfil">[{birthdateValue}]</h6>
                     <!-- password -->
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
-                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password" readonly/>
-                    <input ng-show="upgradeInformations" class="inputsCenter inputDetails" ng-model="password" type="password" placeholder="Password"/>
+                    <input ng-show="!upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="password" type="password" placeholder="Password" readonly/>
+                    <input ng-show="upgradeInformations" class="inputsCenter inputDetailsPerfil" ng-model="password" type="password" placeholder="Password"/>
                     <br>
                     <div class="lineWhite margin-bottom margin-top margin-right-50px margin-left-50px"></div>
                     
                     <!-- buttons to update and save data -->
-                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="clickUserDetails()">Alterar dados</button>
-                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
+                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left inputDetailsPerfil" ng-click="clickUserDetails()">Alterar dados</button>
+                    <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left inputDetailsPerfil" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
                     
                     <!-- error messages: user entry data on fields -->
                     <h5 ng-if="fieldsEmpty">Campos inválidos.</h5>

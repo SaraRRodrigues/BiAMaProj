@@ -187,7 +187,7 @@
 			<!-- show favorites questions -->
 			<div ng-if="!loading && showFavorites">
 				<div class="titlesOnCenter alignUserAndSearchIcons" ng-if="showMaterials" ng-repeat="fav in favorites">
-					<img class="margin-bottom-2x cursorPointer borderOfImages" ng-src="../images/categories/[{fav.}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="150px" alt="foto"/>
+					<img class="margin-bottom-2x cursorPointer borderOfImages" ng-src="../images/categories/[{fav.category}]/[{fav.image}]" ng-click="openFavorite(fav)" width="15%" height="150px" alt="foto"/>
 				</div>
 				<div class="titlesOnCenter colorOfErrorMessages" ng-if="favorites.length===0 && !initFavSuccess">
 					<h4>Não tem materiais associados</h4>
@@ -203,12 +203,12 @@
 					<div class="titlesOnCenter"> 
 						<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 					</div>
-					<div class="titlesOnCenter favoritesAlignQuestions">
-						<div ng-if="!showDivAnswer" class="margin-left-9x0">
+					<div class="titlesOnCenter">
+						<div ng-if="!showDivAnswer">
 							<!-- Question -->
-							<img class="imageButton" src="../images/user.png">
-							<div class="borderQuestion">
-								<label class="margin-right-6x0">Pergunta [{indexQuestion}]</label>
+							<div class="borderQuestion center-block widthOfAnswerDiv">
+								<img class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
+								<label class="margin-right-7x01">Pergunta [{indexQuestion}]</label>
 								<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
 							</div>
 							<!-- Answers -->
@@ -218,17 +218,17 @@
 									<label class="margin-right-6x0">Resposta [{answerQuestion.numberOfQuestion}]</label>
 									<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
 								</div>
-								<div ng-if="$index%2===0"  class="borderAnswerNoMargin">
-									<label class="margin-left-9x00">Resposta [{answerQuestion.numberOfQuestion}]</label>
+								<div ng-if="$index%2===0" class="borderAnswerNoMargin center-block widthOfAnswerDiv">
+									<label class="margin-left-9x01">Resposta [{answerQuestion.numberOfQuestion}]</label>
 									<img class="imageButtonLeft" src="../images/user.png">
-									<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+									<h5 class="descriptionAnswerFav">[{answerQuestion.text}]</h5>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="margin-left-9x01"> 
+					<div> 
 						<button ng-if="!showDivAnswer" class="buttonAnswer center-block" ng-click="clickOnAnswer()">Responder</button>
-						<div ng-if="showDivAnswer" class="titlesOnCenter answerDivFav">
+						<div ng-if="showDivAnswer" class="center-block titlesOnCenter widthOfAnswerDiv answerDivFav">
 							<textarea class="textAreaAnswerDiv"  ng-model="textAnswer" placeholder="..."></textarea><br>
 							<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
 						</div>
@@ -238,7 +238,7 @@
 			<!-- show favorites materials -->
 			<div ng-if="!showFavorites && !locationMaterial && !zoomInMaterial && !miniSearchResults && !showDetailsOfMaterial">
 				<div class="titlesOnCenter sectionScroll">
-					<img class="margin-bottom-2x margin-left-2x borderOfImages" ng-src="../images/categories/[{detailsFavorite.}]/[{detailsFavorite.image}]" width="40%" height="130px" alt="foto"/><br>
+					<img class="margin-bottom-2x margin-left-2x borderOfImages" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="40%" height="130px" alt="foto"/><br>
 					<div class="titlesOnCenter">
 						<!-- Favorite -->
 						<i ng-click="clickFavorite(detailsFavorite)" ng-if="detailsFavorite.isFavorite" class="fas fa-star cursorPointer iconMedium"></i>
@@ -291,7 +291,7 @@
 			<div ng-if="zoomInMaterial">
 				<div>
 					<i ng-click="closeMaterial()" class="fas fa-times float-right cursorPointer iconMedium"></i>
-					<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{detailsFavorite.}]/[{detailsFavorite.image}]" width="37%" height="350px" alt="foto"/><br>
+					<img class="margin-bottom-2x margin-left-2x borderZoomMaterial" ng-src="../images/categories/[{detailsFavorite.category}]/[{detailsFavorite.image}]" width="37%" height="350px" alt="foto"/><br>
 				</div>
 			</div>
 			<!-- show details of material if click on material -->
@@ -299,7 +299,7 @@
 				<div class="row container marginBottomMaterialDetails">
 					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium closeOpenMaterial margin-top-6x"></i>
 					<div class="col-md-3 order-md-1" ng-if="!showMaterial && !showProjectMaterial">
-						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
+						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 					</div>
 					<div class="col-md-3 order-md-1" ng-if="showMaterial && !showProjectMaterial">
 						<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
@@ -309,7 +309,7 @@
 					</div>
 					<div class="col-md-5 order-md-1 mb-2 detailsMaterialSearch">
 						<h4 class="margin-right-5x margin-top-6x textBold">Categoria</h4>
-						<h5 class="margin-right-5x">[{openedMaterial.}]</h5>
+						<h5 class="margin-right-5x">[{openedMaterial.category}]</h5>
 						<h4 class="margin-right-5x textBold">Código</h4>
 						<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
 						<h4 class="margin-right-5x textBold">Descrição</h4>

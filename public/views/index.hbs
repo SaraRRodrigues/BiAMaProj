@@ -122,10 +122,10 @@
 								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
 							</div>
 							<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material.name}]" width="35%" height="150px" alt="foto"/>
 							</div>
 							<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
+								<img class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material.name}]" width="35%" height="150px" alt="foto"/>
 							</div>
 						</div>
 					</div>
@@ -137,10 +137,10 @@
 							<img class="center-block borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="80%" height="200px" alt="foto"/>
 						</div>
 						<div class="col-md-5 order-md-1 margin-top-4x1" ng-if="showCategoryMaterial && !showProjectMaterial">
-							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="80%" height="200px" alt="foto"/>
+							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial.name}]" width="80%" height="200px" alt="foto"/>
 						</div>
 						<div class="col-md-5 order-md-1 margin-top-4x1" ng-if="showProjectMaterial">
-							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="80%" height="200px" alt="foto"/>
+							<img class="center-block margin-top-6x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial.name}]" width="80%" height="200px" alt="foto"/>
 						</div>
 						<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch marginOfDetailsMaterialMobile">
 							<h4 class="margin-right-5x margin-top-5x textBold">Categoria</h4>
@@ -148,7 +148,7 @@
 							<h4 class="margin-right-5x textBold">Código</h4>
 							<h5 class="margin-right-5x">[{openedMaterial.code}]</h5>
 							<h4 class="margin-right-5x textBold">Descrição</h4>
-							<h5 class="margin-right-5x sectionScrollDescMaterial widthOfDescMaterialMobile">[{openedMaterial.description}]</h5>
+							<h5 class="margin-right-5x sectionScrollDescMaterial widthOfDescMaterialMobile margin-bottom-3x">[{openedMaterial.description}]</h5>
 						</div>
 					</div>
 				</div>
@@ -443,10 +443,10 @@
 										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/[{material.category}]/[{material.name}]" width="35%" height="150px" alt="foto"/>
 									</div>
 									<div class="thumbnail" ng-if="showCategoryMaterial && !showProjectMaterial">
-										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material}]" width="35%" height="150px" alt="foto"/>
+										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/library/[{material.name}]" width="35%" height="150px" alt="foto"/>
 									</div>
 									<div class="thumbnail" ng-if="showProjectMaterial && !showCategoryMaterial">
-										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material}]" width="35%" height="150px" alt="foto"/>
+										<img class="cursorPointer" ng-click="openMaterial(material)" ng-src="../images/categories/projectMaterials/[{material.name}]" width="35%" height="150px" alt="foto"/>
 									</div>
 								</div>
 							</div>
@@ -459,10 +459,10 @@
 									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/[{openedMaterial.category}]/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 								</div>
 								<div class="col-md-5 order-md-1" ng-if="showCategoryMaterial && !showProjectMaterial">
-									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/library/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 								</div>
 								<div class="col-md-5 order-md-1" ng-if="showProjectMaterial">
-									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial}]" width="75%" height="250px" alt="foto"/>
+									<img class="margin-bottom-3x margin-top-5x borderZoomMaterial" ng-src="../images/categories/projectMaterials/[{openedMaterial.name}]" width="75%" height="250px" alt="foto"/>
 								</div>
 								<div class="col-md-2 order-md-1 mb-2 detailsMaterialSearch">
 									<h4 class="margin-right-5x margin-top-5x textBold">Categoria</h4>

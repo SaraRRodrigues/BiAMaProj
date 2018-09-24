@@ -188,16 +188,16 @@ app.constant('jQuery', window.jQuery)
 		$scope.getAllUsers.then(function(usersDB) {
 			$scope.loading=true;
 			$scope.users = usersDB.data.users;
-			
 			$scope.loading = false;
 
-			$scope.getMaterials.then(function(result) {
-				$scope.loading = true;
-				var data=result.data.categoryDetails;
-				$scope.materialsToSearch = data;
-				$scope.materials = $scope.materialsToSearch;
-				$scope.loading = false;
-			});
+		});
+
+		$scope.getMaterials.then(function(result) {
+			$scope.loading = true;
+			var data=result.data.categoryDetails;
+			$scope.materialsToSearch = data;
+			$scope.materials = $scope.materialsToSearch;
+			$scope.loading = false;
 		});
 	}
 	
@@ -421,7 +421,7 @@ app.constant('jQuery', window.jQuery)
 			var firstCategory = $scope.materialsToSearch[0].category;
 			for(var index=1; index<$scope.materialsToSearch.length; ++index) {
 				if(firstCategory !== $scope.materialsToSearch[index].category){
-					$scope.materials.push($scope.materialsToSearch[index].name);
+					$scope.materials.push($scope.materialsToSearch[index]);
 				} else {
 					break;
 				}
@@ -432,7 +432,7 @@ app.constant('jQuery', window.jQuery)
 		if(valueSearchMaterial === 'Projeto de materiais') {
 			for(var index=0; index<$scope.materialsToSearch.length; ++index) {
 				if($scope.materialsToSearch[index].code > parseInt('46')){
-					$scope.materials.push($scope.materialsToSearch[index].name);
+					$scope.materials.push($scope.materialsToSearch[index]);
 				} 
 			}	
 			$scope.showProjectMaterial=true;

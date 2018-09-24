@@ -167,7 +167,7 @@
 			<!-- show curiosity -->
 			<div ng-if="!loading && showCuriosity && !miniSearchResults && !showDetailsOfMaterial" class="sectionDetailsCuriosities sectionScroll">
 				<div ng-repeat="curiosity in descriptionCuriosity">
-					<img class="cursorPointer borderOfImageCuriosity" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="29%" height="30%" />
+					<img class="cursorPointer borderOfImageCuriosity" ng-src="../images/curiosities/[{curiosity.image}]" ng-click="openDetailsCuriosity(curiosity.image)" width="29%" height="36%" />
 					<h4 class="textBold">[{curiosity.title}]</h4>
 					<h6>[{curiosity.descriptionCuriosity}]</h6>
 				</div>
@@ -179,9 +179,9 @@
 				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial imageOnCenter cursorPointer borderOfImageCuriosity" ng-src="../images/curiosities/[{curiosityInfo.image}]" ng-click="openBigImage(curiosityInfo.image)" alt="foto"/><br>
 			</div>
 			<!-- if click on image get the big image -->
+			<i ng-if="showBigImage" ng-click="closeCuriosityImage()" class="fas fa-times cursorPointer float-right iconMedium"></i>
 			<div ng-if="showBigImage">
-				<i ng-click="closeCuriosityImage()" class="fas fa-times cursorPointer float-right iconMedium"></i>
-				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial center-block borderOfImageCuriosity" ng-src="../images/curiosities/[{bigImage}]"  width="30%" height="64%" alt="foto"/><br>
+				<img class="margin-bottom-2x margin-left-2x borderZoomMaterial center-block borderOfImageCuriosity margin-top-4x1" ng-src="../images/curiosities/[{bigImage}]"  width="30%" height="64%" alt="foto"/><br>
 			</div>
 			<!-- show details of material if click on material -->
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">

@@ -41,7 +41,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		$scope.createdMyBiama = false;
 		$scope.loading = true;
 		$scope.showBiamaInitPage = true;
-		$scope.biamaUp = false;
+		$scope.biamaUp = true;
 	}
 
 	/* verify if user is logged in */
@@ -79,7 +79,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.loading=true;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
-			$scope.loading=false;
 		}); 
 
 		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
@@ -108,18 +107,15 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
 			getMyBiamaInfo.then(function(result) {
 				$scope.loading=true;
-				$scope.biamaUp = true;
 				var data=result.data.biamaDetails;
 				$scope.descriptionsOfBiama=data;
-				$scope.loading=false;
 
 				var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
 				getBiamaInfo.then(function(result) {
 					$scope.loading=true;
 					var data=result.data.biamaDetails;
 					$scope.idLibrary=data[data.length-1].id_library+1;
-					$scope.loading=false;
-
+					
 					var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
 					getMyBiamaLibraryUser.then(function(result) {
 						$scope.loading=true;
@@ -149,8 +145,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					});
 				});
 			});
-
-			$scope.loading=false;
 		});
 	}
 	

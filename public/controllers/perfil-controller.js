@@ -91,11 +91,14 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.loading=false;
         });
 
-        var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
-        getMaterials.then(function(result) {
-            $scope.loading = false;
-            var data=result.data.comparationDetails;
-            $scope.materialsToSearch = data;
+        var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
+			getNotifications.then(function(result) {
+			$scope.loading=true;
+			var data=result.data.notificationDetails;
+			$scope.notifications=data;
+			$scope.numberOfNotifications=$scope.notifications.length;
+			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
+			$scope.loading=false;
 
         });
     }
@@ -247,51 +250,60 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
 
-        $scope.resultSearch=[];
-        var inputMiniValue = jQuery("#miniSearch").val(); 		
-        var inputMini = inputMiniValue.toLowerCase();
-        if(inputMini !== '') {
-            for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-                var resultMaterial = {
-                    'name': $scope.materialsToSearch[index].name,
-                    'category': $scope.materialsToSearch[index].category,
-                    'code': $scope.materialsToSearch[index].code,
-					'description': $scope.materialsToSearch[index].description
+        var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
+        getMaterials.then(function(result) {
+            $scope.loading = false;
+            var data=result.data.comparationDetails;
+            $scope.materialsToSearch = data;
+            $scope.resultSearch=[];
+            var inputMiniValue = jQuery("#miniSearch").val(); 		
+            var inputMini = inputMiniValue.toLowerCase();
+            if(inputMini !== '') {
+                for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+                    var resultMaterial = {
+                        'name': $scope.materialsToSearch[index].name,
+                        'category': $scope.materialsToSearch[index].category,
+                        'code': $scope.materialsToSearch[index].code,
+                        'description': $scope.materialsToSearch[index].description
+                    }
+                    if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+                        $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+                        $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+                        $scope.resultSearch.push(resultMaterial);
+                    } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+                        $scope.resultSearch.push(resultMaterial);
+                    }
                 }
-                if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
+          
+                if($scope.resultSearch.length == 0) {
+                    $scope.noResultsOnSearch=true;
+                } else {
+                    $scope.showInitSearch=false;
+                    $scope.showSearch=false;
+                    $scope.miniSearchResults = true;
+                    $scope.noResultsOnSearch=false;
+                    $scope.showResultsOfMiniSearch=true;
+                    $scope.showPerfilDetails=false;
                 }
             }
-      
-            if($scope.resultSearch.length == 0) {
-				$scope.noResultsOnSearch=true;
-			} else {
-				$scope.showInitSearch=false;
-				$scope.showSearch=false;
-				$scope.miniSearchResults = true;
-				$scope.noResultsOnSearch=false;
-                $scope.showResultsOfMiniSearch=true;
-                $scope.showPerfilDetails=false;
-			}
-        }
+        });
     }
     
     /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
+
 		if($scope.userDetails){
             $scope.upgradeDate=true;
             $scope.upgradeInformations=true;
             $scope.upgradeDate=false;
             $scope.userDetails=false;
-            
+            $scope.isEditable=false;
+           
 		}else {
-            $scope.upgradeDate=false;
+            $scope.upgradeDate=true;
+            $scope.isEditable=true;
             $scope.showSearch = false;
             $scope.upgradeInformations=true;
             $scope.userDetails=true;
@@ -336,19 +348,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* routes of click on links page */
     $scope.getRequest = function(buttonClick) {
-
-        if(buttonClick === 'notification') {
-			var getNotifications = NotificationPerfilService.getAllNotifications(function(infoNotification){});
-			getNotifications.then(function(result) {
-			$scope.loading=true;
-			var data=result.data.notificationDetails;
-			$scope.notifications=data;
-			$scope.numberOfNotifications=$scope.notifications.length;
-			$scope.currentNotificationId = $scope.notifications[$scope.notifications.length-1].id_notification;
-			$scope.loading=false;
-
-            });
-        }  
 		if($scope.isMobileView) {
 			if(buttonClick === 'favorites') {
 				$window.location.href = '/BiAMa/favoritesMobile?userName=' + $scope.idUserLoggerIn;
