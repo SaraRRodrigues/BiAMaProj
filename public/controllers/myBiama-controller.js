@@ -516,24 +516,38 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 		for(var index=0; index<$scope.users.length; ++index){
 			$scope.userName = $scope.users[index].username;
+			$scope.username = $scope.users[index].username;
 			$scope.userPassword = $scope.users[index].password;
-			$scope.userImage = $scope.users[index].image;
-			$scope.userEmail = $scope.users[index].email;
-			$scope.nameUser=$scope.users[index].name;
-			$scope.userBirthdate = $scope.users[index].birthdate;
-
-			var splitDateBirth = $scope.userBirthdate.split('/');
-			$scope.dayBirth = splitDateBirth[0];
-			$scope.monthBirth = splitDateBirth[1];
-			$scope.yearBirth = splitDateBirth[2];
 
 			if($scope.userName !== null && $scope.userName === username){
 				if($scope.userPassword !== null && $scope.userPassword === password){
+
+					$scope.userImage = $scope.users[index].image;
+					$scope.userEmail = $scope.users[index].email;
+					$scope.nameUser=$scope.users[index].name;
+					$scope.userBirthdate = $scope.users[index].birthdate;
+
+					var splitDateBirth = $scope.userBirthdate.split('/');
+					$scope.dayBirth = splitDateBirth[0];
+					$scope.monthBirth = splitDateBirth[1];
+					$scope.yearBirth = splitDateBirth[2];
+
 					$scope.userLoggedIn=$scope.users[index].username;
 					$scope.idUserLoggerIn=$scope.users[index].id;
 					$scope.confirmSession = true;
-					break;
+					
+					setTimeout(function() {
+						$(".alert").fadeOut().empty();
+					}, 2000);
+
+					$scope.clickInitSession=true;
+
+				} else {
+					$scope.errorLogin = true;
 				}
+				break;
+			} else {
+				$scope.incorrectCredentials=true;
 			}
 		}
     }

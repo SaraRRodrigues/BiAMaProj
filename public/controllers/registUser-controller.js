@@ -109,51 +109,56 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
     
     /* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
-		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
-			$scope.emptyData=true;
-		} else {
-
-			if(birthdate !== undefined && birthdate !== null) {
-				var idUser = $scope.users[$scope.users.length-1].id;
-				$scope.insertedIdUser=idUser;
-				var data = {
-					'idUser': parseInt(idUser)+1,
-					'name': name,
-					'email': email,
-					'birthdate': birthdate.toLocaleDateString(), 
-					'username': username,
-					'password': password,
-					'image': $scope.image
-				}
-				if($scope.image == undefined) {
-					data.image='noImage';
-				}
-
-				var validData = $scope.validDataNotEquals(data.username, data.password);
-			
-				if(validData) {
-					var validBirthdate = $scope.validDateOfBirth(data.birthdate);
-					if(validBirthdate){
-						$http.post('/insertUserDetails', data);
-						
-						var dataLibraryUser = {
-							'idUser': parseInt($scope.insertedIdUser)+1,
-							'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
+		if(name !== undefined && password !== undefined) {
+			if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
+				$scope.emptyData=true;
+			} else {
+	
+				if(birthdate !== undefined && birthdate !== null) {
+					var idUser = $scope.users[$scope.users.length-1].id;
+					$scope.insertedIdUser=idUser;
+					var data = {
+						'idUser': parseInt(idUser)+1,
+						'name': name,
+						'email': email,
+						'birthdate': birthdate.toLocaleDateString(), 
+						'username': username,
+						'password': password,
+						'image': $scope.image
+					}
+					if($scope.image == undefined) {
+						data.image='noImage';
+					}
+	
+					var validData = $scope.validDataNotEquals(data.username, data.password);
+				
+					if(validData) {
+						var validBirthdate = $scope.validDateOfBirth(data.birthdate);
+						if(validBirthdate){
+							$http.post('/insertUserDetails', data);
+							
+							var dataLibraryUser = {
+								'idUser': parseInt($scope.insertedIdUser)+1,
+								'idLibrary': ($scope.userLibrary[$scope.userLibrary.length-1].library_id)+1
+							}
+	
+							$http.post('/insertLibraryUser', dataLibraryUser);
+	
+							$window.setTimeout("location.href = ''")
+						} else {
+							$scope.underAge=true;
 						}
-
-						$http.post('/insertLibraryUser', dataLibraryUser);
-
-						$window.setTimeout("location.href = ''")
 					} else {
-						$scope.underAge=true;
+						$scope.usernameRepeated=true;
 					}
 				} else {
-					$scope.usernameRepeated=true;
+					$scope.emptyBirthdate=true;
 				}
-			} else {
-				$scope.emptyBirthdate=true;
 			}
+		} else {
+			$scope.emptyData=true;
 		}
+		
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
 
@@ -255,24 +260,38 @@ app.controller("RegistUserController", ['$scope',"RegistMaterialService","UserRe
 
 		for(var index=0; index<$scope.users.length; ++index){
 			$scope.userName = $scope.users[index].username;
+			$scope.username = $scope.users[index].username;
 			$scope.userPassword = $scope.users[index].password;
-			$scope.userImage = $scope.users[index].image;
-			$scope.userEmail = $scope.users[index].email;
-			$scope.nameUser=$scope.users[index].name;
-			$scope.userBirthdate = $scope.users[index].birthdate;
-
-			var splitDateBirth = $scope.userBirthdate.split('/');
-			$scope.dayBirth = splitDateBirth[0];
-			$scope.monthBirth = splitDateBirth[1];
-			$scope.yearBirth = splitDateBirth[2];
 
 			if($scope.userName !== null && $scope.userName === username){
 				if($scope.userPassword !== null && $scope.userPassword === password){
+
+					$scope.userImage = $scope.users[index].image;
+					$scope.userEmail = $scope.users[index].email;
+					$scope.nameUser=$scope.users[index].name;
+					$scope.userBirthdate = $scope.users[index].birthdate;
+
+					var splitDateBirth = $scope.userBirthdate.split('/');
+					$scope.dayBirth = splitDateBirth[0];
+					$scope.monthBirth = splitDateBirth[1];
+					$scope.yearBirth = splitDateBirth[2];
+
 					$scope.userLoggedIn=$scope.users[index].username;
 					$scope.idUserLoggerIn=$scope.users[index].id;
 					$scope.confirmSession = true;
-					break;
+					
+					setTimeout(function() {
+						$(".alert").fadeOut().empty();
+					}, 2000);
+
+					$scope.clickInitSession=true;
+
+				} else {
+					$scope.errorLogin = true;
 				}
+				break;
+			} else {
+				$scope.incorrectCredentials=true;
 			}
 		}
 	}

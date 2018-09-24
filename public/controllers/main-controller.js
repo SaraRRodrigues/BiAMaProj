@@ -237,41 +237,46 @@ app.constant('jQuery', window.jQuery)
 	$scope.loginWithGoogle = function() {
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(result => {
-			
-				$scope.idUserLoggerIn=parseInt($scope.users[$scope.users.length-1].id)+1;
-				$scope.userName = result.user.displayName;
-				$scope.userPassword = '';
-				$scope.nameUser = result.user.displayName;
-				$scope.userEmail = result.user.email;
-				$scope.userImage = "noImage";
-				$scope.dayBirth = '';
-				$scope.monthBirth = '';
-				$scope.yearBirth = '';
+		
+			$scope.nameAlreadyExists=false;
+			$scope.idUserLoggerIn=parseInt($scope.users[$scope.users.length-1].id)+1;
+			$scope.userName = result.user.displayName;
+			$scope.userPassword = '';
+			$scope.nameUser = result.user.displayName;
+			$scope.userEmail = result.user.email;
+			$scope.userImage = "noImage";
+			$scope.dayBirth = '';
+			$scope.monthBirth = '';
+			$scope.yearBirth = '';
 
-				for (var i=0; i < $scope.users.length; ++i) {
-					if($scope.users[i].username == $scope.nameUser) {
-						$scope.usernameDuplicated = true;
-						$scope.confirmSession = false;
-						break;
-					} else {
-						$scope.confirmSession = true;
-					}
-				}
-				if(!$scope.usernameDuplicated) {
-					var data = {
-						'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
-						'name': result.user.displayName,
-						'email' : result.user.email,
-						'birthdate': '',
-						'image': "noImage",
-						'username': result.user.displayName,
-						'password': ''
-					}
-					
-					$http.post('/insertUserDetails', data);
-				}
+			
 		})
 		.catch(console.log)
+
+		for(var index=0; index < $scope.users.length; ++index) {
+			if($scope.users[index].username == $scope.nameUser) {
+				$scope.nameAlreadyExists=true;
+				$scope.confirmSession = true;
+				$scope.showInitSession=false;
+				break;
+			}
+		}
+
+		if(!$scope.nameAlreadyExists) {
+			var data = {
+				'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
+				'name': $scope.nameUser,
+				'email' : $scope.userEmail,
+				'birthdate': '',
+				'image': "noImage",
+				'username': $scope.nameUser,
+				'password': ''
+			}
+			
+			$http.post('/insertUserDetails', data);
+			$scope.confirmSession = true;
+			$scope.showInitSession=false;
+		}
 	}
 
 	/* login with facebook with firebase */
@@ -624,7 +629,6 @@ app.constant('jQuery', window.jQuery)
 					break;
 				} else {
 					$scope.incorrectCredentials=true;
-					break;
 				}
 			}
 		});
