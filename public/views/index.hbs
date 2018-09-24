@@ -91,7 +91,7 @@
 						<img class="cursorPointer" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 						<input id="miniSearch" class="inputMinSearch widthOfSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
 						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok cursorPointer"></button>
-						<h5 ng-if="noResultsOnSearch titlesOnCenter colorOfErrorMessages">Não existem resultados.</h5>
+						<h5 class="titlesOnCenter colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 					</div>
 				</div>
 			</div> 

@@ -67,7 +67,7 @@
                 <div ng-if="showSearch" class="margin-top col-sm-3">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 					<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="90px">
-              		
+              		<h5 class="titlesOnCenter colorOfErrorMessages errorSizeMessagesMobile" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 			    </div>
                 <div class="col-sm-4 marginOfSearchInput">
 					<input id="miniSearch" class="inputMinSearch searchInputMobile sizeSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>

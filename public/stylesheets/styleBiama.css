@@ -1183,7 +1183,7 @@ scrollListMaterial {
 
 .sectionScrollTotalCompareMobile {
   padding:15px;
-  height:860px;
+  height:1211px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -1236,7 +1236,7 @@ scrollListMaterial {
 
 .sectionScrollCompare{
   padding:15px;
-  height:362px;
+  height:576px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -2001,4 +2001,13 @@ aDisabled{
 
 .width800px {
   width: 800px;
+}
+
+.comparePaddingDesc {
+  padding: 79px;
+}
+
+.errorSizeMessagesMobile {
+  width: 500px;
+  font-size: 32px;
 }

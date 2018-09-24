@@ -72,7 +72,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         
         $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
         $scope.getUserQuestionInfo.then(function(result) {
-            $scope.loading = true;
+           
             var data=result.data.questionDetails;
             $scope.myQuestions=data;
             $scope.questions=data;
@@ -111,14 +111,14 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
             $scope.calculateAnswerId($scope.details);
 
             $scope.indexQuestion=indexQuestion+1;
-                for(var index=0; index< $scope.myQuestions.length; ++index) {
-                    if($scope.myQuestions[index].id_question === questionId) {
-                        $scope.idQuestion=$scope.myQuestions[index].id_question;
-                        $scope.likeQuestion=$scope.myQuestions[indexQuestion].likesQuestion;
-                        $scope.getAnswersOfQuestion(index);
-                    }
+            for(var index=0; index< $scope.myQuestions.length; ++index) {
+                if($scope.myQuestions[index].id_question === questionId) {
+                    $scope.idQuestion=$scope.myQuestions[index].id_question;
+                    $scope.likeQuestion=$scope.myQuestions[indexQuestion].likesQuestion;
+                    $scope.getAnswersOfQuestion(index);
                 }
-            $scope.showMyQuestions = true;
+            }
+            $scope.showMyQuestions=true;
             /* reset indexQuestionAnswer: number of answer of questions */
             $scope.indexQuestionAnswer=1;
             $scope.loading = false;

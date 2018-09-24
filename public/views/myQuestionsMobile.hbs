@@ -64,7 +64,7 @@
                 <div ng-if="showSearch" class="margin-top col-sm-3">
                     <img class="float-right widthOfSearchIcon" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
 					<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="90px">
-              		
+              		<h5 class="titlesOnCenter colorOfErrorMessages errorSizeMessagesMobile" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 			    </div>
                 <div class="col-sm-4 marginOfSearchInput">
 					<input id="miniSearch" class="inputMinSearch searchInputMobile sizeSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
@@ -159,11 +159,11 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show number of questions -->
-            <div ng-if="!showMyQuestions" class="titlesOnCenter detailPageMobile" ng-repeat="question in myQuestionDetails track by $index">
+            <div ng-if="!showMyQuestions" class="titlesOnCenter detailPageMobile" ng-repeat="question in myQuestions track by $index">
                 <a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
                 <div class="separateQuestionsMobile"></div>
             </div>
-			<div class="titlesOnCenter colorOfErrorMessages" ng-if="myQuestionDetails.length==0">Não tem perguntas associadas.</div>
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="myQuestions.length==0">Não tem perguntas associadas.</div>
 			<!-- if click on question, show details of question -->
             <div ng-if="showMyQuestions">
                 <div class="titlesOnCenter"> 
