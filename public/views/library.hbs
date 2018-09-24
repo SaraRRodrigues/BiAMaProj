@@ -215,7 +215,7 @@
 				<div ng-if="!loading" class="titlesOnCenter">
 					<iframe class="noBorderIframe" ng-if="!zoomInIFrame" ng-src="[{locationsURL}]"  width="400" height="180" frameborder="0" allowfullscreen></iframe>
 					<iframe class="noBorderIframe" ng-if="zoomInIFrame" ng-src="[{locationsURL}]"  width="400" height="300" frameborder="0" allowfullscreen></iframe>
-					<div>
+					<div class="center-block width100px">
 						<i ng-click="expandIframe();" class="fas fa-map-marker-alt cursorPointer"></i>
 						<label class="margin-right-4x">[{descriptionLocation}]</label>
 
@@ -225,7 +225,7 @@
 							<div class="loadSchool" ng-if="loadingSchool">
 								<div class="loading-icon-footer-info"></div>
 							</div>
-							<div class="borderLocations" ng-if="!loadingSchool" ng-repeat="biama in schools">
+							<div class="borderLocations center-block widthOfLocation" ng-if="!loadingSchool" ng-repeat="biama in schools">
 								<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
 								<br>
 							</div>

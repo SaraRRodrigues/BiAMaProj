@@ -40,6 +40,7 @@ a {
 .margin-right-4x{margin-right: 60px;}
 .margin-right-5x{margin-right: 80px;}
 .margin-right-6x{margin-right: 147px;}
+.margin-right-6x00{margin-right: 188px;}
 .margin-right-6x0{margin-right: 194px;}
 .margin-right-6x1{margin-right: 198px;}
 .margin-right-7x{margin-right: 210px;}
@@ -1992,4 +1993,12 @@ aDisabled{
 
 .widthOfLibraryCategory {
   width: 252px;
+}
+
+.widthOfLocation {
+  width: 468px;
+}
+
+.width100px {
+  width: 100px;
 }

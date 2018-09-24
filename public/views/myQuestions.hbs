@@ -197,7 +197,7 @@
                             <!-- Question -->
                             <div class="borderQuestion center-block">
 								<img class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
-                                <label class="margin-right-6x">Pergunta [{indexQuestion}]</label>
+                                <label class="margin-right-6x00">Pergunta [{indexQuestion}]</label>
                                 <div ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()">
                                     <i class="far fa-star favoriteButton cursorPointer"></i>
                                 </div>
@@ -217,7 +217,7 @@
                                 <div ng-if="$index%2!==0" class="borderQuestion center-block">
 									<img ng-if="$index%2!==0" class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
 
-                                    <label class="margin-right-6x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                    <label class="margin-right-6x00">Resposta [{answerQuestion.numberOfQuestion}]</label>
                                     <div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
                                         <i class="fas fa-star favoriteButton cursorPointer"></i>
                                     </div>
@@ -245,7 +245,7 @@
                                     <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
                                         <i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
                                     </div>
-                                    <label class="margin-left-7x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+                                    <label class="margin-left-9x">Resposta [{answerQuestion.numberOfQuestion}]</label>
                                     <img class="imageButtonLeft" src="../images/user.png">
                                     <h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
                                 </div>

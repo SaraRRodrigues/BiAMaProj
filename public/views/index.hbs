@@ -78,19 +78,19 @@
 				<div class="header">
 					<div class="col-sm-4">
 						<div ng-if="!showSearch" class="margin-top-2x col-sm-1">
-							<img class="float-right margin-top-1x" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
-							<img class="float-right" ng-if="showSearch  && !userDetails" width="45" ng-click="clickTopSearch()" src="../images/search.png">
+							<img class="float-right margin-top-1x cursorPointer" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png">
+							<img class="float-right cursorPointer" ng-if="showSearch  && !userDetails" width="45" ng-click="clickTopSearch()" src="../images/search.png">
 						</div>
-						<img ng-if="!userDetails && !enableUserIcon && isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
-						<img ng-if="!userDetails && !isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+						<img class="cursorPointer" ng-if="!userDetails && !enableUserIcon && isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
+						<img class="cursorPointer" ng-if="!userDetails && !isMobileView" src="../images/user.png" alt="img" ng-click="clickUserDetails()">
 					</div>
 					<div ng-if="showSearch" class="margin-top col-sm-2">
 
-						<img  ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
-						<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
-						<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
+						<img class="cursorPointer" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
+						<img class="cursorPointer" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
+						<img class="cursorPointer" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 						<input id="miniSearch" class="inputMinSearch widthOfSearchInputMobile" ng-if="showSearch && !userDetails" type="text"></input>
-						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
+						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok cursorPointer"></button>
 						<h5 ng-if="noResultsOnSearch titlesOnCenter colorOfErrorMessages">Não existem resultados.</h5>
 					</div>
 				</div>
@@ -299,11 +299,11 @@
 					<nav class="positionOfNavDetails" id="searchMain">
 						<!-- search -->
 						<div ng-if="!isMobileView"  class="float-left padding-left-3x">
-							<img ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
-							<img ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
-							<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
+							<img class="cursorPointer" ng-if="!userDetails" src="../images/user.png" ng-click="clickUserDetails()" width="50px">
+							<img class="cursorPointer" ng-if="!showSearch && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
+							<img class="cursorPointer" ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 							<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
-							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
+							<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok cursorPointer"></button>
 							<h5 class="colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 						</div>
 
@@ -313,7 +313,7 @@
 								<div class="navDetailsUser" ng-if="userDetails"><br>
 									<!-- content if not init session -->
 									<div ng-if="!confirmSession">
-										<img src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
+										<img class="cursorPointer" src="../images/userDetails.PNG" ng-click="clickUserDetails()"><br><br>
 										<span title="Tem de iniciar sessão">
 											<a href="" class="aDisabled" ng-click="selectOption()" style=" cursor:not-allowed;opacity:0.5;text-decoration: none;">Favoritos</a><br>
 										</span>

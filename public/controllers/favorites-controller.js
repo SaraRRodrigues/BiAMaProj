@@ -134,21 +134,21 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* open favorites button */
     $scope.openFavoritesButton = function(){
-           /* get information of material and of library - when i do get library */
-           var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
-           getMaterialInfo.then(function(result) {
+        /* get information of material and of library - when i do get library */
+        var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
+        getMaterialInfo.then(function(result) {
+            $scope.loading = true;
+            var data=result.data.materialsCategories;
+            $scope.materialsCategories=data;
+            for(var index=0; index<$scope.materialsCategories.length; ++index){
+                if(index<$scope.MINIMUM_CATEGORIES){
+                    $scope.categories.push($scope.materialsCategories[index])
+                } else {
+                    break;
+                }
+            }
 
-               var data=result.data.materialsCategories;
-               $scope.materialsCategories=data;
-               for(var index=0; index<$scope.materialsCategories.length; ++index){
-                   if(index<$scope.MINIMUM_CATEGORIES){
-                       $scope.categories.push($scope.materialsCategories[index])
-                   } else {
-                       break;
-                   }
-               }
-
-                 /* get favorites material */
+                    /* get favorites material */
             var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
             getMyFavorites.then(function(result) {
 
@@ -157,7 +157,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 $scope.favoriteDetails=[];
                 $scope.favoriteMaterials=[];
                 $scope.favoriteQuestions=[];
-    
+
                 for(var index=0; index<$scope.favoritesInfo.length; ++index) {
                     if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
                         if($scope.favoritesInfo[index].question_id == -1) {
@@ -188,7 +188,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
                 $scope.loading = false;
                 $scope.initFavSuccess=false;
-             
+                
             });
                
         });
@@ -748,7 +748,7 @@ app.factory("LibraryMaterialInfoService", function($q, $http, $timeout){
            //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 3000); 
 
        }
        function errorCallback(error){
@@ -896,7 +896,7 @@ app.factory("FavoritesService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 3000); 
+            }, 2000); 
 
         }
         function errorCallback(error){

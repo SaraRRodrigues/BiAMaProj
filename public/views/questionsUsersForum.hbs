@@ -109,7 +109,7 @@
 						<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 						<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
 						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
-						<h5 ng-if="noResultsOnSearch">Não existem resultados.</h5>
+						<h5 class="colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 					</div> 
 
 					<!-- section of user details -->
@@ -223,7 +223,7 @@
 				<a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
 				<div class="center-block lineSeparateQuestionMobile"></div>
 			</div>
-			<div ng-if="questions.length==0">Não existem perguntas neste Fórum.</div>
+			<div class="colorOfErrorMessages" ng-if="questions.length==0">Não existem perguntas neste Fórum.</div>
 			<!-- if click on question, show details of question -->
 			<div ng-if="showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial">
 				<div class="titlesOnCenter"> 
@@ -300,11 +300,11 @@
 						</div>
 					</div>
 					<!-- add question to favorites -->
-					<div class="margin-top-3x" ng-if="goToLogin">
+					<div class="margin-top-3x colorOfErrorMessages" ng-if="goToLogin">
 						<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 					</div>
 					<!-- put likes on question -->
-					<div ng-if="goToLogin">
+					<div ng-if="goToLogin colorOfErrorMessages">
 						<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 					</div>
 				</div>
