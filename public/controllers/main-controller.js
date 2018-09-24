@@ -624,6 +624,7 @@ app.constant('jQuery', window.jQuery)
 					break;
 				} else {
 					$scope.incorrectCredentials=true;
+					break;
 				}
 			}
 		});
