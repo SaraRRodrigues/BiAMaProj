@@ -218,43 +218,50 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	$scope.insertMyBiamaOnDB = function() {
 		$scope.clickOnInsertBiama=true;
 		$scope.locationIframe = '';
+		$scope.locationNotExists = true;
+
 		if($scope.locationNewBiama == 'Instituto Superior Técnico') {
 			$scope.locationIframe = 'embed?pb=!1m18!1m12!1m3!1d3112.171639197157!2d-9.140899049968251!3d38.73682336389977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a24aa81f17%3A0x880c7c731a54423!2sInstituto+Superior+T%C3%A9cnico!5e0!3m2!1spt-PT!2spt!4v1529528847654';
+			$scope.locationNotExists = false;
 		} else if($scope.locationNewBiama == 'Escola Superior de Educação de Lisboa') {
 			$scope.locationIframe = 'embed?pb=!1m18!1m12!1m3!1d6223.537995391765!2d-9.19961064513007!3d38.74606284620067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eccd41dcab0e3%3A0x2f691f9dce18f0f5!2sEscola+Superior+de+Educa%C3%A7%C3%A3o+de+Lisboa%2C+Lisboa!5e0!3m2!1spt-PT!2spt!4v1529528684919';
+			$scope.locationNotExists = false;
 		} else if($scope.locationNewBiama == 'Instituto Superior de Engenharia de Lisboa') {
 			$scope.locationIframe = '';
+			$scope.locationNotExists = false;
 		}
-		var data = {
-			'idLibrary': $scope.idLibrary,
-			'location': $scope.locationIframe,
-			'description':  $scope.descriptionNewBiama,
-			'locationDescription': $scope.locationNewBiama
-		}
-		$http.post('/insertMyBiama', data);
-		$scope.createdMyBiama = true;
-		
-		if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
-			$scope.registUser = true;
-		} else {
+
+		if(!$scope.locationNotExists) {
 			var data = {
-				'id_notification': parseInt($scope.currentNotificationId)+1,
-				'text_notification': 'A sua BiAMa foi criada',
-				'date_notification': 'Agora mesmo',
-				'insert_notification': 'yes',
-				'id_user': $scope.idUserLoggerIn
+				'idLibrary': $scope.idLibrary,
+				'location': $scope.locationIframe,
+				'description':  $scope.descriptionNewBiama,
+				'locationDescription': $scope.locationNewBiama
 			}
-			$http.post('/insertNotifications', data);
-			window.setTimeout("location.href = ''")
+			$http.post('/insertMyBiama', data);
+			$scope.createdMyBiama = true;
+
+			if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
+				$scope.registUser = true;
+			} else {
+				var data = {
+					'id_notification': parseInt($scope.currentNotificationId)+1,
+					'text_notification': 'A sua BiAMa foi criada',
+					'date_notification': 'Agora mesmo',
+					'insert_notification': 'yes',
+					'id_user': $scope.idUserLoggerIn
+				}
+				$http.post('/insertNotifications', data);
+				window.setTimeout("location.href = ''")
+			}
+	
+			$scope.showBiamaInitPage = false;
+			$scope.showMyBiamaConf = false;
+	
+			setTimeout(function() {
+				$(".myBiama").fadeOut().empty();
+			}, 2000);
 		}
-
-		$scope.showBiamaInitPage = false;
-		$scope.showMyBiamaConf = false;
-
-		setTimeout(function() {
-			$(".myBiama").fadeOut().empty();
-		}, 2000);
-
 	}
 
 	/* created user: insert user on database */

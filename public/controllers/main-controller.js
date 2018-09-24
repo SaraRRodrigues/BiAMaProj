@@ -445,8 +445,6 @@ app.constant('jQuery', window.jQuery)
 		}
 		$scope.showDetailsOfMaterial=false;
 		$scope.showMaterials=true;
-	
-
 	}
 	/* -------------- END DESKTOP & MOBILE -------------- */
 
@@ -482,6 +480,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.openMaterialDetail=false; 
 		$scope.showSearch=false;
 		$scope.enableUserIcon=false;
+		
 	}
 
 	/* open and close the small search icon */

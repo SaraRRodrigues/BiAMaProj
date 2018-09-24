@@ -187,17 +187,15 @@
                     <h1 class="subtitles">Comparar Materiais</h1>
                 </div>
                 <div ng-if="showMaterialsCompare" class="sectionScrollTotalCompare">
-                    <div ng-repeat="material in materialToCompare track by $index" class="titlesOnCenter sectionScrollCompare margin-top-2x">     
-                        <img class="center-block borderOfImageCuriosity margin-bottom-2x cursorPointer cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="30%" height="150px" alt="foto"/>
-						<br>
-						<figure class="center-block">
-                            <figcaption class="col-md-1 descCompare textBold">Categoria</figcaption>
-							<figcaption class="col-md-1 descCompare">[{material.category}]</figcaption>
-							<figcaption class="col-md-1 descCompare textBold"> Código</figcaption>
-							<figcaption class="col-md-1 descCompare"> [{material.code}]</figcaption><br><br>
-						
-							<figcaption class="descCompare">[{material.text}]</figcaption>
-                        </figure>
+                    <div ng-repeat="material in materialToCompare track by $index" class="col-md-6 titlesOnCenter sectionScrollCompare margin-top-2x">     
+						<figcaption>
+							<img class="center-block borderOfImageCuriosity margin-bottom-2x cursorPointer cursorPointer" ng-src="../images/categories/[{material.category}]/[{material.image}]" width="30%" height="150px" alt="foto"/>
+							Categoria: [{material.category}], Código: [{material.code}]
+						</figcaption>
+
+						<div class="center-block">
+							<h5 class="descCompare col-md-12">[{material.text}]</h5>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -208,8 +206,14 @@
 				<div ng-if="loading">
                     <div class="loading-icon-footer-info"></div>
                 </div>
-                <div ng-if="doLogin">
+                <div class="titlesOnCenter colorOfErrorMessages" ng-if="doLogin">
                     <h4>Efetue login para obter comparações entre materiais.</h4>
+                </div>
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="compareMaterialNotExists">
+                    <h4>Não existe esse material.</h4>
+                </div>
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptySearch">
+                    <h4>Pesquisa vazia. Volte a tentar, por favor.</h4>
                 </div>
             </div>
 			<!-- show details of material if click on material -->

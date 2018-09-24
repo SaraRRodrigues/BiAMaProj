@@ -108,7 +108,10 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 						'text': $scope.materialComparation[index].description
 					}
 					$scope.materialToCompare.push(result);
+					$scope.compareMaterialNotExists=false;
 					break;
+				} else {
+					$scope.compareMaterialNotExists=true;
 				}
 			}
 			if($scope.materialToCompare.length > 0) {
@@ -116,6 +119,8 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 			} else {
 				$scope.showMaterialsCompare=false;
 			}
+		} else {
+			$scope.emptySearch=true;
 		}
     }
     /* -------------- END DESKTOP & MOBILE -------------- */

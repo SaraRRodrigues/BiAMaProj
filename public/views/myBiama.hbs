@@ -200,6 +200,10 @@
 					<input id="location" class="biamaConfigFields" ng-model="locationNewBiama" type="text" placeholder="Selecione a localização da sua BiAMa" required></input><br><br>
 					
 					<button type="submit" ng-click="saveInfo(descriptionNewBiama,locationNewBiama)">Guardar informação</button>
+					<div class="titlesOnCenter colorOfErrorMessages" ng-if="locationNotExists">
+						<h5>Selecione uma localização existente.</h5>
+					</div>
+				
 				</form>
 				<!-- section of regist user -->
 				<div ng-if="registUser">
