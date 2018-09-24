@@ -67,14 +67,6 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
             $scope.worldShareItems.push(data[index].image);
             $scope.worldShareData.push(data[index]);
         }
-
-        $scope.getMaterials = WorldSharesForumMaterialService.getMaterialComparation(function(infoMaterial){});
-        $scope.getMaterials.then(function(result) {
-          $scope.loading = false;
-          var data=result.data.comparationDetails;
-          $scope.materialsToSearch = data;
-          
-        });
       });
     }
 
@@ -191,45 +183,52 @@ app.controller("WorldShareForumController", ['$scope',"WorldSharesForumService",
       $scope.resultSearch=[];
       var inputMiniValue = jQuery("#miniSearch").val(); 		
       var inputMini = inputMiniValue.toLowerCase();
-      if(inputMini !== '') {
-        for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-            var resultMaterial = {
-              'name': $scope.materialsToSearch[index].name,
-              'category': $scope.materialsToSearch[index].category,
-              'code': $scope.materialsToSearch[index].code,
-					    'description': $scope.materialsToSearch[index].description
+      $scope.getMaterials = WorldSharesForumMaterialService.getMaterialComparation(function(infoMaterial){});
+      $scope.getMaterials.then(function(result) {
+          $scope.loading = false;
+          var data=result.data.comparationDetails;
+          $scope.materialsToSearch = data;
+          
+          if(inputMini !== '') {
+            for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+                var resultMaterial = {
+                  'name': $scope.materialsToSearch[index].name,
+                  'category': $scope.materialsToSearch[index].category,
+                  'code': $scope.materialsToSearch[index].code,
+                  'description': $scope.materialsToSearch[index].description
+                }
+                if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
+                  $scope.resultSearch.push(resultMaterial);
+                }
             }
-            if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-              $scope.resultSearch.push(resultMaterial);
-            } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-              $scope.resultSearch.push(resultMaterial);
-            } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-              $scope.resultSearch.push(resultMaterial);
-            } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-              $scope.resultSearch.push(resultMaterial);
+            
+            if($scope.resultSearch.length == 0) {
+              $scope.noResultsOnSearch=true;
+            } else {
+              $scope.showInitSearch=false;
+              $scope.showSearch=false;
+              $scope.miniSearchResults = true;
+              $scope.noResultsOnSearch=false;
+              $scope.showResultsOfMiniSearch=true;
+              $scope.showWorldSharesDetails=false;
+              $scope.showCategory=true;
+              $scope.showMaterialDetails=false;
+              $scope.showLocation=false;
+              $scope.showForum = false;
+              $scope.showAllQuestions=false;
+              $scope.showQuestionDetails=false;
+    
+              $scope.showCuriosity=false;
+              $scope.showWorldShares=false;
             }
-        }
-        
-        if($scope.resultSearch.length == 0) {
-          $scope.noResultsOnSearch=true;
-        } else {
-          $scope.showInitSearch=false;
-          $scope.showSearch=false;
-          $scope.miniSearchResults = true;
-          $scope.noResultsOnSearch=false;
-          $scope.showResultsOfMiniSearch=true;
-          $scope.showWorldSharesDetails=false;
-          $scope.showCategory=true;
-          $scope.showMaterialDetails=false;
-          $scope.showLocation=false;
-          $scope.showForum = false;
-          $scope.showAllQuestions=false;
-          $scope.showQuestionDetails=false;
-
-          $scope.showCuriosity=false;
-          $scope.showWorldShares=false;
-        }
-      }
+          }
+      });
     }
 
     /* open and close the section of user details and search icon */

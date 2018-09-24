@@ -114,7 +114,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* action of update information of user details */
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
-        debugger
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {

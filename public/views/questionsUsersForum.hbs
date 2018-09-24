@@ -215,7 +215,7 @@
 				<h1 ng-if="!showQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 			</div>
 			<!-- loading spinner -->
-			<div ng-if="loading">
+			<div ng-if="!showQuestionDetails && loading">
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show number of questions -->
@@ -229,7 +229,11 @@
 				<div class="titlesOnCenter"> 
 					<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
 				</div>
-				<div class="titlesOnCenter">
+				<!-- loading spinner -->
+				<div ng-if="loading">
+					<div class="loading-icon-footer-info"></div>
+				</div>
+				<div class="titlesOnCenter" ng-if="!loading">
 					<div ng-if="!showDivAnswer">
 						<!-- Question -->
 						<div class="borderQuestion center-block">
@@ -304,7 +308,7 @@
 						<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
 					</div>
 					<!-- put likes on question -->
-					<div ng-if="goToLogin colorOfErrorMessages">
+					<div class="colorOfErrorMessages" ng-if="goToLogin">
 						<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 					</div>
 				</div>
