@@ -114,6 +114,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* action of update information of user details */
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
+        debugger
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
@@ -131,9 +132,16 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
         if(birthdate === undefined || birthdate === '') {
             $scope.invalidDate=true;
         } else {
-            if(!$scope.editDate && birthdate.includes("/") ){
-                $scope.birthdateValue=birthdate;      
-            } else if($scope.editDate){
+            if(!$scope.editDate){
+                if(!(birthdate instanceof Date)) {
+                    if(birthdate.includes("/")) {
+                        $scope.birthdateValue=birthdate; 
+                    }
+                } else {
+                    $scope.birthdateValue=birthdate.toLocaleDateString();
+                }
+                     
+            }  else if($scope.editDate){
                 
                 if(birthdate !== ''){
                     if(birthdate instanceof Date) {
@@ -293,13 +301,12 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     
     /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
-
 		if($scope.userDetails){
             $scope.upgradeDate=true;
             $scope.upgradeInformations=true;
-            $scope.upgradeDate=false;
+            $scope.upgradeDate=true;
             $scope.userDetails=false;
-            $scope.isEditable=false;
+           // $scope.isEditable=false;
            
 		}else {
             $scope.upgradeDate=true;
@@ -308,6 +315,10 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.upgradeInformations=true;
             $scope.userDetails=true;
         }
+        if ($scope.birthdateValue !== '') {
+            $scope.birthdateValue='';
+        }
+        
     }
 
     /* section of init session in user details section */

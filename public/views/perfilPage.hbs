@@ -218,11 +218,11 @@
                     <button class="inputsCenter buttonBorder margin-top margin-bottom margin-left inputDetailsPerfil" ng-click="doneUpgrade(username, email, birthdateValue, password, imageUser)">Salvar</button>		
                     
                     <!-- error messages: user entry data on fields -->
-                    <h5 ng-if="fieldsEmpty">Campos inválidos.</h5>
-                    <h5 ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
-                    <h5 ng-if="invalidDate">Data de nascimento inválida.</h5>
-                    <h5 ng-if="usernameRepeatedPerfil">Nome já existente.</h5>
-                    <h5 ng-if="underAgePerfil">Para efetuar o registo tem de ser maior de idade.</h5>
+                    <h5 class="colorOfErrorMessages" ng-if="fieldsEmpty">Campos inválidos.</h5>
+                    <h5 class="colorOfErrorMessages" ng-if="!fieldsEmpty && invalidEmail">Email inválido.</h5>
+                    <h5 class="colorOfErrorMessages" ng-if="invalidDate">Data de nascimento inválida.</h5>
+                    <h5 class="colorOfErrorMessages" ng-if="usernameRepeatedPerfil">Nome já existente.</h5>
+                    <h5 class="colorOfErrorMessages" ng-if="underAgePerfil">Para efetuar o registo tem de ser maior de idade.</h5>
                 </div>
 
 				<div ng-if="updatedData && clickSaveData" class="updateData alert-success center-block sucessMessageLogin titlesOnCenter">
