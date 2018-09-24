@@ -449,7 +449,8 @@ app.constant('jQuery', window.jQuery)
 	/* open material of small search result */
 	$scope.openMaterial = function(material) {
 		$scope.showDetailsOfMaterial=true;
-		$scope.showMaterials=false;
+		$scope.showMaterials=true;
+		$scope.search=true;
 		$scope.openedMaterial=material;
 		$scope.miniSearchResults=false;
 	}

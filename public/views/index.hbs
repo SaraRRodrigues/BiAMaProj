@@ -114,7 +114,7 @@
 				<div ng-if="loading">
 					<div class="loading-icon-footer-info"></div>
 				</div>
-				<div ng-if="showMaterials" class="margin-top-2x">
+				<div ng-if="showMaterials && !showDetailsOfMaterial" class="margin-top-2x">
 					<i ng-click="closeMaterial()" class="fas fa-times cursorPointer float-right iconMedium iconCloseOnSearchMobile"></i>
 					<div class="padding sectionScrollSearchIndexMobile">
 						<div class="col-md-4" ng-repeat="material in materials track by $index">
@@ -435,7 +435,7 @@
 							<div class="loading-icon-footer-info"></div>
 						</div>
 						<!-- show result of search -->
-						<div ng-if="search && showMaterials && !isMobileView" class="margin-top-4x1">
+						<div ng-if="search && showMaterials && !isMobileView && !showDetailsOfMaterial" class="margin-top-4x1">
 							<i ng-click="closeMaterial()" class="fas fa-times cursorPointer iconCloseMaterialSearch float-right iconMedium"></i>
 							<div class="padding sectionScrollSearch">
 								<div class="col-md-4" ng-repeat="material in materials track by $index">
