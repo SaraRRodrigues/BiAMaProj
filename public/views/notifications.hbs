@@ -64,7 +64,7 @@
 						<img ng-if="showSearch  && !userDetails" ng-click="clickTopSearch()" src="../images/search.png" width="45px">
 						<input id="miniSearch" class="inputMinSearch" ng-if="showSearch && !userDetails" type="text"></input>
 						<button ng-if="showSearch && !userDetails" ng-click="initMiniSearch()" class="buttonOkMiniSearch glyphicon glyphicon-ok "></button>
-						<h5 class="titlesOnCenter colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
+						<h5 class="titlesOnCenter colorOfErrorMessages" class="colorOfErrorMessages" ng-if="noResultsOnSearch">Não existem resultados.</h5>
 					</div> 
 
 					<!-- section of user details -->
