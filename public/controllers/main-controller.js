@@ -545,10 +545,10 @@ app.constant('jQuery', window.jQuery)
 
 
 				var type = ($scope.materialsToSearch[index].type)
-				var type = type.toLowerCase();
-				var color = ($scope.materialsToSearch[index].color).toLowerCase();
-				var category = ($scope.materialsToSearch[index].category).toLowerCase();
-				var description = ($scope.materialsToSearch[index].description).toLowerCase();
+				//var type = type.toLowerCase();
+				var color = ($scope.materialsToSearch[index].color);
+				var category = ($scope.materialsToSearch[index].category);
+				var description = ($scope.materialsToSearch[index].description);
 
 				if(type.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
