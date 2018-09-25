@@ -295,7 +295,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					}
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
-					
+					$scope.insertUserSuccess=true;
 				} else {
 					$scope.underAge=true;
 				}
@@ -304,7 +304,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			}
 
 			/* insert notification */
-			if($scope.createdMyBiama) {
+			if($scope.createdMyBiama && $scope.insertUserSuccess) {
 				if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
 					var data = {
 						'id_notification': parseInt($scope.currentNotificationId)+1,
@@ -320,7 +320,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 				setTimeout(function() {
 					$(".myBiama").fadeOut().empty();
 				}, 2000);
-				
+
 				$scope.doc.save('suaBiama.pdf');
 
 			}
