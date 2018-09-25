@@ -169,7 +169,7 @@
 				<div class="imageLeft">
 					<img class="margin-top-3x" src="../images/leftBiama.png"/>
 				</div>
-				<div ng-if="!loading">
+				<div ng-if="!loadingSearch">
 					<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
 					<h1 ng-if="!doLogin" class="subtitles">Favoritos
 						<i ng-click="openFavoritesButton()" class="fas fa-caret-down cursorPointer"></i>
@@ -184,6 +184,10 @@
 			</div>
 			<h3 class="alignCenter" ng-if="selectFav && !loading">Selecione uma opção de favoritos</h3>
 
+			<!-- loading spinner -->
+			<div ng-if="loadingSearch">
+				<div class="loading-icon-footer-info"></div>
+			</div>
 			<!-- loading spinner -->
 			<div ng-if="loading">
 				<div class="loading-icon-footer-info"></div>

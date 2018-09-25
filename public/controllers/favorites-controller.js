@@ -30,6 +30,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         $scope.pathURL='https://www.google.com/maps/';
         $scope.likes=0;
         $scope.indexQuestionAnswer=1;
+        $scope.loadingSearch = false;
     
         $scope.categories= [];
         $scope.favorites = [];
@@ -502,7 +503,10 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         var inputMiniValue = jQuery("#miniSearch").val(); 		
         var inputMini = inputMiniValue.toLowerCase();
 
-        $scope.loading = true;
+        $scope.loadingSearch = true;
+        $scope.selectFav=false;
+        $scope.showMaterials=false;
+        $scope.showMyQuestions=false;
         
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
@@ -568,7 +572,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.detailsFavMaterial=false;
             $scope.detailsFavQuestion=false;
             $scope.showMyQuestions=false;
-            $scope.loading = false;
+            $scope.loadingSearch = false;
         });
     }
 
