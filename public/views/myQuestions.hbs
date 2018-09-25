@@ -186,87 +186,88 @@
 						<div class="center-block separateQuestions"></div>
 					</div>
 					<div class="titlesOnCenter colorOfErrorMessages" ng-if="myQuestions.length==0">Não tem perguntas associadas.</div>
-				</div>
-                <!-- if click on question, show details of question -->
-                <div ng-if="showMyQuestions">
-					<div ng-if="insertedAnswer && clickOnPutAnswer" class="myQuestion alert-success center-block sucessMessageLogin titlesOnCenter">
-						Resposta enviada com sucesso.
-					</div>
-					<div ng-if="!insertedAnswer && clickOnPutAnswer" class="myQuestion alert-danger center-block sucessMessageLogin titlesOnCenter">
-						Erro a enviar a resposta.
-					</div>
-                    <div class="titlesOnCenter"> 
-                        <h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
-                    </div>
-                    <div class="titlesOnCenter">
-                        <div ng-if="!showDivAnswer">
-                            <!-- Question -->
-                            <div class="borderQuestion center-block">
-								<img class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
-                                <label class="margin-right-6x00">Pergunta [{indexQuestion}]</label>
-                                <div ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()">
-                                    <i class="far fa-star favoriteButton cursorPointer"></i>
-                                </div>
-                                <div ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
-                                    <i class="fas fa-star favoriteButton cursorPointer"></i>
-                                </div>
-                                <div ng-if="questionFavorite.like==0" ng-click="addLikeQuestion()">
-                                    <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
-                                </div>
-                                <div ng-if="questionFavorite.like>0" ng-click="removeLikeQuestion()">
-                                    <i class="far fa-thumbs-up likeButton cursorPointer" ></i>
-                                </div>
-                                <h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
-                            </div>
-                            <!-- Answers -->
-                            <div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
-                                <div ng-if="$index%2!==0" class="borderQuestion center-block">
-									<img ng-if="$index%2!==0" class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
+					<!-- if click on question, show details of question -->
+					<div ng-if="showMyQuestions">
+						<div ng-if="insertedAnswer && clickOnPutAnswer" class="myQuestion alert-success center-block sucessMessageLogin titlesOnCenter">
+							Resposta enviada com sucesso.
+						</div>
+						<div ng-if="!insertedAnswer && clickOnPutAnswer" class="myQuestion alert-danger center-block sucessMessageLogin titlesOnCenter">
+							Erro a enviar a resposta.
+						</div>
+						<div class="titlesOnCenter"> 
+							<h1 class="subtitles">Pergunta [{indexQuestion}]</h1>
+						</div>
+						<div class="titlesOnCenter">
+							<div ng-if="!showDivAnswer">
+								<!-- Question -->
+								<div class="borderQuestion center-block">
+									<img class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
+									<label class="margin-right-6x00">Pergunta [{indexQuestion}]</label>
+									<div ng-if="!questionFavorite.favorite" ng-click="addToFavoritesQuestion()">
+										<i class="far fa-star favoriteButton cursorPointer"></i>
+									</div>
+									<div ng-if="questionFavorite.favorite" ng-click="removeFromFavoritesQuestion(indexQuestion)">
+										<i class="fas fa-star favoriteButton cursorPointer"></i>
+									</div>
+									<div ng-if="questionFavorite.like==0" ng-click="addLikeQuestion()">
+										<i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+									</div>
+									<div ng-if="questionFavorite.like>0" ng-click="removeLikeQuestion()">
+										<i class="far fa-thumbs-up likeButton cursorPointer" ></i>
+									</div>
+									<h5 class="descriptionQuestion">[{descriptionQuestion}]</h5>
+								</div>
+								<!-- Answers -->
+								<div ng-repeat="answerQuestion in descriptionAnswer track by $index" ng-if="descriptionAnswer.length>0">
+									<div ng-if="$index%2!==0" class="borderQuestion center-block">
+										<img ng-if="$index%2!==0" class="imageButton marginsOfUserQuestionIcon" src="../images/user.png">
 
-                                    <label class="margin-right-6x00">Resposta [{answerQuestion.numberOfQuestion}]</label>
-                                    <div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
-                                        <i class="fas fa-star favoriteButton cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
-                                        <i class="far fa-star favoriteButton cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
-                                        <i class="far fa-thumbs-up likeButton cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
-                                        <i class="fas fa-thumbs-up likeButton cursorPointer"></i>
-                                    </div>
-                                    <h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
-                                </div>
-                                <div ng-if="$index%2===0" class="borderAnswerNoMargin center-block">
-                                    <div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
-                                        <i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
-                                        <i class="far fa-star favoriteButtonLeft cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
-                                        <i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
-                                    </div>
-                                    <div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
-                                        <i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
-                                    </div>
-                                    <label class="margin-left-9x">Resposta [{answerQuestion.numberOfQuestion}]</label>
-                                    <img class="imageButtonLeft" src="../images/user.png">
-                                    <h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- button to response of questions -->
-                    <div> 
-                        <button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
-                        <div ng-if="showDivAnswer" class="titlesOnCenter answerDiv center-block widthOfAnswerDiv">
-                            <textarea class="textAreaMyAnswer"  ng-model="textAnswer" placeholder="..."></textarea><br>
-                            <button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
-                        </div>
-                    </div>
-                </div>
+										<label class="margin-right-6x00">Resposta [{answerQuestion.numberOfQuestion}]</label>
+										<div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
+											<i class="fas fa-star favoriteButton cursorPointer"></i>
+										</div>
+										<div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
+											<i class="far fa-star favoriteButton cursorPointer"></i>
+										</div>
+										<div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
+											<i class="far fa-thumbs-up likeButton cursorPointer"></i>
+										</div>
+										<div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
+											<i class="fas fa-thumbs-up likeButton cursorPointer"></i>
+										</div>
+										<h5 class="descriptionQuestion">[{answerQuestion.text}]</h5>
+									</div>
+									<div ng-if="$index%2===0" class="borderAnswerNoMargin center-block">
+										<div ng-if="answerQuestion.favorite" ng-click="removeFromFavoritesAnswer(answerQuestion)">
+											<i class="fas fa-star favoriteButtonLeft cursorPointer"></i>
+										</div>
+										<div ng-if="!answerQuestion.favorite" ng-click="addToFavoritesAnswer(answerQuestion)">
+											<i class="far fa-star favoriteButtonLeft cursorPointer"></i>
+										</div>
+										<div ng-if="answerQuestion.likes==0" ng-click="addLikeAnswer(answerQuestion)">
+											<i class="far fa-thumbs-up likeButtonLeft cursorPointer"></i>
+										</div>
+										<div ng-if="answerQuestion.likes>0" ng-click="removeLikeAnswer(answerQuestion)">
+											<i class="fas fa-thumbs-up likeButtonLeft cursorPointer"></i>
+										</div>
+										<label class="margin-left-9x">Resposta [{answerQuestion.numberOfQuestion}]</label>
+										<img class="imageButtonLeft" src="../images/user.png">
+										<h5 class="descriptionAnswer">[{answerQuestion.text}]</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- button to response of questions -->
+						<div> 
+							<button ng-if="!showDivAnswer" class="buttonConfirm" ng-click="clickOnAnswer()">Responder</button>
+							<div ng-if="showDivAnswer" class="titlesOnCenter answerDiv center-block widthOfAnswerDiv">
+								<textarea class="textAreaMyAnswer"  ng-model="textAnswer" placeholder="..."></textarea><br>
+								<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
+							</div>
+						</div>
+					</div>
+				</div>
+               
             </div>
 			<!-- show details of material if click on material -->
 			<div ng-if="showDetailsOfMaterial && !isMobileView" class="col-sm-4 col-sm-offset-2">

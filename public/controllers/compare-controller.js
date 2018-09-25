@@ -144,6 +144,8 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 		$scope.showDetailsOfMaterial=false;
 		$scope.showMaterialsCompare=true;
 		$scope.showLabelCompare=true;
+		
+		$scope.showMaterialsCompare=false;
 	}
 
 	/* open and close the small search icon */
@@ -163,7 +165,6 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 		$scope.showInitSearch=true;
 		$scope.showSearch=false;
 		$scope.enableUserIcon=false;
-		$scope.showMaterialsCompare=true;
 		$scope.showInputToCompare=true;
 		$scope.showDetailsOfMaterial=false;
 		$scope.showLabelCompare=true;
