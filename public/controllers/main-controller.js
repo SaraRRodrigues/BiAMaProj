@@ -544,21 +544,24 @@ app.constant('jQuery', window.jQuery)
 				}
 
 
-				var type = ($scope.materialsToSearch[index].type)
+				var type = ($scope.materialsToSearch[index].type);
 				//var type = type.toLowerCase();
 				var color = ($scope.materialsToSearch[index].color);
 				var category = ($scope.materialsToSearch[index].category);
 				var description = ($scope.materialsToSearch[index].description);
 
-				if(type.indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(color.indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(category.indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
-				} else if(description.indexOf(inputMini) !== -1) {
-					$scope.resultSearch.push(resultMaterial);
+				if(type !== null && color !== null && category !== null && description !== null) {
+					if(type.includes(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(color.includes(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(category.includes(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					} else if(description.includes(inputMini) !== -1) {
+						$scope.resultSearch.push(resultMaterial);
+					}
 				}
+				
 			}
 	
 			if($scope.resultSearch.length == 0) {
