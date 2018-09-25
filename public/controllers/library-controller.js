@@ -35,6 +35,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.clickAddFavoriteMaterial=false;
 		$scope.categories=[];
 		$scope.resultSearch= [];
+		$scope.loadingSearch = false;
 	}
 
 	/* verify if user is logged in */
@@ -357,7 +358,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
 
-		$scope.loading = true;
+		$scope.loadingSearch = true;
+		$scope.showCategory = true;
+
 		$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
 		$scope.getMaterials.then(function(result) {
 			var data=result.data.comparationDetails;
@@ -408,7 +411,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 					$scope.showMaterialDetails=false;
 				}
 			}
-			$scope.loading = false;
+			$scope.loadingSearch = false;
 		});
 	}
 
