@@ -534,6 +534,7 @@ app.constant('jQuery', window.jQuery)
 		var inputMini = inputMiniValue.toLowerCase();
 		
 		if(inputMini !== '') {
+			
 			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
 				var resultMaterial = {
 					'name': $scope.materialsToSearch[index].name,
@@ -541,7 +542,10 @@ app.constant('jQuery', window.jQuery)
 					'code': $scope.materialsToSearch[index].code,
 					'description': $scope.materialsToSearch[index].description
 				}
-				var type = ($scope.materialsToSearch[index].type).toLowerCase();
+
+
+				var type = ($scope.materialsToSearch[index].type)
+				var type = type.toLowerCase();
 				var color = ($scope.materialsToSearch[index].color).toLowerCase();
 				var category = ($scope.materialsToSearch[index].category).toLowerCase();
 				var description = ($scope.materialsToSearch[index].description).toLowerCase();
