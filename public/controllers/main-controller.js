@@ -235,6 +235,8 @@ app.constant('jQuery', window.jQuery)
 
 	/* login with google with firebase */
 	$scope.loginWithGoogle = function() {
+		var resultInitSession = false;
+		$scope.confirmSession = resultInitSession;
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(result => {
 		
@@ -248,35 +250,38 @@ app.constant('jQuery', window.jQuery)
 			$scope.dayBirth = '';
 			$scope.monthBirth = '';
 			$scope.yearBirth = '';
-
 			
-		})
-		.catch(console.log)
-
-		for(var index=0; index < $scope.users.length; ++index) {
-			if($scope.users[index].username == $scope.nameUser) {
-				$scope.nameAlreadyExists=true;
+			for(var index=0; index < $scope.users.length; ++index) {
+				if($scope.users[index].username == $scope.nameUser) {
+					$scope.nameAlreadyExists=true;
+					$scope.confirmSession = true;
+					resultInitSession=true;
+					$scope.showInitSession=false;
+					break;
+				}
+			}
+	
+			if(!$scope.nameAlreadyExists) {
+				var data = {
+					'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
+					'name': $scope.nameUser,
+					'email' : $scope.userEmail,
+					'birthdate': '',
+					'image': "noImage",
+					'username': $scope.nameUser,
+					'password': ''
+				}
+				
+				$http.post('/insertUserDetails', data);
 				$scope.confirmSession = true;
 				$scope.showInitSession=false;
-				break;
-			}
-		}
-
-		if(!$scope.nameAlreadyExists) {
-			var data = {
-				'idUser': parseInt($scope.users[$scope.users.length-1].id)+1,
-				'name': $scope.nameUser,
-				'email' : $scope.userEmail,
-				'birthdate': '',
-				'image': "noImage",
-				'username': $scope.nameUser,
-				'password': ''
 			}
 			
-			$http.post('/insertUserDetails', data);
-			$scope.confirmSession = true;
-			$scope.showInitSession=false;
-		}
+			
+		})
+		.catch(console.log) 
+		
+			
 	}
 
 	/* login with facebook with firebase */
