@@ -43,6 +43,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       $scope.miniSearchResults=false;
       $scope.showAllQuestions=true;
       $scope.favoriteQuestion=false;
+      $scope.loadingSearch = false;
     }
 
     /* verify if user is logged in */
@@ -531,7 +532,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       var inputMiniValue = jQuery("#miniSearch").val(); 		
       var inputMini = inputMiniValue.toLowerCase();
 
-      $scope.loading = true;
+      $scope.loadingSearch = true;
+
       var getMaterials = QuestionsForumMaterialService.getMaterialComparation(function(infoMaterial){});
       getMaterials.then(function(result) {
         
@@ -589,7 +591,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
               $scope.showQuestionDetails=false;
             }
         }
-        $scope.loading = false;
+        $scope.loadingSearch = false;
       });
     }
 

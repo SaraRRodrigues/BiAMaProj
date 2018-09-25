@@ -213,17 +213,21 @@
 				<div class="imageLeft">
 					<img class="margin-top-3x" src="../images/leftBiama.png"/>
 				</div>
-				<div ng-if="!loading">
+				<div ng-if="!loadingSearch">
 					<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToForum()"></i>
 					<h1 ng-if="!showQuestionDetails" class="subtitles">Pergunta dos Utilizadores</h1>
 				</div>
+			</div>
+			<!-- loading spinner -->
+			<div ng-if="loadingSearch">
+				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- loading spinner -->
 			<div ng-if="!showQuestionDetails && loading">
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show number of questions -->
-			<div ng-if="!loading && !showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter" ng-repeat="question in questions track by $index">
+			<div ng-if="!loading && !showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial && !loadingSearch" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 				<a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
 				<div class="center-block lineSeparateQuestionMobile"></div>
 			</div>
