@@ -257,10 +257,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	
 			$scope.showBiamaInitPage = false;
 			$scope.showMyBiamaConf = false;
-	
-			setTimeout(function() {
-				$(".myBiama").fadeOut().empty();
-			}, 2000);
+
 		}
 	}
 
@@ -318,7 +315,14 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 					}
 				} 
 				$http.post('/insertNotifications', data);
+
+				
+				setTimeout(function() {
+					$(".myBiama").fadeOut().empty();
+				}, 2000);
+				
 				$scope.doc.save('suaBiama.pdf');
+
 			}
 		}
 
