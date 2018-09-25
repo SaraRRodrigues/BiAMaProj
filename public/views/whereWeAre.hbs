@@ -170,7 +170,7 @@
 					<label>Pesquise um local ou endereço</label>
 					<i ng-click="getSchools()" class="fas fa-caret-down cursorPointer"></i>	
 					<div ng-if="showSchools">
-						<div class="borderLocations" ng-repeat="biama in biamaDetails">
+						<div class="borderLocations" ng-repeat="biama in schools">
 							<label class="languagesDiv margin-right-4x" ng-click="selectSchool(biama.locationDescription)">[{biama.locationDescription}]</label>
 							<br>
 						</div>

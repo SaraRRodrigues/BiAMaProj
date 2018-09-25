@@ -59,6 +59,7 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 	/* -------------- INIT DESKTOP & MOBILE -------------- */
 	/* get information of my favorites, my questions and answer to display */
     $scope.getAllRequests = function() {
+		$scope.schools=[];
 		var getMaterials = WhereWeAreMaterialService.getMaterialComparation(function(infoMaterial){});
 		getMaterials.then(function(result) {
 			$scope.loading = false;
@@ -72,8 +73,17 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 				$scope.biamaDetails=data;
 				/**default - url of ESELx */
 				$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-				$scope.schools=$scope.biamaDetails;
-
+				
+				if($scope.biamaDetails !== undefined) {
+					if($scope.biamaDetails.length > 0) {
+						$scope.school = $scope.biamaDetails[0].location;
+						for(var index=0; index < $scope.biamaDetails.length; ++index) {
+							if($scope.school.indexOf($scope.biamaDetails[index].location) == -1) {
+								$scope.schools.push($scope.biamaDetails[index]);
+							}
+						}
+					}
+				}
 			});
 			
 		});		

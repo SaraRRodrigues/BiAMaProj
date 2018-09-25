@@ -114,6 +114,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 
     /* action of update information of user details */
     $scope.doneUpgrade = function(username, email, birthdate, password, image) {
+        debugger
         if(username === '' || email === '' || birthdate === '' || password === '' || image === '') {
             $scope.fieldsEmpty=true;
         } else {
@@ -549,7 +550,12 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
 		currentDate=currentDate.toLocaleDateString();
 		var resultCurrentDate = currentDate.split("/");
 
-		var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+        if(parseInt(resultCurrentDate[2]) > parseInt(resultBirth[2])){
+            var calculateYear = parseInt(resultCurrentDate[2]) - parseInt(resultBirth[2]);
+        } else {
+            var calculateYear = parseInt(resultBirth[2]) - parseInt(resultCurrentDate[2]);
+        }
+		
 		if(calculateYear < 18) {
 			return false;
 		}
@@ -559,6 +565,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
     /* update information of user */
     $scope.updateUserDetails = function(id, name, email, birthdate, image, username, password) { 
         $scope.loadingSchool=true;
+        $scope.underAgePerfil=false;
         $scope.usernameRepeatedPerfil=false;
         var data = {
             'idUser': id,
