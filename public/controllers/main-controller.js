@@ -236,7 +236,7 @@ app.constant('jQuery', window.jQuery)
 	/* login with google with firebase */
 	$scope.loginWithGoogle = function() {
 		var resultInitSession = false;
-		$scope.confirmSession = resultInitSession;
+		
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(result => {
 		
@@ -250,7 +250,7 @@ app.constant('jQuery', window.jQuery)
 			$scope.dayBirth = '';
 			$scope.monthBirth = '';
 			$scope.yearBirth = '';
-			
+
 			for(var index=0; index < $scope.users.length; ++index) {
 				if($scope.users[index].username == $scope.nameUser) {
 					$scope.nameAlreadyExists=true;
@@ -281,7 +281,7 @@ app.constant('jQuery', window.jQuery)
 		})
 		.catch(console.log) 
 		
-			
+		$scope.confirmSession = resultInitSession;	
 	}
 
 	/* login with facebook with firebase */
@@ -541,10 +541,10 @@ app.constant('jQuery', window.jQuery)
 					'code': $scope.materialsToSearch[index].code,
 					'description': $scope.materialsToSearch[index].description
 				}
-				var type = ($scope.materialsToSearch[index].type).toLowerCase();
-				var color = ($scope.materialsToSearch[index].color).toLowerCase();
-				var category = ($scope.materialsToSearch[index].category).toLowerCase();
-				var description = ($scope.materialsToSearch[index].description).toLowerCase();
+				var type = $scope.materialsToSearch[index].type;
+				var color = $scope.materialsToSearch[index].color;
+				var category = $scope.materialsToSearch[index].category;
+				var description = $scope.materialsToSearch[index].description;
 
 				if(type.indexOf(inputMini) !== -1) {
 					$scope.resultSearch.push(resultMaterial);
