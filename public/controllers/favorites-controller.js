@@ -71,8 +71,6 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
     /* -------------- INIT DESKTOP & MOBILE -------------- */
     /* get information of favorite materials and my favorites to display */
     $scope.getAllRequests = function() {
-     
-        /*  */
         var getAnswerQuestionInfo = QuestionFavoriteService.getQuestionAnswer(function(infoUserAnswer){});
         getAnswerQuestionInfo.then(function(result) {
             $scope.loading = true;
