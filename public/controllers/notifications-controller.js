@@ -178,10 +178,16 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
     /* open and close the section of user details and search icon */
     $scope.clickUserDetails = function() {
 		if($scope.userDetails){
-			$scope.userDetails = false;
+            $scope.userDetails = false;
+            if(!$scope.isMobileView) {
+                $scope.notificationNumber=false;
+            }
 		}else {
 			$scope.userDetails = true;
-			$scope.showSearch = false;
+            $scope.showSearch = false;
+            if(!$scope.isMobileView) {
+                $scope.notificationNumber=true;
+            }
 		}
     }
 

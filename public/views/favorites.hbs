@@ -167,15 +167,17 @@
 				<div class="imageLeft">
 					<img class="margin-top-3x" src="../images/leftBiama.png"/>
 				</div>
-				<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
-				<h1 ng-if="!doLogin" class="subtitles">Favoritos
-					<i ng-click="openFavoritesButton()" class="fas fa-caret-down cursorPointer"></i>
-				</h1> 
-				<h1 ng-if="doLogin" class="subtitles">Favoritos</h1> 
-				<h4 class="titlesOnCenter colorOfErrorMessages" ng-if="doLogin">Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
-				
-				<div ng-if="showFavoritesButton && !loading" ng-repeat="fav in favoritesButton">
-					<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
+				<div ng-if="!loading">
+					<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
+					<h1 ng-if="!doLogin" class="subtitles">Favoritos
+						<i ng-click="openFavoritesButton()" class="fas fa-caret-down cursorPointer"></i>
+					</h1> 
+					<h1 ng-if="doLogin" class="subtitles">Favoritos</h1> 
+					<h4 class="titlesOnCenter colorOfErrorMessages" ng-if="doLogin">Efetue Login por favor e volte a entrar nos seus favoritos.</h4>
+					
+					<div ng-if="showFavoritesButton && !loading" ng-repeat="fav in favoritesButton">
+						<h5 class="cursorPointer" ng-click="selectFavorite(fav)">[{fav}]</h5>
+					</div>
 				</div>
 			</div>
 			<h3 class="alignCenter" ng-if="selectFav && !loading">Selecione uma opção de favoritos</h3>

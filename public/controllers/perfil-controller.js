@@ -256,10 +256,10 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
   
     /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
-
+        $scope.loading = true;
         var getMaterials = PerfilMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
-            $scope.loading = false;
+            
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
             $scope.resultSearch=[];
@@ -309,6 +309,7 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
                     $scope.showPerfilDetails=false;
                 }
             }
+            $scope.loading = false;
         });
     }
     

@@ -324,6 +324,10 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		$scope.miniSearchResults=false;
 		$scope.showDetailsOfMaterial=false;
 		$scope.zoomInMaterial=false;
+		
+		$scope.showCategory=false;
+		$scope.showMaterialDetails=false;
+		$scope.miniSearchResults=false;
 	}
 
 	/* open and close the small search icon */
@@ -353,9 +357,9 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
 
+		$scope.loading = true;
 		$scope.getMaterials = LibraryMaterialService.getMaterialComparation(function(infoMaterial){});
 		$scope.getMaterials.then(function(result) {
-			$scope.loading = false;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
 
@@ -404,6 +408,7 @@ app.controller("LibraryController", ['$scope', "$http","LibraryMaterialInfoServi
 					$scope.showMaterialDetails=false;
 				}
 			}
+			$scope.loading = false;
 		});
 	}
 

@@ -531,9 +531,10 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       var inputMiniValue = jQuery("#miniSearch").val(); 		
       var inputMini = inputMiniValue.toLowerCase();
 
+      $scope.loading = true;
       var getMaterials = QuestionsForumMaterialService.getMaterialComparation(function(infoMaterial){});
       getMaterials.then(function(result) {
-        $scope.loading = false;
+        
         var data=result.data.comparationDetails;
         $scope.materialsToSearch = data;
 
@@ -588,6 +589,7 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
               $scope.showQuestionDetails=false;
             }
         }
+        $scope.loading = false;
       });
     }
 

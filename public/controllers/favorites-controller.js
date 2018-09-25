@@ -467,7 +467,7 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
   
         $scope.showMaterials=true;
         $scope.zoomInMaterial = false;
-        $scope.selectFav=false;
+        $scope.selectFav=true;
        
     }
 
@@ -502,9 +502,11 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
         var inputMiniValue = jQuery("#miniSearch").val(); 		
         var inputMini = inputMiniValue.toLowerCase();
 
+        $scope.loading = true;
+        
         var getMaterials = FavoritesMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {
-            $scope.loading = true;
+            
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
 

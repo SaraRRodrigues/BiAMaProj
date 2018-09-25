@@ -387,12 +387,13 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
   
     /* action of click button "Ok" present on small search line */
     $scope.initMiniSearch = function() {
+        $scope.loadingSearch = true;
+
         $scope.getMaterials = MyQuestionsMaterialService.getMaterialComparation(function(infoMaterial){});
         $scope.getMaterials.then(function(result) {
-            $scope.loading = true;
+            
             var data=result.data.comparationDetails;
             $scope.materialsToSearch = data;
-            $scope.loading = false;
 
             $scope.resultSearch=[];
             var inputMiniValue = jQuery("#miniSearch").val(); 		
@@ -449,6 +450,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
                     $scope.showAllQuestions=false;
                 }
             }
+            $scope.loadingSearch = false;
         });
     }
   

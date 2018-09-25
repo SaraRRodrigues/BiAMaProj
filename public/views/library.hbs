@@ -157,9 +157,10 @@
 				<div class="imageLeft">
 					<img class="margin-top-3x" src="../images/leftBiama.png"/>
 				</div>
-				<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
-
-				<h1 class="subtitles">Biblioteca</h1>
+				<div ng-if="!loading">
+					<i class="cursorPointer float-left glyphicon glyphicon-triangle-left arrows backArrow" ng-click="goToHomePage()"></i>						
+					<h1 class="subtitles">Biblioteca</h1>
+				</div>
 			</div>
 			<!-- loading spinner -->
 			<div ng-if="loading">
