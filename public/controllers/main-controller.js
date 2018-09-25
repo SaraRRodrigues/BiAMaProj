@@ -551,13 +551,13 @@ app.constant('jQuery', window.jQuery)
 				var description = ($scope.materialsToSearch[index].description);
 
 				if(type !== null && color !== null && category !== null && description !== null) {
-					if(type.includes(inputMini) !== -1) {
+					if(type.indexOf(inputMini) !== -1) {
 						$scope.resultSearch.push(resultMaterial);
-					} else if(color.includes(inputMini) !== -1) {
+					} else if(color.indexOf(inputMini) !== -1) {
 						$scope.resultSearch.push(resultMaterial);
-					} else if(category.includes(inputMini) !== -1) {
+					} else if(category.indexOf(inputMini) !== -1) {
 						$scope.resultSearch.push(resultMaterial);
-					} else if(description.includes(inputMini) !== -1) {
+					} else if(description.indexOf(inputMini) !== -1) {
 						$scope.resultSearch.push(resultMaterial);
 					}
 				}
