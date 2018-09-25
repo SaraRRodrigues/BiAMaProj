@@ -538,24 +538,38 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.materialsToSearch = data;
 
         if(inputMini !== '') {
-            for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-                var resultMaterial = {
-                  'name': $scope.materialsToSearch[index].name,
-                  'category': $scope.materialsToSearch[index].category,
-                  'code': $scope.materialsToSearch[index].code,
-					        'description': $scope.materialsToSearch[index].description
-                }
-                if(($scope.materialsToSearch[index].type).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].color).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].category).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                } else if(($scope.materialsToSearch[index].description).toLowerCase().indexOf(inputMini) !== -1) {
-                    $scope.resultSearch.push(resultMaterial);
-                }
+          for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+            var resultMaterial = {
+              'name': $scope.materialsToSearch[index].name,
+              'category': $scope.materialsToSearch[index].category,
+              'code': $scope.materialsToSearch[index].code,
+              'description': $scope.materialsToSearch[index].description
             }
-      
+    
+            var type = ($scope.materialsToSearch[index].type);
+            var color = ($scope.materialsToSearch[index].color);
+            var category = ($scope.materialsToSearch[index].category);
+            var description = ($scope.materialsToSearch[index].description);
+    
+            if(type !== null && color !== null && category !== null && description !== null) {
+              type = ($scope.materialsToSearch[index].type).toLowerCase();
+              color = ($scope.materialsToSearch[index].color).toLowerCase();
+              category = ($scope.materialsToSearch[index].category).toLowerCase();
+              description = ($scope.materialsToSearch[index].description).toLowerCase();
+    
+              if(type.indexOf(inputMini) !== -1) {
+                $scope.resultSearch.push(resultMaterial);
+              } else if(color.indexOf(inputMini) !== -1) {
+                $scope.resultSearch.push(resultMaterial);
+              } else if(category.indexOf(inputMini) !== -1) {
+                $scope.resultSearch.push(resultMaterial);
+              } else if(description.indexOf(inputMini) !== -1) {
+                $scope.resultSearch.push(resultMaterial);
+              }
+            }
+            
+          }
+         
             if($scope.resultSearch.length == 0) {
               $scope.noResultsOnSearch=true;
             } else {

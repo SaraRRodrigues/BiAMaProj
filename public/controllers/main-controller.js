@@ -461,6 +461,7 @@ app.constant('jQuery', window.jQuery)
 		$scope.search=true;
 		$scope.openedMaterial=material;
 		$scope.miniSearchResults=false;
+		$scope.showResultsOfMiniSearch=false;
 	}
 
 	/* close material that are opened */
@@ -543,14 +544,17 @@ app.constant('jQuery', window.jQuery)
 					'description': $scope.materialsToSearch[index].description
 				}
 
-
 				var type = ($scope.materialsToSearch[index].type);
-				//var type = type.toLowerCase();
 				var color = ($scope.materialsToSearch[index].color);
 				var category = ($scope.materialsToSearch[index].category);
 				var description = ($scope.materialsToSearch[index].description);
 
 				if(type !== null && color !== null && category !== null && description !== null) {
+					type = ($scope.materialsToSearch[index].type).toLowerCase();
+					color = ($scope.materialsToSearch[index].color).toLowerCase();
+					category = ($scope.materialsToSearch[index].category).toLowerCase();
+					description = ($scope.materialsToSearch[index].description).toLowerCase();
+
 					if(type.indexOf(inputMini) !== -1) {
 						$scope.resultSearch.push(resultMaterial);
 					} else if(color.indexOf(inputMini) !== -1) {
@@ -563,9 +567,9 @@ app.constant('jQuery', window.jQuery)
 				}
 				
 			}
-	
 			if($scope.resultSearch.length == 0) {
 				$scope.noResultsOnSearch=true;
+				$scope.search=true;
 			} else {
 				$scope.showInitSearch=false;
 				$scope.showSearch=true;
@@ -573,6 +577,7 @@ app.constant('jQuery', window.jQuery)
 				$scope.noResultsOnSearch=false;
 				$scope.showResultsOfMiniSearch=true;
 			}
+			
 			$scope.userDetails = false;
 		}
 	}
