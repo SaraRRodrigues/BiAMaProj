@@ -749,7 +749,7 @@ app.factory("MyQuestionsMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000);
+            }, 3000);
         }
         function errorCallback(error){
             //error code
@@ -799,7 +799,7 @@ app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
            //success code
            $timeout(function() {
 			deferred.resolve(response);
-	   	   }, 2000);
+	   	   }, 3000);
        }
        function errorCallback(error){
            //error code

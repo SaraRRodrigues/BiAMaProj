@@ -74,12 +74,13 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.users = usersDB.data.users;
 		});
 		
-		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
-		getMaterials.then(function(result) {
+		var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
+		getMyBiamaInfo.then(function(result) {
 			$scope.loading=true;
-			var data=result.data.comparationDetails;
-			$scope.materialsToSearch = data;
-		}); 
+			var data=result.data.biamaDetails;
+			$scope.descriptionsOfBiama=data;
+
+		});
 
 		$scope.getMaterialInfo = MaterialsBiamaService.getMaterial(function(infoMaterial){});
 		/* get information of material and of library - when i do get library */
@@ -104,46 +105,40 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$scope.idMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].id) + 1;
 			$scope.codeMaterial = parseInt($scope.materialsCategories[$scope.materialsCategories.length-1].code) + 1;
 			
-			var getMyBiamaInfo = MyBiamaService.getMyBiamaInfo(function(infoMyBiama){});
-			getMyBiamaInfo.then(function(result) {
+		});
+
+		var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+			getBiamaInfo.then(function(result) {
 				$scope.loading=true;
 				var data=result.data.biamaDetails;
-				$scope.descriptionsOfBiama=data;
-
-				var getBiamaInfo = MyBiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-				getBiamaInfo.then(function(result) {
-					$scope.loading=true;
-					var data=result.data.biamaDetails;
-					$scope.idLibrary=data[data.length-1].id_library+1;
+				$scope.idLibrary=data[data.length-1].id_library+1;
 					
-					var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
-					getMyBiamaLibraryUser.then(function(result) {
-						$scope.loading=true;
-						var data=result.data.userLibrary;
-						$scope.userLibrary=data;
+			var getMyBiamaLibraryUser = UserMyBiamaService.getLibraryUserDetails(function(infoMyBiama){});
+			getMyBiamaLibraryUser.then(function(result) {
+				$scope.loading=true;
+				var data=result.data.userLibrary;
+				$scope.userLibrary=data;
 
-						if($scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== undefined ){
-							for(var index=0; index<$scope.userLibrary.length; ++index) {
-								if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
-									$scope.myLibrary = $scope.userLibrary[index].library_id;
-									break;
-								}
-							}
-				
-							for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
-								if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
-									$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
-									break;
-								}
-							}
-						} else {
-							$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
+				if($scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== undefined ){
+					for(var index=0; index<$scope.userLibrary.length; ++index) {
+						if($scope.userLibrary[index].user_id === parseInt($scope.idUserLoggerIn)){
+							$scope.myLibrary = $scope.userLibrary[index].library_id;
+							break;
 						}
+					}
+		
+					for( var index=0; index <$scope.descriptionsOfBiama.length; ++index) {
+						if($scope.descriptionsOfBiama[index].id_library === $scope.myLibrary){
+							$scope.descriptionMyBiama = $scope.descriptionsOfBiama[index].description;
+							break;
+						}
+					}
+				} else {
+					$scope.descriptionMyBiama = $scope.descriptionsOfBiama[0].description;
+				}
 
-						$scope.loading=false;
-						
-					});
-				});
+				$scope.loading=false;
+				
 			});
 		});
 	}
@@ -472,49 +467,60 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 		$scope.resultSearch=[];
 		var inputMiniValue = jQuery("#miniSearch").val(); 		
 		var inputMini = inputMiniValue.toLowerCase();
-		if(inputMini !== '') {
-			for(var index=0; index < $scope.materialsToSearch.length; ++index) {
-				var resultMaterial = {
-					'name': $scope.materialsToSearch[index].name,
-					'category': $scope.materialsToSearch[index].category,
-					'code': $scope.materialsToSearch[index].code,
-					'description': $scope.materialsToSearch[index].description
-				}
 
-				var type = ($scope.materialsToSearch[index].type);
-				var color = ($scope.materialsToSearch[index].color);
-				var category = ($scope.materialsToSearch[index].category);
-				var description = ($scope.materialsToSearch[index].description);
+		$scope.loading=true;
+		var getMaterials = MyBiamaMaterialService.getMaterialComparation(function(infoMaterial){});
+		getMaterials.then(function(result) {
+			
+			var data=result.data.comparationDetails;
+			$scope.materialsToSearch = data;
 
-				if(type !== null && color !== null && category !== null && description !== null) {
-					type = ($scope.materialsToSearch[index].type).toLowerCase();
-					color = ($scope.materialsToSearch[index].color).toLowerCase();
-					category = ($scope.materialsToSearch[index].category).toLowerCase();
-					description = ($scope.materialsToSearch[index].description).toLowerCase();
-
-					if(type.indexOf(inputMini) !== -1) {
-						$scope.resultSearch.push(resultMaterial);
-					} else if(color.indexOf(inputMini) !== -1) {
-						$scope.resultSearch.push(resultMaterial);
-					} else if(category.indexOf(inputMini) !== -1) {
-						$scope.resultSearch.push(resultMaterial);
-					} else if(description.indexOf(inputMini) !== -1) {
-						$scope.resultSearch.push(resultMaterial);
+			if(inputMini !== '') {
+				for(var index=0; index < $scope.materialsToSearch.length; ++index) {
+					var resultMaterial = {
+						'name': $scope.materialsToSearch[index].name,
+						'category': $scope.materialsToSearch[index].category,
+						'code': $scope.materialsToSearch[index].code,
+						'description': $scope.materialsToSearch[index].description
 					}
-				}
-				
-			}
 	
-			if($scope.resultSearch.length == 0) {
-				$scope.noResultsOnSearch=true;
-			} else {
-				$scope.showInitSearch=false;
-				$scope.showSearch=false;
-				$scope.miniSearchResults = true;
-				$scope.noResultsOnSearch=false;
-				$scope.showResultsOfMiniSearch=true;
+					var type = ($scope.materialsToSearch[index].type);
+					var color = ($scope.materialsToSearch[index].color);
+					var category = ($scope.materialsToSearch[index].category);
+					var description = ($scope.materialsToSearch[index].description);
+	
+					if(type !== null && color !== null && category !== null && description !== null) {
+						type = ($scope.materialsToSearch[index].type).toLowerCase();
+						color = ($scope.materialsToSearch[index].color).toLowerCase();
+						category = ($scope.materialsToSearch[index].category).toLowerCase();
+						description = ($scope.materialsToSearch[index].description).toLowerCase();
+	
+						if(type.indexOf(inputMini) !== -1) {
+							$scope.resultSearch.push(resultMaterial);
+						} else if(color.indexOf(inputMini) !== -1) {
+							$scope.resultSearch.push(resultMaterial);
+						} else if(category.indexOf(inputMini) !== -1) {
+							$scope.resultSearch.push(resultMaterial);
+						} else if(description.indexOf(inputMini) !== -1) {
+							$scope.resultSearch.push(resultMaterial);
+						}
+					}
+					
+				}
+		
+				if($scope.resultSearch.length == 0) {
+					$scope.noResultsOnSearch=true;
+				} else {
+					$scope.showInitSearch=false;
+					$scope.showSearch=false;
+					$scope.miniSearchResults = true;
+					$scope.noResultsOnSearch=false;
+					$scope.showResultsOfMiniSearch=true;
+				}
 			}
-		}
+			$scope.loading=false;
+		}); 
+
     }
 
 	/* open and close the section of user details and search icon */
@@ -729,7 +735,7 @@ app.factory("MaterialsBiamaService", function($q, $http, $timeout){
 
 		$timeout(function() {
 		  deferred.resolve($http.get('/materialsCategories'));
-		}, 2000);
+		}, 3000);
 	
 		return deferred.promise;
 	  };
@@ -891,7 +897,7 @@ app.factory("MyBiamaService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
 				deferred.resolve(response);
-			}, 2000);
+			}, 3000);
         }
         function errorCallback(error){
             //error code

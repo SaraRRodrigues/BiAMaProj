@@ -65,28 +65,27 @@ app.controller("WhereWeAreController", ['$scope',  "BiAMaInfoService", "LibraryM
 			$scope.loading = false;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
-	
-			var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
-			getBiamaInfo.then(function(result) {
-				$scope.loading = false;
-				var data=result.data.biamaDetails;
-				$scope.biamaDetails=data;
-				/**default - url of ESELx */
-				$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
-				
-				if($scope.biamaDetails !== undefined) {
-					if($scope.biamaDetails.length > 0) {
-						$scope.school = $scope.biamaDetails[0].location;
-						for(var index=0; index < $scope.biamaDetails.length; ++index) {
-							if($scope.school.indexOf($scope.biamaDetails[index].location) == -1) {
-								$scope.schools.push($scope.biamaDetails[index]);
-							}
+		});	
+		
+		var getBiamaInfo = BiAMaInfoService.getBiAMaInfo(function(infoBiama){});
+		getBiamaInfo.then(function(result) {
+			$scope.loading = false;
+			var data=result.data.biamaDetails;
+			$scope.biamaDetails=data;
+			/**default - url of ESELx */
+			$scope.locationsURL= $sce.trustAsResourceUrl($scope.pathURL + $scope.biamaDetails[1].location);
+			
+			if($scope.biamaDetails !== undefined) {
+				if($scope.biamaDetails.length > 0) {
+					$scope.school = $scope.biamaDetails[0].location;
+					for(var index=0; index < $scope.biamaDetails.length; ++index) {
+						if($scope.school.indexOf($scope.biamaDetails[index].location) == -1) {
+							$scope.schools.push($scope.biamaDetails[index]);
 						}
 					}
 				}
-			});
-			
-		});		
+			}
+		});
 	}
 	
 	/* redirect to homepage with arrow */
@@ -407,8 +406,10 @@ app.factory("BiAMaInfoService", function($q, $http, $timeout){
 		$http.get('/biamaInfo').then(successCallback, errorCallback);
 
         function successCallback(response){
-            //success code
-            deferred.resolve(response);
+			//success code
+			$timeout(function() {
+				deferred.resolve(response);
+			}, 3000);
         }
         function errorCallback(error){
             //error code
@@ -430,8 +431,10 @@ app.factory("WhereWeAreMaterialService", function($q, $http, $timeout){
 		$http.get('/compareMaterials').then(successCallback, errorCallback);
 
         function successCallback(response){
-            //success code
-            deferred.resolve(response);
+			//success code
+			$timeout(function() {
+				deferred.resolve(response);
+			}, 2000);
         }
         function errorCallback(error){
             //error code

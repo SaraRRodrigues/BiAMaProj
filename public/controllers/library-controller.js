@@ -729,7 +729,7 @@ app.factory("LibraryBiamaService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
                 deferred.resolve(response);
-            }, 2000); 
+            }, 3000); 
         }
         function errorCallback(error){
 			//error code

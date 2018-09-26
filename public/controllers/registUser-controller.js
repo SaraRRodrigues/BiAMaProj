@@ -439,7 +439,9 @@ app.factory("NotificationRegistService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+				deferred.resolve(response);
+	   	   }, 2000);
        }
        function errorCallback(error){
            //error code
@@ -463,7 +465,9 @@ app.factory("RegistMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 3000);
         }
         function errorCallback(error){
             //error code
@@ -487,7 +491,9 @@ app.factory("UserRegistService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 3000);
         }
         function errorCallback(error){
             //error code

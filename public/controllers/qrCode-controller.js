@@ -302,7 +302,9 @@ app.factory("QrCodeMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 3000);
         }
         function errorCallback(error){
             //error code
@@ -326,7 +328,9 @@ app.factory("QrCodeBiamaService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 3000);
         }
         function errorCallback(error){
             //error code

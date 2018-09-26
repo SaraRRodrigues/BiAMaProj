@@ -816,7 +816,9 @@ app.factory("NotificationService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+           $timeout(function() {
+            deferred.resolve(response);
+           }, 3000);
        }
        function errorCallback(error){
            //error code
@@ -840,7 +842,9 @@ app.factory("UserService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+				deferred.resolve(response);
+			}, 2000);
         }
         function errorCallback(error){
 			//error code

@@ -422,7 +422,9 @@ app.factory("CuriositiesService", function($q, $http, $timeout){
 
     function successCallback(response){
         //success code
-        deferred.resolve(response);
+        $timeout(function() {
+          deferred.resolve(response);
+        }, 2000);
     }
     function errorCallback(error){
 			//error code
@@ -441,15 +443,13 @@ app.factory("CuriositiesMaterialService", function($q, $http, $timeout){
   var getMaterialComparation = function() {
       var deferred = $q.defer();
 
-      $timeout(function() {
-      deferred.resolve($http.get('/compareMaterials'));
-      }, 4000);
-
       $http.get('/compareMaterials').then(successCallback, errorCallback);
 
       function successCallback(response){
           //success code
-          deferred.resolve(response);
+          $timeout(function() {
+            deferred.resolve(response);
+          }, 3000);
       }
       function errorCallback(error){
         //error code
@@ -473,7 +473,9 @@ app.factory("CuriositiesBiamaService", function($q, $http, $timeout){
 
     function successCallback(response){
       //success code
-      deferred.resolve(response);
+      $timeout(function() {
+        deferred.resolve(response);
+      }, 3000);
     }
     function errorCallback(error){
       //error code

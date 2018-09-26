@@ -878,7 +878,7 @@ app.factory("QuestionsForumMaterialService", function($q, $http, $timeout){
             //success code
             $timeout(function() {
               deferred.resolve(response);
-            }, 2000);
+            }, 3000);
         }
         function errorCallback(error){
             //error code
@@ -904,7 +904,7 @@ app.factory("QuestionsForumBiamaService", function($q, $http, $timeout){
         //success code
         $timeout(function() {
           deferred.resolve(response);
-        }, 2000);
+        }, 3000);
     }
     function errorCallback(error){
         //error code
@@ -954,7 +954,7 @@ app.factory("NotificationQuestionForumService", function($q, $http, $timeout){
            //success code
           $timeout(function() {
             deferred.resolve(response);
-          }, 2000);
+          }, 3000);
        }
        function errorCallback(error){
            //error code

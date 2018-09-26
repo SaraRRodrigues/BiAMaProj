@@ -640,7 +640,9 @@ app.factory("UserPerfilService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -661,7 +663,7 @@ app.factory("PerfilMaterialService", function($q, $http, $timeout){
 
         $timeout(function() {
         deferred.resolve($http.get('/compareMaterials'));
-        }, 4000);
+        }, 3000);
 
         return deferred.promise;
     };
@@ -675,12 +677,18 @@ app.factory("NotificationPerfilService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
 
-        $timeout(function() {
-        deferred.resolve($http.get('/myNotifications', 
-        {params: {
-            'data': data
-        }}));
-        }, 2000);
+        $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
+
+        function successCallback(response){
+            //success code
+           $timeout(function() {
+             deferred.resolve(response);
+           }, 3000);
+        }
+        function errorCallback(error){
+            //error code
+            deferred.reject(status);
+        }
 
         return deferred.promise;
     };

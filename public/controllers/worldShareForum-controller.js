@@ -434,7 +434,9 @@ app.factory("WorldSharesForumService", function($q, $http, $timeout){
 
       function successCallback(response){
           //success code
-          deferred.resolve(response);
+          $timeout(function() {
+            deferred.resolve(response);
+          }, 2000);
       }
       function errorCallback(error){
           //error code
@@ -457,7 +459,9 @@ app.factory("WorldSharesForumMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+              deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -480,8 +484,9 @@ app.factory("WorldShareForumBiamaService", function($q, $http, $timeout){
     $http.get('/users').then(successCallback, errorCallback);
 
     function successCallback(response){
-        //success code
+      $timeout(function() {
         deferred.resolve(response);
+      }, 3000);
     }
     function errorCallback(error){
         //error code

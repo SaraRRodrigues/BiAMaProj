@@ -384,7 +384,9 @@ app.factory("MyNotificationService", function($q, $http, $timeout){
 
        function successCallback(response){
            //success code
-           deferred.resolve(response);
+            $timeout(function() {
+               deferred.resolve(response);
+            }, 3000);
        }
        function errorCallback(error){
            //error code
@@ -408,7 +410,9 @@ app.factory("UserNotificationService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 2000);
         }
         function errorCallback(error){
             //error code
@@ -431,7 +435,9 @@ app.factory("NotificationMaterialService", function($q, $http, $timeout){
 
         function successCallback(response){
             //success code
-            deferred.resolve(response);
+            $timeout(function() {
+                deferred.resolve(response);
+            }, 3000);
         }
         function errorCallback(error){
             //error code
