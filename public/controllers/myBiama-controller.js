@@ -236,6 +236,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$http.post('/insertMyBiama', data);
 			$scope.createdMyBiama = true;
 
+			debugger;
 			if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
 				$scope.registUser = true;
 			} else {
@@ -259,6 +260,7 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 	/* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
 
+		debugger
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
 			$scope.emptyData=true;
 		} else {
@@ -291,6 +293,8 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 					$http.post('/insertLibraryUser', dataLibraryUser);
 					$scope.insertUserSuccess=true;
+
+					window.setTimeout("location.href = ''")
 				} else {
 					$scope.underAge=true;
 				}
@@ -320,8 +324,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 			}
 		}
-
-		$scope.insertMaterialOnLibraries();
 	}
 
 	/* validate if data not exists already */
@@ -347,31 +349,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			return false;
 		}
 		return true;
-	}
-
-	/* insert material that been inserted on new biama form  */
-	$scope.insertMaterialOnLibraries = function() {
-		
-		var data = {
-			'idMaterial': $scope.idMaterial,
-			'type': $scope.typeMaterial,
-			'color':  $scope.colorMaterial,
-			'code': $scope.codeMaterial,
-			'name': $scope.imageMaterial,
-			'category': $scope.categoryMaterial,
-			'description': $scope.descriptionMaterial,
-		}
-
-		$http.post('/insertMaterial', data);
-		
-		var dataLibraryMaterial = {
-			'idLibrary': $scope.idLibrary,
-			'idMaterial': data.idMaterial
-		}
-
-		$http.post('/insertLibraryMaterial', dataLibraryMaterial);
-
-		window.setTimeout("location.href = ''")
 	}
 
 	/* insert image on new biama form */
