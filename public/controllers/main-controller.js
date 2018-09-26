@@ -596,6 +596,7 @@ app.constant('jQuery', window.jQuery)
 
 	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
+		$scope.incorrectCredentials=false;
 		$scope.notificationNumber=false;
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
@@ -639,6 +640,7 @@ app.constant('jQuery', window.jQuery)
 
 						$scope.clickInitSession=true;
 
+						$scope.incorrectCredentials=false;
 					} else {
 						$scope.errorLogin = true;
 					}

@@ -243,6 +243,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 	
 	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
+		$scope.incorrectCredentials=false;
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
 		}else {
@@ -285,7 +286,7 @@ app.controller("CompareController", ['$scope',"CompareMyMaterialService", "UserC
 						}, 2000);
 
 						$scope.clickInitSession=true;
-
+						$scope.incorrectCredentials=false;
 					} else {
 						$scope.errorLogin = true;
 					}

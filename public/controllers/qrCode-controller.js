@@ -179,6 +179,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 
 	/* section of init session in user details section */
 	$scope.showInitSessionDiv = function () {
+		$scope.incorrectCredentials=false;
 		if($scope.showInitSession){
 			$scope.showInitSession = false;
 		}else {
@@ -221,7 +222,7 @@ app.controller("QrCodeController", ['$scope',"QrCodeMaterialService","QrCodeBiam
 						}, 2000);
 
 						$scope.clickInitSession=true;
-
+						$scope.incorrectCredentials=false;
 					} else {
 						$scope.errorLogin = true;
 					}
