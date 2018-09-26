@@ -56,7 +56,6 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			$scope.loading = false;
 			var data=result.data.comparationDetails;
 			$scope.materialsToSearch = data;
-	
 		});
 	}
 
