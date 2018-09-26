@@ -68,7 +68,19 @@ app.controller("NotificationsController", ['$scope', "MyNotificationService","Us
             $scope.loading = false;
             var data=result.data.notificationDetails;
             $scope.myNotifications=data;   
+
+            if($scope.myNotifications && $scope.myNotifications.length > 0) {
+                $scope.emptyNotifications=false;
+            } else {
+                $scope.emptyNotifications=true;
+            }
             $scope.notifications=data; 
+
+            if($scope.notifications && $scope.notifications.length > 0) {
+                $scope.emptyNotifications=false;
+            } else {
+                $scope.emptyNotifications=true;
+            }
             $scope.numberOfNotifications=$scope.notifications.length;           
         });
     }

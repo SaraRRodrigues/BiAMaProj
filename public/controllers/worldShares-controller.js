@@ -99,7 +99,7 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
     /* get information of my world shares on forum to display */
     $scope.getAllRequests = function() {
 
-        var getMyWorldShares = WorldSharesService.getAllMyWorldShares( $scope.idUserLoggerIn, function(infoMyWorldShares){});
+        var getMyWorldShares = WorldSharesService.getAllMyWorldShares($scope.idUserLoggerIn, function(infoMyWorldShares){});
         getMyWorldShares.then(function(result) {
             $scope.loading = false;
             var data=result.data.worldShareDetails;

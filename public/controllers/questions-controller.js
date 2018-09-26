@@ -70,13 +70,19 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
 	/* get information of my favorites, my questions and answer to display */
     $scope.getAllRequests = function() {
         
-        $scope.getUserQuestionInfo = QuestionService.getUserQuestionInfo(function(infoUserAnswer){});
+        $scope.getUserQuestionInfo = QuestionService.getAllMyQuestions($scope.idUserLoggerIn,function(infoUserAnswer){});
         $scope.getUserQuestionInfo.then(function(result) {
            
-            var data=result.data.questionDetails;
+            var data=result.data.questions;
             $scope.myQuestions=data;
             $scope.questions=data;
 
+            if(data.length > 0) {
+                $scope.emptyQuestions = false;
+            } else {
+                $scope.emptyQuestions = true;
+            }
+           
             $scope.loading = false;
         });
     }

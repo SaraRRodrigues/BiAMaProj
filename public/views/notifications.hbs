@@ -175,10 +175,14 @@
 				</div>
 				<h3 class="titlesOnCenter colorOfErrorMessages">Esta página está em desenvolvimento.</h3>
 				<!-- show notifications -->
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyNotifications">
+					<h3>Não tem notificações</h3>
+				</div>
 				<div ng-if="notificationNumber" class="divNotifications sectionScrollNotification">
 					<div ng-if="loading">
 						<div class="loading-icon-footer-info"></div>
 					</div>
+
 					<div ng-repeat="notification in notifications">
 						<div ng-if="notification.insert">
 						<h6 ng-click="openNotification(notification.text_notification)">[{notification.text_notification}]</h6>
