@@ -169,6 +169,9 @@
 			<div ng-if="showWorldShares && !miniSearchResults && !showDetailsOfMaterial" class="titlesOnCenter sectionScroll">
 				<img ng-repeat="image in worldShareItems track by $index" class="borderOfImageCuriosity margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="20%" height="150px" alt="foto"/>
 			</div>
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="worldShareItems.length==0 && !loading">
+				<h5>Não tem partilhas do mundo</h5>
+			</div>
 			<!-- if click on world share, is showed details of world share -->
 			<div ng-if="showWorldSharesDetails" class="sectionDetails widthOfAddWorldShareSection">
 				<h1 class="subtitles titlesOnCenter">Partilha [{worldSharesInfo.share}]</h1>
