@@ -36,7 +36,6 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 			var splitParams = splitLocation[1].split('&');
 			$scope.idUserLoggerIn =splitParams[0];
 			$scope.redirect = splitParams[1];
-		
 		} else {
 			var splitLocation = location.href.split('=');
 			$scope.idUserLoggerIn =splitLocation[1];
