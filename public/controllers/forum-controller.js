@@ -147,7 +147,6 @@ app.controller("ForumController", ['$scope', "ForumMaterialService", "ForumBiama
 				}
 				
 			}
-			
 			if($scope.resultSearch.length == 0) {
 				$scope.noResultsOnSearch=true;
 			} else {
