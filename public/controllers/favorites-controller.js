@@ -113,9 +113,9 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
 
     /* select type of favorite: question or material */
     $scope.selectFavorite = function(favorite){
-        $scope.loading=true;
+
         $scope.showFavoritesButton=false;
-		if(favorite == 'Materiais'){
+        if(favorite == 'Materiais'){
             $scope.showMyQuestions = false;
             $scope.showMaterials = true;
             $scope.showQuestionDetails = false;
@@ -126,17 +126,18 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
             $scope.showMaterials = false;
             $scope.detailsFavQuestion = true; 
             $scope.detailsFavMaterial = false; 
-           // $scope.showQuestionDetails = true;
+            // $scope.showQuestionDetails = true;
         }
         
     }
 
     /* open favorites button */
     $scope.openFavoritesButton = function(){
+        $scope.loading=true;
         /* get information of material and of library - when i do get library */
         var getMaterialInfo = LibraryMaterialInfoService.getMaterial(function(infoMaterial){});
         getMaterialInfo.then(function(result) {
-            $scope.loading = true;
+            
             var data=result.data.materialsCategories;
             $scope.materialsCategories=data;
             for(var index=0; index<$scope.materialsCategories.length; ++index){
