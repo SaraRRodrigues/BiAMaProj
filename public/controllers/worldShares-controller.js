@@ -107,18 +107,24 @@ app.controller("WorldShareController", ['$scope',"WorldSharesService", "ForumSer
             $scope.worldShareItems=[];
             $scope.worldShareData=[];
             $scope.shareNumber=[];
-            for(var index=0; index<data.length; ++index) {
-                $scope.worldShareItems.push(data[index].image);
-                $scope.worldShareData.push(data[index]);
-                $scope.forumType=data[index].type_forum; 
 
-                if(index===data.length-1) {
-                    var result = (data[index].title).split("s");
-                    var numberTitle=result[1];
-                    $scope.title='ws' + (parseInt(numberTitle)+1);
+            if(data && data.length > 0) {
+                for(var index=0; index<data.length; ++index) {
+                    $scope.worldShareItems.push(data[index].image);
+                    $scope.worldShareData.push(data[index]);
+                    $scope.forumType=data[index].type_forum; 
+    
+                    if(index===data.length-1) {
+                        var result = (data[index].title).split("s");
+                        var numberTitle=result[1];
+                        $scope.title='ws' + (parseInt(numberTitle)+1);
+                    }
                 }
+                $scope.emptyWorldShare=false;
+            } else {
+                $scope.emptyWorldShare=true;
             }
-
+            
         });
         var getMaterials = WorldShareMaterialService.getMaterialComparation(function(infoMaterial){});
         getMaterials.then(function(result) {

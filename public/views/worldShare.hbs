@@ -175,6 +175,9 @@
                 <div ng-if="loading">
                     <div class="loading-icon-footer-info"></div>
                 </div>
+				<div class="titlesOnCenter colorOfErrorMessages" ng-if="emptyWorldShare">
+					<h5>Não tem partilhas do mundo</h5>
+				</div>
                 <!-- show world shares -->
                 <div ng-if="showWorldShares" class="titlesOnCenter sectionScrollAddWorldShare">
                     <img ng-repeat="image in worldShareItems track by $index" class="margin-bottom-2x cursorPointer margin-left-2x cursorPointer" ng-src="../images/worldSharesForum/[{image}]" ng-click="openDetailsWorldShare(image)" width="20%" height="150px" alt="foto"/>
