@@ -148,49 +148,50 @@ app.controller('FavoritesController',['$scope', "$http", "FavoritesService", "Li
                 }
             }
 
-                    /* get favorites material */
-            var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
-            getMyFavorites.then(function(result) {
+            $scope.loading = false;
+        });
 
-                var data=result.data.favoriteDetails;
-                $scope.favoritesInfo=data;
-                $scope.favoriteDetails=[];
-                $scope.favoriteMaterials=[];
-                $scope.favoriteQuestions=[];
+        /* get favorites material */
+        var getMyFavorites = FavoritesService.getMyFavorites($scope.idUserLoggerIn,function(infoFavorites){});
+        getMyFavorites.then(function(result) {
+            $scope.loading=true;
+            var data=result.data.favoriteDetails;
+            $scope.favoritesInfo=data;
+            $scope.favoriteDetails=[];
+            $scope.favoriteMaterials=[];
+            $scope.favoriteQuestions=[];
 
-                for(var index=0; index<$scope.favoritesInfo.length; ++index) {
-                    if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
-                        if($scope.favoritesInfo[index].question_id == -1) {
-                            $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
-                        } else {
-                            $scope.favoriteQuestions.push($scope.favoritesInfo[index])
-                        }
+            for(var index=0; index<$scope.favoritesInfo.length; ++index) {
+                if($scope.favoritesInfo[index].user_id === parseInt($scope.idUserLoggerIn)) {
+                    if($scope.favoritesInfo[index].question_id == -1) {
+                        $scope.favoriteMaterials.push($scope.favoritesInfo[index]);  
+                    } else {
+                        $scope.favoriteQuestions.push($scope.favoritesInfo[index])
                     }
                 }
+            }
 
-                if($scope.materialsCategories && $scope.favorites.length == 0) {
-                    for(var index=0; index<$scope.materialsCategories.length; ++index){
-                        for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
-                            if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
-                                var infoFav = {
-                                    "materialId": $scope.materialsCategories[index].material_id,
-                                    "description": $scope.materialsCategories[index].description,
-                                    "category": $scope.materialsCategories[index].category,
-                                    "image": $scope.materialsCategories[index].name,
-                                    "isFavorite": true
-                                }
-                                $scope.favorites.push(infoFav)
+            if($scope.materialsCategories && $scope.favorites.length == 0) {
+                for(var index=0; index<$scope.materialsCategories.length; ++index){
+                    for(var indexFav=0; indexFav<$scope.favoriteMaterials.length; ++indexFav) {
+                        if($scope.materialsCategories[index].material_id === $scope.favoriteMaterials[indexFav].material_id) {
+                            var infoFav = {
+                                "materialId": $scope.materialsCategories[index].material_id,
+                                "description": $scope.materialsCategories[index].description,
+                                "category": $scope.materialsCategories[index].category,
+                                "image": $scope.materialsCategories[index].name,
+                                "isFavorite": true
                             }
+                            $scope.favorites.push(infoFav)
                         }
                     }
                 }
-                
+            }
+            
 
-                $scope.loading = false;
-                $scope.initFavSuccess=false;
-                
-            });
-               
+            $scope.loading = false;
+            $scope.initFavSuccess=false;
+            
         });
 
         /* get favorites in materials */
