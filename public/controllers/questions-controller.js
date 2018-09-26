@@ -792,7 +792,6 @@ app.factory("FavoritesQuestionService", function($q, $http, $timeout){
 app.factory("NotificationMyQuestionService", function($q, $http, $timeout){
     var getMyNotifications = function(data) {
         var deferred = $q.defer();
-
         $http.get('/myNotifications', {params: {'data': data}}).then(successCallback, errorCallback);
 
        function successCallback(response){
