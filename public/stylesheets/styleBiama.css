@@ -1858,7 +1858,8 @@ backgroundColorDesktop {
 }
 
 .sizeTextOfDetails {
-  font-size:28px
+  font-size:28px;
+  padding: 43px;
 }
 
 .descriptAnswerMobile {
@@ -2010,4 +2011,8 @@ aDisabled{
 .errorSizeMessagesMobile {
   width: 500px;
   font-size: 32px;
+}
+
+.paddingLibrary {
+  padding-left: 75px;
 }

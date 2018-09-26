@@ -130,7 +130,8 @@
 									</div>
 									<br>
 									<button class="registSessionMobile" type="button" ng-click="regist()">Registar</button>
-								</div>												
+								</div>
+								<h5 class="titlesOnCenter colorOfErrorMessages" ng-if="incorrectCredentials">Credenciais inválidas.</h5>															
 							</div>
 						</div>
 					</div>
@@ -185,7 +186,7 @@
             </div>
         </div>
         <!-- show material details -->
-        <div ng-if="!loading" class="margin-left-2x col-sm-11">
+        <div ng-if="!loading">
 			<div ng-if="showMaterialDetails && !locationMaterial && !zoomInMaterial" class="titlesOnCenter sectionScroll">
 				<img class="margin-bottom-2x borderOfImageCuriosity" ng-src="../images/categories/[{materialInfo.category}]/[{materialInfo.image}]" width="25%" height="175px" alt="foto"/><br>
 				<div class="titlesOnCenter">
