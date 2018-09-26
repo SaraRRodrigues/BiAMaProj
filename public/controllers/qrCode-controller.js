@@ -320,7 +320,6 @@ app.factory("QrCodeMaterialService", function($q, $http, $timeout){
 });
 
 app.factory("QrCodeBiamaService", function($q, $http, $timeout){
-    
 	var getUsers = function() {
 		var deferred = $q.defer();
 	
