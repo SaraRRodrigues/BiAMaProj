@@ -1,5 +1,5 @@
 
-app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","FavoritesQuestionForumService", "QuestionsForumMaterialService", "QuestionsForumBiamaService", "NotificationQuestionForumService", "$http", "$window", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, FavoritesQuestionForumService, QuestionsForumMaterialService, QuestionsForumBiamaService,NotificationQuestionForumService, $http, $window){
+app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionService", "LikeQuestionService", "LikeAnswerService","FavoritesQuestionForumService", "QuestionsForumMaterialService", "QuestionsForumBiamaService", "NotificationQuestionForumService","QuestionForumService", "$http", "$window", "jQuery", function($scope, UserForumQuestionService, LikeQuestionService, LikeAnswerService, FavoritesQuestionForumService, QuestionsForumMaterialService, QuestionsForumBiamaService,NotificationQuestionForumService,QuestionForumService, $http, $window){
 
     /* hide footer of index page because of click in buttons footer reload page */
     jQuery("#footerMainMobile").hide();
@@ -44,6 +44,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       $scope.showAllQuestions=true;
       $scope.favoriteQuestion=false;
       $scope.loadingSearch = false;
+      
+      $scope.showPlusQuestion=true;
     }
 
     /* verify if user is logged in */
@@ -75,6 +77,8 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
         $scope.loading = false;
         var data=result.data.questionDetails;
         $scope.questions=data;
+
+        $scope.nextIdQuestion=$scope.questions[$scope.questions.length-1].id_question;
 
       });
       
@@ -755,6 +759,83 @@ app.controller("QuestionsUsersForumController", ['$scope', "UserForumQuestionSer
       }
       $scope.search = false;
     }
+
+    /** response of question */
+    $scope.putQuestion = function(textQuestion) {
+
+      if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== "undefined" && $scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== 'anonymous') {
+        $scope.getUserQuestionInfo = QuestionForumService.getAllMyQuestions($scope.idUserLoggerIn,function(infoUserAnswer){});
+        $scope.getUserQuestionInfo.then(function(result) {
+           
+            var data=result.data.questions;
+            $scope.myQuestions=data;
+            $scope.questions=data;
+
+            if(data.length > 0) {
+                $scope.emptyQuestions = false;
+            } else {
+                $scope.emptyQuestions = true;
+            }
+
+            if(textQuestion !== undefined) {
+              //ir buscar o forum
+              if($scope.idUserLoggerIn !== undefined && $scope.idUserLoggerIn !== '' && $scope.idUserLoggerIn !== 'anonymous') {
+      
+                //ir buscar o forum type
+      
+                var typeForum = $scope.questions[ $scope.questions.length-1].type_forum
+                /* insert question */
+                var data = {
+                  text: textQuestion,
+                  likes: $scope.likes,
+                  idQuestion: parseInt($scope.nextIdQuestion)+1,
+                  forum: typeForum
+                };
+      
+                $http.post('/insertQuestion', data);
+      
+                $scope.requiredInitSession=false;
+                $scope.successInsertedQuestion=true;
+ 
+                if($scope.isMobileView) {
+                  $window.location.href = '/BiAMa/questionsForumMobile?userName=' + $scope.idUserLoggerIn;
+
+                } else {
+                  $window.location.href = '/BiAMa/questionsUsersForum?userName=' + $scope.idUserLoggerIn + '&redirect';
+                }
+              } else {
+                $scope.successInsertedQuestion=false;
+                $scope.requiredInitSession=true;
+              }
+              $scope.requireResponse=false;
+    
+          } else {
+            $scope.requireResponse=true;
+          }
+            $scope.loading = false;
+        });
+      } else {
+        $scope.requiredInitSession=true;
+      }
+    }
+
+    /* add question */
+    $scope.addQuestion = function() {
+        $scope.addMyQuestion=true;
+        $scope.showAllQuestions=false;
+        $scope.showPlusQuestion=false;
+        $scope.showQuestionDetails=false;
+        
+    }
+
+    $scope.cancelInsertQuestion = function() {
+        $scope.showAllQuestions=true;
+        $scope.showPlusQuestion=true;
+        $scope.addMyQuestion=false;
+        $scope.requireResponse=false;
+        $scope.requiredInitSession=false;
+
+    }
   
     /* logout of user details section */
     $scope.logout = function(){
@@ -985,5 +1066,69 @@ app.factory("NotificationQuestionForumService", function($q, $http, $timeout){
   return {
   getMyNotifications: getMyNotifications,
   getAllNotifications: getAllNotifications
+  };
+});
+
+app.factory("QuestionForumService", function($q, $http, $timeout){
+  var getUserQuestionInfo = function() {
+      var deferred = $q.defer();
+
+      $http.get('/userQuestions').then(successCallback, errorCallback);
+
+      function successCallback(response){
+          //success code
+          $timeout(function() {
+              deferred.resolve(response);
+          }, 2000);
+      }
+      function errorCallback(error){
+          //error code
+          deferred.reject(status);
+      }
+
+      return deferred.promise;
+  };
+  
+  var getQuestionAnswer = function() {
+      var deferred = $q.defer();
+
+      $http.get('/userAnswerAndQuestion').then(successCallback, errorCallback);
+
+      function successCallback(response){
+          //success code
+          $timeout(function() {
+              deferred.resolve(response);
+          }, 2000);
+      }
+      function errorCallback(error){
+          //error code
+          deferred.reject(status);
+      }
+
+      return deferred.promise;
+  };
+
+  var getAllMyQuestions = function(data) {
+      var deferred = $q.defer();
+
+      $http.get('/allMyQuestions', {params: {'data': data}}).then(successCallback, errorCallback);
+
+     function successCallback(response){
+         //success code
+         $timeout(function() {
+    deferred.resolve(response);
+        }, 2000);
+     }
+     function errorCallback(error){
+         //error code
+         deferred.reject(status);
+     }
+  return deferred.promise;
+  }
+  
+  return {
+      getUserQuestionInfo: getUserQuestionInfo,
+      getQuestionAnswer: getQuestionAnswer,
+      getAllMyQuestions: getAllMyQuestions
   };
 });

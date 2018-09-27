@@ -41,6 +41,7 @@ app.controller("MyQuestionsController", ['$scope', "QuestionService", "Favorites
         $scope.clickRemoveFavorite=false;
         $scope.clickAddLike=false;
         $scope.clickRemoveLike=false;
+
     }
  
     /* verify if user is logged in */

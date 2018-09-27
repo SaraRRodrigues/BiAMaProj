@@ -229,7 +229,7 @@
 				<div class="loading-icon-footer-info"></div>
 			</div>
 			<!-- show number of questions -->
-			<div ng-if="!loading && !showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial && !loadingSearch" class="titlesOnCenter" ng-repeat="question in questions track by $index">
+			<div ng-if="!loading && !showQuestionDetails && !miniSearchResults && !showDetailsOfMaterial && !loadingSearch && !addMyQuestion" class="titlesOnCenter" ng-repeat="question in questions track by $index">
 				<a class="questionX" ng-click="getQuestion(question.id_question, $index)">Pergunta [{$index+1}]</a><br>
 				<div class="center-block lineSeparateQuestionMobile"></div>
 			</div>
@@ -313,6 +313,7 @@
 							<button class="buttonAnswer" ng-click="putAnswer(textAnswer)">Responder</button>
 						</div>
 					</div>
+					
 					<!-- add question to favorites -->
 					<div class="margin-top-3x colorOfErrorMessages" ng-if="goToLogin">
 						<h4>Para poder adicionar ou remover dos seus favoritos, tem de iniciar sessão</h4>
@@ -321,6 +322,27 @@
 					<div class="colorOfErrorMessages" ng-if="goToLogin">
 						<h4>Para poder adicionar ou remover gosto, tem de iniciar sessão</h4>
 					</div>
+					
+				</div>
+			</div>
+			<!-- insert success question -->
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="successInsertedQuestion">
+				<h4>Inseriu uma pergunta com sucesso</h4>
+			</div>
+			<!-- insert question -->
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="requiredInitSession">
+				<h4>Para poder adicionar pergunta tem de iniciar sessão</h4>
+			</div>
+			<!-- response question -->
+			<div class="titlesOnCenter colorOfErrorMessages" ng-if="requireResponse">
+				<h4>Insira sua resposta, por favor.</h4>
+			</div>
+			<i ng-if="!loading && showPlusQuestion && !showQuestionDetails" class="titlesOnCenter center-block fas fa-plus-circle cursorPointer plusWorldShareFontSize" ng-click="addQuestion()"></i>
+			<div> 
+				<div ng-if="addMyQuestion && !showPlusQuestion" class="margin-bottom-2x titlesOnCenter answerDiv center-block widthOfAnswerDiv">
+					<textarea class="textAreaAnswerDiv"  ng-model="textQuestion" placeholder="..."></textarea><br>
+					<button class="buttonConfirm" ng-click="putQuestion(textQuestion)">Adicionar</button>
+					<button class="buttonConfirm" ng-click="cancelInsertQuestion()">Cancelar</button>
 				</div>
 			</div>
 			<!-- show details of material if click on material -->

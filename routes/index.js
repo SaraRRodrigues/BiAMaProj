@@ -17,6 +17,7 @@ var forumService = require('../services/forumService');
 
 /* insert services */
 var insertAnswerService = require('../services/insertAnswerService');
+var insertQuestionService = require('../services/insertQuestionService');
 var insertFavoriteService = require('../services/insertFavoriteService');
 var deleteFavoriteService = require('../services/deleteFavoriteService');
 
@@ -276,6 +277,13 @@ router.post('/insertWorldShares', (req, resp, next) => {
 router.post('/insertAnswer', (req, resp, next) => {
 	var answer = req.body;
 	insertAnswerService.putAnswer(answer ,(error, insertServiceDetails) => {
+		resp.json({insertServiceDetails})
+	});
+});
+
+router.post('/insertQuestion', (req, resp, next) => {
+	var question = req.body;
+	insertQuestionService.putQuestion(question ,(error, insertServiceDetails) => {
 		resp.json({insertServiceDetails})
 	});
 });
