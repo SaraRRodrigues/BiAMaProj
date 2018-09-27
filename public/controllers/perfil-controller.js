@@ -123,7 +123,6 @@ app.controller("PerfilController", ['$scope', "UserPerfilService", "PerfilMateri
             $scope.invalidEmail=true;
             $scope.fieldsEmpty=false;
         } 
-
         if(image === '') {
             $scope.invalidPhoto=true;
         }
