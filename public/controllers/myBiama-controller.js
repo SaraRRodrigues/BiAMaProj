@@ -236,7 +236,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 			$http.post('/insertMyBiama', data);
 			$scope.createdMyBiama = true;
 
-			debugger;
 			if($scope.idUserLoggerIn == undefined || $scope.idUserLoggerIn == '') {
 				$scope.registUser = true;
 			} else {
@@ -259,8 +258,6 @@ app.controller("MyBiamaController", ['$scope', "MyBiamaService","MaterialsBiamaS
 
 	/* created user: insert user on database */
 	$scope.insertUser = function(name, username, email, birthdate, password) {
-
-		debugger
 		if(name === undefined && username === undefined && email === undefined && birthdate === undefined && password === undefined) {
 			$scope.emptyData=true;
 		} else {
